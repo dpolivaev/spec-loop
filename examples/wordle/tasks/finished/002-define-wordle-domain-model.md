@@ -2,28 +2,23 @@
 - **Task Identifier:** 2026-01-25-domain-model
 - **Scope:** Define the domain model and evaluation rules as cohesive, UI-agnostic building blocks for the Wordle Java implementation.
 - **Motivation:** Establish a clear model and comparison rules so later game logic and interfaces stay consistent.
-- **Developer Briefing:** This task now contains two subtasks: one for defining domain objects and validation, and one for implementing guess evaluation rules. The parent task keeps scope, motivation, and context while the subtasks carry the detailed research, design, and test specifications.
+- **Developer Briefing:** This task now contains two subtasks: one for defining domain objects and validation, and one for implementing guess evaluation rules. Value objects will be implemented as Java records (immutable data carriers) while behavior-focused types like `WordleRules` will remain classes. The parent task keeps scope, motivation, and context while the subtasks carry the detailed research, design, and test specifications.
 - **Research:** The Wordle example contains only the Gradle scaffolding and placeholder entry point; there are no existing domain classes or rules implementations in `examples/wordle/src`. No existing model conventions are present, so the domain model and evaluation rules must be introduced from scratch with clear responsibilities and immutability to reduce future coupling.
 - **Design:**
 ```plantuml
 @startuml
 package wordle.domain {
-  class Word {
-    - value: String
+  class Word <<record>> {
     + Word(raw: String)
     + value(): String
     + letters(): List<Character>
   }
 
-  class WordFactory {
-    + create(raw: String): Word
-  }
-
-  class Feedback {
+  class Feedback <<record>> {
     + entries(): List<LetterFeedback>
   }
 
-  class LetterFeedback {
+  class LetterFeedback <<record>> {
     + position: int
     + letter: char
     + status: LetterStatus
@@ -41,11 +36,9 @@ package wordle.domain {
 }
 
 note right of Word
-  Validation happens in the Word constructor
-  or in WordFactory.create.
+  Validation happens in the Word constructor.
 end note
 
-WordFactory ..> Word
 Word "1" o-- "1" WordleRules
 Feedback "1" o-- "*" LetterFeedback
 LetterFeedback ..> LetterStatus
@@ -54,7 +47,7 @@ LetterFeedback ..> LetterStatus
 - **Test specification:** Subtasks define the test coverage.
 
 ## Subtask: Define domain objects
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Define immutable domain objects for words and feedback, including validation entry points.
 - **Motivation:** Provide a stable core model before adding game logic or UI.
 - **Developer Briefing:** The Wordle example currently lacks any domain classes, so we will define a minimal, focused model to represent words, feedback, and validation entry points. The design below specifies immutable value objects for `Word` and `Feedback`, plus a `WordFactory` to centralize validation when not handled directly by `Word`.
@@ -69,7 +62,7 @@ LetterFeedback ..> LetterStatus
   6. Construct `LetterFeedback` and verify position, letter, and status accessors.
 
 ## Subtask: Implement guess evaluation rules
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Implement comparison logic that produces per-letter feedback given a solution and a guess.
 - **Motivation:** Provide the core Wordle feedback behavior needed by the game engine and UI.
 - **Developer Briefing:** Implement the comparison rules in a dedicated `WordleRules` component that takes two `Word` instances and returns `Feedback`. Validation stays in `Word`/`WordFactory` to keep rules focused on evaluation.
