@@ -1,15 +1,4 @@
-# Agile Specification-Driven Development
-
-Constitution-Driven, Task-Centric AI-Assisted Development
-
-This repository defines a process framework for using a coding model (for example, Codex) in a way that remains compatible with professional software development: explicit scope, review boundaries, reproducible outcomes, and tests as part of completion.
-
-This is not a prompt collection.
-This is a development protocol.
-
----
-
-## Problem Statement
+# Agile Design-first AI-Assisted Development
 
 Modern coding models can generate useful code quickly, but they also tend to:
 
@@ -20,22 +9,29 @@ Modern coding models can generate useful code quickly, but they also tend to:
 * produce changes that are difficult to review or trace to a ticket,
 * apply partial edits when something goes wrong.
 
-These behaviors make AI risky in real projects, especially in team environments where work must remain reviewable, explainable, and verifiable.
+These behaviors make AI risky in real projects, especially in team environments 
+where work must remain reviewable, explainable, and verifiable.
 
-The goal of this framework is to make AI-assisted development behave like disciplined engineering work: small vertical increments, explicit decision points, and a clear definition of “done”.
+This repository defines a process framework for using a coding model (for example, Codex) in a way 
+that remains compatible with professional software development: explicit scope, review boundaries, 
+reproducible outcomes, and tests as part of completion. The goal of this framework is 
+to make AI-assisted development behave like disciplined engineering work: 
+small vertical increments, explicit decision points, and a clear definition of “done”.
 
 ---
 
 ## Why Specification-Driven Development Often Turns Into Waterfall
 
-Specification-driven development (SDD) is appealing because it promises clarity: write the specification first, implement later. In practice, it often reproduces classic waterfall failure modes:
+Specification-driven development (SDD) is appealing because it promises clarity: write the specification first, 
+implement later. In practice, it often reproduces classic waterfall failure modes:
 
 * **Specifications are written too early.** Important constraints are discovered only during implementation.
 * **Specifications grow too large.** They try to describe an entire system instead of the next meaningful step.
 * **Change becomes expensive.** When reality diverges from the spec, the process resists correction.
 * **Specifications lose authority.** They either block progress or get ignored.
 
-When AI is added to the loop, this problem becomes more severe. Models strongly prefer to “complete” designs and implementations in one pass, amplifying scope creep and premature commitment.
+When AI is added to the loop, this problem becomes more severe. 
+Models strongly prefer to “complete” designs and implementations in one pass, amplifying scope creep and premature commitment.
 
 ---
 
@@ -80,7 +76,8 @@ Details of implementation are delegated to the model **only after** understandin
 
 ### Simultaneous Visibility Across Levels
 
-The structure of task files (scope, research, design, test specification, developer briefing) allows the developer to work on the same problem simultaneously at multiple levels:
+The structure of task files (scope, research, design, test specification, developer briefing)
+allows the developer to work on the same problem simultaneously at multiple levels:
 
 * conceptual intent,
 * architectural constraints,
@@ -117,7 +114,8 @@ The model must treat the task file as authoritative for:
 
 ### Research First
 
-Unless explicitly waived, work starts with research into the existing codebase and constraints. Findings are recorded in the **Research** section.
+Unless explicitly waived, work starts with research into the existing codebase and constraints. 
+Findings are recorded in the **Research** section.
 
 This anchors the model in reality and prevents speculative architecture.
 
@@ -142,7 +140,8 @@ Consistency is preferred over partial progress.
 
 ### Run Only on Explicit Requests
 
-Tools and workflows are activated only by explicit user requests. There is no opportunistic refactoring or silent behavior.
+Tools and workflows are activated only by explicit user requests. 
+There is no opportunistic refactoring or silent behavior.
 
 ---
 
@@ -160,7 +159,8 @@ Within a single task or subtask, it is normal to iterate multiple times over:
 * design,
 * and design representation.
 
-Finished subtasks may be refined, and new subtasks may be added as understanding improves. The task file always reflects the *current stabilized state*, not the path taken to reach it.
+Finished subtasks may be refined, and new subtasks may be added as understanding improves. 
+The task file always reflects the *current stabilized state*, not the path taken to reach it.
 
 ### Dialogue With the Model Is Part of Research and Design
 
@@ -170,7 +170,8 @@ The model is used not only for implementation, but also to:
 * surface implicit assumptions,
 * focus attention on risky or fragile parts of legacy code.
 
-Important insights discovered in these discussions are written down explicitly in **Research** and **Design**, turning personal knowledge into shared, reviewable context.
+Important insights discovered in these discussions are written down explicitly in **Research** and **Design**,
+turning personal knowledge into shared, reviewable context.
 
 ### Working With Legacy Code
 
@@ -200,7 +201,8 @@ The briefing explains what matters, where to look first, and why the design look
 
 Design refinement often benefits from visual representations.
 
-This framework encourages the use of PlantUML diagrams to reason about structure and verify assumptions. While GitHub does not render PlantUML natively, diagrams can be:
+This framework encourages the use of PlantUML diagrams to reason about structure and verify assumptions. 
+While GitHub does not render PlantUML natively, diagrams can be:
 
 * rendered in GitLab,
 * viewed via IDE plugins,
@@ -220,7 +222,8 @@ Work is sliced into vertical increments. Each increment has its own scope, desig
 
 ### Jira and Ticket IDs
 
-Task files may reference an existing **Ticket ID**. When present, the ticket ID becomes the primary identifier for commit messages and traceability.
+Task files may reference an existing **Ticket ID**. When present, 
+the ticket ID becomes the primary identifier for commit messages and traceability.
 
 This allows AI-assisted work to fit naturally into Jira-based workflows.
 
@@ -258,7 +261,8 @@ Optional color output can be added as a separate increment.
 
 ## Design Philosophy in One Sentence
 
-This protocol keeps the human developer at the level of understanding and responsibility, while delegating implementation details to the model under explicit, reviewable constraints.
+This protocol keeps the human developer at the level of understanding and responsibility, 
+while delegating implementation details to the model under explicit, reviewable constraints.
 
 ---
 
