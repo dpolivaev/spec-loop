@@ -1,60 +1,10 @@
-package wordle;
+package wordle.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import wordle.domain.Feedback;
-import wordle.domain.LetterFeedback;
-import wordle.domain.LetterStatus;
-import wordle.domain.Word;
-import wordle.domain.WordleRules;
-import java.util.List;
-
-class MainTest {
-    @Test
-    void placeholderTest() {
-        assertTrue(true);
-    }
-
-    @Test
-    void wordNormalizesToUppercase() {
-        var uut = new Word("apple");
-        assertTrue(uut.value().equals("APPLE"));
-    }
-
-    @Test
-    void wordRejectsWrongLength() {
-        assertThrows(IllegalArgumentException.class, () -> new Word("TOO"));
-    }
-
-    @Test
-    void wordRejectsNonLetters() {
-        assertThrows(IllegalArgumentException.class, () -> new Word("AB1CD"));
-    }
-
-    @Test
-    void wordAcceptsValidInput() {
-        var uut = new Word("LEMON");
-        assertTrue(uut.value().equals("LEMON"));
-    }
-
-    @Test
-    void feedbackPreservesEntries() {
-        var entry = new LetterFeedback(0, 'A', LetterStatus.CORRECT);
-        var uut = new Feedback(List.of(entry));
-        assertTrue(uut.entries().get(0).equals(entry));
-    }
-
-    @Test
-    void letterFeedbackAccessorsExposeValues() {
-        var uut = new LetterFeedback(2, 'Z', LetterStatus.ABSENT);
-        assertTrue(uut.position() == 2);
-        assertTrue(uut.letter() == 'Z');
-        assertTrue(uut.status() == LetterStatus.ABSENT);
-    }
-
+class WordleRulesTest {
     @Test
     void compareAllCorrect() {
         var uut = new WordleRules();
