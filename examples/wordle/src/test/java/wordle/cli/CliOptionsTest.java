@@ -3,6 +3,7 @@ package wordle.cli;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 import wordle.domain.WordleRules;
+import wordle.input.GuessInputHandler;
 import wordle.words.WordListLoader;
 
 import java.io.ByteArrayInputStream;
@@ -14,15 +15,16 @@ import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CliRunnerTest {
+class CliOptionsTest {
     @Test
     void defaultsApplyWhenNoArgsProvided() {
-        var runner = new CliRunner(new WordListLoader(), new WordleRules(),
-                new ByteArrayInputStream(new byte[0]), new PrintStream(new ByteArrayOutputStream()));
-        var commandLine = new CommandLine(runner);
+        var options = new CliOptions(new WordListLoader(), new WordleRules(),
+                new ByteArrayInputStream(new byte[0]), new PrintStream(new ByteArrayOutputStream()),
+                new GuessInputHandler(), new FeedbackRenderer());
+        var commandLine = new CommandLine(options);
         commandLine.parseArgs();
-        assertThat(runner.wordlistSource()).isNull();
-        assertThat(runner.maxAttempts()).isEqualTo(6);
+        assertThat(options.wordlistSource()).isNull();
+        assertThat(options.maxAttempts()).isEqualTo(6);
     }
 
     @Test
@@ -30,9 +32,10 @@ class CliRunnerTest {
         var input = "\nDELTA\n";
         var outputBuffer = new ByteArrayOutputStream();
         var filePath = writeTempWordList();
-        var runner = new CliRunner(new WordListLoader(), new WordleRules(),
-                new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)), new PrintStream(outputBuffer));
-        var commandLine = new CommandLine(runner);
+        var options = new CliOptions(new WordListLoader(), new WordleRules(),
+                new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)), new PrintStream(outputBuffer),
+                new GuessInputHandler(), new FeedbackRenderer());
+        var commandLine = new CommandLine(options);
         int exitCode = commandLine.execute("--wordlist", filePath.toString(), "--attempts", "1");
         var output = new String(outputBuffer.toByteArray(), StandardCharsets.UTF_8);
         assertThat(exitCode).isEqualTo(0);
@@ -47,9 +50,10 @@ class CliRunnerTest {
         var input = "BAD\nDELTA\n";
         var outputBuffer = new ByteArrayOutputStream();
         var filePath = writeTempWordList();
-        var runner = new CliRunner(new WordListLoader(), new WordleRules(),
-                new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)), new PrintStream(outputBuffer));
-        var commandLine = new CommandLine(runner);
+        var options = new CliOptions(new WordListLoader(), new WordleRules(),
+                new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)), new PrintStream(outputBuffer),
+                new GuessInputHandler(), new FeedbackRenderer());
+        var commandLine = new CommandLine(options);
         int exitCode = commandLine.execute("--wordlist", filePath.toString(), "--attempts", "1");
         var output = new String(outputBuffer.toByteArray(), StandardCharsets.UTF_8);
         assertThat(exitCode).isEqualTo(0);
@@ -62,9 +66,10 @@ class CliRunnerTest {
     void wordlistUrlIsAccepted() {
         var outputBuffer = new ByteArrayOutputStream();
         var filePath = writeTempWordList();
-        var runner = new CliRunner(new WordListLoader(), new WordleRules(),
-                new ByteArrayInputStream("DELTA\n".getBytes(StandardCharsets.UTF_8)), new PrintStream(outputBuffer));
-        var commandLine = new CommandLine(runner);
+        var options = new CliOptions(new WordListLoader(), new WordleRules(),
+                new ByteArrayInputStream("DELTA\n".getBytes(StandardCharsets.UTF_8)), new PrintStream(outputBuffer),
+                new GuessInputHandler(), new FeedbackRenderer());
+        var commandLine = new CommandLine(options);
         int exitCode = commandLine.execute("--wordlist", filePath.toUri().toString(), "--attempts", "1");
         assertThat(exitCode).isEqualTo(0);
         var output = new String(outputBuffer.toByteArray(), StandardCharsets.UTF_8);
@@ -76,9 +81,10 @@ class CliRunnerTest {
     void inputEndIsReportedAsInterrupted() {
         var outputBuffer = new ByteArrayOutputStream();
         var filePath = writeTempWordList();
-        var runner = new CliRunner(new WordListLoader(), new WordleRules(),
-                new ByteArrayInputStream(new byte[0]), new PrintStream(outputBuffer));
-        var commandLine = new CommandLine(runner);
+        var options = new CliOptions(new WordListLoader(), new WordleRules(),
+                new ByteArrayInputStream(new byte[0]), new PrintStream(outputBuffer),
+                new GuessInputHandler(), new FeedbackRenderer());
+        var commandLine = new CommandLine(options);
         int exitCode = commandLine.execute("--wordlist", filePath.toString(), "--attempts", "1");
         assertThat(exitCode).isEqualTo(0);
         var output = new String(outputBuffer.toByteArray(), StandardCharsets.UTF_8);

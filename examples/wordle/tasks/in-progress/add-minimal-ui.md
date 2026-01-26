@@ -8,7 +8,7 @@
 - **Test specification:** See subtasks.
 
 ## Subtask: Prepare shared input validation
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Refactor CLI responsibilities by splitting option parsing from the game loop, and extract shared input validation so both CLI and UI reuse the same rules for empty and invalid guesses.
 - **Motivation:** Keep guess validation logic consistent and avoid duplicating behavior between CLI and UI.
 - **Developer Briefing:** `CliRunner` currently parses options and runs the game loop. We will split parsing into a dedicated options class and move the loop into a reusable runner so CLI and UI can share the loop logic where sensible. Input validation will also be extracted into a shared helper.
