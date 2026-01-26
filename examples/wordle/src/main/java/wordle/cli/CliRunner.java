@@ -38,6 +38,7 @@ public class CliRunner implements Callable<Integer> {
     @Override
     public Integer call() {
         var engine = new GameEngine(wordListLoader, rules, maxAttempts);
+        var renderer = new FeedbackRenderer();
         var state = startGame(engine);
         var reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
         output.println("Wordle started. Enter guesses:");
@@ -62,6 +63,10 @@ public class CliRunner implements Callable<Integer> {
             } catch (IllegalArgumentException exception) {
                 output.println("Invalid guess. Try again.");
                 continue;
+            }
+            var rendered = renderer.render(state);
+            if (!rendered.isBlank()) {
+                output.println(rendered);
             }
             output.println("Status: " + state.status());
         }

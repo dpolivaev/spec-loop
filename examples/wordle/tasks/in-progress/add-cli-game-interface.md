@@ -96,7 +96,7 @@ CliRunner ..> Option : --attempts
   7. Invalid guesses are reported and do not decrement attempts.
 
 ## Subtask: Implement feedback rendering
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Add feedback formatting for CLI output.
 - **Motivation:** Provide readable game output for users.
 - **Developer Briefing:** Implement a renderer that converts `GameState` feedback into a text row.
