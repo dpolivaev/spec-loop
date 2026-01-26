@@ -8,7 +8,7 @@
 - **Test specification:** See subtasks.
 
 ## Subtask: Define game state model
-- **Status:** Implementation Review
+- **Status:** Finished
 - **Scope:** Introduce immutable game state types for attempts, history, and status.
 - **Motivation:** Establish a stable state model before implementing engine behavior.
 - **Developer Briefing:** Define `GameState` and `GameStatus` in a `wordle.engine` package. State must capture the solution, remaining attempts, feedback history, and current status.
@@ -45,7 +45,7 @@ GameState ..> Word
   2. `GameStatus` contains IN_PROGRESS, WON, LOST.
 
 ## Subtask: Implement game engine logic
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Implement game start and guess submission logic using the state model.
 - **Motivation:** Provide reusable gameplay behavior for CLI and UI layers.
 - **Developer Briefing:** Implement `GameEngine` with `startGame` and `submitGuess`. `startGame` picks a random solution via `WordListLoader`. `submitGuess` creates feedback via `WordleRules` and returns a new `GameState` with updated attempts and status.
