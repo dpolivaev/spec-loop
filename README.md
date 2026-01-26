@@ -1,4 +1,4 @@
-# Agile Design-first AI-Assisted Development
+# Design-first Iterative AI-Assisted Development
 
 Modern coding models can generate useful code quickly, but they also tend to expand scope, invent requirements, implement before design is stable, and treat tests as optional. In real projects, those failure modes make AI output hard to review, hard to trace, and risky to ship.
 
