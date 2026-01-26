@@ -5,6 +5,10 @@ import wordle.domain.LetterStatus;
 import wordle.domain.WordleRules;
 import wordle.words.WordListLoader;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +24,12 @@ public class GameEngine {
     }
 
     public GameState startGame(String resourcePath) {
-        var solution = wordListLoader.randomWord(resourcePath);
+        var solution = wordListLoader.randomWordFromResource(resourcePath);
+        return new GameState(solution, maxAttempts, List.of(), GameStatus.IN_PROGRESS);
+    }
+
+    public GameState startGameExternal(String source) {
+        var solution = loadExternalWord(source);
         return new GameState(solution, maxAttempts, List.of(), GameStatus.IN_PROGRESS);
     }
 
@@ -44,5 +53,20 @@ public class GameEngine {
         }
 
         return new GameState(state.solution(), remaining, updatedHistory, GameStatus.IN_PROGRESS);
+    }
+
+    private Word loadExternalWord(String source) {
+        if (source.contains("://") || source.startsWith("file:")) {
+            try {
+                return wordListLoader.randomWordFromUrl(new URL(source));
+            } catch (MalformedURLException exception) {
+                throw new IllegalArgumentException("Invalid word list URL: " + source, exception);
+            }
+        }
+        var path = Path.of(source);
+        if (Files.exists(path)) {
+            return wordListLoader.randomWordFromPath(path);
+        }
+        throw new IllegalArgumentException("Word list not found: " + source);
     }
 }

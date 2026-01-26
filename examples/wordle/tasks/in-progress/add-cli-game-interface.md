@@ -8,7 +8,7 @@
 - **Test specification:** See subtasks.
 
 ## Subtask: Implement CLI parsing and game loop
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Add picocli-based CLI command, parse arguments, and run the game loop.
 - **Motivation:** Provide a working CLI entry point with configurable attempts and word list.
 - **Developer Briefing:** Implement a picocli command that wires `GameEngine` to stdin/stdout. `Main` should delegate to the command and return the exit code from `CommandLine.execute`.
@@ -56,6 +56,8 @@ end note
   4. `CliRunner` starts a game with a configurable max attempts and loops until `GameStatus` is `WON` or `LOST`.
   5. Each iteration reads a line from stdin, trims it, and submits it to the engine.
   6. When the game ends, print `Result: WON/LOST`. If input ends before completion, print `Result: INTERRUPTED`. Always exit with status code 0.
+  7. Configure the Gradle `run` task to forward `System.in` so interactive input works.
+  8. Invalid guesses (e.g., wrong length) are rejected with a message and do not consume an attempt.
 
   CLI arguments (picocli options):
   - `--wordlist <source>`: file path or URL for the word list; if omitted, use internal `wordlist.txt`.
@@ -90,6 +92,8 @@ CliRunner ..> Option : --attempts
   3. `--wordlist` accepts a file path and uses it to load a game.
   4. `--wordlist` accepts a URL and uses it to load a game.
   5. CLI prints a final `Result:` line (`WON`, `LOST`, or `INTERRUPTED`) and returns exit code 0.
+  6. Gradle `run` accepts interactive input from the terminal.
+  7. Invalid guesses are reported and do not decrement attempts.
 
 ## Subtask: Implement feedback rendering
 - **Status:** Plan Review
