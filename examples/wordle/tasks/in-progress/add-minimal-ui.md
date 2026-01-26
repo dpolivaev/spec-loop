@@ -90,7 +90,7 @@ end note
   6. CLI uses the shared validator (verified by unit tests for the shared component and one integration-style test for the CLI path).
 
 ## Subtask: Implement Swing UI
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Add a minimal Swing UI that lets a user enter guesses, see feedback rows, and view the final result.
 - **Motivation:** Provide a simple graphical interface that exercises the same engine logic as the CLI.
 - **Developer Briefing:** Introduce a Swing entry point in `wordle.ui` and a small controller that owns `GameEngine` and `GameState`. The UI will use a single window with a history area, input field, submit button, and status line. The CLI remains the default `wordle.Main`, while a new Gradle task will launch the Swing app.
@@ -185,9 +185,11 @@ end note
 ```
   1. Use Swing (no new dependencies required).
   2. Keep `application.mainClass = "wordle.Main"` and update `Main` to:
+     - parse CLI options once (without executing the CLI),
      - detect headless mode (`GraphicsEnvironment.isHeadless()`),
      - check for a `--cli` flag in the arguments,
      - launch the Swing UI by default when not headless and `--cli` is absent,
+     - pass `maxAttempts` and `wordlistSource` into the UI path,
      - otherwise run the existing CLI path (passing remaining args to picocli).
   3. Implement `wordle.ui.WordleApp` that builds a single-window Swing UI containing:
      - a history container (e.g., `JPanel` with vertical `BoxLayout`) that holds rendered feedback rows,
@@ -195,6 +197,7 @@ end note
      - a `JTextField` for input and a `JButton` for submission.
   4. `GameUiController` coordinates UI events and the shared `CliGameRunner` loop:
      - On startup, call `GameEngine.startGame("wordlist.txt")` to use the internal list.
+     - If a `wordlistSource` is provided, use `GameEngine.startGameExternal(...)` instead.
      - On submit, pass input to `CliGameRunner` for validation/processing.
      - Provide callbacks to `CliGameRunner` that append feedback rows and update attempts/status display.
      - When status becomes `WON` or `LOST`, disable input and show the final result.
@@ -208,6 +211,7 @@ end note
   6. Manual smoke test: run `./gradlew run --args="--cli ..."` and confirm CLI starts instead of UI.
   7. Manual smoke test: run in a headless environment (or force headless) and confirm CLI starts.
   8. Manual smoke test: in UI mode, play through a short game to confirm feedback and status updates.
+  9. Manual smoke test: run `./gradlew run --args="--wordlist <path> --attempts 1"` and confirm the UI uses the provided values.
 
 ## Subtask: Document UI build and usage
 - **Status:** Plan Review

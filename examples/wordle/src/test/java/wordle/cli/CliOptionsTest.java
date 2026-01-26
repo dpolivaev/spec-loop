@@ -25,6 +25,18 @@ class CliOptionsTest {
         commandLine.parseArgs();
         assertThat(options.wordlistSource()).isNull();
         assertThat(options.maxAttempts()).isEqualTo(6);
+        assertThat(options.runsInTerminal()).isFalse();
+    }
+
+    @Test
+    void cliOptionIsParsed() {
+        var options = new CliOptions(new WordListLoader(), new WordleRules(),
+                new ByteArrayInputStream(new byte[0]), new PrintStream(new ByteArrayOutputStream()),
+                new GuessInputHandler(), new FeedbackRenderer());
+        var commandLine = new CommandLine(options);
+        commandLine.parseArgs("--cli");
+
+        assertThat(options.runsInTerminal()).isTrue();
     }
 
     @Test

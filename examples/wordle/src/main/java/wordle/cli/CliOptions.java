@@ -22,7 +22,7 @@ public class CliOptions implements Callable<Integer> {
     private int maxAttempts;
 
     @Option(names = "--cli", description = "Force CLI mode.")
-    private boolean cliMode;
+    private boolean runsInTerminal;
 
     private final WordListLoader wordListLoader;
     private final WordleRules rules;
@@ -58,16 +58,16 @@ public class CliOptions implements Callable<Integer> {
         return 0;
     }
 
-    String wordlistSource() {
+    public String wordlistSource() {
         return wordlistSource;
     }
 
-    int maxAttempts() {
+    public int maxAttempts() {
         return maxAttempts;
     }
 
-    boolean cliMode() {
-        return cliMode;
+    public boolean runsInTerminal() {
+        return runsInTerminal;
     }
 
     private GameState startGame(GameEngine engine) {
