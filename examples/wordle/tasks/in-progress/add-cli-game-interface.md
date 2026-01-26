@@ -52,11 +52,12 @@ end note
 - **Design:**
   1. Use picocli for argument parsing and help output.
   2. `Main` delegates to a picocli command (e.g., `CliRunner`) with options for word list and attempts.
-  3. `CliRunner` starts a game with a configurable max attempts and loops until `GameStatus` is `WON` or `LOST`.
-  4. Each iteration reads a line from stdin, trims it, and submits it to the engine.
+  3. `CliRunner` accepts `--wordlist` as an external source (file path or URL). If omitted, it uses the internal resource `wordlist.txt`.
+  4. `CliRunner` starts a game with a configurable max attempts and loops until `GameStatus` is `WON` or `LOST`.
+  5. Each iteration reads a line from stdin, trims it, and submits it to the engine.
 
   CLI arguments (picocli options):
-  - `--wordlist <resource>`: resource path for the word list (default `wordlist.txt`).
+  - `--wordlist <source>`: file path or URL for the word list; if omitted, use internal `wordlist.txt`.
   - `--attempts <n>`: number of attempts before losing (default 6).
   - `--help`: print usage and exit (provided by picocli).
 
@@ -85,6 +86,8 @@ CliRunner ..> Option : --attempts
 - **Test specification:**
   1. CLI input handling rejects empty lines and prompts again (define behavior explicitly).
   2. Picocli option defaults apply when no args are provided.
+  3. `--wordlist` accepts a file path and uses it to load a game.
+  4. `--wordlist` accepts a URL and uses it to load a game.
 
 ## Subtask: Implement feedback rendering
 - **Status:** Plan Review
