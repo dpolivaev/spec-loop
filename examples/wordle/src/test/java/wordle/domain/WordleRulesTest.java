@@ -2,28 +2,31 @@ package wordle.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class WordleRulesTest {
     @Test
     void compareAllCorrect() {
         var uut = new WordleRules();
         var feedback = uut.compare(new Word("CRANE"), new Word("CRANE"));
-        assertTrue(feedback.entries().stream().allMatch(entry -> entry.status() == LetterStatus.CORRECT));
+        assertThat(feedback.entries())
+                .allMatch(entry -> entry.status() == LetterStatus.CORRECT);
     }
 
     @Test
     void compareAllAbsent() {
         var uut = new WordleRules();
         var feedback = uut.compare(new Word("CRANE"), new Word("BOLDY"));
-        assertTrue(feedback.entries().stream().allMatch(entry -> entry.status() == LetterStatus.ABSENT));
+        assertThat(feedback.entries())
+                .allMatch(entry -> entry.status() == LetterStatus.ABSENT);
     }
 
     @Test
     void comparePresentLetters() {
         var uut = new WordleRules();
         var feedback = uut.compare(new Word("CRANE"), new Word("REACT"));
-        assertTrue(feedback.entries().stream().anyMatch(entry -> entry.status() == LetterStatus.PRESENT));
+        assertThat(feedback.entries())
+                .anyMatch(entry -> entry.status() == LetterStatus.PRESENT);
     }
 
     @Test
@@ -33,7 +36,7 @@ class WordleRulesTest {
         long presentCount = feedback.entries().stream()
                 .filter(entry -> entry.status() == LetterStatus.PRESENT)
                 .count();
-        assertTrue(presentCount >= 1);
+        assertThat(presentCount).isGreaterThanOrEqualTo(1);
     }
 
     @Test
@@ -43,6 +46,6 @@ class WordleRulesTest {
         long absentCount = feedback.entries().stream()
                 .filter(entry -> entry.status() == LetterStatus.ABSENT)
                 .count();
-        assertTrue(absentCount >= 1);
+        assertThat(absentCount).isGreaterThanOrEqualTo(1);
     }
 }

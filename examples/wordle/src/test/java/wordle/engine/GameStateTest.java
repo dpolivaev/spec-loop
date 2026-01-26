@@ -6,7 +6,7 @@ import wordle.domain.Word;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class GameStateTest {
     @Test
@@ -14,9 +14,9 @@ class GameStateTest {
         var solution = new Word("CRANE");
         var history = List.<Feedback>of();
         var uut = new GameState(solution, 6, history, GameStatus.IN_PROGRESS);
-        assertTrue(uut.solution().equals(solution));
-        assertTrue(uut.attemptsRemaining() == 6);
-        assertTrue(uut.history().equals(history));
-        assertTrue(uut.status() == GameStatus.IN_PROGRESS);
+        assertThat(uut.solution()).isEqualTo(solution);
+        assertThat(uut.attemptsRemaining()).isEqualTo(6);
+        assertThat(uut.history()).isEqualTo(history);
+        assertThat(uut.status()).isEqualTo(GameStatus.IN_PROGRESS);
     }
 }

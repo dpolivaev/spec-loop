@@ -7,16 +7,16 @@ import wordle.words.WordListLoader;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class GameEngineTest {
     @Test
     void startGameInitializesState() {
         var uut = new GameEngine(new WordListLoader(), new WordleRules(), 6);
         var state = uut.startGame("wordlist-single.txt");
-        assertTrue(state.attemptsRemaining() == 6);
-        assertTrue(state.history().isEmpty());
-        assertTrue(state.status() == GameStatus.IN_PROGRESS);
+        assertThat(state.attemptsRemaining()).isEqualTo(6);
+        assertThat(state.history()).isEmpty();
+        assertThat(state.status()).isEqualTo(GameStatus.IN_PROGRESS);
     }
 
     @Test
@@ -24,9 +24,9 @@ class GameEngineTest {
         var uut = new GameEngine(new WordListLoader(), new WordleRules(), 6);
         var state = uut.startGame("wordlist-single.txt");
         var updated = uut.submitGuess(state, "DELTA");
-        assertTrue(updated.status() == GameStatus.WON);
-        assertTrue(updated.attemptsRemaining() == 6);
-        assertTrue(updated.history().size() == 1);
+        assertThat(updated.status()).isEqualTo(GameStatus.WON);
+        assertThat(updated.attemptsRemaining()).isEqualTo(6);
+        assertThat(updated.history()).hasSize(1);
     }
 
     @Test
@@ -34,9 +34,9 @@ class GameEngineTest {
         var uut = new GameEngine(new WordListLoader(), new WordleRules(), 2);
         var state = uut.startGame("wordlist-single.txt");
         var updated = uut.submitGuess(state, "CRANE");
-        assertTrue(updated.status() == GameStatus.IN_PROGRESS);
-        assertTrue(updated.attemptsRemaining() == 1);
-        assertTrue(updated.history().size() == 1);
+        assertThat(updated.status()).isEqualTo(GameStatus.IN_PROGRESS);
+        assertThat(updated.attemptsRemaining()).isEqualTo(1);
+        assertThat(updated.history()).hasSize(1);
     }
 
     @Test
@@ -44,8 +44,8 @@ class GameEngineTest {
         var uut = new GameEngine(new WordListLoader(), new WordleRules(), 1);
         var state = uut.startGame("wordlist-single.txt");
         var updated = uut.submitGuess(state, "CRANE");
-        assertTrue(updated.status() == GameStatus.LOST);
-        assertTrue(updated.attemptsRemaining() == 0);
+        assertThat(updated.status()).isEqualTo(GameStatus.LOST);
+        assertThat(updated.attemptsRemaining()).isZero();
     }
 
     @Test
@@ -54,7 +54,7 @@ class GameEngineTest {
         var state = uut.startGame("wordlist-single.txt");
         var won = uut.submitGuess(state, "DELTA");
         var updated = uut.submitGuess(won, "CRANE");
-        assertTrue(updated == won);
+        assertThat(updated).isSameAs(won);
     }
 
     @Test
@@ -63,7 +63,7 @@ class GameEngineTest {
         var state = uut.startGame("wordlist-single.txt");
         var lost = uut.submitGuess(state, "CRANE");
         var updated = uut.submitGuess(lost, "DELTA");
-        assertTrue(updated == lost);
+        assertThat(updated).isSameAs(lost);
     }
 
     @Test
@@ -71,6 +71,6 @@ class GameEngineTest {
         var uut = new GameEngine(new WordListLoader(), new WordleRules(), 6);
         var state = new GameState(new Word("CRANE"), 6, List.of(), GameStatus.IN_PROGRESS);
         var updated = uut.submitGuess(state, "CRANE");
-        assertTrue(updated.status() == GameStatus.WON);
+        assertThat(updated.status()).isEqualTo(GameStatus.WON);
     }
 }

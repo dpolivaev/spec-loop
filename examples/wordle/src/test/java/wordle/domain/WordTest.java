@@ -2,29 +2,31 @@ package wordle.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WordTest {
     @Test
     void wordNormalizesToUppercase() {
         var uut = new Word("apple");
-        assertTrue(uut.value().equals("APPLE"));
+        assertThat(uut.value()).isEqualTo("APPLE");
     }
 
     @Test
     void wordRejectsWrongLength() {
-        assertThrows(IllegalArgumentException.class, () -> new Word("TOO"));
+        assertThatThrownBy(() -> new Word("TOO"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void wordRejectsNonLetters() {
-        assertThrows(IllegalArgumentException.class, () -> new Word("AB1CD"));
+        assertThatThrownBy(() -> new Word("AB1CD"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void wordAcceptsValidInput() {
         var uut = new Word("LEMON");
-        assertTrue(uut.value().equals("LEMON"));
+        assertThat(uut.value()).isEqualTo("LEMON");
     }
 }
