@@ -35,7 +35,7 @@ This framework stays agile by using **incremental, step-local specifications** (
 
 ## License
 
-Licensed under Creative Commons Attribution 4.0 (CC BY 4.0). See [LICENSE](LICENSE).
+Licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Origin
 
