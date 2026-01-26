@@ -4,7 +4,7 @@ When uncertain or before changing behavior, propose next steps, ask for approval
 
 ## Workflow
 
-1.  **Task files as source of truth**: All tasks, design, and execution status live as individual Markdown files under the project designated task directory, organized by status folders. Ideas for new tasks can be captured in `new-task-ideas.md` in the task directory. Task file names must not use ticket IDs or task identifiers as filename prefixes.
+1.  **Task files as source of truth**: All tasks, design, and execution status live as individual Markdown files under the project designated task directory, organized by status folders. Ideas for new tasks can be captured in `new-task-ideas.md` in the task directory. Task file names must not use ticket IDs or task identifiers as filename prefixes, and task file names must avoid prefixes and abbreviations (use readable, descriptive words).
 2.  **Research first**: Start with research unless the user explicitly waives it. Record findings in the task **Research**. Prefer PlantUML diagrams and place notes inside diagrams; use text when a diagram is not sufficient.
 3.  **Iterative Discovery**: You are free to research broadly across connected subtasks and iterate between research and design as needed. Design decisions are often connected, so continuous research during the design phase is encouraged to capture full context.
 4.  **Task file and approval boundary**: You may edit task files without prior approval. If task files were edited and there is no implementation directive, request user review before making code, test, or configuration changes. An explicit directive such as "implement", "implement it now", "go ahead", or "proceed" counts as approval to implement and must not trigger another approval request. After approval (explicit or implicit), proceed to implement without additional approval unless the user asks for another review gate. No exceptions.
@@ -98,6 +98,7 @@ Subtasks should only use the statuses `Planning`, `Plan Review`, `Implementing`,
     4.  **Documentation**: Any deviations from the original design are documented in the task file.
 
 **Testing Policy:**
+
 - Tests are always part of the same subtask as the implementation. Do not create separate subtasks solely for writing tests.
 - **Plan Review** requires a complete **Test specification** for each subtask.
 - **Implementation Review** requires tests to be implemented and passing as described in the subtask Test specification.
@@ -106,6 +107,6 @@ Subtasks should only use the statuses `Planning`, `Plan Review`, `Implementing`,
 
 ## Architecture Decision Records
 
-- Record architecture decisions in `architecture-decisions/` as one file per decision with meaningful names.
+- Record architecture decisions in `architecture-decisions/` as one file per decision with meaningful names. ADR file names must avoid prefixes and abbreviations (use readable, descriptive words).
 - Use a short template with Title, Date, Status, Context, Decision, and Consequences.
 - Use architecture decision records for decisions that affect public behavior, dependencies, or long term design.
