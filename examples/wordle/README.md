@@ -19,6 +19,35 @@ Wordle is small enough to build in clear increments, but rich enough to require 
 
 The example is intended to grow incrementally (e.g., parsing input, evaluating guesses, formatting output, then optional enhancements as separate increments).
 
+## CLI build and run
+
+Build and run the CLI locally:
+
+```
+./gradlew run --args="--wordlist wordlist.txt --attempts 6"
+```
+
+Optional Arguments:
+
+- `--wordlist <source>`: file path or URL for the word list; omit to use the internal list.
+- `--attempts <n>`: number of attempts before losing (default 6).
+
+## Distribution package
+
+Create a distributable ZIP/TAR:
+
+```
+./gradlew distZip
+./gradlew distTar
+```
+
+Outputs are written to `build/distributions/`. Unpack the archive and run:
+
+```
+./bin/wordle
+./bin/wordle --wordlist wordlist.txt --attempts 6
+```
+
 ## Console output format
 
 One portable output format is:

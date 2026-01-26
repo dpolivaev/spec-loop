@@ -123,7 +123,7 @@ FeedbackRenderer ..> GameState
   1. `FeedbackRenderer` renders correct/present/absent statuses deterministically for a known `GameState`.
 
 ## Subtask: Document CLI build and usage
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Document CLI build/run/usage steps in the README.
 - **Motivation:** Ensure users can run and understand the CLI without guesswork.
 - **Developer Briefing:** Update `examples/wordle/README.md` with CLI usage, including arguments and example commands.
@@ -133,3 +133,15 @@ FeedbackRenderer ..> GameState
   2. Include CLI argument descriptions and example invocations.
 - **Test specification:**
   1. README contains CLI build/run/usage instructions (manual verification acceptable).
+
+## Subtask: Package distribution
+- **Status:** Finished
+- **Scope:** Document the Gradle application distribution (ZIP/TAR) output and how to run it.
+- **Motivation:** Provide a simple, shareable package format for the CLI.
+- **Developer Briefing:** Add README instructions for `distZip`/`distTar` outputs and how to run the generated scripts.
+- **Research:** The Gradle `application` plugin produces distribution archives under `build/distributions/` with `bin/` and `lib/`.
+- **Design:**
+  1. Add a README section describing `./gradlew distZip` and where the ZIP/TAR output is located.
+  2. Document running the unpacked `bin/wordle` script and passing CLI args.
+- **Test specification:**
+  1. Manual verification: run `./gradlew distZip`, unzip, and start the CLI via `bin/wordle`.

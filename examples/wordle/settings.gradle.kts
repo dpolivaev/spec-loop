@@ -1,1 +1,1 @@
-rootProject.name = "wordle-java"
+rootProject.name = "wordle"
