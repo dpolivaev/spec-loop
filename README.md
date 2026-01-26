@@ -12,27 +12,25 @@ This framework stays agile by using **incremental, step-local specifications** (
 
 ## Getting started
 
-1. Copy these files into the target repo (keep paths and names the same):
-   - [CONSTITUTION.md](CONSTITUTION.md)
-   - [AGENTS.md](AGENTS.md)
-   - [.github/copilot-instructions.md](.github/copilot-instructions.md)
-2. Choose a task directory and keep all task files there, organized by status folders.
-   - Example task directory in this repo: [examples/wordle/tasks](examples/wordle/tasks)
-   - Replace the `<TASK_DIR>` placeholder in `AGENTS.md` and `.github/copilot-instructions.md` with your chosen path (for example, `tasks`).
-3. Start work by creating a task file in that directory and follow the workflow in [docs/workflow.md](docs/workflow.md).
+1. The Constitution defines the process for both the human developer and the AI.
+   - This repo’s Constitution: [CONSTITUTION.md](CONSTITUTION.md) is the only content required. You need to understand it and make sure the AI knows it.
+2. How to apply it (keep it in the AI context):
+   - Manual: reference `CONSTITUTION.md` in your prompts when you work with the AI.
+   - Integrated: use instruction files that automatically inject the Constitution and task directory into every session and user message. The [AGENTS.md](AGENTS.md) and [.github/copilot-instructions.md](.github/copilot-instructions.md) files in this repo are examples you can adapt.
+3. Define your task directory in those instruction files (`<TASK_DIR>`), then create a task file and follow the workflow in [docs/workflow.md](docs/workflow.md).
 
 ## Documentation
 
-- [Overview](docs/overview.md)
-- [Workflow](docs/workflow.md)
-- [Human role](docs/human-role.md)
-- [Team and traceability](docs/team-and-traceability.md)
-- [Tooling integration](docs/tooling-integration.md)
-- [Diagrams and PlantUML](docs/diagrams-and-plantuml.md)
+- [Introduction](docs/introduction.md) — why the framework exists and how “design per step” avoids waterfall.
+- [Workflow](docs/workflow.md) — task files, approvals, and definition of done.
+- [Human role](docs/human-role.md) — what the developer owns and how to stay at the level of understanding.
+- [Team and traceability](docs/team-and-traceability.md) — scrum, tickets, and review boundaries.
+- [Tooling integration](docs/tooling-integration.md) — how to apply the Constitution across AI tools.
+- [Diagrams and PlantUML](docs/diagrams-and-plantuml.md) — using diagrams and how to render them.
 
 ## Example
 
-- Wordle: [examples/wordle/](examples/wordle/)
+- Wordle: [examples/wordle/](examples/wordle/) — end-to-end sample showing incremental specs, output format, and tests.
 
 
 ## License
