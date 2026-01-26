@@ -31,6 +31,29 @@ Optional Arguments:
 
 - `--wordlist <source>`: file path or URL for the word list; omit to use the internal list.
 - `--attempts <n>`: number of attempts before losing (default 6).
+- `--cli`: force CLI mode even when the UI is available.
+
+## Swing UI
+
+By default, `./gradlew run` launches the Swing UI when a display is available:
+
+```
+./gradlew run
+```
+
+To run the CLI instead (or when you want to force terminal mode):
+
+```
+./gradlew run --args="--cli"
+```
+
+The UI also accepts the same options as the CLI:
+
+```
+./gradlew run --args="--wordlist wordlist.txt --attempts 6"
+```
+
+When `--wordlist` is provided, the UI loads that file path or URL; otherwise it uses the internal list.
 
 ## Distribution package
 

@@ -214,7 +214,7 @@ end note
   9. Manual smoke test: run `./gradlew run --args="--wordlist <path> --attempts 1"` and confirm the UI uses the provided values.
 
 ## Subtask: Document UI build and usage
-- **Status:** Plan Review
+- **Status:** Finished
 - **Scope:** Document how to build and run the Swing UI in the Wordle README.
 - **Motivation:** Ensure users can start the UI without guessing Gradle commands.
 - **Developer Briefing:** Update `examples/wordle/README.md` to include a Swing UI run command, mention the UI entry point, and describe expected behavior.
