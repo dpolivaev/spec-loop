@@ -8,7 +8,7 @@
 - **Test specification:** See subtasks.
 
 ## Subtask: Define game state model
-- **Status:** Plan Review
+- **Status:** Implementation Review
 - **Scope:** Introduce immutable game state types for attempts, history, and status.
 - **Motivation:** Establish a stable state model before implementing engine behavior.
 - **Developer Briefing:** Define `GameState` and `GameStatus` in a `wordle.engine` package. State must capture the solution, remaining attempts, feedback history, and current status.
