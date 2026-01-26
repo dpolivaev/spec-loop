@@ -55,6 +55,7 @@ end note
   3. `CliRunner` accepts `--wordlist` as an external source (file path or URL). If omitted, it uses the internal resource `wordlist.txt`.
   4. `CliRunner` starts a game with a configurable max attempts and loops until `GameStatus` is `WON` or `LOST`.
   5. Each iteration reads a line from stdin, trims it, and submits it to the engine.
+  6. When the game ends, print `Result: WON/LOST`. If input ends before completion, print `Result: INTERRUPTED`. Always exit with status code 0.
 
   CLI arguments (picocli options):
   - `--wordlist <source>`: file path or URL for the word list; if omitted, use internal `wordlist.txt`.
@@ -88,6 +89,7 @@ CliRunner ..> Option : --attempts
   2. Picocli option defaults apply when no args are provided.
   3. `--wordlist` accepts a file path and uses it to load a game.
   4. `--wordlist` accepts a URL and uses it to load a game.
+  5. CLI prints a final `Result:` line (`WON`, `LOST`, or `INTERRUPTED`) and returns exit code 0.
 
 ## Subtask: Implement feedback rendering
 - **Status:** Plan Review
