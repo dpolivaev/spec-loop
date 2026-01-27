@@ -2,7 +2,8 @@
 
 ## Introduction
 
-Modern coding models can generate useful code quickly, but they also tend to:
+Modern coding models can generate useful code quickly, but they also
+tend to:
 
 - expand scope without being asked,
 - “helpfully” invent requirements,
@@ -20,8 +21,10 @@ that remains compatible with professional engineering practice:
 explicit scope, clear review boundaries, reproducible outcomes, and
 tests as part of completion.
 
-The goal is not autonomy.  
-The goal is **disciplined execution under human control**.
+The framework is defined by a single governing document, the
+**[Constitution](../CONSTITUTION.md)**, which fully describes the
+workflow and its approval boundaries and is intentionally kept compact
+enough to remain fully visible within a single model context window.
 
 ---
 
