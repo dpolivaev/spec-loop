@@ -113,6 +113,15 @@ The framework is explicitly designed to keep work:
 - verifiable through tests,
 - traceable through version control.
 
+## Notes on Model Behavior
+
+In practice, this approach works best with models that reliably follow
+explicit instructions, e.g. properly update subtask status, stop at
+Plan Review, and wait for approval before implementing.
+
+So far, the most consistent results have been observed with
+GPT-5.2-Codex.
+
 ---
 
 ## The Human Developer’s Role
