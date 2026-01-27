@@ -52,7 +52,7 @@ execution, and complete only when tests are implemented.
 - **[Wordle](examples/wordle/)**
   A sample showing incremental specifications, output format, and tests.
   The evolution of the example can be followed 
-  through its [commit history](commits/main/examples/wordle),
+  through its [commit history](https://github.com/dpolivaev/spec-loop/commits/main/examples/wordle),
   which demonstrates the Spec Loop workflow in real development conditions.
 
 
