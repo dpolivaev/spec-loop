@@ -49,6 +49,13 @@ execution, and complete only when tests are implemented.
   The canonical, normative rules that define the process and approval
   boundaries.
 
+- **[Wordle](examples/wordle/)**
+  A sample showing incremental specifications, output format, and tests.
+  The evolution of the example can be followed 
+  through its [commit history](commits/main/examples/wordle),
+  which demonstrates the Spec Loop workflow in real development conditions.
+
+
 ## Diagrams and PlantUML
 
 Design refinement often benefits from visual representations.
@@ -76,14 +83,6 @@ Alternatively, if you work locally:
 
 The intent is that diagrams remain close to the text they explain, so design
 decisions can be understood without switching tools or contexts.
-
-## Example
-
-- Wordle: [examples/wordle/](examples/wordle/) — end-to-end sample showing
-  incremental specifications, output format, and tests.  
-  The evolution of the example can be followed through its [commit
-  history](https://github.com/dpolivaev/spec-loop/commits/main/examples/wordle), which demonstrates the Spec Loop workflow in real development
-  conditions.
 
 ## License
 
