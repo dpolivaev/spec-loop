@@ -81,8 +81,8 @@ decisions can be understood without switching tools or contexts.
 
 - Wordle: [examples/wordle/](examples/wordle/) — end-to-end sample showing
   incremental specifications, output format, and tests.  
-  The evolution of the example can be followed through the repository commit
-  history, which demonstrates the Spec Loop workflow in real development
+  The evolution of the example can be followed through its [commit
+  history](https://github.com/dpolivaev/spec-loop/commits/main/examples/wordle), which demonstrates the Spec Loop workflow in real development
   conditions.
 
 ## License
