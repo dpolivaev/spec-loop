@@ -49,7 +49,7 @@ execution, and complete only when tests are implemented.
   The canonical, normative rules that define the process and approval
   boundaries.
 
-- **[Wordle](examples/wordle/)**
+- **[Wordle](examples/wordle/)**  
   A sample showing incremental specifications, output format, and tests.
   The evolution of the example can be followed 
   through its [commit history](https://github.com/dpolivaev/spec-loop/commits/main/examples/wordle),
