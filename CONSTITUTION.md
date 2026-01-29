@@ -18,8 +18,11 @@ the scope changes materially.
 
 2. **Research first**  
    Start with research unless the user explicitly waives it. Record
-   findings in the task **Research**. Prefer PlantUML diagrams and place
-   notes inside diagrams; use text when a diagram is not sufficient.
+  findings in the task **Research**. Record observations, constraints,
+  and verified facts only; do not include planned actions or steps.
+  Plans and changes belong in **Design**. Prefer PlantUML diagrams and
+  place notes inside diagrams; use text when a diagram is not
+  sufficient.
 
 3. **Iterative discovery**  
    You are free to research broadly across connected subtasks and
