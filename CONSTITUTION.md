@@ -119,6 +119,11 @@ Formatting rules:
 - Preserve semantic line breaks (new sentences or clauses may start on
   new lines when it improves readability).
 - Lists and sublists must use consistent indentation.
+- Fenced code blocks must have no indentation except for internal
+  structure and must start and end with backticks.
+- Standalone paragraphs must have no indentation. Continuation lines
+  within list items are part of the list item and may be indented to
+  align with list formatting.
 - Markdown rendering must remain correct on GitHub and GitLab.
 
 The intent is that all documents remain readable in plain text editors
@@ -187,7 +192,8 @@ Each task uses the following exact order and layout:
   - `- **Test specification:**`
 
 Subtasks, if any, appear only at the end as their own
-`## Subtask: <title>` sections.
+`## Subtask: <title>` sections. New subtasks must be appended at the
+end unless the user explicitly requests a different ordering.
 
 Each subtask:
 
