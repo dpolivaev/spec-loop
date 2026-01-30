@@ -1,4 +1,4 @@
-# Constitution
+# Constitution (Condensed)
 
 When uncertain or before changing behavior, propose next steps, ask for
 approval, then act. Task file approval is the default approval gate for
@@ -9,26 +9,24 @@ the scope changes materially.
 
 1. **Task files as source of truth**  
    All tasks, design, and execution status live as individual Markdown
-   files under the project designated task directory, organized by
-   status folders. Ideas for new tasks can be captured in
-   `new-task-ideas.md` in the task directory. Task file names must not
-   use ticket IDs or task identifiers as filename prefixes, and task
-   file names must avoid prefixes and abbreviations (use readable,
-   descriptive words).
+   files under the project task directory, organized by status folders.
+   Ideas for new tasks can be captured in `new-task-ideas.md` in the
+   task directory. Task file names must not use ticket IDs or task
+   identifiers as filename prefixes, and task file names must avoid
+   prefixes and abbreviations (use readable, descriptive words).
 
 2. **Research first**  
    Start with research unless the user explicitly waives it. Record
-  findings in the task **Research**. Record observations, constraints,
-  and verified facts only; do not include planned actions or steps.
-  Plans and changes belong in **Design**. Prefer PlantUML diagrams and
-  place notes inside diagrams; use text when a diagram is not
-  sufficient.
+   findings in the task **Research**. Record observations, constraints,
+   and verified facts only; do not include planned actions or steps.
+   Plans and changes belong in **Design**. Prefer PlantUML diagrams and
+   place notes inside diagrams; use text when a diagram is not
+   sufficient.
 
 3. **Iterative discovery**  
-   You are free to research broadly across connected subtasks and
-   iterate between research and design as needed. Design decisions are
-   often connected, so continuous research during the design phase is
-   encouraged to capture full context.
+   Research broadly across connected subtasks and iterate between
+   research and design as needed; design decisions are connected, so
+   continuous research during design is encouraged to capture context.
 
 4. **Task file and approval boundary**  
    You may edit task files without prior approval. If task files were
@@ -48,47 +46,49 @@ the scope changes materially.
 6. **Design and approval**  
    Draft the design while research is in progress, then request
    approval. Do not modify code, tests, or configuration until the
-   design is approved. Prefer PlantUML diagrams and place notes inside
-   diagrams; use text when a diagram is not sufficient.
+   design is approved. Design sections must be expressed as PlantUML
+   diagrams that model structure or flow (class, component, sequence).
+   Do not use PlantUML notes. Formatting: the diagram must be in its
+   own paragraph under the Design label (blank line before the code
+   fence). If explanatory text is needed, put it in a separate
+   paragraph under the diagram, not within the list item. Use brief
+   text only when a diagram cannot convey the design.
 
 7. **Status updates**  
    Move task files between status folders within the project task
-   directory to reflect the current work focus (for example, from
-   finished back to in-progress). Keep any existing numeric prefix to
-   preserve traceability; new tasks must not use numeric prefixes until
-   they move to finished. Avoid moving unrelated tasks; move them only
-   when they are actively being worked on.
+   directory to reflect current work focus (e.g., finished back to
+   in-progress). Keep any existing numeric prefix to preserve
+   traceability; new tasks must not use numeric prefixes until they
+   move to finished. Avoid moving unrelated tasks; move them only when
+   actively worked on.
 
 8. **Status validation before commits**  
-   Before each commit, check the relevant task files and propose any
-   status or folder changes needed for consistency. Apply those status
-   changes only after explicit user confirmation, then proceed with the
-   commit.
+   Before each commit, check relevant task files and propose any status
+   or folder changes needed for consistency. Apply those status changes
+   only after explicit user confirmation, then proceed with the commit.
 
 9. **Move workflow for diffs**  
    When moving tracked task files, use `git mv` and stage the move
    immediately before editing. This keeps rename tracking intact in
-   diff tools that are not rename-aware (for example, Visual Studio
-   Code). Do not unstage the rename until you are ready to review and
-   commit. For new, untracked task files, use a regular move and then
-   `git add`.
+   diff tools that are not rename-aware (e.g., VS Code). Do not unstage
+   the rename until you are ready to review and commit. For new,
+   untracked task files, use a regular move and then `git add`.
 
 10. **Finished task cleanup**  
-    Keep finished tasks in the project task directory under the
-    finished status folder with a three-digit prefix in the file name
-    based on the order they are moved into finished. Delete them from
-    the working tree after a release tag is created.
+    Keep finished tasks in the task directory under the finished status
+    folder with a three-digit prefix based on order moved into finished.
+    Delete them from the working tree after a release tag is created.
 
 ## Workflow Checklist
 
-- Before any task file edit, update subtask status if it changes
-  (Planning or Implementing) before editing.
-- Before reporting to the user, update subtask status if it changes
-  (Planning → Plan Review, Implementing → Implementation Review).
+- Before any task file edit, update subtask status if it changes to
+  match the current phase (see Subtask Status Definitions).
+- After editing a task file, update subtask status to match the new
+  phase; this update is mandatory before reporting to the user.
 - Before commit: verify task status and folder changes, stage renames;
   confirm with user unless they explicitly instructed to commit.
-- Before commit: confirm the commit message starts with the
-  **Primary Identifier** for task-related changes:
+- Before commit: confirm the commit message starts with the **Primary
+  Identifier** for task-related changes:
   - If a Ticket ID exists, use it alone (e.g., `TICKET-123: ...`).
   - If no Ticket ID exists, use the full Task Identifier
     (e.g., `2025-01-15-research: ...`).
@@ -106,16 +106,11 @@ the scope changes materially.
 - **Task Sections Are Source of Truth**  
   Re-read the relevant task sections (Scope, Research, Design, Test
   Spec) before implementation or whenever requirements are unclear.
-  Keep only the relevant task content in active context; avoid carrying
-  unrelated content. These sections are the basis for coding and ensure
-  consistency.
+  Keep only the relevant task content in active context; avoid
+  carrying unrelated content. These sections are the basis for coding
+  and ensure consistency.
 
 ## Formatting
-
-All Markdown files governed by this Constitution must be formatted for
-plain-text readability.
-
-Formatting rules:
 
 - Wrap prose at approximately 72–80 characters per line.
 - Do not rely on horizontal scrolling to read paragraphs.
@@ -143,9 +138,11 @@ directory:
 
 - **in-progress**  
   Active work in either planning or implementation. Subtask status must
-  indicate the current phase (Planning / Plan Review / Implementing /
-  Implementation Review) to disambiguate intent. Tasks may stay here
-  while waiting for user confirmation before moving to finished.
+  indicate the current phase using the allowed subtask statuses (see
+  Subtasks below). LLMs must not set **Finished** unless the user
+  explicitly requests it; otherwise use **Implementation Review**.
+  Tasks may stay here while waiting for user confirmation before
+  moving to finished.
 
 - **finished**  
   The user has verified completion; move the task here with the
@@ -165,28 +162,17 @@ directory:
 
 ## Task Structure
 
-The purpose of this rigorous structure is to capture all relevant
-context (current state, future design, verification plan) within the
-task file itself. This ensures that the coding agent has immediate
-access to all necessary information during the implementation phase
-without needing to re-derive context.
-
-Each task uses the following exact order and layout:
+Each task uses this exact order and layout:
 
 - Title line: `# Task: <title>`.
 - Include one of the following identifiers (mutually exclusive):
-  - `- **Ticket:**` The Ticket ID (e.g., `BSK-1234`). This is preferred.
-  - `- **Task Identifier:**`  
-    (Use only if no Ticket exists) A short, stable identifier
-    (e.g., `2025-01-15-consent`).
-    - Construct as `YYYY-MM-DD-<slug>`, where `<slug>` is 1–2 keywords
-      derived from the task filename
-      (e.g., `implement-consent-flow.md` → `...-consent`).
-  - **Commit Rule**  
-    The value present here becomes the **Primary Identifier** for commit
-    messages.
-- Main task sections are list items with bold labels in this exact
-  order:
+  - `- **Ticket:**` Ticket ID (e.g., `BSK-1234`), preferred.
+  - `- **Task Identifier:**` if no Ticket exists; `YYYY-MM-DD-<slug>`
+    where `<slug>` is 1–2 keywords from the filename
+    (e.g., `implement-consent-flow.md` → `...-consent`).
+  - **Commit Rule**: the value present becomes the **Primary Identifier**
+    for commit messages.
+- Main task sections are list items with bold labels in this order:
   - `- **Scope:**`
   - `- **Motivation:**`
   - `- **Developer Briefing:**`
@@ -194,19 +180,21 @@ Each task uses the following exact order and layout:
   - `- **Design:**`
   - `- **Test specification:**`
 
-Subtasks, if any, appear only at the end as their own
-`## Subtask: <title>` sections. New subtasks must be appended at the
-end unless the user explicitly requests a different ordering.
+Subtasks (if any):
 
-Each subtask:
-
-- starts with `- **Status:** <status>`,
-- uses the same list item labels and ordering as the main task,
-- represents a **functional increment** unless explicitly marked
-  otherwise.
+- Appear only at the end as `## Subtask: <title>` sections; append new
+  subtasks unless the user explicitly requests a different ordering.
+- Each subtask:
+  - starts with `- **Status:** <status>`,
+  - uses the same list item labels and ordering as the main task,
+  - represents a functional increment unless explicitly marked
+    otherwise.
 
 Subtasks may use only the statuses `Planning`, `Plan Review`,
-`Implementing`, `Implementation Review`, or `Finished`.
+`Implementing`, `Implementation Review`, or `Finished`. LLMs must not
+set **Finished** unless the user explicitly requests it; otherwise use
+**Implementation Review**.
+
 **Subtask Status Definitions:**
 
 - **Planning**  
@@ -232,55 +220,28 @@ Subtasks may use only the statuses `Planning`, `Plan Review`,
 
 **Definition of Done by Phase:**
 
-- **Planning Phase Definition of Done**  
-  (Required before moving to _Plan Review_):
+- **Planning Phase Definition of Done** (before _Plan Review_):
+  1. **Research**: legacy state and current constraints documented.
+  2. **Design**: architecture/data flow/class interactions defined
+     (PlantUML preferred).
+  3. **Test Spec**: comprehensive test scenarios written.
+  4. **Briefing**: Developer Briefing updated as standalone summary.
+  5. **No Code**: no production code or tests generated yet.
 
-  1. **Research**  
-     Legacy state (if applicable) and current constraints are fully
-     analyzed and documented.
-
-  2. **Design**  
-     Future architecture, data flow, and key class interactions are
-     defined (PlantUML preferred).
-
-  3. **Test Spec**  
-     Comprehensive list of test scenarios (positive, negative,
-     edge cases) is written.
-
-  4. **Briefing**  
-     The "Developer Briefing" is updated to be a standalone summary of
-     the task context.
-
-  5. **No Code**  
-     No production code or tests have been generated yet.
-
-- **Implementing Phase Definition of Done**  
-  (Required before moving to _Implementation Review_):
-
-  1. **Scope**  
-     All items in the **Design** and **Test specification** sections
-     are fully implemented.
-
-  2. **Verification**  
-     All new tests (Unit, Integration) and relevant existing tests
-     pass locally.
-
-  3. **Cleanliness**  
-     Code is free of "TODOs", placeholders, temporary comments, and
-     unused imports.
-
-  4. **Documentation**  
-     Any deviations from the original design are documented in the
-     task file.
+- **Implementing Phase Definition of Done** (before _Implementation
+  Review_):
+  1. **Scope**: Design and Test specification fully implemented.
+  2. **Verification**: new and relevant existing tests pass locally.
+  3. **Cleanliness**: no TODOs, placeholders, temp comments, unused
+     imports.
+  4. **Documentation**: design deviations documented in task file.
 
 **Testing Policy:**
 
-- Tests are always part of the same subtask as the implementation.
-  Do not create separate subtasks solely for writing tests.
-
+- Tests are part of the same subtask as implementation; do not create
+  separate subtasks solely for tests.
 - **Plan Review** requires a complete **Test specification** for each
   subtask.
-
 - **Implementation Review** requires tests to be implemented and
   passing as described in the subtask Test specification.
 
@@ -297,5 +258,5 @@ explicit status lines.
   descriptive words).
 - Use a short template with Title, Date, Status, Context, Decision, and
   Consequences.
-- Use architecture decision records for decisions that affect public
-  behavior, dependencies, or long-term design.
+- Use ADRs for decisions affecting public behavior, dependencies, or
+  long-term design.
