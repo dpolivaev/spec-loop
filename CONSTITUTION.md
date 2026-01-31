@@ -52,7 +52,11 @@ the scope changes materially.
    own paragraph under the Design label (blank line before the code
    fence). If explanatory text is needed, put it in a separate
    paragraph under the diagram, not within the list item. Use brief
-   text only when a diagram cannot convey the design.
+   text only when a diagram cannot convey the design. For class
+   diagrams, use one outer package and nest inner packages inside it.
+   Add `set separator none` at the top of the PlantUML block to prevent
+   automatic namespace nesting. Include all meaningful dependencies
+   with labels; use at most one connector per class pair.
 
 7. **Status updates**  
    Move task files between status folders within the project task
