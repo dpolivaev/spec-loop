@@ -1,9 +1,10 @@
-# Constitution (Condensed)
+# Constitution
 
 When uncertain or before changing behavior, propose next steps, ask for
 approval, then act. Task file approval is the default approval gate for
-implementation unless the user requests an additional review gate or
-the scope changes materially.
+implementation. The user can explicitly override this workflow in
+their request, request an additional review gate, or if the scope
+changes materially.
 
 ## Workflow
 
