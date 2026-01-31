@@ -245,6 +245,8 @@ set **Finished** unless the user explicitly requests it; otherwise use
 
 - Tests are part of the same subtask as implementation; do not create
   separate subtasks solely for tests.
+- Automated tests should be preferred.
+- Group tests under explicit Automated tests and Manual tests sublists.
 - **Plan Review** requires a complete **Test specification** for each
   subtask.
 - **Implementation Review** requires tests to be implemented and
