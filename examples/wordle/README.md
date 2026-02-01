@@ -1,90 +1,79 @@
 # Wordle Example
 
-This directory contains a worked example used to demonstrate the framework end-to-end.
+This directory contains a worked example used to demonstrate Spec Loop
+end-to-end. The **primary documentation of the example is its commit history**,
+which shows how specifications, design, implementation, and tests evolve
+incrementally.
 
 ## Purpose
 
-The goal of the example is to show:
+The goal of this example is to demonstrate:
 
-- incremental specification (design per step),
-- explicit research and design,
-- test-driven completion,
-- and disciplined use of the model under review boundaries.
+* incremental specification (design per step),
+* explicit research and design,
+* test-driven completion,
+* disciplined use of the model under explicit review boundaries.
+
+## Game rules (brief)
+
+Wordle is a word-guessing game with the following rules:
+
+* The game selects a secret word of fixed length.
+* The player submits guesses of the same length.
+* For each guess, letters are evaluated position by position:
+
+  * `=` correct letter in the correct position,
+  * `~` correct letter in the wrong position,
+  * `.` letter not present in the word.
+* The player has a limited number of attempts to guess the word.
+* The game ends when the word is guessed correctly or attempts are exhausted.
+
+These rules are intentionally simple but contain enough edge cases
+(letter repetition, ordering, termination conditions) to require careful
+specification and testing.
 
 ## Why Wordle is a suitable demonstration task
 
-Wordle is small enough to build in clear increments, but rich enough to require careful rules, edge cases, and verification.
+Wordle is small enough to build in clear, reviewable increments, but rich enough
+to require explicit rules, research into edge cases, and verification through
+tests. This makes it a good fit for demonstrating step-local specifications
+and approval gates.
 
-## High-level structure
+## Build and run
 
-The example is intended to grow incrementally (e.g., parsing input, evaluating guesses, formatting output, then optional enhancements as separate increments).
+Build and run locally using Gradle.
 
-## CLI build and run
-
-Build and run the CLI locally:
+### CLI mode
 
 ```
-./gradlew run --args="--wordlist wordlist.txt --attempts 6"
+./gradlew run --args="--cli --wordlist wordlist.txt --attempts 6"
 ```
 
-Optional Arguments:
+Arguments:
 
-- `--wordlist <source>`: file path or URL for the word list; omit to use the internal list.
-- `--attempts <n>`: number of attempts before losing (default 6).
-- `--cli`: force CLI mode even when the UI is available.
+* `--wordlist <source>`: file path or URL for the word list; omit to use the
+  internal list.
+* `--attempts <n>`: number of attempts before losing (default: 6).
+* `--cli`: force CLI mode.
 
-## Swing UI
+### Swing UI
 
-By default, `./gradlew run` launches the Swing UI when a display is available:
+When a display is available, running without `--cli` starts the Swing UI:
 
 ```
 ./gradlew run
 ```
 
-To run the CLI instead (or when you want to force terminal mode):
-
-```
-./gradlew run --args="--cli"
-```
-
-The UI also accepts the same options as the CLI:
-
-```
-./gradlew run --args="--wordlist wordlist.txt --attempts 6"
-```
-
-When `--wordlist` is provided, the UI loads that file path or URL; otherwise it uses the internal list.
-
-## Distribution package
-
-Create a distributable ZIP/TAR:
-
-```
-./gradlew distZip
-./gradlew distTar
-```
-
-Outputs are written to `build/distributions/`. Unpack the archive and run:
-
-```
-./bin/wordle
-./bin/wordle --wordlist wordlist.txt --attempts 6
-```
+The UI accepts the same arguments as the CLI.
 
 ## Console output format
 
-One portable output format is:
+One portable output format used in the example is:
 
 `C. R~ A= N. E.`
 
 Where:
 
-- `=` means correct letter in correct position,
-- `~` means correct letter in wrong position,
-- `.` means letter not present.
-
-## Notes on incremental development and testing
-
-Each increment should be considered complete only when its tests are implemented and passing, unless tests are explicitly waived by the human developer.
-
-The canonical workflow rules are in [CONSTITUTION.md](../../CONSTITUTION.md).
+* `=` means correct letter in the correct position,
+* `~` means correct letter in the wrong position,
+* `.` means letter not present.
