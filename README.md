@@ -1,88 +1,88 @@
 # Spec Loop — Design-First AI-Assisted Development
 
-Modern coding models can generate useful code quickly, but they also tend to
-expand scope, invent requirements, implement before design is stable, and
-treat tests as optional. In real projects, those failure modes make AI output
-hard to review, hard to trace, and risky to ship.
+There are two common ways people use AI for coding.
 
-This repository defines a **process framework** for AI-assisted development
-(not a prompt library and not a tool): explicit scope, review boundaries,
-reproducible outcomes, and tests as part of completion.
+**Vibecoding:** you describe intent, the model fills in the gaps, and you get a
+large diff with undocumented decisions. Review becomes archaeology. Tests are
+optional by accident.
 
-## Why specification-driven development often turns into waterfall
+**Waterfall:** you try to avoid that by writing a complete spec first. You
+can’t. Constraints appear during implementation. The spec inflates, then it
+either blocks change or gets ignored.
 
-Specification-driven development is appealing because it promises clarity
-(spec first, implementation later). In practice, specifications are often
-written too early, grow too large, and resist correction when reality diverges.
+Spec Loop avoids both: write the next small spec, review it, then implement it
+with tests. Keep the spec local to the next step. Repeat until done.
 
-Spec Loop avoids this by using **incremental, step-local specifications**
-(“design per step”): scoped to the next meaningful increment, reviewed before
-execution, and complete only when tests are implemented.
+The rules are defined in **[CONSTITUTION.md](CONSTITUTION.md)**.
+The model drafts and updates task files; you review and approve at the
+task-file gate before implementation.
+
+## Working with legacy code
+
+Spec Loop is designed to work with existing codebases.
+Before any design or implementation step, the model captures relevant legacy
+knowledge in the Research section of the task file: existing behavior,
+constraints, APIs, interfaces, and established code practices.
+
+It follows the classic research–plan–implement approach, broken down
+into small, incremental sub-tasks.
+
+The research is explicitly scoped to the next increment. It captures only
+what is required to implement that increment correctly, and is intentionally
+partial. The result is a bounded, reviewable understanding whose size
+remains manageable.
+
+Because the research is written down, you can verify that the model examined the
+right parts of the codebase, identified the correct interfaces, and aligned with
+existing practices before any code is written. This prevents clean-room
+designs in legacy systems and makes incremental change safe.
 
 ## Getting started
 
-1. The Constitution defines the process for both the human developer and the AI.
-   - This repo’s Constitution: [CONSTITUTION.md](CONSTITUTION.md) is the only
-     content required to execute the process.
-   - For rationale and conceptual context, see the
-     [Conceptual Overview](docs/overview.md).
+Apply the process to your repository.
 
-2. How to apply it (keep it in the AI context):
-   - Manual: reference `CONSTITUTION.md` in your prompts when you work with the
-     AI.
-   - Integrated: use instruction files that automatically inject the
-     Constitution and task directory into every session and user message. The
-     [AGENTS.md](AGENTS.md) and
-     [.github/copilot-instructions.md](.github/copilot-instructions.md) files in
-     this repo are examples you can adapt.
-
-3. Define your task directory in those instruction files (`<TASK_DIR>`), then
-   create a task file and follow the workflow described in
-   [docs/workflow.md](docs/workflow.md).
+* Manual: reference `CONSTITUTION.md` explicitly in your prompts so it is in
+  the model context for the session.
+* Integrated: use instruction files that inject the Constitution and your
+  task directory into every session and user message. This removes the need
+  to mention `CONSTITUTION.md` explicitly in prompts. This repo includes
+  examples you can adapt:
+  [AGENTS.md](AGENTS.md) and
+  [.github/copilot-instructions.md](.github/copilot-instructions.md).
+* Define your task directory in those instruction files (`<TASK_DIR>`), then
+  ask the model to create and update task files there and follow the workflow
+  defined by the Constitution.
 
 ## Documentation
 
-- **[Conceptual Overview](docs/overview.md)**  
-  What Spec Loop is, why it exists, and how the pieces fit together.
+1. Read the Constitution.
 
-- **[Constitution](CONSTITUTION.md)**  
-  The canonical, normative rules that define the process and approval
-  boundaries.
+   * **[CONSTITUTION.md](CONSTITUTION.md)** defines the normative rules: task
+     files, research/design discipline, approval gates, traceability
+     requirements, and definition of done.
 
-- **[Wordle](examples/wordle/)**  
-  A sample showing incremental specifications, output format, and tests.
-  The evolution of the example can be followed 
-  through its [commit history](https://github.com/dpolivaev/spec-loop/commits/main/examples/wordle),
-  which demonstrates the Spec Loop workflow in real development conditions.
+2. Study the Wordle example by commit history.
 
+   * The [Wordle commit history](https://gitlab.com/dpolivaev/spec-loop/-/commits/main/examples/wordle)
+     shows the workflow under real version-control pressure: how task
+     specifications evolve step by step, and how implementation and tests
+     follow approved design.
+
+3. **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**
+   How task files and the Constitution map to team practice: review boundaries,
+   responsibility, commit linking, and status discipline.
 
 ## Diagrams and PlantUML
 
-Design refinement often benefits from visual representations.
-This framework encourages the use of PlantUML diagrams to reason about
-structure, validate assumptions, and make design intent explicit.
+Spec Loop treats diagrams as specification artifacts: they make design intent
+reviewable at the same boundary as the surrounding text.
 
-Diagrams here are **part of the specification**, not decoration.
-They are meant to be read together with the surrounding Markdown text.
+For inline PlantUML rendering in Markdown, view the repo on GitLab.
+GitHub does not render PlantUML embedded in Markdown natively,
+so reading there can degrade the intended experience.
 
-To read these documents properly, a Markdown viewer that can render PlantUML
-diagrams inline is required.
-GitHub does not render PlantUML embedded in Markdown natively.
-
-For a better reading experience with inline diagrams, you can view this
-repository on GitLab:
-
-- **GitLab mirror:** https://gitlab.com/dpolivaev/spec-loop — GitLab renders
-  PlantUML diagrams in Markdown directly in the browser.
-
-Alternatively, if you work locally:
-
-- Use an editor or viewer with PlantUML support (for example, in VS Code with an
-  appropriate extension) so that diagrams are rendered inline while reading or
-  editing the Markdown files.
-
-The intent is that diagrams remain close to the text they explain, so design
-decisions can be understood without switching tools or contexts.
+Locally, use an editor with PlantUML support (for example VS Code with an extension) so
+diagrams render inline while reading.
 
 ## License
 
@@ -91,4 +91,4 @@ Licensed under the MIT License. See [LICENSE](LICENSE).
 ## Origin
 
 This framework was developed and applied in
-[Freeplane](https://github.com/freeplane/freeplane).
+Freeplane.
