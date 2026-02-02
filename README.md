@@ -68,8 +68,8 @@ Apply the process to your repository.
      specifications evolve step by step, and how implementation and tests
      follow approved design.
 
-3. **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**
-   How task files and the Constitution map to team practice: review boundaries,
+3. Read **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**.
+   It explains how task files and the Constitution map to team development practice: boundaries,
    responsibility, commit linking, and status discipline.
 
 ## Diagrams and PlantUML
