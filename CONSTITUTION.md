@@ -247,6 +247,9 @@ set **Finished** unless the user explicitly requests it; otherwise use
   separate subtasks solely for tests.
 - Automated tests should be preferred.
 - Group tests under explicit Automated tests and Manual tests sublists.
+- When implementing a task, you must implement all specified tests,
+  run them, and fix any failures before reporting completion, unless
+  the user explicitly waives tests.
 - **Plan Review** requires a complete **Test specification** for each
   subtask.
 - **Implementation Review** requires tests to be implemented and
