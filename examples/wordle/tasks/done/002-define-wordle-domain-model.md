@@ -64,7 +64,7 @@ LetterFeedback ..> LetterStatus
 
 ## Subtask: Define domain objects
 
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Define immutable domain objects for words and feedback,
   including validation entry points.
 - **Motivation:** Provide a stable core model before adding game logic
@@ -92,7 +92,7 @@ LetterFeedback ..> LetterStatus
 
 ## Subtask: Implement guess evaluation rules
 
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Implement comparison logic that produces per-letter
   feedback given a solution and a guess.
 - **Motivation:** Provide the core Wordle feedback behavior needed by

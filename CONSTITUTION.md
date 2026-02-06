@@ -71,10 +71,10 @@ changes materially.
 
 7. **Status updates**  
    Move task files between status folders within the project task
-   directory to reflect current work focus (e.g., finished back to
+   directory to reflect current work focus (e.g., done back to
    in-progress). Keep any existing numeric prefix to preserve
    traceability; new tasks must not use numeric prefixes until they
-   move to finished. Avoid moving unrelated tasks; move them only when
+   move to done. Avoid moving unrelated tasks; move them only when
    actively worked on.
 
 8. **Status validation before commits**  
@@ -89,17 +89,18 @@ changes materially.
    the rename until you are ready to review and commit. For new,
    untracked task files, use a regular move and then `git add`.
 
-10. **Finished task cleanup**  
-    Keep finished tasks in the task directory under the finished status
-    folder with a three-digit prefix based on order moved into finished.
+10. **Done task cleanup**  
+    Keep done tasks in the task directory under the done status
+    folder with a three-digit prefix based on order moved into done.
     Delete them from the working tree after a release tag is created.
 
 ## Workflow Checklist
 
 - Before any task file edit, update subtask status if it changes to
-  match the current phase (see Subtask Status Definitions).
+  match the current lifecycle state (see Subtask Status Definitions).
 - After editing a task file, update subtask status to match the new
-  phase; this update is mandatory before reporting to the user.
+  lifecycle state; this update is mandatory before reporting to the
+  user.
 - Before commit: verify task status and folder changes, stage renames;
   confirm with user unless they explicitly instructed to commit.
 - Before commit: confirm the commit message starts with the **Primary
@@ -152,14 +153,13 @@ directory:
   the design is approved; include ideas or deferred tasks.
 
 - **in-progress**  
-  Active work in either planning or implementation. Subtask status must
-  indicate the current phase using the allowed subtask statuses (see
-  Subtasks below). LLMs must not set **Finished** unless the user
-  explicitly requests it; otherwise use **Implementation Review**.
+  Active work in research, design, implementation, or verification.
+  Subtask status must use the allowed statuses defined below.
+  LLMs must not set **done** unless the user explicitly requests it.
   Tasks may stay here while waiting for user confirmation before
-  moving to finished.
+  moving to done.
 
-- **finished**  
+- **done**  
   The user has verified completion; move the task here with the
   required prefix before releasing.
 
@@ -203,51 +203,37 @@ Subtasks (if any):
   - represents a functional increment unless explicitly marked
     otherwise.
 
-Subtasks may use only the statuses `Planning`, `Plan Review`,
-`Implementing`, `Implementation Review`, or `Finished`. LLMs must not
-set **Finished** unless the user explicitly requests it; otherwise use
-**Implementation Review**.
+Subtasks may use only the statuses `backlog`, `in-progress`, or `done`.
+LLMs must not set **done** unless the user explicitly requests it.
 
 **Subtask Status Definitions:**
 
-- **Planning**  
-  The agent iterates on Research, Design, Test Specification, and
-  Developer Briefing.
+- **backlog**  
+  The subtask is planned, deferred, or not actively being worked.
+  Research, design, and test specification can be drafted here.
 
-- **Plan Review**  
-  The agent sets this status when the design is complete and waiting
-  for User approval. **Transition to Implementing requires User
-  approval.**
+- **in-progress**  
+  The subtask is actively being worked, including research, design,
+  implementation, and verification. Transition from backlog to
+  implementation still requires User approval under the approval
+  boundary rules.
 
-- **Implementing**  
-  The agent iterates on implementation and verification (coding,
-  testing, debugging, fixing). There is no separate verification step;
-  verification is part of implementation.
+- **done**  
+  The subtask is complete, verified, and approved by the User.
 
-- **Implementation Review**  
-  The agent sets this status when implementation **and** verification
-  are complete. **Transition to Finished requires User approval.**
+**Definition of Done:**
 
-- **Finished**  
-  The task is complete and approved by the User.
-
-**Definition of Done by Phase:**
-
-- **Planning Phase Definition of Done** (before _Plan Review_):
-  1. **Research**: legacy state and current constraints documented.
-  2. **Design**: architecture/data flow/class interactions defined
-     (PlantUML preferred).
-  3. **Test Spec**: comprehensive test scenarios written.
-  4. **Briefing**: Developer Briefing updated as standalone summary.
-  5. **No Code**: no production code or tests generated yet.
-
-- **Implementing Phase Definition of Done** (before _Implementation
-  Review_):
-  1. **Scope**: Design and Test specification fully implemented.
-  2. **Verification**: new and relevant existing tests pass locally.
-  3. **Cleanliness**: no TODOs, placeholders, temp comments, unused
+Before setting a subtask to **done**:
+  1. **Research**: legacy state and constraints are documented as needed.
+  2. **Design**: architecture/data flow/class interactions are defined.
+  3. **Scope**: Design and Test specification are fully implemented.
+  4. **Verification**: new and relevant existing tests pass locally.
+  5. **Cleanliness**: no TODOs, placeholders, temp comments, unused
      imports.
-  4. **Documentation**: design deviations documented in task file.
+  6. **Documentation**: design deviations are documented in the task
+     file.
+  7. **Approval**: the User explicitly approves the transition to
+     **done**.
 
 **Testing Policy:**
 
@@ -258,10 +244,9 @@ set **Finished** unless the user explicitly requests it; otherwise use
 - When implementing a task, you must implement all specified tests,
   run them, and fix any failures before reporting completion, unless
   the user explicitly waives tests.
-- **Plan Review** requires a complete **Test specification** for each
-  subtask.
-- **Implementation Review** requires tests to be implemented and
-  passing as described in the subtask Test specification.
+- Before moving a subtask to **done**, the subtask must have a complete
+  **Test specification** and those tests must be implemented and
+  passing, unless explicitly waived by the user.
 
 **Status**
 

@@ -18,7 +18,7 @@
 - **Test specification:** See subtasks.
 
 ## Subtask: Implement CLI parsing and game loop
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Add picocli-based CLI command, parse arguments, and run the
   game loop.
 - **Motivation:** Provide a working CLI entry point with configurable
@@ -123,7 +123,7 @@ CliRunner ..> Option : --attempts
   7. Invalid guesses are reported and do not decrement attempts.
 
 ## Subtask: Implement feedback rendering
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Add feedback formatting for CLI output.
 - **Motivation:** Provide readable game output for users.
 - **Developer Briefing:** Implement a renderer that converts `GameState`
@@ -154,7 +154,7 @@ FeedbackRenderer ..> GameState
        deterministically for a known `GameState`.
 
 ## Subtask: Document CLI build and usage
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Document CLI build/run/usage steps in the README.
 - **Motivation:** Ensure users can run and understand the CLI without
   guesswork.
@@ -169,7 +169,7 @@ FeedbackRenderer ..> GameState
        acceptable).
 
 ## Subtask: Package distribution
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Document the Gradle application distribution (ZIP/TAR) output
   and how to run it.
 - **Motivation:** Provide a simple, shareable package format for the CLI.

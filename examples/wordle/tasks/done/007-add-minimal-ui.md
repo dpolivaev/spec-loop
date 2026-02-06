@@ -18,7 +18,7 @@
 - **Test specification:** See subtasks.
 
 ## Subtask: Prepare shared input validation
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Refactor CLI responsibilities by splitting option parsing from
   the game loop, and extract shared input validation so both CLI and UI
   reuse the same rules for empty and invalid guesses.
@@ -118,7 +118,7 @@ end note
        component and one integration-style test for the CLI path).
 
 ## Subtask: Implement Swing UI
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Add a minimal Swing UI that lets a user enter guesses, see
   feedback rows, and view the final result.
 - **Motivation:** Provide a simple graphical interface that exercises the
@@ -268,7 +268,7 @@ end note
        --attempts 1"` and confirm the UI uses the provided values.
 
 ## Subtask: Document UI build and usage
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Document how to build and run the Swing UI in the Wordle
   README.
 - **Motivation:** Ensure users can start the UI without guessing Gradle

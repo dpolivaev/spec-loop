@@ -19,7 +19,7 @@
 - **Test specification:** See subtasks.
 
 ## Subtask: Define game state model
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Introduce immutable game state types for attempts, history, and
   status.
 - **Motivation:** Establish a stable state model before implementing engine
@@ -63,7 +63,7 @@ GameState ..> Word
   2. `GameStatus` contains IN_PROGRESS, WON, LOST.
 
 ## Subtask: Implement game engine logic
-- **Status:** Finished
+- **Status:** done
 - **Scope:** Implement game start and guess submission logic using the state
   model.
 - **Motivation:** Provide reusable gameplay behavior for CLI and UI layers.

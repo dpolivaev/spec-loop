@@ -75,11 +75,8 @@ before continuing.
 ## Review boundaries that map to normal practice
 
 Spec Loop separates agreement on intent from review of implementation.
-
-* Plan Review aligns with refinement and design review: scope, design, risks,
-  and test specification are approved before implementation.
-* Implementation Review aligns with code review readiness: code is judged
-  against already-approved intent.
+Even with simplified statuses, review gates still exist at the task-file
+approval boundary and at final completion approval.
 
 Reviewers assess correctness against approved intent.
 
@@ -109,9 +106,9 @@ Work is organized by status folders in the task directory:
 
 * backlog: planned or deferred work; research and design live here until design
   is approved.
-* in-progress: active planning or implementation; subtasks carry explicit phase
+* in-progress: active planning or implementation; subtasks carry explicit
   status.
-* finished: user-verified completion; prefix rules preserve ordering.
+* done: user-verified completion; prefix rules preserve ordering.
 
 Before commits, the model validates task status consistency and proposes folder
 or status updates. These are applied only after explicit user confirmation,
@@ -126,7 +123,7 @@ An increment is considered done only when:
 * the approved design is fully implemented,
 * the test specification is implemented and passing,
 * any deviations are documented in the task file,
-* the user explicitly approves the transition to **Finished**.
+* the user explicitly approves the transition to **done**.
 
 This applies equally to human-written and model-written code.
 
