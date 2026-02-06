@@ -1,6 +1,9 @@
 # Constitution
 
-When uncertain or before changing behavior, propose next steps, ask for
+- **Principle over ceremony**  
+  This Constitution is intent-first; compliance is judged by
+  outcome and behavior, not checklist formality.
+- When uncertain or before changing behavior, propose next steps, ask for
 approval, then act. Task file approval is the default approval gate for
 implementation. The user can explicitly override this workflow in
 their request, request an additional review gate, or if the scope
@@ -38,6 +41,9 @@ changes materially.
    another approval request. After approval (explicit or implicit),
    proceed to implement without additional approval unless the user
    asks for another review gate. No exceptions.
+   If scope drifts (new type, flow, dependency, or behavior-affecting
+   method change not in Design), stop, update Design, request
+   approval, then continue.
 
 5. **Implementation completeness**  
    Implementation is complete only when both the design and the test
@@ -47,7 +53,11 @@ changes materially.
 6. **Design and approval**  
    Draft the design while research is in progress, then request
    approval. Do not modify code, tests, or configuration until the
-   design is approved. Design sections must be expressed as PlantUML
+   design is approved. Any new class, responsibility move, or
+   behavior-affecting method change requires a Design update and
+   approval before code. If design is outdated, reject
+   implementation and request design update approval first. Design
+   sections must be expressed as PlantUML
    diagrams that model structure or flow (class, component, sequence).
    Do not use PlantUML notes. Formatting: the diagram must be in its
    own paragraph under the Design label (blank line before the code
@@ -157,8 +167,6 @@ directory:
 
 - **Clarity**  
   Designs may describe file scope broadly when it stays unambiguous.
-- **No unapproved logic changes**  
-  Do not change business logic unless explicitly instructed.
 - **Task to commit linking**  
   Every commit message must include the Task Identifier.
 - **Refactor tracking**  
