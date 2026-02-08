@@ -45,6 +45,9 @@ before performing research or design.
 Design and research MUST NOT be developed directly in chat
 unless the User explicitly allows planning without a task file.
 
+All current design decisions for the scoped work MUST be written 
+in the task file Design section before IMPLEMENTATION starts.
+
 Chat is a coordination channel, not a design artifact.
 
 ## Workflow
@@ -83,6 +86,8 @@ Chat is a coordination channel, not a design artifact.
    another approval request. After approval (explicit or implicit),
    proceed to implement without additional approval unless the user
    asks for another review gate. No exceptions.
+   Any implementation approval is invalid if the task file
+   misses any current design decisions for that scope.
    If scope drifts (new type, flow, dependency, or behavior-affecting
    method change not in Design), stop, update Design, request
    approval, then continue.
