@@ -72,6 +72,19 @@ The default approval gate is task file approval:
 If scope changes materially, the model proposes next steps and requests approval
 before continuing.
 
+## Phase model
+
+Spec Loop defines work phases: **PLAN**, **IMPLEMENTATION** and **DONE**.
+
+By default, phase transitions are constrained:
+
+* `PLAN -> IMPLEMENTATION` requires explicit approval.
+* `IMPLEMENTATION -> DONE` requires explicit approval.
+* Any new request, refinement, extension, or follow-up resets work to `PLAN`.
+
+This keeps the model aligned and prevents implementation from continuing by inertia
+after scope changes.
+
 ## Review boundaries that map to normal practice
 
 Spec Loop separates agreement on intent from review of implementation.
@@ -106,8 +119,8 @@ Work is organized by status folders in the task directory:
 
 * backlog: planned or deferred work; research and design live here until design
   is approved.
-* in-progress: active planning or implementation; subtasks carry explicit
-  status.
+* in-progress: active research, design, implementation, or verification;
+  subtasks carry explicit status.
 * done: user-verified completion; prefix rules preserve ordering.
 
 Before commits, the model validates task status consistency and proposes folder

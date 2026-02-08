@@ -17,6 +17,9 @@ The rules are defined in **[CONSTITUTION.md](CONSTITUTION.md)**.
 The model drafts and updates task files; you review and approve at the
 task-file gate before implementation.
 
+Spec Loop also defines explicit work phases: plan, implementation and done.
+Any transitions to implementation and to done require explicit user approval.
+
 ## Working with legacy code
 
 Spec Loop is designed to work with existing codebases.
