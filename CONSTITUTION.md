@@ -133,8 +133,9 @@ Chat is a coordination channel, not a design artifact.
    When moving tracked task files, use `git mv` and stage the move
    immediately before editing. This keeps rename tracking intact in
    diff tools that are not rename-aware (e.g., VS Code). Do not unstage
-   the rename until you are ready to review and commit. For new,
-   untracked task files, use a regular move and then `git add`.
+   the rename until you are ready to review and commit. For new
+   untracked task files, move in filesystem (not `git mv`), then run
+   `git add -A`.
 
 10. **Done task cleanup**  
     Keep done tasks in the task directory under the done status
