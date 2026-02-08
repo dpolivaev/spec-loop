@@ -9,6 +9,44 @@ implementation. The user can explicitly override this workflow in
 their request, request an additional review gate, or if the scope
 changes materially.
 
+## Spec Loop Phases and Transitions
+
+Phases:
+- **PLAN** — research, design/spec changes, test specification.
+- **IMPLEMENTATION** — code and test code, strictly following approved design.
+- **DONE** — verified and accepted completion.
+
+Work always starts in **PLAN**.
+
+After completing any phase, the default next phase is **PLAN**.
+Any new work, change, extension, refinement, or follow-up
+automatically resets the process to **PLAN**.
+
+The model MUST NOT continue IMPLEMENTATION by inertia.
+
+By default, phases are exclusive. The User may explicitly allow 
+planning and implementation together in special cases.
+
+No transition between phases
+(PLAN → IMPLEMENTATION, IMPLEMENTATION → PLAN, IMPLEMENTATION → DONE)
+is allowed without **explicit User instruction or approval**.
+
+Within a phase, the model may act freely.
+At phase boundaries, the model MUST stop and ask.
+
+## Task-first planning
+
+By default, all PLAN work is performed **inside a task file**.
+
+If no suitable task file exists for the current request,
+the model MUST first propose creating a new task file
+before performing research or design.
+
+Design and research MUST NOT be developed directly in chat
+unless the User explicitly allows planning without a task file.
+
+Chat is a coordination channel, not a design artifact.
+
 ## Workflow
 
 1. **Task files as source of truth**  
@@ -18,6 +56,10 @@ changes materially.
    task directory. Task file names must not use ticket IDs or task
    identifiers as filename prefixes, and task file names must avoid
    prefixes and abbreviations (use readable, descriptive words).
+   If no task file exists for the requested work,
+   the model MUST propose creating one
+   before recording Research or Design.
+
 
 2. **Research first**  
    Start with research unless the user explicitly waives it. Record
@@ -151,6 +193,9 @@ directory:
 - **backlog**  
   New, planned, or deferred work. Research and design belong here until
   the design is approved; include ideas or deferred tasks.
+  When creating a new task, first check whether `in-progress` contains
+  any tasks. If `in-progress` is empty, create the new task directly in
+  `in-progress` instead of `backlog`.
 
 - **in-progress**  
   Active work in research, design, implementation, or verification.
@@ -204,7 +249,14 @@ Subtasks (if any):
     otherwise.
 
 Subtasks may use only the statuses `backlog`, `in-progress`, or `done`.
-LLMs must not set **done** unless the user explicitly requests it.
+
+**DONE is a phase transition.**
+Moving a task or subtask to **done** is not a status update,
+but a transition to the DONE phase.
+As with all phase transitions, this requires
+**explicit User approval** (see Spec Loop Phases and Transitions).
+
+LLMs must not set **done** on their own.
 
 **Subtask Status Definitions:**
 
