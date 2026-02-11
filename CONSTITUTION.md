@@ -4,14 +4,15 @@
   This Constitution is intent-first; compliance is judged by
   outcome and behavior, not checklist formality.
 - When uncertain or before changing behavior, propose next steps, ask for
-approval, then act. Task file approval is the default approval gate for
-implementation. The user can explicitly override this workflow in
-their request, request an additional review gate, or if the scope
-changes materially.
+  approval, then act. Task file approval is the default approval gate for
+  implementation. The user can explicitly override this workflow in
+  their request, request an additional review gate, or if the scope
+  changes materially.
 
 ## Spec Loop Phases and Transitions
 
 Phases:
+
 - **PLAN** — research, design/spec changes, test specification.
 - **IMPLEMENTATION** — code and test code, strictly following approved design.
 - **DONE** — verified and accepted completion.
@@ -24,7 +25,7 @@ automatically resets the process to **PLAN**.
 
 The model MUST NOT continue IMPLEMENTATION by inertia.
 
-By default, phases are exclusive. The User may explicitly allow 
+By default, phases are exclusive. The User may explicitly allow
 planning and implementation together in special cases.
 
 No transition between phases
@@ -45,7 +46,7 @@ before performing research or design.
 Design and research MUST NOT be developed directly in chat
 unless the User explicitly allows planning without a task file.
 
-All current design decisions for the scoped work MUST be written 
+All current design decisions for the scoped work MUST be written
 in the task file Design section before IMPLEMENTATION starts.
 
 Chat is a coordination channel, not a design artifact.
@@ -62,7 +63,6 @@ Chat is a coordination channel, not a design artifact.
    If no task file exists for the requested work,
    the model MUST propose creating one
    before recording Research or Design.
-
 
 2. **Research first**  
    Start with research unless the user explicitly waives it. Record
@@ -282,16 +282,17 @@ LLMs must not set **done** on their own.
 **Definition of Done:**
 
 Before setting a subtask to **done**:
-  1. **Research**: legacy state and constraints are documented as needed.
-  2. **Design**: architecture/data flow/class interactions are defined.
-  3. **Scope**: Design and Test specification are fully implemented.
-  4. **Verification**: new and relevant existing tests pass locally.
-  5. **Cleanliness**: no TODOs, placeholders, temp comments, unused
-     imports.
-  6. **Documentation**: design deviations are documented in the task
-     file.
-  7. **Approval**: the User explicitly approves the transition to
-     **done**.
+
+1. **Research**: legacy state and constraints are documented as needed.
+2. **Design**: architecture/data flow/class interactions are defined.
+3. **Scope**: Design and Test specification are fully implemented.
+4. **Verification**: new and relevant existing tests pass locally.
+5. **Cleanliness**: no TODOs, placeholders, temp comments, unused
+   imports.
+6. **Documentation**: design deviations are documented in the task
+   file.
+7. **Approval**: the User explicitly approves the transition to
+   **done**.
 
 **Testing Policy:**
 
