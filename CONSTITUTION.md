@@ -106,7 +106,9 @@ Chat is a coordination channel, not a design artifact.
    implementation and request design update approval first. Design
    sections must be expressed as PlantUML
    diagrams that model structure or flow (class, component, sequence).
-   Do not use PlantUML notes. Formatting: the diagram must be in its
+  Do not use PlantUML notes. If you mix class and non-class elements
+  (e.g., `database`), add `allowmixing` near the top of the diagram.
+  Formatting: the diagram must be in its
    own paragraph under the Design label (blank line before the code
    fence). If explanatory text is needed, put it in a separate
    paragraph under the diagram, not within the list item. Use brief
