@@ -297,10 +297,15 @@ Before setting a subtask to **done**:
 
 **Testing Policy:**
 
-- Tests are part of the same subtask as implementation; do not create
-  separate subtasks solely for tests.
+- Every subtask must include a testing block.
+- Implementation subtasks without testing are not allowed.
+- Avoid splitting implementation and testing across separate subtasks
+  for the same functional increment.
+- Separate test-focused tasks are allowed when adding or extending
+  coverage as a standalone scope.
 - Automated tests should be preferred.
-- Group tests under explicit Automated tests and Manual tests sublists.
+- In each subtask, include a Test specification with
+  explicit Automated tests and Manual tests sublists.
 - When implementing a task, you must implement all specified tests,
   run them, and fix any failures before reporting completion, unless
   the user explicitly waives tests.
