@@ -1,11 +1,16 @@
-# Spec Loop Tutorial: Develop Chicago Art Institute Website with a Game
+# Spec Loop Tutorial: Build a Museum Website + Game (Using AIC Public Data)
 
-This tutorial is about building a small website together with AI.
-
+This tutorial shows how to build a small website with AI. 
 The website has two core parts:
 
-- a museum overview page,
-- and a playable game where the user orders artworks by year.
+* a museum overview page
+* a playable game where the user sorts artworks by year
+
+The tutorial uses public data from the [Art Institute of Chicago](https://www.artic.edu/) (AIC),
+one of the major art museums in the United States.
+This project is not affiliated with or endorsed by AIC.
+Attribution details are included in the Project Brief
+and must be preserved in any generated outputs.
 
 ## Project Brief
 
@@ -13,6 +18,11 @@ The website has two core parts:
 We are building a small website with two parts:
 1) a museum overview page based on Art Institute of Chicago data,
 2) a game called Progressive Timeline.
+
+Data source attribution:
+- Art Institute of Chicago (AIC): https://www.artic.edu/
+- This project is an educational exercise and should clearly attribute
+  AIC as the source of museum content and artwork metadata.
 
 In Progressive Timeline, the player must order artworks by year
 from earliest to latest.
