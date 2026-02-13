@@ -267,6 +267,7 @@ Before setting a subtask to **done**:
 **Testing Policy:**
 
 - Every subtask must include a testing block.
+- Tasks or subtasks without code changes do not require tests.
 - Implementation subtasks without testing are not allowed.
 - Avoid splitting implementation and testing across separate subtasks
   for the same functional increment.
