@@ -127,6 +127,10 @@ Each step follows the Constitution interaction model:
   commit for that subtask before moving on.
 - You give feedback in chat.
 
+Research is often not a separate task. In many steps, research is done
+as part of task or subtask planning, and its results are captured in the
+task/subtask sections to build task context.
+
 By default, this tutorial uses task files for planning work. If you
 explicitly choose to run selected planning work outside task files, that
 is allowed. Only the user can change or relax Constitution workflow
@@ -340,12 +344,16 @@ per-subtask approval/verification.
 
 1. The LLM creates one parent task and proposes a subtask plan.
 2. You review the parent task and subtask plans.
-3. By default, subtasks are implemented one by one.
-4. Before each subtask implementation, the LLM asks for explicit approval.
-5. After each subtask implementation, you review results and tests.
-6. Without explicit user consent for parallel execution, move to the
+3. During this planning, allow the LLM to perform focused research for
+   each subtask and record findings directly in the subtask planning
+   sections to build task context. Giving precise research hints is
+   critical for success, especially in legacy projects.
+4. By default, subtasks are implemented one by one.
+5. Before each subtask implementation, the LLM asks for explicit approval.
+6. After each subtask implementation, you review results and tests.
+7. Without explicit user consent for parallel execution, move to the
    next subtask only after the current one is complete.
-7. If needed, run refinement iterations for the current subtask before moving on.
+8. If needed, run refinement iterations for the current subtask before moving on.
 
 The LLM may plan multiple subtasks in parallel. It may also implement
 multiple already approved subtasks in parallel when you explicitly allow
