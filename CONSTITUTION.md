@@ -8,6 +8,9 @@
   implementation. The user can explicitly override this workflow in
   their request, request an additional review gate, or if the scope
   changes materially.
+- Only the User may override, relax, or redefine workflow rules in this
+  Constitution. The LLM may propose changes, but must not reinterpret,
+  weaken, or apply rule changes without explicit User approval.
 
 ## Spec Loop Phases and Transitions
 
@@ -37,10 +40,12 @@ At phase boundaries, the model MUST stop and ask.
 
 ## Task-first planning
 
-By default, all PLAN work is performed **inside a task file**.
+By default, PLAN work is performed **inside a task file**.
+The User may explicitly choose to perform selected planning work
+outside task files.
 
 If no suitable task file exists for the current request,
-the model MUST first propose creating a new task file
+the model should propose creating a new task file
 before performing research or design.
 
 Design and research MUST NOT be developed directly in chat
@@ -60,8 +65,9 @@ Chat is a coordination channel, not a design artifact.
    identifiers as filename prefixes, and task file names must avoid
    prefixes and abbreviations (use readable, descriptive words).
    If no task file exists for the requested work,
-   the model MUST propose creating one
-   before recording Research or Design.
+   the model should propose creating one
+   before recording Research or Design, unless the User explicitly
+   chooses to proceed without a task file.
 
 2. **Research first**  
    Start with research unless the user explicitly waives it. Record
@@ -322,6 +328,8 @@ explicit status lines.
 
 - Record architecture decisions in `architecture-decisions/` as one
   file per decision with meaningful names.
+- ADRs may be created directly, without a task file, unless the User
+  explicitly requests task-linked ADR work.
 - ADR file names must avoid prefixes and abbreviations (use readable,
   descriptive words).
 - Use a short template with Title, Date, Status, Context, Decision, and

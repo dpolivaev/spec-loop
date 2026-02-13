@@ -32,6 +32,34 @@ The game includes a leaderboard sorted by:
 2) total completion time (asc) for ties
 ```
 
+## Learning outcomes
+
+By the end of this tutorial, you should be able to:
+
+- enforce PLAN/IMPLEMENTATION boundaries with explicit approval gates,
+- keep task and subtask scopes small and reviewable,
+- use ADRs for architectural decisions with clear rationale,
+- verify behavior using concrete evidence, not assumptions,
+- apply lightweight process for non-behavioral repo housekeeping.
+
+## How to think while running this tutorial
+
+Keep the process meaningful, not bureaucratic.
+The goal is to improve decisions and reduce defects, not to maximize
+documents.
+
+Repository housekeeping may be done directly and committed with the
+current step when it is non-behavioral and low-risk
+(for example: `.gitignore`, documentation typo fixes, editor settings).
+A separate software task is not required for this kind of maintenance.
+
+Common anti-patterns:
+
+- implementation starts before explicit approval,
+- unrelated changes are mixed into one subtask,
+- implementation subtask is updated without testing,
+- task or subtask is moved to `done` without explicit user confirmation.
+
 ## Setup (before Step 1)
 
 This repository is a tutorial source, not the participant workspace.
@@ -99,11 +127,19 @@ Each step follows the Constitution interaction model:
   commit for that subtask before moving on.
 - You give feedback in chat.
 
+By default, this tutorial uses task files for planning work. If you
+explicitly choose to run selected planning work outside task files, that
+is allowed. Only the user can change or relax Constitution workflow
+rules; the LLM may propose changes but cannot apply them on its own.
+
 This is expected default behavior. You usually do not need to remind the
 LLM about it. If the LLM starts implementation before explicit approval,
 flag it and ask it to return to the correct phase boundary.
 
 ### Step 1: API Recon — repository-first AIC API research baseline
+
+**Spec-loop principle being trained:** Explicit legacy code research before
+implementation.
 
 **What we want to get**
 
@@ -128,6 +164,9 @@ This step is intentionally a research task. Keep the boundary clear:
 4. The LLM asks for implementation approval.
 5. Approve implementation explicitly, then let the LLM implement.
 6. Review the output and verification report.
+
+If the LLM starts coding before approval, stop it and require it to
+continue only after your explicit approval boundary is restored.
 
 **What to tell the LLM**
 
@@ -172,6 +211,9 @@ git commit for this step.
 ### Step 2: Museum overview page (static HTML)
 
 Use the same chat session as in Step 1. Context from Step 1 is assumed.
+
+**Spec-loop principle being trained:** implementation only after approval,
+then iterative refinement with design kept in sync.
 
 **What we want to get**
 
@@ -234,6 +276,9 @@ git commit for this step.
 
 ### Step 3: Create ADR for implementation stack selection
 
+**Spec-loop principle being trained:** explicit architectural decision
+recording with clear rationale.
+
 **What we want to get**
 
 - One ADR that defines the MVP implementation stack and records one decision with rationale.
@@ -277,6 +322,9 @@ git commit for this step.
 
 ### Step 4: Implement core gameplay (with subtasks)
 
+**Spec-loop principle being trained:** subtask decomposition and
+per-subtask approval/verification.
+
 **What we want to get**
 
 - One implementation task for core gameplay with LLM-planned subtasks.
@@ -292,11 +340,17 @@ git commit for this step.
 
 1. The LLM creates one parent task and proposes a subtask plan.
 2. You review the parent task and subtask plans.
-3. Subtasks are implemented one by one, not all at once.
+3. By default, subtasks are implemented one by one.
 4. Before each subtask implementation, the LLM asks for explicit approval.
 5. After each subtask implementation, you review results and tests.
-6. Move to the next subtask only after the current one is complete.
+6. Without explicit user consent for parallel execution, move to the
+   next subtask only after the current one is complete.
 7. If needed, run refinement iterations for the current subtask before moving on.
+
+The LLM may plan multiple subtasks in parallel. It may also implement
+multiple already approved subtasks in parallel when you explicitly allow
+that. If it starts implementing an unapproved subtask, stop it and
+return to that subtask approval boundary.
 
 **What to tell the LLM**
 
@@ -346,6 +400,9 @@ After the move to `done` and required rename, ask the LLM to create a
 git commit for this step.
 
 ### Step 5: Implement leaderboard
+
+**Spec-loop principle being trained:** phased delivery to reduce risk
+(working baseline first, persistence second).
 
 **What we want to get**
 
