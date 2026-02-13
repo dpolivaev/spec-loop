@@ -56,8 +56,7 @@ Chat is a coordination channel, not a design artifact.
 1. **Task files as source of truth**  
    All tasks, design, and execution status live as individual Markdown
    files under the project task directory, organized by status folders.
-   Ideas for new tasks can be captured in `new-task-ideas.md` in the
-   task directory. Task file names must not use ticket IDs or task
+   Task file names must not use ticket IDs or task
    identifiers as filename prefixes, and task file names must avoid
    prefixes and abbreviations (use readable, descriptive words).
    If no task file exists for the requested work,
