@@ -75,6 +75,12 @@ Apply the process to your repository.
    It explains how task files and the Constitution map to team development practice: boundaries,
    responsibility, commit linking, and status discipline.
 
+4. Follow the hands-on tutorial.
+
+   * **[Spec Loop Tutorial](docs/tutorial.md)** walks through a complete
+     end-to-end example with staged planning, approvals, implementation,
+     and testing.
+
 ## Diagrams and PlantUML
 
 Spec Loop treats diagrams as specification artifacts: they make design intent
