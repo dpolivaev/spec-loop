@@ -4,7 +4,7 @@
   This Constitution is intent-first; compliance is judged by
   outcome and behavior, not checklist formality.
 - When uncertain or before changing behavior, propose next steps, ask for
-  approval, then act. Task file approval is the default approval gate for
+  approval, then act. Task file approval is the approval gate for
   implementation. The user can explicitly override this workflow in
   their request, request an additional review gate, or if the scope
   changes materially.
@@ -22,14 +22,15 @@ Phases:
 
 Work always starts in **PLAN**.
 
-After completing any phase, the default next phase is **PLAN**.
+After completing any phase, the next phase is **PLAN** unless the User
+explicitly specifies a different flow.
 Any new work, change, extension, refinement, or follow-up
 automatically resets the process to **PLAN**.
 
 The model MUST NOT continue IMPLEMENTATION by inertia.
 
-By default, phases are exclusive. The User may explicitly allow
-planning and implementation together in special cases.
+Phases are exclusive unless the User explicitly allows planning and
+implementation together in special cases.
 
 No transition between phases
 (PLAN → IMPLEMENTATION, IMPLEMENTATION → PLAN, IMPLEMENTATION → DONE)
@@ -40,9 +41,8 @@ At phase boundaries, the model MUST stop and ask.
 
 ## Task-first planning
 
-By default, PLAN work is performed **inside a task file**.
-The User may explicitly choose to perform selected planning work
-outside task files.
+PLAN work is performed **inside a task file**. The User may explicitly
+choose to perform selected planning work outside task files.
 
 If no suitable task file exists for the current request,
 the model should propose creating a new task file
@@ -62,12 +62,10 @@ Chat is a coordination channel, not a design artifact.
    All tasks, design, and execution status live as individual Markdown
    files under the project task directory, organized by status folders.
    Task file names must not use ticket IDs or task
-   identifiers as filename prefixes, and task file names must avoid
-   prefixes and abbreviations (use readable, descriptive words).
-   If no task file exists for the requested work,
-   the model should propose creating one
-   before recording Research or Design, unless the User explicitly
-   chooses to proceed without a task file.
+   identifiers as filename prefixes, and must avoid prefixes and
+   abbreviations (use readable, descriptive words).
+   Task-first workflow from the section above applies unless the User
+   explicitly chooses otherwise.
 
 2. **Research first**  
    Start with research unless the user explicitly waives it. Record
@@ -85,17 +83,13 @@ Chat is a coordination channel, not a design artifact.
 4. **Task file and approval boundary**  
    You may edit task files without prior approval. If task files were
    edited and there is no implementation directive, request user review
-   before making code, test, or configuration changes. An explicit
-   directive such as "implement", "implement it now", "go ahead", or
-   "proceed" counts as approval to implement and must not trigger
-   another approval request. After approval (explicit or implicit),
-   proceed to implement without additional approval unless the user
-   asks for another review gate. No exceptions.
-   Any implementation approval is invalid if the task file
-   misses any current design decisions for that scope.
-   If scope drifts (new type, flow, dependency, or behavior-affecting
-   method change not in Design), stop, update Design, request
-   approval, then continue.
+   before making code, test, or configuration changes. Explicit
+   directives such as "implement", "implement it now", "go ahead", or
+   "proceed" count as implementation approval. After approval (explicit
+   or implicit), proceed without extra approval unless the user asks for
+   another review gate. If implementation scope drifts beyond Design
+   (e.g. new type, flow, dependency, or behavior-affecting method change),
+   stop, update Design, request approval, then continue.
 
 5. **Implementation completeness**  
    Implementation is complete only when both the design and the test
@@ -103,25 +97,19 @@ Chat is a coordination channel, not a design artifact.
    tests.
 
 6. **Design and approval**  
-   Draft the design while research is in progress, then request
-   approval. Do not modify code, tests, or configuration until the
-   design is approved. Any new class, responsibility move, or
-   behavior-affecting method change requires a Design update and
-   approval before code. If design is outdated, reject
-   implementation and request design update approval first. Design
-   sections must be expressed as PlantUML
-   diagrams that model structure or flow (class, component, sequence).
-  Do not use PlantUML notes. If you mix class and non-class elements
-  (e.g., `database`), add `allowmixing` near the top of the diagram.
-  Formatting: the diagram must be in its
-   own paragraph under the Design label (blank line before the code
-   fence). If explanatory text is needed, put it in a separate
-   paragraph under the diagram, not within the list item. Use brief
-   text only when a diagram cannot convey the design. For class
-   diagrams, use one outer package and nest inner packages inside it.
-   Add `set separator none` at the top of the PlantUML block to prevent
-   automatic namespace nesting. Include all meaningful dependencies
-   with labels; use at most one connector per class pair.
+   Draft design during research, then request approval. Do not modify
+   code, tests, or configuration until design is approved. Any new
+   class, responsibility move, or behavior-affecting method change
+   requires a Design update and approval before code.
+   Design sections must use PlantUML diagrams (class/component/sequence).
+   Do not use PlantUML notes. If mixing class and non-class elements
+   (for example `database`), add `allowmixing`.
+   Formatting: keep the diagram in its own paragraph under Design
+   (blank line before code fence). Put explanatory text in a separate
+   paragraph under the diagram. For class diagrams, use one outer package with nested
+   inner packages and add `set separator none`.
+   Include meaningful dependency labels; use at most one connector per
+   class pair.
 
 7. **Status updates**  
    Move task files between status folders within the project task
@@ -132,9 +120,19 @@ Chat is a coordination channel, not a design artifact.
    actively worked on.
 
 8. **Status validation before commits**  
+   Update subtask status whenever task-file lifecycle state changes.
    Before each commit, check relevant task files and propose any status
    or folder changes needed for consistency. Apply those status changes
    only after explicit user confirmation, then proceed with the commit.
+   For task-related commits, start the message with the **Primary
+   Identifier**:
+   - Ticket ID if present (for example `TICKET-123: ...`).
+   - Otherwise full Task Identifier
+     (for example `2025-01-15-research: ...`).
+   For non-task updates, commit messages may omit identifiers when
+   `AGENTS.md` policy allows it. If the user explicitly asks to skip
+   identifiers for a commit, honor that request.
+   After signature changes, run relevant module tests before reporting.
 
 9. **Move workflow for diffs**  
    When moving tracked task files, use `git mv` and stage the move
@@ -149,29 +147,6 @@ Chat is a coordination channel, not a design artifact.
     folder with a three-digit prefix based on order moved into done.
     Delete them from the working tree after a release tag is created.
 
-## Workflow Checklist
-
-- Before any task file edit, update subtask status if it changes to
-  match the current lifecycle state (see Subtask Status Definitions).
-- After editing a task file, update subtask status to match the new
-  lifecycle state; this update is mandatory before reporting to the
-  user.
-- Before commit: verify task status and folder changes, stage renames;
-  confirm with user unless they explicitly instructed to commit.
-- Before commit: confirm the commit message starts with the **Primary
-  Identifier** for task-related changes:
-  - If a Ticket ID exists, use it alone (e.g., `TICKET-123: ...`).
-  - If no Ticket ID exists, use the full Task Identifier
-    (e.g., `2025-01-15-research: ...`).
-- For updates not related to any task, commit messages may omit task
-  identifiers when the repository policy (defined in `AGENTS.md`)
-  allows it.
-- If the user explicitly requests skipping task or ticket identifiers
-  for a specific commit, honor the request and use a message without
-  identifiers for that commit.
-- After signature changes: run the relevant module tests before
-  reporting completion.
-
 ## Context Preservation
 
 - **Task Sections Are Source of Truth**  
@@ -183,17 +158,14 @@ Chat is a coordination channel, not a design artifact.
 
 ## Formatting
 
-- Wrap prose at approximately 72–80 characters per line.
-- Do not rely on horizontal scrolling to read paragraphs.
-- Preserve semantic line breaks (new sentences or clauses may start on
-  new lines when it improves readability).
-- Lists and sublists must use consistent indentation.
-- Fenced code blocks must have no indentation except for internal
-  structure and must start and end with backticks.
-- Standalone paragraphs must have no indentation. Continuation lines
-  within list items are part of the list item and may be indented to
-  align with list formatting.
-- Markdown rendering must remain correct on GitHub and GitLab.
+- Wrap prose at approximately 72–80 characters; avoid horizontal
+  scrolling.
+- Preserve semantic line breaks and consistent list indentation.
+- Fenced code blocks must be unindented (except internal structure) and
+  must start/end with backticks.
+- Keep standalone paragraphs unindented. Continuation lines in list
+  items may be indented to align with list formatting.
+- Ensure Markdown renders correctly on GitHub and GitLab.
 
 The intent is that all documents remain readable in plain text editors
 (vim, less, nano) as well as in rendered views.
@@ -212,7 +184,7 @@ directory:
 
 - **in-progress**  
   Active work in research, design, implementation, or verification.
-  Subtask status must use the allowed statuses defined below.
+  Subtask status must use `backlog`, `in-progress`, or `done`.
   LLMs must not set **done** unless the user explicitly requests it.
   Tasks may stay here while waiting for user confirmation before
   moving to done.
@@ -225,8 +197,6 @@ directory:
 
 - **Clarity**  
   Designs may describe file scope broadly when it stays unambiguous.
-- **Task to commit linking**  
-  Every commit message must include the Task Identifier.
 - **Refactor tracking**  
   When refactoring, document it by updating the design section of the
   existing task or creating a new task.
@@ -273,18 +243,11 @@ LLMs must not set **done** on their own.
 
 **Subtask Status Definitions:**
 
-- **backlog**  
-  The subtask is planned, deferred, or not actively being worked.
-  Research, design, and test specification can be drafted here.
-
-- **in-progress**  
-  The subtask is actively being worked, including research, design,
-  implementation, and verification. Transition from backlog to
-  implementation still requires User approval under the approval
-  boundary rules.
-
-- **done**  
-  The subtask is complete, verified, and approved by the User.
+- **backlog**: planned/deferred; research, design, and test
+  specification may be drafted.
+- **in-progress**: active work state for research, design,
+  implementation, and verification.
+- **done**: complete, verified, and explicitly approved by the User.
 
 **Definition of Done:**
 
@@ -315,14 +278,8 @@ Before setting a subtask to **done**:
 - When implementing a task, you must implement all specified tests,
   run them, and fix any failures before reporting completion, unless
   the user explicitly waives tests.
-- Before moving a subtask to **done**, the subtask must have a complete
-  **Test specification** and those tests must be implemented and
-  passing, unless explicitly waived by the user.
-
-**Status**
-
-Status is implied by the folder for main tasks; subtasks still include
-explicit status lines.
+- Before moving a subtask to **done**, required tests must be
+  implemented and passing unless explicitly waived by the user.
 
 ## Architecture Decision Records
 
