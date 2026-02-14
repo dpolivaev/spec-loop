@@ -4,21 +4,19 @@
   This Constitution is intent-first; compliance is judged by
   outcome and behavior, not checklist formality.
 - When uncertain or before changing behavior, propose next steps, ask for
-  approval, then act. Task file approval is the approval gate for
-  implementation. The user can explicitly override this workflow in
-  their request, request an additional review gate, or if the scope
-  changes materially.
+  approval, then act. For task-scoped implementation, approval may be
+  given by task file approval or by explicit directives such as
+  "implement", "implement it now", "go ahead", or "proceed". The User
+  can explicitly override this workflow in their request, request an
+  additional review gate, or when the scope changes materially.
 - Only the User may override, relax, or redefine workflow rules in this
   Constitution. The LLM may propose changes, but must not reinterpret,
   weaken, or apply rule changes without explicit User approval.
-- **Enforcement and pre-edit gate**  
+- **Enforcement, pre-edit gate, and LLM stewardship**  
   This Constitution is the foundation of code quality, and every
-  requirement is mandatory. Before the first code edit in any turn, the
-  model must confirm: task file updated, scope matches Design, and
-  explicit User approval exists. If any condition is missing, or if
-  implementation starts without this confirmation, the model must stop
-  immediately, return to PLAN, update the task file, and request
-  explicit User approval before continuing.
+  requirement is mandatory. The User is not required to know this
+  Constitution; the LLM is fully responsible for enforcing it in its own
+  behavior and must not shift this responsibility to the User.
 
 ## Spec Loop Phases and Transitions
 
@@ -30,102 +28,149 @@ Phases:
 
 Work always starts in **PLAN**.
 
-After completing any phase, the next phase is **PLAN** unless the User
-explicitly specifies a different flow.
-Any new work, change, extension, refinement, or follow-up
-automatically resets the process to **PLAN**.
+After a work item is completed, any subsequent work item starts in
+**PLAN** by default, unless the User explicitly specifies a different
+flow.
+Any new work, change, extension, refinement, or follow-up starts in
+**PLAN** by default.
 
 The model MUST NOT continue IMPLEMENTATION by inertia.
 
 Phases are exclusive unless the User explicitly allows planning and
 implementation together in special cases.
 
-No transition between phases
-(PLAN → IMPLEMENTATION, IMPLEMENTATION → PLAN, IMPLEMENTATION → DONE)
-is allowed without **explicit User instruction or approval**.
+The following transitions require **explicit User instruction or
+approval**: PLAN → IMPLEMENTATION, IMPLEMENTATION → PLAN,
+IMPLEMENTATION → DONE.
 
-Within a phase, the model may act freely.
+This phase model applies to task-scoped implementation work. ADR-only,
+research-only, and analysis-only work are outside this phase model,
+unless the User explicitly requests otherwise.
+
+Implementation approval gate:
+
+- Design approval is mandatory before any code, test, or configuration
+  change.
+- Refactoring that changes code, tests, or configuration is
+  implementation and requires an explicit Design update and approval.
+- If task files were edited and there is no implementation directive,
+  request user review before making code, test, or configuration
+  changes.
+- Explicit directives such as "implement", "implement it now",
+  "go ahead", or "proceed" count as implementation approval.
+- After approval (explicit or implicit), proceed without extra approval
+  unless the user asks for another review gate.
+- If implementation scope drifts beyond Design (for example, new type,
+  flow, dependency, or behavior-affecting method change), stop, update
+  Design, request approval, then continue.
+
+**CRITICAL: LLM MUST enforce the gate and recover on deviation**
+Before the first code edit in any turn, the LLM MUST confirm that the
+required gate is satisfied. The LLM MUST NOT shift this responsibility
+to the User. If the LLM deviates, it MUST self-report, stop
+immediately, return to planning mode, repair task-file state by fixing
+the Design section, and request explicit User approval before
+continuing.
+
+If workflow wording conflicts elsewhere in this Constitution, this
+section governs.
+
+Within a phase, the model may act freely within approved scope and all
+Constitution constraints.
 At phase boundaries, the model MUST stop and ask.
 
 ## Task-first planning
 
-PLAN work is performed **inside a task file**. The User may explicitly
-choose to perform selected planning work outside task files.
+Task-first workflow is mandatory for work that changes code, tests, or
+configuration.
+For ADR-only, research-only, or analysis-only requests with no code,
+test, or configuration changes, this workflow does not apply, and no
+task file is required unless the User explicitly requests task-based
+tracking.
 
-If no suitable task file exists for the current request,
-the model should propose creating a new task file
+If such non-code work later leads to implementation, the process must
+enter PLAN in a task file before any code, test, or configuration
+change.
+
+When task-first workflow applies and no suitable task file exists for
+the current request, the model should propose creating a new task file
 before performing research or design.
 
-Design and research MUST NOT be developed directly in chat
-unless the User explicitly allows planning without a task file.
+Design and research for task-scoped implementation MUST NOT be
+developed directly in chat unless the User explicitly allows planning
+without a task file.
 
 All current design decisions for the scoped work MUST be written
 in the task file Design section before IMPLEMENTATION starts.
+Start refactoring with an explicit Design update in the existing task;
+if needed, create a new task or subtask.
 
 Chat is a coordination channel, not a design artifact.
 
+Phase transitions and implementation approval gates are defined in
+**Spec Loop Phases and Transitions**.
+
 ## Workflow
+
+Operational workflow rules in this section complement, and do not
+override, **Spec Loop Phases and Transitions**.
 
 1. **Task files as source of truth**  
    All tasks, design, and execution status live as individual Markdown
    files under the project task directory, organized by status folders.
-   Task file names must not use ticket IDs or task
-   identifiers as filename prefixes, and must avoid prefixes and
-   abbreviations (use readable, descriptive words).
+   New task file names must not use ticket IDs, task identifiers, or
+   numeric prefixes, and must avoid abbreviations (use readable,
+   descriptive words). Done tasks use the required three-digit
+   completion prefix defined in this Constitution.
    Task-first workflow from the section above applies unless the User
    explicitly chooses otherwise.
 
-2. **Research first**  
+2. **Research baseline**  
    Start with research unless the user explicitly waives it. Record
    findings in the task **Research**. Record observations, constraints,
    and verified facts only; do not include planned actions or steps.
-   Plans and changes belong in **Design**. Prefer PlantUML diagrams and
-   place notes inside diagrams; use text when a diagram is not
-   sufficient.
+   Plans and changes belong in **Design**.
 
-3. **Iterative discovery**  
-   Research broadly across connected subtasks and iterate between
-   research and design as needed; design decisions are connected, so
-   continuous research during design is encouraged to capture context.
-
-4. **Task file and approval boundary**  
-   You may edit task files without prior approval. If task files were
-   edited and there is no implementation directive, request user review
-   before making code, test, or configuration changes. Explicit
-   directives such as "implement", "implement it now", "go ahead", or
-   "proceed" count as implementation approval. After approval (explicit
-   or implicit), proceed without extra approval unless the user asks for
-   another review gate. If implementation scope drifts beyond Design
-   (e.g. new type, flow, dependency, or behavior-affecting method change),
-   stop, update Design, request approval, then continue.
-
-5. **Implementation completeness**  
-   Implementation is complete only when both the design and the test
-   specification are implemented, unless the user explicitly waives
-   tests.
-
-6. **Design and approval**  
-   Draft design during research, then request approval. Do not modify
-   code, tests, or configuration until design is approved. Any new
-   class, responsibility move, or behavior-affecting method change
-   requires a Design update and approval before code.
+3. **Design specification**  
+   Document architecture, data flow, class/component interactions, and
+   test-impacting decisions in **Design**.
+   Draft the design from validated **Research** findings.
+   Designs may describe file scope broadly when it stays unambiguous.
    Design sections must use PlantUML diagrams (class/component/sequence).
    Do not use PlantUML notes. If mixing class and non-class elements
    (for example `database`), add `allowmixing`.
    Formatting: keep the diagram in its own paragraph under Design
    (blank line before code fence). Put explanatory text in a separate
-   paragraph under the diagram. For class diagrams, use one outer package with nested
-   inner packages and add `set separator none`.
+   paragraph under the diagram. For class diagrams, use one outer
+   package with nested inner packages and add `set separator none`.
    Include meaningful dependency labels; use at most one connector per
    class pair.
 
-7. **Status updates**  
+4. **Iterative discovery**  
+   After drafting **Design**, iterate between **Research** and
+   **Design** until decisions are supported and testable. Update both
+   sections when new findings appear. No implementation starts during
+   this loop.
+
+5. **Implementation**  
+   Implementation is complete only when both the design and the test
+   specification are implemented, unless the user explicitly waives
+   tests.
+
+6. **Status updates**  
    Move task files between status folders within the project task
    directory to reflect current work focus (e.g., done back to
-   in-progress). Keep any existing numeric prefix to preserve
-   traceability; new tasks must not use numeric prefixes until they
-   move to done. Avoid moving unrelated tasks; move them only when
-   actively worked on.
+   in-progress or backlog). When reopening a task from done, keep the
+   existing three-digit prefix to preserve traceability. Avoid moving
+   unrelated tasks; move them only when actively worked on.
+
+7. **Move workflow for diffs**  
+   When moving tracked task files, use `git mv` and stage the move
+   immediately before editing. This keeps rename tracking intact in
+   diff tools that are not rename-aware (e.g., VS Code). Do not unstage
+   the rename until you are ready to review and commit. For new
+   untracked task files, move in filesystem (not `git mv`), then run
+   `git add -A`.
 
 8. **Status validation before commits**  
    Update subtask status whenever task-file lifecycle state changes.
@@ -140,20 +185,13 @@ Chat is a coordination channel, not a design artifact.
    For non-task updates, commit messages may omit identifiers when
    `AGENTS.md` policy allows it. If the user explicitly asks to skip
    identifiers for a commit, honor that request.
-   After signature changes, run relevant module tests before reporting.
+   After code or configuration changes, run relevant module tests before
+   reporting.
 
-9. **Move workflow for diffs**  
-   When moving tracked task files, use `git mv` and stage the move
-   immediately before editing. This keeps rename tracking intact in
-   diff tools that are not rename-aware (e.g., VS Code). Do not unstage
-   the rename until you are ready to review and commit. For new
-   untracked task files, move in filesystem (not `git mv`), then run
-   `git add -A`.
-
-10. **Done task cleanup**  
-    Keep done tasks in the task directory under the done status
-    folder with a three-digit prefix based on order moved into done.
-    Delete them from the working tree after a release tag is created.
+9. **Done task cleanup**  
+   Keep done tasks in the task directory under the done status
+   folder with a three-digit prefix based on order moved into done.
+   Delete them from the working tree after a release tag is created.
 
 ## Context Preservation
 
@@ -186,9 +224,9 @@ directory:
 - **backlog**  
   New, planned, or deferred work. Research and design belong here until
   the design is approved; include ideas or deferred tasks.
-  When creating a new task, first check whether `in-progress` contains
-  any tasks. If `in-progress` is empty, create the new task directly in
-  `in-progress` instead of `backlog`.
+  New tasks default to `backlog`.
+  Exception: if `in-progress` contains no tasks and only one new task
+  is being created, place that task in `in-progress`.
 
 - **in-progress**  
   Active work in research, design, implementation, or verification.
@@ -200,14 +238,6 @@ directory:
 - **done**  
   The user has verified completion; move the task here with the
   required prefix before releasing.
-
-## Scope and Safeguards
-
-- **Clarity**  
-  Designs may describe file scope broadly when it stays unambiguous.
-- **Refactor tracking**  
-  When refactoring, document it by updating the design section of the
-  existing task or creating a new task.
 
 ## Task Structure
 
@@ -242,10 +272,8 @@ Subtasks (if any):
 Subtasks may use only the statuses `backlog`, `in-progress`, or `done`.
 
 **DONE is a phase transition.**
-Moving a task or subtask to **done** is not a status update,
-but a transition to the DONE phase.
-As with all phase transitions, this requires
-**explicit User approval** (see Spec Loop Phases and Transitions).
+Moving a task or subtask to **done** follows the transition and
+approval rules in **Spec Loop Phases and Transitions**.
 
 LLMs must not set **done** on their own.
 
@@ -276,6 +304,8 @@ Before setting a subtask to **done**:
 
 - Every subtask must include a testing block.
 - Tasks or subtasks without code changes do not require tests.
+- For no-code tasks or subtasks, keep the testing block and set
+  `Automated tests: N/A` and `Manual tests: N/A`.
 - Implementation subtasks without testing are not allowed.
 - Avoid splitting implementation and testing across separate subtasks
   for the same functional increment.
