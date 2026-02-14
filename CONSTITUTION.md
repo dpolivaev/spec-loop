@@ -11,6 +11,14 @@
 - Only the User may override, relax, or redefine workflow rules in this
   Constitution. The LLM may propose changes, but must not reinterpret,
   weaken, or apply rule changes without explicit User approval.
+- **Enforcement and pre-edit gate**  
+  This Constitution is the foundation of code quality, and every
+  requirement is mandatory. Before the first code edit in any turn, the
+  model must confirm: task file updated, scope matches Design, and
+  explicit User approval exists. If any condition is missing, or if
+  implementation starts without this confirmation, the model must stop
+  immediately, return to PLAN, update the task file, and request
+  explicit User approval before continuing.
 
 ## Spec Loop Phases and Transitions
 
