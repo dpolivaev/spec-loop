@@ -1,47 +1,43 @@
 # Constitution
 
 - **Principle over ceremony**  
-  This Constitution is intent-first; compliance is judged by
-  outcome and behavior, not checklist formality.
-- When uncertain or before changing behavior, propose next steps, ask for
-  approval, then act. For task-scoped implementation, approval may be
-  given by task file approval or by explicit directives such as
-  "implement", "implement it now", "go ahead", or "proceed". The User
-  can explicitly override this workflow in their request, request an
-  additional review gate, or when the scope changes materially.
+  This Constitution is intent-first. Compliance is judged by outcome and
+  behavior, not checklist formality.
+- When uncertain or before changing behavior, propose next steps, ask
+  for approval, then act. For task-scoped implementation, approval may
+  come from task-file approval or explicit directives such as
+  "implement", "implement it now", "go ahead", or "proceed". The
+  User may override this workflow in their request, request an
+  additional review gate, or require a new gate when scope changes.
 - Only the User may override, relax, or redefine workflow rules in this
   Constitution. The LLM may propose changes, but must not reinterpret,
   weaken, or apply rule changes without explicit User approval.
 - **Enforcement, pre-edit gate, and LLM stewardship**  
-  This Constitution is the foundation of code quality, and every
-  requirement is mandatory. The User is not required to know this
-  Constitution; the LLM is fully responsible for enforcing it in its own
-  behavior and must not shift this responsibility to the User.
+  This Constitution is mandatory. The User is not required to know it.
+  The LLM is fully responsible for enforcement and must not shift that
+  responsibility to the User.
 
 ## Spec Loop Phases and Transitions
 
 Phases:
 
-- **PLAN** — research, design/spec changes, test specification.
-- **IMPLEMENTATION** — code and test code, strictly following approved design.
-- **DONE** — verified and accepted completion.
+- **PLAN** - research, design/spec changes, test specification.
+- **IMPLEMENTATION** - code and test code, strictly following approved
+  design.
+- **DONE** - verified and accepted completion.
 
-Work always starts in **PLAN**.
-
-After a work item is completed, any subsequent work item starts in
-**PLAN** by default, unless the User explicitly specifies a different
-flow.
-Any new work, change, extension, refinement, or follow-up starts in
-**PLAN** by default.
+Work starts in **PLAN**. After any completed work item, subsequent work
+also starts in **PLAN** by default unless the User explicitly specifies
+another flow.
 
 The model MUST NOT continue IMPLEMENTATION by inertia.
 
 Phases are exclusive unless the User explicitly allows planning and
-implementation together in special cases.
+implementation together.
 
 The following transitions require **explicit User instruction or
-approval**: PLAN → IMPLEMENTATION, IMPLEMENTATION → PLAN,
-IMPLEMENTATION → DONE.
+approval**: PLAN -> IMPLEMENTATION, IMPLEMENTATION -> PLAN,
+IMPLEMENTATION -> DONE.
 
 This phase model applies to task-scoped implementation work. ADR-only,
 research-only, and analysis-only work are outside this phase model,
@@ -72,20 +68,21 @@ immediately, return to planning mode, repair task-file state by fixing
 the Design section, and request explicit User approval before
 continuing.
 
-If workflow wording conflicts elsewhere in this Constitution, this
-section governs.
+If wording conflicts elsewhere in this Constitution, this section
+governs.
 
 Within a phase, the model may act freely within approved scope and all
-Constitution constraints.
-At phase boundaries, the model MUST stop and ask.
+Constitution constraints. At phase boundaries, the model MUST stop and
+ask.
 
 ## Task-first planning
 
 Task-first workflow is mandatory for work that changes code, tests, or
 configuration.
+
 For ADR-only, research-only, or analysis-only requests with no code,
-test, or configuration changes, this workflow does not apply, and no
-task file is required unless the User explicitly requests task-based
+test, or configuration changes, task-first workflow does not apply and
+no task file is required unless the User explicitly requests task-based
 tracking.
 
 If such non-code work later leads to implementation, the process must
@@ -100,10 +97,10 @@ Design and research for task-scoped implementation MUST NOT be
 developed directly in chat unless the User explicitly allows planning
 without a task file.
 
-All current design decisions for the scoped work MUST be written
-in the task file Design section before IMPLEMENTATION starts.
-Start refactoring with an explicit Design update in the existing task;
-if needed, create a new task or subtask.
+All current design decisions for scoped work MUST be written in the
+task-file Design section before IMPLEMENTATION starts. Start refactoring
+with an explicit Design update in the existing task; if needed, create
+another task or subtask.
 
 Chat is a coordination channel, not a design artifact.
 
@@ -112,8 +109,8 @@ Phase transitions and implementation approval gates are defined in
 
 ## Workflow
 
-Operational workflow rules in this section complement, and do not
-override, **Spec Loop Phases and Transitions**.
+Rules in this section complement, and do not override,
+**Spec Loop Phases and Transitions**.
 
 1. **Task files as source of truth**  
    All tasks, design, and execution status live as individual Markdown
@@ -121,30 +118,33 @@ override, **Spec Loop Phases and Transitions**.
    New task file names must not use ticket IDs, task identifiers, or
    numeric prefixes, and must avoid abbreviations (use readable,
    descriptive words). Done tasks use the required three-digit
-   completion prefix defined in this Constitution.
-   Task-first workflow from the section above applies unless the User
-   explicitly chooses otherwise.
+   completion prefix defined in this Constitution. Task-first workflow
+   from the section above applies unless the User explicitly chooses
+   otherwise.
 
 2. **Research baseline**  
    Start with research unless the user explicitly waives it. Record
-   findings in the task **Research**. Record observations, constraints,
-   and verified facts only; do not include planned actions or steps.
-   Plans and changes belong in **Design**.
+   findings in task **Research**. Record observations, constraints, and
+   verified facts only; do not include planned actions or steps. Plans
+   and changes belong in **Design**.
 
 3. **Design specification**  
    Document architecture, data flow, class/component interactions, and
-   test-impacting decisions in **Design**.
-   Draft the design from validated **Research** findings.
-   Designs may describe file scope broadly when it stays unambiguous.
-   Design sections must use PlantUML diagrams (class/component/sequence).
-   Do not use PlantUML notes. If mixing class and non-class elements
-   (for example `database`), add `allowmixing`.
+   test-impacting decisions in **Design**. Draft design from validated
+   **Research** findings. Designs may describe file scope broadly when
+   it remains unambiguous.
+
+   Design sections must use PlantUML diagrams
+   (class/component/sequence). Do not use PlantUML notes. If mixing
+   class and non-class elements (for example `database`), add
+   `allowmixing`.
+
    Formatting: keep the diagram in its own paragraph under Design
    (blank line before code fence). Put explanatory text in a separate
    paragraph under the diagram. For class diagrams, use one outer
    package with nested inner packages and add `set separator none`.
-   Include meaningful dependency labels; use at most one connector per
-   class pair.
+   Include meaningful dependency labels and use at most one connector
+   per class pair.
 
 4. **Iterative discovery**  
    After drafting **Design**, iterate between **Research** and
@@ -153,22 +153,22 @@ override, **Spec Loop Phases and Transitions**.
    this loop.
 
 5. **Implementation**  
-   Implementation is complete only when both the design and the test
+   Implementation is complete only when both design and test
    specification are implemented, unless the user explicitly waives
    tests.
 
 6. **Status updates**  
    Move task files between status folders within the project task
-   directory to reflect current work focus (e.g., done back to
+   directory to reflect current focus (for example, done back to
    in-progress or backlog). When reopening a task from done, keep the
    existing three-digit prefix to preserve traceability. Avoid moving
    unrelated tasks; move them only when actively worked on.
 
 7. **Move workflow for diffs**  
    When moving tracked task files, use `git mv` and stage the move
-   immediately before editing. This keeps rename tracking intact in
-   diff tools that are not rename-aware (e.g., VS Code). Do not unstage
-   the rename until you are ready to review and commit. For new
+   immediately before editing. This preserves rename tracking in diff
+   tools that are not rename-aware (for example, VS Code). Do not
+   unstage the rename until ready to review and commit. For new
    untracked task files, move in filesystem (not `git mv`), then run
    `git add -A`.
 
@@ -189,22 +189,21 @@ override, **Spec Loop Phases and Transitions**.
    reporting.
 
 9. **Done task cleanup**  
-   Keep done tasks in the task directory under the done status
-   folder with a three-digit prefix based on order moved into done.
-   Delete them from the working tree after a release tag is created.
+   Keep done tasks in the task directory under the done status folder
+   with a three-digit prefix based on order moved into done. Delete them
+   from the working tree after a release tag is created.
 
 ## Context Preservation
 
-- **Task Sections Are Source of Truth**  
-  Re-read the relevant task sections (Scope, Research, Design, Test
-  Spec) before implementation or whenever requirements are unclear.
-  Keep only the relevant task content in active context; avoid
-  carrying unrelated content. These sections are the basis for coding
-  and ensure consistency.
+- **Task sections are source of truth**  
+  Re-read relevant task sections (Scope, Research, Design, Test Spec)
+  before implementation or whenever requirements are unclear. Keep only
+  relevant task content in active context and avoid carrying unrelated
+  content.
 
 ## Formatting
 
-- Wrap prose at approximately 72–80 characters; avoid horizontal
+- Wrap prose at approximately 72-80 characters; avoid horizontal
   scrolling.
 - Preserve semantic line breaks and consistent list indentation.
 - Fenced code blocks must be unindented (except internal structure) and
@@ -213,8 +212,8 @@ override, **Spec Loop Phases and Transitions**.
   items may be indented to align with list formatting.
 - Ensure Markdown renders correctly on GitHub and GitLab.
 
-The intent is that all documents remain readable in plain text editors
-(vim, less, nano) as well as in rendered views.
+The intent is readability in plain text editors (vim, less, nano) and
+rendered views.
 
 ## Task States
 
@@ -223,7 +222,7 @@ directory:
 
 - **backlog**  
   New, planned, or deferred work. Research and design belong here until
-  the design is approved; include ideas or deferred tasks.
+  design is approved; include ideas or deferred tasks.
   New tasks default to `backlog`.
   Exception: if `in-progress` contains no tasks and only one new task
   is being created, place that task in `in-progress`.
@@ -232,8 +231,8 @@ directory:
   Active work in research, design, implementation, or verification.
   Subtask status must use `backlog`, `in-progress`, or `done`.
   LLMs must not set **done** unless the user explicitly requests it.
-  Tasks may stay here while waiting for user confirmation before
-  moving to done.
+  Tasks may stay here while waiting for user confirmation before moving
+  to done.
 
 - **done**  
   The user has verified completion; move the task here with the
@@ -245,12 +244,12 @@ Each task uses this exact order and layout:
 
 - Title line: `# Task: <title>`.
 - Include one of the following identifiers (mutually exclusive):
-  - `- **Ticket:**` Ticket ID (e.g., `BSK-1234`), preferred.
-  - `- **Task Identifier:**` if no Ticket exists; `YYYY-MM-DD-<slug>`
-    where `<slug>` is 1–2 keywords from the filename
-    (e.g., `implement-consent-flow.md` → `...-consent`).
-  - **Commit Rule**: the value present becomes the **Primary Identifier**
-    for commit messages.
+  - `- **Ticket:**` Ticket ID (for example `BSK-1234`), preferred.
+  - `- **Task Identifier:**` if no Ticket exists;
+    `YYYY-MM-DD-<slug>` where `<slug>` is 1-2 keywords from filename
+    (for example `implement-consent-flow.md` -> `...-consent`).
+  - **Commit Rule**: the value present becomes the **Primary
+    Identifier** for commit messages.
 - Main task sections are list items with bold labels in this order:
   - `- **Scope:**`
   - `- **Motivation:**`
@@ -262,18 +261,18 @@ Each task uses this exact order and layout:
 Subtasks (if any):
 
 - Appear only at the end as `## Subtask: <title>` sections; append new
-  subtasks unless the user explicitly requests a different ordering.
+  subtasks unless the user explicitly requests different ordering.
 - Each subtask:
   - starts with `- **Status:** <status>`,
-  - uses the same list item labels and ordering as the main task,
+  - uses the same list-item labels and ordering as the main task,
   - represents a functional increment unless explicitly marked
     otherwise.
 
-Subtasks may use only the statuses `backlog`, `in-progress`, or `done`.
+Subtasks may use only `backlog`, `in-progress`, or `done`.
 
 **DONE is a phase transition.**
-Moving a task or subtask to **done** follows the transition and
-approval rules in **Spec Loop Phases and Transitions**.
+Moving a task or subtask to **done** follows the transition and approval
+rules in **Spec Loop Phases and Transitions**.
 
 LLMs must not set **done** on their own.
 
@@ -312,8 +311,8 @@ Before setting a subtask to **done**:
 - Separate test-focused tasks are allowed when adding or extending
   coverage as a standalone scope.
 - Automated tests should be preferred.
-- In each subtask, include a Test specification with
-  explicit Automated tests and Manual tests sublists.
+- In each subtask, include a Test specification with explicit
+  Automated tests and Manual tests sublists.
 - When implementing a task, you must implement all specified tests,
   run them, and fix any failures before reporting completion, unless
   the user explicitly waives tests.
