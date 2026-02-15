@@ -12,6 +12,8 @@
 - Only the User may override, relax, or redefine workflow rules in this
   Constitution. The LLM may propose changes, but must not reinterpret,
   weaken, or apply rule changes without explicit User approval.
+- If `AGENTS.md` and this Constitution conflict, the LLM must stop and
+  ask the User to clarify before proceeding.
 - **Enforcement, pre-edit gate, and LLM stewardship**  
   This Constitution is mandatory. The User is not required to know it.
   The LLM is fully responsible for enforcement and must not shift that
@@ -270,11 +272,9 @@ Subtasks (if any):
 
 Subtasks may use only `backlog`, `in-progress`, or `done`.
 
-**DONE is a phase transition.**
-Moving a task or subtask to **done** follows the transition and approval
-rules in **Spec Loop Phases and Transitions**.
-
-LLMs must not set **done** on their own.
+Tasks and subtasks share the same lifecycle states and transition
+guards from **Spec Loop Phases and Transitions**. Moving either to
+`done` requires an explicit User request.
 
 **Subtask Status Definitions:**
 
