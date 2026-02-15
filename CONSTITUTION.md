@@ -28,11 +28,22 @@ Phases:
   design.
 - **DONE** - verified and accepted completion.
 
-Work starts in **PLAN**. After any completed work item, subsequent work
-also starts in **PLAN** by default unless the User explicitly specifies
-another flow.
+In PLAN, edits are allowed only for non-executable artifacts used for
+research, design, planning, or governance, including task files, ADRs,
+documentation, diagrams, and instruction files (for example,
+AGENTS.md and CONSTITUTION.md).
 
-The model MUST NOT continue IMPLEMENTATION by inertia.
+Any change that affects executable behavior, tests, build/configuration,
+dependencies, packaging, or runtime assets is IMPLEMENTATION and
+requires explicit User instruction to enter IMPLEMENTATION.
+
+If classification is unclear, stop and ask the User before editing.
+
+Work starts in **PLAN** and returns to **PLAN** after each completed
+work item unless the User explicitly specifies another flow.
+
+The model MUST NOT continue IMPLEMENTATION by inertia across work
+items; each new item requires a fresh PLAN -> IMPLEMENTATION approval.
 
 Phases are exclusive unless the User explicitly allows planning and
 implementation together.
@@ -41,9 +52,9 @@ The following transitions require **explicit User instruction or
 approval**: PLAN -> IMPLEMENTATION, IMPLEMENTATION -> PLAN,
 IMPLEMENTATION -> DONE.
 
-This phase model applies to task-scoped implementation work. ADR-only,
-research-only, and analysis-only work are outside this phase model,
-unless the User explicitly requests otherwise.
+This phase model governs task-scoped implementation work; ADR-only,
+research-only, and analysis-only requests remain in PLAN unless the
+User requests otherwise.
 
 Implementation approval gate:
 
@@ -56,7 +67,7 @@ Implementation approval gate:
   changes.
 - Explicit directives such as "implement", "implement it now",
   "go ahead", or "proceed" count as implementation approval.
-- After approval (explicit or implicit), proceed without extra approval
+- After approval, proceed without extra approval
   unless the user asks for another review gate.
 - If implementation scope drifts beyond Design (for example, new type,
   flow, dependency, or behavior-affecting method change), stop, update
