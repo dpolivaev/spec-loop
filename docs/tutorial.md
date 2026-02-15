@@ -117,6 +117,16 @@ Use it when needed so the LLM can verify:
 - `site/index.html` rendering and basic page behavior,
 - game page flow and interactions during gameplay checks.
 
+### 5. Configure PlantUML Markdown preview (recommended)
+
+Design diagrams are first-class review artifacts in this workflow, so
+it helps to configure local Markdown preview before you start.
+
+- VS Code setup:
+  [PlantUML Rendering Inside VS Code Markdown Preview](vscode-markdown-plantuml-preview.md)
+- JetBrains setup:
+  [PlantUML Rendering Inside JetBrains Markdown Preview](jetbrains-markdown-plantuml-preview.md)
+
 ## Steps
 
 Each step follows the Constitution interaction model:

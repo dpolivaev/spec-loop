@@ -86,12 +86,14 @@ Apply the process to your repository.
 Spec Loop treats diagrams as specification artifacts: they make design intent
 reviewable at the same boundary as the surrounding text.
 
-For inline PlantUML rendering in Markdown, view the repo on GitLab.
-GitHub does not render PlantUML embedded in Markdown natively,
+For inline PlantUML rendering in Markdown on the web, view the repo on
+GitLab. GitHub does not render PlantUML embedded in Markdown natively,
 so reading there can degrade the intended experience.
 
-Locally, use an editor with PlantUML support (for example VS Code with an extension) so
-diagrams render inline while reading.
+For local preview setup, use one of these guides:
+
+* **[VS Code Markdown Preview (server/local options)](docs/vscode-markdown-plantuml-preview.md)**
+* **[JetBrains Markdown Preview (including Android Studio path)](docs/jetbrains-markdown-plantuml-preview.md)**
 
 ## License
 
