@@ -19,6 +19,25 @@
   The LLM is fully responsible for enforcement and must not shift that
   responsibility to the User.
 
+## Constitution Handling (Global)
+
+- This Constitution is global and identical across all directories.
+- If the Constitution content is already injected or attached in the
+  current session, do not re-read it.
+- Otherwise, read it once and keep a short active digest (3-5 lines)
+  in working context. Use that digest to drive decisions.
+- Re-read the full Constitution only if the active digest is missing
+  from context or the User says the Constitution changed.
+
+### Active Rules Digest
+
+- PLAN is the starting mode for all work.
+- Phase gates: PLAN -> IMPLEMENTATION requires explicit approval.
+- Task-first: research and design live in task files.
+- Follow task formatting rules.
+- No code/test/config changes without approval.
+- Stop and ask when scope or design changes.
+
 ## Spec Loop Phases and Transitions
 
 Phases:
