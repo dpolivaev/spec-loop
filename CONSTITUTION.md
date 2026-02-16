@@ -92,21 +92,6 @@ Implementation approval gate:
   flow, dependency, or behavior-affecting method change), stop, update
   Design, request approval, then continue.
 
-**CRITICAL: LLM MUST enforce the gate and recover on deviation**
-Before the first code edit in any turn, the LLM MUST confirm that the
-required gate is satisfied. The LLM MUST NOT shift this responsibility
-to the User. If the LLM deviates, it MUST self-report, stop
-immediately, return to planning mode, repair task-file state by fixing
-the Design section, and request explicit User approval before
-continuing.
-
-If wording conflicts elsewhere in this Constitution, this section
-governs.
-
-Within a phase, the model may act freely within approved scope and all
-Constitution constraints. At phase boundaries, the model MUST stop and
-ask.
-
 ## Task-first planning
 
 Task-first workflow is mandatory for work that changes code, tests, or
