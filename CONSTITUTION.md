@@ -147,18 +147,22 @@ Rules in this section complement, and do not override,
    discovered in Research.
 
 3. **Scenario**  
-   Write scenario as a short chronological story in natural
-   language, describing what happens.
-   Keep implementation details out of Scenario.
 
-   Scenario defines canonical domain names. If Research and Scenario use
+   Write a short chronological story in natural language that describes
+   what happens. Keep implementation details out.
+
+   Use Scenario when the task introduces or clarifies behavior, or
+   introduces or refines terms. Otherwise, Scenario can be skipped.
+
+   If Scenario exists, its terms are canonical. If Research uses
    different names, align by updating Scenario or renaming downstream
    artifacts before implementation.
 
 4. **Design**  
    Document architecture, data flow, class/component interactions, and
    test-impacting decisions in **Design**. Draft design from validated
-   **Research** findings and required behavior from **Scenario**.
+   **Research** findings and required behavior from **Scenario** when
+   it exists.
    Designs may describe file scope broadly when it remains unambiguous.
 
    Design sections must use PlantUML diagrams
@@ -174,11 +178,11 @@ Rules in this section complement, and do not override,
    per class pair.
 
 5. **Iterative discovery**  
-   After drafting **Scenario** and **Design**, iterate across
-   **Research**, **Scenario**, and **Design** until decisions are
-   supported, naming is aligned, and behavior is testable. Update these
-   sections when new findings appear. No implementation starts during
-   this loop.
+   After drafting **Design** and **Scenario** when needed, iterate
+   across **Research**, **Scenario** (if used), and **Design** until
+   decisions are supported, naming is aligned, and behavior is testable.
+   Update these sections when new findings appear. No implementation
+   starts during this loop.
 
 6. **Implementation**  
    Implementation is complete only when both design and test
