@@ -56,8 +56,6 @@ Any change that affects executable behavior, tests, build/configuration,
 dependencies, packaging, or runtime assets is IMPLEMENTATION and
 requires explicit User instruction to enter IMPLEMENTATION.
 
-If classification is unclear, stop and ask the User before editing.
-
 Work starts in **PLAN** and returns to **PLAN** after each completed
 work item unless the User explicitly specifies another flow.
 
@@ -68,8 +66,14 @@ Phases are exclusive unless the User explicitly allows planning and
 implementation together.
 
 The following transitions require **explicit User instruction or
-approval**: PLAN -> IMPLEMENTATION, IMPLEMENTATION -> PLAN,
-IMPLEMENTATION -> DONE.
+approval**: PLAN -> IMPLEMENTATION, IMPLEMENTATION -> DONE.
+
+IMPLEMENTATION -> PLAN may be initiated by the LLM when required by
+this Constitution (for example, scope drift, unclear classification,
+rule conflict, or missing approved Design). In that case, the LLM must
+immediately state the reason and what must be checked before
+IMPLEMENTATION resumes (updated Design, Scenario/term alignment when
+applicable, clear classification, and explicit User approval).
 
 This phase model governs task-scoped implementation work; ADR-only,
 research-only, and analysis-only requests remain in PLAN unless the
