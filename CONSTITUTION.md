@@ -139,17 +139,27 @@ Rules in this section complement, and do not override,
    from the section above applies unless the User explicitly chooses
    otherwise.
 
-2. **Research baseline**  
+2. **Research**  
    Start with research unless the user explicitly waives it. Record
    findings in task **Research**. Record observations, constraints, and
    verified facts only; do not include planned actions or steps. Plans
-   and changes belong in **Design**.
+   and changes belong in **Design**. Candidate domain names may be
+   discovered in Research.
 
-3. **Design specification**  
+3. **Scenario**  
+   Write scenario as a short chronological story in natural
+   language, describing what happens.
+   Keep implementation details out of Scenario.
+
+   Scenario defines canonical domain names. If Research and Scenario use
+   different names, align by updating Scenario or renaming downstream
+   artifacts before implementation.
+
+4. **Design**  
    Document architecture, data flow, class/component interactions, and
    test-impacting decisions in **Design**. Draft design from validated
-   **Research** findings. Designs may describe file scope broadly when
-   it remains unambiguous.
+   **Research** findings and required behavior from **Scenario**.
+   Designs may describe file scope broadly when it remains unambiguous.
 
    Design sections must use PlantUML diagrams
    (class/component/sequence). Do not use PlantUML notes. If mixing
@@ -163,25 +173,26 @@ Rules in this section complement, and do not override,
    Include meaningful dependency labels and use at most one connector
    per class pair.
 
-4. **Iterative discovery**  
-   After drafting **Design**, iterate between **Research** and
-   **Design** until decisions are supported and testable. Update both
+5. **Iterative discovery**  
+   After drafting **Scenario** and **Design**, iterate across
+   **Research**, **Scenario**, and **Design** until decisions are
+   supported, naming is aligned, and behavior is testable. Update these
    sections when new findings appear. No implementation starts during
    this loop.
 
-5. **Implementation**  
+6. **Implementation**  
    Implementation is complete only when both design and test
    specification are implemented, unless the user explicitly waives
    tests.
 
-6. **Status updates**  
+7. **Status updates**  
    Move task files between status folders within the project task
    directory to reflect current focus (for example, done back to
    in-progress or backlog). When reopening a task from done, keep the
    existing three-digit prefix to preserve traceability. Avoid moving
    unrelated tasks; move them only when actively worked on.
 
-7. **Move workflow for diffs**  
+8. **Move workflow for diffs**  
    When moving tracked task files, use `git mv` and stage the move
    immediately before editing. This preserves rename tracking in diff
    tools that are not rename-aware (for example, VS Code). Do not
@@ -189,7 +200,7 @@ Rules in this section complement, and do not override,
    untracked task files, move in filesystem (not `git mv`), then run
    `git add -A`.
 
-8. **Status validation before commits**  
+9. **Status validation before commits**  
    Update subtask status whenever task-file lifecycle state changes.
    Before each commit, check relevant task files and propose any status
    or folder changes needed for consistency. Apply those status changes
@@ -205,7 +216,7 @@ Rules in this section complement, and do not override,
    After code or configuration changes, run relevant module tests before
    reporting.
 
-9. **Done task cleanup**  
+10. **Done task cleanup**  
    Keep done tasks in the task directory under the done status folder
    with a three-digit prefix based on order moved into done. Delete them
    from the working tree after a release tag is created.
@@ -213,10 +224,10 @@ Rules in this section complement, and do not override,
 ## Context Preservation
 
 - **Task sections are source of truth**  
-  Re-read relevant task sections (Scope, Research, Design, Test Spec)
-  before implementation or whenever requirements are unclear. Keep only
-  relevant task content in active context and avoid carrying unrelated
-  content.
+  Re-read relevant task sections (Scope, Motivation, Scenario,
+  Research, Design, Test Spec) before implementation or whenever
+  requirements are unclear. Keep only relevant task content in active
+  context and avoid carrying unrelated content.
 
 ## Formatting
 
@@ -270,6 +281,7 @@ Each task uses this exact order and layout:
 - Main task sections are list items with bold labels in this order:
   - `- **Scope:**`
   - `- **Motivation:**`
+  - `- **Scenario:**`
   - `- **Developer Briefing:**`
   - `- **Research:**`
   - `- **Design:**`
@@ -293,7 +305,7 @@ guards from **Spec Loop Phases and Transitions**. Moving either to
 
 **Subtask Status Definitions:**
 
-- **backlog**: planned/deferred; research, design, and test
+- **backlog**: planned/deferred; scenario, research, design, and test
   specification may be drafted.
 - **in-progress**: active work state for research, design,
   implementation, and verification.
@@ -304,14 +316,16 @@ guards from **Spec Loop Phases and Transitions**. Moving either to
 Before setting a subtask to **done**:
 
 1. **Research**: legacy state and constraints are documented as needed.
-2. **Design**: architecture/data flow/class interactions are defined.
-3. **Scope**: Design and Test specification are fully implemented.
-4. **Verification**: new and relevant existing tests pass locally.
-5. **Cleanliness**: no TODOs, placeholders, temp comments, unused
+2. **Scenario**: expected behavior is documented as a clear story in
+   natural language.
+3. **Design**: architecture/data flow/class interactions are defined.
+4. **Scope**: Design and Test specification are fully implemented.
+5. **Verification**: new and relevant existing tests pass locally.
+6. **Cleanliness**: no TODOs, placeholders, temp comments, unused
    imports.
-6. **Documentation**: design deviations are documented in the task
+7. **Documentation**: design deviations are documented in the task
    file.
-7. **Approval**: the User explicitly approves the transition to
+8. **Approval**: the User explicitly approves the transition to
    **done**.
 
 **Testing Policy:**
