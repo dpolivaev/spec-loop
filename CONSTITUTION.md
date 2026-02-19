@@ -148,15 +148,24 @@ Rules in this section complement, and do not override,
 
 3. **Scenario**  
 
-   Write a short chronological story in natural language that describes
-   what happens. Keep implementation details out.
+   Scenario is an LLM reasoning aid: it anchors chronological
+   understanding and stabilizes terms before Design and implementation.
+   Write it as a short natural-language story describing what happens.
+   Keep implementation details out.
 
    Use Scenario when the task introduces or clarifies behavior, or
    introduces or refines terms. Otherwise, Scenario can be skipped.
 
-   If Scenario exists, its terms are canonical. If Research uses
-   different names, align by updating Scenario or renaming downstream
-   artifacts before implementation.
+   Authoring order and section placement are distinct: draft Scenario
+   after initial Research when Research-first workflow is used.
+
+   When Scenario is used, it defines canonical domain terms
+   (ubiquitous language) for Design, tests, and code naming. If
+   Research uses different names, align them to Scenario before
+   implementation.
+
+   If Scenario is omitted, do not introduce new or changed domain terms
+   in Design. Add Scenario first, then continue.
 
 4. **Design**  
    Document architecture, data flow, class/component interactions, and
@@ -285,11 +294,14 @@ Each task uses this exact order and layout:
 - Main task sections are list items with bold labels in this order:
   - `- **Scope:**`
   - `- **Motivation:**`
-  - `- **Scenario:**`
+  - `- **Scenario:**` (conditional; include only when behavior is
+    introduced/clarified or terms are introduced/refined)
   - `- **Developer Briefing:**`
   - `- **Research:**`
   - `- **Design:**`
   - `- **Test specification:**`
+  If Scenario is omitted, keep the remaining sections in order, with
+  `Developer Briefing` immediately after `Motivation`.
 
 Subtasks (if any):
 
@@ -297,7 +309,8 @@ Subtasks (if any):
   subtasks unless the user explicitly requests different ordering.
 - Each subtask:
   - starts with `- **Status:** <status>`,
-  - uses the same list-item labels and ordering as the main task,
+  - uses the same list-item labels and ordering rules as the main task
+    (including conditional Scenario),
   - represents a functional increment unless explicitly marked
     otherwise.
 
@@ -320,8 +333,8 @@ guards from **Spec Loop Phases and Transitions**. Moving either to
 Before setting a subtask to **done**:
 
 1. **Research**: legacy state and constraints are documented as needed.
-2. **Scenario**: expected behavior is documented as a clear story in
-   natural language.
+2. **Scenario**: when applicable, expected behavior is documented as a
+   clear story in natural language.
 3. **Design**: architecture/data flow/class interactions are defined.
 4. **Scope**: Design and Test specification are fully implemented.
 5. **Verification**: new and relevant existing tests pass locally.

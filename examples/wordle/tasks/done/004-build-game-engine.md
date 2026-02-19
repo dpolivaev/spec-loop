@@ -1,110 +1,152 @@
 # Task: Build game engine
 
 - **Task Identifier:** 2026-01-25-game-engine
-- **Scope:** Implement the game loop state, attempt limits, win/lose
+- **Scope:** Implement game loop state, attempt limits, win and lose
   conditions, and turn progression.
-- **Motivation:** Provide a reusable core engine that both CLI and UI layers
-  can drive.
-- **Developer Briefing:** The Wordle example now has a domain model and a
-  word list loader, but no gameplay engine. This task is split into two
-  subtasks: define the game state model, then implement the engine logic
-  that produces new states from guesses. The engine must remain UI-agnostic
-  so CLI and minimal UI can reuse it.
-- **Research:** Current code includes domain records (`Word`, `Feedback`,
-  `LetterFeedback`, `LetterStatus`), `WordleRules.compare` for evaluation,
-  and `WordListLoader.randomWord` for selecting a solution from the
-  resource. There is no game state, attempt tracking, or win/lose logic
-  implemented.
-- **Design:** See subtasks.
-- **Test specification:** See subtasks.
+- **Motivation:** Provide a reusable core engine that CLI and UI layers can
+  drive without duplicating gameplay logic.
+- **Scenario:** A game starts with a hidden solution and fixed attempts.
+  Each guess produces feedback and updates attempts and history until the
+  player wins or exhausts attempts.
+- **Developer Briefing:** This task is split into two subtasks: define an
+  immutable game state model, then implement engine behavior that starts
+  games and applies guesses using `WordleRules` and `WordListLoader`.
+- **Research:** Before this task, the project had domain records, rule
+  evaluation, and random word selection. No game state, status tracking, or
+  turn progression logic existed.
+- **Design:**
+
+```plantuml
+@startuml
+set separator none
+package "wordle" {
+  package "engine" {
+    class GameEngine
+    class GameState
+    enum GameStatus
+  }
+  package "domain" {
+    class Feedback
+    class Word
+  }
+  package "rules" {
+    class WordleRules
+  }
+  package "words" {
+    class WordListLoader
+  }
+}
+
+GameEngine --> WordListLoader : starts game with solution source
+GameEngine --> WordleRules : evaluates guess
+GameEngine --> GameState : returns new state
+GameState --> Feedback : stores feedback history
+GameState --> Word : stores solution
+GameState --> GameStatus : stores lifecycle status
+@enduml
+```
+
+  Engine operations are pure state transitions: `startGame` initializes
+  `IN_PROGRESS`, and `submitGuess` returns a new `GameState` with updated
+  history, attempts, and terminal status when applicable.
+- **Test specification:**
+  - Automated tests:
+    - Covered by subtask test specifications.
+  - Manual tests:
+    - N/A
 
 ## Subtask: Define game state model
+
 - **Status:** done
 - **Scope:** Introduce immutable game state types for attempts, history, and
   status.
 - **Motivation:** Establish a stable state model before implementing engine
   behavior.
-- **Developer Briefing:** Define `GameState` and `GameStatus` in a
-  `wordle.engine` package. State must capture the solution, remaining
-  attempts, feedback history, and current status.
-- **Research:** No game state types exist; all logic is currently in domain
-  and word list components.
+- **Scenario:** After each guess, the engine returns a new state object that
+  contains updated attempts, feedback history, and status while keeping
+  prior state immutable.
+- **Developer Briefing:** Define `GameState` and `GameStatus` in
+  `wordle.engine`. State stores solution, attempts remaining, feedback
+  history, and current lifecycle status.
+- **Research:** No game state types existed at subtask start.
 - **Design:**
+
 ```plantuml
 @startuml
-package wordle.domain {
-  class Word
-  class Feedback
-}
-
-package wordle.engine {
-  class GameState {
-    + solution(): Word
-    + attemptsRemaining(): int
-    + history(): List<Feedback>
-    + status(): GameStatus
+set separator none
+package "wordle" {
+  package "engine" {
+    class GameState
+    enum GameStatus
   }
-
-  enum GameStatus {
-    IN_PROGRESS
-    WON
-    LOST
+  package "domain" {
+    class Feedback
+    class Word
   }
 }
 
-GameState "1" o-- "*" Feedback
-GameState ..> Word
+GameState --> Word : solution value
+GameState --> Feedback : ordered guess history
+GameState --> GameStatus : status value
 @enduml
 ```
 
+  `GameState` is immutable and becomes the single payload exchanged between
+  gameplay engine and presentation layers.
 - **Test specification:**
-  1. `GameState` stores the provided solution, attempts, history, and
-       status.
-  2. `GameStatus` contains IN_PROGRESS, WON, LOST.
+  - Automated tests:
+    - `GameState` stores provided solution, attempts, history, and status.
+    - `GameStatus` contains `IN_PROGRESS`, `WON`, and `LOST`.
+  - Manual tests:
+    - N/A
 
 ## Subtask: Implement game engine logic
+
 - **Status:** done
 - **Scope:** Implement game start and guess submission logic using the state
   model.
 - **Motivation:** Provide reusable gameplay behavior for CLI and UI layers.
-- **Developer Briefing:** Implement `GameEngine` with `startGame` and
-  `submitGuess`. `startGame` picks a random solution via `WordListLoader`.
-  `submitGuess` creates feedback via `WordleRules` and returns a new
-  `GameState` with updated attempts and status.
-- **Research:** There is no engine implementation; WordleRules and
-  WordListLoader are ready to be composed.
+- **Scenario:** A new game starts from a selected solution. Each submitted
+  guess updates the state until either all letters are correct or attempts
+  run out.
+- **Developer Briefing:** Implement `GameEngine.startGame` and
+  `GameEngine.submitGuess`. Compose `WordListLoader` and `WordleRules`, and
+  define post-terminal behavior for additional guesses.
+- **Research:** No engine behavior existed; integration points were ready in
+  rules and word list components.
 - **Design:**
+
 ```plantuml
 @startuml
-package wordle.domain {
-  class WordleRules
-}
-
-package wordle.words {
-  class WordListLoader
-}
-
-package wordle.engine {
-  class GameEngine {
-    + GameEngine(wordListLoader: WordListLoader, rules: WordleRules, maxAttempts: int)
-    + startGame(resourcePath: String): GameState
-    + submitGuess(state: GameState, guessRaw: String): GameState
+set separator none
+package "wordle" {
+  package "engine" {
+    class GameEngine
+    class GameState
   }
-
-  class GameState
+  package "rules" {
+    class WordleRules
+  }
+  package "words" {
+    class WordListLoader
+  }
 }
 
-GameEngine ..> WordListLoader
-GameEngine ..> WordleRules
-GameEngine ..> GameState
+GameEngine --> WordListLoader : startGame(resourcePath)
+GameEngine --> WordleRules : submitGuess(state, guess)
+GameEngine --> GameState : emits next immutable state
 @enduml
 ```
 
+  `startGame` initializes attempts and empty history. `submitGuess` applies
+  rule feedback, appends history, updates attempts, and transitions to `WON`
+  or `LOST` when conditions are met.
 - **Test specification:**
-  1. Starting a game sets attempts to `maxAttempts`, history empty, status
-       `IN_PROGRESS`.
-  2. A correct guess sets status to `WON` and leaves attempts unchanged.
-  3. An incorrect guess decrements attempts and appends feedback.
-  4. After `maxAttempts` incorrect guesses, status becomes `LOST`.
-  5. Submitting a guess after `WON` or `LOST` leaves state unchanged or
-       throws (define behavior explicitly).
+  - Automated tests:
+    - Starting a game sets `maxAttempts`, empty history, and `IN_PROGRESS`.
+    - Correct guess sets status to `WON`.
+    - Incorrect guess decrements attempts and appends feedback.
+    - `maxAttempts` incorrect guesses transition to `LOST`.
+    - Post-terminal submissions follow defined behavior consistently.
+  - Manual tests:
+    - N/A

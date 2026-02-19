@@ -5,62 +5,49 @@
   UI-agnostic building blocks for the Wordle Java implementation.
 - **Motivation:** Establish a clear model and comparison rules so later
   game logic and interfaces stay consistent.
-- **Developer Briefing:** This task now contains two subtasks: one for
-  defining domain objects and validation, and one for implementing
-  guess evaluation rules. Value objects will be implemented as Java
-  records (immutable data carriers) while behavior-focused types like
-  `WordleRules` will remain classes. The parent task keeps scope,
-  motivation, and context while the subtasks carry the detailed
-  research, design, and test specifications.
-- **Research:** The Wordle example contains only the Gradle
-  scaffolding and placeholder entry point; there are no existing domain
-  classes or rules implementations in `examples/wordle/src`. No
-  existing model conventions are present, so the domain model and
-  evaluation rules must be introduced from scratch with clear
-  responsibilities and immutability to reduce future coupling.
+- **Scenario:** A player submits a five-letter guess against a hidden
+  solution. The system validates word shape, compares letters positionally,
+  and returns deterministic feedback for each letter, including duplicate
+  letter handling.
+- **Developer Briefing:** This task has two subtasks: one introduces core
+  immutable domain objects and validation entry points, and one implements
+  guess evaluation rules. Value-centric types are records where appropriate,
+  while behavior-centric rule execution remains in a dedicated class.
+- **Research:** The Wordle example previously had Gradle scaffolding and a
+  placeholder entry point only. There were no domain classes, no evaluation
+  rules, and no existing naming conventions for model boundaries.
 - **Design:**
 
 ```plantuml
 @startuml
-package wordle.domain {
-  class Word <<record>> {
-    + Word(raw: String)
-    + value(): String
-    + letters(): List<Character>
+set separator none
+package "wordle" {
+  package "domain" {
+    class Word <<record>>
+    class Feedback <<record>>
+    class LetterFeedback <<record>>
+    enum LetterStatus
   }
-
-  class Feedback <<record>> {
-    + entries(): List<LetterFeedback>
-  }
-
-  class LetterFeedback <<record>> {
-    + position: int
-    + letter: char
-    + status: LetterStatus
-  }
-
-  enum LetterStatus {
-    CORRECT
-    PRESENT
-    ABSENT
-  }
-
-  class WordleRules {
-    + compare(solution: Word, guess: Word): Feedback
+  package "rules" {
+    class WordleRules
   }
 }
 
-note right of Word
-  Validation happens in the Word constructor.
-end note
-
-Word "1" o-- "1" WordleRules
-Feedback "1" o-- "*" LetterFeedback
-LetterFeedback ..> LetterStatus
+WordleRules --> Word : evaluates solution and guess
+WordleRules --> Feedback : returns result
+Feedback --> LetterFeedback : contains entries
+LetterFeedback --> LetterStatus : uses status value
 @enduml
 ```
 
-- **Test specification:** Subtasks define the test coverage.
+  `Word` owns normalization and shape validation, and `WordleRules` owns
+  duplicate-aware scoring logic that first marks exact matches and then
+  allocates remaining present letters by available counts.
+- **Test specification:**
+  - Automated tests:
+    - Covered by subtask test specifications.
+  - Manual tests:
+    - N/A
 
 ## Subtask: Define domain objects
 
@@ -69,50 +56,89 @@ LetterFeedback ..> LetterStatus
   including validation entry points.
 - **Motivation:** Provide a stable core model before adding game logic
   or UI.
-- **Developer Briefing:** The Wordle example currently lacks any domain
-  classes, so we will define a minimal, focused model to represent
-  words, feedback, and validation entry points. The design below
-  specifies immutable value objects for `Word` and `Feedback`, plus a
-  `WordFactory` to centralize validation when not handled directly by
-  `Word`.
-- **Research:** There are no existing domain classes or validation
-  utilities in `examples/wordle/src`, so the model and validation entry
-  points must be introduced from scratch.
-- **Design:** See parent task design diagram.
+- **Scenario:** A valid input word is converted into the canonical internal
+  representation, and a feedback object stores ordered per-letter results
+  that downstream components can render without mutation.
+- **Developer Briefing:** Define a minimal model for `Word`, `Feedback`,
+  `LetterFeedback`, and `LetterStatus`. Validation is performed at
+  construction time so invalid words are rejected before evaluation.
+- **Research:** No existing domain classes or validation helpers were
+  present in `examples/wordle/src` when this subtask started.
+- **Design:**
+
+```plantuml
+@startuml
+set separator none
+package "wordle" {
+  package "domain" {
+    class Word <<record>>
+    class Feedback <<record>>
+    class LetterFeedback <<record>>
+    enum LetterStatus
+  }
+}
+
+Feedback --> LetterFeedback : ordered feedback entries
+LetterFeedback --> LetterStatus : status classification
+@enduml
+```
+
+  The domain model is immutable and constructor-driven so state changes are
+  explicit and controlled by object creation.
 - **Test specification:**
-  1. Create `Word` with lowercase input and verify normalization to
-     uppercase.
-  2. Reject `Word` with length != 5.
-  3. Reject `Word` with non A-Z characters.
-  4. Accept `Word` with valid 5-letter A-Z input.
-  5. Construct `Feedback` with a list of `LetterFeedback` and verify
-     entries are preserved in order.
-  6. Construct `LetterFeedback` and verify position, letter, and status
-     accessors.
+  - Automated tests:
+    - Creating `Word` from lowercase input normalizes to uppercase.
+    - Creating `Word` with length not equal to five is rejected.
+    - Creating `Word` with non A-Z characters is rejected.
+    - Creating `Word` with valid five-letter alphabetic input succeeds.
+    - `Feedback` preserves entry order.
+    - `LetterFeedback` exposes position, letter, and status correctly.
+  - Manual tests:
+    - N/A
 
 ## Subtask: Implement guess evaluation rules
 
 - **Status:** done
-- **Scope:** Implement comparison logic that produces per-letter
-  feedback given a solution and a guess.
-- **Motivation:** Provide the core Wordle feedback behavior needed by
-  the game engine and UI.
-- **Developer Briefing:** Implement the comparison rules in a dedicated
-  `WordleRules` component that takes two `Word` instances and returns
-  `Feedback`. Validation stays in `Word`/`WordFactory` to keep rules
-  focused on evaluation.
-- **Research:** There is no existing rules implementation in the Wordle
-  example. The evaluation algorithm must handle duplicate letters by
-  scoring exact matches first, then marking present letters only when
-  remaining occurrences exist.
-- **Design:** See parent task design diagram.
+- **Scope:** Implement comparison logic that produces per-letter feedback
+  given a solution and a guess.
+- **Motivation:** Provide the core Wordle feedback behavior needed by the
+  game engine and interface layers.
+- **Scenario:** A guess is compared with the solution. Exact matches are
+  marked first, then remaining letters are marked present only while unused
+  occurrences remain, and all others are marked absent.
+- **Developer Briefing:** Implement `WordleRules.compare(solution, guess)`
+  and keep validation outside the rules class. The algorithm must be
+  deterministic and duplicate-aware.
+- **Research:** No previous rules implementation existed. Duplicate handling
+  required a two-pass strategy to avoid over-marking present letters.
+- **Design:**
+
+```plantuml
+@startuml
+set separator none
+package "wordle" {
+  package "domain" {
+    class Word
+    class Feedback
+  }
+  package "rules" {
+    class WordleRules
+  }
+}
+
+WordleRules --> Word : reads letters
+WordleRules --> Feedback : builds feedback
+@enduml
+```
+
+  The rules class evaluates exact matches first and tracks remaining
+  unmatched solution letters before assigning present or absent statuses.
 - **Test specification:**
-  1. Compare identical solution and guess; all positions are CORRECT.
-  2. Compare with no matching letters; all positions are ABSENT.
-  3. Compare with some letters present in wrong positions; PRESENT
-     statuses set correctly.
-  4. Duplicate-letter case: solution `LEVEL`, guess `LELEE`; ensure
-     correct letters are marked first, then PRESENT only up to
-     remaining counts.
-  5. Duplicate-letter case where guess repeats a letter more than
-     solution; extra repeats are ABSENT.
+  - Automated tests:
+    - Identical solution and guess produce all `CORRECT` statuses.
+    - Completely non-overlapping words produce all `ABSENT` statuses.
+    - Wrong-position overlaps produce correct `PRESENT` statuses.
+    - Duplicate case `LEVEL` vs `LELEE` respects remaining-count logic.
+    - Guess duplicates beyond solution counts are marked `ABSENT`.
+  - Manual tests:
+    - N/A

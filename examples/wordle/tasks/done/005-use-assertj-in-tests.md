@@ -1,24 +1,48 @@
 # Task: Use AssertJ in tests
 
 - **Task Identifier:** 2026-01-26-assertj
-- **Scope:** Replace JUnit assertions with AssertJ in test code and add
+- **Scope:** Replace JUnit assertions with AssertJ in test code and add the
   AssertJ dependency.
-- **Motivation:** Improve test readability and consistency across the suite.
-- **Developer Briefing:** This task introduces AssertJ and updates existing
-  tests to use its fluent assertions. The work is confined to test code and
-  build configuration, with no production code changes.
-- **Research:** The current tests use JUnit Jupiter assertions in
-  `wordle.domain`, `wordle.words`, and `wordle.engine` test packages. Build
-  uses Gradle Kotlin DSL and currently depends on JUnit Jupiter only.
-- **Design:** Add `org.assertj:assertj-core` as a test dependency in
-  `examples/wordle/build.gradle.kts`. Replace JUnit assertions with AssertJ:
-  - `assertTrue(condition)` -> `assertThat(condition).isTrue()`
-  - `assertNotNull(value)` -> `assertThat(value).isNotNull()`
-  - `assertThrows` -> `assertThatThrownBy(...)` or
-  `assertThatExceptionOfType(...)`
-  - Stream `allMatch`/`anyMatch` -> `assertThat(collection).allMatch(...)` /
-  `anyMatch(...)` where clearer
-  Keep test logic identical; only assertion style changes.
+- **Motivation:** Improve test readability and consistency across the
+  existing suite.
+- **Developer Briefing:** The task is limited to test code and build test
+  dependency configuration. Production behavior and public APIs must remain
+  unchanged.
+- **Research:** Existing tests used JUnit Jupiter assertion helpers. Build
+  configuration already used Gradle Kotlin DSL with JUnit Jupiter.
+- **Design:**
+
+```plantuml
+@startuml
+set separator none
+package "wordle" {
+  package "build" {
+    class "build.gradle.kts" as BuildFile
+  }
+  package "tests" {
+    class DomainTests
+    class WordsTests
+    class EngineTests
+  }
+  package "libraries" {
+    class AssertJ
+    class JUnitJupiter
+  }
+}
+
+BuildFile --> AssertJ : adds test dependency
+BuildFile --> JUnitJupiter : retains test platform
+DomainTests --> AssertJ : fluent assertions
+WordsTests --> AssertJ : fluent assertions
+EngineTests --> AssertJ : fluent assertions
+@enduml
+```
+
+  Assertion calls are migrated from JUnit assertion utilities to AssertJ
+  equivalents while preserving existing test logic and coverage intent.
 - **Test specification:**
-  1. Run `./gradlew test` and ensure all tests pass.
-  2. Verify no JUnit assertion static imports remain in test files.
+  - Automated tests:
+    - Run `./gradlew test` and confirm all tests pass.
+    - Verify test sources contain no JUnit assertion static imports.
+  - Manual tests:
+    - N/A

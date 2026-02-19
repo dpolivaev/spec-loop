@@ -1,186 +1,212 @@
 # Task: Add CLI game interface
 
 - **Task Identifier:** 2026-01-25-cli-interface
-- **Scope:** Implement a command-line experience for playing Wordle (input
-  loop, feedback rendering) and document CLI build/run/usage steps.
-- **Motivation:** Provide a simple interface to exercise and validate the
-  core engine, with clear CLI instructions for users.
-- **Developer Briefing:** The engine and domain layers are implemented, but
-  there is no CLI entry point. We will add a simple interactive loop that
-  starts a game, accepts guesses, renders feedback, and ends on win/lose.
-  The CLI will include a brief usage section in the Wordle README with
-  build/run instructions.
-- **Research:** Current code includes the game engine
-  (`wordle.engine.GameEngine`), word list loader
-  (`wordle.words.WordListLoader`), and domain model. No CLI utilities or
-  formatting helpers exist yet.
-- **Design:** See subtasks.
-- **Test specification:** See subtasks.
+- **Scope:** Implement a command-line experience for playing Wordle,
+  including input loop, feedback rendering, and CLI usage documentation.
+- **Motivation:** Provide a simple interface that exercises the core engine
+  and offers clear operational instructions.
+- **Scenario:** A user launches the Wordle command, enters guesses in a
+  terminal, receives feedback after each guess, and sees a final game
+  result when the session ends.
+- **Developer Briefing:** The task adds a picocli-based entry path, a game
+  loop that wires to the engine, feedback rendering, and README guidance.
+  Distribution packaging documentation is also included.
+- **Research:** The codebase had engine and domain layers but no CLI entry
+  point, no argument parsing, and no terminal feedback formatter.
+- **Design:**
+
+```plantuml
+@startuml
+set separator none
+package "wordle" {
+  package "cli" {
+    class Main
+    class CliOptions
+    class CliGameRunner
+    class FeedbackRenderer
+  }
+  package "engine" {
+    class GameEngine
+    class GameState
+    enum GameStatus
+  }
+}
+
+Main --> CliOptions : parses command options
+Main --> CliGameRunner : starts interactive session
+CliGameRunner --> GameEngine : submits guesses
+CliGameRunner --> GameState : tracks state transitions
+CliGameRunner --> FeedbackRenderer : formats rows
+CliGameRunner --> GameStatus : reports final result
+@enduml
+```
+
+  CLI mode supports configurable attempts and optional external word-list
+  source while preserving engine-centric gameplay logic.
+- **Test specification:**
+  - Automated tests:
+    - Covered by subtask test specifications.
+  - Manual tests:
+    - Covered by subtask test specifications.
 
 ## Subtask: Implement CLI parsing and game loop
+
 - **Status:** done
-- **Scope:** Add picocli-based CLI command, parse arguments, and run the
-  game loop.
-- **Motivation:** Provide a working CLI entry point with configurable
-  attempts and word list.
-- **Developer Briefing:** Implement a picocli command that wires
-  `GameEngine` to stdin/stdout. `Main` should delegate to the command and
-  return the exit code from `CommandLine.execute`.
-- **Research:** Picocli API surface (external) needed for this subtask:
-```plantuml
-@startuml
-package picocli {
-  class CommandLine {
-    + CommandLine(command: Object)
-    + execute(args: String[]): int
-  }
-
-  annotation Command
-  annotation Option
-}
-
-note right of Command
-  Marks a class as a CLI command.
-  Key attributes:
-  - name: command name in usage
-  - description: help text
-  - mixinStandardHelpOptions:
-    enables -h/--help and -V/--version
-end note
-
-note right of Option
-  Declares a CLI flag and binds it to a field.
-  Key attributes:
-  - names: option names (e.g., "--wordlist")
-  - description: help text
-  - defaultValue: value when option is omitted
-  - required: whether option is mandatory
-end note
-
-note right of CommandLine
-  Executes the command with args
-  and returns an exit code.
-end note
-@enduml
-```
-
+- **Scope:** Add picocli-based command parsing and an interactive game loop.
+- **Motivation:** Provide a working CLI entry point with configurable input
+  sources and attempt limits.
+- **Scenario:** The user runs the command with or without options. The
+  command starts a game, repeatedly reads guesses, and exits after printing
+  `Result: WON`, `Result: LOST`, or `Result: INTERRUPTED`.
+- **Developer Briefing:** `Main` delegates to picocli parsing, then executes
+  a CLI runner that owns the input loop. Invalid guesses are reported
+  without consuming attempts.
+- **Research:** There was no existing command parser or loop abstraction in
+  the project before this subtask.
 - **Design:**
-  1. Use picocli for argument parsing and help output.
-  2. `Main` delegates to a picocli command (e.g., `CliRunner`) with options
-       for word list and attempts.
-  3. `CliRunner` accepts `--wordlist` as an external source (file path or
-       URL). If omitted, it uses the internal resource `wordlist.txt`.
-  4. `CliRunner` starts a game with a configurable max attempts and loops
-       until `GameStatus` is `WON` or `LOST`.
-  5. Each iteration reads a line from stdin, trims it, and submits it to the
-       engine.
-  6. When the game ends, print `Result: WON/LOST`. If input ends before
-       completion, print `Result: INTERRUPTED`. Always exit with status code
-       0.
-  7. Configure the Gradle `run` task to forward `System.in` so interactive
-       input works.
-  8. Invalid guesses (e.g., wrong length) are rejected with a message and do
-       not consume an attempt.
-
-  CLI arguments (picocli options):
-  - `--wordlist <source>`: file path or URL for the word list; if omitted,
-  use internal `wordlist.txt`.
-  - `--attempts <n>`: number of attempts before losing (default 6).
-  - `--help`: print usage and exit (provided by picocli).
 
 ```plantuml
 @startuml
-package wordle.engine {
-  class GameEngine
-  class GameState
-}
-
-package wordle.cli {
-  class CliRunner <<Command>> {
-    + run(resourcePath: String): void
+set separator none
+package "wordle" {
+  package "cli" {
+    class Main
+    class CliOptions
+    class CliGameRunner
+  }
+  package "engine" {
+    class GameEngine
+    class GameState
+    enum GameStatus
   }
 }
 
-class Main
-
-Main ..> CliRunner
-CliRunner ..> GameEngine
-CliRunner ..> GameState
-CliRunner ..> Option : --wordlist
-CliRunner ..> Option : --attempts
+Main --> CliOptions : parse args
+Main --> CliGameRunner : execute session
+CliGameRunner --> GameEngine : start game and submit guess
+CliGameRunner --> GameState : receive updated state
+CliGameRunner --> GameStatus : determine terminal output
 @enduml
 ```
 
+  CLI options include attempts and optional word-list source. Interactive
+  input is read from standard input, and run completion always returns
+  process exit code `0` after printing final result text.
 - **Test specification:**
-  1. CLI input handling rejects empty lines and prompts again (define
-       behavior explicitly).
-  2. Picocli option defaults apply when no args are provided.
-  3. `--wordlist` accepts a file path and uses it to load a game.
-  4. `--wordlist` accepts a URL and uses it to load a game.
-  5. CLI prints a final `Result:` line (`WON`, `LOST`, or `INTERRUPTED`) and
-       returns exit code 0.
-  6. Gradle `run` accepts interactive input from the terminal.
-  7. Invalid guesses are reported and do not decrement attempts.
+  - Automated tests:
+    - Option defaults are applied when no CLI args are passed.
+    - `--wordlist` file path source is accepted and loaded.
+    - `--wordlist` URL source is accepted and loaded.
+    - Invalid guesses are reported and do not decrement attempts.
+    - Final `Result:` line reports `WON`, `LOST`, or `INTERRUPTED`.
+  - Manual tests:
+    - Run `./gradlew run` and confirm interactive terminal input works.
 
 ## Subtask: Implement feedback rendering
+
 - **Status:** done
-- **Scope:** Add feedback formatting for CLI output.
-- **Motivation:** Provide readable game output for users.
-- **Developer Briefing:** Implement a renderer that converts `GameState`
-  feedback into a text row.
-- **Research:** See parent task research.
+- **Scope:** Add deterministic feedback formatting for CLI output rows.
+- **Motivation:** Make game feedback readable in terminal sessions.
+- **Scenario:** After each valid guess, the CLI prints a row that encodes
+  letter statuses in a stable textual format.
+- **Developer Briefing:** Implement `FeedbackRenderer` to transform game
+  feedback state into user-facing CLI text.
+- **Research:** No renderer utility existed before this subtask.
 - **Design:**
-  1. `FeedbackRenderer` formats feedback as a simple text row (e.g., letters
-       with status markers).
 
 ```plantuml
 @startuml
-package wordle.engine {
-  class GameState
-}
-
-package wordle.cli {
-  class FeedbackRenderer {
-    + render(state: GameState): String
+set separator none
+package "wordle" {
+  package "cli" {
+    class FeedbackRenderer
+  }
+  package "engine" {
+    class GameState
   }
 }
 
-FeedbackRenderer ..> GameState
+FeedbackRenderer --> GameState : reads latest feedback entries
 @enduml
 ```
 
+  Renderer output is deterministic for a given `GameState` so tests can
+  assert exact expected strings.
 - **Test specification:**
-  1. `FeedbackRenderer` renders correct/present/absent statuses
-       deterministically for a known `GameState`.
+  - Automated tests:
+    - Renderer outputs expected status markers for known feedback inputs.
+  - Manual tests:
+    - N/A
 
 ## Subtask: Document CLI build and usage
+
 - **Status:** done
-- **Scope:** Document CLI build/run/usage steps in the README.
-- **Motivation:** Ensure users can run and understand the CLI without
-  guesswork.
-- **Developer Briefing:** Update `examples/wordle/README.md` with CLI usage,
-  including arguments and example commands.
-- **Research:** See parent task research.
+- **Scope:** Document CLI build, run, and usage steps in the Wordle README.
+- **Motivation:** Ensure users can run the CLI without guessing commands.
+- **Developer Briefing:** Update README sections for CLI build and run, and
+  include argument descriptions with sample invocations.
+- **Research:** Documentation existed but did not include complete CLI usage.
 - **Design:**
-  1. Update `examples/wordle/README.md` with CLI build/run steps and usage.
-  2. Include CLI argument descriptions and example invocations.
+
+```plantuml
+@startuml
+set separator none
+package "wordle" {
+  package "docs" {
+    class "README.md" as ReadmeFile
+  }
+  package "cli" {
+    class CliOptions
+  }
+}
+
+ReadmeFile --> CliOptions : documents arguments and examples
+@enduml
+```
+
+  README content is the only artifact changed in this subtask.
 - **Test specification:**
-  1. README contains CLI build/run/usage instructions (manual verification
-       acceptable).
+  - Automated tests:
+    - N/A
+  - Manual tests:
+    - N/A
 
 ## Subtask: Package distribution
+
 - **Status:** done
-- **Scope:** Document the Gradle application distribution (ZIP/TAR) output
-  and how to run it.
-- **Motivation:** Provide a simple, shareable package format for the CLI.
-- **Developer Briefing:** Add README instructions for `distZip`/`distTar`
-  outputs and how to run the generated scripts.
-- **Research:** The Gradle `application` plugin produces distribution
-  archives under `build/distributions/` with `bin/` and `lib/`.
+- **Scope:** Document Gradle application distribution archives and runtime
+  scripts.
+- **Motivation:** Provide a shareable package workflow beyond direct Gradle
+  `run` usage.
+- **Developer Briefing:** Add README instructions for `distZip` and `distTar`
+  outputs, archive locations, and script execution.
+- **Research:** Gradle application plugin produces distributions under
+  `build/distributions` with `bin/` and `lib/` contents.
 - **Design:**
-  1. Add a README section describing `./gradlew distZip` and where the
-       ZIP/TAR output is located.
-  2. Document running the unpacked `bin/wordle` script and passing CLI args.
+
+```plantuml
+@startuml
+set separator none
+package "wordle" {
+  package "docs" {
+    class "README.md" as ReadmeFile
+  }
+  package "distribution" {
+    class DistZip
+    class DistTar
+    class BinScript
+  }
+}
+
+ReadmeFile --> DistZip : documents build command
+ReadmeFile --> DistTar : documents build command
+ReadmeFile --> BinScript : documents runtime invocation
+@enduml
+```
+
+  This subtask is documentation-only and does not modify runtime behavior.
 - **Test specification:**
-  1. Manual verification: run `./gradlew distZip`, unzip, and start the CLI
-       via `bin/wordle`.
+  - Automated tests:
+    - N/A
+  - Manual tests:
+    - N/A
