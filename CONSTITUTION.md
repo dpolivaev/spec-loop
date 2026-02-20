@@ -204,10 +204,11 @@ Rules in this section complement, and do not override,
 
 7. **Status updates**  
    Move task files between status folders within the project task
-   directory to reflect current focus (for example, done back to
-   in-progress or backlog). When reopening a task from done, keep the
-   existing three-digit prefix to preserve traceability. Avoid moving
-   unrelated tasks; move them only when actively worked on.
+   directory to reflect current focus (for example, `in-progress` to
+   `review`, or `done` back to `in-progress` or `backlog`).
+   When reopening a task from done, keep the existing three-digit
+   prefix to preserve traceability. Avoid moving unrelated tasks; move
+   them only when actively worked on.
 
 8. **Move workflow for diffs**  
    When moving tracked task files, use `git mv` and stage the move
@@ -221,7 +222,10 @@ Rules in this section complement, and do not override,
    Update subtask status whenever task-file lifecycle state changes.
    Before each commit, check relevant task files and propose any status
    or folder changes needed for consistency. Apply those status changes
-   only after explicit user confirmation, then proceed with the commit.
+   only after explicit user confirmation, except that the LLM should
+   apply `in-progress` -> `review` transitions directly for both
+   task-folder status and subtask status when implementation and local
+   verification are complete. Then proceed with the commit.
    For task-related commits, start the message with the **Primary
    Identifier**:
    - Ticket ID if present (for example `TICKET-123: ...`).
@@ -262,26 +266,33 @@ rendered views.
 
 ## Task States
 
-Tasks must use one of these status folders within the project task
-directory:
+Tasks and subtasks share one lifecycle with the same status values:
+`backlog`, `in-progress`, `review`, `done`.
 
+Representation:
+- Task lifecycle state is represented by the task file directory.
+- Subtask lifecycle state is represented by `- **Status:** <status>`.
+
+Lifecycle definitions:
 - **backlog**  
-  New, planned, or deferred work. Research and design belong here until
-  design is approved; include ideas or deferred tasks.
-  New tasks default to `backlog`.
-  Exception: if `in-progress` contains no tasks and only one new task
-  is being created, place that task in `in-progress`.
-
+  Planned or deferred work. Research and design belong here until
+  design is approved. New tasks default to `backlog`.
 - **in-progress**  
   Active work in research, design, implementation, or verification.
-  Subtask status must use `backlog`, `in-progress`, or `done`.
-  LLMs must not set **done** unless the user explicitly requests it.
-  Tasks may stay here while waiting for user confirmation before moving
-  to done.
-
+- **review**  
+  Implementation is complete and locally verified, and the item awaits
+  user review or acceptance.
 - **done**  
-  The user has verified completion; move the task here with the
-  required prefix before releasing.
+  User-verified completion.
+
+Lifecycle and transition rules:
+- Tasks and subtasks use the same transition guards from
+  **Spec Loop Phases and Transitions**.
+- LLM should move `in-progress` -> `review` when implementation and
+  local verification are complete.
+- Moving to `done` requires an explicit User request.
+- Exception for initial placement: if `in-progress` contains no tasks
+  and only one new task is being created, place it in `in-progress`.
 
 ## Task Structure
 
@@ -318,23 +329,12 @@ Subtasks (if any):
   - represents a functional increment unless explicitly marked
     otherwise.
 
-Subtasks may use only `backlog`, `in-progress`, or `done`.
+Subtask `Status` values and transitions use the same lifecycle rules as
+defined in **Task States**.
 
-Tasks and subtasks share the same lifecycle states and transition
-guards from **Spec Loop Phases and Transitions**. Moving either to
-`done` requires an explicit User request.
+**Definition of Done for LLM:**
 
-**Subtask Status Definitions:**
-
-- **backlog**: planned/deferred; scenario, research, design, and test
-  specification may be drafted.
-- **in-progress**: active work state for research, design,
-  implementation, and verification.
-- **done**: complete, verified, and explicitly approved by the User.
-
-**Definition of Done:**
-
-Before setting a subtask to **done**:
+Before setting a task or subtask to **review**:
 
 1. **Research**: legacy state and constraints are documented as needed.
 2. **Scenario**: when applicable, expected behavior is documented as a
@@ -346,8 +346,6 @@ Before setting a subtask to **done**:
    imports.
 7. **Documentation**: design deviations are documented in the task
    file.
-8. **Approval**: the User explicitly approves the transition to
-   **done**.
 
 **Testing Policy:**
 
@@ -366,7 +364,7 @@ Before setting a subtask to **done**:
 - When implementing a task, you must implement all specified tests,
   run them, and fix any failures before reporting completion, unless
   the user explicitly waives tests.
-- Before moving a subtask to **done**, required tests must be
+- Before moving a subtask to **review**, required tests must be
   implemented and passing unless explicitly waived by the user.
 
 ## Architecture Decision Records
