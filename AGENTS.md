@@ -8,4 +8,4 @@ without reading it is allowed.
 
 If the constitution is known, you must comply with its rules and immediately emit `🫡`.
 
-Task directory: `<TASK_DIR>` (replace with the repo-local path to your task files, for example, `tasks`).
+Task directory: `<TASK_DIR>`.
