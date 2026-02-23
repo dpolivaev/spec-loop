@@ -29,14 +29,32 @@
 - Re-read the full Constitution only if the active digest is missing
   from context or the User says the Constitution changed.
 
-### Active Rules Digest
+### Core Invariants
 
-- PLAN is the starting mode for all work.
-- Phase gates: PLAN -> IMPLEMENTATION requires explicit approval.
 - Task-first: research and design live in task files.
 - Follow task formatting rules.
-- No code/test/config changes without approval.
-- Stop and ask when scope or design changes.
+
+### Decision Tables (Operational Shortcuts)
+
+Use these tables as the primary quick path. When a row applies, follow
+it directly.
+
+| Situation | Required action | Resulting phase |
+| --- | --- | --- |
+| Request changes executable behavior (code/test/config/deps/runtime assets) | Enter PLAN: update Research/Scenario/Design as needed and ask for explicit approval to start implementation | PLAN |
+| Refactoring that changes code, tests, or configuration | Enter PLAN: update Design for the refactor and ask for explicit implementation approval | PLAN |
+| User explicitly approves implementation (`implement`, `go ahead`, `proceed`, equivalent explicit instruction) | Start implementation according to approved Design | IMPLEMENTATION |
+| Request is research/analysis/docs only | Edit non-executable artifacts only | PLAN |
+| Task file changed but no implementation directive exists | Stop and ask for review/approval before code/test/config edits | PLAN |
+| Scope drifts beyond approved Design (new flow/type/dependency/behavior) | Stop, update Research/Scenario/Design, request approval | PLAN |
+| Implementation completed and local verification passed | Move `in-progress` -> `review` for task/subtask | REVIEW |
+| User explicitly confirms completion | Move item to `done` | DONE |
+
+| Scenario usage decision | Rule |
+| --- | --- |
+| Behavior or domain terms are introduced/changed | Scenario is required |
+| Purely technical change without behavior/term change | Scenario may be omitted |
+| Scenario omitted | Do not introduce new domain terms in Design; add Scenario first if terms change |
 
 ## Spec Loop Phases and Transitions
 
@@ -59,8 +77,8 @@ requires explicit User instruction to enter IMPLEMENTATION.
 Work starts in **PLAN** and returns to **PLAN** after each completed
 work item unless the User explicitly specifies another flow.
 
-The model MUST NOT continue IMPLEMENTATION by inertia across work
-items; each new item requires a fresh PLAN -> IMPLEMENTATION approval.
+Do not continue IMPLEMENTATION by inertia across work items; each new
+item requires a fresh PLAN -> IMPLEMENTATION approval.
 
 Phases are exclusive unless the User explicitly allows planning and
 implementation together.
@@ -79,49 +97,27 @@ This phase model governs task-scoped implementation work; ADR-only,
 research-only, and analysis-only requests remain in PLAN unless the
 User requests otherwise.
 
-Implementation approval gate:
-
-- Design approval is mandatory before any code, test, or configuration
-  change.
-- Refactoring that changes code, tests, or configuration is
-  implementation and requires an explicit Design update and approval.
-- If task files were edited and there is no implementation directive,
-  request user review before making code, test, or configuration
-  changes.
-- Explicit directives such as "implement", "implement it now",
-  "go ahead", or "proceed" count as implementation approval.
-- After approval, proceed without extra approval
-  unless the user asks for another review gate.
-- If implementation scope drifts beyond Design (for example, new type,
-  flow, dependency, or behavior-affecting method change), stop, update
-  Design, request approval, then continue.
+Implementation approval details are defined by the Decision Tables and
+remain mandatory.
 
 ## Task-first planning
 
 Task-first workflow is mandatory for work that changes code, tests, or
 configuration.
 
-For ADR-only, research-only, or analysis-only requests with no code,
-test, or configuration changes, task-first workflow does not apply and
-no task file is required unless the User explicitly requests task-based
-tracking.
+For ADR-only/research-only/analysis-only requests with no code, test,
+or configuration changes, a task file is optional unless the User asks
+for task-based tracking.
 
-If such non-code work later leads to implementation, the process must
-enter PLAN in a task file before any code, test, or configuration
-change.
+If non-code work later leads to implementation, enter PLAN in a task
+file before any executable change.
 
-When task-first workflow applies and no suitable task file exists for
-the current request, the model should propose creating a new task file
-before performing research or design.
+When task-first applies and no suitable task file exists, propose
+creating one before research/design. Do not keep implementation design
+only in chat unless the User explicitly allows that mode.
 
-Design and research for task-scoped implementation MUST NOT be
-developed directly in chat unless the User explicitly allows planning
-without a task file.
-
-All current design decisions for scoped work MUST be written in the
-task-file Design section before IMPLEMENTATION starts. Start refactoring
-with an explicit Design update in the existing task; if needed, create
-another task or subtask.
+Before IMPLEMENTATION, current design decisions must be present in the
+task-file Design section.
 
 Chat is a coordination channel, not a design artifact.
 
@@ -144,32 +140,22 @@ Rules in this section complement, and do not override,
    otherwise.
 
 2. **Research**  
-   Start with research unless the user explicitly waives it. Record
-   findings in task **Research**. Record observations, constraints, and
-   verified facts only; do not include planned actions or steps. Plans
-   and changes belong in **Design**. Candidate domain names may be
-   discovered in Research.
+  Start with research unless waived. Record observations,
+  constraints, and verified facts only; plans belong in **Design**.
 
 3. **Scenario**  
 
-   Scenario is an LLM reasoning aid: it anchors chronological
-   understanding and stabilizes terms before Design and implementation.
-   Write it as a short natural-language story describing what happens.
-   Keep implementation details out.
+  Scenario anchors behavior and terms before implementation. Use it
+  when behavior/terms are introduced or changed; otherwise it can be
+  skipped (see Decision Tables). Keep Scenario concise and
+  implementation-free.
 
-   Use Scenario when the task introduces or clarifies behavior, or
-   introduces or refines terms. Otherwise, Scenario can be skipped.
-
-   Authoring order and section placement are distinct: draft Scenario
-   after initial Research when Research-first workflow is used.
-
-   When Scenario is used, it defines canonical domain terms
-   (ubiquitous language) for Design, tests, and code naming. If
-   Research uses different names, align them to Scenario before
-   implementation.
-
-   If Scenario is omitted, do not introduce new or changed domain terms
-   in Design. Add Scenario first, then continue.
+    **Naming principle (canonical terms):**
+    Once Scenario exists, use Scenario terms consistently in Design,
+    tests, code symbols, and commit text. Do not keep parallel synonyms
+    for the same domain concept. If existing code uses different names,
+    align naming incrementally in the current scope and document any
+    intentional temporary mismatch in the task file.
 
 4. **Design**  
    Document architecture, data flow, class/component interactions, and
@@ -191,11 +177,9 @@ Rules in this section complement, and do not override,
    per class pair.
 
 5. **Iterative discovery**  
-   After drafting **Design** and **Scenario** when needed, iterate
-   across **Research**, **Scenario** (if used), and **Design** until
-   decisions are supported, naming is aligned, and behavior is testable.
-   Update these sections when new findings appear. No implementation
-   starts during this loop.
+  Iterate across **Research**, **Scenario** (if used), and **Design**
+  until decisions are supported, naming is aligned, and behavior is
+  testable. No implementation starts during this loop.
 
 6. **Implementation**  
    Implementation is complete only when both design and test
