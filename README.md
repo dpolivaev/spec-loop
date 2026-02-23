@@ -56,9 +56,15 @@ Apply the process to your repository.
   ask the model to create and update task files there and follow the workflow
   defined by the Constitution.
 
+### Claude setup note
+
+If you use Claude, save your project instructions as `CLAUDE.md`.
+You can use the content of `AGENTS.md` as the preamble and then add any
+extra project-specific guidance you need.
+
 ## Documentation
 
-1. Read the Constitution.
+1. Check the Constitution briefly.
 
    * **[CONSTITUTION.md](CONSTITUTION.md)** defines the normative rules: task
      files, research/design discipline, approval gates, traceability
@@ -71,7 +77,7 @@ Apply the process to your repository.
      specifications evolve step by step, and how implementation and tests
      follow approved design.
 
-3. Read **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**.
+3. Check **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**.
    It explains how task files and the Constitution map to team development practice: boundaries,
    responsibility, commit linking, and status discipline.
 
@@ -80,6 +86,12 @@ Apply the process to your repository.
    * **[Spec Loop Tutorial](docs/tutorial.md)** walks through a complete
      end-to-end example with staged planning, approvals, implementation,
      and testing.
+
+Recommended quick-check order:
+- `README.md`
+- `CONSTITUTION.md`
+- `docs/review-responsibility-and-traceability.md`
+- `docs/tutorial.md`
 
 ## Diagrams and PlantUML
 
