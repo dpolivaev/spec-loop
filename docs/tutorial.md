@@ -12,38 +12,6 @@ This tutorial is intentionally compact and execution-focused.
   use `AGENTS.md` content as the preamble and add any other guidance
   needed for your project.
 
-## Project Brief
-
-Use this brief in Step 1:
-
-```text
-We are building a small website with two parts:
-1) a museum overview page based on Art Institute of Chicago data,
-2) a game called Progressive Timeline.
-
-Data source attribution:
-- Art Institute of Chicago (AIC): https://www.artic.edu/
-- This project is an educational exercise and should clearly attribute
-  AIC as the source of museum content and artwork metadata.
-
-In Progressive Timeline, the player must order artworks by year
-from earliest to latest.
-
-Level progression:
-- Level 1: 2 artworks
-- Level 2: 3 artworks
-- Level 3: 4 artworks
-- each next level adds one artwork
-
-Data rule:
-- use only artworks with a clearly extractable year
-- exclude artworks with ambiguous years
-
-The game includes a leaderboard sorted by:
-1) reached level (desc)
-2) total completion time (asc) for ties
-```
-
 ## Step 0: Setup (manual only, no LLM message)
 
 Do this yourself before sending any message to the LLM:
@@ -57,6 +25,9 @@ Do this yourself before sending any message to the LLM:
    - Copy: `CONSTITUTION.md`, `AGENTS.md`,
      `docs/review-responsibility-and-traceability.md`, and (if you use
      GitHub Copilot) `.github/copilot-instructions.md`.
+   - These governance files are shared guardrails for both sides. The LLM is
+     expected to follow the Constitution by default; you do not need to
+     re-explain it in every prompt.
    - In the copied instruction file(s), replace `<TASK_DIR>` with a
      real path such as `tasks`.
    - If you use Claude Code, you can save `AGENTS.md` content as
@@ -86,11 +57,17 @@ Expected layout:
   data-aggregator/
 ```
 
-5. Configure PlantUML preview in your editor using:
+5. Optional: enable browser automation tooling for browser checks
+   (for example Playwright MCP).
+   Use it when needed so the LLM can verify:
+   - `site/index.html` rendering and basic page behavior,
+   - game page flow and interactions during gameplay checks.
+
+6. Configure PlantUML preview in your editor using:
    - `docs/vscode-markdown-plantuml-preview.md`, or
    - `docs/jetbrains-markdown-plantuml-preview.md`.
 
-6. Verify PlantUML rendering with this installation check snippet:
+7. Verify PlantUML rendering with this installation check snippet:
 
 This section is written to be unambiguous in all modes:
 - With PlantUML rendering enabled, you should see a diagram in the
@@ -126,6 +103,54 @@ LLM --> User: Reports execution in chat
 @enduml
 ```
 
+This tutorial uses public data from the Art Institute of Chicago (AIC).
+This project is not affiliated with or endorsed by AIC.
+
+## Project Brief
+
+Use this brief in Step 1:
+
+```text
+We are building a small website with two parts:
+1) a museum overview page based on Art Institute of Chicago data,
+2) a game called Progressive Timeline.
+
+Data source attribution:
+- Art Institute of Chicago (AIC): https://www.artic.edu/
+Attribution must be preserved in generated outputs.
+- This project is an educational exercise and should clearly attribute
+  AIC as the source of museum content and artwork metadata.
+
+In Progressive Timeline, the player must order artworks by year
+from earliest to latest.
+
+Level progression:
+- Level 1: 2 artworks
+- Level 2: 3 artworks
+- Level 3: 4 artworks
+- each next level adds one artwork
+
+Data rule:
+- use only artworks with a clearly extractable year
+- exclude artworks with ambiguous years
+
+The game includes a leaderboard sorted by:
+1) reached level (desc)
+2) total completion time (asc) for ties
+```
+
+Each step uses the same structure:
+
+- ‘You send’ is the exact message to send to the LLM.
+- ‘You see’ is what you should expect to observe in results/artifacts.
+- ‘After completion’ describes move-to-done/commit expectations.
+- ‘You learned (this step)’ is the takeaway after the step is done.
+
+‘You see’ describes the expected outcome and typical artifacts for each
+step. If the LLM deviates, decide whether the deviation is acceptable.
+If it matters to you, ask the LLM to adjust and re-verify until the
+step matches what you consider important.
+
 ## Step 1: API Recon (`docs/api-cheat-sheet.md`)
 
 ### You send
@@ -142,8 +167,8 @@ a concise map of routes, handlers, and models, a list of endpoints with
 HTTP methods, key fields needed for the museum page and game including
 year extraction and image access, and image URL retrieval rules. Run
 real HTTP checks with curl or equivalent and report verification in
-chat; default to public AIC API unless you explicitly use a local
-instance with base URL and startup command. Also add a practical
+chat; use the public AIC API (do not run a local instance). The
+data-aggregator checkout is for reverse engineering only. Also add a practical
 .gitignore for artifacts that already exist in this project (for
 example IDE files, local caches, logs, and local env files). Do not ask
 for explicit coding approval before writing the cheat sheet, this is a
@@ -152,12 +177,13 @@ documentation-only task.
 
 ### You see
 
-- AI output in chat does not ask for explicit implementation approval
-  before writing the cheat sheet.
-- AI output in chat includes real API verification evidence.
-- `docs/api-cheat-sheet.md` is created with required sections.
-- `.gitignore` is added or updated for real local artifacts in this
-  project.
+- Chat: may or may not ask for implementation approval before writing the
+  cheat sheet (doc-only step).
+- `docs/api-cheat-sheet.md`: states that verification used the public AIC
+  API.
+- `docs/api-cheat-sheet.md`: includes verification evidence (commands +
+  observed results).
+- `.gitignore`: added/updated for real local artifacts in this project.
 
 ### After completion (move to done / commit)
 
@@ -165,6 +191,11 @@ documentation-only task.
   - Ask the LLM to move the task to `done` first, then commit. The LLM
     should automatically add the numerical prefix to the task moved into
     done.
+
+### You learned (this step)
+
+- You can finish documentation/research work and commit it cleanly
+  before starting implementation steps.
 
 For all implementation steps below (Steps 2-5): if the LLM starts
 implementation before planning and explicit approval boundaries, tell it
@@ -188,23 +219,29 @@ serve command in chat.
 
 ### You see (plan)
 
-- AI output in chat reports that the task file was created.
-- AI output in chat asks for explicit implementation approval.
-- In the task file, verify the expected sections (Scope, Motivation,
-  Research, Design, and Test specification; Scenario when applicable).
+- Chat: reports that a task file was created and asks for explicit
+  implementation approval.
+- Task file: contains Scope, Motivation, Research, Design, and Test
+  specification (and other required sections, for example Scenario when applicable).
 
 Approve only after the task definition looks correct.
 
 ### You see (after implementation is completed)
 
-- AI output in chat reports serve/open verification command and result.
-- `site/index.html` exists and shows exactly 20 artworks with required
-  fields.
+- Chat: reports the exact local serve/open verification command and the
+  result.
+- `site/index.html`: exists and shows exactly 20 artworks with title,
+  artist, year, department, and image.
 
 ### After completion (move to done / commit)
 
 - After you accept this work item as done: move the task to `done`, then
   commit.
+
+### You learned (this step)
+
+- Implementation starts only after explicit approval and is verified with
+  concrete evidence.
 
 ## Step 3: ADR for Game Stack Selection
 
@@ -221,14 +258,20 @@ persistence as out of scope for now and deferred to Step 5.
 
 ### You see
 
-- AI output in chat includes criteria discussion before final ADR text.
-- AI output in chat shows option comparison and final rationale.
-- ADR file exists in `architecture-decisions/`.
+- Chat: discusses decision criteria before presenting the final ADR.
+- ADR: records the chosen stack with rationale.
+- ADR: includes test tooling choice and the exact test command, and marks
+  persistence as out of scope and deferred to Step 5.
 
 ### After completion (commit)
 
 - After you accept the ADR as done: ask the LLM to commit the ADR change.
   This step is ADR-only and does not involve moving anything to `done`.
+
+### You learned (this step)
+
+- ADRs capture long-lived decisions (including the exact test command)
+  without requiring a task file.
 
 ## Step 4: Core Gameplay (Subtasks)
 
@@ -247,30 +290,27 @@ subtask should include testing scope.
 
 ### You see (plan)
 
-- AI output in chat reports that the task file was created with
-  subtask decomposition.
-- AI output in chat asks for explicit implementation approval before
-  implementation starts.
-- In the task file, verify that the task and subtasks include
-  the expected sections (Scope, Motivation, Research, Design, and Test
-  specification; Scenario when applicable).
+- Chat: reports that a task file was created with a subtask breakdown and
+  asks for explicit implementation approval.
+- Task file: subtasks include testing scope.
 
 Approve only after the task definition looks correct.
 
 ### You see (during subtask implementation)
 
-- AI output in chat asks for explicit approval before implementing each
+- Chat: asks for explicit approval before implementing each subtask and
+  stops after each subtask.
+- Tests: separate verification evidence is provided per implemented
   subtask.
-- AI output in chat implements only one subtask at a time.
-- AI output in chat provides separate test/verification evidence per
-  subtask.
-- After each subtask, AI output in chat stops and waits for your next
-  instruction.
-- Commit behavior for this step: after you accept each implemented
-  subtask as done, commit; move the overall task to `done` only after the
-  last subtask is done.
-- Game is reachable from `site/index.html` and playable (after the
-  relevant subtask completes).
+- Git: commits happen per accepted subtask; the overall task is moved to
+  `done` only after the last subtask is done.
+- Code: game is reachable from `site/index.html` and playable (after
+  relevant subtasks complete).
+
+### You learned (this step)
+
+- Subtasks keep implementation reviewable: approve, implement, verify,
+  commit—one subtask at a time.
 
 ## Step 5: Leaderboard (In-Memory, Then Persistence)
 
@@ -290,22 +330,19 @@ testing scope for every implementation subtask.
 
 ### You see (plan)
 
-- AI output in chat reports that the task file was created with two
-  explicit phases: in-memory first, then persistence.
-- AI output in chat asks for explicit implementation approval.
-- In the task file, verify that task/subtasks include the expected
-  sections (Scope, Motivation, Research, Design, and Test
-  specification; Scenario when applicable).
+- Chat: reports that a task file was created with two phases and asks for
+  explicit implementation approval.
+- Task file: two phases are explicit (in-memory first, then persistence)
+  and include a subtask breakdown.
 
 Approve only after the task definition looks correct.
 
 ### You see (after implementation is completed)
 
-- AI output in chat confirms the two-phase order and shows verification
-  evidence.
-- AI output in chat documents restart behavior, storage location, and
-  reset command.
-- Leaderboard behavior matches required sorting and tests pass.
+- Chat: confirms the two-phase order and provides verification evidence.
+- Docs: storage location and reset procedure are documented with an exact
+  command.
+- Behavior: leaderboard sorting matches the required rules.
 
 ### After completion (move to done / commit)
 
@@ -313,41 +350,52 @@ Approve only after the task definition looks correct.
 - After you accept Phase 2 (persistence) as done: move the task to
   `done`, then commit.
 
+### You learned (this step)
+
+- Phased delivery reduces risk: get a working baseline first, then add
+  persistence with an ADR-backed decision.
+
 ## You learned
 
 Each step follows the Constitution interaction model:
 
-- In chat, you ask the LLM to **create a task**.
-- First, ask the LLM to write the task only (Scope + Research + Design
-  + Test Spec).
-- The LLM should stop after planning and ask for implementation
-  approval.
-- You give feedback in chat and explicitly approve or reject
-  implementation.
-- Only after explicit approval should the LLM implement
-  (code/docs/tests).
+- In chat, you ask the LLM to create a task or ADR.
+- First, the LLM writes the task/ADR content (Scope + Research + Design
+  + Test Spec where applicable) and asks for explicit implementation
+  approval before any executable changes.
+- You approve or reject implementation explicitly.
+- Only after explicit approval should the LLM implement (code/docs/tests).
 - Tasks should include automated tests for their deliverables, except
   research-only tasks.
-- In large implementation steps, explicitly ask the LLM to decompose
-  work into smaller implementation subtasks before approval.
-- Every implementation subtask must include both implementation and a
-  testing block.
+- In large implementation steps, ask the LLM to decompose work into
+  smaller implementation subtasks before approval.
+- Every implementation subtask includes both implementation and testing.
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
 - After you explicitly accept a work item as `done`, require a commit
   before moving on. When a step is implemented via subtasks: move the
   overall task to `done` only after the last subtask is done.
-- You give feedback in chat.
 
-Research is often not a separate task. In many steps, research is done
-as part of task or subtask planning, and its results are captured in the
-task/subtask sections to build task context.
+Learning outcomes:
 
-By default, this tutorial uses task files for planning work. If you
-explicitly choose to run selected planning work outside task files, that
-is allowed. Only the user can change or relax Constitution workflow
-rules; the LLM may propose changes but cannot apply them on its own.
+- Keep task and subtask scopes small and reviewable.
+- Use ADRs for architectural decisions with clear rationale.
+- Verify behavior using concrete evidence, not assumptions.
 
-This is expected default behavior. You usually do not need to remind the
-LLM about it. If the LLM starts implementation before explicit approval,
-flag it and ask it to return to the correct phase boundary.
+How to think while running this tutorial:
+
+- Keep the process meaningful, not bureaucratic.
+- Low-risk, non-behavioral housekeeping may be done and committed with a
+  step when appropriate (for example: `.gitignore`, documentation typo
+  fixes).
+- Chat is for coordination and approvals; task files and ADRs are the
+  durable specification artifacts.
+- Only the user may relax or override Constitution workflow rules.
+
+Common anti-patterns:
+
+- Implementation starts before explicit approval.
+- Unrelated changes are mixed into one subtask.
+- Implementation changes are made without verification evidence.
+- A task or subtask is moved to `done` without explicit user
+  confirmation.
