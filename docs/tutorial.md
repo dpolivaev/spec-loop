@@ -7,9 +7,6 @@ This tutorial is intentionally compact and execution-focused.
   `docs/review-responsibility-and-traceability.md`.
 - Then run this tutorial.
 - For every step, validate progress from AI output in chat.
-- After you are satisfied with a step, ask LLM to move task to done and
-  to commit. LLM should automatically add the numerical prefix to the
-  tasks moved into done.
 - Send all LLM messages from your project root directory.
 - If you use Claude, save project instructions as `CLAUDE.md`. You can
   use `AGENTS.md` content as the preamble and add any other guidance
@@ -55,12 +52,16 @@ Do this yourself before sending any message to the LLM:
    - Before this tutorial, quickly check `CONSTITUTION.md` and
      `docs/review-responsibility-and-traceability.md`.
 2. Create your own project repository (this repo is tutorial source only).
-3. Copy governance files to your project and set a concrete task directory path:
-   - In your project `AGENTS.md`, replace `<TASK_DIR>` with a real
-     path such as `<PROJECT_ROOT>/tasks`.
-   - If you use Claude, store these instructions as `CLAUDE.md`; start
-     from `AGENTS.md` content as preamble and add extra project guidance
-     as needed.
+3. Copy governance files into your project and set a concrete task
+   directory path:
+   - Copy: `CONSTITUTION.md`, `AGENTS.md`,
+     `docs/review-responsibility-and-traceability.md`, and (if you use
+     GitHub Copilot) `.github/copilot-instructions.md`.
+   - In the copied instruction file(s), replace `<TASK_DIR>` with a
+     real path such as `tasks`.
+   - If you use Claude Code, you can save `AGENTS.md` content as
+     `CLAUDE.md` (or keep both) and add extra project guidance as
+     needed.
 4. Check out `data-aggregator` as a sibling repository (parallel
    directory), not inside your project:
 
@@ -133,7 +134,7 @@ Replace placeholder values in the message block below before sending it.
 
 ```text
 Please create a research task for AIC API recon for my project at
-the current repository root, with tasks in `tasks` and the local
+the current repository root, with tasks in `<TASK_DIR>` and the local
 data-aggregator checkout at <DATA_AGGREGATOR_ROOT>. Use the project
 brief from this tutorial and write the result to
 `docs/api-cheat-sheet.md`. The cheat sheet should include
@@ -157,6 +158,13 @@ documentation-only task.
 - `docs/api-cheat-sheet.md` is created with required sections.
 - `.gitignore` is added or updated for real local artifacts in this
   project.
+
+### After completion (move to done / commit)
+
+- When you accept this Step 1 work item as done:
+  - Ask the LLM to move the task to `done` first, then commit. The LLM
+    should automatically add the numerical prefix to the task moved into
+    done.
 
 For all implementation steps below (Steps 2-5): if the LLM starts
 implementation before planning and explicit approval boundaries, tell it
@@ -193,13 +201,18 @@ Approve only after the task definition looks correct.
 - `site/index.html` exists and shows exactly 20 artworks with required
   fields.
 
-## Step 3: ADR for Stack Selection
+### After completion (move to done / commit)
+
+- After you accept this work item as done: move the task to `done`, then
+  commit.
+
+## Step 3: ADR for Game Stack Selection
 
 ### You send
 
 ```text
-Please create one ADR for MVP stack selection in
-`architecture-decisions/`. First discuss the decision
+Please create one ADR for MVP stack selection for the game
+implementation in `architecture-decisions/`. First discuss the
 criteria with me, then compare 3-5 realistic MVP stack options with
 pros and cons, and record one final choice with rationale. In the same
 ADR, define practical test tooling and the exact test command, mark
@@ -212,12 +225,17 @@ persistence as out of scope for now and deferred to Step 5.
 - AI output in chat shows option comparison and final rationale.
 - ADR file exists in `architecture-decisions/`.
 
+### After completion (commit)
+
+- After you accept the ADR as done: ask the LLM to commit the ADR change.
+  This step is ADR-only and does not involve moving anything to `done`.
+
 ## Step 4: Core Gameplay (Subtasks)
 
 ### You send
 
 ```text
-Please create one parent task for core gameplay in this repository and
+Please create one task for core gameplay in this repository and
 propose implementation subtasks. The scope must include a Level 1
 playable flow with 2 artworks, progressive levels where each next level
 adds one artwork, and strict year eligibility that accepts only
@@ -229,30 +247,38 @@ subtask should include testing scope.
 
 ### You see (plan)
 
-- AI output in chat reports that the parent task file was created with
+- AI output in chat reports that the task file was created with
   subtask decomposition.
 - AI output in chat asks for explicit implementation approval before
   implementation starts.
-- In the task file, verify that the parent task and subtasks include
+- In the task file, verify that the task and subtasks include
   the expected sections (Scope, Motivation, Research, Design, and Test
   specification; Scenario when applicable).
 
-Approve only after the task and subtask definitions look correct.
+Approve only after the task definition looks correct.
 
-### You see (after implementation is completed)
+### You see (during subtask implementation)
 
-- AI output in chat requests approval separately per subtask before
-  coding each one.
-- AI output in chat provides separate test evidence per subtask.
-- Game is reachable from `site/index.html` and playable.
+- AI output in chat asks for explicit approval before implementing each
+  subtask.
+- AI output in chat implements only one subtask at a time.
+- AI output in chat provides separate test/verification evidence per
+  subtask.
+- After each subtask, AI output in chat stops and waits for your next
+  instruction.
+- Commit behavior for this step: after you accept each implemented
+  subtask as done, commit; move the overall task to `done` only after the
+  last subtask is done.
+- Game is reachable from `site/index.html` and playable (after the
+  relevant subtask completes).
 
 ## Step 5: Leaderboard (In-Memory, Then Persistence)
 
 ### You send
 
 ```text
-Please create one parent task for the leaderboard in this repository with
-two phases. The sorting must be reached level descending and total
+Please create one task for the leaderboard in this repository with
+two phases and include a proposed subtask breakdown. The sorting must be reached level descending and total
 completion time ascending for ties. Build and test an in-memory
 leaderboard first, then create an ADR for persistence strategy, and then
 build and test the selected persistence option. Persistence acceptance
@@ -281,6 +307,12 @@ Approve only after the task definition looks correct.
   reset command.
 - Leaderboard behavior matches required sorting and tests pass.
 
+### After completion (move to done / commit)
+
+- After you accept Phase 1 (in-memory leaderboard) as done: commit.
+- After you accept Phase 2 (persistence) as done: move the task to
+  `done`, then commit.
+
 ## You learned
 
 Each step follows the Constitution interaction model:
@@ -302,8 +334,9 @@ Each step follows the Constitution interaction model:
   testing block.
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
-- After a user explicitly accepts a subtask as `done`, require a git
-  commit for that subtask before moving on.
+- After you explicitly accept a work item as `done`, require a commit
+  before moving on. When a step is implemented via subtasks: move the
+  overall task to `done` only after the last subtask is done.
 - You give feedback in chat.
 
 Research is often not a separate task. In many steps, research is done
