@@ -36,11 +36,29 @@ If you use a self-hosted server, set `markdown.plantuml.server` to your server b
 
 Use a fenced code block with language `plantuml`, including `@startuml` and `@enduml`:
 
+This section intentionally starts with a nested code block.
+The outer four-backtick fence is only for showing literal Markdown.
+Copy only the inner fenced `plantuml` block.
+
+````
 ```plantuml
 @startuml
 Alice -> Bob: hello
 @enduml
 ```
+````
+
+Render check (plain plantuml block):
+
+```plantuml
+@startuml
+Alice -> Bob: hello
+@enduml
+```
+
+If PlantUML rendering is enabled, the additional block above should
+render as a diagram in Markdown Preview. If rendering is not enabled, it
+will appear as a code block.
 
 ### 4) Open Markdown Preview (built-in)
 
@@ -131,11 +149,29 @@ Examples:
 
 Same Markdown content as Option A:
 
+This section intentionally starts with a nested code block.
+The outer four-backtick fence is only for showing literal Markdown.
+Copy only the inner fenced `plantuml` block.
+
+````
 ```plantuml
 @startuml
 Alice -> Bob: hello
 @enduml
 ```
+````
+
+Render check (plain plantuml block):
+
+```plantuml
+@startuml
+Alice -> Bob: hello
+@enduml
+```
+
+If PlantUML rendering is enabled, the additional block above should
+render as a diagram in preview. If rendering is not enabled, it will
+appear as a code block.
 
 ### 5) Open the correct Markdown preview (provided by the extension)
 

@@ -88,7 +88,31 @@ Expected layout:
 5. Configure PlantUML preview in your editor using:
    - `docs/vscode-markdown-plantuml-preview.md`, or
    - `docs/jetbrains-markdown-plantuml-preview.md`.
+
 6. Verify PlantUML rendering with this installation check snippet:
+
+This section is written to be unambiguous in all modes:
+- With PlantUML rendering enabled, you should see a diagram in the
+  second example.
+- Without PlantUML rendering, both examples may appear as code blocks.
+- In raw Markdown view, the first example shows literal Markdown
+  syntax with outer fences; copy only the inner fenced `plantuml`
+  block from that first example.
+
+````
+```plantuml
+@startuml
+actor User
+participant LLM
+User -> LLM: Send planning request
+LLM --> User: Asks for implementation approval
+User -> LLM: Approves implementation
+LLM --> User: Reports execution in chat
+@enduml
+```
+````
+
+as
 
 ```plantuml
 @startuml

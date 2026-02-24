@@ -40,11 +40,29 @@ JetBrains Markdown docs (including diagrams via extensions): [https://www.jetbra
 
 In any `.md` file:
 
+This section intentionally starts with a nested code block.
+The outer four-backtick fence is only for showing literal Markdown.
+Copy only the inner fenced `plantuml` block.
+
+````
 ```plantuml
 @startuml
 Alice -> Bob: hello
 @enduml
 ```
+````
+
+Render check (plain plantuml block):
+
+```plantuml
+@startuml
+Alice -> Bob: hello
+@enduml
+```
+
+If PlantUML rendering is enabled, the additional block above should
+render as a diagram in Markdown Preview. If rendering is not enabled, it
+will appear as a code block.
 
 ### 4) Open the built-in Markdown Preview
 
