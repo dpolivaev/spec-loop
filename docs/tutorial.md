@@ -117,7 +117,7 @@ We are building a small website with two parts:
 
 Data source attribution:
 - Art Institute of Chicago (AIC): https://www.artic.edu/
-Attribution must be preserved in generated outputs.
+- Attribution must be preserved in generated outputs.
 - This project is an educational exercise and should clearly attribute
   AIC as the source of museum content and artwork metadata.
 
@@ -177,8 +177,8 @@ documentation-only task.
 
 ### You see
 
-- Chat: may or may not ask for implementation approval before writing the
-  cheat sheet (doc-only step).
+- Chat: may ask for implementation approval before writing the cheat
+  sheet; either is acceptable for this doc-only step.
 - `docs/api-cheat-sheet.md`: states that verification used the public AIC
   API.
 - `docs/api-cheat-sheet.md`: includes verification evidence (commands +
@@ -224,7 +224,7 @@ serve command in chat.
 - Task file: contains Scope, Motivation, Research, Design, and Test
   specification (and other required sections, for example Scenario when applicable).
 
-Approve only after the task definition looks correct.
+Approve only after the task definition and subtask breakdown look correct.
 
 ### You see (after implementation is completed)
 
@@ -364,7 +364,8 @@ Each step follows the Constitution interaction model:
   + Test Spec where applicable) and asks for explicit implementation
   approval before any executable changes.
 - You approve or reject implementation explicitly.
-- Only after explicit approval should the LLM implement (code/docs/tests).
+- Only after explicit approval should the LLM make executable changes
+  (code/tests/config/runtime assets).
 - Tasks should include automated tests for their deliverables, except
   research-only tasks.
 - In large implementation steps, ask the LLM to decompose work into
