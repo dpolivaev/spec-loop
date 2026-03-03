@@ -1,5 +1,11 @@
 # Spec Loop — Design-First AI-Assisted Development
 
+<p align="center">
+  <a href="docs/infographics.jpg">
+    <img src="docs/infographics.jpg" alt="Spec-Loop infographic" width="80%" style="border: 1px solid rgba(127, 127, 127, 0.35); border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
+  </a>
+</p>
+
 There are two common ways people use AI for coding.
 
 **Vibecoding:** you describe intent, the model fills in the gaps, and you get a
