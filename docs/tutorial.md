@@ -12,9 +12,10 @@ This tutorial is intentionally compact and execution-focused.
   use `AGENTS.md` content as the preamble and add any other guidance
   needed for your project.
 
-## Step 0: Setup (manual only, no LLM message)
+## Step 0: Setup (manual) + Constitution sanity ping
 
-Do this yourself before sending any message to the LLM:
+Do this yourself before sending your first substantive request to the
+LLM:
 
 1. Read `README.md` first, then this tutorial.
    - Before this tutorial, quickly check `CONSTITUTION.md` and
@@ -109,9 +110,20 @@ This project is not affiliated with or endorsed by AIC.
 8. Constitution sanity check:
    - Ensure `CONSTITUTION.md` is present at your project repo root and
      your LLM tool loads it (via your copied `AGENTS.md` / `CLAUDE.md`).
+   - Send this now as your first LLM message (before any other request):
+
+```text
+Before we start: tell me which instruction/governance files you have
+already read for this repository (filenames if known). Then restate the
+PLAN -> IMPLEMENTATION approval gate in one sentence.
+
+Do not create or modify any files yet.
+```
+
    - On the first LLM response, you should see a leading 🫡 without
-     asking for it. If you do not see it, stop and fix your instruction
-     loading before proceeding.
+     asking for it. If you do not see it (or the tool reports
+     `CONSTITUTION.md` is unavailable/unreadable), stop and fix file
+     access/instruction loading before proceeding.
 
 Each step uses the same structure:
 
@@ -225,6 +237,8 @@ serve command in chat.
 
 - Chat: reports that a task file was created and asks for explicit
   implementation approval.
+- Governance: `AGENTS.md` / `CLAUDE.md` updated to record the confirmed
+  sibling `data-aggregator` path.
 - Task file:
   - Contains Scope, Motivation, Research, Design, and Test specification
     (and other required sections, for example Scenario when applicable).
