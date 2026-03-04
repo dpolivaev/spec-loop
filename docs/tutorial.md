@@ -413,8 +413,14 @@ Each step follows the Constitution interaction model:
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
 - After you explicitly accept a work item as `done`, ask the LLM to
-  commit before moving on. When a step is implemented via subtasks: move the
-  overall task to `done` only after the last subtask is done.
+  commit before moving on.
+- Depending on your tool, you may be asked to confirm the commit
+  command (review the commit message there), or the commit may happen
+  immediately (review the commit message right after). If it does not
+  match the work item's purpose and the full change set, ask the LLM to
+  improve the message and amend the commit.
+- When a step is implemented via subtasks: move the overall task to
+  `done` only after the last subtask is done.
 
 Learning outcomes:
 
