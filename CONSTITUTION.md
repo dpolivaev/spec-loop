@@ -68,7 +68,10 @@ Phases:
 In PLAN, edits are allowed only for non-executable artifacts used for
 research, design, planning, or governance, including task files, ADRs,
 documentation, diagrams, and instruction files (for example,
-AGENTS.md and CONSTITUTION.md).
+AGENTS.md and CONSTITUTION.md). Command execution is allowed for
+research/verification, but it must not change repository contents
+outside those non-executable artifacts. If it would, treat it as
+IMPLEMENTATION and request explicit User approval first.
 
 Any change that affects executable behavior, tests, build/configuration,
 dependencies, packaging, or runtime assets is IMPLEMENTATION and
