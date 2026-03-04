@@ -214,9 +214,9 @@ Rules in this section complement, and do not override,
    task-folder status and subtask status when implementation and local
    verification are complete.
    Before writing the commit message, review the full change set being
-   committed and its purpose. The commit message must describe the
-   purpose and all changes in the commit, not only the most recent
-   change.
+   committed and its purpose. The commit message must accurately
+   describe the purpose, unless the User explicitly requests otherwise.
+   Do not write a commit message that is misleading about what changed.
    Then proceed with the commit.
    For task-related commits, start the message with the **Primary
    Identifier**:
