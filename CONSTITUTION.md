@@ -212,7 +212,12 @@ Rules in this section complement, and do not override,
    only after explicit user confirmation, except that the LLM should
    apply `in-progress` -> `review` transitions directly for both
    task-folder status and subtask status when implementation and local
-   verification are complete. Then proceed with the commit.
+   verification are complete.
+   Before writing the commit message, review the full change set being
+   committed and its purpose. The commit message must describe the
+   purpose and all changes in the commit, not only the most recent
+   change.
+   Then proceed with the commit.
    For task-related commits, start the message with the **Primary
    Identifier**:
    - Ticket ID if present (for example `TICKET-123: ...`).
