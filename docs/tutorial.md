@@ -417,8 +417,8 @@ Each step follows the Constitution interaction model:
 - Depending on your tool, you may be asked to confirm the commit
   command (review the commit message there), or the commit may happen
   immediately (review the commit message right after). If it does not
-  match the work item's purpose and the full change set, ask the LLM to
-  improve the message and amend the commit.
+  match the work item's purpose, or it is misleading about what
+  changed, ask the LLM to improve the message and amend the commit.
 - When a step is implemented via subtasks: move the overall task to
   `done` only after the last subtask is done.
 
