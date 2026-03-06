@@ -341,40 +341,61 @@ Record one final choice with rationale. In the same ADR:
 Starting point: reuse relevant AIC API research already recorded in
 earlier task files in this repo.
 
-Please create one task for core gameplay in this repository and
-propose implementation subtasks. The scope must include a Level 1
-playable flow with 2 artworks, progressive levels where each next level
-adds one artwork, and strict year eligibility that accepts only
-standalone 4-digit years like 1879 and rejects ranges, circa/ca.,
-decades, null or unknown values, and mixed text values. Ensure the game
-page is reachable from a link on site/index.html. Each implementation
-subtask should include testing scope.
+Please create one task for core gameplay in this repository. The scope
+must include a Level 1 playable flow with 2 artworks, progressive
+levels where each next level adds one artwork, and strict year
+eligibility that accepts only standalone 4-digit years like 1879 and
+rejects ranges, circa/ca., decades, null or unknown values, and mixed
+text values. Ensure the game page is reachable from a link on
+site/index.html.
+
+For the initial task creation, do not fully design every future
+subtask. Create only:
+- the overall task header
+- an ordered implementation subtask breakdown
+- Scope and Motivation for each subtask
+
+Reuse earlier task-file research where relevant, but keep future
+subtasks lightweight. We will flesh out only the current subtask before
+implementation.
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created with a subtask breakdown and
-  asks for explicit implementation approval.
+- Chat: reports that a task file was created with a task header and an
+  ordered subtask breakdown, then stops for review.
 - Task file:
-  - Subtasks include testing scope.
-  - Research references earlier task file(s) as a starting point.
+  - Overall Scope and Motivation are clear.
+  - Each subtask has Scope and Motivation, but future subtasks are not
+    fully designed yet.
+  - Relevant earlier task-file research is referenced where needed.
 
 ### Subtask-by-subtask workflow
 
-Review the task header and the task breakdown first. If the breakdown
-needs adjustment, ask the LLM to revise it before implementation
-starts. If it looks good, ask the LLM to implement only the first
-subtask. From there, continue subtask by subtask: after each subtask,
-either ask for changes or accept it and ask the LLM to move it to
-`done`. Before asking the LLM to commit an accepted subtask, ask it to
-check whether `.gitignore` needs an update for artifacts introduced in
-that subtask and to fix it if needed. Then ask it to create a separate
-commit before proceeding to the next one.
+- Review the task header and the task breakdown first.
+- If the breakdown needs adjustment, ask the LLM to revise it before any
+  implementation starts.
+- If it looks good, ask the LLM to flesh out only the first subtask.
+- Review that current-subtask detail. If it looks good, ask the LLM to
+  implement only that subtask.
+- After each implemented subtask, either ask for changes or accept it
+  and ask the LLM to move it to `done`.
+- Before asking the LLM to commit an accepted subtask, ask it to check
+  whether `.gitignore` needs an update for artifacts introduced in that
+  subtask and to fix it if needed.
+- Then ask it to create a separate commit and only after that ask it to
+  flesh out the next subtask.
+
+### You see (current subtask design)
+
+- Chat: fleshes out only the current subtask and asks for explicit
+  implementation approval.
+- Task file: the current subtask is fleshed out; future subtasks remain
+  lightweight.
 
 ### You see (during subtask implementation)
 
-- Chat: asks for explicit approval before implementing each subtask and
-  stops after each subtask.
+- Chat: implements only the approved current subtask and stops.
 - Tests: separate verification evidence is provided per implemented
   subtask.
 - Git: there is a separate commit per accepted subtask; the overall
@@ -384,67 +405,149 @@ commit before proceeding to the next one.
 
 ### You learned (this step)
 
-- Subtasks keep implementation reviewable: approve, implement, verify,
-  ask the LLM to commit—one subtask at a time.
+- Keep future subtasks lightweight until you reach them: review the
+  current subtask in detail, implement it, verify it, commit it, then
+  move on.
 
 ## Step 5: Leaderboard (In-Memory, Then Persistence)
 
 ### You send
 
 ```text
-Please create one task for the leaderboard in this repository with
-two phases and include a proposed subtask breakdown. The sorting must be reached level descending and total
-completion time ascending for ties. Build and test an in-memory
-leaderboard first, then create an ADR for persistence strategy, and then
-build and test the selected persistence option. Persistence acceptance
-criteria are that data survives restart, the storage location is
-documented, and the reset procedure for local development and tests is
-documented with an exact command. Propose small subtasks and include
-testing scope for every implementation subtask.
+Please create one task for the leaderboard in this repository. Break
+the implementation work down in this order:
+1. in-memory leaderboard implementation
+2. persistence implementation
+
+The sorting must be reached level descending and total completion time
+ascending for ties. Persistence acceptance criteria are that data
+survives restart, the storage location is documented, and the reset
+procedure for local development and tests is documented with an exact
+command.
+
+For the initial task creation, do not fully design every future
+subtask. Create only:
+- the overall task header
+- an ordered breakdown of the implementation subtasks above
+- Scope and Motivation for each subtask
+
+Keep future implementation subtasks lightweight. We will flesh out only
+the current subtask before implementation.
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created with two phases and asks for
-  explicit implementation approval.
-- Task file: two phases are explicit (in-memory first, then persistence)
-  and include a subtask breakdown.
+- Task file:
+  - Exists with ordered implementation subtasks.
+  - Requires a separate persistence ADR before persistence
+    implementation is fleshed out.
 
-Approve only after the task definition looks correct.
+### You send
 
-### You see (after implementation is completed)
+```text
+Please flesh out only the in-memory leaderboard subtask in the approved
+leaderboard task. Keep the persistence implementation subtask
+lightweight for now. Stop after updating the task file and ask for
+implementation approval.
+```
 
-- Chat: confirms the two-phase order and provides verification evidence.
+### You see (in-memory subtask design)
+
+- Task file: the in-memory leaderboard subtask is fleshed out; future
+  implementation subtasks remain lightweight.
+
+### You send
+
+```text
+Please implement only the in-memory leaderboard subtask, provide
+verification evidence, and stop after it is complete.
+```
+
+### You see (in-memory implementation)
+
+- Verification evidence is provided for the in-memory leaderboard
+  subtask.
+- Behavior: leaderboard sorting matches the required rules.
+
+### You send
+
+```text
+Please create the persistence ADR now for the approved leaderboard task.
+First discuss the decision criteria with me. The ADR must define the
+chosen persistence approach, storage location, reset procedure for local
+development and tests with an exact command, and practical verification
+commands. Do not flesh out the persistence implementation subtask yet.
+```
+
+### You see (persistence ADR)
+
+- ADR: records the chosen persistence approach, storage location
+  expectations, reset procedure expectations, and practical verification
+  commands before the persistence implementation subtask is fleshed out.
+
+### You send
+
+```text
+Using the accepted persistence ADR, please flesh out only the
+persistence implementation subtask in the approved leaderboard task.
+Stop after updating the task file and ask for implementation approval.
+```
+
+### You see (persistence subtask design)
+
+- Task file: the persistence implementation subtask is fleshed out.
+
+### You send
+
+```text
+Please implement only the persistence implementation subtask, provide
+verification evidence, and stop after it is complete.
+```
+
+### You see (persistence implementation)
+
+- Verification evidence is provided for the persistence implementation
+  subtask.
 - Docs: storage location and reset procedure are documented with an exact
   command.
-- Behavior: leaderboard sorting matches the required rules.
+- Behavior: leaderboard sorting matches the required rules and data
+  survives restart.
 
 ### After completion (move to done / commit)
 
-- After you accept Phase 1 (in-memory leaderboard) as done: ask the LLM
-  to commit.
-- After you accept Phase 2 (persistence) as done: ask the LLM to move
-  the task to `done`, then ask it to commit.
+- After you accept the in-memory leaderboard subtask as done: ask the
+  LLM to move it to `done`, check whether `.gitignore` needs an update
+  and fix it if needed, then commit.
+- After you accept the persistence ADR: ask the LLM to commit the ADR
+  change.
+- After you accept the persistence implementation subtask as done: ask
+  the LLM to move that subtask and the overall task to `done`, check
+  whether `.gitignore` needs an update and fix it if needed, then
+  commit.
 
 ### You learned (this step)
 
-- Phased delivery reduces risk: get a working baseline first, then add
-  persistence with an ADR-backed decision.
+- Ordered delivery reduces risk: get the in-memory behavior working
+  first, make the persistence decision explicitly, then implement
+  persistence.
 
 ## You learned
 
 Each step follows the Constitution interaction model:
 
 - In chat, you ask the LLM to create a task or ADR.
-- First, the LLM writes the task/ADR content (Scope + Research + Design +
-  Test Spec where applicable) and asks for explicit implementation
-  approval before any executable changes.
+- First, the LLM writes the task/ADR content needed for the current
+  review step. For larger tasks, start with the task header and an
+  ordered subtask breakdown, then flesh out Research, Scenario, Design,
+  and Test specification only for the current subtask before
+  implementation.
 - You approve or reject implementation explicitly.
 - Only after explicit approval should the LLM make executable changes
   (code/tests/config/runtime assets).
 - Tasks should include automated tests for their deliverables.
 - In large implementation steps, ask the LLM to decompose work into
-  smaller implementation subtasks before approval.
+  smaller implementation subtasks before detailed design and
+  implementation approval.
 - Every implementation subtask includes both implementation and testing.
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
