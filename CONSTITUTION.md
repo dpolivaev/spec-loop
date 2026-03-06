@@ -154,30 +154,38 @@ Rules in this section complement, and do not override,
   implementation-free.
 
     **Naming principle (canonical terms):**
-    Once Scenario exists, use Scenario terms consistently in Design,
-    tests, code symbols, and commit text. Do not keep parallel synonyms
-    for the same domain concept. If existing code uses different names,
-    align naming incrementally in the current scope and document any
-    intentional temporary mismatch in the task file.
+    Scenario is the source of domain and behavior language. When
+    behavior or terms are introduced or changed, create or update
+    Scenario first, then use those terms consistently in Design, tests,
+    code symbols, and commit text. Do not keep parallel synonyms for
+    the same domain concept.
+    If existing code uses different names, align naming incrementally in
+    the current scope and document any intentional temporary mismatch in
+    the task file.
 
 4. **Design**  
-   Document architecture, data flow, class/component interactions, and
-   test-impacting decisions in **Design**. Draft design from validated
-   **Research** findings and required behavior from **Scenario** when
-   it exists.
-   Designs may describe file scope broadly when it remains unambiguous.
+   Document architecture, data flow, interactions, and test-impacting
+   decisions in **Design**. Draft it from validated **Research** and
+   required behavior from **Scenario** when Scenario exists.
+
+   Design must make intended implementation structure reviewable.
+   Important responsibilities, interactions, and architectural
+   boundaries should appear in the diagram whenever PlantUML can
+   express them. When Scenario exists, Design must reflect Scenario
+   language in implementation-oriented abstractions and responsibility
+   boundaries.
 
    Design sections must use PlantUML diagrams
    (class/component/sequence). Do not use PlantUML notes. If mixing
-   class and non-class elements (for example `database`), add
-   `allowmixing`.
+   class and non-class elements, add `allowmixing`. For component or
+   sequence diagrams, declare elements with explicit PlantUML
+   keywords. For class diagrams, use one outer package with nested
+   inner packages and add `set separator none`. Use meaningful
+   dependency labels and at most one connector per class pair.
 
-   Formatting: keep the diagram in its own paragraph under Design
-   (blank line before code fence). Put explanatory text in a separate
-   paragraph under the diagram. For class diagrams, use one outer
-   package with nested inner packages and add `set separator none`.
-   Include meaningful dependency labels and use at most one connector
-   per class pair.
+   Formatting: keep the diagram in its own paragraph under Design, with
+   explanatory text in a separate paragraph below it only for context,
+   rationale, constraints, or clarifications PlantUML cannot express.
 
 5. **Iterative discovery**  
   Iterate across **Research**, **Scenario** (if used), and **Design**
