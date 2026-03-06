@@ -473,8 +473,7 @@ the current subtask before implementation.
 ### You send
 
 ```text
-Please create the persistence ADR now for the approved leaderboard task.
-First discuss the decision criteria with me. The ADR must define the
+Please create the persistence ADR. The ADR must define the
 chosen persistence approach, storage location, reset procedure for local
 development and tests with an exact command, and practical verification
 commands.
