@@ -181,25 +181,32 @@ the brief and clearly describe the two parts (museum overview page +
 Progressive Timeline game), the core rules, and the leaderboard sorting.
 Keep the README concise and practical.
 
+Also update `AGENTS.md` so it explicitly tells the LLM to read
+`README.md` and follow the "Project Brief" section there for project
+requirements unless I explicitly override it.
+
 This is documentation-only work, we do not need a task file for it.
 ```
 
 ### You see
 
-- Chat: response starts with 🫡.
 - [README.md](../README.md):
   - Exists and captures the project brief requirements.
   - Includes the project brief text under "Project Brief".
+- [AGENTS.md](../AGENTS.md):
+  - Explicitly points the LLM to [README.md](../README.md) as the source
+    of the project brief and requirements.
 
 ### After completion (commit)
 
 - After you accept this work item as done: ask the LLM to commit the
-  README change.
+  README and `AGENTS.md` changes.
 
 ### You learned (this step)
 
-- The LLM can create documentation and (after you accept it) commit
-  without creating a task file.
+- The LLM can create documentation, wire persistent instructions to the
+  canonical project brief, and (after you accept it) commit without
+  creating a task file.
 
 ## Step 2: Museum Overview Page (`site/index.html`) + Just-Enough API Research
 
