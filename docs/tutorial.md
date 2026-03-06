@@ -291,20 +291,37 @@ strictly.
 
 ```text
 Please create one ADR for MVP stack selection for the game
-implementation in `architecture-decisions/`. First discuss the
-criteria with me, then compare 3-5 realistic MVP stack options with
-pros and cons, and record one final choice with rationale. In the same
-ADR, define practical test tooling and the exact test command, mark
-persistence as out of scope for now.
+implementation in `architecture-decisions/`.
+
+First discuss the criteria with me. We want an MVP stack that supports a
+clean, layered design: the game rules should not be tied to the UI, the
+design should stay visible and reviewable, and most core logic should be
+testable without the browser. Persistence is out of scope for now.
+
+Then compare 3-5 realistic MVP stack options with pros and cons. Include
+at least one simpler option and at least one option that is a strong fit
+for clean or hexagonal architecture.
+
+Record one final choice with rationale. In the same ADR:
+- define the practical test tooling
+- define the exact test command(s)
+- define the browser-based tooling for gameplay and design checks
+- define the expected high-level architecture for the MVP
+- explain why the chosen stack is a good fit for clean, reviewable
+  design
+- mark persistence as out of scope and deferred to the leaderboard work
 ```
 
 ### You see
 
 - Chat: discusses decision criteria before presenting the final ADR.
 - ADR:
-  - Records the chosen stack with rationale.
-  - Includes test tooling choice and the exact test command, and marks
-    persistence as out of scope and deferred to the leaderboard work.
+  - Compares realistic MVP stack options and records the chosen one with rationale.
+  - Explains the choice in terms of clean/layered design, not only implementation speed.
+  - Includes test tooling and the exact test command(s).
+  - Includes browser-based tooling for gameplay and design checks.
+  - Defines the expected high-level architecture for the MVP.
+  - Marks persistence as out of scope and deferred to the leaderboard work.
 
 ### After completion (commit)
 
