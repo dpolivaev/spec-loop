@@ -366,7 +366,10 @@ needs adjustment, ask the LLM to revise it before implementation
 starts. If it looks good, ask the LLM to implement only the first
 subtask. From there, continue subtask by subtask: after each subtask,
 either ask for changes or accept it and ask the LLM to move it to
-`done` and create a separate commit before proceeding to the next one.
+`done`. Before asking the LLM to commit an accepted subtask, ask it to
+check whether `.gitignore` needs an update for artifacts introduced in
+that subtask and to fix it if needed. Then ask it to create a separate
+commit before proceeding to the next one.
 
 ### You see (during subtask implementation)
 
