@@ -57,8 +57,8 @@ Expected layout:
   data-aggregator/
 ```
 
-5. Optional: enable browser automation tooling for browser checks
-   (for example Playwright MCP).
+5. Recommended: enable browser automation tooling for browser checks
+   (for example [Playwright MCP](https://github.com/microsoft/playwright-mcp#getting-started)).
    Use it when needed so the LLM can verify:
    - `site/index.html` rendering and basic page behavior,
    - game page flow and interactions during gameplay checks.
