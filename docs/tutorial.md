@@ -2,14 +2,14 @@
 
 This tutorial is intentionally compact and execution-focused.
 
-- Read `README.md` first.
-- Then quickly check `CONSTITUTION.md` and
-  `docs/review-responsibility-and-traceability.md`.
+- Read [README.md](../README.md) first.
+- Then quickly check [CONSTITUTION.md](../CONSTITUTION.md) and
+  [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
 - Then run this tutorial.
 - For every step, validate progress from AI output in chat.
 - Send all LLM messages from your project root directory.
 - If you use Claude, save project instructions as `CLAUDE.md`. You can
-  use `AGENTS.md` content as the preamble and add any other guidance
+  use [AGENTS.md](../AGENTS.md) content as the preamble and add any other guidance
   needed for your project.
 
 ## Step 0: Setup (manual) + Constitution sanity ping
@@ -17,23 +17,22 @@ This tutorial is intentionally compact and execution-focused.
 Do this yourself before sending your first substantive request to the
 LLM:
 
-1. Read `README.md` first, then this tutorial.
-   - Before this tutorial, quickly check `CONSTITUTION.md` and
-     `docs/review-responsibility-and-traceability.md`.
+1. Read [README.md](../README.md) first, then this tutorial.
+   - Before this tutorial, quickly check [CONSTITUTION.md](../CONSTITUTION.md) and
+     [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
 2. Create your own project repository (this repo is tutorial source only).
 3. Copy governance files into your project and set a concrete task
    directory path:
-   - Copy: `CONSTITUTION.md`, `AGENTS.md`,
-     `docs/review-responsibility-and-traceability.md`, and (if you use
-     GitHub Copilot) `.github/copilot-instructions.md`.
+   - Copy [CONSTITUTION.md](../CONSTITUTION.md) into your project in all cases.
+   - Then copy the instruction file your LLM tool uses:
+     - most tools: [AGENTS.md](../AGENTS.md)
+     - GitHub Copilot: [.github/copilot-instructions.md](../.github/copilot-instructions.md)
+     - Claude Code: save [AGENTS.md](../AGENTS.md) content as `CLAUDE.md` (or keep both if useful)
    - These governance files are shared guardrails for both sides. The LLM is
      expected to follow the Constitution by default; you do not need to
      re-explain it in every prompt.
    - In the copied instruction file(s), replace `<TASK_DIR>` with a
      real path such as `tasks`.
-   - If you use Claude Code, you can save `AGENTS.md` content as
-     `CLAUDE.md` (or keep both) and add extra project guidance as
-     needed.
 4. Check out `data-aggregator` as a sibling repository (parallel
    directory), not inside your project:
 
@@ -65,8 +64,8 @@ Expected layout:
    - game page flow and interactions during gameplay checks.
 
 6. Configure PlantUML preview in your editor using:
-   - `docs/vscode-markdown-plantuml-preview.md`, or
-   - `docs/jetbrains-markdown-plantuml-preview.md`.
+   - [docs/vscode-markdown-plantuml-preview.md](vscode-markdown-plantuml-preview.md), or
+   - [docs/jetbrains-markdown-plantuml-preview.md](jetbrains-markdown-plantuml-preview.md).
 
 7. Verify PlantUML rendering with this installation check snippet:
 
@@ -108,8 +107,8 @@ This tutorial uses public data from the Art Institute of Chicago (AIC).
 This project is not affiliated with or endorsed by AIC.
 
 8. Constitution sanity check:
-   - Ensure `CONSTITUTION.md` is present at your project repo root and
-     your LLM tool loads it (via your copied `AGENTS.md` / `CLAUDE.md`).
+   - Ensure [CONSTITUTION.md](../CONSTITUTION.md) is present at your project repo root and
+     your LLM tool loads it (via your copied [AGENTS.md](../AGENTS.md) / `CLAUDE.md`).
    - Send this now as your first LLM message (before any other request):
 
 ```text
@@ -122,14 +121,14 @@ Do not create or modify any files yet.
 
    - On the first LLM response, you should see a leading 🫡 without
      asking for it. If you do not see it (or the tool reports
-     `CONSTITUTION.md` is unavailable/unreadable), stop and fix file
+     [CONSTITUTION.md](../CONSTITUTION.md) is unavailable/unreadable), stop and fix file
      access/instruction loading before proceeding.
 
 Each step uses the same structure:
 
 - ‘You send’ is the exact message to send to the LLM.
-- Governance and workflow gates (from the copied `AGENTS.md` and
-  `CONSTITUTION.md`) are expected to be loaded by your LLM tool
+- Governance and workflow gates (from the copied [AGENTS.md](../AGENTS.md) and
+  [CONSTITUTION.md](../CONSTITUTION.md)) are expected to be loaded by your LLM tool
   automatically. If the LLM does not follow them, fix instruction
   loading at the tool configuration level before proceeding.
 - ‘You see’ is what you should expect to observe in results/artifacts.
@@ -141,7 +140,7 @@ step. If the LLM deviates, decide whether the deviation is acceptable.
 If it matters to you, ask the LLM to adjust and re-verify until the
 step matches what you consider important.
 
-## Step 1: Project README (`README.md`)
+## Step 1: Project README ([README.md](../README.md))
 
 ### You send
 
@@ -188,7 +187,7 @@ This is documentation-only work, we do not need a task file for it.
 ### You see
 
 - Chat: response starts with 🫡.
-- `README.md`:
+- [README.md](../README.md):
   - Exists and captures the project brief requirements.
   - Includes the project brief text under "Project Brief".
 
@@ -237,7 +236,7 @@ serve command in chat.
 
 - Chat: reports that a task file was created and asks for explicit
   implementation approval.
-- Governance: `AGENTS.md` / `CLAUDE.md` updated to record the confirmed
+- Governance: [AGENTS.md](../AGENTS.md) / `CLAUDE.md` updated to record the confirmed
   sibling `data-aggregator` path.
 - Task file:
   - Contains Scope, Motivation, Research, Design, and Test specification
