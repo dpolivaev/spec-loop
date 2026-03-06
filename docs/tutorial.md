@@ -39,13 +39,13 @@ LLM:
 4. Check out `data-aggregator` as a sibling repository (parallel
    directory), not inside your project:
 
-Replace placeholder values in the command block below before running it.
+Run the command block below to create `tutorial-project`.
 
 ```bash
 mkdir -p ~/git-repo/ai
 cd ~/git-repo/ai
-mkdir -p <your-project-name>
-cd <your-project-name>
+mkdir -p tutorial-project
+cd tutorial-project
 git init
 
 cd ~/git-repo/ai
@@ -56,7 +56,7 @@ Expected layout:
 
 ```text
 ~/git-repo/ai/
-  <your-project-name>/
+  tutorial-project/
   data-aggregator/
 ```
 
