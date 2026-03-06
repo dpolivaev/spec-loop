@@ -131,11 +131,15 @@ instruction/governance files already present in this repository.
 
 Each following tutorial step uses the same structure:
 
-- ‘You send’ is the exact message to send to the LLM.
+- ‘You send’ shows a suitable message to send to the LLM. Any equivalent wording is fine.
 - Governance and workflow gates (from the copied [AGENTS.md](../AGENTS.md) and
   [CONSTITUTION.md](../CONSTITUTION.md)) are expected to be loaded by your LLM tool
   automatically. If the LLM does not follow them, fix instruction
   loading at the tool configuration level before proceeding.
+- The constitution, not repeated prompt wording, defines approval and
+  implementation boundaries.
+- Before implementation, you can always ask the LLM to revise the
+  current task, subtask, or design instead of proceeding directly.
 - ‘You see’ is what you should expect to observe in results/artifacts.
 - ‘After completion’ describes move-to-done/commit expectations.
 - ‘You learned (this step)’ is the takeaway after the step is done.
@@ -449,12 +453,7 @@ the current subtask before implementation.
 
 ### You send
 
-```text
-Please flesh out only the in-memory leaderboard subtask in the approved
-leaderboard task. Keep the persistence implementation subtask
-lightweight for now. Stop after updating the task file and ask for
-implementation approval.
-```
+- Please flesh out only the in-memory leaderboard subtask
 
 ### You see (in-memory subtask design)
 
@@ -463,10 +462,7 @@ implementation approval.
 
 ### You send
 
-```text
-Please implement only the in-memory leaderboard subtask, provide
-verification evidence, and stop after it is complete.
-```
+- Implement it.
 
 ### You see (in-memory implementation)
 
@@ -481,7 +477,7 @@ Please create the persistence ADR now for the approved leaderboard task.
 First discuss the decision criteria with me. The ADR must define the
 chosen persistence approach, storage location, reset procedure for local
 development and tests with an exact command, and practical verification
-commands. Do not flesh out the persistence implementation subtask yet.
+commands.
 ```
 
 ### You see (persistence ADR)
@@ -492,11 +488,7 @@ commands. Do not flesh out the persistence implementation subtask yet.
 
 ### You send
 
-```text
-Using the accepted persistence ADR, please flesh out only the
-persistence implementation subtask in the approved leaderboard task.
-Stop after updating the task file and ask for implementation approval.
-```
+- Please design the remaining subtask
 
 ### You see (persistence subtask design)
 
@@ -504,10 +496,7 @@ Stop after updating the task file and ask for implementation approval.
 
 ### You send
 
-```text
-Please implement only the persistence implementation subtask, provide
-verification evidence, and stop after it is complete.
-```
+- Implement it.
 
 ### You see (persistence implementation)
 
