@@ -231,9 +231,10 @@ Rules in this section complement, and do not override,
    apply `in-progress` -> `review` transitions directly for both
    task-folder status and subtask status when implementation and local
    verification are complete.
-   Generated build artifacts must not be committed. If they are
-   accidentally tracked, untrack them and add the appropriate ignore
-   rule before continuing.
+   Generated and local-only artifacts must not be committed. If such
+   files are accidentally tracked, untrack them and add or update the
+   appropriate ignore rule before continuing, unless they are
+   intentionally versioned.
    Before writing the commit message, review the full change set being
    committed and its purpose. The commit message must accurately
    describe the purpose, unless the User explicitly requests otherwise.

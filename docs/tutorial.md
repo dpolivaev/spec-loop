@@ -149,10 +149,17 @@ step. If the LLM deviates, decide whether the deviation is acceptable.
 If it matters to you, ask the LLM to adjust and re-verify until the
 step matches what you consider important.
 
+When relevant, ‘You see’ may also include supporting hygiene changes
+required by the constitution, such as task status updates or ignore-rule
+updates.
+
 Sometimes the LLM fails to follow the required task structure, section
 order, or formatting. If you suspect that might be the case, you can
 always ask it to check the task or subtask against
 [CONSTITUTION.md](../CONSTITUTION.md) before proceeding.
+
+If you notice files in the change set that should be ignored, you can
+tell the LLM to fix that.
 
 ## Step 1: Project README ([README.md](../README.md))
 
@@ -275,9 +282,6 @@ Approve only after the task definition and subtask breakdown look correct.
 
 ### After completion (move to done / commit)
 
-- Before you ask the LLM to commit: if needed, ask the LLM to add/update a practical
-  `.gitignore` for artifacts that already exist in this project (for
-  example IDE files, local caches, logs, and local env files).
 - After you accept this work item as done: ask the LLM to move the task
   to `done`, then ask it to commit.
 
@@ -389,9 +393,6 @@ implementation.
   implement only that subtask.
 - After each implemented subtask, either ask for changes or accept it
   and ask the LLM to move it to `done`.
-- Before asking the LLM to commit an accepted subtask, ask it to check
-  whether `.gitignore` needs an update for artifacts introduced in that
-  subtask and to fix it if needed.
 - Then ask it to create a separate commit and only after that ask it to
   flesh out the next subtask.
 
@@ -509,13 +510,11 @@ commands.
 ### After completion (move to done / commit)
 
 - After you accept the in-memory leaderboard subtask as done: ask the
-  LLM to move it to `done`, check whether `.gitignore` needs an update
-  and fix it if needed, then commit.
+  LLM to move it to `done`, then commit.
 - After you accept the persistence ADR: ask the LLM to commit the ADR
   change.
 - After you accept the persistence implementation subtask as done: ask
-  the LLM to move that subtask and the overall task to `done`, check
-  whether `.gitignore` needs an update and fix it if needed, then
+  the LLM to move that subtask and the overall task to `done`, then
   commit.
 
 ### You learned (this step)
