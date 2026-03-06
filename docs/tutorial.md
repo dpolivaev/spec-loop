@@ -2,6 +2,9 @@
 
 This tutorial is intentionally compact and execution-focused.
 
+This tutorial uses public data from the Art Institute of Chicago (AIC).
+This project is not affiliated with or endorsed by AIC.
+
 - Read [README.md](../README.md) first.
 - Then quickly check [CONSTITUTION.md](../CONSTITUTION.md) and
   [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
@@ -103,10 +106,7 @@ LLM --> User: Reports execution in chat
 @enduml
 ```
 
-This tutorial uses public data from the Art Institute of Chicago (AIC).
-This project is not affiliated with or endorsed by AIC.
-
-8. Constitution sanity check:
+8. Constitution check + initial governance commit:
    - Ensure [CONSTITUTION.md](../CONSTITUTION.md) is present at your project repo root and
      your LLM tool loads it (via your copied [AGENTS.md](../AGENTS.md) / `CLAUDE.md`).
    - Send this now as your first LLM message (before any other request):
@@ -116,15 +116,20 @@ Before we start: tell me which instruction/governance files you have
 already read for this repository (filenames if known). Then restate the
 PLAN -> IMPLEMENTATION approval gate in one sentence.
 
-Do not create or modify any files yet.
+Then create an initial commit containing CONSTITUTION.md and the
+instruction/governance files already present in this repository.
 ```
 
    - On the first LLM response, you should see a leading 🫡 without
      asking for it. If you do not see it (or the tool reports
      [CONSTITUTION.md](../CONSTITUTION.md) is unavailable/unreadable), stop and fix file
      access/instruction loading before proceeding.
+   - You should also see an initial commit that includes [CONSTITUTION.md](../CONSTITUTION.md)
+     and the relevant instruction/governance files for your tool setup.
 
-Each step uses the same structure:
+----------
+
+Each following tutorial step uses the same structure:
 
 - ‘You send’ is the exact message to send to the LLM.
 - Governance and workflow gates (from the copied [AGENTS.md](../AGENTS.md) and
@@ -213,8 +218,6 @@ This is documentation-only work, we do not need a task file for it.
 ### You send
 
 ```text
-Use the project brief from `README.md`.
-
 A sibling `data-aggregator` checkout exists at `../data-aggregator`
 relative to this repo root (parallel directory, not inside this repo).
 Use it for reverse engineering only. If it is missing, stop and ask me
