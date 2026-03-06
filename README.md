@@ -26,10 +26,10 @@ task-file gate before implementation.
 Spec Loop also defines explicit work phases: plan, implementation and done.
 Any transitions to implementation and to done require explicit user approval.
 
-## Working with legacy code
+## Why This Works with Large Codebases
 
-Spec Loop is designed to work with existing codebases.
-Before any design or implementation step, the model captures relevant legacy
+Spec Loop is designed to work with existing codebases at scale.
+Before any design or implementation step, the model captures relevant
 knowledge in the Research section of the task file: existing behavior,
 constraints, APIs, interfaces, and established code practices.
 
@@ -41,10 +41,12 @@ what is required to implement that increment correctly, and is intentionally
 partial. The result is a bounded, reviewable understanding whose size
 remains manageable.
 
-Because the research is written down, you can verify that the model examined the
-right parts of the codebase, identified the correct interfaces, and aligned with
-existing practices before any code is written. This prevents clean-room
-designs in legacy systems and makes incremental change safe.
+Because the scope can be kept reasonably small and the research is
+written down, you can verify that the model examined the right parts of
+the codebase, identified the correct interfaces, and aligned with
+existing practices before any code is written. This is especially
+valuable in legacy systems: it prevents clean-room redesigns and makes
+incremental change safer.
 
 ## Getting started
 
