@@ -145,6 +145,11 @@ step. If the LLM deviates, decide whether the deviation is acceptable.
 If it matters to you, ask the LLM to adjust and re-verify until the
 step matches what you consider important.
 
+Sometimes the LLM fails to follow the required task structure, section
+order, or formatting. If you suspect that might be the case, you can
+always ask it to check the task or subtask against
+[CONSTITUTION.md](../CONSTITUTION.md) before proceeding.
+
 ## Step 1: Project README ([README.md](../README.md))
 
 ### You send
