@@ -37,7 +37,9 @@
 ### Decision Tables (Operational Shortcuts)
 
 Use these tables as the primary quick path. When a row applies, follow
-it directly.
+it directly. For phase transitions, **Spec Loop Phases and
+Transitions** is authoritative. Task/subtask lifecycle rules are
+defined later in **Task State Model**.
 
 | Situation | Required action | Resulting phase |
 | --- | --- | --- |
@@ -164,11 +166,16 @@ Rules in this section complement, and do not override,
     the task file.
 
 4. **Design**  
-   Document architecture, data flow, interactions, and test-impacting
-   decisions in **Design**. Draft it from validated **Research** and
-   required behavior from **Scenario** when Scenario exists.
+   Document implementation architecture, data flow, interactions, and
+   responsibility boundaries in **Design**. Draft it from validated
+   **Research** and required behavior from **Scenario** when Scenario
+   exists.
 
    Design must make intended implementation structure reviewable.
+   Keep verification structure in **Test specification**, not in
+   Design. Do not model test suites, test doubles, harnesses, or other
+   test-only elements in Design unless the task itself changes test
+   infrastructure.
    Important responsibilities, interactions, and architectural
    boundaries should appear in the diagram whenever PlantUML can
    express them. When Scenario exists, Design must reflect Scenario
@@ -187,17 +194,20 @@ Rules in this section complement, and do not override,
    explanatory text in a separate paragraph below it only for context,
    rationale, constraints, or clarifications PlantUML cannot express.
 
-5. **Iterative discovery**  
-  Iterate across **Research**, **Scenario** (if used), and **Design**
-  until decisions are supported, naming is aligned, and behavior is
-  testable. No implementation starts during this loop.
+5. **Test specification**
+   Document verification structure and concrete test coverage.
 
-6. **Implementation**  
+6. **Iterative discovery**  
+  Iterate across **Research**, **Scenario** (if used), **Design**, and
+  **Test specification** until decisions and verification are
+  coherent. No implementation starts during this loop.
+
+7. **Implementation**  
    Implementation is complete only when both design and test
    specification are implemented, unless the user explicitly waives
    tests.
 
-7. **Status updates**  
+8. **Status updates**  
    Move task files between status folders within the project task
    directory to reflect current focus (for example, `in-progress` to
    `review`, or `done` back to `in-progress` or `backlog`).
@@ -205,7 +215,7 @@ Rules in this section complement, and do not override,
    prefix to preserve traceability. Avoid moving unrelated tasks; move
    them only when actively worked on.
 
-8. **Move workflow for diffs**  
+9. **Move workflow for diffs**  
    When moving tracked task files, use `git mv` and stage the move
    immediately before editing. This preserves rename tracking in diff
    tools that are not rename-aware (for example, VS Code). Do not
@@ -213,7 +223,7 @@ Rules in this section complement, and do not override,
    untracked task files, move in filesystem (not `git mv`), then run
    `git add -A`.
 
-9. **Status validation before commits**  
+10. **Status validation before commits**  
    Update subtask status whenever task-file lifecycle state changes.
    Before each commit, check relevant task files and propose any status
    or folder changes needed for consistency. Apply those status changes
@@ -221,6 +231,9 @@ Rules in this section complement, and do not override,
    apply `in-progress` -> `review` transitions directly for both
    task-folder status and subtask status when implementation and local
    verification are complete.
+   Generated build artifacts must not be committed. If they are
+   accidentally tracked, untrack them and add the appropriate ignore
+   rule before continuing.
    Before writing the commit message, review the full change set being
    committed and its purpose. The commit message must accurately
    describe the purpose, unless the User explicitly requests otherwise.
@@ -237,7 +250,7 @@ Rules in this section complement, and do not override,
    After code or configuration changes, run relevant module tests before
    reporting.
 
-10. **Done task cleanup**  
+11. **Done task cleanup**  
    Keep done tasks in the task directory under the done status folder
    with a three-digit prefix based on order moved into done. Delete them
    from the working tree after a release tag is created.
@@ -288,9 +301,6 @@ Lifecycle definitions:
 Lifecycle and transition rules:
 - Tasks and subtasks use the same transition guards from
   **Spec Loop Phases and Transitions**.
-- LLM should move `in-progress` -> `review` when implementation and
-  local verification are complete.
-- Moving to `done` requires an explicit User request.
 - Exception for initial placement: if `in-progress` contains no tasks
   and only one new task is being created, place it in `in-progress`.
 
