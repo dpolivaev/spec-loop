@@ -342,7 +342,14 @@ subtask should include testing scope.
   - Subtasks include testing scope.
   - Research references earlier task file(s) as a starting point.
 
-Approve only after the task definition looks correct.
+### Subtask-by-subtask workflow
+
+Review the task header and the task breakdown first. If the breakdown
+needs adjustment, ask the LLM to revise it before implementation
+starts. If it looks good, ask the LLM to implement only the first
+subtask. From there, continue subtask by subtask: after each subtask,
+either ask for changes or accept it and ask the LLM to move it to
+`done` and create a separate commit before proceeding to the next one.
 
 ### You see (during subtask implementation)
 
@@ -350,8 +357,8 @@ Approve only after the task definition looks correct.
   stops after each subtask.
 - Tests: separate verification evidence is provided per implemented
   subtask.
-- Git: ask the LLM to commit per accepted subtask; the overall task is
-  moved to `done` only after the last subtask is done.
+- Git: there is a separate commit per accepted subtask; the overall
+  task is moved to `done` only after the last subtask is done.
 - Code: game is reachable from `site/index.html` and playable (after
   relevant subtasks complete).
 
