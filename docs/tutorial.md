@@ -27,13 +27,20 @@ LLM:
 3. Copy governance files into your project and set a concrete task
    directory path:
    - Copy [CONSTITUTION.md](../CONSTITUTION.md) into your project in all cases.
+   - Copy [glossary-skill.md](../glossary-skill.md) into the same
+  directory as [CONSTITUTION.md](../CONSTITUTION.md). This tutorial
+  uses [glossary.md](../glossary.md) throughout, so keep the
+  glossary guidance available from the start.
    - Then copy the instruction file your LLM tool uses:
      - most tools: [AGENTS.md](../AGENTS.md)
      - GitHub Copilot: [.github/copilot-instructions.md](../.github/copilot-instructions.md)
      - Claude Code: save [AGENTS.md](../AGENTS.md) content as `CLAUDE.md` (or keep both if useful)
-   - These governance files are shared guardrails for both sides. The LLM is
-     expected to follow the Constitution by default; you do not need to
-     re-explain it in every prompt.
+   - These copied files work together: the Constitution defines workflow,
+     tool-specific instruction files inject the workflow into sessions, and
+     `glossary-skill.md` provides guidance for creating and updating
+     `glossary.md`.
+   - The LLM is expected to follow the Constitution by default; you do not
+     need to re-explain it in every prompt.
    - In the copied instruction file(s), replace `<TASK_DIR>` with a
      real path such as `tasks`.
 4. Check out `data-aggregator` as a sibling repository (parallel
@@ -108,7 +115,12 @@ LLM --> User: Reports execution in chat
 
 8. Constitution check + initial governance commit:
    - Ensure [CONSTITUTION.md](../CONSTITUTION.md) is present at your project repo root and
-     your LLM tool loads it (via your copied [AGENTS.md](../AGENTS.md) / `CLAUDE.md`).
+     your LLM tool loads it (via your copied [AGENTS.md](../AGENTS.md) /
+     `CLAUDE.md`).
+   - Keep [glossary-skill.md](../glossary-skill.md) in the same
+     directory as [CONSTITUTION.md](../CONSTITUTION.md) so the LLM can
+     consult it later for [glossary.md](../glossary.md) creation and
+     updates.
    - Send this now as your first LLM message (before any other request):
 
 ```text
@@ -116,7 +128,8 @@ Before we start: tell me which instruction/governance files you have
 already read for this repository (filenames if known). Then restate the
 PLAN -> IMPLEMENTATION approval gate in one sentence.
 
-Then create an initial commit containing CONSTITUTION.md and the
+Then create an initial commit containing CONSTITUTION.md,
+glossary-skill.md, and the
 instruction/governance files already present in this repository.
 ```
 
@@ -125,22 +138,30 @@ instruction/governance files already present in this repository.
      [CONSTITUTION.md](../CONSTITUTION.md) is unavailable/unreadable), stop and fix file
      access/instruction loading before proceeding.
    - You should also see an initial commit that includes [CONSTITUTION.md](../CONSTITUTION.md)
-     and the relevant instruction/governance files for your tool setup.
+     and the relevant copied governance files for your tool setup, including
+     [glossary-skill.md](../glossary-skill.md).
 
 ----------
 
 Each following tutorial step uses the same structure:
 
 - ‘You send’ shows a suitable message to send to the LLM. Any equivalent wording is fine.
+- This tutorial assumes [glossary.md](../glossary.md) is created in
+  Step 1 and then maintained throughout the later steps.
 - Governance and workflow gates (from the copied [AGENTS.md](../AGENTS.md) and
   [CONSTITUTION.md](../CONSTITUTION.md)) are expected to be loaded by your LLM tool
-  automatically. If the LLM does not follow them, fix instruction
+  automatically. [glossary-skill.md](../glossary-skill.md) is expected next to
+  [CONSTITUTION.md](../CONSTITUTION.md) and should be consulted when
+  [glossary.md](../glossary.md) is created or updated. If the LLM does not follow them, fix instruction
   loading at the tool configuration level before proceeding.
 - The constitution, not repeated prompt wording, defines approval and
   implementation boundaries.
 - Before implementation, you can always ask the LLM to revise the
   current task, subtask, or design instead of proceeding directly.
 - ‘You see’ is what you should expect to observe in results/artifacts.
+- ‘You see’ may include terminology aligned with
+  [glossary.md](../glossary.md) and, for implementation steps, updates
+  to it that reflect approved Design.
 - ‘After completion’ describes move-to-done/commit expectations.
 - ‘You learned (this step)’ is the takeaway after the step is done.
 
@@ -202,6 +223,10 @@ the brief and clearly describe the two parts (museum overview page +
 Progressive Timeline game), the core rules, and the leaderboard sorting.
 Keep the README concise and practical.
 
+Also create `glossary.md` from the approved project brief. It should
+define the canonical project terms needed for this tutorial and keep
+their wording consistent with the brief.
+
 Also update `AGENTS.md` so it explicitly tells the LLM to read
 `README.md` and follow the "Project Brief" section there for project
 requirements unless I explicitly override it.
@@ -214,6 +239,9 @@ This is documentation-only work, we do not need a task file for it.
 - [README.md](../README.md):
   - Exists and captures the project brief requirements.
   - Includes the project brief text under "Project Brief".
+- [glossary.md](../glossary.md):
+  - Exists and defines the canonical project terms from the brief.
+  - Uses wording consistent with the brief so later tasks can reuse it.
 - [AGENTS.md](../AGENTS.md):
   - Explicitly points the LLM to [README.md](../README.md) as the source
     of the project brief and requirements.
@@ -221,13 +249,14 @@ This is documentation-only work, we do not need a task file for it.
 ### After completion (commit)
 
 - After you accept this work item as done: ask the LLM to commit the
-  README and `AGENTS.md` changes.
+  README, `glossary.md`, and `AGENTS.md` changes.
 
 ### You learned (this step)
 
 - The LLM can create documentation, wire persistent instructions to the
-  canonical project brief, and (after you accept it) commit without
-  creating a task file.
+  canonical project brief, establish `glossary.md` as the project
+  vocabulary, and (after you accept it) commit without creating a task
+  file.
 
 ## Step 2: Museum Overview Page (`site/index.html`) + Just-Enough API Research
 
@@ -371,6 +400,9 @@ subtask. Create only:
 Reuse earlier task-file research where relevant, but keep future
 subtasks lightweight. We will flesh out only the current subtask before
 implementation.
+
+Use `glossary.md` during planning as the reference for gameplay terms
+and definitions.
 ```
 
 ### You see (plan)
@@ -382,6 +414,7 @@ implementation.
   - Each subtask has Scope and Motivation, but future subtasks are not
     fully designed yet.
   - Relevant earlier task-file research is referenced where needed.
+  - Task and subtask terminology aligns with `glossary.md`.
 
 ### Subtask-by-subtask workflow
 
@@ -402,6 +435,9 @@ implementation.
   implementation approval.
 - Task file: the current subtask is fleshed out; future subtasks remain
   lightweight.
+- The current subtask Design uses glossary terms from `glossary.md`
+  consistently and makes any glossary term change explicit before
+  approval.
 
 ### You see (during subtask implementation)
 
@@ -412,6 +448,8 @@ implementation.
   task is moved to `done` only after the last subtask is done.
 - Code: game is reachable from `site/index.html` and playable (after
   relevant subtasks complete).
+- If approved Design changed existing glossary terms, `glossary.md` is
+  updated to match.
 
 ### You learned (this step)
 
@@ -443,6 +481,9 @@ subtask. Create only:
 
 Keep future implementation subtasks lightweight. We will flesh out only
 the current subtask before implementation.
+
+Use `glossary.md` during planning as the reference for leaderboard
+terms and definitions.
 ```
 
 ### You see (plan)

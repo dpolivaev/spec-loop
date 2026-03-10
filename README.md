@@ -52,6 +52,9 @@ incremental change safer.
 
 Apply the process to your repository.
 
+* Copy the core framework files into your repository:
+  `CONSTITUTION.md` for workflow rules. If your project uses a
+  glossary, also copy the optional glossary guidance from this repo.
 * Manual: reference `CONSTITUTION.md` explicitly in your prompts so it is in
   the model context for the session.
 * Integrated: use instruction files that inject the Constitution and your
@@ -63,6 +66,7 @@ Apply the process to your repository.
 * Define your task directory in those instruction files (`<TASK_DIR>`), then
   ask the model to create and update task files there and follow the workflow
   defined by the Constitution.
+
 
 ### Claude setup note
 
@@ -94,6 +98,17 @@ extra project-specific guidance you need.
    * **[Spec Loop Tutorial](docs/tutorial.md)** walks through a complete
      end-to-end example with staged planning, approvals, implementation,
      and testing.
+
+5. Optional project glossary.
+
+   * In DDD, `glossary.md` makes the ubiquitous language explicit. It
+     is the place where project terms are defined so Scenario, Design,
+     tests, code symbols, and commit text can use the same language.
+   * If you want shared glossary conventions, keep
+     **[glossary-skill.md](glossary-skill.md)** next to
+     **[CONSTITUTION.md](CONSTITUTION.md)**.
+   * The guidance file includes an embedded glossary example and does
+     not depend on other example files being present.
 
 Recommended quick-check order:
 - `README.md`
