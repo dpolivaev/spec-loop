@@ -226,6 +226,16 @@ Exclude by default:
 - Prefer one small overview Mermaid diagram and one focused Mermaid
   diagram after each area table.
 - Prefer several small diagrams over one crowded graph.
+- If a diagram has nodes outside the main area, group those external
+  nodes into their own semantically correct subgraphs such as actor,
+  shared context, error handling, or a neighboring bounded context.
+- Keep those external subgraphs semantically correct. Do not place a
+  term into a generic shared group when it belongs to a specific
+  neighboring context.
+- This structure keeps the main area focused while making external
+  relationships explicit.
+- If a diagram is still too crowded after that restructuring, split
+  the content into smaller diagrams.
 - Keep Mermaid node labels as plain text.
 - Do not rely on Mermaid click or href links for document navigation;
   use AsciiDoc anchors and cross-references instead.

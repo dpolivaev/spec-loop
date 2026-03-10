@@ -41,7 +41,9 @@ a|
 [mermaid]
 ----
 graph LR
-  user["User"]
+  subgraph actorContext["Actor"]
+    user["User"]
+  end
 
   subgraph subsystems["Wordle"]
     guessEvaluation["Guess Evaluation"]
@@ -107,10 +109,12 @@ graph LR
     gameStatus["Game Status"]
   end
 
-  solution["Solution"]
-  guess["Guess"]
-  feedback["Feedback"]
-  wordleRules["Wordle Rules"]
+  subgraph guessEvaluationContext["Guess Evaluation"]
+    solution["Solution"]
+    guess["Guess"]
+    feedback["Feedback"]
+    wordleRules["Wordle Rules"]
+  end
 
   wordList -->|provides candidate words for| solution
   gameEngine -->|selects| solution
