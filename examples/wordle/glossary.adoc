@@ -1,0 +1,215 @@
+= Wordle Glossary
+
+This glossary defines the canonical language for the Wordle example.
+
+Each term text links to one representative class in the code base. The
+usage column links only to other terms in this file.
+
+Terms are grouped by area below so each section keeps its related terms
+close to the matching diagram.
+
+## Overview
+
+[#overview-table]
+[cols="3,9",options="header"]
+|===
+| Subsystem | Usage
+
+| <<subsystem-game,Game>>: State transitions for one game from start
+to win or loss.
+a|
+* The user advances one <<subsystem-game,Game>> by
+  submitting a <<term-guess,Guess>> until
+  <<term-game-status,Game Status>> becomes terminal.
+* <<subsystem-game,Game>> uses
+  <<subsystem-guess-evaluation,Guess Evaluation>> through
+  <<term-game-engine,Game Engine>> and
+  <<term-wordle-rules,Wordle Rules>>.
+
+| <<subsystem-guess-evaluation,Guess Evaluation>>: Rules and value
+concepts
+for evaluating words and per-letter results.
+a|
+* <<subsystem-guess-evaluation,Guess Evaluation>> defines how a
+  <<term-guess,Guess>> is compared with a <<term-solution,Solution>>.
+* <<subsystem-guess-evaluation,Guess Evaluation>> produces
+  <<term-feedback,Feedback>> and <<term-letter-status,Letter Status>>
+  for one <<subsystem-game,Game>>.
+
+|===
+
+[mermaid]
+----
+graph LR
+  user["User"]
+
+  subgraph subsystems["Wordle"]
+    guessEvaluation["Guess Evaluation"]
+    game["Game"]
+  end
+
+  user -->|plays| game
+  game -->|uses| guessEvaluation
+----
+
+[#subsystem-game]
+## <<overview-table,Game>>
+
+[cols="6,10",options="header"]
+|===
+| Term | Usage
+
+| [[term-game-engine]]link:src/main/java/wordle/engine/GameEngine.java[Game Engine]:
+State transition service that starts games and applies guesses.
+a|
+* <<term-game-engine,Game Engine>> starts a game by selecting a
+  <<term-solution,Solution>> from a <<term-word-list,Word List>>.
+* <<term-game-engine,Game Engine>> applies each
+  <<term-guess,Guess>> using <<term-wordle-rules,Wordle Rules>> and
+  returns the next <<term-game-state,Game State>>.
+
+| [[term-game-state]]link:src/main/java/wordle/engine/GameState.java[Game State]:
+Immutable snapshot of the current game.
+a|
+* <<term-game-state,Game State>> stores the
+  <<term-solution,Solution>>, remaining attempts,
+  <<term-feedback,Feedback>> history, and
+  <<term-game-status,Game Status>>.
+* <<term-game-engine,Game Engine>> returns a new
+  <<term-game-state,Game State>> after each <<term-guess,Guess>>.
+
+| [[term-game-status]]link:src/main/java/wordle/engine/GameStatus.java[Game Status]:
+Lifecycle result for the current game state.
+a|
+* A <<term-game-status,Game Status>> marks a
+  <<term-game-state,Game State>> as in progress, won, or lost.
+* <<term-game-engine,Game Engine>> updates
+  <<term-game-status,Game Status>> after each
+  <<term-guess,Guess>>.
+
+| [[term-word-list]]link:src/main/java/wordle/words/WordListLoader.java[Word List]:
+Declared source of candidate solution words.
+a|
+* A <<term-word-list,Word List>> provides candidate
+  <<term-word,Words>> for the <<term-solution,Solution>>.
+* <<term-game-engine,Game Engine>> starts by selecting one
+  <<term-solution,Solution>> from a <<term-word-list,Word List>>.
+
+|===
+
+[mermaid]
+----
+graph LR
+  subgraph game["Game"]
+    wordList["Word List"]
+    gameEngine["Game Engine"]
+    gameState["Game State"]
+    gameStatus["Game Status"]
+  end
+
+  solution["Solution"]
+  guess["Guess"]
+  feedback["Feedback"]
+  wordleRules["Wordle Rules"]
+
+  wordList -->|provides candidate words for| solution
+  gameEngine -->|selects| solution
+  gameEngine -->|uses| wordleRules
+  gameEngine -->|applies| guess
+  gameEngine -->|returns| gameState
+  gameState -->|stores| solution
+  gameState -->|stores history of| feedback
+  gameState -->|stores| gameStatus
+----
+
+[#subsystem-guess-evaluation]
+## <<overview-table,Guess Evaluation>>
+
+[cols="6,10",options="header"]
+|===
+| Term | Usage
+
+| [[term-feedback]]link:src/main/java/wordle/domain/Feedback.java[Feedback]:
+Ordered per-letter evaluation result for one guess.
+a|
+* One <<term-feedback,Feedback>> contains ordered
+  <<term-letter-feedback,Letter Feedback>> entries.
+* Each <<term-guess,Guess>> produces one <<term-feedback,Feedback>>
+  when <<term-wordle-rules,Wordle Rules>> compare it with a
+  <<term-solution,Solution>>.
+
+| [[term-guess]]link:src/main/java/wordle/domain/WordleRules.java[Guess]:
+Player-submitted word evaluated against the hidden solution.
+a|
+* A <<term-guess,Guess>> is represented as a <<term-word,Word>>.
+* <<term-wordle-rules,Wordle Rules>> compare a
+  <<term-guess,Guess>> with a <<term-solution,Solution>> and return
+  <<term-feedback,Feedback>>.
+
+| [[term-letter-feedback]]link:src/main/java/wordle/domain/LetterFeedback.java[Letter Feedback]:
+Single positioned result inside one feedback value.
+a|
+* Each <<term-letter-feedback,Letter Feedback>> stores one guessed
+  letter, its position, and a <<term-letter-status,Letter Status>>.
+* One <<term-feedback,Feedback>> is composed of ordered
+  <<term-letter-feedback,Letter Feedback>> entries.
+
+| [[term-letter-status]]link:src/main/java/wordle/domain/LetterStatus.java[Letter Status]:
+Classification for one guessed letter.
+a|
+* A <<term-letter-status,Letter Status>> classifies one
+  <<term-letter-feedback,Letter Feedback>> as correct, present, or
+  absent.
+* <<term-wordle-rules,Wordle Rules>> assign
+  <<term-letter-status,Letter Status>> values while building
+  <<term-feedback,Feedback>>.
+
+| [[term-solution]]link:src/main/java/wordle/engine/GameEngine.java[Solution]:
+Hidden word selected for one game.
+a|
+* One <<term-solution,Solution>> is a <<term-word,Word>> selected at
+  game start.
+* The <<term-solution,Solution>> stays fixed while
+  <<term-wordle-rules,Wordle Rules>> evaluate each
+  <<term-guess,Guess>>.
+
+| [[term-word]]link:src/main/java/wordle/domain/Word.java[Word]:
+Validated five-letter uppercase value.
+a|
+* Both <<term-guess,Guess>> and <<term-solution,Solution>> are
+  represented as <<term-word,Word>> values.
+* A <<term-word,Word>> can come from a <<term-word-list,Word List>>
+  and then flow through <<term-wordle-rules,Wordle Rules>>.
+
+| [[term-wordle-rules]]link:src/main/java/wordle/domain/WordleRules.java[Wordle Rules]:
+Comparison rules that evaluate a guess against the solution.
+a|
+* <<term-wordle-rules,Wordle Rules>> compare one
+  <<term-guess,Guess>> with the <<term-solution,Solution>>.
+* <<term-wordle-rules,Wordle Rules>> return
+  <<term-feedback,Feedback>> using duplicate-aware
+  <<term-letter-status,Letter Status>> assignment.
+
+|===
+
+[mermaid]
+----
+graph LR
+  subgraph guessEvaluation["Guess Evaluation"]
+    guess["Guess"]
+    solution["Solution"]
+    word["Word"]
+    wordleRules["Wordle Rules"]
+    feedback["Feedback"]
+    letterFeedback["Letter Feedback"]
+    letterStatus["Letter Status"]
+  end
+
+  guess -->|is represented as| word
+  solution -->|is represented as| word
+  wordleRules -->|compares| guess
+  wordleRules -->|against| solution
+  wordleRules -->|returns| feedback
+  feedback -->|contains| letterFeedback
+  letterFeedback -->|uses| letterStatus
+----
