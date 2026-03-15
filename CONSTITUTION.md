@@ -179,13 +179,12 @@ Rules in this section complement, and do not override,
     Creating the first `glossary.md` from already approved information
     is documentation-only work and does not require a task file unless
     the User asks for task-based tracking.
-    If `glossary.md` is updated during IMPLEMENTATION, the update may
-    only reflect approved Design. Any term addition, removal, rename,
-    merge, split, or definition change must therefore be explicit in
-    Design and resolved before requesting implementation approval.
-    If the LLM discovers during IMPLEMENTATION that this was missed, it
-    must treat that as a mistake, return to PLAN, update the relevant
-    task-file sections, and request approval before continuing.
+    If a task changes or adds domain terms, the required
+    `glossary.md` updates must be planned during PLAN.
+    During IMPLEMENTATION, perform the planned `glossary.md`
+    updates. They may only reflect approved Design.
+    If required glossary updates were not planned, stop, return to
+    PLAN, update the task, request approval, then continue.
     If `glossary-skill.md` exists next to this Constitution, consult it
     when creating or updating `glossary.md`. It is not required during
     PLAN and does not create an additional approval gate.
