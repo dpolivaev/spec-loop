@@ -1,7 +1,7 @@
 # Glossary Guidance
 
-This file defines how to create and update a project glossary in a
-tool-agnostic way.
+This file defines how to create and update a project glossary in
+AsciiDoc.
 
 The file name includes `skill` for discoverability by AI tools, but
 this document is plain repository guidance and does not depend on any
@@ -13,8 +13,8 @@ Use this guidance when:
 
 - a project glossary already exists and must be updated,
 - the user asks to create a glossary,
-- implementation work introduces, removes, or refines canonical domain
-  terms within approved scope.
+- a task changes or adds canonical domain terms within approved
+  scope.
 
 ## Relationship to Spec Loop
 
@@ -23,6 +23,8 @@ Use this guidance when:
 - Design and implementation must stay aligned with approved terms.
 - A glossary is a project-level supporting artifact, not a replacement
   for task files.
+- Plan required glossary updates during PLAN.
+- Perform planned glossary updates during IMPLEMENTATION.
 - If glossary work would change approved meaning rather than record it,
   return to PLAN first and update the task file before continuing.
 
@@ -44,7 +46,7 @@ subsystem areas.
 
 Short intro.
 
-## Overview
+== Overview
 
 [#overview-table]
 [cols="3,9",options="header"]
@@ -76,7 +78,7 @@ graph LR
 ----
 
 [#subsystem-example]
-## <<overview-table,Example Area>>
+== <<overview-table,Example Area>>
 
 [cols="6,10",options="header"]
 |===
@@ -160,7 +162,7 @@ a|
 - Add an anchor such as `[#subsystem-example]` before each area
   heading.
 - If an overview exists, link each section heading back to it with
-  `## <<overview-table,Section Name>>`.
+  `== <<overview-table,Section Name>>`.
 - Keep glossary terms in separate non-duplicating area tables.
 - Place each area table directly before its matching Mermaid diagram.
 - Sort glossary rows alphabetically within each area table.
@@ -210,19 +212,28 @@ Exclude by default:
 
 ## Class Linking Rules
 
-1. Link each term to one representative class only.
+1. Link each term to one representative code artifact when a
+   stable anchor exists.
 2. Prefer a true domain type when one exists.
 3. If no domain type exists, use the nearest stable class that carries
    the concept, such as a controller, service, or persistence entity.
-4. Choose the class that best explains where the concept lives in the
-   code base, not necessarily the first class found.
-5. Keep code links in the `Term` column only.
+4. If no stable code anchor exists yet, omit the code link.
+5. Choose the code artifact that best explains where the concept lives
+   in the code base, not necessarily the first class found.
+6. Keep code links in the `Term` column only.
 
 ## Diagram Rules
 
-- Mermaid diagrams may live inside the same `.adoc` file as the
-  glossary.
-- Use them as focused visual context, not as the source of truth.
+- Mermaid diagrams live inside the same `.adoc` file as the glossary.
+- Every glossary area must include a focused Mermaid diagram.
+- If an overview section exists, it must include an overview Mermaid
+  diagram.
+- Diagrams must be consistent with the glossary text and serve as a
+  user-facing aid, not decorative content.
+- When glossary text changes in a way that affects relationships,
+  boundaries, actors, or flows shown in diagrams, update the diagrams
+  in the same change.
+- Use diagrams as focused visual context, not as the source of truth.
 - Prefer one small overview Mermaid diagram and one focused Mermaid
   diagram after each area table.
 - Prefer several small diagrams over one crowded graph.
