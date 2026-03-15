@@ -39,7 +39,7 @@
 Use these tables as the primary quick path. When a row applies, follow
 it directly. For phase transitions, **Spec Loop Phases and
 Transitions** is authoritative. Task/subtask lifecycle rules are
-defined later in **Task State Model**.
+defined later in **Task States**.
 
 | Situation | Required action | Resulting phase |
 | --- | --- | --- |
@@ -121,8 +121,8 @@ When task-first applies and no suitable task file exists, propose
 creating one before research/design. Do not keep implementation design
 only in chat unless the User explicitly allows that mode.
 
-Before IMPLEMENTATION, current design decisions must be present in the
-task-file Design section.
+Before IMPLEMENTATION, the approved target design decisions must be
+present in the task-file Design section.
 
 Chat is a coordination channel, not a design artifact.
 
@@ -147,6 +147,10 @@ Rules in this section complement, and do not override,
 2. **Research**  
   Start with research unless waived. Record observations,
   constraints, and verified facts only; plans belong in **Design**.
+  Research documents the current system: current behavior, legacy
+  architecture, reverse-engineered flows, current data structures,
+  initialization details, characterization findings, and verified
+  constraints. Current or as-is design belongs in **Research**.
 
 3. **Scenario**  
 
@@ -164,18 +168,28 @@ Rules in this section complement, and do not override,
     If existing code uses different names, align naming incrementally in
     the current scope and document any intentional temporary mismatch in
     the task file.
+    Research may mention legacy terms and synonyms. Design must use only
+    canonical Scenario terms, except for explicit legacy-to-target
+    mapping tables.
 
 4. **Design**  
    Document implementation architecture, data flow, interactions, and
    responsibility boundaries in **Design**. Draft it from validated
    **Research** and required behavior from **Scenario** when Scenario
-   exists.
+   exists. Design documents the approved target system only. Current
+   implementation, legacy structure, reverse-engineered flows, and
+   as-is diagrams must not appear in **Design** unless they are
+   intentionally retained in the target design.
 
    Design must make intended implementation structure reviewable.
    Keep verification structure in **Test specification**, not in
    Design. Do not model test suites, test doubles, harnesses, or other
    test-only elements in Design unless the task itself changes test
-   infrastructure.
+   infrastructure. Design diagrams must not include test classes, test
+   fixtures, or test-only helpers. When changing tools, APIs, or
+   serialized payloads, **Design** must show the full target
+   request/response structures and enums; examples may supplement but
+   must not replace the class specification.
    Important responsibilities, interactions, and architectural
    boundaries should appear in the diagram whenever PlantUML can
    express them. When Scenario exists, Design must reflect Scenario
@@ -283,6 +297,12 @@ rendered views.
 Tasks and subtasks share one lifecycle with the same status values:
 `backlog`, `in-progress`, `review`, `done`.
 
+Phases and lifecycle are different:
+
+- Phases govern what work may be performed now.
+- Task and subtask lifecycle states describe where the tracked item
+  sits in the workflow.
+
 Representation:
 - Task lifecycle state is represented by the task file directory.
 - Subtask lifecycle state is represented by `- **Status:** <status>`.
@@ -302,6 +322,9 @@ Lifecycle definitions:
 Lifecycle and transition rules:
 - Tasks and subtasks use the same transition guards from
   **Spec Loop Phases and Transitions**.
+- LLM should move `in-progress` -> `review` when implementation and
+  local verification are complete.
+- Moving to `done` requires an explicit User request.
 - Exception for initial placement: if `in-progress` contains no tasks
   and only one new task is being created, place it in `in-progress`.
 
@@ -356,7 +379,9 @@ Before setting a task or subtask to **review**:
 6. **Cleanliness**: no TODOs, placeholders, temp comments, unused
    imports.
 7. **Documentation**: design deviations are documented in the task
-   file.
+   file. If implementation differs from the approved target design, the
+   deviation and rationale must be documented in the task file before
+   review.
 
 **Testing Policy:**
 
