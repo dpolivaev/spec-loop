@@ -8,10 +8,9 @@
 - **Motivation:** Provide a consistent Java build setup so the Wordle
   implementation can proceed without build friction and stay aligned with
   the Kotlin variant conventions.
-- **Developer Briefing:** The repository previously had no Gradle
-  configuration for Wordle. The task defines wrapper files, project naming,
-  Java toolchain setup, and test runtime wiring so later implementation
-  tasks can focus on behavior instead of project bootstrapping.
+- **Briefing:** Start with the Gradle wrapper files, project naming, and Java
+  toolchain wiring. Later tasks assume tests and dependencies run without
+  extra bootstrap work.
 - **Research:** The Wordle example initially contained documentation and
   tasks only. No wrapper scripts, build script, or Java source tree existed.
   The latest Gradle release at task time was 9.3.0, so wrapper configuration

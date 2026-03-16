@@ -8,9 +8,9 @@
 - **Scenario:** A user runs the app in a graphical environment and gets a
   simple Wordle window for entering guesses and viewing feedback. In
   headless mode or when `--cli` is set, the app falls back to CLI flow.
-- **Developer Briefing:** This task introduces UI orchestration and shared
-  input validation while preserving the CLI path. `Main` chooses UI or CLI
-  based on runtime context and command flags.
+- **Briefing:** This task adds a Swing path on top of the existing CLI and
+  engine flow. Shared validation and launch selection matter as much as the
+  UI widgets themselves.
 - **Research:** Prior implementation exposed only CLI flow over the same
   engine and word list components; there was no Swing entry path.
 - **Design:**
@@ -66,8 +66,9 @@ GameUiController --> GameState : updates view state
   checks.
 - **Scenario:** Both CLI and UI submit raw guess text. Shared validation
   rejects empty or invalid-length guesses the same way before engine calls.
-- **Developer Briefing:** Split option parsing from loop execution and add a
-  reusable `GuessInputHandler` abstraction used by both interface paths.
+- **Briefing:** Start from the current CLI path and identify which
+  responsibilities must move into shared input handling before the Swing
+  path is added.
 - **Research:** Existing CLI code combined parsing, validation, and loop
   control in one flow.
 - **Design:**
@@ -118,9 +119,9 @@ CliGameRunner --> GameEngine : submits validated guess
 - **Scenario:** A user enters guesses in a text field and submits them.
   Feedback rows accumulate in the window, attempts update, and controls
   disable when the game reaches `WON` or `LOST`.
-- **Developer Briefing:** Implement `wordle.ui.WordleApp` and a
-  `GameUiController` that drives engine state updates and UI rendering.
-  `Main` selects UI when non-headless and CLI fallback otherwise.
+- **Briefing:** The new Swing path sits on top of existing engine behavior.
+  Read the CLI and engine integration points before shaping `wordle.ui`
+  classes.
 - **Research:** Swing path did not exist at subtask start; CLI and engine
   integration already existed.
 - **Design:**
@@ -175,8 +176,8 @@ GameUiController --> GameStatus : updates terminal state
 - **Scope:** Document Swing UI build and run behavior in README.
 - **Motivation:** Ensure users can start and switch interface modes with
   clear commands.
-- **Developer Briefing:** Update README with UI default behavior,
-  headless fallback behavior, and mode-switch instructions.
+- **Briefing:** This is README orientation for the sections that explain UI
+  startup, fallback behavior, and mode selection.
 - **Research:** Existing README documentation was CLI-centered.
 - **Design:**
 

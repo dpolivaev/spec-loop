@@ -8,9 +8,9 @@
 - **Scenario:** A user launches the Wordle command, enters guesses in a
   terminal, receives feedback after each guess, and sees a final game
   result when the session ends.
-- **Developer Briefing:** The task adds a picocli-based entry path, a game
-  loop that wires to the engine, feedback rendering, and README guidance.
-  Distribution packaging documentation is also included.
+- **Briefing:** CLI work spans entry-point wiring, interactive loop behavior,
+  output rendering, and README guidance. Read the subtasks in order because
+  later documentation assumes the runtime path already exists.
 - **Research:** The codebase had engine and domain layers but no CLI entry
   point, no argument parsing, and no terminal feedback formatter.
 - **Design:**
@@ -58,9 +58,9 @@ CliGameRunner --> GameStatus : reports final result
 - **Scenario:** The user runs the command with or without options. The
   command starts a game, repeatedly reads guesses, and exits after printing
   `Result: WON`, `Result: LOST`, or `Result: INTERRUPTED`.
-- **Developer Briefing:** `Main` delegates to picocli parsing, then executes
-  a CLI runner that owns the input loop. Invalid guesses are reported
-  without consuming attempts.
+- **Briefing:** Start at `Main` and the CLI entry path, then trace into the
+  runner that owns input and result reporting. Invalid guesses should be
+  handled in the loop without consuming attempts.
 - **Research:** There was no existing command parser or loop abstraction in
   the project before this subtask.
 - **Design:**
@@ -109,8 +109,9 @@ CliGameRunner --> GameStatus : determine terminal output
 - **Motivation:** Make game feedback readable in terminal sessions.
 - **Scenario:** After each valid guess, the CLI prints a row that encodes
   letter statuses in a stable textual format.
-- **Developer Briefing:** Implement `FeedbackRenderer` to transform game
-  feedback state into user-facing CLI text.
+- **Briefing:** This subtask is isolated to CLI presentation. Follow the
+  feedback model produced by the engine and keep the output format stable
+  and readable.
 - **Research:** No renderer utility existed before this subtask.
 - **Design:**
 
@@ -143,8 +144,8 @@ FeedbackRenderer --> GameState : reads latest feedback entries
 - **Status:** done
 - **Scope:** Document CLI build, run, and usage steps in the Wordle README.
 - **Motivation:** Ensure users can run the CLI without guessing commands.
-- **Developer Briefing:** Update README sections for CLI build and run, and
-  include argument descriptions with sample invocations.
+- **Briefing:** This is README orientation for the sections that describe CLI
+  build, run, and command usage after the CLI path exists.
 - **Research:** Documentation existed but did not include complete CLI usage.
 - **Design:**
 
@@ -178,8 +179,8 @@ ReadmeFile --> CliOptions : documents arguments and examples
   scripts.
 - **Motivation:** Provide a shareable package workflow beyond direct Gradle
   `run` usage.
-- **Developer Briefing:** Add README instructions for `distZip` and `distTar`
-  outputs, archive locations, and script execution.
+- **Briefing:** This is README packaging orientation layered on top of the
+  application plugin outputs under `build/distributions`.
 - **Research:** Gradle application plugin produces distributions under
   `build/distributions` with `bin/` and `lib/` contents.
 - **Design:**

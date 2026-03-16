@@ -7,13 +7,13 @@ This document captures what Spec Loop implies in team environments.
 The Constitution is the normative contract between the human developer and the
 model. It enforces, at minimum:
 
-* Task files as the source of truth for scope, research, design, and execution
-  status.
+* Task files as the source of truth for scope, constraints, research, design,
+  and execution status.
 * Research-first unless explicitly waived.
 * A default approval gate at the task file boundary before any code, test, or
   configuration changes.
-* Implementation completeness: design and test specification implemented unless
-  tests are explicitly waived.
+* Implementation completeness: design, constraints when present, and test
+  specification implemented unless tests are explicitly waived.
 * Traceability discipline: identifiers in commit messages, and status/folder
   consistency.
 
@@ -38,23 +38,34 @@ what must be true now to implement the next increment correctly.
 
 Practically:
 
-* Research records observations, constraints, and verified facts only.
-* Design records the current design intent for the increment.
+* Research records observations and verified facts only.
+* Constraints record binding limits for the increment when needed.
+* Design records the approved target design intent for the increment.
 * Test specification defines the verification that must exist for completion.
 
 History belongs in version control. The task file represents the current intent.
 
-### Developer Briefing as a soft entry point
+### Constraints as a control layer
 
-Each task includes a **Developer Briefing** section that serves as a soft entry
+When a task includes **Constraints**, they capture the limits that the target
+design and implementation must obey.
+
+Typical examples are semantic invariants, non-goals, compatibility limits,
+identity rules, performance limits, and forbidden simplifications.
+
+If **Design** conflicts with **Constraints**, **Constraints** wins.
+
+### Briefing as a soft entry point
+
+Each task includes a **Briefing** section that serves as a soft entry
 point:
 
-* for reviewers unfamiliar with the codebase,
-* for the developer returning to the task after time has passed,
+* for someone unfamiliar with the codebase,
+* for the contributor returning to the task after time has passed,
 * for onboarding new contributors.
 
-The briefing explains what matters, where to look first, and why the design
-looks the way it does.
+The briefing explains what matters, where to look first, and which
+modules, classes, and stack decisions orient a newcomer quickly.
 
 It is not a summary of the task history. It is a guide for understanding the
 current intent.
