@@ -9,10 +9,9 @@
   solution. The system validates word shape, compares letters positionally,
   and returns deterministic feedback for each letter, including duplicate
   letter handling.
-- **Developer Briefing:** This task has two subtasks: one introduces core
-  immutable domain objects and validation entry points, and one implements
-  guess evaluation rules. Value-centric types are records where appropriate,
-  while behavior-centric rule execution remains in a dedicated class.
+- **Briefing:** The domain work is split between immutable model types and
+  comparison rules. Read the model subtask before the evaluation subtask;
+  later engine work depends on both.
 - **Research:** The Wordle example previously had Gradle scaffolding and a
   placeholder entry point only. There were no domain classes, no evaluation
   rules, and no existing naming conventions for model boundaries.
@@ -59,9 +58,9 @@ LetterFeedback --> LetterStatus : uses status value
 - **Scenario:** A valid input word is converted into the canonical internal
   representation, and a feedback object stores ordered per-letter results
   that downstream components can render without mutation.
-- **Developer Briefing:** Define a minimal model for `Word`, `Feedback`,
-  `LetterFeedback`, and `LetterStatus`. Validation is performed at
-  construction time so invalid words are rejected before evaluation.
+- **Briefing:** Relevant work lives in `wordle.domain`. Start with `Word`,
+  `Feedback`, `LetterFeedback`, and `LetterStatus`; validation happens at
+  construction boundaries before rule evaluation.
 - **Research:** No existing domain classes or validation helpers were
   present in `examples/wordle/src` when this subtask started.
 - **Design:**
@@ -106,9 +105,9 @@ LetterFeedback --> LetterStatus : status classification
 - **Scenario:** A guess is compared with the solution. Exact matches are
   marked first, then remaining letters are marked present only while unused
   occurrences remain, and all others are marked absent.
-- **Developer Briefing:** Implement `WordleRules.compare(solution, guess)`
-  and keep validation outside the rules class. The algorithm must be
-  deterministic and duplicate-aware.
+- **Briefing:** This subtask centers on `WordleRules.compare(solution, guess)`.
+  Keep duplicate-letter handling readable; validation remains outside the
+  rules class.
 - **Research:** No previous rules implementation existed. Duplicate handling
   required a two-pass strategy to avoid over-marking present letters.
 - **Design:**

@@ -8,9 +8,9 @@
 - **Scenario:** A game starts with a hidden solution and fixed attempts.
   Each guess produces feedback and updates attempts and history until the
   player wins or exhausts attempts.
-- **Developer Briefing:** This task is split into two subtasks: define an
-  immutable game state model, then implement engine behavior that starts
-  games and applies guesses using `WordleRules` and `WordListLoader`.
+- **Briefing:** This task connects the domain model to runtime game flow.
+  The first subtask defines immutable state; the second adds engine
+  behavior on top of that state.
 - **Research:** Before this task, the project had domain records, rule
   evaluation, and random word selection. No game state, status tracking, or
   turn progression logic existed.
@@ -65,9 +65,9 @@ GameState --> GameStatus : stores lifecycle status
 - **Scenario:** After each guess, the engine returns a new state object that
   contains updated attempts, feedback history, and status while keeping
   prior state immutable.
-- **Developer Briefing:** Define `GameState` and `GameStatus` in
-  `wordle.engine`. State stores solution, attempts remaining, feedback
-  history, and current lifecycle status.
+- **Briefing:** Relevant types belong in `wordle.engine`. Start with state
+  and status types that carry solution, attempts remaining, feedback
+  history, and lifecycle state without mutation.
 - **Research:** No game state types existed at subtask start.
 - **Design:**
 
@@ -109,9 +109,9 @@ GameState --> GameStatus : status value
 - **Scenario:** A new game starts from a selected solution. Each submitted
   guess updates the state until either all letters are correct or attempts
   run out.
-- **Developer Briefing:** Implement `GameEngine.startGame` and
-  `GameEngine.submitGuess`. Compose `WordListLoader` and `WordleRules`, and
-  define post-terminal behavior for additional guesses.
+- **Briefing:** Engine behavior composes `WordListLoader` and `WordleRules`.
+  Follow the state model from the previous subtask before changing start
+  and guess flow.
 - **Research:** No engine behavior existed; integration points were ready in
   rules and word list components.
 - **Design:**

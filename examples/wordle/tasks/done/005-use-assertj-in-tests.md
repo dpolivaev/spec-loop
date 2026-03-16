@@ -5,9 +5,9 @@
   AssertJ dependency.
 - **Motivation:** Improve test readability and consistency across the
   existing suite.
-- **Developer Briefing:** The task is limited to test code and build test
-  dependency configuration. Production behavior and public APIs must remain
-  unchanged.
+- **Briefing:** Only test sources and test dependency configuration are in
+  scope. Existing production APIs should remain unchanged while assertions
+  are normalized.
 - **Research:** Existing tests used JUnit Jupiter assertion helpers. Build
   configuration already used Gradle Kotlin DSL with JUnit Jupiter.
 - **Design:**

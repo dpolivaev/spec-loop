@@ -8,10 +8,9 @@
 - **Scenario:** The game starts and requests a solution word. The loader
   reads the packaged word list, selects one valid entry using the declared
   count header, and returns a `Word` object for the engine.
-- **Developer Briefing:** The subproject had domain validation but no word
-  list loading. This task moves the list into resources and adds a loader
-  that reads first-line metadata, picks a random index, and returns the
-  selected word through existing `Word` validation.
+- **Briefing:** This task bridges the packaged word list and the existing
+  `Word` validation path. Read the resource location and selection flow
+  before changing loader behavior.
 - **Research:** `examples/wordle/src/wordlist.txt` existed outside the
   resource directory, and there was no loader implementation. `Word`
   already performed normalization and validation.

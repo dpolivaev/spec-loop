@@ -366,7 +366,7 @@ Each task uses this exact order and layout:
   - `- **Constraints:**` (optional; include when the task has
     important limits that the target `Design` and implementation must
     obey)
-  - `- **Developer Briefing:**`
+  - `- **Briefing:**`
   - `- **Research:**`
   - `- **Design:**`
   - `- **Test specification:**`
@@ -382,10 +382,10 @@ Each task uses this exact order and layout:
   simplifications.
 - If `Design` conflicts with `Constraints`, `Constraints` wins.
 
-**Developer Briefing**
+**Briefing**
 
-- Short orientation for a developer or reviewer unfamiliar with the
-  codebase, stack, subsystem boundaries, or entry points.
+- Short orientation for someone unfamiliar with the codebase,
+  stack, subsystem boundaries, or entry points.
 - Use this section for practical context such as relevant modules,
   important classes, framework context, repository conventions, and
   risk areas.
