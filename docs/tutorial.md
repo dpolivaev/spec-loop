@@ -29,7 +29,7 @@ LLM:
    - Copy [CONSTITUTION.md](../CONSTITUTION.md) into your project in all cases.
    - Copy [glossary-skill.md](../glossary-skill.md) into the same
   directory as [CONSTITUTION.md](../CONSTITUTION.md). This tutorial
-  uses [glossary.md](../glossary.md) throughout, so keep the
+  uses [glossary.adoc](../glossary.adoc) throughout, so keep the
   glossary guidance available from the start.
    - Then copy the instruction file your LLM tool uses:
      - most tools: [AGENTS.md](../AGENTS.md)
@@ -38,7 +38,7 @@ LLM:
    - These copied files work together: the Constitution defines workflow,
      tool-specific instruction files inject the workflow into sessions, and
      `glossary-skill.md` provides guidance for creating and updating
-     `glossary.md`.
+     `glossary.adoc`.
    - The LLM is expected to follow the Constitution by default; you do not
      need to re-explain it in every prompt.
    - In the copied instruction file(s), replace `<TASK_DIR>` with a
@@ -119,7 +119,7 @@ LLM --> User: Reports execution in chat
      `CLAUDE.md`).
    - Keep [glossary-skill.md](../glossary-skill.md) in the same
      directory as [CONSTITUTION.md](../CONSTITUTION.md) so the LLM can
-     consult it later for [glossary.md](../glossary.md) creation and
+     consult it later for [glossary.adoc](../glossary.adoc) creation and
      updates.
    - Send this now as your first LLM message (before any other request):
 
@@ -146,13 +146,13 @@ instruction/governance files already present in this repository.
 Each following tutorial step uses the same structure:
 
 - ‘You send’ shows a suitable message to send to the LLM. Any equivalent wording is fine.
-- This tutorial assumes [glossary.md](../glossary.md) is created in
+- This tutorial assumes [glossary.adoc](../glossary.adoc) is created in
   Step 1 and then maintained throughout the later steps.
 - Governance and workflow gates (from the copied [AGENTS.md](../AGENTS.md) and
   [CONSTITUTION.md](../CONSTITUTION.md)) are expected to be loaded by your LLM tool
   automatically. [glossary-skill.md](../glossary-skill.md) is expected next to
   [CONSTITUTION.md](../CONSTITUTION.md) and should be consulted when
-  [glossary.md](../glossary.md) is created or updated. If the LLM does not follow them, fix instruction
+  [glossary.adoc](../glossary.adoc) is created or updated. If the LLM does not follow them, fix instruction
   loading at the tool configuration level before proceeding.
 - The constitution, not repeated prompt wording, defines approval and
   implementation boundaries.
@@ -160,7 +160,7 @@ Each following tutorial step uses the same structure:
   current task, subtask, or design instead of proceeding directly.
 - ‘You see’ is what you should expect to observe in results/artifacts.
 - ‘You see’ may include terminology aligned with
-  [glossary.md](../glossary.md) and, for implementation steps, updates
+  [glossary.adoc](../glossary.adoc) and, for implementation steps, updates
   to it that reflect approved Design.
 - ‘After completion’ describes move-to-done/commit expectations.
 - ‘You learned (this step)’ is the takeaway after the step is done.
@@ -223,7 +223,7 @@ the brief and clearly describe the two parts (museum overview page +
 Progressive Timeline game), the core rules, and the leaderboard sorting.
 Keep the README concise and practical.
 
-Also create `glossary.md` from the approved project brief. It should
+Also create `glossary.adoc` from the approved project brief. It should
 define the canonical project terms needed for this tutorial and keep
 their wording consistent with the brief.
 
@@ -239,7 +239,7 @@ This is documentation-only work, we do not need a task file for it.
 - [README.md](../README.md):
   - Exists and captures the project brief requirements.
   - Includes the project brief text under "Project Brief".
-- [glossary.md](../glossary.md):
+- [glossary.adoc](../glossary.adoc):
   - Exists and defines the canonical project terms from the brief.
   - Uses wording consistent with the brief so later tasks can reuse it.
 - [AGENTS.md](../AGENTS.md):
@@ -249,12 +249,12 @@ This is documentation-only work, we do not need a task file for it.
 ### After completion (commit)
 
 - After you accept this work item as done: ask the LLM to commit the
-  README, `glossary.md`, and `AGENTS.md` changes.
+  README, `glossary.adoc`, and `AGENTS.md` changes.
 
 ### You learned (this step)
 
 - The LLM can create documentation, wire persistent instructions to the
-  canonical project brief, establish `glossary.md` as the project
+  canonical project brief, establish `glossary.adoc` as the project
   vocabulary, and (after you accept it) commit without creating a task
   file.
 
@@ -401,7 +401,7 @@ Reuse earlier task-file research where relevant, but keep future
 subtasks lightweight. We will flesh out only the current subtask before
 implementation.
 
-Use `glossary.md` during planning as the reference for gameplay terms
+Use `glossary.adoc` during planning as the reference for gameplay terms
 and definitions.
 ```
 
@@ -414,7 +414,7 @@ and definitions.
   - Each subtask has Scope and Motivation, but future subtasks are not
     fully designed yet.
   - Relevant earlier task-file research is referenced where needed.
-  - Task and subtask terminology aligns with `glossary.md`.
+  - Task and subtask terminology aligns with `glossary.adoc`.
 
 ### Subtask-by-subtask workflow
 
@@ -435,9 +435,9 @@ and definitions.
   implementation approval.
 - Task file: the current subtask is fleshed out; future subtasks remain
   lightweight.
-- The current subtask Design uses glossary terms from `glossary.md`
-  consistently and makes any glossary term change explicit before
-  approval.
+- The current subtask Design and Constraints, when present,
+  use glossary terms from `glossary.adoc` consistently and make any
+  glossary term change explicit before approval.
 
 ### You see (during subtask implementation)
 
@@ -448,7 +448,7 @@ and definitions.
   task is moved to `done` only after the last subtask is done.
 - Code: game is reachable from `site/index.html` and playable (after
   relevant subtasks complete).
-- If approved Design changed existing glossary terms, `glossary.md` is
+- If approved Design changed existing glossary terms, `glossary.adoc` is
   updated to match.
 
 ### You learned (this step)
@@ -482,7 +482,7 @@ subtask. Create only:
 Keep future implementation subtasks lightweight. We will flesh out only
 the current subtask before implementation.
 
-Use `glossary.md` during planning as the reference for leaderboard
+Use `glossary.adoc` during planning as the reference for leaderboard
 terms and definitions.
 ```
 
@@ -571,9 +571,9 @@ Each step follows the Constitution interaction model:
 - In chat, you ask the LLM to create a task or ADR.
 - First, the LLM writes the task/ADR content needed for the current
   review step. For larger tasks, start with the task header and an
-  ordered subtask breakdown, then flesh out Research, Scenario, Design,
-  and Test specification only for the current subtask before
-  implementation.
+  ordered subtask breakdown, then flesh out Research, Scenario, Constraints when
+  needed, Design, and Test specification only for the current
+  subtask before implementation.
 - You approve or reject implementation explicitly.
 - Only after explicit approval should the LLM make executable changes
   (code/tests/config/runtime assets).

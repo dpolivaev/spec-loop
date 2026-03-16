@@ -101,7 +101,7 @@ extra project-specific guidance you need.
 
 5. Optional project glossary.
 
-   * In DDD, `glossary.md` makes the ubiquitous language explicit. It
+   * In DDD, `glossary.adoc` makes the ubiquitous language explicit. It
      is the place where project terms are defined so Scenario, Design,
      tests, code symbols, and commit text can use the same language.
    * If you want shared glossary conventions, keep

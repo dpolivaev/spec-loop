@@ -38,8 +38,9 @@ what must be true now to implement the next increment correctly.
 
 Practically:
 
-* Research records observations, constraints, and verified facts only.
-* Design records the current design intent for the increment.
+* Research records observations and verified facts only.
+* Constraints record binding limits for the increment when needed.
+* Design records the approved target design intent for the increment.
 * Test specification defines the verification that must exist for completion.
 
 History belongs in version control. The task file represents the current intent.
@@ -53,8 +54,8 @@ point:
 * for the developer returning to the task after time has passed,
 * for onboarding new contributors.
 
-The briefing explains what matters, where to look first, and why the design
-looks the way it does.
+The briefing explains what matters, where to look first,
+and which modules, classes, and stack decisions orient a newcomer quickly.
 
 It is not a summary of the task history. It is a guide for understanding the
 current intent.
