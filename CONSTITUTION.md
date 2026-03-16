@@ -121,8 +121,8 @@ When task-first applies and no suitable task file exists, propose
 creating one before research/design. Do not keep implementation design
 only in chat unless the User explicitly allows that mode.
 
-Before IMPLEMENTATION, the approved target design decisions must be
-present in the task-file Design section.
+Before IMPLEMENTATION, approved Design decisions and required
+Constraints must be present in the task file.
 
 Chat is a coordination channel, not a design artifact.
 
@@ -292,7 +292,7 @@ Rules in this section complement, and do not override,
 
 - **Task sections are source of truth**  
   Re-read relevant task sections (Scope, Motivation, Scenario,
-  Research, Design, Test Spec) before implementation or whenever
+  Constraints, Research, Design, Test Spec) before implementation or whenever
   requirements are unclear. Keep only relevant task content in active
   context and avoid carrying unrelated content.
 
@@ -363,12 +363,32 @@ Each task uses this exact order and layout:
   - `- **Motivation:**`
   - `- **Scenario:**` (conditional; include only when behavior is
     introduced/clarified or terms are introduced/refined)
+  - `- **Constraints:**` (optional; include when the task has
+    important limits that the target `Design` and implementation must
+    obey)
   - `- **Developer Briefing:**`
   - `- **Research:**`
   - `- **Design:**`
   - `- **Test specification:**`
-  If Scenario is omitted, keep the remaining sections in order, with
-  `Developer Briefing` immediately after `Motivation`.
+  If `Scenario` or `Constraints` is omitted, keep the remaining
+  sections in order.
+
+**Constraints** (optional)
+
+- Use when the task has important limits that the target `Design` and
+  implementation must obey.
+- Typical content: semantic invariants, non-goals, compatibility
+  limits, performance limits, identity rules, and forbidden
+  simplifications.
+- If `Design` conflicts with `Constraints`, `Constraints` wins.
+
+**Developer Briefing**
+
+- Short orientation for a developer or reviewer unfamiliar with the
+  codebase, stack, subsystem boundaries, or entry points.
+- Use this section for practical context such as relevant modules,
+  important classes, framework context, repository conventions, and
+  risk areas.
 
 Subtasks (if any):
 
@@ -377,7 +397,7 @@ Subtasks (if any):
 - Each subtask:
   - starts with `- **Status:** <status>`,
   - uses the same list-item labels and ordering rules as the main task
-    (including conditional Scenario),
+    (including conditional `Scenario` and optional `Constraints`),
   - represents a functional increment unless explicitly marked
     otherwise.
 
@@ -388,11 +408,12 @@ defined in **Task States**.
 
 Before setting a task or subtask to **review**:
 
-1. **Research**: legacy state and constraints are documented as needed.
+1. **Research**: legacy state is documented as needed.
 2. **Scenario**: when applicable, expected behavior is documented as a
    clear story in natural language.
 3. **Design**: architecture/data flow/class interactions are defined.
-4. **Scope**: Design and Test specification are fully implemented.
+4. **Scope**: Scope, Design, Constraints, and Test specification are
+   fully implemented as applicable.
 5. **Verification**: new and relevant existing tests pass locally.
 6. **Cleanliness**: no TODOs, placeholders, temp comments, unused
    imports.
