@@ -196,14 +196,6 @@ Rules in this section complement, and do not override,
    language in implementation-oriented abstractions and responsibility
    boundaries.
 
-   Design sections must use PlantUML diagrams
-   (class/component/sequence). Do not use PlantUML notes. If mixing
-   class and non-class elements, add `allowmixing`. For component or
-   sequence diagrams, declare elements with explicit PlantUML
-   keywords. For class diagrams, use one outer package with nested
-   inner packages and add `set separator none`. Use meaningful
-   dependency labels and at most one connector per class pair.
-
    Formatting: keep the diagram in its own paragraph under Design, with
    explanatory text in a separate paragraph below it only for context,
    rationale, constraints, or clarifications PlantUML cannot express.
@@ -371,6 +363,27 @@ Each task uses this exact order and layout:
 - Use this section for practical context such as relevant modules,
   important classes, framework context, repository conventions, and
   risk areas.
+
+**PlantUML Diagrams**
+
+- In task files, prefer PlantUML diagrams (for example
+  class/component/sequence) over prose when structure, flow,
+  ownership, interactions, or constraints can be expressed more
+  clearly in a diagram.
+- PlantUML diagrams may appear in any section when they represent or
+  clarify that section's content.
+- PlantUML diagrams must match the semantics of their section. Use
+  **Research** for current state and **Design** for target state; use
+  other sections only when the diagram directly supports that
+  section's purpose.
+- Do not use PlantUML notes. Put explanatory text in a separate
+  paragraph immediately below the diagram for context, rationale,
+  constraints, or clarifications the diagram cannot express.
+- If mixing class and non-class elements, add `allowmixing`. For
+  component or sequence diagrams, declare elements with explicit
+  PlantUML keywords. For class diagrams, use one outer package with
+  nested inner packages and add `set separator none`. Use meaningful
+  dependency labels and at most one connector per class pair.
 
 Subtasks (if any):
 
