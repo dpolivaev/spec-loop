@@ -208,15 +208,14 @@ Rules in this section complement, and do not override,
    serialized payloads, **Design** must show the full target
    request/response structures and enums; examples may supplement but
    must not replace the class specification.
-   Important responsibilities, interactions, and architectural
-   boundaries should appear in the diagram whenever PlantUML can
-   express them. When Scenario exists, Design must reflect Scenario
-   language in implementation-oriented abstractions and responsibility
-   boundaries.
+  Show important responsibilities, interactions, and architectural
+  boundaries clearly and concisely. When Scenario exists, Design must
+  reflect Scenario language in implementation-oriented abstractions and
+  responsibility boundaries.
 
-   Formatting: keep the diagram in its own paragraph under Design, with
-   explanatory text in a separate paragraph below it only for context,
-   rationale, constraints, or clarifications PlantUML cannot express.
+  Formatting: if used, keep the diagram in its own paragraph under
+  Design. Put explanatory text below it only for context, rationale,
+  constraints, or clarifications it cannot express.
 
 5. **Test specification**
    Document verification structure and concrete test coverage.
@@ -384,19 +383,19 @@ Each task uses this exact order and layout:
 
 **PlantUML Diagrams**
 
-- In task files, prefer PlantUML diagrams (for example
-  class/component/sequence) over prose when structure, flow,
-  ownership, interactions, or constraints can be expressed more
-  clearly in a diagram.
-- PlantUML diagrams may appear in any section when they represent or
-  clarify that section's content.
-- PlantUML diagrams must match the semantics of their section. Use
-  **Research** for current state and **Design** for target state; use
-  other sections only when the diagram directly supports that
-  section's purpose.
-- Do not use PlantUML notes. Put explanatory text in a separate
-  paragraph immediately below the diagram for context, rationale,
-  constraints, or clarifications the diagram cannot express.
+- This section defines when PlantUML diagrams are required in task
+  files.
+- Use **Research** for current state and **Design** for target state.
+- **Research** must include a PlantUML diagram when current behavior,
+  message flow, context selection, or component interaction is being
+  analyzed.
+- **Design** must include a PlantUML diagram when the change affects
+  structure or component interaction.
+- A diagram may be omitted only when the task is confined to a single
+  method or a trivially local change with no meaningful flow or
+  interaction to visualize.
+- Do not use PlantUML notes. Put needed explanation below the
+  diagram.
 - If mixing class and non-class elements, add `allowmixing`. For
   component or sequence diagrams, declare elements with explicit
   PlantUML keywords. For class diagrams, use one outer package with
