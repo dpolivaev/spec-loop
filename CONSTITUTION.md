@@ -381,8 +381,10 @@ Each task uses this exact order and layout:
 - If mixing class and non-class elements, add `allowmixing`. For
   component or sequence diagrams, declare elements with explicit
   PlantUML keywords. For class diagrams, use one outer package with
-  nested inner packages and add `set separator none`. Use meaningful
-  dependency labels and at most one connector per class pair.
+  nested inner packages and add `set separator none`. Show only the
+  class elements that are part of the change or needed to understand
+  the structural interaction. Use meaningful dependency labels and at
+  most one connector per class pair.
 
 Subtasks (if any):
 
