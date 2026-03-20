@@ -153,41 +153,40 @@ Rules in this section complement, and do not override,
   constraints. Current or as-is design belongs in **Research**.
 
 3. **Scenario**  
-
   Scenario anchors behavior and terms before implementation. Use it
   when behavior/terms are introduced or changed; otherwise it can be
   skipped (see Decision Tables). Keep Scenario concise and
   implementation-free.
 
-    **Naming principle (canonical terms):**
-    Scenario is the source of domain and behavior language. When
-    behavior or terms are introduced or changed, create or update
-    Scenario first, then use those terms consistently in Design, tests,
-    code symbols, and commit text. Do not keep parallel synonyms for
-    the same domain concept.
-    If existing code uses different names, align naming incrementally in
-    the current scope and document any intentional temporary mismatch in
-    the task file.
-    Research may mention legacy terms and synonyms. Design must use only
-    canonical Scenario terms, except for explicit legacy-to-target
-    mapping tables.
+  **Naming principle (canonical terms):**
+  Scenario is the source of domain and behavior language. When
+  behavior or terms are introduced or changed, create or update
+  Scenario first, then use those terms consistently in Design, tests,
+  code symbols, and commit text. Do not keep parallel synonyms for
+  the same domain concept.
+  If existing code uses different names, align naming incrementally in
+  the current scope and document any intentional temporary mismatch in
+  the task file.
+  Research may mention legacy terms and synonyms. Design must use only
+  canonical Scenario terms, except for explicit legacy-to-target
+  mapping tables.
 
-    **Project glossary:**
-    A project glossary in `glossary.adoc` is optional.
-    If `glossary.adoc` exists, consider it during planning as the
-    reference for project ubiquitous-language terms and definitions.
-    Creating the first `glossary.adoc` from already approved information
-    is documentation-only work and does not require a task file unless
-    the User asks for task-based tracking.
-    If a task changes or adds domain terms, the required
-    `glossary.adoc` updates must be planned during PLAN.
-    During IMPLEMENTATION, perform the planned `glossary.adoc`
-    updates. They may only reflect approved Design.
-    If required glossary updates were not planned, stop, return to
-    PLAN, update the task, request approval, then continue.
-    If `glossary-skill.md` exists next to this Constitution, consult it
-    when creating or updating `glossary.adoc`. It is not required during
-    PLAN and does not create an additional approval gate.
+  **Project glossary:**
+  A project glossary in `glossary.adoc` is optional.
+  If `glossary.adoc` exists, consider it during planning as the
+  reference for project ubiquitous-language terms and definitions.
+  Creating the first `glossary.adoc` from already approved information
+  is documentation-only work and does not require a task file unless
+  the User asks for task-based tracking.
+  If a task changes or adds domain terms, the required
+  `glossary.adoc` updates must be planned during PLAN.
+  During IMPLEMENTATION, perform the planned `glossary.adoc`
+  updates. They may only reflect approved Design.
+  If required glossary updates were not planned, stop, return to
+  PLAN, update the task, request approval, then continue.
+  If `glossary-skill.md` exists next to this Constitution, consult it
+  when creating or updating `glossary.adoc`. It is not required during
+  PLAN and does not create an additional approval gate.
 
 
 4. **Design**  
