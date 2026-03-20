@@ -212,6 +212,12 @@ Rules in this section complement, and do not override,
   reflect Scenario language in implementation-oriented abstractions and
   responsibility boundaries.
 
+  Design must assign each new responsibility explicitly. Assign it
+  either to an existing implementation unit or to a concretely named
+  new one with a clear boundary. If that assignment is not yet
+  decided, the design is not ready for implementation. Do not use
+  stand-in names for unresolved design.
+
   Formatting: if used, keep the diagram in its own paragraph under
   Design. Put explanatory text below it only for context, rationale,
   constraints, or clarifications it cannot express.
