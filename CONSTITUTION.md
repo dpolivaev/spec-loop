@@ -363,7 +363,7 @@ Each task uses this exact order and layout:
   If `Scenario` or `Constraints` is omitted, keep the remaining
   sections in order.
 
-**Constraints** (optional)
+### Constraints (optional)
 
 - Use when the task has important limits that the target `Design` and
   implementation must obey.
@@ -372,7 +372,7 @@ Each task uses this exact order and layout:
   simplifications.
 - If `Design` conflicts with `Constraints`, `Constraints` wins.
 
-**Briefing**
+### Briefing
 
 - Short orientation for someone unfamiliar with the codebase,
   stack, subsystem boundaries, or entry points.
@@ -380,7 +380,7 @@ Each task uses this exact order and layout:
   important classes, framework context, repository conventions, and
   risk areas.
 
-**PlantUML Diagrams**
+### PlantUML Diagrams
 
 - This section defines when PlantUML diagrams are required in task
   files.
@@ -405,7 +405,7 @@ Each task uses this exact order and layout:
   interaction, with meaningful dependency labels and at most one
   connector per class pair.
 
-Subtasks (if any):
+### Subtasks (if any)
 
 - Appear only at the end as `## Subtask: <title>` sections; append new
   subtasks unless the user explicitly requests different ordering.
@@ -419,7 +419,7 @@ Subtasks (if any):
 Subtask `Status` values and transitions use the same lifecycle rules as
 defined in **Task States**.
 
-**Definition of Done for LLM:**
+## Definition of Done for LLM
 
 Before setting a task or subtask to **review**:
 
@@ -437,7 +437,7 @@ Before setting a task or subtask to **review**:
    deviation and rationale must be documented in the task file before
    review.
 
-**Testing Policy:**
+## Testing Policy
 
 - Every subtask must include a testing block.
 - Tasks or subtasks without code changes do not require tests.
