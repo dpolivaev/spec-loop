@@ -369,6 +369,21 @@ Each task uses this exact order and layout:
   - `- **Test specification:**`
   If `Scenario` or `Constraints` is omitted, keep the remaining
   sections in order.
+- Subtasks (if the task contains any) must be placed
+  after all global task sections.
+
+### Every Subtask
+- must start with level 2 heading having pattern
+  `## Subtask: <title>` 
+  followed by the status line `- **Status:** <status>`,
+- must use the same list-item labels and ordering rules as the main task
+  (including conditional `Scenario` and optional `Constraints`),
+- must represent a functional increment and, for implementation tasks,
+  include executable work.
+- Do not create planning-only subtasks unless the User explicitly asks.
+
+Subtask `Status` values and transitions use the same lifecycle rules as
+defined in **Task States**.
 
 ### Constraints (optional)
 
@@ -424,22 +439,6 @@ Each task uses this exact order and layout:
   `glossary-skill.md` next to this Constitution.
 - If `glossary-skill.md` exists, read it and follow it first.
 - This glossary check does not add an approval gate.
-
-### Subtasks (if any)
-
-- Appear only at the end as `## Subtask: <title>` sections; append new
-  subtasks unless the user explicitly requests different ordering.
-- Each subtask:
-  - starts with `- **Status:** <status>`,
-  - uses the same list-item labels and ordering rules as the main task
-    (including conditional `Scenario` and optional `Constraints`),
-  - represents a functional increment unless explicitly marked
-    otherwise.
-- For implementation tasks, every subtask must include executable work.
-  Do not create planning-only subtasks unless the User explicitly asks.
-
-Subtask `Status` values and transitions use the same lifecycle rules as
-defined in **Task States**.
 
 ## Definition of Done for LLM
 
