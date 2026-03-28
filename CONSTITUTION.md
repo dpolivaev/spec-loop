@@ -435,6 +435,8 @@ Each task uses this exact order and layout:
     (including conditional `Scenario` and optional `Constraints`),
   - represents a functional increment unless explicitly marked
     otherwise.
+- For implementation tasks, every subtask must include executable work.
+  Do not create planning-only subtasks unless the User explicitly asks.
 
 Subtask `Status` values and transitions use the same lifecycle rules as
 defined in **Task States**.
