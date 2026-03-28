@@ -401,16 +401,14 @@ site/index.html.
 
 For the initial task creation, do not fully design every future
 subtask. Create only:
-- the overall task header
-- an ordered implementation subtask breakdown
-- Scope and Motivation for each subtask
+- the overall task
+- subtasks containing Scope and Motivation each
 
 Reuse earlier task-file research where relevant, but keep future
 subtasks lightweight. We will flesh out only the current subtask before
 implementation.
 
-Use `glossary.adoc` during planning as the reference for gameplay terms
-and definitions.
+Use `glossary.adoc` as the terminology reference.
 ```
 
 ### You see (plan)
@@ -429,13 +427,13 @@ and definitions.
 - Review the task header and the task breakdown first.
 - If the breakdown needs adjustment, ask the LLM to revise it before any
   implementation starts.
-- If it looks good, ask the LLM to flesh out only the first subtask.
+- If it looks good, ask the LLM to `flesh out only the first subtask`.
 - Review that current-subtask detail. If it looks good, ask the LLM to
-  implement only that subtask.
+  `implement only that subtask`.
 - After each implemented subtask, either ask for changes or accept it
-  and ask the LLM to move it to `done`.
-- Then ask it to create a separate commit and only after that ask it to
-  flesh out the next subtask.
+  and ask the LLM to `move it to done`.
+- Then ask it to `create a separate commit` and only after that ask it to
+  `flesh out the next subtask`.
 
 ### You see (current subtask design)
 
