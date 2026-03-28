@@ -178,34 +178,35 @@ Rules in this section complement, and do not override,
   Creating the first `glossary.adoc` from already approved information
   is documentation-only work and does not require a task file unless
   the User asks for task-based tracking.
-  If a task changes or adds domain terms, the required
-  `glossary.adoc` updates must be planned during PLAN.
   If the project uses `glossary.adoc`, the LLM must check whether
-  approved work changes or clarifies shared domain language.
-  During IMPLEMENTATION, perform the planned required
-  `glossary.adoc` updates. They may only reflect approved Design.
-  If required glossary updates were not planned, stop, return to
-  PLAN, update the task, request approval, then continue.
+  approved work changes, clarifies or implements shared domain terms.
+  The related `glossary.adoc` updates must be planned during PLAN.
+  Do not add helper names, implementation details, framework terms, or
+  other terms that are not needed to understand project rules,
+  behavior, or true subsystem boundaries.
 
+  Before creating or updating `glossary.adoc`, read
+  `glossary-skill.md` next to this Constitution if available.
 
 4. **Design**  
-   Document implementation architecture, data flow, interactions, and
-   responsibility boundaries in **Design**. Draft it from validated
-   **Research** and required behavior from **Scenario** when Scenario
-   exists. Design documents the approved target system only. Current
-   implementation, legacy structure, reverse-engineered flows, and
-   as-is diagrams must not appear in **Design** unless they are
-   intentionally retained in the target design.
+  Document implementation architecture, data flow, interactions, and
+  responsibility boundaries in **Design**. Draft it from validated
+  **Research** and required behavior from **Scenario** when Scenario
+  exists. Design documents the approved target system only. Current
+  implementation, legacy structure, reverse-engineered flows, and
+  as-is diagrams must not appear in **Design** unless they are
+  intentionally retained in the target design.
 
-   Design must make intended implementation structure reviewable.
-   Keep verification structure in **Test specification**, not in
-   Design. Do not model test suites, test doubles, harnesses, or other
-   test-only elements in Design unless the task itself changes test
-   infrastructure. Design diagrams must not include test classes, test
-   fixtures, or test-only helpers. When changing tools, APIs, or
-   serialized payloads, **Design** must show the full target
-   request/response structures and enums; examples may supplement but
-   must not replace the class specification.
+  Design must make intended implementation structure reviewable.
+  Keep verification structure in **Test specification**, not in
+  Design. Do not model test suites, test doubles, harnesses, or other
+  test-only elements in Design unless the task itself changes test
+  infrastructure. Design diagrams must not include test classes, test
+  fixtures, or test-only helpers. When changing tools, APIs, or
+  serialized payloads, **Design** must show the full target
+  request/response structures and enums; examples may supplement but
+  must not replace the class specification.
+
   Show important responsibilities, interactions, and architectural
   boundaries clearly and concisely. When Scenario exists, Design must
   reflect Scenario language in implementation-oriented abstractions and
@@ -230,11 +231,17 @@ Rules in this section complement, and do not override,
   coherent. No implementation starts during this loop.
 
 7. **Implementation**  
-   Implementation is complete only when both design and test
-   specification are implemented, unless the user explicitly waives
-   tests. If the project uses `glossary.adoc` and approved work
-   changes or clarifies shared domain language, implementation is not
-   complete until the required glossary update is made.
+  Implementation is complete only when both design and test
+  specification are implemented, unless the user explicitly waives
+  tests. If the project uses `glossary.adoc` and approved work
+  changes, clarifies, or implements shared domain terms, perform the required
+  `glossary.adoc` updates. They may only reflect approved Design.
+  If required glossary term updates were not planned, stop, return to
+  PLAN, update the task, request approval, then continue.
+  Implementation is not complete until the
+  required glossary update with relevant implementation traceability
+  links is made.
+
 
 8. **Status updates**  
    Move task files between status folders within the project task
@@ -426,19 +433,6 @@ defined in **Task States**.
   only the class elements needed for the change or structural
   interaction, with meaningful dependency labels and at most one
   connector per class pair.
-
-### Project Glossary
-
-- This section defines how `glossary.adoc` is used when a project keeps
-  a glossary.
-- `glossary.adoc` records only the project's shared domain language.
-- Do not add helper names, implementation details, framework terms, or
-  other terms that are not needed to understand project rules,
-  behavior, or true subsystem boundaries.
-- Before creating or updating `glossary.adoc`, check for
-  `glossary-skill.md` next to this Constitution.
-- If `glossary-skill.md` exists, read it and follow it first.
-- This glossary check does not add an approval gate.
 
 ## Definition of Done for LLM
 
