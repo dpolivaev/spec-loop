@@ -130,7 +130,7 @@ PLAN -> IMPLEMENTATION approval gate in one sentence.
 
 Then create an initial commit containing CONSTITUTION.md,
 glossary-skill.md, and the
-instruction/governance files already present in this repository.
+instruction/governance files already present in this project.
 ```
 
    - On the first LLM response, you should see a leading 🫡 without
@@ -160,8 +160,10 @@ Each following tutorial step uses the same structure:
   current task, subtask, or design instead of proceeding directly.
 - ‘You see’ is what you should expect to observe in results/artifacts.
 - ‘You see’ may include terminology aligned with
-  [glossary.adoc](../glossary.adoc) and, for implementation steps, updates
-  to it that reflect approved Design.
+  [glossary.adoc](../glossary.adoc).
+- If implementation changes or clarifies shared domain language,
+  ‘You see’ should also include the corresponding
+  [glossary.adoc](../glossary.adoc) update.
 - ‘After completion’ describes move-to-done/commit expectations.
 - ‘You learned (this step)’ is the takeaway after the step is done.
 
@@ -171,8 +173,9 @@ If it matters to you, ask the LLM to adjust and re-verify until the
 step matches what you consider important.
 
 When relevant, ‘You see’ may also include supporting hygiene changes
-required by the constitution, such as task status updates or ignore-rule
-updates.
+required by the constitution, such as task status updates, ignore-rule
+updates, or required glossary updates. If one is missing, ask the LLM
+to correct it before you accept the step.
 
 Sometimes the LLM fails to follow the required task structure, section
 order, or formatting. If you suspect that might be the case, you can
@@ -448,8 +451,9 @@ and definitions.
   task is moved to `done` only after the last subtask is done.
 - Code: game is reachable from `site/index.html` and playable (after
   relevant subtasks complete).
-- If approved Design changed existing glossary terms, `glossary.adoc` is
-  updated to match.
+- [glossary.adoc](../glossary.adoc): expands to cover the gameplay-core
+  terms introduced by the implementation and links those terms to the
+  relevant code.
 
 ### You learned (this step)
 
@@ -511,6 +515,8 @@ terms and definitions.
 - Verification evidence is provided for the in-memory leaderboard
   subtask.
 - Behavior: leaderboard sorting matches the required rules.
+- [glossary.adoc](../glossary.adoc): links the leaderboard terms to the
+  implemented code.
 
 ### You send
 

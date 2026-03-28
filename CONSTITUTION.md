@@ -180,13 +180,12 @@ Rules in this section complement, and do not override,
   the User asks for task-based tracking.
   If a task changes or adds domain terms, the required
   `glossary.adoc` updates must be planned during PLAN.
-  During IMPLEMENTATION, perform the planned `glossary.adoc`
-  updates. They may only reflect approved Design.
+  If the project uses `glossary.adoc`, the LLM must check whether
+  approved work changes or clarifies shared domain language.
+  During IMPLEMENTATION, perform the planned required
+  `glossary.adoc` updates. They may only reflect approved Design.
   If required glossary updates were not planned, stop, return to
   PLAN, update the task, request approval, then continue.
-  If `glossary-skill.md` exists next to this Constitution, consult it
-  when creating or updating `glossary.adoc`. It is not required during
-  PLAN and does not create an additional approval gate.
 
 
 4. **Design**  
@@ -233,7 +232,9 @@ Rules in this section complement, and do not override,
 7. **Implementation**  
    Implementation is complete only when both design and test
    specification are implemented, unless the user explicitly waives
-   tests.
+   tests. If the project uses `glossary.adoc` and approved work
+   changes or clarifies shared domain language, implementation is not
+   complete until the required glossary update is made.
 
 8. **Status updates**  
    Move task files between status folders within the project task
@@ -410,6 +411,19 @@ Each task uses this exact order and layout:
   only the class elements needed for the change or structural
   interaction, with meaningful dependency labels and at most one
   connector per class pair.
+
+### Project Glossary
+
+- This section defines how `glossary.adoc` is used when a project keeps
+  a glossary.
+- `glossary.adoc` records only the project's shared domain language.
+- Do not add helper names, implementation details, framework terms, or
+  other terms that are not needed to understand project rules,
+  behavior, or true subsystem boundaries.
+- Before creating or updating `glossary.adoc`, check for
+  `glossary-skill.md` next to this Constitution.
+- If `glossary-skill.md` exists, read it and follow it first.
+- This glossary check does not add an approval gate.
 
 ### Subtasks (if any)
 
