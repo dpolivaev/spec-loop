@@ -55,6 +55,7 @@ defined later in **Task States**.
 | Scenario usage decision | Rule |
 | --- | --- |
 | Behavior or domain terms are introduced/changed | Scenario is required |
+| Work only implements existing shared domain terms | Scenario may be omitted |
 | Purely technical change without behavior/term change | Scenario may be omitted |
 | Scenario omitted | Do not introduce new domain terms in Design; add Scenario first if terms change |
 
@@ -451,6 +452,8 @@ Before setting a task or subtask to **review**:
    file. If implementation differs from the approved target design, the
    deviation and rationale must be documented in the task file before
    review.
+8. **Glossary**: required `glossary.adoc` updates and
+   implementation traceability links are completed.
 
 ## Testing Policy
 
