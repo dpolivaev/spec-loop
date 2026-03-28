@@ -29,7 +29,7 @@ LLM:
      shared location outside your project.
    - Keep [glossary-skill.md](../glossary-skill.md) in the same
      directory as [CONSTITUTION.md](../CONSTITUTION.md). This tutorial
-     uses [glossary.adoc](../glossary.adoc) throughout, so keep the
+     uses `glossary.adoc` throughout, so keep the
      glossary guidance available from the start.
    - Fallback: if a shared location is not practical, copy these files
      into your project instead.
@@ -124,7 +124,7 @@ LLM --> User: Reports execution in chat
      `CLAUDE.md`).
    - Keep [glossary-skill.md](../glossary-skill.md) in the same
      directory as [CONSTITUTION.md](../CONSTITUTION.md) so the LLM can
-     consult it later for [glossary.adoc](../glossary.adoc) creation and
+     consult it later for `glossary.adoc` creation and
      updates.
    - Send this now as your first LLM message (before any other request):
 
@@ -151,13 +151,13 @@ instruction/governance files already present in this project.
 Each following tutorial step uses the same structure:
 
 - ‘You send’ shows a suitable message to send to the LLM. Any equivalent wording is fine.
-- This tutorial assumes [glossary.adoc](../glossary.adoc) is created in
+- This tutorial assumes `glossary.adoc` is created in
   Step 1 and then maintained throughout the later steps.
 - Governance and workflow gates (from the copied [AGENTS.md](../AGENTS.md) and
   [CONSTITUTION.md](../CONSTITUTION.md)) are expected to be loaded by your LLM tool
   automatically. [glossary-skill.md](../glossary-skill.md) is expected next to
   [CONSTITUTION.md](../CONSTITUTION.md) and should be consulted when
-  [glossary.adoc](../glossary.adoc) is created or updated. If the LLM does not follow them, fix instruction
+  `glossary.adoc` is created or updated. If the LLM does not follow them, fix instruction
   loading at the tool configuration level before proceeding.
 - The constitution, not repeated prompt wording, defines approval and
   implementation boundaries.
@@ -165,10 +165,10 @@ Each following tutorial step uses the same structure:
   current task, subtask, or design instead of proceeding directly.
 - ‘You see’ is what you should expect to observe in results/artifacts.
 - ‘You see’ may include terminology aligned with
-  [glossary.adoc](../glossary.adoc).
+  `glossary.adoc`.
 - If implementation changes or clarifies shared domain language,
   ‘You see’ should also include the corresponding
-  [glossary.adoc](../glossary.adoc) update.
+  `glossary.adoc` update.
 - ‘After completion’ describes move-to-done/commit expectations.
 - ‘You learned (this step)’ is the takeaway after the step is done.
 
@@ -247,7 +247,7 @@ This is documentation-only work, we do not need a task file for it.
 - [README.md](../README.md):
   - Exists and captures the project brief requirements.
   - Includes the project brief text under "Project Brief".
-- [glossary.adoc](../glossary.adoc):
+- `glossary.adoc`:
   - Exists and defines the canonical project terms from the brief.
   - Uses wording consistent with the brief so later tasks can reuse it.
 - [AGENTS.md](../AGENTS.md):
@@ -256,8 +256,8 @@ This is documentation-only work, we do not need a task file for it.
 
 ### After completion (commit)
 
-- After you accept this work item as done: ask the LLM to commit the
-  README, `glossary.adoc`, and `AGENTS.md` changes.
+- After you accept this work item as done: ask the LLM 
+  to `commit the README, glossary.adoc, and AGENTS.md changes`.
 
 ### You learned (this step)
 
@@ -319,8 +319,8 @@ Approve only after the task definition and subtask breakdown look correct.
 
 ### After completion (move to done / commit)
 
-- After you accept this work item as done: ask the LLM to move the task
-  to `done`, then ask it to commit.
+- After you accept this work item as done: ask the LLM to 
+  `move the task to done`, then ask it to commit.
 
 ### You learned (this step)
 
@@ -387,7 +387,7 @@ Record one final choice with rationale. In the same ADR:
 
 ### After completion (commit)
 
-- After you accept the ADR as done: ask the LLM to commit the ADR change.
+- After you accept the ADR as done: ask the LLM to `commit the ADR change`.
   This step is ADR-only and does not involve moving anything to `done`.
 
 ### You learned (this step)
@@ -466,7 +466,7 @@ Use `glossary.adoc` as the terminology reference.
   task is moved to `done` only after the last subtask is done.
 - Code: game is reachable from `site/index.html` and playable (after
   relevant subtasks complete).
-- [glossary.adoc](../glossary.adoc): expands to cover the gameplay-core
+- `glossary.adoc`: expands to cover the gameplay-core
   terms introduced by the implementation and links those terms to the
   relevant code.
 
@@ -530,7 +530,7 @@ terms and definitions.
 - Verification evidence is provided for the in-memory leaderboard
   subtask.
 - Behavior: leaderboard sorting matches the required rules.
-- [glossary.adoc](../glossary.adoc): links the leaderboard terms to the
+- `glossary.adoc`: links the leaderboard terms to the
   implemented code.
 
 ### You send
