@@ -24,13 +24,15 @@ LLM:
    - Before this tutorial, quickly check [CONSTITUTION.md](../CONSTITUTION.md) and
      [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
 2. Create your own project repository (this repo is tutorial source only).
-3. Copy governance files into your project and set a concrete task
-   directory path:
-   - Copy [CONSTITUTION.md](../CONSTITUTION.md) into your project in all cases.
-   - Copy [glossary-skill.md](../glossary-skill.md) into the same
-  directory as [CONSTITUTION.md](../CONSTITUTION.md). This tutorial
-  uses [glossary.adoc](../glossary.adoc) throughout, so keep the
-  glossary guidance available from the start.
+3. Set up governance files and a concrete task directory path:
+   - Preferred: keep [CONSTITUTION.md](../CONSTITUTION.md) in a stable
+     shared location outside your project.
+   - Keep [glossary-skill.md](../glossary-skill.md) in the same
+     directory as [CONSTITUTION.md](../CONSTITUTION.md). This tutorial
+     uses [glossary.adoc](../glossary.adoc) throughout, so keep the
+     glossary guidance available from the start.
+   - Fallback: if a shared location is not practical, copy these files
+     into your project instead.
    - Then copy the instruction file your LLM tool uses:
      - most tools: [AGENTS.md](../AGENTS.md)
      - GitHub Copilot: [.github/copilot-instructions.md](../.github/copilot-instructions.md)
@@ -41,8 +43,11 @@ LLM:
      `glossary.adoc`.
    - The LLM is expected to follow the Constitution by default; you do not
      need to re-explain it in every prompt.
-   - In the copied instruction file(s), replace `<TASK_DIR>` with a
-     real path such as `tasks`.
+   - In the instruction file(s), replace `<TASK_DIR>` with a real path
+     such as `tasks`.
+   - If the governance files are outside the project, reference the
+     shared `CONSTITUTION.md` from your instruction file, typically by
+     absolute path.
 4. Check out `data-aggregator` as a sibling repository (parallel
    directory), not inside your project:
 

@@ -52,9 +52,14 @@ incremental change safer.
 
 Apply the process to your repository.
 
-* Copy the core framework files into your repository:
-  `CONSTITUTION.md` for workflow rules. If your project uses a
-  glossary, also copy the optional glossary guidance from this repo.
+* Preferred: keep the core framework files in a stable shared
+  location outside your project repository.
+  Use `CONSTITUTION.md` for workflow rules. If your project uses a
+  glossary, keep the optional glossary guidance from this repo next to
+  it. Reference `CONSTITUTION.md` from your instruction file, typically
+  by absolute path when the files are outside the project.
+* Fallback: copy the core framework files into your repository if a
+  shared external location is not practical.
 * Manual: reference `CONSTITUTION.md` explicitly in your prompts so it is in
   the model context for the session.
 * Integrated: use instruction files that inject the Constitution and your
@@ -66,6 +71,9 @@ Apply the process to your repository.
 * Define your task directory in those instruction files (`<TASK_DIR>`), then
   ask the model to create and update task files there and follow the workflow
   defined by the Constitution.
+  Absolute paths are useful when the Constitution is kept in a shared
+  external location; relative paths work when the governance files are
+  present in the project.
 
 
 ### Claude setup note
