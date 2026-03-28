@@ -335,18 +335,20 @@ Constitution (for example ask it to restate the PLAN -> IMPLEMENTATION
 approval gate), then tell it to stop and follow the Constitution
 strictly.
 
-## Step 3: ADR for Game Stack Selection
+## Step 3: ADR for Game Stack and Core Design Style
 
 ### You send
 
 ```text
-Please create one ADR for MVP stack selection for the game
-implementation in `architecture-decisions/`.
+Please create one ADR for MVP stack selection and core design style for
+the game implementation in `architecture-decisions/`.
 
-First discuss the criteria with me. We want an MVP stack that supports a
-clean, layered design: the game rules should not be tied to the UI, the
-design should stay visible and reviewable, and most core logic should be
-testable without the browser. Persistence is out of scope for now.
+First discuss the criteria with me. We want an MVP stack and design
+approach that support a clean, layered, class-based design: the game
+rules should live in explicit domain classes, should not be tied to the
+UI, the design should stay visible and reviewable with a class diagram,
+and most core logic should be testable without the browser.
+Persistence stack decisions are deferred.
 
 Then compare 3-5 realistic MVP stack options with pros and cons. Include
 at least one simpler option and at least one option that is a strong fit
@@ -357,8 +359,12 @@ Record one final choice with rationale. In the same ADR:
 - define the exact test command(s)
 - define the browser-based tooling for gameplay and design checks
 - define the expected high-level architecture for the MVP
-- explain why the chosen stack is a good fit for clean, reviewable
-  design
+- require a class-based core design with explicit domain classes and
+  clear UI-adapter boundaries
+- state that later task Design should be reviewable with a class
+  diagram
+- explain why the chosen stack and design style are a good fit for
+  clean, reviewable design
 - mark persistence as out of scope and deferred to the leaderboard work
 ```
 
@@ -367,10 +373,16 @@ Record one final choice with rationale. In the same ADR:
 - Chat: discusses decision criteria before presenting the final ADR.
 - ADR:
   - Compares realistic MVP stack options and records the chosen one with rationale.
-  - Explains the choice in terms of clean/layered design, not only implementation speed.
+  - Records the required core design style, not only the implementation stack.
+  - Explains the choice in terms of clean/layered class-based design,
+    not only implementation speed.
   - Includes test tooling and the exact test command(s).
   - Includes browser-based tooling for gameplay and design checks.
   - Defines the expected high-level architecture for the MVP.
+  - Requires explicit domain classes for core gameplay logic and clear
+    boundaries to UI/browser code.
+  - Makes later class-diagram-based design review an explicit
+    expectation.
   - Marks persistence as out of scope and deferred to the leaderboard work.
 
 ### After completion (commit)
@@ -389,7 +401,7 @@ Record one final choice with rationale. In the same ADR:
 
 ```text
 Starting point: reuse relevant AIC API research already recorded in
-earlier task files in this repo.
+earlier task files in this repo and follow the ADR.
 
 Please create one task for core gameplay in this repository. The scope
 must include a Level 1 playable flow with 2 artworks, progressive
@@ -427,20 +439,20 @@ Use `glossary.adoc` as the terminology reference.
 - Review the task header and the task breakdown first.
 - If the breakdown needs adjustment, ask the LLM to revise it before any
   implementation starts.
-- If it looks good, ask the LLM to `flesh out only the first subtask`.
+- If it looks good, ask the LLM to `completely design only the first subtask`.
 - Review that current-subtask detail. If it looks good, ask the LLM to
   `implement only that subtask`.
 - After each implemented subtask, either ask for changes or accept it
   and ask the LLM to `move it to done`.
 - Then ask it to `create a separate commit` and only after that ask it to
-  `flesh out the next subtask`.
+  `design the next subtask`.
 
 ### You see (current subtask design)
 
-- Chat: fleshes out only the current subtask and asks for explicit
+- Chat: designs out only the current subtask and asks for explicit
   implementation approval.
-- Task file: the current subtask is fleshed out; future subtasks remain
-  lightweight.
+- Task file: the current subtask is designed with all class diagrams;
+  future subtasks remain lightweight.
 - The current subtask Design and Constraints, when present,
   use glossary terms from `glossary.adoc` consistently and make any
   glossary term change explicit before approval.
