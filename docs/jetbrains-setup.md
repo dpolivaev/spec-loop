@@ -1,6 +1,10 @@
-# PlantUML Rendering Inside JetBrains Markdown Preview
+# JetBrains Setup: PlantUML and AsciiDoc
 
-**Goal:** PlantUML diagrams render *inside the built-in Markdown Preview* in JetBrains IDEs, **locally** (no PlantUML server).
+**Goal:** set up JetBrains IDEs for Spec Loop artifacts:
+- PlantUML diagrams render *inside the built-in Markdown Preview*,
+  **locally** (no PlantUML server).
+- `glossary.adoc` opens with an AsciiDoc viewer when the project uses a
+  glossary.
 
 This document has two paths:
 
@@ -120,6 +124,27 @@ This is **not required** for Markdown rendering, but many teams install it for c
 
 ---
 
+## AsciiDoc viewer for `glossary.adoc`
+
+If your project uses `glossary.adoc`, AsciiDoc support in the IDE is
+required.
+
+### 1) Install the AsciiDoc plugin
+
+1. Open **Settings / Preferences** → **Plugins**.
+2. Search for **AsciiDoc**.
+3. Install the plugin and restart the IDE if prompted.
+
+Plugin page:
+[https://plugins.jetbrains.com/plugin/7391-asciidoc](https://plugins.jetbrains.com/plugin/7391-asciidoc)
+
+### 2) Open `glossary.adoc`
+
+Open the `.adoc` file normally in the IDE. The plugin provides AsciiDoc
+editing support and preview support for glossary files.
+
+---
+
 ## Links used
 
 * JetBrains IntelliJ IDEA Markdown docs (extensions + preview): [https://www.jetbrains.com/help/idea/markdown.html](https://www.jetbrains.com/help/idea/markdown.html) ([JetBrains][1])
@@ -129,6 +154,7 @@ This is **not required** for Markdown rendering, but many teams install it for c
 * Android Studio runtime/JCEF fix walkthrough: [https://joachimschuster.de/posts/android-studio-markdown-struggle-never-ends/](https://joachimschuster.de/posts/android-studio-markdown-struggle-never-ends/) ([Joachim Schuster's blog][5])
 * plantuml4idea plugin: [https://plugins.jetbrains.com/plugin/7017-plantuml4idea](https://plugins.jetbrains.com/plugin/7017-plantuml4idea) ([JetBrains Marketplace][6])
 * plantuml4idea repository (features + notes): [https://github.com/esteinberg/plantuml4idea](https://github.com/esteinberg/plantuml4idea) ([GitHub][7])
+* JetBrains AsciiDoc plugin: [https://plugins.jetbrains.com/plugin/7391-asciidoc](https://plugins.jetbrains.com/plugin/7391-asciidoc)
 
 [1]: https://www.jetbrains.com/help/idea/markdown.html "Markdown | IntelliJ IDEA Documentation"
 [2]: https://plugins.jetbrains.com/plugin/7793-markdown/docs "Markdown"

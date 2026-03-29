@@ -1,6 +1,9 @@
-# PlantUML Rendering Inside VS Code Markdown Preview (Two Options: Server or Local)
+# VS Code Setup: PlantUML and AsciiDoc
 
-**Goal:** PlantUML diagrams render *inside Markdown preview* in Visual Studio Code.
+**Goal:** set up Visual Studio Code for Spec Loop artifacts:
+- PlantUML diagrams render *inside Markdown preview*.
+- `glossary.adoc` opens with an AsciiDoc viewer when the project uses a
+  glossary.
 
 This document provides two supported approaches:
 
@@ -211,6 +214,25 @@ Graphviz/dot notes:
 
 ---
 
+## AsciiDoc viewer for `glossary.adoc`
+
+If your project uses `glossary.adoc`, AsciiDoc support in VS Code is
+required.
+
+### 1) Install an AsciiDoc extension
+
+Install:
+
+* **AsciiDoc** (`asciidoctor.asciidoctor-vscode`)
+  [https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode](https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode)
+
+### 2) Open `glossary.adoc`
+
+Open the `.adoc` file normally in VS Code. The extension provides
+AsciiDoc editing support and preview support for glossary files.
+
+---
+
 ## Links used
 
 * Markdown PlantUML Preview (server-based):
@@ -230,3 +252,6 @@ Graphviz/dot notes:
 
 * Graphviz / dot notes:
   [https://plantuml.com/graphviz-dot](https://plantuml.com/graphviz-dot)
+
+* VS Code AsciiDoc extension:
+  [https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode](https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode)

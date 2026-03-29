@@ -1,6 +1,14 @@
 # Spec Loop Tutorial: You Send, You See
 
 This tutorial is intentionally compact and execution-focused.
+It is optimized to demonstrate a broad range of Spec Loop mechanisms in
+limited time, not to show the shortest possible prompts or the leanest
+possible solutions for every situation.
+
+Some prompts are intentionally more explicit than a small real-world
+task would strictly require, because the tutorial is also showing
+reviewability, traceability, architectural decision capture, and staged
+delivery.
 
 This tutorial uses public data from the Art Institute of Chicago (AIC).
 This project is not affiliated with or endorsed by AIC.
@@ -15,6 +23,13 @@ This project is not affiliated with or endorsed by AIC.
   use [AGENTS.md](../AGENTS.md) content as the preamble and add any other guidance
   needed for your project.
 
+The setup recommendations below do not all have the same weight:
+- PlantUML is required where the Constitution requires diagrams.
+- Browser automation is strongly recommended for frontend work but not
+  strictly required.
+- `glossary.adoc` is project-dependent, but recommended when you want
+  stable ubiquitous language and implementation-linked documentation.
+
 ## Step 0: Setup (manual) + Constitution sanity ping
 
 Do this yourself before sending your first substantive request to the
@@ -26,11 +41,14 @@ LLM:
 2. Create your own project repository (this repo is tutorial source only).
 3. Set up governance files and a concrete task directory path:
    - Preferred: keep [CONSTITUTION.md](../CONSTITUTION.md) in a stable
-     shared location outside your project.
+     shared or central location outside your project. These files do
+     not need to live inside the project at all.
    - Keep [glossary-skill.md](../glossary-skill.md) in the same
-     directory as [CONSTITUTION.md](../CONSTITUTION.md). This tutorial
-     uses `glossary.adoc` throughout, so keep the
-     glossary guidance available from the start.
+     directory as [CONSTITUTION.md](../CONSTITUTION.md), regardless of
+     whether the current project uses a glossary.
+   - If the governance files live outside the project, reference the
+     shared `CONSTITUTION.md` from your instruction file by absolute
+     path instead of copying the files into the repository.
    - Fallback: if a shared location is not practical, copy these files
      into your project instead.
    - Then copy the instruction file your LLM tool uses:
@@ -46,8 +64,8 @@ LLM:
    - In the instruction file(s), replace `<TASK_DIR>` with a real path
      such as `tasks`.
    - If the governance files are outside the project, reference the
-     shared `CONSTITUTION.md` from your instruction file, typically by
-     absolute path.
+     shared `CONSTITUTION.md` from your instruction file by absolute
+     path.
 4. Check out `data-aggregator` as a sibling repository (parallel
    directory), not inside your project:
 
@@ -72,17 +90,31 @@ Expected layout:
   data-aggregator/
 ```
 
-5. Recommended: enable browser automation tooling for browser checks
+5. Strongly recommended: enable browser automation tooling for browser checks
    (for example [Playwright MCP](https://github.com/microsoft/playwright-mcp#getting-started)).
-   Use it when needed so the LLM can verify:
+   The tutorial can still be followed without it, but it is especially
+   helpful in frontend work because it helps the LLM and the user verify
+   the same rendered page content and design. Use it when needed so the
+   LLM can verify:
    - `site/index.html` rendering and basic page behavior,
    - game page flow and interactions during gameplay checks.
 
 6. Configure PlantUML preview in your editor using:
-   - [docs/vscode-markdown-plantuml-preview.md](vscode-markdown-plantuml-preview.md), or
-   - [docs/jetbrains-markdown-plantuml-preview.md](jetbrains-markdown-plantuml-preview.md).
+   - [docs/vscode-setup.md](vscode-setup.md), or
+   - [docs/jetbrains-setup.md](jetbrains-setup.md).
 
-7. Verify PlantUML rendering with this installation check snippet:
+   PlantUML is not just a tutorial preference. The Constitution
+   requires PlantUML where task-file diagrams are required. PlantUML is
+   also the recommended default here because these diagrams are often
+   easier to read and review than pure Mermaid diagrams for the
+   structural and behavioral design work used in this tutorial.
+
+7. This tutorial uses `glossary.adoc` throughout, so also configure
+   AsciiDoc support in your editor or IDE. See:
+   - [docs/vscode-setup.md](vscode-setup.md), or
+   - [docs/jetbrains-setup.md](jetbrains-setup.md).
+
+8. Verify PlantUML rendering with this installation check snippet:
 
 This section is written to be unambiguous in all modes:
 - With PlantUML rendering enabled, you should see a diagram in the
@@ -118,14 +150,13 @@ LLM --> User: Reports execution in chat
 @enduml
 ```
 
-8. Constitution check + initial governance commit:
-   - Ensure [CONSTITUTION.md](../CONSTITUTION.md) is present at your project repo root and
-     your LLM tool loads it (via your copied [AGENTS.md](../AGENTS.md) /
-     `CLAUDE.md`).
+9. Constitution check + initial governance commit:
+   - Ensure your LLM tool can read the shared
+     [CONSTITUTION.md](../CONSTITUTION.md) location (or the project copy
+     if you use the fallback setup).
    - Keep [glossary-skill.md](../glossary-skill.md) in the same
-     directory as [CONSTITUTION.md](../CONSTITUTION.md) so the LLM can
-     consult it later for `glossary.adoc` creation and
-     updates.
+     directory as [CONSTITUTION.md](../CONSTITUTION.md) so projects
+     that use `glossary.adoc` can consult it later.
    - Send this now as your first LLM message (before any other request):
 
 ```text
@@ -133,17 +164,19 @@ Before we start: tell me which instruction/governance files you have
 already read for this repository (filenames if known). Then restate the
 PLAN -> IMPLEMENTATION approval gate in one sentence.
 
-Then create an initial commit containing CONSTITUTION.md,
-glossary-skill.md, and the
-instruction/governance files already present in this project.
+Then create an initial commit containing the instruction/governance
+files already present in this project, and any copied governance files
+that belong to this repository setup.
 ```
 
    - On the first LLM response, you should see a leading 🫡 without
      asking for it. If you do not see it (or the tool reports
      [CONSTITUTION.md](../CONSTITUTION.md) is unavailable/unreadable), stop and fix file
      access/instruction loading before proceeding.
-   - You should also see an initial commit that includes [CONSTITUTION.md](../CONSTITUTION.md)
-     and the relevant copied governance files for your tool setup, including
+   - You should also see an initial commit that includes the relevant
+     governance files for your tool setup. If you use copied governance
+     files in the project, that includes
+     [CONSTITUTION.md](../CONSTITUTION.md) and, when applicable,
      [glossary-skill.md](../glossary-skill.md).
 
 ----------
@@ -336,6 +369,12 @@ approval gate), then tell it to stop and follow the Constitution
 strictly.
 
 ## Step 3: ADR for Game Stack and Core Design Style
+
+This step is intentionally more explicit than many real MVP prompts.
+Its purpose is to demonstrate architectural decision capture, tooling
+selection, reviewable design expectations, and later task alignment in
+a single example. In a smaller or lower-risk project, a lighter ADR
+prompt may be sufficient.
 
 ### You send
 
