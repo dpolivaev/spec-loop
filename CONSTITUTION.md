@@ -103,9 +103,6 @@ This phase model governs task-scoped implementation work; ADR-only,
 research-only, and analysis-only requests remain in PLAN unless the
 User requests otherwise.
 
-Implementation approval details are defined by the Decision Tables and
-remain mandatory.
-
 ## Task-first planning
 
 Task-first workflow is mandatory for work that changes code, tests, or
@@ -115,20 +112,13 @@ For ADR-only/research-only/analysis-only requests with no code, test,
 or configuration changes, a task file is optional unless the User asks
 for task-based tracking.
 
-If non-code work later leads to implementation, enter PLAN in a task
-file before any executable change.
-
 When task-first applies and no suitable task file exists, propose
-creating one before research/design. Do not keep implementation design
-only in chat unless the User explicitly allows that mode.
+creating one before research/design.
 
 Before IMPLEMENTATION, approved Design decisions and required
 Constraints must be present in the task file.
 
 Chat is a coordination channel, not a design artifact.
-
-Phase transitions and implementation approval gates are defined in
-**Spec Loop Phases and Transitions**.
 
 ## Workflow
 
@@ -148,8 +138,8 @@ Rules in this section complement, and do not override,
 2. **Research**  
   Start with research unless waived. Record observations,
   constraints, and verified facts only; plans belong in **Design**.
-  Research documents the current system: current behavior, legacy
-  architecture, reverse-engineered flows, current data structures,
+  Research documents the current system: behavior, legacy
+  architecture, reverse-engineered flows, data structures,
   initialization details, characterization findings, and verified
   constraints. Current or as-is design belongs in **Research**.
 
@@ -163,8 +153,7 @@ Rules in this section complement, and do not override,
   Scenario is the source of domain and behavior language. When
   behavior or terms are introduced or changed, create or update
   Scenario first, then use those terms consistently in Design, tests,
-  code symbols, and commit text. Do not keep parallel synonyms for
-  the same domain concept.
+  code symbols, and commit text. Do not keep parallel synonyms.
   If existing code uses different names, align naming incrementally in
   the current scope and document any intentional temporary mismatch in
   the task file.
@@ -181,13 +170,17 @@ Rules in this section complement, and do not override,
   Creating the first `glossary.adoc` from already approved information
   is documentation-only work and does not require a task file unless
   the User asks for task-based tracking.
-  If `glossary.adoc` exists, the LLM must check whether
-  approved work changes, clarifies or implements shared domain terms.
-  The related `glossary.adoc` updates must be planned during PLAN.
   Do not add helper names, implementation details, framework terms, or
   other terms that are not needed to understand project rules,
   behavior, or true subsystem boundaries.
-
+  When `glossary.adoc` exists, the LLM must:
+  - check whether approved work changes, clarifies, or implements
+    shared domain terms,
+  - plan the related `glossary.adoc` updates during PLAN,
+  - perform those updates during IMPLEMENTATION with relevant
+    implementation traceability links.
+  If required glossary updates were not planned, stop, return to PLAN,
+  update the task, request approval, then continue.
   Before creating or updating `glossary.adoc`, read
   `glossary-skill.md` next to this Constitution if available.
 
@@ -197,8 +190,8 @@ Rules in this section complement, and do not override,
   **Research** and required behavior from **Scenario** when Scenario
   exists. Design documents the approved target system only. Current
   implementation, legacy structure, reverse-engineered flows, and
-  as-is diagrams must not appear in **Design** unless they are
-  intentionally retained in the target design.
+  as-is diagrams belong in **Research** unless they are intentionally
+  retained in the target design.
 
   Design must make intended implementation structure reviewable.
   Keep verification structure in **Test specification**, not in
@@ -236,14 +229,8 @@ Rules in this section complement, and do not override,
 7. **Implementation**  
   Implementation is complete only when both design and test
   specification are implemented, unless the user explicitly waives
-  tests. If `glossary.adoc` exists and approved work
-  changes, clarifies, or implements shared domain terms, perform the required
-  `glossary.adoc` updates. They may only reflect approved Design.
-  If required glossary term updates were not planned, stop, return to
-  PLAN, update the task, request approval, then continue.
-  Implementation is not complete until the
-  required glossary update with relevant implementation traceability
-  links is made.
+  tests. Any glossary work required by **Project glossary** must also
+  be complete before implementation is complete.
 
 
 8. **Status updates**  
@@ -322,11 +309,8 @@ rendered views.
 Tasks and subtasks share one lifecycle with the same status values:
 `backlog`, `in-progress`, `review`, `done`.
 
-Phases and lifecycle are different:
-
-- Phases govern what work may be performed now.
-- Task and subtask lifecycle states describe where the tracked item
-  sits in the workflow.
+Phases govern what work may be performed now. Lifecycle states describe
+where the tracked item sits in the workflow.
 
 Representation:
 - Task lifecycle state is represented by the task file directory.
@@ -334,8 +318,7 @@ Representation:
 
 Lifecycle definitions:
 - **backlog**  
-  Planned or deferred work. Research and design belong here until
-  design is approved. New tasks default to `backlog`.
+  Planned or deferred work. New tasks default to `backlog`.
 - **in-progress**  
   Active work in research, design, implementation, or verification.
 - **review**  
@@ -377,6 +360,8 @@ Each task uses this exact order and layout:
   - `- **Research:**`
   - `- **Design:**`
   - `- **Test specification:**`
+  In tasks with subtasks, the main-task `Research`, `Design`, and
+  `Test specification` sections may be omitted.
   If `Scenario` or `Constraints` is omitted, keep the remaining
   sections in order.
 - Subtasks (if the task contains any) must be placed
@@ -389,7 +374,8 @@ Each task uses this exact order and layout:
 - must use the same list-item labels and ordering rules as the main task
   (including conditional `Scenario` and optional `Constraints`),
 - must represent a functional increment and, for implementation tasks,
-  include executable work.
+  include executable work,
+- must satisfy the testing requirements defined in **Testing Policy**.
 - Do not create planning-only subtasks unless the User explicitly asks.
 
 Subtask `Status` values and transitions use the same lifecycle rules as
@@ -441,41 +427,33 @@ defined in **Task States**.
 
 Before setting a task or subtask to **review**:
 
-1. **Research**: legacy state is documented as needed.
-2. **Scenario**: when applicable, expected behavior is documented as a
-   clear story in natural language.
-3. **Design**: architecture/data flow/class interactions are defined.
-4. **Scope**: Scope, Design, Constraints, and Test specification are
-   fully implemented as applicable.
-5. **Verification**: new and relevant existing tests pass locally.
-6. **Cleanliness**: no TODOs, placeholders, temp comments, unused
-   imports.
-7. **Documentation**: design deviations are documented in the task
-   file. If implementation differs from the approved target design, the
-   deviation and rationale must be documented in the task file before
-   review.
-8. **Glossary**: required `glossary.adoc` updates and
-   implementation traceability links are completed.
+1. **Required sections**: Research, Scenario, Design, Constraints, and
+   Test specification are complete and implemented as applicable.
+2. **Verification**: tests required by **Testing Policy** pass locally.
+3. **Cleanliness**: no TODOs, placeholders, temp comments, or unused
+   imports remain.
+4. **Documentation**: any implementation deviation from approved
+   design is documented in the task file before review.
+5. **Glossary**: any glossary work required by **Project glossary** is
+   completed.
 
 ## Testing Policy
 
-- Every subtask must include a testing block.
-- Tasks or subtasks without code changes do not require tests.
-- For no-code tasks or subtasks, keep the testing block and set
+- Keep a Test specification in each task without subtasks and in each
+  subtask.
+- For no-code tasks or subtasks, set
   `Automated tests: N/A` and `Manual tests: N/A`.
-- Implementation subtasks without testing are not allowed.
-- Avoid splitting implementation and testing across separate subtasks
-  for the same functional increment.
+- Implementation subtasks must include testing and must not split
+  implementation and testing across separate subtasks for the same
+  functional increment.
 - Separate test-focused tasks are allowed when adding or extending
   coverage as a standalone scope.
 - Automated tests should be preferred.
-- In each subtask, include a Test specification with explicit
-  Automated tests and Manual tests sublists.
-- When implementing a task, you must implement all specified tests,
-  run them, and fix any failures before reporting completion, unless
-  the user explicitly waives tests.
-- Before moving a subtask to **review**, required tests must be
-  implemented and passing unless explicitly waived by the user.
+- In each implementation task without subtasks and in each
+  implementation subtask, include explicit Automated tests and Manual
+  tests sublists.
+- Implement, run, and fix all required tests before moving a task or
+  subtask to **review**, unless the user explicitly waives tests.
 
 ## Architecture Decision Records
 
