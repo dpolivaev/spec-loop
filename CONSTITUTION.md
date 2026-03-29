@@ -25,7 +25,7 @@
 - If the Constitution content is already injected or attached in the
   current session, do not re-read it.
 - Otherwise, read it once and keep a short active digest (3-5 lines)
-  in working context. Use that digest to drive decisions.
+  in context. Use it to drive decisions.
 - Re-read the full Constitution only if the active digest is missing
   from context or the User says the Constitution changed.
 
@@ -37,9 +37,9 @@
 ### Decision Tables (Operational Shortcuts)
 
 Use these tables as the primary quick path. When a row applies, follow
-it directly. For phase transitions, **Spec Loop Phases and
-Transitions** is authoritative. Task/subtask lifecycle rules are
-defined later in **Task States**.
+it. For phase transitions, **Spec Loop Phases and Transitions** is
+authoritative. Task/subtask lifecycle rules are defined later in
+**Task States**.
 
 | Situation | Required action | Resulting phase |
 | --- | --- | --- |
@@ -100,8 +100,8 @@ IMPLEMENTATION resumes (updated Design, Scenario/term alignment when
 applicable, clear classification, and explicit User approval).
 
 This phase model governs task-scoped implementation work; ADR-only,
-research-only, and analysis-only requests remain in PLAN unless the
-User requests otherwise.
+research-only, and analysis-only requests stay in PLAN unless the User
+says otherwise.
 
 ## Task-first planning
 
@@ -125,7 +125,7 @@ Chat is a coordination channel, not a design artifact.
 Rules in this section complement, and do not override,
 **Spec Loop Phases and Transitions**.
 
-1. **Task files as source of truth**  
+1. **Task files**  
    All tasks, design, and execution status live as individual Markdown
    files under the project task directory, organized by status folders.
    New task file names must not use ticket IDs, task identifiers, or
@@ -153,7 +153,8 @@ Rules in this section complement, and do not override,
   Scenario is the source of domain and behavior language. When
   behavior or terms are introduced or changed, create or update
   Scenario first, then use those terms consistently in Design, tests,
-  code symbols, and commit text. Do not keep parallel synonyms.
+  code symbols, and commit text. Do not keep parallel synonyms for the
+  same domain concept.
   If existing code uses different names, align naming incrementally in
   the current scope and document any intentional temporary mismatch in
   the task file.
@@ -162,11 +163,10 @@ Rules in this section complement, and do not override,
   mapping tables.
 
   **Project glossary:**
-  A project glossary in `glossary.adoc` is optional until a project
-  opts in by creating it or by instructions that require it.
-  If `glossary.adoc` exists, it defines the project's shared domain
-  language and must be considered during planning as the reference for
-  project ubiquitous-language terms and definitions.
+  `glossary.adoc` is optional until a project opts in by creating it or
+  by instructions that require it. Once present, it defines the
+  project's shared domain language and must be used during planning as
+  the reference for project terms and definitions.
   Creating the first `glossary.adoc` from already approved information
   is documentation-only work and does not require a task file unless
   the User asks for task-based tracking.
@@ -185,13 +185,13 @@ Rules in this section complement, and do not override,
   `glossary-skill.md` next to this Constitution if available.
 
 4. **Design**  
-  Document implementation architecture, data flow, interactions, and
-  responsibility boundaries in **Design**. Draft it from validated
-  **Research** and required behavior from **Scenario** when Scenario
-  exists. Design documents the approved target system only. Current
-  implementation, legacy structure, reverse-engineered flows, and
-  as-is diagrams belong in **Research** unless they are intentionally
-  retained in the target design.
+  Document the target system in **Design**: architecture, data
+  structures, data flow, interactions, and implementation boundaries.
+  Draft it from validated **Research** and required behavior from
+  **Scenario** when Scenario exists. Current implementation, legacy
+  structure, reverse-engineered flows, and as-is diagrams belong in
+  **Research** unless they are intentionally retained in the target
+  design.
 
   Design must make intended implementation structure reviewable.
   Keep verification structure in **Test specification**, not in
@@ -203,16 +203,14 @@ Rules in this section complement, and do not override,
   request/response structures and enums; examples may supplement but
   must not replace the class specification.
 
-  Show important responsibilities, interactions, and architectural
-  boundaries clearly and concisely. When Scenario exists, Design must
-  reflect Scenario language in implementation-oriented abstractions and
-  responsibility boundaries.
+  Show important interactions and implementation boundaries clearly and
+  concisely. When Scenario exists, Design must use Scenario language
+  for design-owned names.
 
-  Design must assign each new responsibility explicitly. Assign it
-  either to an existing implementation unit or to a concretely named
-  new one with a clear boundary. If that assignment is not yet
-  decided, the design is not ready for implementation. Do not use
-  stand-in names for unresolved design.
+  Design must show where each design element will live: in an existing
+  implementation unit or in a concretely named new one with a clear
+  boundary. If that is not yet decided, the design is not ready for
+  implementation. Use domain language for design-owned names.
 
   Formatting: if used, keep the diagram in its own paragraph under
   Design. Put explanatory text below it only for context, rationale,
@@ -224,13 +222,14 @@ Rules in this section complement, and do not override,
 6. **Iterative discovery**  
   Iterate across **Research**, **Scenario** (if used), **Design**, and
   **Test specification** until decisions and verification are
-  coherent. No implementation starts during this loop.
+  coherent. Record intermediate design alternatives when they help
+  reasoning, review, or discussion. No implementation starts during
+  this loop.
 
 7. **Implementation**  
-  Implementation is complete only when both design and test
-  specification are implemented, unless the user explicitly waives
-  tests. Any glossary work required by **Project glossary** must also
-  be complete before implementation is complete.
+  Implementation is complete only when design and test specification are
+  implemented, unless the user explicitly waives tests. Any glossary
+  work required by **Project glossary** must also be complete.
 
 
 8. **Status updates**  
@@ -284,11 +283,14 @@ Rules in this section complement, and do not override,
 
 ## Context Preservation
 
-- **Task sections are source of truth**  
-  Re-read relevant task sections (Scope, Motivation, Scenario,
-  Constraints, Research, Design, Test Spec) before implementation or whenever
-  requirements are unclear. Keep only relevant task content in active
-  context and avoid carrying unrelated content.
+- Re-read relevant task sections before implementation or whenever
+  requirements are unclear.
+- Treat the active task or subtask as the working source of truth for
+  the current work item.
+- Older task files are historical records and need not be
+  retroactively updated when later tasks supersede them.
+- Keep only relevant task content in active context and avoid carrying
+  unrelated content.
 
 ## Formatting
 
@@ -381,6 +383,22 @@ Each task uses this exact order and layout:
 Subtask `Status` values and transitions use the same lifecycle rules as
 defined in **Task States**.
 
+### Task Context Hygiene
+
+- Avoid redundant duplication across the main task and subtasks. When a
+  subtask reuses earlier context, reference the existing section
+  briefly and state only the local adaptation, risk, or decision.
+- Future subtasks may keep `Research`, `Design`, and `Test
+  specification` lightweight until they become current. Placeholders
+  such as `To be done` or `See main task` are allowed.
+- The current implementation subtask must contain the detail needed for
+  review and execution.
+- Once a design decision is made, remove obsolete or superseded
+  alternatives from the task.
+- Repeating diagrams, type structures, payloads, or prose is allowed
+  only when it adds local reasoning value or shows a genuinely
+  different behavior, ownership boundary, or contract.
+
 ### Constraints (optional)
 
 - Use when the task has important limits that the target `Design` and
@@ -427,14 +445,18 @@ defined in **Task States**.
 
 Before setting a task or subtask to **review**:
 
-1. **Required sections**: Research, Scenario, Design, Constraints, and
-   Test specification are complete and implemented as applicable.
-2. **Verification**: tests required by **Testing Policy** pass locally.
-3. **Cleanliness**: no TODOs, placeholders, temp comments, or unused
+1. **Research**: legacy state is documented as needed.
+2. **Scenario**: when applicable, expected behavior is documented as a
+   clear story in natural language.
+3. **Design**: architecture/data flow/class interactions are defined.
+4. **Scope**: Scope, Design, Constraints, and Test specification are
+   fully implemented as applicable.
+5. **Verification**: tests required by **Testing Policy** pass locally.
+6. **Cleanliness**: no TODOs, placeholders, temp comments, or unused
    imports remain.
-4. **Documentation**: any implementation deviation from approved
+7. **Documentation**: any implementation deviation from approved
    design is documented in the task file before review.
-5. **Glossary**: any glossary work required by **Project glossary** is
+8. **Glossary**: any glossary work required by **Project glossary** is
    completed.
 
 ## Testing Policy
@@ -449,9 +471,8 @@ Before setting a task or subtask to **review**:
 - Separate test-focused tasks are allowed when adding or extending
   coverage as a standalone scope.
 - Automated tests should be preferred.
-- In each implementation task without subtasks and in each
-  implementation subtask, include explicit Automated tests and Manual
-  tests sublists.
+- In each implementation task without subtasks and each implementation
+  subtask, include explicit Automated tests and Manual tests sublists.
 - Implement, run, and fix all required tests before moving a task or
   subtask to **review**, unless the user explicitly waives tests.
 
