@@ -1,5 +1,10 @@
 # Glossary Guidance
 
+A project glossary defines the shared domain language above individual
+tasks and the code. Its purpose is to keep Scenario, Design, tests,
+code symbols, and commit text aligned on the same terms across the
+project.
+
 This file defines how to create and update a project glossary in
 AsciiDoc.
 
@@ -13,16 +18,17 @@ Use this guidance when:
 
 - a project glossary already exists and must be updated,
 - the user asks to create a glossary,
-- a task changes or adds canonical domain terms within approved
-  scope.
+- a task changes, clarifies, or implements shared domain terms within
+  approved scope.
 
 ## Relationship to Spec Loop
 
 - Scenario remains the source of approved domain and behavior language
   in task files.
 - Design and implementation must stay aligned with approved terms.
-- A glossary is a project-level supporting artifact, not a replacement
-  for task files.
+- If `glossary.adoc` exists, it defines the project's shared domain
+  language above individual tasks. It is a project-level supporting
+  artifact, not a replacement for task files.
 - Plan required glossary updates during PLAN.
 - Perform planned glossary updates during IMPLEMENTATION.
 - If glossary work would change approved meaning rather than record it,

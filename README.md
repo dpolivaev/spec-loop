@@ -26,6 +26,12 @@ task-file gate before implementation.
 Spec Loop also defines explicit work phases: plan, implementation and done.
 Any transitions to implementation and to done require explicit user approval.
 
+When a project maintains a
+[glossary document](CONSTITUTION.md#project-glossary), that glossary
+defines the shared domain language above individual tasks and the code.
+It keeps design documents, tests, code symbols, and commit text
+aligned on the same terms across the whole project.
+
 ## Why This Works with Large Codebases
 
 Spec Loop is designed to work with existing codebases at scale.
@@ -40,6 +46,10 @@ The research is explicitly scoped to the next increment. It captures only
 what is required to implement that increment correctly, and is intentionally
 partial. The result is a bounded, reviewable understanding whose size
 remains manageable.
+
+For large codebases, the glossary is especially useful because it
+keeps domain terms stable across many increments, files, and
+subsystems.
 
 Because the scope can be kept reasonably small and the research is
 written down, you can verify that the model examined the right parts of
@@ -59,8 +69,7 @@ Preferred setup:
   central location outside your project repositories. It does not need
   to live inside the project at all.
 - Keep **[glossary-skill.md](glossary-skill.md)** next to that shared
-  Constitution file, regardless of whether a given project uses a
-  glossary.
+  Constitution file.
 - The shared Constitution directory may be anywhere convenient.
   Projects and user-level instruction files can reference it by
   absolute path.
@@ -71,20 +80,16 @@ Fallback setup:
 - When the governance files are present in the project, relative paths
   are usually sufficient.
 
-Glossary usage:
-- Individual projects may decide independently whether to use
-  `glossary.adoc`.
-- When a project uses `glossary.adoc`, keeping `glossary-skill.md`
-  next to the Constitution gives the LLM a stable place to find the
-  glossary guidance.
+Glossary setup:
+- A project opts in to glossary maintenance by creating
+  `glossary.adoc` or by instructions that require it; otherwise it is
+  opted out.
+- Once `glossary.adoc` exists, it is part of the project workflow and
+  must be maintained by the AI according to the active rules.
 - `glossary.adoc` uses AsciiDoc because it provides stronger document
   structure and better support for cross-references and links than
-  plain Markdown, which is useful for implementation-linked glossary
-  documentation.
-- AsciiDoc support in your IDE or editor, for example through an
-  extension or plugin, is therefore required when a project uses
-  `glossary.adoc`, and not required when the project does not use a
-  glossary.
+  plain Markdown. AsciiDoc support in your IDE or editor is therefore
+  required when `glossary.adoc` exists, and not required otherwise.
 
 ### Instruction loading options
 
@@ -166,16 +171,11 @@ project-specific settings such as `<TASK_DIR>` and local requirements.
      end-to-end example with staged planning, approvals, implementation,
      and testing.
 
-5. Optional project glossary.
+5. Project glossary conventions.
 
-   * In DDD, `glossary.adoc` makes the ubiquitous language explicit. It
-     is the place where project terms are defined so Scenario, Design,
-     tests, code symbols, and commit text can use the same language.
-   * If you want shared glossary conventions, keep
-     **[glossary-skill.md](glossary-skill.md)** next to
-     **[CONSTITUTION.md](CONSTITUTION.md)**.
-   * The guidance file includes an embedded glossary example and does
-     not depend on other example files being present.
+   * See `Glossary setup` above.
+   * **[glossary-skill.md](glossary-skill.md)** is the shared glossary
+     guidance file and includes its own embedded example.
 
 Recommended quick-check order:
 - `README.md`

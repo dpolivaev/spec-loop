@@ -173,13 +173,15 @@ Rules in this section complement, and do not override,
   mapping tables.
 
   **Project glossary:**
-  A project glossary in `glossary.adoc` is optional.
-  If `glossary.adoc` exists, consider it during planning as the
-  reference for project ubiquitous-language terms and definitions.
+  A project glossary in `glossary.adoc` is optional until a project
+  opts in by creating it or by instructions that require it.
+  If `glossary.adoc` exists, it defines the project's shared domain
+  language and must be considered during planning as the reference for
+  project ubiquitous-language terms and definitions.
   Creating the first `glossary.adoc` from already approved information
   is documentation-only work and does not require a task file unless
   the User asks for task-based tracking.
-  If the project uses `glossary.adoc`, the LLM must check whether
+  If `glossary.adoc` exists, the LLM must check whether
   approved work changes, clarifies or implements shared domain terms.
   The related `glossary.adoc` updates must be planned during PLAN.
   Do not add helper names, implementation details, framework terms, or
@@ -234,7 +236,7 @@ Rules in this section complement, and do not override,
 7. **Implementation**  
   Implementation is complete only when both design and test
   specification are implemented, unless the user explicitly waives
-  tests. If the project uses `glossary.adoc` and approved work
+  tests. If `glossary.adoc` exists and approved work
   changes, clarifies, or implements shared domain terms, perform the required
   `glossary.adoc` updates. They may only reflect approved Design.
   If required glossary term updates were not planned, stop, return to
