@@ -44,11 +44,8 @@ Transitions** and **Task States** remain authoritative.
 | Request executable changes (code/test/config/deps/runtime assets) | Enter PLAN: update Research/Scenario/Design as needed and ask for explicit approval to start implementation | PLAN |
 | Refactoring that changes code, tests, or configuration | Enter PLAN: update Design and ask for explicit implementation approval | PLAN |
 | User explicitly approves implementation (`implement`, `go ahead`, `proceed`, equivalent explicit instruction) | Start implementation according to approved Design | IMPLEMENTATION |
-| Request is research/analysis/docs only | Edit non-executable artifacts only | PLAN |
 | Task file changed but no implementation directive exists | Stop and ask for review/approval before code/test/config edits | PLAN |
 | Scope drifts beyond approved Design (new flow/type/dependency/behavior) | Stop, update Research/Scenario/Design, request approval | PLAN |
-| Implementation completed and local verification passed | Move `in-progress` -> `review` for task/subtask | REVIEW |
-| User explicitly confirms completion | Move item to `done` | DONE |
 
 | Scenario usage | Rule |
 | --- | --- |
@@ -96,21 +93,20 @@ reason immediately and what must be checked before IMPLEMENTATION
 resumes (updated Design, Scenario/term alignment when applicable,
 clear classification, and explicit User approval).
 
-This phase model governs task-scoped implementation work; ADR-only,
-research-only, and analysis-only requests stay in PLAN unless the User
-says otherwise.
+This phase model governs task-scoped implementation work only.
+Work that does not change code, tests, or configuration is outside
+this phase model unless the User says otherwise.
 
-## Task-first planning
+## When work is task-based
 
-Task-first workflow is mandatory for work that changes code, tests, or
-configuration. For ADR-only/research-only/analysis-only requests with
-no code, test, or configuration changes, a task file is optional
-unless the User asks for task-based tracking.
+Work that changes code, tests, or configuration must be task-based.
+For work that does not change code, tests, or configuration, a task
+file is not required unless the User asks for task-based tracking.
 
-When task-first applies and no suitable task file exists, propose
-creating one before research/design. Before IMPLEMENTATION, approved
-Design decisions and required Constraints must be present in the task
-file.
+When work is task-based and no suitable task file exists,
+propose creating one before research/design. Before IMPLEMENTATION,
+the task file must contain approved Design decisions and any required
+Constraints.
 
 Chat is a coordination channel, not a design artifact.
 
