@@ -25,9 +25,9 @@
 - If the Constitution content is already injected or attached in the
   current session, do not re-read it.
 - Otherwise, read it once and keep a short active digest (3-5 lines)
-  in context. Use it to drive decisions.
-- Re-read the full Constitution only if the active digest is missing
-  from context or the User says the Constitution changed.
+  in context and use it to drive decisions.
+- Re-read the full Constitution only if the digest is missing from
+  context or the User says the Constitution changed.
 
 ### Core Invariants
 
@@ -36,15 +36,13 @@
 
 ### Decision Tables (Operational Shortcuts)
 
-Use these tables as the primary quick path. When a row applies, follow
-it. For phase transitions, **Spec Loop Phases and Transitions** is
-authoritative. Task/subtask lifecycle rules are defined later in
-**Task States**.
+Use these tables as quick lookup only. **Spec Loop Phases and
+Transitions** and **Task States** remain authoritative.
 
 | Situation | Required action | Resulting phase |
 | --- | --- | --- |
-| Request changes executable behavior (code/test/config/deps/runtime assets) | Enter PLAN: update Research/Scenario/Design as needed and ask for explicit approval to start implementation | PLAN |
-| Refactoring that changes code, tests, or configuration | Enter PLAN: update Design for the refactor and ask for explicit implementation approval | PLAN |
+| Request executable changes (code/test/config/deps/runtime assets) | Enter PLAN: update Research/Scenario/Design as needed and ask for explicit approval to start implementation | PLAN |
+| Refactoring that changes code, tests, or configuration | Enter PLAN: update Design and ask for explicit implementation approval | PLAN |
 | User explicitly approves implementation (`implement`, `go ahead`, `proceed`, equivalent explicit instruction) | Start implementation according to approved Design | IMPLEMENTATION |
 | Request is research/analysis/docs only | Edit non-executable artifacts only | PLAN |
 | Task file changed but no implementation directive exists | Stop and ask for review/approval before code/test/config edits | PLAN |
@@ -70,11 +68,10 @@ Phases:
 
 In PLAN, edits are allowed only for non-executable artifacts used for
 research, design, planning, or governance, including task files, ADRs,
-documentation, diagrams, and instruction files (for example,
-AGENTS.md and CONSTITUTION.md). Command execution is allowed for
-research/verification, but it must not change repository contents
-outside those non-executable artifacts. If it would, treat it as
-IMPLEMENTATION and request explicit User approval first.
+documentation, diagrams, and instruction files. Command execution is
+allowed for research/verification, but it must not change repository
+contents outside those non-executable artifacts. If it would, treat it
+as IMPLEMENTATION and request explicit User approval first.
 
 Any change that affects executable behavior, tests, build/configuration,
 dependencies, packaging, or runtime assets is IMPLEMENTATION and
@@ -94,10 +91,10 @@ approval**: PLAN -> IMPLEMENTATION, IMPLEMENTATION -> DONE.
 
 IMPLEMENTATION -> PLAN may be initiated by the LLM when required by
 this Constitution (for example, scope drift, unclear classification,
-rule conflict, or missing approved Design). In that case, the LLM must
-immediately state the reason and what must be checked before
-IMPLEMENTATION resumes (updated Design, Scenario/term alignment when
-applicable, clear classification, and explicit User approval).
+rule conflict, or missing approved Design). In that case, state the
+reason immediately and what must be checked before IMPLEMENTATION
+resumes (updated Design, Scenario/term alignment when applicable,
+clear classification, and explicit User approval).
 
 This phase model governs task-scoped implementation work; ADR-only,
 research-only, and analysis-only requests stay in PLAN unless the User
@@ -106,17 +103,14 @@ says otherwise.
 ## Task-first planning
 
 Task-first workflow is mandatory for work that changes code, tests, or
-configuration.
-
-For ADR-only/research-only/analysis-only requests with no code, test,
-or configuration changes, a task file is optional unless the User asks
-for task-based tracking.
+configuration. For ADR-only/research-only/analysis-only requests with
+no code, test, or configuration changes, a task file is optional
+unless the User asks for task-based tracking.
 
 When task-first applies and no suitable task file exists, propose
-creating one before research/design.
-
-Before IMPLEMENTATION, approved Design decisions and required
-Constraints must be present in the task file.
+creating one before research/design. Before IMPLEMENTATION, approved
+Design decisions and required Constraints must be present in the task
+file.
 
 Chat is a coordination channel, not a design artifact.
 
@@ -127,11 +121,11 @@ Rules in this section complement, and do not override,
 
 ### 1. Task files
 
-All tasks, design, and execution status live as individual Markdown
-files under the project task directory, organized by status folders.
-Task base names must not use ticket IDs, task identifiers, or
-abbreviations; use readable, descriptive words. Numeric prefixes are
-used only as folder-local ordering markers:
+All task work lives as individual Markdown files under the project
+task directory, organized by status folders. Task base names must not
+use ticket IDs, task identifiers, or abbreviations; use readable,
+descriptive words. Numeric prefixes are used only as folder-local
+ordering markers:
 
 - `backlog` uses a readable three-digit backlog-order prefix.
 - `done` uses the required three-digit completion-order prefix defined
@@ -139,45 +133,43 @@ used only as folder-local ordering markers:
 
 Backlog numbering and done numbering are independent sequences. The
 same number may appear once in `backlog` and once in `done` without
-conflict. Task-first workflow from the section above applies unless the
-User explicitly chooses otherwise.
+conflict.
 
 ### 2. Research
 
 Start with research unless waived. Record observations, constraints,
 and verified facts only; plans belong in **Design**. Research
 documents the current system: behavior, legacy architecture,
-reverse-engineered flows, data structures, initialization details,
-characterization findings, and verified constraints. Current or as-is
-design belongs in **Research**.
+reverse-engineered flows, data structures, characterization findings,
+and verified constraints. Current or as-is design belongs in
+**Research**.
 
 ### 3. Scenario
 
 Scenario anchors behavior and terms before implementation. Use it when
-behavior/terms are introduced or changed; otherwise it can be skipped
-(see Decision Tables). Keep Scenario concise and implementation-free.
+behavior or terms are introduced or changed; otherwise it may be
+omitted per the Decision Tables. Keep it concise and
+implementation-free.
 
 **Naming principle (canonical terms):**
 Scenario is the source of domain and behavior language. When behavior
 or terms are introduced or changed, create or update Scenario first,
 then use those terms consistently in Design, tests, code symbols, and
-commit text. Do not keep parallel synonyms for the same domain concept.
-If existing code uses different names, align naming incrementally in
-the current scope and document any intentional temporary mismatch in
-the task file. Research may mention legacy terms and synonyms. Design
-must use only canonical Scenario terms, except for explicit
-legacy-to-target mapping tables.
+commit text. Do not keep parallel synonyms for the same concept.
+Research may mention legacy terms and synonyms. Design must use only
+canonical Scenario terms, except for explicit legacy-to-target mapping
+tables. If existing code uses different names, align incrementally in
+scope and document any intentional temporary mismatch in the task file.
 
 **Project glossary:**
 `glossary.adoc` is optional until a project opts in by creating it or
-by instructions that require it. Once present, it defines the
-project's shared domain language and must be used during planning as
-the reference for project terms and definitions. Creating the first
+by instructions that require it. Once present, it is the reference for
+shared project terms during planning. Creating the first
 `glossary.adoc` from already approved information is documentation-only
 work and does not require a task file unless the User asks for
 task-based tracking. Do not add helper names, implementation details,
-framework terms, or other terms that are not needed to understand
-project rules, behavior, or true subsystem boundaries.
+framework terms, or other terms not needed to understand project
+rules, behavior, or real subsystem boundaries.
 
 When `glossary.adoc` exists, the LLM must:
 
@@ -205,15 +197,13 @@ design.
 Design must make intended implementation structure reviewable. Keep
 verification structure in **Test specification**, not in Design. Do not
 model test suites, test doubles, harnesses, or other test-only
-elements in Design unless the task itself changes test infrastructure.
-Design diagrams must not include test classes, test fixtures, or
-test-only helpers. When changing tools, APIs, or serialized payloads,
+elements in Design unless the task changes test infrastructure. Design
+diagrams must not include test classes, test fixtures, or test-only
+helpers. When changing tools, APIs, or serialized payloads,
 **Design** must show the full target request/response structures and
-enums; examples may supplement but must not replace the class
-specification.
+enums; examples may supplement but must not replace the specification.
 
-Show important interactions and implementation boundaries clearly and
-concisely. When Scenario exists, Design must use Scenario language for
+When Scenario exists, Design must use Scenario language for
 design-owned names.
 
 Design must show where each design element will live: in an existing
@@ -222,8 +212,8 @@ boundary. If that is not yet decided, the design is not ready for
 implementation. Use domain language for design-owned names.
 
 Formatting: if used, keep the diagram in its own paragraph under
-Design. Put explanatory text below it only for context, rationale,
-constraints, or clarifications it cannot express.
+Design. Put explanatory text below it only when needed for context,
+rationale, constraints, or clarifications it cannot express.
 
 ### 5. Test specification
 
@@ -233,7 +223,7 @@ Document verification structure and concrete test coverage.
 
 Iterate across **Research**, **Scenario** (if used), **Design**, and
 **Test specification** until decisions and verification are coherent.
-Record intermediate design alternatives when they help reasoning,
+Record intermediate alternatives only when they help reasoning,
 review, or discussion. No implementation starts during this loop.
 
 ### 7. Implementation
@@ -245,11 +235,10 @@ required by **Project glossary** must also be complete.
 ### 8. Status updates
 
 Move task files between status folders within the project task
-directory to reflect current focus (for example, `in-progress` to
-`review`, or `done` back to `in-progress` or `backlog`). Remove the
-backlog-order prefix only when a task is moved from `backlog`. When
-moving a task into `done`, assign the next done-folder completion
-prefix independently of any former backlog prefix.
+directory to reflect current focus. Remove the backlog-order prefix
+only when a task is moved from `backlog`. When moving a task into
+`done`, assign the next done-folder completion prefix independently of
+any former backlog prefix.
 
 When reopening a task from done, keep the existing three-digit prefix
 to preserve traceability. Avoid moving unrelated tasks; move them only
@@ -259,9 +248,9 @@ when actively worked on.
 
 When moving tracked task files, use `git mv` and stage the move
 immediately before editing. This preserves rename tracking in diff
-tools that are not rename-aware (for example, VS Code). Do not unstage
-the rename until ready to review and commit. For new untracked task
-files, move in filesystem (not `git mv`), then run `git add -A`.
+tools that are not rename-aware. Do not unstage the rename until ready
+to review and commit. For new untracked task files, move in filesystem
+(not `git mv`), then run `git add -A`.
 
 ### 10. Status validation before commits
 
@@ -274,21 +263,19 @@ local verification are complete.
 
 Generated and local-only artifacts must not be committed. If such files
 are accidentally tracked, untrack them and add or update the
-appropriate ignore rule before continuing, unless they are
-intentionally versioned.
+appropriate ignore rule before continuing, unless intentionally
+versioned.
 
-Before writing the commit message, review the full change set being
-committed and its purpose. The commit message must accurately describe
-the purpose, unless the User explicitly requests otherwise. Do not
-write a commit message that is misleading about what changed. Then
-proceed with the commit.
+Before writing the commit message, review the full change set and its
+purpose. The message must accurately describe that purpose unless the
+User explicitly requests otherwise. Do not use a misleading commit
+message. Then proceed with the commit.
 
 For task-related commits, start the message with the **Primary
 Identifier**:
 
 - Ticket ID if present (for example `TICKET-123: ...`).
-- Otherwise full Task Identifier (for example
-  `2025-01-15-research: ...`).
+- Otherwise full Task Identifier.
 
 For non-task updates, commit messages may omit identifiers when
 `AGENTS.md` policy allows it. If the user explicitly asks to skip
@@ -310,10 +297,9 @@ Delete them from the working tree after a release tag is created.
   requirements are unclear.
 - Treat the active task or subtask as the working source of truth for
   the current work item.
-- The active task or subtask does not need to be kept mutually
-  consistent with already finished tasks. Older task files are
-  historical working records and need not be retroactively updated when
-  later tasks supersede them.
+- Older task files are historical working records and need not be kept
+  mutually consistent with the active task when later tasks supersede
+  them.
 - Keep only relevant task content in active context and avoid carrying
   unrelated content.
 
@@ -337,7 +323,7 @@ Tasks and subtasks share one lifecycle with the same status values:
 `backlog`, `in-progress`, `review`, `done`.
 
 Phases govern what work may be performed now. Lifecycle states describe
-where the tracked item sits in the workflow.
+where tracked work sits in the workflow.
 
 Representation:
 - Task lifecycle state is represented by the task file directory.
@@ -371,10 +357,10 @@ Each task uses this exact order and layout:
 
 - Title line: `# Task: <title>`.
 - Include one of the following identifiers (mutually exclusive):
-  - `- **Ticket:**` Ticket ID (for example `BSK-1234`), preferred.
+  - `- **Ticket:**` Ticket ID, preferred.
   - `- **Task Identifier:**` if no Ticket exists;
-    `YYYY-MM-DD-<slug>` where `<slug>` is 1-2 keywords from filename
-    (for example `implement-consent-flow.md` -> `...-consent`).
+    `YYYY-MM-DD-<slug>` where `<slug>` is 1-2 keywords from the
+    filename.
   - **Commit Rule**: the value present becomes the **Primary
     Identifier** for commit messages.
 - Main task sections are list items with bold labels in this order:
@@ -382,9 +368,8 @@ Each task uses this exact order and layout:
   - `- **Motivation:**`
   - `- **Scenario:**` (conditional; include only when behavior is
     introduced/clarified or terms are introduced/refined)
-  - `- **Constraints:**` (optional; include when the task has
-    important limits that the target `Design` and implementation must
-    obey)
+  - `- **Constraints:**` (optional; include for important limits the
+    target `Design` and implementation must obey)
   - `- **Briefing:**`
   - `- **Research:**`
   - `- **Design:**`
@@ -397,8 +382,7 @@ Each task uses this exact order and layout:
   after all global task sections.
 
 ### Every Subtask
-- must start with level 2 heading having pattern
-  `## Subtask: <title>` 
+- must start with a level 2 heading `## Subtask: <title>`
   followed by the status line `- **Status:** <status>`,
 - must use the same list-item labels and ordering rules as the main task
   (including conditional `Scenario` and optional `Constraints`),
@@ -406,9 +390,6 @@ Each task uses this exact order and layout:
   include executable work,
 - must satisfy the testing requirements defined in **Testing Policy**.
 - Do not create planning-only subtasks unless the User explicitly asks.
-
-Subtask `Status` values and transitions use the same lifecycle rules as
-defined in **Task States**.
 
 ### Task Context Hygiene
 
@@ -437,16 +418,13 @@ defined in **Task States**.
 
 ### Briefing
 
-- Short orientation for someone unfamiliar with the codebase,
-  stack, subsystem boundaries, or entry points.
-- Use this section for practical context such as relevant modules,
-  important classes, framework context, repository conventions, and
-  risk areas.
+- Short orientation for someone unfamiliar with the codebase, stack,
+  subsystem boundaries, or entry points. Use this section for practical
+  context such as relevant modules, important classes, framework
+  context, repository conventions, and risk areas.
 
 ### PlantUML Diagrams
 
-- This section defines when PlantUML diagrams are required in task
-  files.
 - Use **Research** for current state and **Design** for target state.
 - **Research** must include a PlantUML diagram when current behavior,
   message flow, context selection, or component interaction is being
@@ -460,8 +438,8 @@ defined in **Task States**.
   diagram.
 - Use `allowmixing` only when class elements are combined with
   non-class elements.
-- Declare component and sequence diagrams with
-  explicit PlantUML keywords.
+- Declare component and sequence diagrams with explicit PlantUML
+  keywords.
 - For class diagrams, use one outer
   `package` with nested inner packages and `set separator none`. Show
   only the class elements needed for the change or structural
@@ -473,25 +451,23 @@ defined in **Task States**.
 Before setting a task or subtask to **review**:
 
 1. **Research**: legacy state is documented as needed.
-2. **Scenario**: when applicable, expected behavior is documented as a
-   clear story in natural language.
-3. **Design**: architecture/data flow/class interactions are defined.
-4. **Scope**: Scope, Design, Constraints, and Test specification are
-   fully implemented as applicable.
+2. **Scenario**: when applicable, expected behavior is documented in
+  natural language.
+3. **Design**: architecture, data flow, classes and interactions are defined.
+4. **Implementation**: Scope, Design, Constraints, and Test
+  specification are fully implemented as applicable.
 5. **Verification**: tests required by **Testing Policy** pass locally.
 6. **Cleanliness**: no TODOs, placeholders, temp comments, or unused
-   imports remain.
+  imports remain.
 7. **Documentation**: any implementation deviation from approved
-   design is documented in the task file before review.
-8. **Glossary**: any glossary work required by **Project glossary** is
-   completed.
+  design is documented in the task file before review.
+8. **Glossary**: required glossary work is completed.
 
 ## Testing Policy
 
 - Keep a Test specification in each task without subtasks and in each
-  subtask.
-- For no-code tasks or subtasks, set
-  `Automated tests: N/A` and `Manual tests: N/A`.
+  subtask. For no-code tasks or subtasks, set `Automated tests: N/A`
+  and `Manual tests: N/A`.
 - Implementation subtasks must include testing and must not split
   implementation and testing across separate subtasks for the same
   functional increment.
