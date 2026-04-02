@@ -128,12 +128,16 @@ Rules in this section complement, and do not override,
 1. **Task files**  
    All tasks, design, and execution status live as individual Markdown
    files under the project task directory, organized by status folders.
-   New task file names must not use ticket IDs, task identifiers, or
-   numeric prefixes, and must avoid abbreviations (use readable,
-   descriptive words). Done tasks use the required three-digit
-   completion prefix defined in this Constitution. Task-first workflow
-   from the section above applies unless the User explicitly chooses
-   otherwise.
+   Task base names must not use ticket IDs, task identifiers, or
+   abbreviations; use readable, descriptive words. Numeric prefixes are
+   used only as folder-local ordering markers:
+   - `backlog` uses a readable three-digit backlog-order prefix.
+   - `done` uses the required three-digit completion-order prefix
+     defined in this Constitution.
+   Backlog numbering and done numbering are independent sequences. The
+   same number may appear once in `backlog` and once in `done` without
+   conflict. Task-first workflow from the section above applies unless
+   the User explicitly chooses otherwise.
 
 2. **Research**  
   Start with research unless waived. Record observations,
@@ -236,6 +240,10 @@ Rules in this section complement, and do not override,
    Move task files between status folders within the project task
    directory to reflect current focus (for example, `in-progress` to
    `review`, or `done` back to `in-progress` or `backlog`).
+    Remove the backlog-order prefix only when a task is moved from
+    `backlog`. When moving a task into `done`, assign the next
+    done-folder completion prefix independently of any former backlog
+    prefix.
    When reopening a task from done, keep the existing three-digit
    prefix to preserve traceability. Avoid moving unrelated tasks; move
    them only when actively worked on.
@@ -253,9 +261,8 @@ Rules in this section complement, and do not override,
    Before each commit, check relevant task files and propose any status
    or folder changes needed for consistency. Apply those status changes
    only after explicit user confirmation, except that the LLM should
-   apply `in-progress` -> `review` transitions directly for both
-   task-folder status and subtask status when implementation and local
-   verification are complete.
+   apply `in-progress` -> `review` transitions directly when
+   implementation and local verification are complete.
    Generated and local-only artifacts must not be committed. If such
    files are accidentally tracked, untrack them and add or update the
    appropriate ignore rule before continuing, unless they are
@@ -278,8 +285,9 @@ Rules in this section complement, and do not override,
 
 11. **Done task cleanup**  
    Keep done tasks in the task directory under the done status folder
-   with a three-digit prefix based on order moved into done. Delete them
-   from the working tree after a release tag is created.
+    with a three-digit prefix based on order moved into done. This done
+    numbering is independent from any three-digit backlog-order prefix.
+    Delete them from the working tree after a release tag is created.
 
 ## Context Preservation
 
@@ -334,6 +342,8 @@ Lifecycle and transition rules:
   **Spec Loop Phases and Transitions**.
 - LLM should move `in-progress` -> `review` when implementation and
   local verification are complete.
+- For a task with subtasks, move the task itself to `review` only when
+  every subtask status is `review`.
 - Moving to `done` requires an explicit User request.
 - Exception for initial placement: if `in-progress` contains no tasks
   and only one new task is being created, place it in `in-progress`.
@@ -482,8 +492,8 @@ Before setting a task or subtask to **review**:
   file per decision with meaningful names.
 - ADRs may be created directly, without a task file, unless the User
   explicitly requests task-linked ADR work.
-- ADR file names must avoid prefixes and abbreviations (use readable,
-  descriptive words).
+- ADR file names must avoid prefixes (including numbers) and abbreviations
+  (use readable, descriptive words).
 - Use a short template with Title, Date, Status, Context, Decision, and
   Consequences.
 - Use ADRs for decisions affecting public behavior, dependencies, or
