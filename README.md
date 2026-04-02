@@ -58,6 +58,30 @@ existing practices before any code is written. This is especially
 valuable in legacy systems: it prevents clean-room redesigns and makes
 incremental change safer.
 
+## Document Roles and Lifetimes
+
+Spec Loop uses more than one document type on purpose. They do not have
+the same job or the same lifetime.
+
+- Task files are short-lived working artifacts for the next concrete
+  slice of work. They exist to drive research, review, implementation,
+  and testing of that slice.
+- ADRs capture durable decisions and the reasons behind them.
+- A glossary captures stable shared language across tasks, design,
+  tests, code symbols, and commits.
+- Living project documents capture current truth that should remain
+  useful after the task is accepted, such as technical shape,
+  operations, or other stable project knowledge.
+
+Historical task files do not need to be kept mutually consistent across
+time. The active task, however, should stay aligned with the glossary,
+living project documents, and implemented code for its scope.
+
+If a project maintains a technical design document, its purpose is to
+describe the current technical shape, stable boundaries, and important
+flows. It should not become a second glossary or a catalog of transient
+implementation detail.
+
 ## Getting started
 
 Apply the process to your repository.

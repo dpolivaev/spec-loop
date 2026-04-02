@@ -285,9 +285,9 @@ Rules in this section complement, and do not override,
 
 11. **Done task cleanup**  
    Keep done tasks in the task directory under the done status folder
-    with a three-digit prefix based on order moved into done. This done
-    numbering is independent from any three-digit backlog-order prefix.
-    Delete them from the working tree after a release tag is created.
+   with a three-digit prefix based on order moved into done. This done
+   numbering is independent from any three-digit backlog-order prefix.
+   Delete them from the working tree after a release tag is created.
 
 ## Context Preservation
 
@@ -295,8 +295,10 @@ Rules in this section complement, and do not override,
   requirements are unclear.
 - Treat the active task or subtask as the working source of truth for
   the current work item.
-- Older task files are historical records and need not be
-  retroactively updated when later tasks supersede them.
+- The active task or subtask does not need to be kept mutually
+  consistent with already finished tasks. Older task files are
+  historical working records and need not be retroactively updated when
+  later tasks supersede them.
 - Keep only relevant task content in active context and avoid carrying
   unrelated content.
 
