@@ -125,169 +125,184 @@ Chat is a coordination channel, not a design artifact.
 Rules in this section complement, and do not override,
 **Spec Loop Phases and Transitions**.
 
-1. **Task files**  
-   All tasks, design, and execution status live as individual Markdown
-   files under the project task directory, organized by status folders.
-   Task base names must not use ticket IDs, task identifiers, or
-   abbreviations; use readable, descriptive words. Numeric prefixes are
-   used only as folder-local ordering markers:
-   - `backlog` uses a readable three-digit backlog-order prefix.
-   - `done` uses the required three-digit completion-order prefix
-     defined in this Constitution.
-   Backlog numbering and done numbering are independent sequences. The
-   same number may appear once in `backlog` and once in `done` without
-   conflict. Task-first workflow from the section above applies unless
-   the User explicitly chooses otherwise.
+### 1. Task files
 
-2. **Research**  
-  Start with research unless waived. Record observations,
-  constraints, and verified facts only; plans belong in **Design**.
-  Research documents the current system: behavior, legacy
-  architecture, reverse-engineered flows, data structures,
-  initialization details, characterization findings, and verified
-  constraints. Current or as-is design belongs in **Research**.
+All tasks, design, and execution status live as individual Markdown
+files under the project task directory, organized by status folders.
+Task base names must not use ticket IDs, task identifiers, or
+abbreviations; use readable, descriptive words. Numeric prefixes are
+used only as folder-local ordering markers:
 
-3. **Scenario**  
-  Scenario anchors behavior and terms before implementation. Use it
-  when behavior/terms are introduced or changed; otherwise it can be
-  skipped (see Decision Tables). Keep Scenario concise and
-  implementation-free.
+- `backlog` uses a readable three-digit backlog-order prefix.
+- `done` uses the required three-digit completion-order prefix defined
+  in this Constitution.
 
-  **Naming principle (canonical terms):**
-  Scenario is the source of domain and behavior language. When
-  behavior or terms are introduced or changed, create or update
-  Scenario first, then use those terms consistently in Design, tests,
-  code symbols, and commit text. Do not keep parallel synonyms for the
-  same domain concept.
-  If existing code uses different names, align naming incrementally in
-  the current scope and document any intentional temporary mismatch in
-  the task file.
-  Research may mention legacy terms and synonyms. Design must use only
-  canonical Scenario terms, except for explicit legacy-to-target
-  mapping tables.
+Backlog numbering and done numbering are independent sequences. The
+same number may appear once in `backlog` and once in `done` without
+conflict. Task-first workflow from the section above applies unless the
+User explicitly chooses otherwise.
 
-  **Project glossary:**
-  `glossary.adoc` is optional until a project opts in by creating it or
-  by instructions that require it. Once present, it defines the
-  project's shared domain language and must be used during planning as
-  the reference for project terms and definitions.
-  Creating the first `glossary.adoc` from already approved information
-  is documentation-only work and does not require a task file unless
-  the User asks for task-based tracking.
-  Do not add helper names, implementation details, framework terms, or
-  other terms that are not needed to understand project rules,
-  behavior, or true subsystem boundaries.
-  When `glossary.adoc` exists, the LLM must:
-  - check whether approved work changes, clarifies, or implements
-    shared domain terms,
-  - plan the related `glossary.adoc` updates during PLAN,
-  - perform those updates during IMPLEMENTATION with relevant
-    implementation traceability links.
-  If required glossary updates were not planned, stop, return to PLAN,
-  update the task, request approval, then continue.
-  Before creating or updating `glossary.adoc`, read
-  `glossary-skill.md` next to this Constitution if available.
+### 2. Research
 
-4. **Design**  
-  Document the target system in **Design**: architecture, data
-  structures, data flow, interactions, and implementation boundaries.
-  Draft it from validated **Research** and required behavior from
-  **Scenario** when Scenario exists. Current implementation, legacy
-  structure, reverse-engineered flows, and as-is diagrams belong in
-  **Research** unless they are intentionally retained in the target
-  design.
+Start with research unless waived. Record observations, constraints,
+and verified facts only; plans belong in **Design**. Research
+documents the current system: behavior, legacy architecture,
+reverse-engineered flows, data structures, initialization details,
+characterization findings, and verified constraints. Current or as-is
+design belongs in **Research**.
 
-  Design must make intended implementation structure reviewable.
-  Keep verification structure in **Test specification**, not in
-  Design. Do not model test suites, test doubles, harnesses, or other
-  test-only elements in Design unless the task itself changes test
-  infrastructure. Design diagrams must not include test classes, test
-  fixtures, or test-only helpers. When changing tools, APIs, or
-  serialized payloads, **Design** must show the full target
-  request/response structures and enums; examples may supplement but
-  must not replace the class specification.
+### 3. Scenario
 
-  Show important interactions and implementation boundaries clearly and
-  concisely. When Scenario exists, Design must use Scenario language
-  for design-owned names.
+Scenario anchors behavior and terms before implementation. Use it when
+behavior/terms are introduced or changed; otherwise it can be skipped
+(see Decision Tables). Keep Scenario concise and implementation-free.
 
-  Design must show where each design element will live: in an existing
-  implementation unit or in a concretely named new one with a clear
-  boundary. If that is not yet decided, the design is not ready for
-  implementation. Use domain language for design-owned names.
+**Naming principle (canonical terms):**
+Scenario is the source of domain and behavior language. When behavior
+or terms are introduced or changed, create or update Scenario first,
+then use those terms consistently in Design, tests, code symbols, and
+commit text. Do not keep parallel synonyms for the same domain concept.
+If existing code uses different names, align naming incrementally in
+the current scope and document any intentional temporary mismatch in
+the task file. Research may mention legacy terms and synonyms. Design
+must use only canonical Scenario terms, except for explicit
+legacy-to-target mapping tables.
 
-  Formatting: if used, keep the diagram in its own paragraph under
-  Design. Put explanatory text below it only for context, rationale,
-  constraints, or clarifications it cannot express.
+**Project glossary:**
+`glossary.adoc` is optional until a project opts in by creating it or
+by instructions that require it. Once present, it defines the
+project's shared domain language and must be used during planning as
+the reference for project terms and definitions. Creating the first
+`glossary.adoc` from already approved information is documentation-only
+work and does not require a task file unless the User asks for
+task-based tracking. Do not add helper names, implementation details,
+framework terms, or other terms that are not needed to understand
+project rules, behavior, or true subsystem boundaries.
 
-5. **Test specification**
-   Document verification structure and concrete test coverage.
+When `glossary.adoc` exists, the LLM must:
 
-6. **Iterative discovery**  
-  Iterate across **Research**, **Scenario** (if used), **Design**, and
-  **Test specification** until decisions and verification are
-  coherent. Record intermediate design alternatives when they help
-  reasoning, review, or discussion. No implementation starts during
-  this loop.
+- check whether approved work changes, clarifies, or implements shared
+  domain terms,
+- plan the related `glossary.adoc` updates during PLAN,
+- perform those updates during IMPLEMENTATION with relevant
+  implementation traceability links.
 
-7. **Implementation**  
-  Implementation is complete only when design and test specification are
-  implemented, unless the user explicitly waives tests. Any glossary
-  work required by **Project glossary** must also be complete.
+If required glossary updates were not planned, stop, return to PLAN,
+update the task, request approval, then continue. Before creating or
+updating `glossary.adoc`, read `glossary-skill.md` next to this
+Constitution if available.
 
+### 4. Design
 
-8. **Status updates**  
-   Move task files between status folders within the project task
-   directory to reflect current focus (for example, `in-progress` to
-   `review`, or `done` back to `in-progress` or `backlog`).
-    Remove the backlog-order prefix only when a task is moved from
-    `backlog`. When moving a task into `done`, assign the next
-    done-folder completion prefix independently of any former backlog
-    prefix.
-   When reopening a task from done, keep the existing three-digit
-   prefix to preserve traceability. Avoid moving unrelated tasks; move
-   them only when actively worked on.
+Document the target system in **Design**: architecture, data
+structures, data flow, interactions, and implementation boundaries.
+Draft it from validated **Research** and required behavior from
+**Scenario** when Scenario exists. Current implementation, legacy
+structure, reverse-engineered flows, and as-is diagrams belong in
+**Research** unless they are intentionally retained in the target
+design.
 
-9. **Move workflow for diffs**  
-   When moving tracked task files, use `git mv` and stage the move
-   immediately before editing. This preserves rename tracking in diff
-   tools that are not rename-aware (for example, VS Code). Do not
-   unstage the rename until ready to review and commit. For new
-   untracked task files, move in filesystem (not `git mv`), then run
-   `git add -A`.
+Design must make intended implementation structure reviewable. Keep
+verification structure in **Test specification**, not in Design. Do not
+model test suites, test doubles, harnesses, or other test-only
+elements in Design unless the task itself changes test infrastructure.
+Design diagrams must not include test classes, test fixtures, or
+test-only helpers. When changing tools, APIs, or serialized payloads,
+**Design** must show the full target request/response structures and
+enums; examples may supplement but must not replace the class
+specification.
 
-10. **Status validation before commits**  
-   Update subtask status whenever task-file lifecycle state changes.
-   Before each commit, check relevant task files and propose any status
-   or folder changes needed for consistency. Apply those status changes
-   only after explicit user confirmation, except that the LLM should
-   apply `in-progress` -> `review` transitions directly when
-   implementation and local verification are complete.
-   Generated and local-only artifacts must not be committed. If such
-   files are accidentally tracked, untrack them and add or update the
-   appropriate ignore rule before continuing, unless they are
-   intentionally versioned.
-   Before writing the commit message, review the full change set being
-   committed and its purpose. The commit message must accurately
-   describe the purpose, unless the User explicitly requests otherwise.
-   Do not write a commit message that is misleading about what changed.
-   Then proceed with the commit.
-   For task-related commits, start the message with the **Primary
-   Identifier**:
-   - Ticket ID if present (for example `TICKET-123: ...`).
-   - Otherwise full Task Identifier
-     (for example `2025-01-15-research: ...`).
-   For non-task updates, commit messages may omit identifiers when
-   `AGENTS.md` policy allows it. If the user explicitly asks to skip
-   identifiers for a commit, honor that request.
-   After code or configuration changes, run relevant module tests before
-   reporting.
+Show important interactions and implementation boundaries clearly and
+concisely. When Scenario exists, Design must use Scenario language for
+design-owned names.
 
-11. **Done task cleanup**  
-   Keep done tasks in the task directory under the done status folder
-   with a three-digit prefix based on order moved into done. This done
-   numbering is independent from any three-digit backlog-order prefix.
-   Delete them from the working tree after a release tag is created.
+Design must show where each design element will live: in an existing
+implementation unit or in a concretely named new one with a clear
+boundary. If that is not yet decided, the design is not ready for
+implementation. Use domain language for design-owned names.
+
+Formatting: if used, keep the diagram in its own paragraph under
+Design. Put explanatory text below it only for context, rationale,
+constraints, or clarifications it cannot express.
+
+### 5. Test specification
+
+Document verification structure and concrete test coverage.
+
+### 6. Iterative discovery
+
+Iterate across **Research**, **Scenario** (if used), **Design**, and
+**Test specification** until decisions and verification are coherent.
+Record intermediate design alternatives when they help reasoning,
+review, or discussion. No implementation starts during this loop.
+
+### 7. Implementation
+
+Implementation is complete only when design and test specification are
+implemented, unless the user explicitly waives tests. Any glossary work
+required by **Project glossary** must also be complete.
+
+### 8. Status updates
+
+Move task files between status folders within the project task
+directory to reflect current focus (for example, `in-progress` to
+`review`, or `done` back to `in-progress` or `backlog`). Remove the
+backlog-order prefix only when a task is moved from `backlog`. When
+moving a task into `done`, assign the next done-folder completion
+prefix independently of any former backlog prefix.
+
+When reopening a task from done, keep the existing three-digit prefix
+to preserve traceability. Avoid moving unrelated tasks; move them only
+when actively worked on.
+
+### 9. Move workflow for diffs
+
+When moving tracked task files, use `git mv` and stage the move
+immediately before editing. This preserves rename tracking in diff
+tools that are not rename-aware (for example, VS Code). Do not unstage
+the rename until ready to review and commit. For new untracked task
+files, move in filesystem (not `git mv`), then run `git add -A`.
+
+### 10. Status validation before commits
+
+Update subtask status whenever task-file lifecycle state changes.
+Before each commit, check relevant task files and propose any status or
+folder changes needed for consistency. Apply those status changes only
+after explicit user confirmation, except that the LLM should apply
+`in-progress` -> `review` transitions directly when implementation and
+local verification are complete.
+
+Generated and local-only artifacts must not be committed. If such files
+are accidentally tracked, untrack them and add or update the
+appropriate ignore rule before continuing, unless they are
+intentionally versioned.
+
+Before writing the commit message, review the full change set being
+committed and its purpose. The commit message must accurately describe
+the purpose, unless the User explicitly requests otherwise. Do not
+write a commit message that is misleading about what changed. Then
+proceed with the commit.
+
+For task-related commits, start the message with the **Primary
+Identifier**:
+
+- Ticket ID if present (for example `TICKET-123: ...`).
+- Otherwise full Task Identifier (for example
+  `2025-01-15-research: ...`).
+
+For non-task updates, commit messages may omit identifiers when
+`AGENTS.md` policy allows it. If the user explicitly asks to skip
+identifiers for a commit, honor that request.
+
+After code or configuration changes, run relevant module tests before
+reporting.
+
+### 11. Done task cleanup
+
+Keep done tasks in the task directory under the done status folder with
+a three-digit prefix based on order moved into done. This done
+numbering is independent from any three-digit backlog-order prefix.
+Delete them from the working tree after a release tag is created.
 
 ## Context Preservation
 
