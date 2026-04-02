@@ -31,12 +31,12 @@
 
 ### Core Invariants
 
-- Task-first: research and design live in task files.
+- Task-based work must be plan-first.
 - Follow task formatting rules.
 
 ### Decision Tables (Operational Shortcuts)
 
-Use these tables as quick lookup only. **Spec Loop Phases and
+Use these tables as quick lookup only. **Task-based Phases and
 Transitions** and **Task States** remain authoritative.
 
 | Situation | Required action | Resulting phase |
@@ -54,7 +54,20 @@ Transitions** and **Task States** remain authoritative.
 | Change is purely technical and does not change behavior or domain terms | Scenario may be omitted |
 | Scenario is omitted | Design must not introduce new domain terms; add Scenario first if terms change |
 
-## Spec Loop Phases and Transitions
+## When work is task-based
+
+Work that changes code, tests, or configuration must be task-based.
+For work that does not change code, tests, or configuration, a task
+file is not required unless the User asks for task-based tracking.
+
+When work is task-based and no suitable task file exists,
+propose creating one before research/design. Before IMPLEMENTATION,
+the task file must contain approved Design decisions and any required
+Constraints.
+
+Chat is a coordination channel, not a design artifact.
+
+## Task-based Phases and Transitions
 
 Phases:
 
@@ -97,23 +110,10 @@ This phase model governs task-scoped implementation work only.
 Work that does not change code, tests, or configuration is outside
 this phase model unless the User says otherwise.
 
-## When work is task-based
-
-Work that changes code, tests, or configuration must be task-based.
-For work that does not change code, tests, or configuration, a task
-file is not required unless the User asks for task-based tracking.
-
-When work is task-based and no suitable task file exists,
-propose creating one before research/design. Before IMPLEMENTATION,
-the task file must contain approved Design decisions and any required
-Constraints.
-
-Chat is a coordination channel, not a design artifact.
-
 ## Workflow
 
 Rules in this section complement, and do not override,
-**Spec Loop Phases and Transitions**.
+**Task-based Phases and Transitions**.
 
 ### 1. Task files
 
@@ -338,7 +338,7 @@ Lifecycle definitions:
 
 Lifecycle and transition rules:
 - Tasks and subtasks use the same transition guards from
-  **Spec Loop Phases and Transitions**.
+  **Task-based Phases and Transitions**.
 - LLM should move `in-progress` -> `review` when implementation and
   local verification are complete.
 - For a task with subtasks, move the task itself to `review` only when
