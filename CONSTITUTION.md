@@ -61,9 +61,7 @@ For work that does not change code, tests, or configuration, a task
 file is not required unless the User asks for task-based tracking.
 
 When work is task-based and no suitable task file exists,
-propose creating one before research/design. Before IMPLEMENTATION,
-the task file must contain approved Design decisions and any required
-Constraints.
+propose creating one before research/design.
 
 Chat is a coordination channel, not a design artifact.
 
@@ -72,8 +70,9 @@ Chat is a coordination channel, not a design artifact.
 Phases:
 
 - **PLAN** - research, design/spec changes, test specification.
-- **IMPLEMENTATION** - code and test code, strictly following approved
-  design.
+- **IMPLEMENTATION** - code and required tests, strictly following
+  approved Design and Test specification unless the User explicitly
+  waives tests.
 - **DONE** - verified and accepted completion.
 
 In PLAN, edits are allowed only for non-executable artifacts used for
@@ -99,6 +98,12 @@ implementation together.
 The following transitions require **explicit User instruction or
 approval**: PLAN -> IMPLEMENTATION, IMPLEMENTATION -> DONE.
 
+Backlog tasks may keep Research and Design high-level or mark them
+`To be done` until they become current.
+Before PLAN -> IMPLEMENTATION, the active task must have any required
+Research, any required Constraints, and an implementation-ready
+Design.
+
 IMPLEMENTATION -> PLAN may be initiated by the LLM when required by
 this Constitution (for example, scope drift, unclear classification,
 rule conflict, or missing approved Design). In that case, state the
@@ -110,9 +115,10 @@ This phase model governs task-scoped implementation work only.
 Work that does not change code, tests, or configuration is outside
 this phase model unless the User says otherwise.
 
-## Workflow
+## Task Artifacts and Administration
 
-Rules in this section complement, and do not override,
+Rules in this section define task artifacts, section content, and task
+administration. Phase entry, exit, and approval rules remain in
 **Task-based Phases and Transitions**.
 
 ### 1. Task files
@@ -137,10 +143,9 @@ conflict.
 
 Start with research unless waived. Record observations, constraints,
 and verified facts only; plans belong in **Design**. Research
-documents the current system: behavior, legacy architecture,
-reverse-engineered flows, data structures, characterization findings,
-and verified constraints. Current or as-is design belongs in
-**Research**.
+documents the current system: behavior, current implementation,
+legacy architecture, reverse-engineered flows, data structures,
+characterization findings, verified constraints, and as-is diagrams.
 
 #### Scenario
 
@@ -190,30 +195,25 @@ Constitution if available.
 Document the target system in **Design**: architecture, data
 structures, data flow, interactions, and implementation boundaries.
 Draft it from validated **Research** and required behavior from
-**Scenario** when Scenario exists. Current implementation, legacy
-structure, reverse-engineered flows, and as-is diagrams belong in
-**Research** unless they are intentionally retained in the target
-design.
+**Scenario** when Scenario exists.
 
 Design must make intended implementation structure reviewable. Keep
 verification structure in **Test specification**, not in Design. Do
 not model test suites, test doubles, harnesses, or other test-only
-elements in Design unless the task changes test infrastructure. Design
-diagrams must not include test classes, test fixtures, or test-only
-helpers. When changing tools, APIs, or serialized payloads,
-**Design** must show the full target request/response structures and
-enums; examples may supplement but must not replace the specification.
-When Scenario exists, Design must use Scenario language for
-design-owned names.
+elements in Design unless the task changes test infrastructure. Before
+PLAN -> IMPLEMENTATION, Design must identify the concrete
+implementation units for the change, using the chosen names of
+existing units to reuse and concretely named new units to introduce.
+If a design diagram is used, those units and names must appear in the
+diagram itself, not only in prose. When changing tools, APIs, or
+serialized payloads, **Design** must show the full target
+request/response structures and enums; examples may supplement but
+must not replace the specification. When Scenario exists, Design must
+use Scenario language for design-owned names.
 
-Design must show where each design element will live: in an existing
-implementation unit or in a concretely named new one with a clear
-boundary. If that is not yet decided, the design is not ready for
-implementation. Use domain language for design-owned names.
-
-Formatting: if used, keep the diagram in its own paragraph under
-Design. Put explanatory text below it only when needed for context,
-rationale, constraints, or clarifications it cannot express.
+Use domain language for design-owned names. If those units, names, or
+boundaries are not yet decided, the design is not ready for
+implementation.
 
 #### Test specification
 
@@ -226,13 +226,7 @@ Iterate across **Research**, **Scenario** (if used), **Design**, and
 Record intermediate alternatives only when they help reasoning,
 review, or discussion. No implementation starts during this loop.
 
-### 3. Implementation
-
-Implementation is complete only when design and test specification are
-implemented, unless the user explicitly waives tests. Any glossary work
-required by **Project glossary** must also be complete.
-
-### 4. Task administration
+### 3. Task administration
 
 #### Status moves
 
@@ -421,19 +415,30 @@ Each task uses this exact order and layout:
 
 ### PlantUML Diagrams
 
+- This section governs diagram use and formatting for task
+  **Research** and **Design**.
 - Use **Research** for current state and **Design** for target state.
 - **Research** must include a PlantUML diagram when current behavior,
   message flow, context selection, or component interaction is being
   analyzed.
 - **Design** must include a PlantUML diagram when the change affects
   structure or component interaction.
-- A diagram may be omitted only when the task is confined to a single
+- Prefer diagrams over text when they can express the research or
+  design clearly. Use text only for what the diagram cannot express
+  well.
+- Diagrams may be omitted only when the task is confined to a single
   method or a trivially local change with no meaningful flow or
   interaction to visualize.
-- Do not use PlantUML notes. Put needed explanation below the
-  diagram.
+- Diagrams must not include test classes, test fixtures, or test-only
+  helpers.
+- Keep the diagram in its own paragraph under the owning section.
+- Do not use PlantUML notes. Put needed explanation below the diagram
+  only when needed for context, rationale, constraints, or
+  clarifications it cannot express.
 - Use `allowmixing` only when class elements are combined with
   non-class elements.
+- If both structure and behavior matter, use separate diagrams instead
+  of mixing them in one PlantUML block.
 - Declare component and sequence diagrams with explicit PlantUML
   keywords.
 - For class diagrams, use one outer
