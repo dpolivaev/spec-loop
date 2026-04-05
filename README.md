@@ -189,11 +189,20 @@ project-specific settings such as `<TASK_DIR>` and local requirements.
    It explains how task files and the Constitution map to team development practice: boundaries,
    responsibility, commit linking, and status discipline.
 
-4. Follow the hands-on tutorial.
+4. Follow one of the hands-on tutorials.
 
-   * **[Spec Loop Tutorial](docs/tutorial.md)** walks through a complete
-     end-to-end example with staged planning, approvals, implementation,
-     and testing.
+   * **[Wordle Tutorial](docs/wordle-tutorial.md)** walks through a
+     compact Java example with staged planning, approvals,
+     implementation, glossary maintenance, and testing.
+   * **[Online Art Game Tutorial](docs/online-art-game-tutorial.md)**
+     walks through a complete browser-oriented example with staged
+     planning, approvals, implementation, and testing.
+   * The two tutorials teach the same Spec Loop workflow: planning
+     first, explicit approval before implementation, small reviewable
+     tasks or subtasks, verification, and user correction when the LLM
+     misses a supporting update. The main difference is the technical
+     setting: Wordle is a compact Java path, while the online art game
+     is browser-oriented. You can choose either tutorial.
 
 5. Project glossary conventions.
 
@@ -205,7 +214,8 @@ Recommended quick-check order:
 - `README.md`
 - `CONSTITUTION.md`
 - `docs/review-responsibility-and-traceability.md`
-- `docs/tutorial.md`
+- `docs/online-art-game-tutorial.md`
+- `docs/wordle-tutorial.md`
 
 ## Diagrams and PlantUML
 

@@ -1,4 +1,4 @@
-# Spec Loop Tutorial: You Send, You See
+# Online Art Game Tutorial: You Send, You See
 
 This tutorial is intentionally compact and execution-focused.
 It is optimized to demonstrate a broad range of Spec Loop mechanisms in
@@ -186,6 +186,8 @@ Each following tutorial step uses the same structure:
 - ‘You send’ shows a suitable message to send to the LLM. Any equivalent wording is fine.
 - This tutorial assumes `glossary.adoc` is created in
   Step 1 and then maintained throughout the later steps.
+  Once it exists, the LLM should treat it as ordinary project context
+  rather than needing that reminder in every later prompt.
 - Governance and workflow gates (from the copied [AGENTS.md](../AGENTS.md) and
   [CONSTITUTION.md](../CONSTITUTION.md)) are expected to be loaded by your LLM tool
   automatically. [glossary-skill.md](../glossary-skill.md) is expected next to
@@ -222,6 +224,19 @@ always ask it to check the task or subtask against
 
 If you notice files in the change set that should be ignored, you can
 tell the LLM to fix that.
+
+## Possible misalignment
+
+If one of these happens, interrupt the flow and ask the LLM to correct
+it before you continue:
+
+- Implementation starts before explicit approval.
+- Unrelated changes are mixed into one subtask.
+- Implementation changes are made without verification evidence.
+- A supporting artifact such as `glossary.adoc`, task status, or ignore
+  rules was not updated when the change clearly requires it.
+- A task or subtask is moved to `done` without explicit user
+  confirmation.
 
 ## Step 1: Project README ([README.md](../README.md))
 
@@ -459,7 +474,6 @@ Reuse earlier task-file research where relevant, but keep future
 subtasks lightweight. We will flesh out only the current subtask before
 implementation.
 
-Use `glossary.adoc` as the terminology reference.
 ```
 
 ### You see (plan)
@@ -540,8 +554,8 @@ subtask. Create only:
 Keep future implementation subtasks lightweight. We will flesh out only
 the current subtask before implementation.
 
-Use `glossary.adoc` during planning as the reference for leaderboard
-terms and definitions.
+Keep leaderboard terminology aligned with the established project
+language.
 ```
 
 ### You see (plan)
@@ -669,11 +683,3 @@ How to think while running this tutorial:
 - Chat is for coordination and approvals; task files and ADRs are the
   durable specification artifacts.
 - Only the user may relax or override Constitution workflow rules.
-
-Common anti-patterns:
-
-- Implementation starts before explicit approval.
-- Unrelated changes are mixed into one subtask.
-- Implementation changes are made without verification evidence.
-- A task or subtask is moved to `done` without explicit user
-  confirmation.
