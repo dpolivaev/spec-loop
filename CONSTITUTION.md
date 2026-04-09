@@ -123,19 +123,25 @@ administration. Phase entry, exit, and approval rules remain in
 
 ### 1. Task files
 
-All task work lives as individual Markdown files under the project
-task directory, organized by status folders. Task base names must not
-use ticket IDs, task identifiers, or abbreviations; use readable,
-descriptive words. Numeric prefixes are used only as folder-local
-ordering markers:
+Task files live under the project task directory.
 
-- `backlog` uses a readable three-digit backlog-order prefix.
-- `done` uses the required three-digit completion-order prefix defined
-  in this Constitution.
+Top-level task folders are `backlog`, `in-progress`, `review`, and
+`done`. These folder names are the task lifecycle states.
 
-Backlog numbering and done numbering are independent sequences. The
-same number may appear once in `backlog` and once in `done` without
-conflict.
+- Only `backlog` may contain additional subfolders for organization.
+- Names of backlog subfolders are organizational only and need not
+  match lifecycle states.
+- Backlog numbering is optional.
+- If used, backlog numbering is a readable three-digit prefix local to
+  the containing backlog folder.
+- `done` uses the required three-digit completion-order prefix and
+  remains one global sequence within `done`.
+
+Task base names must not use ticket IDs, task identifiers, or
+abbreviations; use readable, descriptive words.
+
+Backlog and done numbering are independent. The same number may appear
+in multiple backlog folders and once in `done`.
 
 ### 2. Planning artifacts
 
@@ -230,15 +236,17 @@ review, or discussion. No implementation starts during this loop.
 
 #### Status moves
 
-Move task files between status folders within the project task
-directory to reflect current focus. Remove the backlog-order prefix
-only when a task is moved from `backlog`. When moving a task into
-`done`, assign the next done-folder completion prefix independently of
-any former backlog prefix.
+Move task files between status folders to reflect lifecycle state.
 
-When reopening a task from `done`, keep the existing three-digit
-prefix to preserve traceability. Avoid moving unrelated tasks; move
-them only when actively worked on.
+Moves between backlog subfolders are organizational only. When tasks
+move between backlog subfolders, adjust backlog prefixes to fit the
+target. Remove a backlog prefix only when moving a task out of
+`backlog`. When moving a task into `done`, assign the next global
+`done` prefix independently of any former backlog prefix.
+
+When reopening a task from `done`, keep its prefix to preserve
+traceability. Avoid moving unrelated tasks; move them only when
+actively worked on.
 
 #### Tracked moves
 
@@ -276,9 +284,8 @@ reporting.
 
 #### Done cleanup
 
-Keep done tasks in the task directory under the done status folder
-with a three-digit prefix based on order moved into done. This done
-numbering is independent from any three-digit backlog-order prefix.
+Keep done tasks under `done` with a global three-digit completion
+prefix. This numbering is independent of any optional backlog prefix.
 Delete them from the working tree after a release tag is created.
 
 ## Context Preservation
@@ -316,7 +323,7 @@ Phases govern what work may be performed now. Lifecycle states describe
 where tracked work sits in the workflow.
 
 Representation:
-- Task lifecycle state is represented by the task file directory.
+- Task lifecycle state is determined by the top-level status folder.
 - Subtask lifecycle state is represented by `- **Status:** <status>`.
 
 Lifecycle definitions:
