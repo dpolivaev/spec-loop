@@ -232,7 +232,7 @@ still better than having no diagram, but it does not replace the
 Constitution's PlantUML requirement where that requirement applies.
 
 For inline PlantUML rendering in Markdown on the web, view the repo on
-GitLab. GitHub does not render PlantUML embedded in Markdown natively,
+[GitLab](https://gitlab.com/dpolivaev/spec-loop). GitHub does not render PlantUML embedded in Markdown natively,
 so reading there can degrade the intended experience.
 
 For local preview setup, use one of these guides:
