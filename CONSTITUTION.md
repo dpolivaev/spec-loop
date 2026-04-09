@@ -203,23 +203,26 @@ structures, data flow, interactions, and implementation boundaries.
 Draft it from validated **Research** and required behavior from
 **Scenario** when Scenario exists.
 
-Design must make intended implementation structure reviewable. Keep
-verification structure in **Test specification**, not in Design. Do
-not model test suites, test doubles, harnesses, or other test-only
-elements in Design unless the task changes test infrastructure. Before
-PLAN -> IMPLEMENTATION, Design must identify the concrete
-implementation units for the change, using the chosen names of
-existing units to reuse and concretely named new units to introduce.
-If a design diagram is used, those units and names must appear in the
-diagram itself, not only in prose. When changing tools, APIs, or
-serialized payloads, **Design** must show the full target
-request/response structures and enums; examples may supplement but
-must not replace the specification. When Scenario exists, Design must
-use Scenario language for design-owned names.
+Design is the implementation contract. It must make intended
+implementation structure reviewable and implementation-ready.
 
-Use domain language for design-owned names. If those units, names, or
-boundaries are not yet decided, the design is not ready for
+Use only final intended names for design-owned terms, implementation
+units, configuration keys, tool/API names, request/response fields,
+enum values, and similar identifiers. Do not use placeholders,
+temporary names, candidate names, or example names. If a name, unit,
+or boundary is not decided, the design is not ready for
 implementation.
+
+Keep test-only elements in **Test specification**, not in Design,
+unless the task changes test infrastructure.
+
+When changing tools, APIs, or serialized payloads, **Design** must
+show the full target request/response structures and enums; examples
+may supplement but must not replace the specification.
+
+When Scenario exists, Design must use canonical Scenario terms for
+design-owned names. If a design diagram is used, the relevant units
+and names must appear in the diagram itself, not only in prose.
 
 #### Test specification
 
@@ -465,8 +468,8 @@ Before setting a task or subtask to **review**:
 4. **Implementation**: Scope, Design, Constraints, and Test
    specification are fully implemented as applicable.
 5. **Verification**: tests required by **Testing Policy** pass locally.
-6. **Cleanliness**: no TODOs, placeholders, temp comments, or unused
-   imports remain.
+6. **Cleanliness**: no TODOs, placeholders, example names, temp
+   comments, or unused imports remain.
 7. **Documentation**: any implementation deviation from approved
    design is documented in the task file before review.
 8. **Glossary**: required glossary work is complete.
