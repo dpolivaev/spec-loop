@@ -100,9 +100,10 @@ approval**: PLAN -> IMPLEMENTATION, IMPLEMENTATION -> DONE.
 
 Backlog tasks may keep Research and Design high-level or mark them
 `To be done` until they become current.
-Before PLAN -> IMPLEMENTATION, the active task must have any required
-Research, any required Constraints, and an implementation-ready
-Design.
+Before IMPLEMENTATION, the active task must have any required
+Research, any required Constraints, required Scenario work, an
+implementation-ready Design, and a Test specification for the increment
+being implemented, even when the user allows PLAN and IMPLEMENTATION together.
 
 IMPLEMENTATION -> PLAN may be initiated by the LLM when required by
 this Constitution (for example, scope drift, unclear classification,
@@ -247,9 +248,10 @@ target. Remove a backlog prefix only when moving a task out of
 `backlog`. When moving a task into `done`, assign the next global
 `done` prefix independently of any former backlog prefix.
 
-When reopening a task from `done`, keep its prefix to preserve
-traceability. Avoid moving unrelated tasks; move them only when
-actively worked on.
+When reopening a task from `done`, keep the task file in
+`done` by default and append a new subtask for the new increment.
+Do not modify already finished main sections or completed subtasks unless
+the User explicitly requests those edits.
 
 #### Tracked moves
 
@@ -327,6 +329,9 @@ where tracked work sits in the workflow.
 
 Representation:
 - Task lifecycle state is determined by the top-level status folder.
+- For follow-up work on tasks already in `done`, the file remains in
+  `done`; active lifecycle is represented by the newest follow-up
+  subtask status.
 - Subtask lifecycle state is represented by `- **Status:** <status>`.
 
 Lifecycle definitions:
@@ -345,9 +350,9 @@ Lifecycle and transition rules:
   **Task-based Phases and Transitions**.
 - LLM should move `in-progress` -> `review` when implementation and
   local verification are complete.
-- For a task with subtasks, move the task itself to `review` only when
+- For tasks not in done with subtasks, move the task itself to `review` only when
   every subtask status is `review`.
-- Moving to `done` requires an explicit User request.
+- Moving to and from `done` requires an explicit User request.
 - Exception for initial placement: if `in-progress` contains no tasks
   and only one new task is being created, place it in `in-progress`.
 
