@@ -428,39 +428,53 @@ Each task uses this exact order and layout:
   context such as relevant modules, important classes, framework
   context, repository conventions, and risk areas.
 
-### PlantUML Diagrams
+### Diagrams
 
 - This section governs diagram use and formatting for task
   **Research** and **Design**.
+- Use **PlantUML** by default.
+- Use **Mermaid** only when the User or another governing instruction
+  explicitly prefers Mermaid.
 - Use **Research** for current state and **Design** for target state.
-- **Research** must include a PlantUML diagram when current behavior,
+- **Research** must include a diagram when current behavior,
   message flow, context selection, or component interaction is being
   analyzed.
-- **Design** must include a PlantUML diagram when the change affects
-  structure or component interaction.
+- **Design** must include a diagram when the change affects structure
+  or component interaction.
 - Prefer diagrams over text when they can express the research or
-  design clearly. Use text only for what the diagram cannot express
+  design clearly. Use text only for what a diagram cannot express
   well.
 - Diagrams may be omitted only when the task is confined to a single
   method or a trivially local change with no meaningful flow or
   interaction to visualize.
 - Diagrams must not include test classes, test fixtures, or test-only
   helpers.
-- Keep the diagram in its own paragraph under the owning section.
-- Do not use PlantUML notes. Put needed explanation below the diagram
-  only when needed for context, rationale, constraints, or
+- Keep each diagram in its own paragraph under the owning section.
+- Do not use notes inside diagrams. Put needed explanation below a
+  diagram only when needed for context, rationale, constraints, or
   clarifications it cannot express.
+- If both structure and behavior matter, use separate diagrams instead
+  of mixing them in one diagram block.
+- Declare component and sequence diagrams with explicit language
+  keywords.
+- For class diagrams, show only the class elements needed for the
+  change or structural interaction, with meaningful dependency labels
+  and at most one connector per class pair.
+
+#### PlantUML-specific rules
+
 - Use `allowmixing` only when class elements are combined with
   non-class elements.
-- If both structure and behavior matter, use separate diagrams instead
-  of mixing them in one PlantUML block.
-- Declare component and sequence diagrams with explicit PlantUML
-  keywords.
-- For class diagrams, use one outer
-  `package` with nested inner packages and `set separator none`. Show
-  only the class elements needed for the change or structural
-  interaction, with meaningful dependency labels and at most one
-  connector per class pair.
+- For class diagrams, use one outer `package` with nested inner
+  packages and `set separator none`.
+
+#### Mermaid-specific rules
+
+- For class diagrams, use `classDiagram`.
+- Use only single-level `namespace` blocks; do not nest
+  `namespace` blocks.
+- When hierarchical boundaries must be shown, flatten namespace names
+  instead of nesting.
 
 ## Definition of Done for LLM
 

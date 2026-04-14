@@ -29,7 +29,8 @@ should outlive a single task.
 
 The setup recommendations below do not all have the same weight:
 
-- PlantUML is required where the Constitution requires diagrams.
+- PlantUML is the default where the Constitution requires diagrams.
+- Mermaid is a poorer but possible alternative.
 - `glossary.adoc` is used throughout this tutorial.
 - Browser automation is not needed for this path.
 
@@ -78,9 +79,11 @@ mkdir -p architecture-decisions docs
    - [docs/vscode-setup.md](vscode-setup.md), or
    - [docs/jetbrains-setup.md](jetbrains-setup.md).
 
-   PlantUML is not just a tutorial preference.
-   The Constitution requires PlantUML where task-file diagrams are
-   required.
+   PlantUML is the default diagram language for this tutorial.
+   Mermaid is a poorer but possible fallback when the User or another
+   governing instruction explicitly prefers Mermaid (for example when
+   GitHub or similar environments are used and PlantUML is not
+   rendered).
 
 6. This tutorial uses `glossary.adoc` throughout, so also configure
    AsciiDoc support in your editor or IDE.
@@ -88,43 +91,7 @@ mkdir -p architecture-decisions docs
    - [docs/vscode-setup.md](vscode-setup.md), or
    - [docs/jetbrains-setup.md](jetbrains-setup.md).
 
-7. Verify PlantUML rendering with this installation check snippet:
-
-This section is written to be unambiguous in all modes:
-- With PlantUML rendering enabled, you should see a diagram in the
-  second block below.
-- Without PlantUML rendering, both blocks may appear as code blocks.
-- In raw Markdown view, the first block shows literal Markdown
-  syntax with outer fences; copy only the inner fenced `plantuml`
-  block from that first block.
-
-````
-```plantuml
-@startuml
-actor User
-participant LLM
-User -> LLM: Send planning request
-LLM --> User: Asks for implementation approval
-User -> LLM: Approves implementation
-LLM --> User: Reports execution in chat
-@enduml
-```
-````
-
-as
-
-```plantuml
-@startuml
-actor User
-participant LLM
-User -> LLM: Send planning request
-LLM --> User: Asks for implementation approval
-User -> LLM: Approves implementation
-LLM --> User: Reports execution in chat
-@enduml
-```
-
-8. Constitution check + initial governance commit:
+7. Constitution check + initial governance commit:
    - Ensure your LLM tool can read the shared
      [CONSTITUTION.md](../CONSTITUTION.md) location
      (or the project copy if you use the fallback setup).
@@ -298,7 +265,8 @@ Record just-enough research directly inside the task `Research`
 section, including the chosen Gradle wrapper version and any relevant
 build/test wiring decisions.
 
-Include PlantUML design, concrete automated tests, and the exact build
+Include a design diagram (PlantUML by default; Mermaid only when
+explicitly preferred), concrete automated tests, and the exact build
 and test commands you plan to run during verification.
 ```
 
@@ -310,7 +278,8 @@ and test commands you plan to run during verification.
   - contains Scope, Motivation, Briefing, Research, Design, and Test
     specification,
   - records the chosen Gradle wrapper version in Research,
-  - includes a PlantUML diagram for the build layout.
+  - includes a build-layout diagram (PlantUML by default; Mermaid
+    only when explicitly preferred).
 
 Approve only after the task definition looks correct.
 Then ask the LLM to `implement it`.
@@ -438,7 +407,8 @@ include the exact automated checks needed to verify the loader.
   implementation approval.
 - Task file:
   - documents the word-list file format in Research,
-  - includes a PlantUML design for the loader-to-resource flow,
+  - includes a loader-to-resource flow diagram (PlantUML by default;
+    Mermaid only when explicitly preferred),
   - defines concrete automated tests for loader behavior.
 
 Approve only after the task definition looks correct.

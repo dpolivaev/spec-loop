@@ -24,7 +24,8 @@ This project is not affiliated with or endorsed by AIC.
   needed for your project.
 
 The setup recommendations below do not all have the same weight:
-- PlantUML is required where the Constitution requires diagrams.
+- PlantUML is the default where the Constitution requires diagrams.
+- Mermaid is a poorer but possible alternative.
 - Browser automation is strongly recommended for frontend work but not
   strictly required.
 - `glossary.adoc` is project-dependent, but recommended when you want
@@ -99,58 +100,17 @@ Expected layout:
    - `site/index.html` rendering and basic page behavior,
    - game page flow and interactions during gameplay checks.
 
-6. Configure PlantUML preview in your editor using:
+6. Configure PlantUML and Mermaid previews in your editor using:
    - [docs/vscode-setup.md](vscode-setup.md), or
    - [docs/jetbrains-setup.md](jetbrains-setup.md).
 
-   PlantUML is not just a tutorial preference. The Constitution
-   requires PlantUML where task-file diagrams are required. PlantUML is
-   also the recommended default here because these diagrams are often
-   easier to read and review than pure Mermaid diagrams for the
-   structural and behavioral design work used in this tutorial.
 
 7. This tutorial uses `glossary.adoc` throughout, so also configure
    AsciiDoc support in your editor or IDE. See:
    - [docs/vscode-setup.md](vscode-setup.md), or
    - [docs/jetbrains-setup.md](jetbrains-setup.md).
 
-8. Verify PlantUML rendering with this installation check snippet:
-
-This section is written to be unambiguous in all modes:
-- With PlantUML rendering enabled, you should see a diagram in the
-  second example.
-- Without PlantUML rendering, both examples may appear as code blocks.
-- In raw Markdown view, the first example shows literal Markdown
-  syntax with outer fences; copy only the inner fenced `plantuml`
-  block from that first example.
-
-````
-```plantuml
-@startuml
-actor User
-participant LLM
-User -> LLM: Send planning request
-LLM --> User: Asks for implementation approval
-User -> LLM: Approves implementation
-LLM --> User: Reports execution in chat
-@enduml
-```
-````
-
-as
-
-```plantuml
-@startuml
-actor User
-participant LLM
-User -> LLM: Send planning request
-LLM --> User: Asks for implementation approval
-User -> LLM: Approves implementation
-LLM --> User: Reports execution in chat
-@enduml
-```
-
-9. Constitution check + initial governance commit:
+8. Constitution check + initial governance commit:
    - Ensure your LLM tool can read the shared
      [CONSTITUTION.md](../CONSTITUTION.md) location (or the project copy
      if you use the fallback setup).

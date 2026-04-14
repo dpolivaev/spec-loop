@@ -217,23 +217,27 @@ Recommended quick-check order:
 - `docs/online-art-game-tutorial.md`
 - `docs/wordle-tutorial.md`
 
-## Diagrams and PlantUML
+## Diagrams: PlantUML default, Mermaid fallback
 
-Spec Loop treats diagrams as specification artifacts: they make design intent
-reviewable at the same boundary as the surrounding text.
+Spec Loop treats diagrams as specification artifacts: they make design
+intent reviewable at the same boundary as the surrounding text.
 
-Where the Constitution requires diagrams in task files, PlantUML is the
-required format. This is not only a tutorial preference.
+Where the Constitution requires diagrams in task files, use PlantUML by
+default.
 
-PlantUML is also the recommended default in practice because it is often
-easier to keep precise and reviewable than pure Mermaid for the
-structural and behavioral design work used in Spec Loop. Mermaid is
-still better than having no diagram, but it does not replace the
-Constitution's PlantUML requirement where that requirement applies.
+Mermaid is a poorer but still possible alternative when the User or
+another governing instruction explicitly prefers Mermaid, for example
+when GitHub or similar environments are used and PlantUML is not
+rendered.
+
+PlantUML remains the recommended default in practice because it is
+usually easier to keep precise and reviewable for the structural and
+behavioral design work used in Spec Loop.
 
 For inline PlantUML rendering in Markdown on the web, view the repo on
-[GitLab](https://gitlab.com/dpolivaev/spec-loop). GitHub does not render PlantUML embedded in Markdown natively,
-so reading there can degrade the intended experience.
+[GitLab](https://gitlab.com/dpolivaev/spec-loop). GitHub does not
+render PlantUML embedded in Markdown natively, so reading there can
+degrade the intended experience.
 
 For local preview setup, use one of these guides:
 
