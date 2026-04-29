@@ -144,7 +144,7 @@ Move task files between folders to reflect lifecycle state.
 
 Backlog subfolder moves: organizational only. Adjust backlog prefixes to fit target. Remove backlog prefix only when moving out of `backlog`. Moving into `done`: assign next global `done` prefix independently.
 
-Reopening from `done`: keep file in `done`, append new subtask for new increment. Don't modify finished sections or completed subtasks unless User explicitly asks.
+Tasks in `review` or `done` stay in place. For later work, append a new subtask. Don't modify finished sections or completed subtasks unless User explicitly asks.
 
 #### Tracked moves
 
@@ -188,8 +188,8 @@ Tasks and subtasks share one lifecycle: `backlog`, `in-progress`, `review`, `don
 Phases = what work may happen now. Lifecycle states = where tracked work sits.
 
 Representation:
-- Task lifecycle state = top-level status folder.
-- Follow-up on `done` task: file stays in `done`; active lifecycle = newest follow-up subtask status.
+- Task state = top-level folder until the file reaches `review` or `done`.
+- Files in `review` or `done` stay there. Later work uses the newest follow-up subtask status.
 - Subtask lifecycle: `- **Status:** <status>`.
 
 Lifecycle definitions:
@@ -200,10 +200,11 @@ Lifecycle definitions:
 
 Lifecycle and transition rules:
 - Same transition guards as **Task-based Phases and Transitions**.
+- Allowed task-file moves: `backlog` <-> `in-progress` -> `review` -> `done`.
+- If `in-progress` is empty and only one new task is being created, place it in `in-progress`, otherwise in `backlog`.
 - LLM moves `in-progress` -> `review` when implementation and local verification complete.
 - Task (not in done) with subtasks: move task to `review` only when every subtask is `review`.
-- Moving to/from `done` requires explicit User request.
-- Exception: if `in-progress` is empty and only one new task is being created, place it in `in-progress`.
+- Moving into `done` requires explicit User request.
 
 ## Task Structure
 
