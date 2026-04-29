@@ -457,6 +457,8 @@ Each task uses this exact order and layout:
   of mixing them in one diagram block.
 - Declare component and sequence diagrams with explicit language
   keywords.
+- Always use class diagrams if any classes are added, removed
+ or structurally modified.
 - For class diagrams, show only the class elements needed for the
   change or structural interaction, with meaningful dependency labels
   and at most one connector per class pair.
@@ -467,6 +469,7 @@ Each task uses this exact order and layout:
   non-class elements.
 - For class diagrams, use one outer `package` with nested inner
   packages and `set separator none`.
+- Use escape character `~` for text in PlantUML matching creole markup like `--`.
 
 #### Mermaid-specific rules
 
