@@ -24,23 +24,17 @@ If your IDE does not have a working Markdown preview (or does not show “Markdo
 
 ## Path A — Enable PlantUML rendering in Markdown Preview (JetBrains IDEs)
 
-### 1) Ensure the Markdown plugin is enabled
+### 1) Ensure the Markdown renderer is enabled
 
-1. Open **Settings / Preferences** → **Plugins**.
-2. Find **Markdown** and ensure it is **enabled** (it is bundled and enabled by default in most IntelliJ-based IDEs).
-   Plugin docs: [https://plugins.jetbrains.com/plugin/7793-markdown/docs](https://plugins.jetbrains.com/plugin/7793-markdown/docs) ([JetBrains Marketplace][2])
+Open any `.md` file. If you see rendered content, the renderer is active. If you see raw markup, click the **Editor and Preview** or **Preview** icon in the top-right corner of the editor to enable it.
+
+To set the default layout, go to **Settings → Languages & Frameworks → Markdown** and set **Default layout** to your preferred option.
 
 ### 2) Enable the PlantUML Markdown extension
 
-1. Open **Settings / Preferences**.
-2. Go to **Languages & Frameworks → Markdown**.
-3. Find **Markdown Extensions**.
-4. Enable **PlantUML**.
-5. Apply / OK.
+Go to **Settings → Languages & Frameworks → Markdown**, find the **Markdown Extensions** section, enable **PlantUML**, and click **Apply** or **OK**.
 
-JetBrains Markdown docs (including diagrams via extensions): [https://www.jetbrains.com/help/idea/markdown.html](https://www.jetbrains.com/help/idea/markdown.html) ([JetBrains][1])
-
-### 3) Write PlantUML in Markdown
+### 3) Check PlantUML in Markdown
 
 In any `.md` file:
 
@@ -64,13 +58,36 @@ Alice -> Bob: hello
 @enduml
 ```
 
-If PlantUML rendering is enabled, the additional block above should
-render as a diagram in Markdown Preview. If rendering is not enabled, it
-will appear as a code block.
+If PlantUML rendering is enabled, the block above renders as a diagram in the Markdown preview. If not, it appears as a code block.
 
 ### 4) Open the built-in Markdown Preview
 
-Open the Markdown preview pane (split editor/preview). The diagram should render inline.
+Open any `.md` file and click the **Editor and Preview** or **Preview** icon in the top-right corner of the editor. The diagram should render inline in the preview pane.
+
+---
+
+## AsciiDoc viewer for `glossary.adoc`
+
+If your project uses `glossary.adoc`, AsciiDoc support in the IDE is
+required.
+
+### 1) Install the AsciiDoc plugin
+
+1. Open **Settings / Preferences** → **Plugins**.
+2. Search for **AsciiDoc**.
+3. Install the plugin and restart the IDE if prompted.
+
+Plugin page:
+[https://plugins.jetbrains.com/plugin/7391-asciidoc](https://plugins.jetbrains.com/plugin/7391-asciidoc)
+
+### 2) Enable the Mermaid Diagrams extension for AsciiDoc
+
+Go to Settings → Languages & Frameworks → AsciiDoc, scroll to the checkboxes, enable Enable built-in Mermaid Diagrams support, and click Apply or OK. Note that this feature is experimental and works only with the JCEF preview engine.
+
+### 3) Open `glossary.adoc`
+
+Open the `.adoc` file normally in the IDE. The plugin provides AsciiDoc
+editing support and preview support for glossary files.
 
 ---
 
@@ -121,27 +138,6 @@ This is **not required** for Markdown rendering, but many teams install it for c
 
 * **plantuml4idea (PlantUML integration)**: [https://plugins.jetbrains.com/plugin/7017-plantuml4idea](https://plugins.jetbrains.com/plugin/7017-plantuml4idea) ([JetBrains Marketplace][6])
 * Plugin README / notes (including Graphviz note for many diagram types): [https://github.com/esteinberg/plantuml4idea](https://github.com/esteinberg/plantuml4idea) ([GitHub][7])
-
----
-
-## AsciiDoc viewer for `glossary.adoc`
-
-If your project uses `glossary.adoc`, AsciiDoc support in the IDE is
-required.
-
-### 1) Install the AsciiDoc plugin
-
-1. Open **Settings / Preferences** → **Plugins**.
-2. Search for **AsciiDoc**.
-3. Install the plugin and restart the IDE if prompted.
-
-Plugin page:
-[https://plugins.jetbrains.com/plugin/7391-asciidoc](https://plugins.jetbrains.com/plugin/7391-asciidoc)
-
-### 2) Open `glossary.adoc`
-
-Open the `.adoc` file normally in the IDE. The plugin provides AsciiDoc
-editing support and preview support for glossary files.
 
 ---
 
