@@ -17,15 +17,54 @@ This path uses one focused ADR before CLI implementation.
 The rest of the work can stay task-based unless a later design choice
 should outlive a single task.
 
-- Read [README.md](../README.md) first.
-- Then quickly check [CONSTITUTION.md](../CONSTITUTION.md) and
+## How to use this tutorial
+
+Follow this tutorial step by step. Do not try to read it all in
+advance.
+
+- If you want background on Spec Loop itself, you can skim
+  [README.md](../README.md).
+- Before you begin, take a short look at
+  [CONSTITUTION.md](../CONSTITUTION.md) so you know it defines the
+  workflow used throughout this tutorial.
+- You do not need to learn the Constitution in full up front. The
+  tutorial teaches the workflow by using it.
+- If useful, also skim
   [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
-- Then run this tutorial.
 - For every step, validate progress from AI output in chat.
 - Send all LLM messages from your project root directory.
-- If you use Claude, save project instructions as `CLAUDE.md`.
-  You can use [AGENTS.md](../AGENTS.md) content as the preamble and add
-  any other guidance needed for your project.
+
+## Setup
+
+Do this before you run the tutorial:
+
+1. Check out the `spec-loop` project that contains this tutorial.
+
+2. Create your own `wordle-project` repository in the same workspace
+   directory as `spec-loop`, not nested inside it.
+
+Run the command block below from a workspace directory of your choice.
+Replace `/path/to/your/workspace` with a real path.
+
+```bash
+mkdir -p /path/to/your/workspace
+cd /path/to/your/workspace
+git clone https://github.com/dpolivaev/spec-loop
+
+mkdir -p wordle-project
+cd wordle-project
+git init
+mkdir -p tasks/in-progress tasks/backlog tasks/done
+mkdir -p architecture-decisions docs
+```
+
+Expected layout:
+
+```text
+/path/to/your/workspace/
+  spec-loop/
+  wordle-project/
+```
 
 The setup recommendations below do not all have the same weight:
 
@@ -34,48 +73,8 @@ The setup recommendations below do not all have the same weight:
 - `glossary.adoc` is used throughout this tutorial.
 - Browser automation is not needed for this path.
 
-## Step 0: Setup (manual) + Constitution sanity ping
-
-Do this yourself before sending your first substantive request to the
-LLM:
-
-1. Read [README.md](../README.md) first, then this tutorial.
-   - Before this tutorial, quickly check
-     [CONSTITUTION.md](../CONSTITUTION.md) and
-     [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
-2. Create your own project repository.
-3. Set up governance files and a concrete task directory path:
-   - Preferred: keep [CONSTITUTION.md](../CONSTITUTION.md) in a stable
-     shared or central location outside your project.
-   - Keep [glossary-skill.md](../glossary-skill.md) in the same
-     directory as [CONSTITUTION.md](../CONSTITUTION.md), regardless of
-     whether the current project uses a glossary.
-   - If the governance files live outside the project, reference the
-     shared `CONSTITUTION.md` from your instruction file by absolute
-     path instead of copying the files into the repository.
-   - Fallback: if a shared location is not practical, copy these files
-     into your project instead.
-   - Then copy the instruction file your LLM tool uses:
-     - most tools: [AGENTS.md](../AGENTS.md)
-     - GitHub Copilot:
-       [.github/copilot-instructions.md](../.github/copilot-instructions.md)
-     - Claude Code: save [AGENTS.md](../AGENTS.md) content as
-       `CLAUDE.md` (or keep both if useful)
-   - In the instruction file(s), replace `<TASK_DIR>` with a real path
-     such as `tasks`.
-4. Run the command block below to create `wordle-project`.
-
-```bash
-mkdir -p ~/git-repo/ai
-cd ~/git-repo/ai
-mkdir -p wordle-project
-cd wordle-project
-git init
-mkdir -p tasks/in-progress tasks/backlog tasks/done
-mkdir -p architecture-decisions docs
-```
-
-5. Configure PlantUML preview in your editor using:
+3. Configure PlantUML, Mermaid, and AsciiDoc support in your editor or
+   IDE using:
    - [docs/vscode-setup.md](vscode-setup.md), or
    - [docs/jetbrains-setup.md](jetbrains-setup.md).
 
@@ -85,21 +84,40 @@ mkdir -p architecture-decisions docs
    GitHub or similar environments are used and PlantUML is not
    rendered).
 
-6. This tutorial uses `glossary.adoc` throughout, so also configure
-   AsciiDoc support in your editor or IDE.
-   See:
-   - [docs/vscode-setup.md](vscode-setup.md), or
-   - [docs/jetbrains-setup.md](jetbrains-setup.md).
+## Step 1: Configure project instructions and governance
 
-7. Constitution check + initial governance commit:
-   - Ensure your LLM tool can read the shared
-     [CONSTITUTION.md](../CONSTITUTION.md) location
-     (or the project copy if you use the fallback setup).
+Before your first substantive LLM request in `wordle-project`,
+configure the project instructions and governance files.
+
+1. Decide how this project will access governance files:
+   - Preferred: keep [CONSTITUTION.md](../CONSTITUTION.md) in a stable
+     shared location outside the project.
    - Keep [glossary-skill.md](../glossary-skill.md) in the same
-     directory as [CONSTITUTION.md](../CONSTITUTION.md) so projects
-     that use `glossary.adoc` can consult it later.
-   - Send this now as your first LLM message
-     (before any other request):
+     directory as [CONSTITUTION.md](../CONSTITUTION.md).
+   - Fallback: if a shared location is not practical, copy those files
+     into this project instead.
+
+2. Add the instruction file for your LLM tool:
+   - most tools: [AGENTS.md](../AGENTS.md)
+   - GitHub Copilot:
+     [.github/copilot-instructions.md](../.github/copilot-instructions.md)
+   - Claude Code: save [AGENTS.md](../AGENTS.md) content as
+     `CLAUDE.md` (or keep both if useful)
+
+3. Update that instruction file for this project:
+   - Ensure the instruction file points to the task directory you want
+     to use for this project. Example: `tasks`.
+   - If you use a shared governance location, reference the shared
+     `CONSTITUTION.md` there by absolute path.
+   - For this tutorial path, use `glossary.adoc`:
+     - create and maintain `glossary.adoc` as later steps instruct
+   - Decide which diagram type this project will use:
+     - default example: use PlantUML where the Constitution requires
+       diagrams
+     - alternative example: use Mermaid only when you explicitly prefer
+       it or your environment makes it more practical
+
+4. Send this as your first LLM message for the project:
 
 ```text
 Before we start: tell me which instruction/governance files you have
@@ -111,13 +129,17 @@ files already present in this project, and any copied governance files
 that belong to this repository setup.
 ```
 
-   - On the first LLM response, you should see a leading `🫡` without
-     asking for it.
-   - If you do not see it, or the tool reports
-     [CONSTITUTION.md](../CONSTITUTION.md) is unavailable or unreadable,
-     stop and fix file access or instruction loading before proceeding.
-   - You should also see an initial commit that includes the relevant
-     governance files for your tool setup.
+5. Verify the result before continuing:
+   - the first LLM response starts with `🫡`
+   - it correctly restates the approval gate
+   - it creates the initial governance commit
+   - if you copied governance files into the project, that commit
+     includes [CONSTITUTION.md](../CONSTITUTION.md) and, when
+     applicable, [glossary-skill.md](../glossary-skill.md)
+
+If the LLM does not show `🫡`, or reports that
+[CONSTITUTION.md](../CONSTITUTION.md) is unavailable or unreadable,
+stop and fix instruction loading or file access before proceeding.
 
 ----------
 
@@ -125,7 +147,7 @@ Each following tutorial step uses the same structure:
 
 - `You send` shows a suitable message to send to the LLM.
   Any equivalent wording is fine.
-- This tutorial assumes `glossary.adoc` is created in Step 1 and then
+- This tutorial assumes `glossary.adoc` is created in Step 2 and then
   maintained throughout the later steps. Once it exists, the LLM
   should treat it as ordinary project context rather than needing that
   reminder in every later prompt.
@@ -171,7 +193,7 @@ it before you continue:
 - A task or subtask is moved to `done` without explicit user
   confirmation.
 
-## Step 1: Project README ([README.md](../README.md))
+## Step 2: Project README ([README.md](../README.md))
 
 ### You send
 
@@ -243,7 +265,7 @@ This is documentation-only work, we do not need a task file for it.
   canonical project brief, and establish `glossary.adoc` as the project
   vocabulary without creating a task file.
 
-## Step 2: Gradle Java project setup
+## Step 3: Gradle Java project setup
 
 ### You send
 
@@ -301,7 +323,7 @@ Then ask the LLM to `implement it`.
 - Initial build setup is still task-based work:
   it is planned first, then implemented after explicit approval.
 
-## Step 3: Wordle domain model and evaluation rules
+## Step 4: Wordle domain model and evaluation rules
 
 ### You send
 
@@ -381,7 +403,7 @@ Use these subtasks:
   review the current subtask in detail, implement it, verify it,
   commit it, then move on.
 
-## Step 4: Word list loader and validation
+## Step 5: Word list loader and validation
 
 ### You send
 
@@ -433,7 +455,7 @@ Then ask the LLM to `implement it`.
 - Infrastructure-facing work such as resource loading still benefits
   from explicit file-format research and testable design.
 
-## Step 5: Game engine
+## Step 6: Game engine
 
 ### You send
 
@@ -503,7 +525,7 @@ Use these subtasks:
 - Separate the stable state shape from the state-transition behavior:
   it keeps the engine reviewable and the test coverage focused.
 
-## Step 6: AssertJ test migration
+## Step 7: AssertJ test migration
 
 ### You send
 
@@ -546,7 +568,7 @@ Then ask the LLM to `implement it`.
 - Technical cleanup that changes build configuration and tests is still
   implementation work and still needs a task, verification, and review.
 
-## Step 7: ADR for CLI argument parsing
+## Step 8: ADR for CLI argument parsing
 
 ### You send
 
@@ -592,7 +614,7 @@ or basic option parsing path.
 - ADRs are useful for durable tooling or design choices that should not
   be rediscovered inside a later implementation task.
 
-## Step 8: CLI game interface
+## Step 9: CLI game interface
 
 ### You send
 
@@ -664,7 +686,7 @@ subtask. Create only:
   keeping the increments ordered and separately accepted preserves
   reviewability.
 
-## Step 9: Minimal Swing UI
+## Step 10: Minimal Swing UI
 
 ### You send
 

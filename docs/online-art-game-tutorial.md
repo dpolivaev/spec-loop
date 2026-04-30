@@ -13,86 +13,68 @@ delivery.
 This tutorial uses public data from the Art Institute of Chicago (AIC).
 This project is not affiliated with or endorsed by AIC.
 
-- Read [README.md](../README.md) first.
-- Then quickly check [CONSTITUTION.md](../CONSTITUTION.md) and
+## How to use this tutorial
+
+Follow this tutorial step by step. Do not try to read it all in
+advance.
+
+- If you want background on Spec Loop itself, you can skim
+  [README.md](../README.md).
+- Before you begin, take a short look at
+  [CONSTITUTION.md](../CONSTITUTION.md) so you know it defines the
+  workflow used throughout this tutorial.
+- You do not need to learn the Constitution in full up front. The
+  tutorial teaches the workflow by using it.
+- If useful, also skim
   [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
-- Then run this tutorial.
 - For every step, validate progress from AI output in chat.
 - Send all LLM messages from your project root directory.
-- If you use Claude, save project instructions as `CLAUDE.md`. You can
-  use [AGENTS.md](../AGENTS.md) content as the preamble and add any other guidance
-  needed for your project.
 
-The setup recommendations below do not all have the same weight:
-- PlantUML is the default where the Constitution requires diagrams.
-- Mermaid is a poorer but possible alternative.
-- Browser automation is strongly recommended for frontend work but not
-  strictly required.
-- `glossary.adoc` is project-dependent, but recommended when you want
-  stable ubiquitous language and implementation-linked documentation.
+## Setup
 
-## Step 0: Setup (manual) + Constitution sanity ping
+Do this before you run the tutorial:
 
-Do this yourself before sending your first substantive request to the
-LLM:
+1. Check out the `spec-loop` project that contains this tutorial.
 
-1. Read [README.md](../README.md) first, then this tutorial.
-   - Before this tutorial, quickly check [CONSTITUTION.md](../CONSTITUTION.md) and
-     [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
-2. Create your own project repository (this repo is tutorial source only).
-3. Set up governance files and a concrete task directory path:
-   - Preferred: keep [CONSTITUTION.md](../CONSTITUTION.md) in a stable
-     shared or central location outside your project. These files do
-     not need to live inside the project at all.
-   - Keep [glossary-skill.md](../glossary-skill.md) in the same
-     directory as [CONSTITUTION.md](../CONSTITUTION.md), regardless of
-     whether the current project uses a glossary.
-   - If the governance files live outside the project, reference the
-     shared `CONSTITUTION.md` from your instruction file by absolute
-     path instead of copying the files into the repository.
-   - Fallback: if a shared location is not practical, copy these files
-     into your project instead.
-   - Then copy the instruction file your LLM tool uses:
-     - most tools: [AGENTS.md](../AGENTS.md)
-     - GitHub Copilot: [.github/copilot-instructions.md](../.github/copilot-instructions.md)
-     - Claude Code: save [AGENTS.md](../AGENTS.md) content as `CLAUDE.md` (or keep both if useful)
-   - These copied files work together: the Constitution defines workflow,
-     tool-specific instruction files inject the workflow into sessions, and
-     `glossary-skill.md` provides guidance for creating and updating
-     `glossary.adoc`.
-   - The LLM is expected to follow the Constitution by default; you do not
-     need to re-explain it in every prompt.
-   - In the instruction file(s), replace `<TASK_DIR>` with a real path
-     such as `tasks`.
-   - If the governance files are outside the project, reference the
-     shared `CONSTITUTION.md` from your instruction file by absolute
-     path.
-4. Check out `data-aggregator` as a sibling repository (parallel
-   directory), not inside your project:
+2. Create your own `tutorial-project` repository and clone
+   `data-aggregator` so both are siblings in the same workspace
+   directory, not nested inside each other.
 
-Run the command block below to create `tutorial-project`.
+Run the command block below from a workspace directory of your choice.
+Replace `/path/to/your/workspace` with a real path.
 
 ```bash
-mkdir -p ~/git-repo/ai
-cd ~/git-repo/ai
+mkdir -p /path/to/your/workspace
+cd /path/to/your/workspace
+git clone https://github.com/dpolivaev/spec-loop
+
 mkdir -p tutorial-project
 cd tutorial-project
 git init
 
-cd ~/git-repo/ai
+cd ..
 git clone https://github.com/art-institute-of-chicago/data-aggregator.git
 ```
 
 Expected layout:
 
 ```text
-~/git-repo/ai/
+/path/to/your/workspace/
+  spec-loop/
   tutorial-project/
   data-aggregator/
 ```
 
-5. Strongly recommended: enable browser automation tooling for browser checks
-   (for example [Playwright MCP](https://github.com/microsoft/playwright-mcp#getting-started)).
+The setup recommendations below do not all have the same weight:
+- Browser automation is strongly recommended for frontend work but not
+  strictly required.
+- PlantUML is the default where the Constitution requires diagrams.
+- Mermaid is a poorer but possible alternative.
+- `glossary.adoc` is project-dependent, but recommended when you want
+  stable ubiquitous language and implementation-linked documentation.
+
+3. Strongly recommended: enable browser automation tooling for browser
+   checks (for example [Playwright MCP](https://github.com/microsoft/playwright-mcp#getting-started)).
    The tutorial can still be followed without it, but it is especially
    helpful in frontend work because it helps the LLM and the user verify
    the same rendered page content and design. Use it when needed so the
@@ -100,24 +82,47 @@ Expected layout:
    - `site/index.html` rendering and basic page behavior,
    - game page flow and interactions during gameplay checks.
 
-6. Configure PlantUML and Mermaid previews in your editor using:
+4. Configure PlantUML, Mermaid, and AsciiDoc support in your editor or
+   IDE. See:
    - [docs/vscode-setup.md](vscode-setup.md), or
    - [docs/jetbrains-setup.md](jetbrains-setup.md).
 
+## Step 1: Configure project instructions and governance
 
-7. This tutorial uses `glossary.adoc` throughout, so also configure
-   AsciiDoc support in your editor or IDE. See:
-   - [docs/vscode-setup.md](vscode-setup.md), or
-   - [docs/jetbrains-setup.md](jetbrains-setup.md).
+Before your first substantive LLM request in `tutorial-project`,
+configure the project instructions and governance files.
 
-8. Constitution check + initial governance commit:
-   - Ensure your LLM tool can read the shared
-     [CONSTITUTION.md](../CONSTITUTION.md) location (or the project copy
-     if you use the fallback setup).
+1. Decide how this project will access governance files:
+   - Preferred: keep [CONSTITUTION.md](../CONSTITUTION.md) in a stable
+     shared location outside the project.
    - Keep [glossary-skill.md](../glossary-skill.md) in the same
-     directory as [CONSTITUTION.md](../CONSTITUTION.md) so projects
-     that use `glossary.adoc` can consult it later.
-   - Send this now as your first LLM message (before any other request):
+     directory as [CONSTITUTION.md](../CONSTITUTION.md).
+   - Fallback: if a shared location is not practical, copy those files
+     into this project instead.
+
+2. Add the instruction file for your LLM tool:
+   - most tools: [AGENTS.md](../AGENTS.md)
+   - GitHub Copilot:
+     [.github/copilot-instructions.md](../.github/copilot-instructions.md)
+   - Claude Code: save [AGENTS.md](../AGENTS.md) content as
+     `CLAUDE.md` (or keep both if useful)
+
+3. Update that instruction file for this project:
+   - Ensure the instruction file points to the task directory you want
+     to use for this project. Example: `tasks`.
+   - If you use a shared governance location, reference the shared
+     `CONSTITUTION.md` there by absolute path.
+   - Decide whether this project will use `glossary.adoc`:
+     - opt in example: later tutorial steps may create and maintain
+       `glossary.adoc` for shared project terminology
+     - opt out example: do not create `glossary.adoc` for this project
+   - Decide which diagram type this project will use:
+     - default example: use PlantUML where the Constitution requires
+       diagrams
+     - alternative example: use Mermaid only when you explicitly prefer
+       it or your environment makes it more practical
+
+4. Send this as your first LLM message for the project:
 
 ```text
 Before we start: tell me which instruction/governance files you have
@@ -129,15 +134,17 @@ files already present in this project, and any copied governance files
 that belong to this repository setup.
 ```
 
-   - On the first LLM response, you should see a leading 🫡 without
-     asking for it. If you do not see it (or the tool reports
-     [CONSTITUTION.md](../CONSTITUTION.md) is unavailable/unreadable), stop and fix file
-     access/instruction loading before proceeding.
-   - You should also see an initial commit that includes the relevant
-     governance files for your tool setup. If you use copied governance
-     files in the project, that includes
-     [CONSTITUTION.md](../CONSTITUTION.md) and, when applicable,
-     [glossary-skill.md](../glossary-skill.md).
+5. Verify the result before continuing:
+   - the first LLM response starts with `🫡`
+   - it correctly restates the approval gate
+   - it creates the initial governance commit
+   - if you copied governance files into the project, that commit
+     includes [CONSTITUTION.md](../CONSTITUTION.md) and, when
+     applicable, [glossary-skill.md](../glossary-skill.md)
+
+If the LLM does not show `🫡`, or reports that
+[CONSTITUTION.md](../CONSTITUTION.md) is unavailable or unreadable,
+stop and fix instruction loading or file access before proceeding.
 
 ----------
 
@@ -145,7 +152,7 @@ Each following tutorial step uses the same structure:
 
 - ‘You send’ shows a suitable message to send to the LLM. Any equivalent wording is fine.
 - This tutorial assumes `glossary.adoc` is created in
-  Step 1 and then maintained throughout the later steps.
+  Step 2 and then maintained throughout the later steps.
   Once it exists, the LLM should treat it as ordinary project context
   rather than needing that reminder in every later prompt.
 - Governance and workflow gates (from the copied [AGENTS.md](../AGENTS.md) and
@@ -198,7 +205,7 @@ it before you continue:
 - A task or subtask is moved to `done` without explicit user
   confirmation.
 
-## Step 1: Project README ([README.md](../README.md))
+## Step 2: Project README ([README.md](../README.md))
 
 ### You send
 
@@ -274,7 +281,7 @@ This is documentation-only work, we do not need a task file for it.
   vocabulary, and (after you accept it) commit without creating a task
   file.
 
-## Step 2: Museum Overview Page (`site/index.html`) + Just-Enough API Research
+## Step 3: Museum Overview Page (`site/index.html`) + Just-Enough API Research
 
 ### You send
 
@@ -343,7 +350,7 @@ Constitution (for example ask it to restate the PLAN -> IMPLEMENTATION
 approval gate), then tell it to stop and follow the Constitution
 strictly.
 
-## Step 3: ADR for Game Stack and Core Design Style
+## Step 4: ADR for Game Stack and Core Design Style
 
 This step is intentionally more explicit than many real MVP prompts.
 Its purpose is to demonstrate architectural decision capture, tooling
@@ -409,7 +416,7 @@ Record one final choice with rationale. In the same ADR:
 - ADRs capture long-lived decisions (including the exact test command)
   without requiring a task file.
 
-## Step 4: Core Gameplay (Subtasks)
+## Step 5: Core Gameplay (Subtasks)
 
 ### You send
 
@@ -489,7 +496,7 @@ implementation.
   current subtask in detail, implement it, verify it, commit it, then
   move on.
 
-## Step 5: Leaderboard (In-Memory, Then Persistence)
+## Step 6: Leaderboard (In-Memory, Then Persistence)
 
 ### You send
 
