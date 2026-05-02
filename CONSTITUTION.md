@@ -1,12 +1,12 @@
 # Constitution
 
 - **Principle over ceremony**
-  Intent-first. Judge by outcome, not checklist.
-- Uncertain or before behavior change: propose steps, get approval, act. Approval for task work comes from task-file approval or directives like "implement", "go ahead", "proceed". User may override, add review gate, or require new gate on scope change.
-- Only User may override/relax/redefine workflow rules. LLM may propose, not self-apply.
-- If `AGENTS.md` and Constitution conflict, stop and ask User.
+- Intent-first. Judge by outcome, not checklist.
+- Whenever the LLM stops or pauses, it must explain the reason explicitly.
+- If `AGENTS.md` and this Constitution conflict, stop and ask the User.
 - **Enforcement, pre-edit gate, and LLM stewardship**
-  Constitution mandatory. LLM enforces it. Not User's job.
+- Constitution mandatory. LLM enforces it. Not User's job.
+- Only the User may override workflow rules.
 
 ## Constitution Handling (Global)
 
@@ -26,8 +26,8 @@ Quick lookup only. **Task-based Phases and Transitions** and **Task States** are
 
 | Situation | Required action | Resulting phase |
 | --- | --- | --- |
-| Request executable changes (code/test/config/deps/runtime assets) | Enter PLAN: update Research/Scenario/Design as needed and ask for explicit approval to start implementation | PLAN |
-| Refactoring that changes code, tests, or configuration | Enter PLAN: update Design and ask for explicit implementation approval | PLAN |
+| Request executable changes (code/test/config/deps/runtime assets) | Enter PLAN: update Research/Scenario/Design as needed | PLAN |
+| Refactoring that changes code, tests, or configuration | Enter PLAN: update Design | PLAN |
 | User explicitly approves implementation (`implement`, `go ahead`, `proceed`, equivalent explicit instruction) | Start implementation according to approved Design | IMPLEMENTATION |
 | Task file changed but no implementation directive exists | Stop and ask for review/approval before code/test/config edits | PLAN |
 | Scope drifts beyond approved Design (new flow/type/dependency/behavior) | Stop, update Research/Scenario/Design, request approval | PLAN |
@@ -57,11 +57,11 @@ Anything touching executable behavior, tests, build/config, deps, packaging, or 
 
 Work starts in **PLAN**, returns to **PLAN** after each work item unless User says otherwise.
 
-No IMPLEMENTATION inertia across items. Each item needs fresh PLAN -> IMPLEMENTATION approval.
-
-Phases exclusive unless User allows combined planning+implementation.
-
-Explicit User instruction required for: PLAN -> IMPLEMENTATION, IMPLEMENTATION -> DONE.
+- Ask questions before PLAN only to clarify scope or constraints.
+- No permission questions for already requested work.
+- Starting PLAN artifacts, entering IMPLEMENTATION and marking DONE require explicit User instruction.
+- If scope, design, naming, or logic changes, request re-approval. No IMPLEMENTATION inertia across items.
+- Phases exclusive unless User allows combined planning+implementation.
 
 Backlog tasks may keep Research/Design high-level or `To be done` until current. Before IMPLEMENTATION, active task needs: required Research, required Constraints, required Scenario, implementation-ready Design, Test spec for increment — even when User allows combined phases.
 
@@ -144,7 +144,7 @@ Move task files between folders to reflect lifecycle state.
 
 Backlog subfolder moves: organizational only. Adjust backlog prefixes to fit target. Remove backlog prefix only when moving out of `backlog`. Moving into `done`: assign next global `done` prefix independently.
 
-Tasks in `review` or `done` stay in place. For later work, append a new subtask. Don't modify finished sections or completed subtasks unless User explicitly asks.
+Tasks in `review` or `done` stay in place. Perform minor review adjustments without a separate subtask, but do not substantially rework finished sections/subtasks unless the User asks. Append new subtasks for substantial rework or extension.
 
 #### Tracked moves
 
