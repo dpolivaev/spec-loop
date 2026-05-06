@@ -112,7 +112,7 @@ When `glossary.adoc` exists, LLM must:
 - plan `glossary.adoc` updates during PLAN,
 - perform updates during IMPLEMENTATION with traceability links.
 
-If required glossary updates not planned: stop, return to PLAN, update task, get approval, continue. Before creating/updating `glossary.adoc`, read `glossary-skill.md` next to this Constitution if available.
+If required glossary updates not planned: stop, return to PLAN, update task, get approval, continue.
 
 #### Design
 

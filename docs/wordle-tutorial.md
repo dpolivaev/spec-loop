@@ -1,196 +1,154 @@
 # Wordle Tutorial: You Send, You See
 
-This tutorial is intentionally compact and execution-focused.
-It uses the same staged interaction style as the main tutorial, but it
-targets a small Java Wordle project.
+## Bootstrap
 
-It assumes the current Constitution rules are in effect:
+### B1. Create an empty `wordle-tutorial-project`
 
-- work starts in PLAN,
-- executable changes need explicit `PLAN -> IMPLEMENTATION` approval,
-- `glossary.adoc` becomes part of the workflow once it exists,
-- larger tasks should start with lightweight future subtasks,
-- only the current subtask should be fully designed before implementation,
-- moving work to `done` still requires explicit user confirmation.
-
-This path uses one focused ADR before CLI implementation.
-The rest of the work can stay task-based unless a later design choice
-should outlive a single task.
-
-## How to use this tutorial
-
-Follow this tutorial step by step. Do not try to read it all in
-advance.
-
-- If you want background on Spec Loop itself, you can skim
-  [README.md](../README.md).
-- Before you begin, take a short look at
-  [CONSTITUTION.md](../CONSTITUTION.md) so you know it defines the
-  workflow used throughout this tutorial.
-- You do not need to learn the Constitution in full up front. The
-  tutorial teaches the workflow by using it.
-- If useful, also skim
-  [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md).
-- For every step, validate progress from AI output in chat.
-- Send all LLM messages from your project root directory.
-
-## Setup
-
-Do this before you run the tutorial:
-
-1. Check out the `spec-loop` project that contains this tutorial.
-
-2. Create your own `wordle-project` repository in the same workspace
-   directory as `spec-loop`, not nested inside it.
-
-Run the command block below from a workspace directory of your choice.
-Replace `/path/to/your/workspace` with a real path.
+Run this from a workspace directory of your choice:
 
 ```bash
-mkdir -p /path/to/your/workspace
-cd /path/to/your/workspace
-git clone https://github.com/dpolivaev/spec-loop
-
-mkdir -p wordle-project
-cd wordle-project
+mkdir -p wordle-tutorial-project
+cd wordle-tutorial-project
 git init
-mkdir -p tasks/in-progress tasks/backlog tasks/done
-mkdir -p architecture-decisions docs
 ```
 
-Expected layout:
+### B2. Install `install-spec-loop`
+
+```bash
+npx skills add dpolivaev/spec-loop
+```
+
+This recommended path requires Node.js because it uses `npx`.
+Add `-g` if you prefer global installation.
+
+### B3. Open the project
+
+Open `wordle-tutorial-project` in your coding tool.
+
+### B4. Select the model explicitly
+
+For this tutorial, select the model explicitly instead of relying on
+automatic model choice. With an unknown model, poor instruction
+following is more likely.
+
+Continue with Step 1 from the `wordle-tutorial-project` root. Send the
+tutorial prompts from there unless a later step says otherwise.
+
+## Step 1: Install Spec Loop into the tutorial project
+
+### You send
 
 ```text
-/path/to/your/workspace/
-  spec-loop/
-  wordle-project/
+I am following the Spec Loop Wordle tutorial from my browser.
+Please use `install-spec-loop` skill to install Spec Loop governance and
+workflow support for this project.
+
+Tutorial-specific goals:
+- install glossary support because later tutorial steps will create and
+  maintain `glossary.adoc`,
+- browser automation setup is not needed for this tutorial,
+- after setup, tell me which Spec Loop setup is active and restate the
+  `PLAN -> IMPLEMENTATION` approval rule in one sentence,
+- after setup, summarize the chosen configuration and create an initial
+  commit for the setup files that now belong to this project.
 ```
 
-The setup recommendations below do not all have the same weight:
+### You see
 
-- PlantUML is the default where the Constitution requires diagrams.
-- Mermaid is a poorer but possible alternative.
-- `glossary.adoc` is used throughout this tutorial.
-- Browser automation is not needed for this path.
+- Chat:
+  - first asks whether a `spec-loop` checkout already exists,
+  - does not try to search your whole machine for it,
+  - recommends skills over fallback instructions unless the harness
+    makes that impractical,
+  - recommends linked mode for a fresh install,
+  - shows a concrete plan before changing files or config.
+- If `spec-loop` already exists:
+  - the LLM asks for the exact path,
+  - it suggests updating that checkout before using it.
+- If `spec-loop` does not exist:
+  - the LLM asks where to clone it,
+  - the clone target is outside `wordle-tutorial-project`.
+- Project setup:
+  - Spec Loop governance is installed through `install-spec-loop`,
+  - `tasks/` is suggested and then confirmed or replaced by your
+    preferred task directory,
+  - glossary support is installed so later steps can create and
+    maintain `glossary.adoc`.
+- Tooling:
+  - PlantUML is recommended unless there is a good reason to choose
+    Mermaid,
+  - PlantUML support is configured unless you opted out,
+  - AsciiDoc support is configured because glossary workflow is active,
+  - browser automation setup is not required for this tutorial.
+- Verification:
+  - the LLM shows planned file/config changes before applying them,
+  - the LLM confirms which installed governance path is now active,
+  - the LLM correctly restates the `PLAN -> IMPLEMENTATION` approval
+    rule,
+  - an initial setup/governance commit is created for this project.
 
-3. Configure PlantUML, Mermaid, and AsciiDoc support in your editor or
-   IDE using:
-   - [docs/vscode-setup.md](vscode-setup.md), or
-   - [docs/jetbrains-setup.md](jetbrains-setup.md).
+### You learned (this step)
 
-   PlantUML is the default diagram language for this tutorial.
-   Mermaid is a poorer but possible fallback when the User or another
-   governing instruction explicitly prefers Mermaid (for example when
-   GitHub or similar environments are used and PlantUML is not
-   rendered).
+- Setup is intentionally LLM-guided.
+- You and the LLM make setup decisions together instead of manually
+  copying governance files and editing instructions by hand.
+- The tutorial may be open in your browser while the LLM only sees the
+  `wordle-tutorial-project`, so prompts must carry the setup context the LLM
+  needs.
+- This tutorial does not need browser automation setup.
 
-## Step 1: Configure project instructions and governance
+## If setup seems wrong
 
-Before your first substantive LLM request in `wordle-project`,
-configure the project instructions and governance files.
+1. Ask the LLM which Spec Loop setup is currently active.
+2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
+3. If the answer still looks wrong, ask it to run `install-spec-loop`
+   again and repair the setup.
+4. If that does not help, reinstall the skill with:
 
-1. Decide how this project will access governance files:
-   - Preferred: keep [CONSTITUTION.md](../CONSTITUTION.md) in a stable
-     shared location outside the project.
-   - Keep [glossary-skill.md](../glossary-skill.md) in the same
-     directory as [CONSTITUTION.md](../CONSTITUTION.md).
-   - Fallback: if a shared location is not practical, copy those files
-     into this project instead.
-
-2. Add the instruction file for your LLM tool:
-   - most tools: [AGENTS.md](../AGENTS.md)
-   - GitHub Copilot:
-     [.github/copilot-instructions.md](../.github/copilot-instructions.md)
-   - Claude Code: save [AGENTS.md](../AGENTS.md) content as
-     `CLAUDE.md` (or keep both if useful)
-
-3. Update that instruction file for this project:
-   - Ensure the instruction file points to the task directory you want
-     to use for this project. Example: `tasks`.
-   - If you use a shared governance location, reference the shared
-     `CONSTITUTION.md` there by absolute path.
-   - For this tutorial path, use `glossary.adoc`:
-     - create and maintain `glossary.adoc` as later steps instruct
-   - Decide which diagram type this project will use:
-     - default example: use PlantUML where the Constitution requires
-       diagrams
-     - alternative example: use Mermaid only when you explicitly prefer
-       it or your environment makes it more practical
-
-4. Send this as your first LLM message for the project:
-
-```text
-Before we start: tell me which instruction/governance files you have
-already read for this repository (filenames if known). Then restate the
-PLAN -> IMPLEMENTATION approval gate in one sentence.
-
-Then create an initial commit containing the instruction/governance
-files already present in this project, and any copied governance files
-that belong to this repository setup.
+```bash
+npx skills add dpolivaev/spec-loop
 ```
 
-5. Verify the result before continuing:
-   - the first LLM response starts with `🫡`
-   - it correctly restates the approval gate
-   - it creates the initial governance commit
-   - if you copied governance files into the project, that commit
-     includes [CONSTITUTION.md](../CONSTITUTION.md) and, when
-     applicable, [glossary-skill.md](../glossary-skill.md)
+5. If `npx` is not available or does not help, ask the LLM to install
+   from `https://github.com/dpolivaev/spec-loop/tree/main/skills` if
+   your harness supports that.
+6. As a last resort, copy the needed part of the `skills/` directory
+   from the `spec-loop` repository into the harness-specific skills
+   directory.
+7. Continue only when the LLM clearly understands the setup and the
+   workflow rules.
 
-If the LLM does not show `🫡`, or reports that
-[CONSTITUTION.md](../CONSTITUTION.md) is unavailable or unreadable,
-stop and fix instruction loading or file access before proceeding.
+## From here on
 
-----------
-
-Each following tutorial step uses the same structure:
-
-- `You send` shows a suitable message to send to the LLM.
-  Any equivalent wording is fine.
-- This tutorial assumes `glossary.adoc` is created in Step 2 and then
-  maintained throughout the later steps. Once it exists, the LLM
-  should treat it as ordinary project context rather than needing that
-  reminder in every later prompt.
-- Governance and workflow gates from the copied [AGENTS.md](../AGENTS.md)
-  and [CONSTITUTION.md](../CONSTITUTION.md) are expected to be loaded by
-  your LLM tool automatically.
-- The Constitution, not repeated prompt wording, defines approval and
-  implementation boundaries.
-- Before implementation, you can always ask the LLM to revise the
-  current task, subtask, or design instead of proceeding directly.
-- `You see` describes the expected outcome and typical artifacts for
-  each step.
-- If implementation changes or clarifies shared domain language,
-  `You see` should also include the corresponding `glossary.adoc`
-  update.
-- The LLM should usually try to keep related artifacts in sync on its
-  own, but sometimes it will miss a supporting update such as a glossary
-  change or a status move. When that happens, ask it to correct the
-  omission before you accept the step.
-- `After completion` describes move-to-done and commit expectations.
-- `You learned (this step)` is the takeaway after the step is done.
-
-If the LLM deviates, decide whether the deviation is acceptable.
-If it matters to you, ask the LLM to adjust and re-verify until the
-step matches what you consider important.
-This includes small but important omissions such as missing glossary
-entries, missing task status changes, or missing documentation follow-up.
-
-If you suspect the task structure or section order is wrong, ask the
-LLM to check the task or subtask against
-[CONSTITUTION.md](../CONSTITUTION.md) before proceeding.
+- each `You send` block is a prompt to adapt and send,
+- each `You see` block describes the expected outcome,
+- if you want to finish the tutorial in minimum time, send the next
+  prompt first and then read it and think about it while the LLM works,
+  because the LLM also needs time to act and respond,
+- validate progress from the LLM's chat output and the changed files
+  before continuing,
+- if the LLM misses a required setup, governance, glossary, or status
+  update, ask it to fix that before continuing,
+- if the setup or workflow rules seem wrong, use the recovery steps
+  above before continuing.
 
 ## Possible misalignment
 
 If one of these happens, interrupt the flow and ask the LLM to correct
-it before you continue:
+it before continuing:
 
-- Implementation starts before explicit approval.
-- Future subtasks are fully designed before they become current.
-- Implementation changes are made without verification evidence.
-- A supporting artifact such as `glossary.adoc` or task status was not
-  updated when the change clearly requires it.
-- A task or subtask is moved to `done` without explicit user
+- it starts changing files or config before showing the plan and
+  getting approval,
+- it cannot clearly explain which Spec Loop setup is active or restate
+  the `PLAN -> IMPLEMENTATION` approval rule,
+- it ignores the installed governance,
+- it starts implementation before explicit approval,
+- unrelated changes are mixed into one subtask,
+- implementation changes are made without verification evidence,
+- it misses required supporting updates such as glossary, task status,
+  or ignore rules,
+- what it reports in chat does not match the actual changed files,
+- a task or subtask is moved to `done` without explicit user
   confirmation.
 
 ## Step 2: Project README ([README.md](../README.md))
@@ -235,9 +193,10 @@ Also create `glossary.adoc` from the approved project brief. It should
 define the canonical project terms needed for this tutorial and keep
 their wording consistent with the brief.
 
-Also update `AGENTS.md` so it explicitly tells the LLM to read
-`README.md` and follow the "Project Brief" section there for project
-requirements unless I explicitly override it.
+Also update the active project governance entry point so it
+explicitly tells the LLM to read `README.md` and follow the
+"Project Brief" section there for project requirements unless I
+explicitly override it.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -250,14 +209,14 @@ This is documentation-only work, we do not need a task file for it.
 - `glossary.adoc`:
   - exists and defines the canonical project terms from the brief,
   - uses wording consistent with the brief so later tasks can reuse it.
-- [AGENTS.md](../AGENTS.md):
+- Project governance entry point:
   - explicitly points the LLM to [README.md](../README.md) as the
     source of the project brief and requirements.
 
 ### After completion (commit)
 
 - After you accept this work item as done:
-  ask the LLM to `commit the README, glossary.adoc, and AGENTS.md changes`.
+  ask the LLM to `commit the README, glossary.adoc, and governance-entry changes`.
 
 ### You learned (this step)
 

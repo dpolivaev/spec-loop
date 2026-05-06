@@ -86,23 +86,39 @@ implementation detail.
 
 Apply the process to your repository.
 
-### Governance files
+### Bootstrap setup
 
-Preferred setup:
+Recommended path:
+
+1. Ensure Node.js is available so `npx` works.
+2. Install `install-spec-loop`:
+
+```bash
+npx skills add dpolivaev/spec-loop
+```
+
+3. Ask the LLM to run `install-spec-loop`.
+4. Let it detect existing setup, ask whether to install additional
+   skills or one fallback instruction file, and then ask whether to use
+   linked, snapshot, or embedded governance content.
+5. Review the planned file changes and approve them before edits are
+   applied.
+
+Add `-g` if you prefer global installation.
+
+Shared governance source:
 - Keep **[CONSTITUTION.md](CONSTITUTION.md)** in one stable shared or
-  central location outside your project repositories. It does not need
-  to live inside the project at all.
+  central Spec Loop clone when practical.
 - Keep **[glossary-skill.md](glossary-skill.md)** next to that shared
   Constitution file.
-- The shared Constitution directory may be anywhere convenient.
-  Projects and user-level instruction files can reference it by
-  absolute path.
+- Fresh installs should usually prefer linked mode so installed skills
+  or fallback instruction files can reference the shared source.
 
-Fallback setup:
-- Copy the governance files into the project repository only when a
-  shared external location is not practical.
-- When the governance files are present in the project, relative paths
-  are usually sufficient.
+Alternative content modes:
+- Snapshot mode copies governance content into the target layout.
+- Embedded mode inlines the full governance text into the installed
+  skills or fallback instruction file.
+- Both are valid when external references are impractical.
 
 Glossary setup:
 - A project opts in to glossary maintenance by creating
@@ -110,65 +126,51 @@ Glossary setup:
   opted out.
 - Once `glossary.adoc` exists, it is part of the project workflow and
   must be maintained by the AI according to the active rules.
-- `glossary.adoc` uses AsciiDoc because it provides stronger document
-  structure and better support for cross-references and links than
-  plain Markdown. AsciiDoc support in your IDE or editor is therefore
-  required when `glossary.adoc` exists, and not required otherwise.
+- `glossary.adoc` uses AsciiDoc, so editor support is required when the
+  glossary workflow is active.
 
-### Instruction loading options
+### Installation forms
 
-There are three ways to make the LLM follow the Constitution.
+Spec Loop governance can be installed in two mutually exclusive forms.
 
-1. Manual prompting
+1. Skills (recommended)
 
-   Reference `CONSTITUTION.md` explicitly in your prompts so it is in
-   the model context for the session.
+   Install `plan-task` as the mandatory planning skill and optionally
+   install `write-glossary` for glossary work.
 
-2. User-level or global instructions
+2. Fallback instruction files
 
-   Put the pre-flight rule that loads the Constitution into the
-   tool-specific user instructions that apply across projects. In this
-   setup, those global instructions typically reference the shared
-   `CONSTITUTION.md` by absolute path.
+   Install exactly one fallback file such as `AGENTS.md`, `CLAUDE.md`,
+   or `.github/copilot-instructions.md` when the harness needs local
+   governance instructions.
 
-3. Project instruction files
+The bootstrap skill may also detect that equivalent higher-level
+harness instructions are already active and avoid writing fallback
+files.
 
-   Put the pre-flight rule into project-local instruction files such as
-   `AGENTS.md`, `CLAUDE.md`, or `.github/copilot-instructions.md`.
-   These instructions may reference `CONSTITUTION.md` by relative or by
-   absolute path.
-
-These approaches may be used independently or together. A common setup
-is:
-- user-level instructions enforce reading the shared Constitution,
-- project instruction files add project-specific guidance.
-
-This repo includes example project instruction files you can adapt:
-[AGENTS.md](AGENTS.md) and
-[.github/copilot-instructions.md](.github/copilot-instructions.md).
+This repo includes the templates and references used by the installer:
+- `skills/install-spec-loop/SKILL.md`
+- `skills/install-spec-loop/templates/AGENTS.template.md`
+- `skills/install-spec-loop/templates/copilot-instructions.template.md`
+- `skills/install-spec-loop/templates/plan-task.skill.template.md`
+- `skills/install-spec-loop/templates/write-glossary.template.md`
 
 ### Project-specific settings
 
-- Define your task directory in project-specific instructions, for
-  example by replacing `<TASK_DIR>` with a real path such as `tasks`.
-- Keep project requirements and local repository guidance in the
-  project instruction files even if Constitution loading is enforced
-  globally.
-- Then ask the model to create and update task files there and follow
-  the workflow defined by the Constitution.
-
+- `install-spec-loop` asks for the project task directory and suggests
+  `tasks/` by default.
+- It also records whether glossary support is installed and whether the
+  glossary workflow is currently opted in or opted out.
+- If you manage the files manually, keep those settings in the
+  installed skills or fallback instruction file.
 
 ### Claude setup note
 
-If you use Claude, `CLAUDE.md` can be used either as a project-local
-instruction file or as a user-level instruction file, just like
-`AGENTS.md`.
+If the chosen fallback target is Claude, use the AGENTS template content
+in `CLAUDE.md`.
 
-If you need a project-local `CLAUDE.md`, you can use the content of
-`AGENTS.md` as the starting point and then add any extra
-project-specific guidance you need. If Constitution loading is already
-enforced by user-level instructions, `CLAUDE.md` can focus on
-project-specific settings such as `<TASK_DIR>` and local requirements.
+If equivalent governance is already enforced by higher-level Claude
+instructions, a project-local `CLAUDE.md` fallback may be unnecessary.
 
 ## Documentation
 
@@ -239,10 +241,10 @@ For inline PlantUML rendering in Markdown on the web, view the repo on
 render PlantUML embedded in Markdown natively, so reading there can
 degrade the intended experience.
 
-For local preview setup, use one of these guides:
+For local preview setup, use one of these installer references:
 
-* **[VS Code Setup (PlantUML and AsciiDoc)](docs/vscode-setup.md)**
-* **[JetBrains Setup (PlantUML and AsciiDoc)](docs/jetbrains-setup.md)**
+* **[VS Code Setup (PlantUML and AsciiDoc)](skills/install-spec-loop/docs/vscode-setup.md)**
+* **[JetBrains Setup (PlantUML and AsciiDoc)](skills/install-spec-loop/docs/jetbrains-setup.md)**
 
 ## License
 

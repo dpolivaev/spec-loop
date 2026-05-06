@@ -1,0 +1,57 @@
+# JetBrains Setup Reference for `install-spec-loop`
+
+Use this reference when `install-spec-loop` is helping a user who works in a
+JetBrains IDE.
+
+## Decision rules
+
+- PlantUML support in Markdown preview is mandatory unless the user
+  explicitly opts out of PlantUML.
+- Explain the consequence of opting out: Spec Loop diagrams in Markdown will
+  stay as code blocks or will not preview correctly.
+- AsciiDoc support is mandatory when glossary support is installed and the
+  user has not opted out of glossary workflow.
+- Explain the consequence of opting out of AsciiDoc support:
+  `glossary.adoc` will lose normal editing and preview support.
+- Ask for confirmation before changing plugins or IDE settings.
+
+## Detect before changing anything
+
+Check whether the IDE already has:
+
+- a working Markdown preview,
+- the Markdown PlantUML extension path available, and
+- AsciiDoc support when glossary workflow is active.
+
+If those pieces are already in place, report that no JetBrains setup change is
+needed.
+
+## PlantUML setup
+
+For most JetBrains IDEs:
+
+1. Open **Settings / Preferences -> Languages & Frameworks -> Markdown**.
+2. Ensure Markdown preview works.
+3. Enable the **PlantUML** Markdown extension.
+
+If Markdown preview is missing or blank, especially in Android Studio:
+
+1. Fix the runtime or preview support first, typically by switching to a
+   JetBrains Runtime with JCEF.
+2. After preview works, enable the PlantUML Markdown extension.
+
+## AsciiDoc setup
+
+Install the **AsciiDoc** plugin.
+
+If glossary workflow is active, also ensure the preview path needed by the
+plugin works in the current IDE/runtime.
+
+## What `install-spec-loop` should do
+
+1. Detect whether the IDE already supports Markdown PlantUML preview and, if
+   needed, AsciiDoc.
+2. If support is missing, explain what is missing and why it matters.
+3. Show the exact planned plugin or IDE-setting changes.
+4. Apply them after confirmation when the harness can do so.
+5. Otherwise, tell the user exactly which plugin or setting to enable.
