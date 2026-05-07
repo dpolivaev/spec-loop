@@ -1,7 +1,7 @@
-# JetBrains Setup Reference for `install-spec-loop`
+# JetBrains Setup Reference for `setup-task-and-glossary-rendering`
 
-Use this reference when `install-spec-loop` is helping a user who works in a
-JetBrains IDE.
+Use this reference when `setup-task-and-glossary-rendering` is helping a user
+who works in a JetBrains IDE.
 
 ## Decision rules
 
@@ -50,7 +50,7 @@ If `glossary.adoc` is active or configured as the default format for new
 glossaries, also ensure the preview path needed by the plugin works in the
 current IDE/runtime.
 
-## What `install-spec-loop` should do
+## What `setup-task-and-glossary-rendering` should do
 
 1. Detect whether the IDE already supports Markdown PlantUML preview and, if
    needed, AsciiDoc.

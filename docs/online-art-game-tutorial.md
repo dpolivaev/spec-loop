@@ -15,14 +15,15 @@ cd museum-tutorial-project
 git init
 ```
 
-### B2. Install `install-spec-loop`
+### B2. Install the Spec Loop skills
 
 ```bash
 npx skills add dpolivaev/spec-loop
 ```
 
 This recommended path requires Node.js because it uses `npx`.
-Add `-g` if you prefer global installation.
+For global or agent-specific installation details, see
+https://github.com/vercel-labs/skills.
 
 ### B3. Open the project
 
@@ -37,88 +38,75 @@ following is more likely.
 Continue with Step 1 from the `museum-tutorial-project` root. Send the
 tutorial prompts from there unless a later step says otherwise.
 
-## Step 1: Install Spec Loop into the tutorial project
+## Step 1: Confirm Spec Loop in the tutorial project
 
 ### You send
 
 ```text
 I am following the Spec Loop online art game tutorial from my browser.
-Please use `install-spec-loop` skill to install Spec Loop governance and
-workflow support for this project.
+Please work in this project using the installed Spec Loop skills.
 
 Tutorial-specific goals:
-- install Spec Loop `glossary.adoc` format guidance because later
-  tutorial steps will create and maintain `glossary.adoc`,
-- after setup, tell me which Spec Loop setup is active and restate the
-  `PLAN -> IMPLEMENTATION` approval rule in one sentence,
-- after setup, summarize the chosen configuration and create an initial
-  commit for the setup files that now belong to this project.
+- use `plan-task` for non-trivial work,
+- use `write-glossary` for the Spec Loop `glossary.adoc` glossary
+  because later tutorial steps will create and maintain `glossary.adoc`,
+- use `setup-task-and-glossary-rendering` only if rendering setup help
+  is needed,
+- tell me which Spec Loop skills you will use here and restate the
+  `PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
 
 ### You see
 
 - Chat:
-  - first asks whether a `spec-loop` checkout already exists,
-  - does not try to search your whole machine for it,
-  - recommends skills over instruction files unless the harness makes
-    that impractical,
-  - recommends linked mode for a fresh install,
-  - shows a concrete plan before changing files or config.
-- If `spec-loop` already exists:
-  - the LLM asks for the exact path,
-  - it suggests updating that checkout before using it.
-- If `spec-loop` does not exist:
-  - the LLM asks where to clone it,
-  - the clone target is outside `museum-tutorial-project`.
+  - confirms that the installed Spec Loop skills are available,
+  - treats `plan-task` as the mandatory planning skill for non-trivial
+    work,
+  - explains that `write-glossary` will be used for the tutorial's
+    `glossary.adoc` work,
+  - uses `setup-task-and-glossary-rendering` only if setup or rendering
+    help is actually needed.
 - Project setup:
-  - Spec Loop governance is installed through `install-spec-loop`,
-  - `tasks/` is suggested and then confirmed or replaced by your
-    preferred task directory,
-  - Spec Loop `glossary.adoc` format guidance is installed so later
-    steps can create and maintain `glossary.adoc`.
+  - Spec Loop governance is available through the installed skills,
+  - `tasks/` is used when task files are needed,
+  - later glossary work uses the Spec Loop `glossary.adoc` format.
 - Tooling:
   - PlantUML is recommended unless there is a good reason to choose
     Mermaid,
-  - PlantUML support is configured unless you opted out,
-  - AsciiDoc support is configured because the Spec Loop
-    `glossary.adoc` format is in use.
+  - AsciiDoc support matters because the tutorial will use
+    `glossary.adoc`.
 - Verification:
-  - the LLM shows planned file/config changes before applying them,
-  - the LLM confirms which installed governance path is now active,
   - the LLM correctly restates the `PLAN -> IMPLEMENTATION` approval
     rule,
-  - an initial setup/governance commit is created for this project.
+  - the LLM can explain which skill it will use for planning, glossary
+    work, and rendering setup.
 
 ### You learned (this step)
 
-- Setup is intentionally LLM-guided.
-- You and the LLM make setup decisions together instead of manually
-  copying governance files and editing instructions by hand.
+- Setup is now primarily package installation plus skill selection.
 - The tutorial may be open in your browser while the LLM only sees the
-  `museum-tutorial-project`, so prompts must carry the setup context the LLM
+  `museum-tutorial-project`, so prompts must still carry the context it
   needs.
 - This tutorial later uses public data from the Art Institute of
   Chicago (AIC). The project is not affiliated with or endorsed by AIC.
 
 ## If setup seems wrong
 
-1. Ask the LLM which Spec Loop setup is currently active.
+1. Ask the LLM which Spec Loop skills are active.
 2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
-3. If the answer still looks wrong, ask it to run `install-spec-loop`
-   again and repair the setup.
-4. If that does not help, reinstall the skill with:
+3. If that still looks wrong, reinstall the skills with:
 
 ```bash
 npx skills add dpolivaev/spec-loop
 ```
 
-5. If `npx` is not available or does not help, ask the LLM to install
-   from `https://github.com/dpolivaev/spec-loop/tree/main/skills` if
-   your harness supports that.
-6. As a last resort, copy the needed part of the `skills/` directory
-   from the `spec-loop` repository into the harness-specific skills
-   directory.
-7. Continue only when the LLM clearly understands the setup and the
+4. For global or agent-specific installation details, check
+   https://github.com/vercel-labs/skills.
+5. If `npx` is not available or does not help, copy the needed part of
+   the `skills/` directory from
+   `https://github.com/dpolivaev/spec-loop` into the harness-specific
+   skills directory.
+6. Continue only when the LLM clearly understands the setup and the
    workflow rules.
 
 ## From here on

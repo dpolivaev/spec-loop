@@ -19,18 +19,19 @@ either blocks change or gets ignored.
 Spec Loop avoids both: write the next small spec, review it, then implement it
 with tests. Keep the spec local to the next step. Repeat until done.
 
-The rules are defined in **[CONSTITUTION.md](CONSTITUTION.md)**.
+The governing rules live in
+**[skills/plan-task/constitution.md](skills/plan-task/constitution.md)**.
 The model drafts and updates task files; you review and approve at the
 task-file gate before implementation.
 
-Spec Loop also defines explicit work phases: plan, implementation and done.
+Spec Loop also defines explicit work phases: plan, implementation, and done.
 Any transitions to implementation and to done require explicit user approval.
 
-When a project maintains a
-[glossary document](CONSTITUTION.md#project-glossary), that glossary
-defines the shared domain language above individual tasks and the code.
-It keeps design documents, tests, code symbols, and commit text
-aligned on the same terms across the whole project.
+When a project maintains a glossary described by the Constitution's
+[project glossary section](skills/plan-task/constitution.md#project-glossary),
+that glossary defines the shared domain language above individual tasks and the
+code. It keeps design documents, tests, code symbols, and commit text aligned
+on the same terms across the whole project.
 
 ## Why This Works with Large Codebases
 
@@ -82,108 +83,81 @@ describe the current technical shape, stable boundaries, and important
 flows. It should not become a second glossary or a catalog of transient
 implementation detail.
 
-## Getting started
+## Getting Started
 
 Apply the process to your repository.
 
-### Bootstrap setup
+### Install the skills with `npx skills`
 
 Recommended path:
 
 1. Ensure Node.js is available so `npx` works.
-2. Install `install-spec-loop`:
+2. Install the Spec Loop skills:
 
 ```bash
 npx skills add dpolivaev/spec-loop
 ```
 
-3. Ask the LLM to run `install-spec-loop`.
-4. Let it detect existing setup, ask whether to install additional
-   skills or one instruction file, and then ask whether to use linked,
-   snapshot, or embedded governance content.
-5. Review the planned file changes and approve them before edits are
-   applied.
+3. For global installation:
 
-Add `-g` if you prefer global installation.
+```bash
+npx skills add dpolivaev/spec-loop -g
+```
 
-Shared governance source:
-- Keep **[CONSTITUTION.md](CONSTITUTION.md)** in one stable shared or
-  central Spec Loop clone when practical.
-- Keep **[glossary-skill.md](glossary-skill.md)** next to that shared
-  Constitution file.
-- Fresh installs should usually prefer linked mode so installed skills
-  or instruction files can reference the shared source.
+4. For agent-specific options and installation details, see:
+   - https://github.com/dpolivaev/spec-loop
+   - https://github.com/vercel-labs/skills
 
-Alternative content modes:
-- Snapshot mode copies governance content into the target layout.
-- Embedded mode inlines the full governance text into the installed
-  skills or instruction file.
-- Both are valid when external references are impractical.
+### Update installed skills
 
-Glossary setup:
-- A project glossary becomes part of the workflow once `glossary.adoc`
-  or `glossary.md` exists.
-- If both files exist, the AI must ask which one is canonical before
-  updating either.
-- `write-glossary` provides Spec Loop glossary format guidance for
-  `glossary.adoc`.
-- When `write-glossary` is not installed, new glossary creation may
-  still default to `md` or `adoc` according to the installed settings.
-- AsciiDoc editor support is required whenever `glossary.adoc` is the
-  active glossary format or the configured default for new glossaries.
+Project-level update:
 
-### Installation forms
+```bash
+npx skills update
+```
 
-Spec Loop governance can be installed in two mutually exclusive forms.
+Global update:
 
-1. Skills (recommended)
+```bash
+npx skills update -g
+```
 
-   Install `plan-task` as the mandatory planning skill and optionally
-   install `write-glossary` for Spec Loop `glossary.adoc` work.
+### Manual fallback when `npx` is unavailable
 
-2. Instruction files
+If `npx` is not available, clone or download this repository and copy the
+needed skill directories from `skills/` into your agent's skills directory.
 
-   Install exactly one instruction file such as `AGENTS.md`,
-   `CLAUDE.md`, or `.github/copilot-instructions.md` when the harness
-   needs local governance instructions.
+Which directory your agent uses is agent-specific. See
+https://github.com/vercel-labs/skills for agent-specific installation details.
 
-The bootstrap skill may also detect that equivalent higher-level
-harness instructions are already active and avoid writing instruction
-files.
+## Included Skills
 
-This repo includes the templates and references used by the installer:
-- `skills/install-spec-loop/SKILL.md`
-- `skills/install-spec-loop/templates/AGENTS.template.md`
-- `skills/install-spec-loop/templates/copilot-instructions.template.md`
-- `skills/install-spec-loop/templates/plan-task.skill.template.md`
-- `skills/install-spec-loop/templates/write-glossary.template.md`
+This repository currently ships these skills:
 
-### Project-specific settings
+1. **`plan-task`**
+   - the planning and readiness-check skill for task-based work;
+   - defined by
+     [skills/plan-task/constitution.md](skills/plan-task/constitution.md).
 
-- `install-spec-loop` asks for the project task directory and suggests
-  `tasks/` by default.
-- It also records the missing glossary creation default.
-- If Spec Loop glossary format guidance is not installed, it also
-  records the default format for creating a new glossary.
-- If you manage the files manually, keep those settings in the
-  installed `plan-task` skill or instruction file.
+2. **`write-glossary`**
+   - the Spec Loop AsciiDoc glossary-format skill;
+   - defined by
+     [skills/write-glossary/glossary-format.md](skills/write-glossary/glossary-format.md).
 
-### Claude setup note
-
-If the chosen instruction-file target is Claude, use the AGENTS template
-content in `CLAUDE.md`.
-
-If equivalent governance is already enforced by higher-level Claude
-instructions, a project-local `CLAUDE.md` instruction file may be
-unnecessary.
+3. **`setup-task-and-glossary-rendering`**
+   - the setup and troubleshooting skill for rendering task files and
+     glossary files;
+   - uses:
+     - [skills/setup-task-and-glossary-rendering/vscode-setup.md](skills/setup-task-and-glossary-rendering/vscode-setup.md)
+     - [skills/setup-task-and-glossary-rendering/jetbrains-setup.md](skills/setup-task-and-glossary-rendering/jetbrains-setup.md)
 
 ## Documentation
 
 1. Check the Constitution briefly.
 
-   * **[CONSTITUTION.md](CONSTITUTION.md)** defines the normative rules: task
-     files, research/design discipline, approval gates, traceability
-     requirements, and definition of done.
+   * **[skills/plan-task/constitution.md](skills/plan-task/constitution.md)**
+     defines the normative rules: task files, research/design discipline,
+     approval gates, traceability requirements, and definition of done.
 
 2. Study the Wordle example by commit history.
 
@@ -192,9 +166,10 @@ unnecessary.
      specifications evolve step by step, and how implementation and tests
      follow approved design.
 
-3. Check **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**.
-   It explains how task files and the Constitution map to team development practice: boundaries,
-   responsibility, commit linking, and status discipline.
+3. Check
+   **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**.
+   It explains how task files and the Constitution map to team development
+   practice: boundaries, responsibility, commit linking, and status discipline.
 
 4. Follow one of the hands-on tutorials.
 
@@ -213,18 +188,19 @@ unnecessary.
 
 5. Project glossary conventions.
 
-   * See `Glossary setup` above.
-   * **[glossary-skill.md](glossary-skill.md)** is the shared glossary
-     guidance file and includes its own embedded example.
+   * See the Constitution's project glossary section above.
+   * **[skills/write-glossary/glossary-format.md](skills/write-glossary/glossary-format.md)**
+     is the shared glossary-format guidance file and includes its own
+     embedded example.
 
 Recommended quick-check order:
 - `README.md`
-- `CONSTITUTION.md`
+- `skills/plan-task/constitution.md`
 - `docs/review-responsibility-and-traceability.md`
 - `docs/online-art-game-tutorial.md`
 - `docs/wordle-tutorial.md`
 
-## Diagrams: PlantUML default, Mermaid fallback
+## Diagrams: PlantUML Default, Mermaid Fallback
 
 Spec Loop treats diagrams as specification artifacts: they make design
 intent reviewable at the same boundary as the surrounding text.
@@ -246,10 +222,10 @@ For inline PlantUML rendering in Markdown on the web, view the repo on
 render PlantUML embedded in Markdown natively, so reading there can
 degrade the intended experience.
 
-For local preview setup, use one of these installer references:
+For local preview setup, use:
 
-* **[VS Code Setup (PlantUML and AsciiDoc)](skills/install-spec-loop/docs/vscode-setup.md)**
-* **[JetBrains Setup (PlantUML and AsciiDoc)](skills/install-spec-loop/docs/jetbrains-setup.md)**
+* **[VS Code Setup (PlantUML and AsciiDoc)](skills/setup-task-and-glossary-rendering/vscode-setup.md)**
+* **[JetBrains Setup (PlantUML and AsciiDoc)](skills/setup-task-and-glossary-rendering/jetbrains-setup.md)**
 
 ## License
 

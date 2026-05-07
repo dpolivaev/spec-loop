@@ -8,8 +8,7 @@ project.
 This file defines how to create and update a project glossary in
 AsciiDoc.
 
-The file name includes `skill` for discoverability by AI tools, but
-this document is plain repository guidance and does not depend on any
+This document is plain repository guidance and does not depend on any
 specific tool.
 
 ## When to Use

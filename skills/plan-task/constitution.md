@@ -117,7 +117,10 @@ When a recognized project glossary exists, LLM must:
 
 - check if approved work changes/clarifies/implements shared domain terms,
 - plan glossary updates during PLAN,
-- perform glossary updates during IMPLEMENTATION with traceability links.
+- perform glossary updates during IMPLEMENTATION with traceability links,
+- use `write-glossary` if available when the project glossary uses the
+  Spec Loop AsciiDoc format; otherwise update the glossary directly in the
+  active project format.
 
 If required glossary updates not planned: stop, return to PLAN, update task,
 get approval, continue.
