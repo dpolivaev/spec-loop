@@ -9,10 +9,11 @@ Visual Studio Code or in a VS Code-compatible environment.
   PlantUML.
 - Explain the consequence of opting out: Spec Loop diagrams in Markdown will
   remain plain code blocks or will not preview correctly.
-- AsciiDoc support is mandatory when glossary support is installed and the
-  user has not opted out of glossary workflow.
-- Explain the consequence of opting out of AsciiDoc support: `glossary.adoc`
-  will lose normal editing and preview support.
+- AsciiDoc support is mandatory when Spec Loop glossary format guidance is
+  installed, when an existing project glossary uses `glossary.adoc`, or when
+  the configured default format for new glossaries is `adoc`.
+- Explain the consequence of skipping AsciiDoc support: `glossary.adoc` will
+  lose normal editing and preview support.
 - Ask for confirmation before changing extension state or editor settings.
 
 ## Detect before changing anything
@@ -20,7 +21,8 @@ Visual Studio Code or in a VS Code-compatible environment.
 Check whether the environment already has:
 
 - PlantUML preview support for Markdown, and
-- AsciiDoc support when glossary workflow is active.
+- AsciiDoc support whenever `glossary.adoc` is active or configured as the
+  default format for new glossaries.
 
 If both are already sufficient, report that no editor setup change is needed.
 
@@ -67,7 +69,8 @@ Install:
 
 - `asciidoctor.asciidoctor-vscode`
 
-This is required when glossary workflow is active.
+This is required whenever `glossary.adoc` is active or configured as the
+default format for new glossaries.
 
 ## What `install-spec-loop` should do
 

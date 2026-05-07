@@ -47,8 +47,8 @@ Please use `install-spec-loop` skill to install Spec Loop governance and
 workflow support for this project.
 
 Tutorial-specific goals:
-- install glossary support because later tutorial steps will create and
-  maintain `glossary.adoc`,
+- install Spec Loop `glossary.adoc` format guidance because later
+  tutorial steps will create and maintain `glossary.adoc`,
 - after setup, tell me which Spec Loop setup is active and restate the
   `PLAN -> IMPLEMENTATION` approval rule in one sentence,
 - after setup, summarize the chosen configuration and create an initial
@@ -60,8 +60,8 @@ Tutorial-specific goals:
 - Chat:
   - first asks whether a `spec-loop` checkout already exists,
   - does not try to search your whole machine for it,
-  - recommends skills over fallback instructions unless the harness
-    makes that impractical,
+  - recommends skills over instruction files unless the harness makes
+    that impractical,
   - recommends linked mode for a fresh install,
   - shows a concrete plan before changing files or config.
 - If `spec-loop` already exists:
@@ -74,13 +74,14 @@ Tutorial-specific goals:
   - Spec Loop governance is installed through `install-spec-loop`,
   - `tasks/` is suggested and then confirmed or replaced by your
     preferred task directory,
-  - glossary support is installed so later steps can create and
-    maintain `glossary.adoc`.
+  - Spec Loop `glossary.adoc` format guidance is installed so later
+    steps can create and maintain `glossary.adoc`.
 - Tooling:
   - PlantUML is recommended unless there is a good reason to choose
     Mermaid,
   - PlantUML support is configured unless you opted out,
-  - AsciiDoc support is configured because glossary workflow is active.
+  - AsciiDoc support is configured because the Spec Loop
+    `glossary.adoc` format is in use.
 - Verification:
   - the LLM shows planned file/config changes before applying them,
   - the LLM confirms which installed governance path is now active,

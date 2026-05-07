@@ -104,15 +104,23 @@ Research may mention legacy terms. Design uses only canonical Scenario terms exc
 
 #### Project glossary
 
-`glossary.adoc` optional until project opts in by creating it. Once present: defines shared domain language; use during planning as reference. Creating first `glossary.adoc` from approved info = docs-only work, no task file needed unless User asks. No helper names, impl details, framework terms, or terms not needed to understand project rules/behavior/subsystem boundaries.
+A project glossary is optional until the project creates one. Recognize
+`glossary.adoc` and `glossary.md` as project glossary files. If both exist,
+ask the user which one is canonical before updating either. Once a project
+glossary exists, it defines shared domain language; use it during planning as
+reference. Creating the first project glossary from approved info = docs-only
+work, no task file needed unless User asks. No helper names, impl details,
+framework terms, or terms not needed to understand project
+rules/behavior/subsystem boundaries.
 
-When `glossary.adoc` exists, LLM must:
+When a recognized project glossary exists, LLM must:
 
 - check if approved work changes/clarifies/implements shared domain terms,
-- plan `glossary.adoc` updates during PLAN,
-- perform updates during IMPLEMENTATION with traceability links.
+- plan glossary updates during PLAN,
+- perform glossary updates during IMPLEMENTATION with traceability links.
 
-If required glossary updates not planned: stop, return to PLAN, update task, get approval, continue.
+If required glossary updates not planned: stop, return to PLAN, update task,
+get approval, continue.
 
 #### Design
 

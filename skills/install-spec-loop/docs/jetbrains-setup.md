@@ -9,10 +9,11 @@ JetBrains IDE.
   explicitly opts out of PlantUML.
 - Explain the consequence of opting out: Spec Loop diagrams in Markdown will
   stay as code blocks or will not preview correctly.
-- AsciiDoc support is mandatory when glossary support is installed and the
-  user has not opted out of glossary workflow.
-- Explain the consequence of opting out of AsciiDoc support:
-  `glossary.adoc` will lose normal editing and preview support.
+- AsciiDoc support is mandatory when Spec Loop glossary format guidance is
+  installed, when an existing project glossary uses `glossary.adoc`, or when
+  the configured default format for new glossaries is `adoc`.
+- Explain the consequence of skipping AsciiDoc support: `glossary.adoc`
+  will lose normal editing and preview support.
 - Ask for confirmation before changing plugins or IDE settings.
 
 ## Detect before changing anything
@@ -21,7 +22,8 @@ Check whether the IDE already has:
 
 - a working Markdown preview,
 - the Markdown PlantUML extension path available, and
-- AsciiDoc support when glossary workflow is active.
+- AsciiDoc support whenever `glossary.adoc` is active or configured as the
+  default format for new glossaries.
 
 If those pieces are already in place, report that no JetBrains setup change is
 needed.
@@ -44,8 +46,9 @@ If Markdown preview is missing or blank, especially in Android Studio:
 
 Install the **AsciiDoc** plugin.
 
-If glossary workflow is active, also ensure the preview path needed by the
-plugin works in the current IDE/runtime.
+If `glossary.adoc` is active or configured as the default format for new
+glossaries, also ensure the preview path needed by the plugin works in the
+current IDE/runtime.
 
 ## What `install-spec-loop` should do
 

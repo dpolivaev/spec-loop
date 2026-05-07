@@ -99,8 +99,8 @@ npx skills add dpolivaev/spec-loop
 
 3. Ask the LLM to run `install-spec-loop`.
 4. Let it detect existing setup, ask whether to install additional
-   skills or one fallback instruction file, and then ask whether to use
-   linked, snapshot, or embedded governance content.
+   skills or one instruction file, and then ask whether to use linked,
+   snapshot, or embedded governance content.
 5. Review the planned file changes and approve them before edits are
    applied.
 
@@ -112,22 +112,25 @@ Shared governance source:
 - Keep **[glossary-skill.md](glossary-skill.md)** next to that shared
   Constitution file.
 - Fresh installs should usually prefer linked mode so installed skills
-  or fallback instruction files can reference the shared source.
+  or instruction files can reference the shared source.
 
 Alternative content modes:
 - Snapshot mode copies governance content into the target layout.
 - Embedded mode inlines the full governance text into the installed
-  skills or fallback instruction file.
+  skills or instruction file.
 - Both are valid when external references are impractical.
 
 Glossary setup:
-- A project opts in to glossary maintenance by creating
-  `glossary.adoc` or by instructions that require it; otherwise it is
-  opted out.
-- Once `glossary.adoc` exists, it is part of the project workflow and
-  must be maintained by the AI according to the active rules.
-- `glossary.adoc` uses AsciiDoc, so editor support is required when the
-  glossary workflow is active.
+- A project glossary becomes part of the workflow once `glossary.adoc`
+  or `glossary.md` exists.
+- If both files exist, the AI must ask which one is canonical before
+  updating either.
+- `write-glossary` provides Spec Loop glossary format guidance for
+  `glossary.adoc`.
+- When `write-glossary` is not installed, new glossary creation may
+  still default to `md` or `adoc` according to the installed settings.
+- AsciiDoc editor support is required whenever `glossary.adoc` is the
+  active glossary format or the configured default for new glossaries.
 
 ### Installation forms
 
@@ -136,16 +139,16 @@ Spec Loop governance can be installed in two mutually exclusive forms.
 1. Skills (recommended)
 
    Install `plan-task` as the mandatory planning skill and optionally
-   install `write-glossary` for glossary work.
+   install `write-glossary` for Spec Loop `glossary.adoc` work.
 
-2. Fallback instruction files
+2. Instruction files
 
-   Install exactly one fallback file such as `AGENTS.md`, `CLAUDE.md`,
-   or `.github/copilot-instructions.md` when the harness needs local
-   governance instructions.
+   Install exactly one instruction file such as `AGENTS.md`,
+   `CLAUDE.md`, or `.github/copilot-instructions.md` when the harness
+   needs local governance instructions.
 
 The bootstrap skill may also detect that equivalent higher-level
-harness instructions are already active and avoid writing fallback
+harness instructions are already active and avoid writing instruction
 files.
 
 This repo includes the templates and references used by the installer:
@@ -159,18 +162,20 @@ This repo includes the templates and references used by the installer:
 
 - `install-spec-loop` asks for the project task directory and suggests
   `tasks/` by default.
-- It also records whether glossary support is installed and whether the
-  glossary workflow is currently opted in or opted out.
+- It also records the missing glossary creation default.
+- If Spec Loop glossary format guidance is not installed, it also
+  records the default format for creating a new glossary.
 - If you manage the files manually, keep those settings in the
-  installed skills or fallback instruction file.
+  installed `plan-task` skill or instruction file.
 
 ### Claude setup note
 
-If the chosen fallback target is Claude, use the AGENTS template content
-in `CLAUDE.md`.
+If the chosen instruction-file target is Claude, use the AGENTS template
+content in `CLAUDE.md`.
 
 If equivalent governance is already enforced by higher-level Claude
-instructions, a project-local `CLAUDE.md` fallback may be unnecessary.
+instructions, a project-local `CLAUDE.md` instruction file may be
+unnecessary.
 
 ## Documentation
 
