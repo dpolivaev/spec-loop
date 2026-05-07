@@ -19,10 +19,22 @@ either blocks change or gets ignored.
 Spec Loop avoids both: write the next small spec, review it, then implement it
 with tests. Keep the spec local to the next step. Repeat until done.
 
-The governing rules live in
-**[skills/plan-task/constitution.md](skills/plan-task/constitution.md)**.
-The model drafts and updates task files; you review and approve at the
-task-file gate before implementation.
+Spec Loop is a framework of reusable skills.
+
+Its main governing rules live in the `plan-task` skill, in
+**[constitution.md](skills/plan-task/constitution.md)**.
+That skill governs plan-first work, task files, and the approval gate
+before implementation.
+
+The `write-glossary` skill defines the Spec Loop AsciiDoc glossary
+format in
+**[glossary-format.md](skills/write-glossary/glossary-format.md)**.
+
+The `setup-task-and-glossary-rendering` skill helps users prepare and
+troubleshoot rendering for task files and glossary files.
+
+The model uses these skills while drafting and updating task files; you
+review and approve at the task-file gate before implementation.
 
 Spec Loop also defines explicit work phases: plan, implementation, and done.
 Any transitions to implementation and to done require explicit user approval.
@@ -113,14 +125,15 @@ Spec Loop task files use embedded PlantUML diagrams, and Spec Loop
 glossaries may include embedded diagrams. Prepare your editor for
 reviewing rendered task files and glossary files before continuing.
 
-Ask the agent to use `setup-task-and-glossary-rendering` to prepare your
-editor preview setup.
+Ask the agent to use the `setup-task-and-glossary-rendering` skill to
+prepare your editor preview setup.
 
 For example:
 
 ```text
-Please use `setup-task-and-glossary-rendering` to help me prepare my
-editor for reviewing rendered Spec Loop task files and glossary files.
+Please use the `setup-task-and-glossary-rendering` skill to help me
+prepare my editor for reviewing rendered Spec Loop task files and
+glossary files.
 
 My coding harness may run in a terminal, but I review files in
 <VS Code or JetBrains>.
@@ -157,10 +170,11 @@ their use explicit.
 If your harness behaves that way, add a project instruction such as:
 
 ```text
-Use `plan-task` for all non-trivial work unless I explicitly opt out.
-Use `write-glossary` for `glossary.adoc` glossary work.
-Follow the Constitution loaded through `plan-task`, including the
-PLAN -> IMPLEMENTATION explicit approval gate.
+Use the `plan-task` skill for all non-trivial work unless I explicitly
+opt out.
+Use the `write-glossary` skill for `glossary.adoc` glossary work.
+Follow the Constitution loaded through the `plan-task` skill,
+including the PLAN -> IMPLEMENTATION explicit approval gate.
 ```
 
 If your harness supports project instruction files such as `AGENTS.md`,
@@ -183,10 +197,7 @@ This repository currently ships these skills:
 
 3. **`setup-task-and-glossary-rendering`**
    - the setup and troubleshooting skill for rendering task files and
-     glossary files;
-   - uses:
-     - [skills/setup-task-and-glossary-rendering/vscode-setup.md](skills/setup-task-and-glossary-rendering/vscode-setup.md)
-     - [skills/setup-task-and-glossary-rendering/jetbrains-setup.md](skills/setup-task-and-glossary-rendering/jetbrains-setup.md)
+     glossary files.
 
 ## Documentation
 
@@ -259,10 +270,8 @@ For inline PlantUML rendering in Markdown on the web, view the repo on
 render PlantUML embedded in Markdown natively, so reading there can
 degrade the intended experience.
 
-For local preview setup, use:
-
-* **[VS Code Setup (PlantUML and AsciiDoc)](skills/setup-task-and-glossary-rendering/vscode-setup.md)**
-* **[JetBrains Setup (PlantUML and AsciiDoc)](skills/setup-task-and-glossary-rendering/jetbrains-setup.md)**
+For local preview setup, use the
+`setup-task-and-glossary-rendering` skill.
 
 ## License
 

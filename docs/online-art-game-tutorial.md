@@ -48,8 +48,9 @@ Run this step unless you already know your editor is prepared to render:
 ### You send
 
 ```text
-Please use `setup-task-and-glossary-rendering` to help me prepare my
-editor for reviewing rendered Spec Loop task files and glossary files.
+Please use the `setup-task-and-glossary-rendering` skill to help me
+prepare my editor for reviewing rendered Spec Loop task files and
+glossary files.
 
 My coding harness may run in a terminal, but I review files in
 <VS Code or JetBrains>.
@@ -58,7 +59,7 @@ My coding harness may run in a terminal, but I review files in
 ### You see
 
 - Chat:
-  - uses `setup-task-and-glossary-rendering`,
+  - uses the `setup-task-and-glossary-rendering` skill,
   - reads the setup document for your editor,
   - guides you through the rendering setup needed for task and glossary
     review.
@@ -75,15 +76,16 @@ My coding harness may run in a terminal, but I review files in
 ```text
 I am following the Spec Loop online art game tutorial from my browser.
 Please work in this project and use these skills as needed:
-`plan-task`, `write-glossary`, and
-`setup-task-and-glossary-rendering`.
+the `plan-task` skill, the `write-glossary` skill, and the
+`setup-task-and-glossary-rendering` skill.
 
 Tutorial-specific goals:
-- use `plan-task` for non-trivial work,
-- use `write-glossary` for the Spec Loop `glossary.adoc` glossary
-  because later tutorial steps will create and maintain `glossary.adoc`,
-- use `setup-task-and-glossary-rendering` again only if rendering setup
-  help is needed later,
+- use the `plan-task` skill for non-trivial work,
+- use the `write-glossary` skill for the Spec Loop `glossary.adoc`
+  glossary because later tutorial steps will create and maintain
+  `glossary.adoc`,
+- use the `setup-task-and-glossary-rendering` skill again only if
+  rendering setup help is needed later,
 - tell me which of these skills you will use here and restate the
   `PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
@@ -91,14 +93,14 @@ Tutorial-specific goals:
 ### You see
 
 - Chat:
-  - confirms that `plan-task`, `write-glossary`, and
-    `setup-task-and-glossary-rendering` are available,
-  - treats `plan-task` as the mandatory planning skill for non-trivial
-    work,
-  - explains that `write-glossary` will be used for the tutorial's
-    `glossary.adoc` work,
-  - keeps `setup-task-and-glossary-rendering` for later rendering help
-    if needed.
+  - confirms that the `plan-task`, `write-glossary`, and
+    `setup-task-and-glossary-rendering` skills are available,
+  - treats the `plan-task` skill as the mandatory planning skill for
+    non-trivial work,
+  - explains that the `write-glossary` skill will be used for the
+    tutorial's `glossary.adoc` work,
+  - keeps the `setup-task-and-glossary-rendering` skill for later
+    rendering help if needed.
 - Project setup:
   - Spec Loop governance is available through the installed skills,
   - `tasks/` is used when task files are needed,
@@ -128,8 +130,8 @@ Tutorial-specific goals:
 
 ## If setup seems wrong
 
-1. Ask the LLM which of `plan-task`, `write-glossary`, and
-   `setup-task-and-glossary-rendering` are active.
+1. Ask the LLM which of the `plan-task`, `write-glossary`, and
+   `setup-task-and-glossary-rendering` skills are active.
 2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
 3. If that still looks wrong, reinstall the skills with:
 
