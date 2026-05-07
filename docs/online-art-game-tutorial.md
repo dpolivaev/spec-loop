@@ -22,8 +22,8 @@ npx skills add dpolivaev/spec-loop
 ```
 
 This recommended path requires Node.js because it uses `npx`.
-For global or agent-specific installation details, see
-https://github.com/vercel-labs/skills.
+For global or agent-specific installation details, including
+`-g -a <agent>`, see https://github.com/vercel-labs/skills.
 
 ### B3. Open the project
 
@@ -38,34 +38,67 @@ following is more likely.
 Continue with Step 1 from the `museum-tutorial-project` root. Send the
 tutorial prompts from there unless a later step says otherwise.
 
+### B5. Prepare task and glossary rendering in your editor
+
+Run this step unless you already know your editor is prepared to render:
+
+- Markdown task files with embedded PlantUML
+- AsciiDoc glossary files with embedded diagrams
+
+### You send
+
+```text
+Please use `setup-task-and-glossary-rendering` to help me prepare my
+editor for reviewing rendered Spec Loop task files and glossary files.
+
+My coding harness may run in a terminal, but I review files in
+<VS Code or JetBrains>.
+```
+
+### You see
+
+- Chat:
+  - uses `setup-task-and-glossary-rendering`,
+  - reads the setup document for your editor,
+  - guides you through the rendering setup needed for task and glossary
+    review.
+- Verification:
+  - your editor is ready to review Markdown task files with embedded
+    PlantUML,
+  - your editor is ready to review AsciiDoc glossary files with
+    embedded diagrams.
+
 ## Step 1: Confirm Spec Loop in the tutorial project
 
 ### You send
 
 ```text
 I am following the Spec Loop online art game tutorial from my browser.
-Please work in this project using the installed Spec Loop skills.
+Please work in this project and use these skills as needed:
+`plan-task`, `write-glossary`, and
+`setup-task-and-glossary-rendering`.
 
 Tutorial-specific goals:
 - use `plan-task` for non-trivial work,
 - use `write-glossary` for the Spec Loop `glossary.adoc` glossary
   because later tutorial steps will create and maintain `glossary.adoc`,
-- use `setup-task-and-glossary-rendering` only if rendering setup help
-  is needed,
-- tell me which Spec Loop skills you will use here and restate the
+- use `setup-task-and-glossary-rendering` again only if rendering setup
+  help is needed later,
+- tell me which of these skills you will use here and restate the
   `PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
 
 ### You see
 
 - Chat:
-  - confirms that the installed Spec Loop skills are available,
+  - confirms that `plan-task`, `write-glossary`, and
+    `setup-task-and-glossary-rendering` are available,
   - treats `plan-task` as the mandatory planning skill for non-trivial
     work,
   - explains that `write-glossary` will be used for the tutorial's
     `glossary.adoc` work,
-  - uses `setup-task-and-glossary-rendering` only if setup or rendering
-    help is actually needed.
+  - keeps `setup-task-and-glossary-rendering` for later rendering help
+    if needed.
 - Project setup:
   - Spec Loop governance is available through the installed skills,
   - `tasks/` is used when task files are needed,
@@ -74,7 +107,9 @@ Tutorial-specific goals:
   - PlantUML is recommended unless there is a good reason to choose
     Mermaid,
   - AsciiDoc support matters because the tutorial will use
-    `glossary.adoc`.
+    `glossary.adoc`,
+  - editor rendering support was prepared in B5 unless you knowingly
+    skipped that step.
 - Verification:
   - the LLM correctly restates the `PLAN -> IMPLEMENTATION` approval
     rule,
@@ -83,7 +118,8 @@ Tutorial-specific goals:
 
 ### You learned (this step)
 
-- Setup is now primarily package installation plus skill selection.
+- Setup is now package installation plus skill selection, with a
+  separate editor-rendering step when needed.
 - The tutorial may be open in your browser while the LLM only sees the
   `museum-tutorial-project`, so prompts must still carry the context it
   needs.
@@ -92,7 +128,8 @@ Tutorial-specific goals:
 
 ## If setup seems wrong
 
-1. Ask the LLM which Spec Loop skills are active.
+1. Ask the LLM which of `plan-task`, `write-glossary`, and
+   `setup-task-and-glossary-rendering` are active.
 2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
 3. If that still looks wrong, reinstall the skills with:
 
@@ -100,7 +137,8 @@ Tutorial-specific goals:
 npx skills add dpolivaev/spec-loop
 ```
 
-4. For global or agent-specific installation details, check
+4. For global or agent-specific installation details, including
+   `-g -a <agent>`, check
    https://github.com/vercel-labs/skills.
 5. If `npx` is not available or does not help, copy the needed part of
    the `skills/` directory from

@@ -1,19 +1,23 @@
 ---
 name: plan-task
 description: >-
-  Create, manage, and verify the task files whose approved content is
-  required for task-based work before implementing code, test, or
-  configuration changes. Use for implementation preparation,
-  implementation readiness checks, and returning work to planning when
-  implementation must meaningfully deviate from the approved task
-  content. This skill is mandatory unless the user explicitly opts out
-  for the current project or session.
+  Use to begin non-trivial work on features, bug fixes,
+  refactorings, and changes to code, tests, configuration,
+  dependencies, runtime assets, or design. This skill creates,
+  manages, and verifies the required task files. It covers
+  implementation preparation, readiness checks, and the explicit user
+  approval gate before implementation. Mandatory unless the user
+  explicitly opts out for the current project or session.
 ---
 
-Use for implementation preparation and implementation readiness checks
-by creating, managing, and verifying the task files whose approved
-content is required before implementing code, test, or configuration
-changes.
+Use this skill to begin non-trivial work on features, bug fixes,
+refactorings, and changes to code, tests, configuration,
+dependencies, runtime assets, or design.
+
+It creates, manages, and verifies the required task files.
+
+It covers implementation preparation, readiness checks, and the
+explicit user approval gate before implementation.
 
 This skill is mandatory unless the user explicitly opts out for the
 current project or session.
@@ -22,6 +26,9 @@ This skill is defined by [constitution.md](./constitution.md). Read
 that file and follow it before using this skill.
 
 Read and apply project instructions such as `AGENTS.md` when present.
+
+If project instructions do not define a task directory, use `tasks/`
+as the default.
 
 Default glossary policy:
 

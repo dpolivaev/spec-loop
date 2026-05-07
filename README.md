@@ -98,15 +98,33 @@ Recommended path:
 npx skills add dpolivaev/spec-loop
 ```
 
-3. For global installation:
+3. For global installation for a specific agent:
 
 ```bash
-npx skills add dpolivaev/spec-loop -g
+npx skills add dpolivaev/spec-loop -g -a <agent>
 ```
 
-4. For agent-specific options and installation details, see:
-   - https://github.com/dpolivaev/spec-loop
-   - https://github.com/vercel-labs/skills
+Valid agent values and additional agent-specific options are documented
+at https://github.com/vercel-labs/skills.
+
+### Prepare task and glossary rendering
+
+Spec Loop task files use embedded PlantUML diagrams, and Spec Loop
+glossaries may include embedded diagrams. Prepare your editor for
+reviewing rendered task files and glossary files before continuing.
+
+Ask the agent to use `setup-task-and-glossary-rendering` to prepare your
+editor preview setup.
+
+For example:
+
+```text
+Please use `setup-task-and-glossary-rendering` to help me prepare my
+editor for reviewing rendered Spec Loop task files and glossary files.
+
+My coding harness may run in a terminal, but I review files in
+<VS Code or JetBrains>.
+```
 
 ### Update installed skills
 
@@ -129,6 +147,25 @@ needed skill directories from `skills/` into your agent's skills directory.
 
 Which directory your agent uses is agent-specific. See
 https://github.com/vercel-labs/skills for agent-specific installation details.
+
+### If your harness does not automatically apply installed skills
+
+Some coding harnesses expose installed skills to the model but do not
+reliably apply them unless the user prompt or project instructions make
+their use explicit.
+
+If your harness behaves that way, add a project instruction such as:
+
+```text
+Use `plan-task` for all non-trivial work unless I explicitly opt out.
+Use `write-glossary` for `glossary.adoc` glossary work.
+Follow the Constitution loaded through `plan-task`, including the
+PLAN -> IMPLEMENTATION explicit approval gate.
+```
+
+If your harness supports project instruction files such as `AGENTS.md`,
+put the rule there. That is more reliable than relying on ordinary chat
+context alone.
 
 ## Included Skills
 
