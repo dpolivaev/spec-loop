@@ -5,8 +5,9 @@ description: >-
   refactorings, and changes to code, tests, configuration,
   dependencies, runtime assets, or design. This skill creates,
   manages, and verifies the required task files. It covers
-  implementation preparation, readiness checks, and the explicit user
-  approval gate before implementation. Mandatory unless the user
+  implementation preparation, mandatory task self-checks, and the
+  explicit user approval gate before implementation. Mandatory unless
+  the user
   explicitly opts out for the current project or session.
 ---
 
@@ -16,8 +17,8 @@ dependencies, runtime assets, or design.
 
 It creates, manages, and verifies the required task files.
 
-It covers implementation preparation, readiness checks, and the
-explicit user approval gate before implementation.
+It covers implementation preparation, mandatory task self-checks,
+and the explicit user approval gate before implementation.
 
 This skill is mandatory unless the user explicitly opts out for the
 current project or session.

@@ -65,6 +65,19 @@ Work starts in **PLAN**, returns to **PLAN** after each work item unless User sa
 
 Backlog tasks may keep Research/Design high-level or `To be done` until current. Before IMPLEMENTATION, active task needs: required Research, required Constraints, required Scenario, implementation-ready Design, Test spec for increment — even when User allows combined phases.
 
+Before asking the User to approve a task file for IMPLEMENTATION, the
+LLM must self-check that the content for the current implementation
+increment meets all applicable requirements of this Constitution and is
+correct, internally consistent, and compliant with `AGENTS.md` and
+applicable glossary rules.
+
+In tasks with subtasks, this applies to the active subtask and any
+task-level context it depends on, not to future subtasks that are not
+yet current.
+
+If asking the User to review a draft instead, say so explicitly and
+list the known gaps, open questions, and unresolved decisions.
+
 IMPLEMENTATION -> PLAN: LLM may initiate if required (scope drift, unclear classification, rule conflict, missing approved Design). State reason and what must be resolved before IMPLEMENTATION resumes.
 
 Phase model governs task-scoped work only. Non-code/test/config work is outside it unless User says otherwise.
