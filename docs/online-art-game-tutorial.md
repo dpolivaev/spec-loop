@@ -75,28 +75,23 @@ My coding harness may run in a terminal, but I review files in
 
 ```text
 I am following the Spec Loop online art game tutorial from my browser.
-Please work in this project and use these skills as needed:
-the `plan-task` skill, the `write-glossary` skill, and the
-`setup-task-and-glossary-rendering` skill.
+Please work in this project according to the installed Spec Loop setup.
 
 Tutorial-specific goals:
-- use the `plan-task` skill for non-trivial work,
-- use the `write-glossary` skill for the Spec Loop `glossary.adoc`
-  glossary because later tutorial steps will create and maintain
-  `glossary.adoc`,
-- use the `setup-task-and-glossary-rendering` skill again only if
-  rendering setup help is needed later,
-- tell me which of these skills you will use here and restate the
+- use the normal planning workflow for non-trivial work,
+- later tutorial steps will create and maintain `glossary.adoc`,
+- rendering setup help is only needed again if a later step requires
+  it,
+- tell me how you will work here and restate the
   `PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
 
 ### You see
 
 - Chat:
-  - confirms that the `plan-task`, `write-glossary`, and
-    `setup-task-and-glossary-rendering` skills are available,
-  - treats the `plan-task` skill as the mandatory planning skill for
-    non-trivial work,
+  - confirms that the installed Spec Loop setup is available,
+  - automatically applies the `plan-task` skill as the mandatory
+    planning skill for non-trivial work,
   - explains that the `write-glossary` skill will be used for the
     tutorial's `glossary.adoc` work,
   - keeps the `setup-task-and-glossary-rendering` skill for later
@@ -120,8 +115,8 @@ Tutorial-specific goals:
 
 ### You learned (this step)
 
-- Setup is now package installation plus skill selection, with a
-  separate editor-rendering step when needed.
+- Setup is now package installation, with a separate
+  editor-rendering step when needed.
 - The tutorial may be open in your browser while the LLM only sees the
   `museum-tutorial-project`, so prompts must still carry the context it
   needs.
@@ -130,8 +125,7 @@ Tutorial-specific goals:
 
 ## If setup seems wrong
 
-1. Ask the LLM which of the `plan-task`, `write-glossary`, and
-   `setup-task-and-glossary-rendering` skills are active.
+1. Ask the LLM which installed skills are active.
 2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
 3. If that still looks wrong, reinstall the skills with:
 
@@ -146,7 +140,10 @@ npx skills add dpolivaev/spec-loop
    the `skills/` directory from
    `https://github.com/dpolivaev/spec-loop` into the harness-specific
    skills directory.
-6. Continue only when the LLM clearly understands the setup and the
+6. If the harness still does not automatically apply the expected
+   workflow, explicitly ask for the needed skill or see
+   [README.md](../README.md#if-your-harness-does-not-automatically-apply-installed-skills).
+7. Continue only when the LLM clearly understands the setup and the
    workflow rules.
 
 ## From here on
@@ -299,26 +296,27 @@ relative to this repo root (parallel directory, not inside this repo).
 Use it for reverse engineering only.
 
 After the correct location is confirmed, add it to the active project
-governance entry point so future tasks can reuse it without re-asking.
+governance entry point so future work can reuse it without re-asking.
 
-Please create a task for the museum overview page in this repository to
-create the page at `site/index.html`. The task must include just-enough
-AIC API research directly inside the task file `Research` section. Run
-real HTTP checks with curl (or equivalent) against the public AIC API
-(do not run a local instance) and record verification evidence
-(commands + observed results) inside the task file. The page should
-introduce AIC as the data source, show departments, and show exactly 20
-representative artworks with title, artist, department, and image for
-each item. Include the rules for retrieving artwork images in the task
-research. Use API data and image URLs programmatically without manual
-downloads, add automated checks that prove the page can be served and
-opened, and report the exact local serve command in chat.
+Let us work on the museum overview page in this repository by creating
+`site/index.html`.
+
+Requirements:
+- run real HTTP checks with curl (or equivalent) against the public AIC
+  API; do not run a local instance
+- introduce AIC as the data source
+- show departments
+- show exactly 20 representative artworks with title, artist,
+  department, and image for each item
+- use API data and image URLs programmatically without manual downloads
+- add automated checks that prove the page can be served and opened
+- report the exact local serve command in chat
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created and asks for explicit
-  implementation approval.
+- Chat: reports that a task file was created automatically and asks for
+  explicit implementation approval.
 - Governance: the active project governance entry point is updated to
   record the confirmed sibling `data-aggregator` path.
 - Task file:
@@ -328,7 +326,12 @@ opened, and report the exact local serve command in chat.
     needed for the museum page (including image URL rules) and any
     relevant reverse engineering notes from `data-aggregator`.
 
-Approve only after the task definition and subtask breakdown look correct.
+Approve only after the task definition looks correct.
+If the LLM does not create the task automatically, the task content
+does not have the required form, or embedded PlantUML does not render
+correctly, correct it before approving anything.
+If needed, send the error text or a screenshot and ask the LLM to fix
+the diagram.
 
 ### You see (after implementation is completed)
 
@@ -339,8 +342,8 @@ Approve only after the task definition and subtask breakdown look correct.
 
 ### After completion (move to done / commit)
 
-- After you accept this work item as done: ask the LLM to 
-  `move the task to done`, then ask it to commit.
+- After you accept this work item as done: tell the LLM 
+  `move the task to done and commit`.
 
 ### You learned (this step)
 
@@ -350,10 +353,10 @@ Approve only after the task definition and subtask breakdown look correct.
 For all work items below that include implementation: the LLM is
 expected to follow the Constitution automatically; "manual control" is
 the exception. If the LLM starts implementation before planning and
-explicit approval boundaries, first check whether it remembers the
-Constitution (for example ask it to restate the PLAN -> IMPLEMENTATION
-approval gate), then tell it to stop and follow the Constitution
-strictly.
+explicit approval boundaries, or over-designs future work too early,
+first check whether it remembers the Constitution (for example ask it
+to restate the PLAN -> IMPLEMENTATION approval gate), then tell it to
+stop and follow the Constitution strictly.
 
 ## Step 4: ADR for Game Stack and Core Design Style
 
@@ -427,31 +430,27 @@ Record one final choice with rationale. In the same ADR:
 
 ```text
 Starting point: reuse relevant AIC API research already recorded in
-earlier task files in this repo and follow the ADR.
+this repo and follow the ADR.
 
-Please create one task for core gameplay in this repository. The scope
-must include a Level 1 playable flow with 2 artworks, progressive
-levels where each next level adds one artwork, and strict year
-eligibility that accepts only standalone 4-digit years like 1879 and
-rejects ranges, circa/ca., decades, null or unknown values, and mixed
-text values. Ensure the game page is reachable from a link on
+Let us work on core gameplay in this repository.
+
+The scope must include a Level 1 playable flow with 2 artworks,
+progressive levels where each next level adds one artwork, and strict
+year eligibility that accepts only standalone 4-digit years like 1879
+and rejects ranges, circa/ca., decades, null or unknown values, and
+mixed text values. Ensure the game page is reachable from a link on
 site/index.html.
 
 For the initial task creation, do not fully design every future
 subtask. Create only:
-- the overall task
-- subtasks containing Scope and Motivation each
-
-Reuse earlier task-file research where relevant, but keep future
-subtasks lightweight. We will flesh out only the current subtask before
-implementation.
-
+- the overall task,
+- subtasks containing Scope and Motivation each.
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created with a task header and an
-  ordered subtask breakdown, then stops for review.
+- Chat: reports that a task file was created automatically with a task
+  header and an ordered subtask breakdown, then stops for review.
 - Task file:
   - Overall Scope and Motivation are clear.
   - Each subtask has Scope and Motivation, but future subtasks are not
@@ -506,8 +505,9 @@ implementation.
 ### You send
 
 ```text
-Please create one task for the leaderboard in this repository. Break
-the implementation work down in this order:
+Let us work on the leaderboard in this repository.
+
+Break the implementation work down in this order:
 1. in-memory leaderboard implementation
 2. persistence implementation
 
@@ -517,24 +517,18 @@ survives restart, the storage location is documented, and the reset
 procedure for local development and tests is documented with an exact
 command.
 
-For the initial task creation, do not fully design every future
-subtask. Create only:
-- the overall task header
-- an ordered breakdown of the implementation subtasks above
-- Scope and Motivation for each subtask
-
-Keep future implementation subtasks lightweight. We will flesh out only
-the current subtask before implementation.
-
 Keep leaderboard terminology aligned with the established project
 language.
 ```
 
 ### You see (plan)
 
+- Chat: reports that a task file was created automatically and stops
+  for review.
 - Task file:
-  - Exists with ordered implementation subtasks.
-  - Requires a separate persistence ADR before persistence
+  - exists with ordered implementation subtasks,
+  - keeps future implementation subtasks lightweight,
+  - requires a separate persistence ADR before persistence
     implementation is fleshed out.
 
 ### You send
@@ -622,12 +616,13 @@ Implement it.
 
 Each step follows the Constitution interaction model:
 
-- In chat, you ask the LLM to create a task or ADR.
-- First, the LLM writes the task/ADR content needed for the current
-  review step. For larger tasks, start with the task header and an
-  ordered subtask breakdown, then flesh out Research, Scenario, Constraints when
-  needed, Design, and Test specification only for the current
-  subtask before implementation.
+- In chat, you ask the LLM to work on a feature or durable design
+  decision.
+- For implementation work, the LLM should create the needed task
+  automatically before making executable changes.
+- For larger tasks, the first planning pass may stop at the task
+  header and an ordered subtask breakdown; only the current subtask is
+  fleshed out in detail before implementation.
 - You approve or reject implementation explicitly.
 - Only after explicit approval should the LLM make executable changes
   (code/tests/config/runtime assets).
@@ -638,6 +633,9 @@ Each step follows the Constitution interaction model:
 - Every implementation subtask includes both implementation and testing.
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
+- If the LLM plans too much, skips needed artifact updates, or starts
+  implementation too early, correct it and ask it to return to the
+  expected workflow.
 - After you explicitly accept a work item as `done`, ask the LLM to
   commit before moving on.
 - Depending on your tool, you may be asked to confirm the commit
@@ -662,4 +660,7 @@ How to think while running this tutorial:
   appropriate (for example: `.gitignore`, documentation typo fixes).
 - Chat is for coordination and approvals; task files and ADRs are the
   durable specification artifacts.
+- Trust the installed skills to choose the workflow, and correct the
+  LLM explicitly if it skips planning, over-designs future work, or
+  misses a required artifact update.
 - Only the user may relax or override Constitution workflow rules.

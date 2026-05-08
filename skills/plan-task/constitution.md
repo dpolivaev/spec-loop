@@ -132,8 +132,8 @@ When a recognized project glossary exists, LLM must:
 - plan glossary updates during PLAN,
 - perform glossary updates during IMPLEMENTATION with traceability links,
 - use `write-glossary` if available when the project glossary uses the
-  Spec Loop AsciiDoc format; otherwise update the glossary directly in the
-  active project format.
+  AsciiDoc glossary format defined by the `write-glossary` skill;
+  otherwise update the glossary directly in the active project format.
 
 If required glossary updates not planned: stop, return to PLAN, update task,
 get approval, continue.
@@ -297,7 +297,10 @@ Short orientation for someone unfamiliar with codebase: relevant modules, import
 
 #### PlantUML-specific rules
 
-- Use `allowmixing` only when class elements combined with non-class elements.
+- Prefer separate diagrams over `allowmixing`.
+- File/folder tree diagrams, component diagrams, class diagrams, and sequence diagrams should normally be separate.
+- Use `allowmixing` only when class elements combined with non-class elements in one diagram are genuinely required.
+- When syntax or rendering is uncertain, follow `examples/example-task-wordle-cli.md`.
 - Class diagrams: one outer `package` with nested inner packages and `set separator none`.
 - Use escape character `~` for text matching creole markup like `--`.
 

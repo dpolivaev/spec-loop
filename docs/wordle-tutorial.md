@@ -72,29 +72,24 @@ My coding harness may run in a terminal, but I review files in
 
 ```text
 I am following the Spec Loop Wordle tutorial from my browser.
-Please work in this project and use these skills as needed:
-the `plan-task` skill, the `write-glossary` skill, and the
-`setup-task-and-glossary-rendering` skill.
+Please work in this project according to the installed Spec Loop setup.
 
 Tutorial-specific goals:
-- use the `plan-task` skill for non-trivial work,
-- use the `write-glossary` skill for the Spec Loop `glossary.adoc`
-  glossary because later tutorial steps will create and maintain
-  `glossary.adoc`,
-- use the `setup-task-and-glossary-rendering` skill again only if
-  rendering setup help is needed later,
+- use the normal planning workflow for non-trivial work,
+- later tutorial steps will create and maintain `glossary.adoc`,
+- rendering setup help is only needed again if a later step requires
+  it,
 - browser automation setup is not needed for this tutorial,
-- tell me which of these skills you will use here and restate the
+- tell me how you will work here and restate the
   `PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
 
 ### You see
 
 - Chat:
-  - confirms that the `plan-task`, `write-glossary`, and
-    `setup-task-and-glossary-rendering` skills are available,
-  - treats the `plan-task` skill as the mandatory planning skill for
-    non-trivial work,
+  - confirms that the installed Spec Loop setup is available,
+  - automatically applies the `plan-task` skill as the mandatory
+    planning skill for non-trivial work,
   - explains that the `write-glossary` skill will be used for the
     tutorial's `glossary.adoc` work,
   - keeps the `setup-task-and-glossary-rendering` skill for later
@@ -119,8 +114,8 @@ Tutorial-specific goals:
 
 ### You learned (this step)
 
-- Setup is now package installation plus skill selection, with a
-  separate editor-rendering step when needed.
+- Setup is now package installation, with a separate
+  editor-rendering step when needed.
 - The tutorial may be open in your browser while the LLM only sees the
   `wordle-tutorial-project`, so prompts must still carry the context it
   needs.
@@ -128,8 +123,7 @@ Tutorial-specific goals:
 
 ## If setup seems wrong
 
-1. Ask the LLM which of the `plan-task`, `write-glossary`, and
-   `setup-task-and-glossary-rendering` skills are active.
+1. Ask the LLM which installed skills are active.
 2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
 3. If that still looks wrong, reinstall the skills with:
 
@@ -144,7 +138,10 @@ npx skills add dpolivaev/spec-loop
    the `skills/` directory from
    `https://github.com/dpolivaev/spec-loop` into the harness-specific
    skills directory.
-6. Continue only when the LLM clearly understands the setup and the
+6. If the harness still does not automatically apply the expected
+   workflow, explicitly ask for the needed skill or see
+   [README.md](../README.md#if-your-harness-does-not-automatically-apply-installed-skills).
+7. Continue only when the LLM clearly understands the setup and the
    workflow rules.
 
 ## From here on
@@ -258,8 +255,7 @@ This is documentation-only work, we do not need a task file for it.
 ### You send
 
 ```text
-Please create a task for the initial Gradle Java project setup in this
-repository.
+Let us work on initial Gradle Java project setup in this repository.
 
 The scope must include:
 - a single-module Gradle project,
@@ -270,20 +266,12 @@ The scope must include:
 - standard `src/main/java`, `src/test/java`, and `src/main/resources`
   layout,
 - just enough code to prove the application can build, test, and run.
-
-Record just-enough research directly inside the task `Research`
-section, including the chosen Gradle wrapper version and any relevant
-build/test wiring decisions.
-
-Include a design diagram (PlantUML by default; Mermaid only when
-explicitly preferred), concrete automated tests, and the exact build
-and test commands you plan to run during verification.
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created and asks for explicit
-  implementation approval.
+- Chat: reports that a task file was created automatically and asks for
+  explicit implementation approval.
 - Task file:
   - contains Scope, Motivation, Briefing, Research, Design, and Test
     specification,
@@ -292,6 +280,11 @@ and test commands you plan to run during verification.
     only when explicitly preferred).
 
 Approve only after the task definition looks correct.
+If the LLM does not create the task automatically, the task content
+does not have the required form, or embedded PlantUML does not render
+correctly, correct it before approving anything.
+If needed, send the error text or a screenshot and ask the LLM to fix
+the diagram.
 Then ask the LLM to `implement it`.
 
 ### You see (after implementation is completed)
@@ -304,7 +297,7 @@ Then ask the LLM to `implement it`.
 ### After completion (move to done / commit)
 
 - After you accept this work item as done:
-  ask the LLM to `move the task to done`, then ask it to commit.
+  tell the LLM to `move the task to done and commit`.
 
 ### You learned (this step)
 
@@ -316,8 +309,8 @@ Then ask the LLM to `implement it`.
 ### You send
 
 ```text
-Please create one task for the Wordle domain model and evaluation rules
-in this repository.
+Let us work on the Wordle domain model and evaluation rules in this
+repository.
 
 The scope must include:
 - UI-agnostic domain objects for words and feedback,
@@ -325,20 +318,18 @@ The scope must include:
 - immutable model boundaries suitable for later engine and interface
   work.
 
+Break the work down into subtasks.
+ 
 For the initial task creation, do not fully design every future
 subtask. Create only:
 - the overall task,
 - subtasks containing Scope and Motivation each.
-
-Use these subtasks:
-1. define domain objects
-2. implement guess evaluation rules
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created with a task header and an
-  ordered subtask breakdown, then stops for review.
+- Chat: reports that a task file was created automatically with a task
+  header and an ordered subtask breakdown, then stops for review.
 - Task file:
   - has clear overall Scope, Motivation, and Scenario,
   - keeps future subtasks lightweight,
@@ -396,7 +387,7 @@ Use these subtasks:
 ### You send
 
 ```text
-Please create one task for the internal word list loader and validation.
+Let us work on the internal word list loader and validation.
 
 The scope must include:
 - a packaged `wordlist.txt` resource,
@@ -406,15 +397,12 @@ The scope must include:
   type,
 - no separate dictionary-membership checks beyond loading and existing
   validation.
-
-Record the file-format rules directly in the task Research section and
-include the exact automated checks needed to verify the loader.
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created and asks for explicit
-  implementation approval.
+- Chat: reports that a task file was created automatically and asks for
+  explicit implementation approval.
 - Task file:
   - documents the word-list file format in Research,
   - includes a loader-to-resource flow diagram (PlantUML by default;
@@ -436,7 +424,7 @@ Then ask the LLM to `implement it`.
 ### After completion (move to done / commit)
 
 - After you accept this work item as done:
-  ask the LLM to `move the task to done`, then ask it to commit.
+  tell the LLM `move the task to done, commit`.
 
 ### You learned (this step)
 
@@ -451,7 +439,7 @@ Then ask the LLM to `implement it`.
 Starting point: build on the relevant research already recorded in this
 repository.
 
-Please create one task for the game engine in this repository.
+Let us work on the game engine in this repository.
 
 The scope must include:
 - immutable game state,
@@ -462,20 +450,15 @@ The scope must include:
 - guess submission logic,
 - win and lose termination behavior.
 
-For the initial task creation, do not fully design every future
-subtask. Create only:
-- the overall task,
-- subtasks containing Scope and Motivation each.
-
-Use these subtasks:
+Break the work down into these subtasks:
 1. define game state model
 2. implement game engine logic
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created with a task header and an
-  ordered subtask breakdown, then stops for review.
+- Chat: reports that a task file was created automatically with a task
+  header and an ordered subtask breakdown, then stops for review.
 - Task file:
   - keeps future subtasks lightweight,
   - aligns with existing glossary terms,
@@ -518,8 +501,8 @@ Use these subtasks:
 ### You send
 
 ```text
-Please create one task to migrate the existing tests in this repository
-to AssertJ and add the required dependency.
+Let us migrate the existing tests in this repository to AssertJ and add
+the required dependency.
 
 The scope must include:
 - replacing JUnit assertion helpers with AssertJ,
@@ -530,8 +513,8 @@ The scope must include:
 
 ### You see (plan)
 
-- Chat: reports that a task file was created and asks for explicit
-  implementation approval.
+- Chat: reports that a task file was created automatically and asks for
+  explicit implementation approval.
 - Task file:
   - keeps scope limited to test sources and test dependency
     configuration,
@@ -549,7 +532,7 @@ Then ask the LLM to `implement it`.
 ### After completion (move to done / commit)
 
 - After you accept this work item as done:
-  ask the LLM to `move the task to done`, then ask it to commit.
+  tell the LLM `move the task to done, commit`.
 
 ### You learned (this step)
 
@@ -610,7 +593,7 @@ or basic option parsing path.
 Starting point: build on the existing gameplay logic in this repository
 and follow the approved CLI argument parsing ADR.
 
-Please create one task for the CLI game interface in this repository.
+Let us work on the CLI game interface in this repository.
 
 The CLI requirements are:
 - interactive terminal play,
@@ -624,18 +607,12 @@ Break the implementation work down in this order:
 2. implement feedback rendering
 3. document CLI build and usage
 4. document application distribution packaging
-
-For the initial task creation, do not fully design every future
-subtask. Create only:
-- the overall task,
-- subtasks containing Scope and Motivation each.
-
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created with a task header and an
-  ordered subtask breakdown, then stops for review.
+- Chat: reports that a task file was created automatically with a task
+  header and an ordered subtask breakdown, then stops for review.
 - Task file:
   - uses an ordered subtask flow,
   - keeps future subtasks lightweight,
@@ -682,7 +659,7 @@ subtask. Create only:
 Starting point: build on the existing gameplay logic in this
 repository.
 
-Please create one task for a minimal Swing UI in this repository.
+Let us work on a minimal Swing UI in this repository.
 
 Requirements:
 - keep CLI availability,
@@ -696,18 +673,12 @@ Break the implementation work down in this order:
 1. prepare shared input validation for CLI and UI
 2. implement the minimal Swing UI
 3. document UI build and usage
-
-For the initial task creation, do not fully design every future
-subtask. Create only:
-- the overall task,
-- subtasks containing Scope and Motivation each.
-
 ```
 
 ### You see (plan)
 
-- Chat: reports that a task file was created with a task header and an
-  ordered subtask breakdown, then stops for review.
+- Chat: reports that a task file was created automatically with a task
+  header and an ordered subtask breakdown, then stops for review.
 - Task file:
   - keeps future subtasks lightweight,
   - makes the CLI/UI boundary explicit,
@@ -746,15 +717,13 @@ subtask. Create only:
 
 Each step follows the Constitution interaction model:
 
-- In chat, you ask the LLM to create a task or perform approved
-  documentation work, or to create an ADR when a durable design choice
-  needs to be recorded.
-- First, the LLM writes the task content needed for the current review
-  step.
-- For larger tasks, start with the task header and an ordered subtask
-  breakdown, then flesh out Research, Scenario, Constraints when
-  needed, Design, and Test specification only for the current subtask
-  before implementation.
+- In chat, you ask the LLM to work on a feature, approved
+  documentation change, or durable design decision.
+- For implementation work, the LLM should create the needed task
+  automatically before making executable changes.
+- For larger tasks, the first planning pass may stop at the task
+  header and an ordered subtask breakdown; only the current subtask is
+  fleshed out in detail before implementation.
 - You approve or reject implementation explicitly.
 - Only after explicit approval should the LLM make executable changes.
 - Tasks should include automated tests for their deliverables.
@@ -765,6 +734,9 @@ Each step follows the Constitution interaction model:
   keep it aligned with the approved shared terms.
 - Use ADRs for durable decisions such as the CLI parsing approach,
   then make later tasks follow that decision.
+- If the LLM plans too much, skips needed artifact updates, or starts
+  implementation too early, correct it and ask it to return to the
+  expected workflow.
 - After you explicitly accept a work item as `done`, ask the LLM to
   commit before moving on.
 
@@ -780,7 +752,7 @@ How to think while running this tutorial:
 - Keep the process meaningful, not bureaucratic.
 - Chat is for coordination and approvals; task files and the glossary
   are the durable specification artifacts.
-- A good interaction feel is that the LLM tries to keep track of the
-  surrounding artifacts for you, while you still notice and correct the
-  occasional missed update.
+- Trust the installed skills to choose the workflow, and correct the
+  LLM explicitly if it skips planning, over-designs future work, or
+  misses a required artifact update.
 - Only the user may relax or override Constitution workflow rules.
