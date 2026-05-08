@@ -22,8 +22,14 @@ explicit user approval gate before implementation.
 This skill is mandatory unless the user explicitly opts out for the
 current project or session.
 
-This skill is defined by [constitution.md](./constitution.md). Read
-that file and follow it before using this skill.
+This skill is defined by [constitution.md](./constitution.md).
+
+The very first required action before using this skill is to read
+that file to the end, unless its contents are already known in the
+current session context.
+
+You must comply with it fully before proceeding. After confirming
+that, immediately emit 🫡.
 
 Read and apply project instructions such as `AGENTS.md` when present.
 
