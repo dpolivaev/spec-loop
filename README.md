@@ -33,8 +33,14 @@ format in
 The `setup-task-and-glossary-rendering` skill helps users prepare and
 troubleshoot rendering for task files and glossary files.
 
-The model uses these skills while drafting and updating task files; you
-review and approve at the task-file gate before implementation.
+The `assess-pull-request` skill reconstructs retrospective review files
+from existing pull requests or commit ranges and can generate
+GitHub-friendly Mermaid variants from them when needed.
+
+The model uses these skills while drafting and updating task or review
+artifacts; you review and approve at the task-file gate before
+implementation, or inspect retrospective review files when the code
+already exists.
 
 Spec Loop also defines explicit work phases: plan, implementation, and done.
 Any transitions to implementation and to done require explicit user approval.
@@ -82,6 +88,9 @@ the same job or the same lifetime.
 - ADRs capture durable decisions and the reasons behind them.
 - A glossary captures stable shared language across tasks, design,
   tests, code symbols, and commits.
+- Review files reconstruct and assess already-implemented work such as
+  pull requests or commit ranges. When needed, they may also produce
+  GitHub-friendly Mermaid variants for sharing the review.
 - Living project documents capture current truth that should remain
   useful after the task is accepted, such as technical shape,
   operations, or other stable project knowledge.
@@ -198,6 +207,12 @@ This repository currently ships these skills:
 3. **`setup-task-and-glossary-rendering`**
    - the setup and troubleshooting skill for rendering task files and
      glossary files.
+
+4. **`assess-pull-request`**
+   - the retrospective review skill for existing pull requests, branch
+     diffs, or commit ranges;
+   - defined by
+     [skills/assess-pull-request/review-guidance.md](skills/assess-pull-request/review-guidance.md).
 
 ## Documentation
 
