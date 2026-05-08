@@ -104,20 +104,20 @@ Apply the process to your repository.
 Recommended path:
 
 1. Ensure Node.js is available so `npx` works.
-2. Install the Spec Loop skills:
+2. Install all Spec Loop skills for the current project, non-interactively:
 
 ```bash
-npx skills add dpolivaev/spec-loop
+npx skills add dpolivaev/spec-loop -s '*' -y
 ```
 
-3. For global installation for a specific agent:
+3. For global installation for all agents, non-interactively:
 
 ```bash
-npx skills add dpolivaev/spec-loop -g -a <agent>
+npx skills add dpolivaev/spec-loop -g --all
 ```
 
-Valid agent values and additional agent-specific options are documented
-at https://github.com/vercel-labs/skills.
+`--all` installs all skills for all supported agents. For single-agent
+or other installation variants, see https://github.com/vercel-labs/skills.
 
 ### Prepare task and glossary rendering
 

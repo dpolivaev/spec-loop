@@ -18,12 +18,18 @@ git init
 ### B2. Install the Spec Loop skills
 
 ```bash
-npx skills add dpolivaev/spec-loop
+npx skills add dpolivaev/spec-loop -s '*' -y
 ```
 
 This recommended path requires Node.js because it uses `npx`.
-For global or agent-specific installation details, including
-`-g -a <agent>`, see https://github.com/vercel-labs/skills.
+For global installation for all agents, use:
+
+```bash
+npx skills add dpolivaev/spec-loop -g --all
+```
+
+`--all` installs all skills for all supported agents. For other
+installation variants, see https://github.com/vercel-labs/skills.
 
 ### B3. Open the project
 
@@ -130,11 +136,11 @@ Tutorial-specific goals:
 3. If that still looks wrong, reinstall the skills with:
 
 ```bash
-npx skills add dpolivaev/spec-loop
+npx skills add dpolivaev/spec-loop -s '*' -y
 ```
 
-4. For global or agent-specific installation details, including
-   `-g -a <agent>`, check
+4. For global installation for all agents, use `-g --all`.
+   For other installation variants, check
    https://github.com/vercel-labs/skills.
 5. If `npx` is not available or does not help, copy the needed part of
    the `skills/` directory from
