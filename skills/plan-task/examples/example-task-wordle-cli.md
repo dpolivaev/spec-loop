@@ -17,6 +17,16 @@ task-diagram needs:
 Keep different concerns in separate PlantUML blocks instead of mixing
 diagram types.
 
+PlantUML writing hints:
+
+- Do not apply normal prose line-wrapping rules inside PlantUML fences.
+- Keep each declaration, relationship, and labeled arrow on one
+  physical line.
+- If a label becomes too long, shorten it and explain the rest in prose
+  below the diagram.
+- If rendering fails, fix the diagram before treating the task as ready
+  for review.
+
 ## Scope
 
 Add a CLI adapter for Wordle that starts a game, reads guesses from

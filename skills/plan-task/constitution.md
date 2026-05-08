@@ -297,10 +297,7 @@ Short orientation for someone unfamiliar with codebase: relevant modules, import
 
 #### PlantUML-specific rules
 
-- Prefer separate diagrams over `allowmixing`.
-- File/folder tree diagrams, component diagrams, class diagrams, and sequence diagrams should normally be separate.
-- Use `allowmixing` only when class elements combined with non-class elements in one diagram are genuinely required.
-- When syntax or rendering is uncertain, follow `examples/example-task-wordle-cli.md`.
+- Prefer separate diagrams over `allowmixing`; keep file/folder tree, component, class, and sequence diagrams separate unless one mixed diagram is genuinely required.
 - Class diagrams: one outer `package` with nested inner packages and `set separator none`.
 - Use escape character `~` for text matching creole markup like `--`.
 
