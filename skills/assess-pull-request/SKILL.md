@@ -9,46 +9,31 @@ description: >-
   needed.
 ---
 
-Use for retrospective review of an existing pull request, merge
-request, branch diff, or commit range.
+Use for retrospective review of existing PR, MR, branch diff, or commit range.
 
-Before doing that work, read `../plan-task/SKILL.md`, follow all files
-it requires you to read, and apply the full `plan-task` skill bundle as
-shared convention guidance, including its glossary policy, diagram
-rules, and supporting examples. Then read
-[review-guidance.md](./review-guidance.md).
+Before work: read `../plan-task/SKILL.md`, follow all files it requires, apply full `plan-task` 
+skill bundle as shared convention guidance. Then read [review-guidance.md](./review-guidance.md).
 
-Treat `review-guidance.md` as the authoritative source for review
-purpose, evidence handling, file structure, section semantics,
-`Review Area` behavior, assessment style, intent-versus-
-implementation analysis, tone, translation rules, diagram rules, and
-sharing variant behavior. Keep `SKILL.md` as orchestration and
-entry-point instruction, not as a second guidance document.
+`review-guidance.md` = authoritative source for review purpose, evidence, file structure, 
+section semantics, `Review Area` behavior, assessment style, intent-vs-implementation analysis, 
+tone, translation rules, diagram rules, sharing variant behavior. 
+`SKILL.md` = orchestration/entry-point only, not second guidance doc.
 
-This skill reconstructs already-implemented work as a detailed human
-review-preparation artifact. Reconstruct the reviewed change as if you
-were retrospectively assembling the task file that should have existed
-under `plan-task`, then layer AI-side assessment and recommendations on
-top of that reconstruction.
+Skill reconstructs already-implemented work as detailed human review-prep artifact. 
+Reconstruct as if assembling task file that should have existed under `plan-task`, 
+then layer AI assessment and recommendations on top. Change already implemented — 
+not waiting at PLAN -> IMPLEMENTATION gate.
 
-This skill reconstructs already-implemented work. Do not treat the
-change as waiting at the normal PLAN -> IMPLEMENTATION gate.
-
-Use read-only provider commands for review-backed evidence when
-available:
+Use read-only provider commands for evidence when available:
 
 - `gh` for GitHub
 - `glab` for GitLab, including self-hosted GitLab when available
 
-Detect the provider from the explicit review reference first. If that
-is not enough, inspect the repository origin / remote host. If the
-provider, evidence source, or comparison range is still unclear, stop
-and ask.
+Detect provider from explicit review reference first. If unclear, inspect repo origin/remote host. 
+If provider, evidence source, or comparison range still unclear, stop and ask.
 
 Write local review artifacts under `reviews/`.
 
-If the user asks for a provider-specific sharing variant, follow
-`review-guidance.md` to decide whether a local sibling variant is
-needed or whether the canonical review artifact can be reused directly.
-
-Posting that content to the provider is outside this skill.
+If user wants provider-specific sharing variant, follow `review-guidance.md` 
+to decide whether local sibling variant needed or canonical artifact reusable directly. 
+Posting to provider outside this skill.
