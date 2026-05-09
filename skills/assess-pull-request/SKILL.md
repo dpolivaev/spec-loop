@@ -11,18 +11,23 @@ description: >-
 
 Use for retrospective review of existing PR, MR, branch diff, or commit range.
 
-Before work: read `../plan-task/SKILL.md`, follow all files it requires, apply full `plan-task` 
-skill bundle as shared convention guidance. Then read [review-guidance.md](./review-guidance.md).
+Before work: read `../plan-task/SKILL.md`, follow all files it requires, and apply the full `plan-task`
+skill bundle as shared convention guidance, including its glossary policy, diagram rules, and examples.
+Then read [review-guidance.md](./review-guidance.md).
+For a compact current-format example, see
+[examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
+Use it as a pattern collection for structure, area-wise outcome synthesis, and reconstructive
+`Test specification`, not as a required review size.
 
 `review-guidance.md` = authoritative source for review purpose, evidence, file structure, 
 section semantics, `Review Area` behavior, assessment style, intent-vs-implementation analysis, 
 tone, translation rules, diagram rules, sharing variant behavior. 
 `SKILL.md` = orchestration/entry-point only, not second guidance doc.
 
-Skill reconstructs already-implemented work as detailed human review-prep artifact. 
-Reconstruct as if assembling task file that should have existed under `plan-task`, 
-then layer AI assessment and recommendations on top. Change already implemented — 
-not waiting at PLAN -> IMPLEMENTATION gate.
+This skill reconstructs already-implemented work as a detailed human review-preparation artifact.
+Reconstruct the change as if retrospectively assembling the task file that should have existed under
+`plan-task`, then layer AI assessment and recommendations on top.
+Do not treat the change as waiting at the normal PLAN -> IMPLEMENTATION gate.
 
 Use read-only provider commands for evidence when available:
 
@@ -34,6 +39,6 @@ If provider, evidence source, or comparison range still unclear, stop and ask.
 
 Write local review artifacts under `reviews/`.
 
-If user wants provider-specific sharing variant, follow `review-guidance.md` 
-to decide whether local sibling variant needed or canonical artifact reusable directly. 
-Posting to provider outside this skill.
+If the user wants a provider-specific sharing variant, follow `review-guidance.md`
+to decide whether a local sibling variant is needed or whether the canonical artifact can be reused directly.
+Posting to the provider is outside this skill.

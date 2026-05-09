@@ -1,21 +1,29 @@
 # Review guidance for `assess-pull-request`
 
-Skill reuse `plan-task` bundle for writing rules, glossary, section semantics, diagram separation, examples.
+This skill reuses the `plan-task` bundle for writing conventions, glossary policy, section semantics,
+diagram separation, and examples.
 
-This file: retrospective review guidance + overrides. Authoritative for review behavior, output structure, 
-section semantics, assessment style, tone, translation rules, diagram handling, sharing variants.
+This file contains the retrospective review guidance and overrides.
+It is the authoritative source for review behavior, output structure,
+section semantics, assessment style, tone, translation rules, diagram handling, and sharing variants.
+For a compact example of the current format, see
+[examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
+Use it as a pattern collection for section ordering, area-wise outcome synthesis,
+and reconstructive `Test specification`, not as a required minimum length.
 
 ## 0. Purpose and reconstruction model
 
 Write review in English. Translate non-English comments/names/labels/terms found in reviewed change. 
 Keep original wording only for traceability or disambiguation.
 
-Use professional, factual, non-inflammatory language suitable for direct provider posting. 
-State strong negative findings clearly but prefer measured phrasing: `not ready to merge`, 
-`not yet complete`, `not yet supported by evidence`, `does not currently demonstrate`.
+Use professional, factual, non-inflammatory language suitable for direct provider posting.
+State strong negative findings clearly, but prefer measured phrasing such as `not ready to merge`,
+`not yet complete`, `not yet supported by evidence`, or `does not currently demonstrate`
+when that preserves accuracy.
 
-Primary output: human review-preparation artifact, not terse verdict. Reconstruct reviewed change 
-as retrospective `plan-task` artifact that should have existed, then add AI assessment and recommendations.
+Primary output: a human review-preparation artifact, not a terse verdict.
+Reconstruct the reviewed change as the retrospective `plan-task` artifact that should have existed,
+then add AI assessment and recommendations to support human review and decision making.
 
 Global sections describe reviewed change:
 
@@ -33,12 +41,13 @@ Global `Scenario`: include unless PR is so narrowly technical no meaningful use 
 Global `Briefing`: help reviewer start efficiently — main change areas, reading order, hotspots, 
 strategic questions.
 
-Within each `Review Area`: same seriousness. Local `Scenario`: area's specific user flow, workflow change, 
-or operational consequence. Local `Briefing`: how to enter that area, dependencies, 
-hotspots, local strategic questions. Keep concise for narrow areas; not filler.
+Within each `Review Area`, use `Scenario` and `Briefing` with the same seriousness.
+Local `Scenario`: the area's specific user flow, workflow change, or operational consequence.
+Local `Briefing`: how to enter that area, what dependencies and hotspots matter, and which local strategic
+questions to keep in mind. Keep both concise for narrow areas; do not treat them as filler.
 
-For substantial or multi-area changes, decompose into `Review Area` sections aligned with logical work areas, 
-like `plan-task` subtasks.
+For substantial or multi-area changes, decompose into `Review Area` sections aligned with logical work areas,
+like `plan-task` subtasks. Each area should help the reviewer understand what it adds, changes, or removes and why.
 
 ## 1. Evidence modes
 
@@ -74,8 +83,8 @@ GitLab access path:
 - `glab mr diff <mr>` when available
 - optional read-only GitLab API requests when CLI insufficient
 
-Diff and implemented code = source of truth. Provider text, discussion, 
-commit messages = help interpret motivation, risks, logical clusters.
+The diff and implemented code are the source of truth.
+Provider text, discussion, and commit messages help interpret motivation, risks, and logical clusters.
 
 If provider-backed mode requested but required read-only commands fail, stop and ask: retry, 
 provide evidence manually, or fall back to Git-only mode.
@@ -200,9 +209,9 @@ Each review area: same section ordering as main review, ends with own `Assessmen
 boundaries, explicit non-goals. Reviewed change scope, not review activity scope.
 - `Motivation` — change motivation from provider description, linked tickets, commit messages, 
 clearly marked inference when explicit statements missing. Change motivation, not reason for performing review.
-- `Scenario` — reconstructed use cases, user flows, or operational situations reviewed work enables or changes. 
-Global: include unless PR so narrowly technical any scenario would be fake filler. 
-Per area: equal seriousness for that local slice.
+- `Scenario` — reconstructed use cases, user flows, or operational situations reviewed work enables or changes.
+Global: include unless the PR is so narrowly technical that any scenario would be fake filler.
+Per area: use the same seriousness and explain the specific behavior, workflow, or operational change in that slice.
 - `Constraints` — explicit non-goals, compatibility limits, review boundaries, restrictions 
 found in change or provider discussion.
 - `Briefing` — reviewer onboarding and orientation; in provider-backed mode store full review URL here. 
@@ -237,11 +246,12 @@ to surface quality, risk, clarity, complexity, consistency, follow-up questions.
   - **Intent** — right thing to do? Problem worth solving this way? Intended benefits convincing?
   - **Implementation** — chosen intent realized correctly, coherently, safely, completely, with adequate tests?
 
-  Use that split even when judgment is asymmetric. Also discuss pros, cons, complexity increased/reduced/shifted, 
-  whether trade-off justified. Where relevant, state whether area should be kept/simplified/split/deferred/dropped. 
-  For refactorings and infrastructure: explain whether independent value exists or justification 
-  mainly depends on another disputed direction. Do not force false balance: if evidence one-sided, say so; 
-  if mixed, present differentiated pros/cons matching assessment.
+  Use that split even when judgment is asymmetric. Also discuss pros, cons, complexity increased/reduced/shifted,
+  and whether the trade-off appears justified. Where relevant, state whether the area should be kept,
+  simplified, split, deferred, or dropped. For refactorings and infrastructure, explain whether independent
+  value exists or whether the justification mainly depends on another disputed direction.
+  Do not force false balance: if evidence is one-sided, say so; if mixed, present differentiated pros/cons
+  matching the assessment. Keep the tone professional and measured even when the conclusion is strongly negative.
 
 ## 6. Diagram requirements in retrospective reviews
 
