@@ -5,12 +5,12 @@
     - Independently justified keep candidate:
       - settings loader extraction and schema normalization
     - Conditionally justified area:
-      - stricter validation, if existing-user migration and failure policy are clarified
+      - stricter validation, if migration for existing users and failure policy are clarified
     - Dependent on a disputed direction:
       - embedded preview server, which should wait for explicit product and security agreement
   - Implementation judgment:
     - The loader extraction is coherent, but the branch couples it to a breaking validation change
-      and a default-on preview server.
+      and a default-enabled preview server.
   - Verification judgment:
     - Unit tests cover parser happy paths and invalid-key rejection.
     - Missing evidence remains for migration compatibility, disabled-server startup, and end-to-end
@@ -41,7 +41,7 @@
 - **Briefing:**
   Review URL: `https://github.com/example/acme-widget/pull/42`
 
-  Decompose this review into two areas because the configuration refactor has independent value,
+  This review is decomposed into two areas because the configuration refactor has independent value,
   while the preview server introduces a separate runtime and product direction.
 
   Read the configuration loader first, then the preview server.
@@ -77,7 +77,7 @@
   - The verification story is directionally useful but not yet sufficient for merge confidence.
 - **Assessment:**
   - **Intent:**
-    The PR combines one independently useful refactor with two more debatable follow-on directions.
+    The PR combines one independently useful refactor with two more debatable follow-up directions.
     Extracting configuration loading is easy to justify on its own. Stricter validation is plausible,
     but only if its user impact is managed. The preview server is the weakest direction because it is
     a product expansion rather than a necessary consequence of the refactor.
@@ -198,7 +198,7 @@
 
   Evidence present:
 
-  - route-level unit coverage may exist
+  - some route-level unit coverage may exist
 
   Missing or weak evidence:
 

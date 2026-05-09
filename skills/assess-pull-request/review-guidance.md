@@ -1,20 +1,18 @@
 # Review guidance for `assess-pull-request`
 
-This skill reuses the `plan-task` bundle for writing conventions, glossary policy, section semantics,
-diagram separation, and examples.
+This skill reuses the `plan-task` bundle for shared conventions.
 
-This file contains the retrospective review guidance and overrides.
-It is the authoritative source for review behavior, output structure,
+This file is the authoritative source for retrospective review behavior, output structure,
 section semantics, assessment style, tone, translation rules, diagram handling, and sharing variants.
-For a compact example of the current format, see
+Optional compact example:
 [examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
 Use it as a pattern collection for section ordering, area-wise outcome synthesis,
 and reconstructive `Test specification`, not as a required minimum length.
 
 ## 0. Purpose and reconstruction model
 
-Write review in English. Translate non-English comments/names/labels/terms found in reviewed change. 
-Keep original wording only for traceability or disambiguation.
+Write the review in English. Translate non-English comments, names, labels, or terms found in the
+reviewed change. Keep original wording only for traceability or disambiguation.
 
 Use professional, factual, non-inflammatory language suitable for direct provider posting.
 State strong negative findings clearly, but prefer measured phrasing such as `not ready to merge`,
@@ -23,7 +21,7 @@ when that preserves accuracy.
 
 Primary output: a human review-preparation artifact, not a terse verdict.
 Reconstruct the reviewed change as the retrospective `plan-task` artifact that should have existed,
-then add AI assessment and recommendations to support human review and decision making.
+then add AI assessment and recommendations.
 
 Global sections describe reviewed change:
 
@@ -36,18 +34,18 @@ Global sections describe reviewed change:
 - `Test specification` = reconstructed verification needs, actual test evidence, sufficiency judgment
 - `Assessment` = AI analysis, concerns, reviewer guidance, intent-vs-implementation judgment
 
-`Scenario` and `Briefing` matter at global level and within each `Review Area`. 
-Global `Scenario`: include unless PR is so narrowly technical no meaningful use case can be reconstructed. 
-Global `Briefing`: help reviewer start efficiently — main change areas, reading order, hotspots, 
-strategic questions.
+`Scenario` and `Briefing` matter globally and within each `Review Area`.
+Include global `Scenario` unless the PR is too narrow for a meaningful one.
+Use global `Briefing` for main change areas, reading order, hotspots, and strategic questions.
 
-Within each `Review Area`, use `Scenario` and `Briefing` with the same seriousness.
-Local `Scenario`: the area's specific user flow, workflow change, or operational consequence.
-Local `Briefing`: how to enter that area, what dependencies and hotspots matter, and which local strategic
-questions to keep in mind. Keep both concise for narrow areas; do not treat them as filler.
+Per area, use both seriously:
+- local `Scenario` = specific user flow, workflow change, or operational consequence
+- local `Briefing` = entry points, dependencies, hotspots, and local strategic questions
+
+Keep them concise for narrow areas; do not treat them as filler.
 
 For substantial or multi-area changes, decompose into `Review Area` sections aligned with logical work areas,
-like `plan-task` subtasks. Each area should help the reviewer understand what it adds, changes, or removes and why.
+like `plan-task` subtasks. Each area should still make clear what it adds, changes, or removes and why.
 
 ## 1. Evidence modes
 
@@ -86,8 +84,8 @@ GitLab access path:
 The diff and implemented code are the source of truth.
 Provider text, discussion, and commit messages help interpret motivation, risks, and logical clusters.
 
-If provider-backed mode requested but required read-only commands fail, stop and ask: retry, 
-provide evidence manually, or fall back to Git-only mode.
+If provider-backed mode is requested but required read-only commands fail, stop and ask whether to
+retry, provide evidence manually, or fall back to Git-only mode.
 
 ### Git-only mode
 
@@ -163,9 +161,9 @@ Include concise supporting bullets:
 - whether major parts should be kept, simplified, split, deferred, or dropped
 - when recommending split: suggested first follow-up PR slice
 
-When verdict clear, say so clearly. When evidence mixed, differentiate accordingly. 
-Do not manufacture symmetry or invent offsetting pros/cons evidence does not support. 
-When recommending split, state explicitly and suggest most coherent/valuable/reviewable first slice.
+When the verdict is clear, say so clearly. When evidence is mixed, differentiate accordingly.
+Do not manufacture symmetry or invent offsetting pros/cons the evidence does not support.
+When recommending a split, state it explicitly and suggest the most coherent, valuable, and reviewable first slice.
 
 `Verification judgment`: outcome-level confidence from reconstructed `Test specification` — 
 what verification should exist, what evidence is present, how strong, whether sufficient for merge confidence.
@@ -181,14 +179,14 @@ Do not repeat overall verdict inside `Assessment` sections.
 For substantial or multi-area changes, review areas expected. Organize around logical work areas: 
 modules, features, layers, coherent commit clusters. Small single-area changes may use one global review.
 
-Global sections: PR-wide scope, motivation, cross-cutting context, overall assessment. 
-Global `Assessment` and `Review outcome`: judge whole PR's net benefit, net complexity shift, 
-whether major parts should be kept/simplified/split/deferred/dropped — 
-from two explicit perspectives: intent and implementation.
+Global sections cover PR-wide scope, motivation, cross-cutting context, and overall assessment.
+Global `Assessment` and `Review outcome` should judge the whole PR's net benefit, net complexity shift,
+and whether major parts should be kept, simplified, split, deferred, or dropped — from two explicit
+perspectives: intent and implementation.
 
-At global level, synthesize review areas; do not flatten into generic praise or criticism. 
-Make clear which areas are independently worth keeping, which should be narrowed, 
-which are justified only if disputed direction is accepted, which should be deferred or dropped.
+At the global level, synthesize review areas; do not flatten them into generic praise or criticism.
+Make clear which areas are independently worth keeping, which should be narrowed,
+which are justified only if a disputed direction is accepted, and which should be deferred or dropped.
 
 Place review areas after all global sections. Each must use:
 
@@ -201,7 +199,8 @@ Recommended area status values:
 - `needs-information`
 - `out-of-scope`
 
-Each review area: same section ordering as main review, ends with own `Assessment`, must make clear what area adds/changes/removes and why.
+Each review area uses the same section ordering as the main review, ends with its own `Assessment`,
+and should make clear what the area adds, changes, or removes and why.
 
 ## 5. Section mapping
 
@@ -211,13 +210,13 @@ boundaries, explicit non-goals. Reviewed change scope, not review activity scope
 clearly marked inference when explicit statements missing. Change motivation, not reason for performing review.
 - `Scenario` — reconstructed use cases, user flows, or operational situations reviewed work enables or changes.
 Global: include unless the PR is so narrowly technical that any scenario would be fake filler.
-Per area: use the same seriousness and explain the specific behavior, workflow, or operational change in that slice.
+Per area: explain the specific behavior, workflow, or operational change in that slice.
 - `Constraints` — explicit non-goals, compatibility limits, review boundaries, restrictions 
 found in change or provider discussion.
-- `Briefing` — reviewer onboarding and orientation; in provider-backed mode store full review URL here. 
-Global: main change areas, reading order, hotspots, strategic questions. 
-When recommending split, identify first follow-up PR slice here or in `Review outcome`. 
-Per area: how to enter, dependencies, hotspots, local strategic questions. 
+- `Briefing` — reviewer onboarding and orientation; in provider-backed mode store the full review URL here.
+Global: main change areas, reading order, hotspots, strategic questions.
+When recommending split, identify the first follow-up PR slice here or in `Review outcome`.
+Per area: how to enter, dependencies, hotspots, local strategic questions.
 When decomposed into areas, briefly explain why that decomposition was chosen.
 - `Research` — base state and bounded context reconstruction. 
 Start from changed files and changed symbols in diff. 
@@ -238,9 +237,9 @@ Explain which behaviors/contracts/regressions/integrations/boundaries/invariants
 what evidence is present, what is missing, whether tests appear sufficient, 
 whether assertions validate intended behavior vs. merely exercise code paths. 
 Apply both globally and per area. Global: distill into concise `Verification judgment` inside `Review outcome`.
-- `Assessment` — AI analytic findings, uncertainties, unresolved concerns, recommendations, 
-reviewer attention points, trade-off analysis. Overall verdict only in `Review outcome`. Use `Assessment` 
-to surface quality, risk, clarity, complexity, consistency, follow-up questions.
+- `Assessment` — AI analytic findings, uncertainties, unresolved concerns, recommendations,
+reviewer attention points, and trade-off analysis. Keep the overall verdict only in `Review outcome`.
+Use `Assessment` to surface quality, risk, clarity, complexity, consistency, and follow-up questions.
 
   Two explicit perspectives for global review and each area:
   - **Intent** — right thing to do? Problem worth solving this way? Intended benefits convincing?

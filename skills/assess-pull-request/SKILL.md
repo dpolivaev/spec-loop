@@ -12,9 +12,8 @@ description: >-
 Use for retrospective review of existing PR, MR, branch diff, or commit range.
 
 Before work: read `../plan-task/SKILL.md`, follow all files it requires, and apply the full `plan-task`
-skill bundle as shared convention guidance, including its glossary policy, diagram rules, and examples.
-Then read [review-guidance.md](./review-guidance.md).
-For a compact current-format example, see
+skill bundle as shared convention guidance. Then read [review-guidance.md](./review-guidance.md).
+Optional compact example:
 [examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
 Use it as a pattern collection for structure, area-wise outcome synthesis, and reconstructive
 `Test specification`, not as a required review size.
@@ -24,9 +23,8 @@ section semantics, `Review Area` behavior, assessment style, intent-vs-implement
 tone, translation rules, diagram rules, sharing variant behavior. 
 `SKILL.md` = orchestration/entry-point only, not second guidance doc.
 
-This skill reconstructs already-implemented work as a detailed human review-preparation artifact.
-Reconstruct the change as if retrospectively assembling the task file that should have existed under
-`plan-task`, then layer AI assessment and recommendations on top.
+Reconstruct already-implemented work as the retrospective `plan-task`-style review artifact that
+should have existed, then add AI assessment and recommendations.
 Do not treat the change as waiting at the normal PLAN -> IMPLEMENTATION gate.
 
 Use read-only provider commands for evidence when available:
