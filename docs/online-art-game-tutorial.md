@@ -58,7 +58,7 @@ Please use the `setup-task-and-glossary-rendering` skill to help me
 prepare my editor for reviewing rendered Spec Loop task files and
 glossary files.
 
-My coding harness may run in a terminal, but I review files in
+My coding tool may run in a terminal, but I review files in
 <VS Code or JetBrains>.
 ```
 
@@ -103,7 +103,7 @@ Tutorial-specific goals:
   - keeps the `setup-task-and-glossary-rendering` skill for later
     rendering help if needed.
 - Project setup:
-  - Spec Loop governance is available through the installed skills,
+  - Spec Loop workflow rules are available through the installed skills,
   - `tasks/` is used when task files are needed,
   - later glossary work uses the Spec Loop `glossary.adoc` format.
 - Tooling:
@@ -114,16 +114,16 @@ Tutorial-specific goals:
   - editor rendering support was prepared in B5 unless you knowingly
     skipped that step.
 - Verification:
-  - the LLM correctly restates the `PLAN -> IMPLEMENTATION` approval
+  - the assistant correctly restates the `PLAN -> IMPLEMENTATION` approval
     rule,
-  - the LLM can explain which skill it will use for planning, glossary
+  - the assistant can explain which skill it will use for planning, glossary
     work, and rendering setup.
 
 ### You learned (this step)
 
 - Setup is now package installation, with a separate
   editor-rendering step when needed.
-- The tutorial may be open in your browser while the LLM only sees the
+- The tutorial may be open in your browser while the assistant only sees the
   `museum-tutorial-project`, so prompts must still carry the context it
   needs.
 - This tutorial later uses public data from the Art Institute of
@@ -131,7 +131,7 @@ Tutorial-specific goals:
 
 ## If setup seems wrong
 
-1. Ask the LLM which installed skills are active.
+1. Ask the assistant which installed skills are active.
 2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
 3. If that still looks wrong, reinstall the skills with:
 
@@ -144,12 +144,12 @@ npx skills add dpolivaev/spec-loop -s '*' -y
    https://github.com/vercel-labs/skills.
 5. If `npx` is not available or does not help, copy the needed part of
    the `skills/` directory from
-   `https://github.com/dpolivaev/spec-loop` into the harness-specific
+   `https://github.com/dpolivaev/spec-loop` into the tool-specific
    skills directory.
-6. If the harness still does not automatically apply the expected
+6. If the tool still does not automatically apply the expected
    workflow, explicitly ask for the needed skill or see
    [README.md](../README.md#if-your-harness-does-not-automatically-apply-installed-skills).
-7. Continue only when the LLM clearly understands the setup and the
+7. Continue only when the assistant clearly understands the setup and the
    workflow rules.
 
 ## From here on
@@ -157,25 +157,25 @@ npx skills add dpolivaev/spec-loop -s '*' -y
 - each `You send` block is a prompt to adapt and send,
 - each `You see` block describes the expected outcome,
 - if you want to finish the tutorial in minimum time, send the next
-  prompt first and then read it and think about it while the LLM works,
-  because the LLM also needs time to act and respond,
-- validate progress from the LLM's chat output and the changed files
+  prompt first and then read it and think about it while the assistant works,
+  because the assistant also needs time to act and respond,
+- validate progress from the assistant's chat output and the changed files
   before continuing,
-- if the LLM misses a required setup, governance, glossary, or status
-  update, ask it to fix that before continuing,
+- if the assistant misses a required setup, project instructions, glossary,
+  or status update, ask it to fix that before continuing,
 - if the setup or workflow rules seem wrong, use the recovery steps
   above before continuing.
 
 ## Possible misalignment
 
-If one of these happens, interrupt the flow and ask the LLM to correct
+If one of these happens, interrupt the flow and ask the assistant to correct
 it before continuing:
 
 - it starts changing files or config before showing the plan and
   getting approval,
 - it cannot clearly explain which Spec Loop setup is active or restate
   the `PLAN -> IMPLEMENTATION` approval rule,
-- it ignores the installed governance,
+- it ignores the installed workflow rules,
 - it starts implementation before explicit approval,
 - unrelated changes are mixed into one subtask,
 - implementation changes are made without verification evidence,
@@ -230,10 +230,9 @@ Also create `glossary.adoc` from the approved project brief. It should
 define the canonical project terms needed for this tutorial and keep
 their wording consistent with the brief.
 
-Also update the active project governance entry point so it
-explicitly tells the LLM to read `README.md` and follow the
-"Project Brief" section there for project requirements unless I
-explicitly override it.
+Also update the active project instructions file so it explicitly
+tells the assistant to read `README.md` and follow the "Project Brief"
+section there for project requirements unless I explicitly override it.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -246,28 +245,28 @@ This is documentation-only work, we do not need a task file for it.
 - `glossary.adoc`:
   - Exists and defines the canonical project terms from the brief.
   - Uses wording consistent with the brief so later tasks can reuse it.
-- Project governance entry point:
-  - Explicitly points the LLM to [README.md](../README.md) as the
+- Project instructions file:
+  - Explicitly points the assistant to [README.md](../README.md) as the
     source of the project brief and requirements.
 
 ### After completion (commit)
 
-- After you accept this work item as done: ask the LLM to
-  `commit the README, glossary.adoc, and governance-entry changes`.
+- After you accept this work item as done: ask the assistant to
+  `commit the README, glossary.adoc, and instructions-file changes`.
 
 ### You learned (this step)
 
-- The LLM can create documentation, wire persistent instructions to the
-  canonical project brief, establish `glossary.adoc` as the project
-  vocabulary, and (after you accept it) commit without creating a task
-  file.
+- The assistant can create documentation, add lasting instructions that
+  point to the project brief, establish `glossary.adoc` as the
+  project vocabulary, and (after you accept it) commit without
+  creating a task file.
 
 ## Step 3: Museum Overview Page (`site/index.html`) + Just-Enough API Research
 
 Optional note: Playwright MCP or Playwright CLI can be helpful later if
-you want the LLM to navigate, check, and debug the web pages and
-scripts it produces. Depending on your harness, you can discuss with
-the LLM whether to install one of them now or later. Playwright MCP:
+you want the assistant to navigate, check, and debug the web pages and
+scripts it produces. Depending on your tool, you can discuss with the
+assistant whether to install one of them now or later. Playwright MCP:
 https://github.com/microsoft/playwright-mcp#getting-started
 This is helpful, but not important for finishing the tutorial.
 
@@ -290,19 +289,20 @@ Once the sibling checkout is available, continue with the next step.
 ### You see
 
 - `../data-aggregator` exists as a sibling checkout.
-- If the LLM had enough access, it performed the clone itself.
-- If the clone could not be performed automatically, the LLM stopped and
+- If the assistant had enough access, it performed the clone itself.
+- If the clone could not be performed automatically, the assistant stopped and
   told you exactly what to do before continuing.
 
 ### You send
 
 ```text
 A sibling `data-aggregator` checkout exists at `../data-aggregator`
-relative to this repo root (parallel directory, not inside this repo).
-Use it for reverse engineering only.
+relative to this repository root (parallel directory, not inside this repository).
+Use it for reference only.
 
-After the correct location is confirmed, add it to the active project
-governance entry point so future work can reuse it without re-asking.
+After the correct location is confirmed, add it to the active
+project instructions file so future work can reuse it without
+re-asking.
 
 Let us work on the museum overview page in this repository by creating
 `site/index.html`.
@@ -323,20 +323,20 @@ Requirements:
 
 - Chat: reports that a task file was created automatically and asks for
   explicit implementation approval.
-- Governance: the active project governance entry point is updated to
+- Instructions: the active project instructions file is updated to
   record the confirmed sibling `data-aggregator` path.
 - Task file:
   - Contains Scope, Motivation, Research, Design, and Test specification
     (and other required sections, for example Scenario when applicable).
   - Research includes curl verification evidence and practical rules
     needed for the museum page (including image URL rules) and any
-    relevant reverse engineering notes from `data-aggregator`.
+    relevant reference notes from `data-aggregator`.
 
 Approve only after the task definition looks correct.
-If the LLM does not create the task automatically, the task content
+If the assistant does not create the task automatically, the task content
 does not have the required form, or embedded PlantUML does not render
 correctly, correct it before approving anything.
-If needed, send the error text or a screenshot and ask the LLM to fix
+If needed, send the error text or a screenshot and ask the assistant to fix
 the diagram.
 
 ### You see (after implementation is completed)
@@ -348,7 +348,7 @@ the diagram.
 
 ### After completion (move to done / commit)
 
-- After you accept this work item as done: tell the LLM 
+- After you accept this work item as done: tell the assistant 
   `move the task to done and commit`.
 
 ### You learned (this step)
@@ -356,44 +356,47 @@ the diagram.
 - Implementation starts only after explicit approval and is verified with
   concrete evidence.
 
-For all work items below that include implementation: the LLM is
-expected to follow the Constitution automatically; "manual control" is
-the exception. If the LLM starts implementation before planning and
-explicit approval boundaries, or over-designs future work too early,
-first check whether it remembers the Constitution (for example ask it
-to restate the PLAN -> IMPLEMENTATION approval gate), then tell it to
-stop and follow the Constitution strictly.
+For all work items below that include implementation: the assistant is
+expected to follow the Spec Loop workflow rules automatically; direct
+manual guidance is the exception. If the assistant starts implementation
+before planning and explicit approval boundaries, or over-designs
+future work too early, first check whether it remembers the workflow
+rules (for example ask it to restate the PLAN -> IMPLEMENTATION
+approval gate), then tell it to stop and follow those workflow rules
+strictly.
 
-## Step 4: ADR for Game Stack and Core Design Style
+## Step 4: Architecture Decision Record (ADR) for Game Stack and Core Design Style
 
-This step is intentionally more explicit than many real MVP prompts.
-Its purpose is to demonstrate architectural decision capture, tooling
-selection, reviewable design expectations, and later task alignment in
-a single example. In a smaller or lower-risk project, a lighter ADR
-prompt may be sufficient.
+This step is intentionally more explicit than many real prompts for
+an initial implementation. Its purpose is to demonstrate architectural
+decision capture, tooling selection, reviewable design expectations,
+and later task alignment in a single example. In a smaller or
+lower-risk project, a lighter ADR prompt may be sufficient.
 
 ### You send
 
 ```text
-Please create one ADR for MVP stack selection and core design style for
-the game implementation in `architecture-decisions/`.
+Please create one ADR for stack selection and core design style for the
+initial game implementation in `architecture-decisions/`.
 
-First discuss the criteria with me. We want an MVP stack and design
-approach that support a clean, layered, class-based design: the game
-rules should live in explicit domain classes, should not be tied to the
-UI, the design should stay visible and reviewable with a class diagram,
-and most core logic should be testable without the browser.
-Persistence stack decisions are deferred.
+First discuss the criteria with me. We want a stack and design approach
+for the initial game implementation that support a clean, layered,
+class-based design: the game rules should live in explicit domain
+classes, should not be tied to the UI, the design should stay visible
+and reviewable with a class diagram, and most core logic should be
+testable without the browser. Persistence stack decisions are deferred.
 
-Then compare 3-5 realistic MVP stack options with pros and cons. Include
-at least one simpler option and at least one option that is a strong fit
-for clean or hexagonal architecture.
+Then compare 3-5 realistic stack options for the initial game
+implementation with pros and cons. Include at least one simpler option
+and at least one option that is a strong fit for clean or hexagonal
+architecture.
 
 Record one final choice with rationale. In the same ADR:
 - define the practical test tooling
 - define the exact test command(s)
 - define the browser-based tooling for gameplay and design checks
-- define the expected high-level architecture for the MVP
+- define the expected high-level architecture for the initial game
+  implementation
 - require a class-based core design with explicit domain classes and
   clear UI-adapter boundaries
 - state that later task Design should be reviewable with a class
@@ -407,13 +410,14 @@ Record one final choice with rationale. In the same ADR:
 
 - Chat: discusses decision criteria before presenting the final ADR.
 - ADR:
-  - Compares realistic MVP stack options and records the chosen one with rationale.
+  - Compares realistic stack options for the initial game implementation and records the chosen one with rationale.
   - Records the required core design style, not only the implementation stack.
   - Explains the choice in terms of clean/layered class-based design,
     not only implementation speed.
   - Includes test tooling and the exact test command(s).
   - Includes browser-based tooling for gameplay and design checks.
-  - Defines the expected high-level architecture for the MVP.
+  - Defines the expected high-level architecture for the initial game
+    implementation.
   - Requires explicit domain classes for core gameplay logic and clear
     boundaries to UI/browser code.
   - Makes later class-diagram-based design review an explicit
@@ -422,7 +426,7 @@ Record one final choice with rationale. In the same ADR:
 
 ### After completion (commit)
 
-- After you accept the ADR as done: ask the LLM to `commit the ADR change`.
+- After you accept the ADR as done: ask the assistant to `commit the ADR change`.
   This step is ADR-only and does not involve moving anything to `done`.
 
 ### You learned (this step)
@@ -436,7 +440,7 @@ Record one final choice with rationale. In the same ADR:
 
 ```text
 Starting point: reuse relevant AIC API research already recorded in
-this repo and follow the ADR.
+this repository and follow the ADR.
 
 Let us work on core gameplay in this repository.
 
@@ -467,13 +471,13 @@ subtask. Create only:
 ### Subtask-by-subtask workflow
 
 - Review the task header and the task breakdown first.
-- If the breakdown needs adjustment, ask the LLM to revise it before any
-  implementation starts.
-- If it looks good, ask the LLM to `completely design only the first subtask`.
-- Review that current-subtask detail. If it looks good, ask the LLM to
+- If the breakdown needs adjustment, ask the assistant to revise it before
+  any implementation starts.
+- If it looks good, ask the assistant to `fully design only the first subtask`.
+- Review that current subtask detail. If it looks good, ask the assistant to
   `implement only that subtask`.
 - After each implemented subtask, either ask for changes or accept it
-  and ask the LLM to `move it to done`.
+  and ask the assistant to `move it to done`.
 - Then ask it to `create a separate commit` and only after that ask it to
   `design the next subtask`.
 
@@ -496,7 +500,7 @@ subtask. Create only:
   task is moved to `done` only after the last subtask is done.
 - Code: game is reachable from `site/index.html` and playable (after
   relevant subtasks complete).
-- `glossary.adoc`: expands to cover the gameplay-core
+- `glossary.adoc`: expands to cover the core gameplay
   terms introduced by the implementation and links those terms to the
   relevant code.
 
@@ -535,17 +539,17 @@ language.
   - exists with ordered implementation subtasks,
   - keeps future implementation subtasks lightweight,
   - requires a separate persistence ADR before persistence
-    implementation is fleshed out.
+    implementation is fully designed.
 
 ### You send
 
 ```text
-Please flesh out only the in-memory leaderboard subtask.
+Please fully design only the in-memory leaderboard subtask.
 ```
 
 ### You see (in-memory subtask design)
 
-- Task file: the in-memory leaderboard subtask is fleshed out; future
+- Task file: the in-memory leaderboard subtask is fully designed; future
   implementation subtasks remain lightweight.
 
 ### You send
@@ -575,7 +579,7 @@ commands.
 
 - ADR: records the chosen persistence approach, storage location
   expectations, reset procedure expectations, and practical verification
-  commands before the persistence implementation subtask is fleshed out.
+  commands before the persistence implementation subtask is fully designed.
 
 ### You send
 
@@ -585,7 +589,7 @@ Please design the remaining subtask.
 
 ### You see (persistence subtask design)
 
-- Task file: the persistence implementation subtask is fleshed out.
+- Task file: the persistence implementation subtask is fully designed.
 
 ### You send
 
@@ -605,11 +609,11 @@ Implement it.
 ### After completion (move to done / commit)
 
 - After you accept the in-memory leaderboard subtask as done: ask the
-  LLM to move it to `done`, then commit.
-- After you accept the persistence ADR: ask the LLM to commit the ADR
+  assistant to move it to `done`, then commit.
+- After you accept the persistence ADR: ask the assistant to commit the ADR
   change.
 - After you accept the persistence implementation subtask as done: ask
-  the LLM to move that subtask and the overall task to `done`, then
+  the assistant to move that subtask and the overall task to `done`, then
   commit.
 
 ### You learned (this step)
@@ -620,35 +624,35 @@ Implement it.
 
 ## You learned
 
-Each step follows the Constitution interaction model:
+Each step follows the Spec Loop workflow model:
 
-- In chat, you ask the LLM to work on a feature or durable design
+- In chat, you ask the assistant to work on a feature or long-lived design
   decision.
-- For implementation work, the LLM should create the needed task
+- For implementation work, the assistant should create the needed task
   automatically before making executable changes.
 - For larger tasks, the first planning pass may stop at the task
   header and an ordered subtask breakdown; only the current subtask is
-  fleshed out in detail before implementation.
+  designed in detail before implementation.
 - You approve or reject implementation explicitly.
-- Only after explicit approval should the LLM make executable changes
+- Only after explicit approval should the assistant make executable changes
   (code/tests/config/runtime assets).
 - Tasks should include automated tests for their deliverables.
-- In large implementation steps, ask the LLM to decompose work into
+- In large implementation steps, ask the assistant to decompose work into
   smaller implementation subtasks before detailed design and
   implementation approval.
 - Every implementation subtask includes both implementation and testing.
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
-- If the LLM plans too much, skips needed artifact updates, or starts
+- If the assistant plans too much, skips needed file updates, or starts
   implementation too early, correct it and ask it to return to the
   expected workflow.
-- After you explicitly accept a work item as `done`, ask the LLM to
+- After you explicitly accept a work item as `done`, ask the assistant to
   commit before moving on.
 - Depending on your tool, you may be asked to confirm the commit
   command (review the commit message there), or the commit may happen
   immediately (review the commit message right after). If it does not
   match the work item's purpose, or it is misleading about what
-  changed, ask the LLM to improve the message and amend the commit.
+  changed, ask the assistant to improve the message and amend the commit.
 - When a step is implemented via subtasks: move the overall task to
   `done` only after the last subtask is done.
 
@@ -661,12 +665,13 @@ Learning outcomes:
 How to think while running this tutorial:
 
 - Keep the process meaningful, not bureaucratic.
-- Low-risk, non-behavioral housekeeping may be done and (after you
-  accept it) you can ask the LLM to commit it as part of a step when
-  appropriate (for example: `.gitignore`, documentation typo fixes).
-- Chat is for coordination and approvals; task files and ADRs are the
-  durable specification artifacts.
+- Low-risk, small cleanup that does not change behavior may be done
+  and (after you accept it) you can ask the assistant to commit it as part
+  of a step when appropriate (for example: `.gitignore`,
+  documentation typo fixes).
+- Chat is for coordination and approvals; task files and ADRs are
+  the long-lived specification files.
 - Trust the installed skills to choose the workflow, and correct the
-  LLM explicitly if it skips planning, over-designs future work, or
-  misses a required artifact update.
-- Only the user may relax or override Constitution workflow rules.
+  assistant explicitly if it skips planning, over-designs future work, or
+  misses a required file update.
+- Only the user may relax or override these workflow rules.

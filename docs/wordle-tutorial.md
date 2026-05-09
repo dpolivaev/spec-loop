@@ -55,7 +55,7 @@ Please use the `setup-task-and-glossary-rendering` skill to help me
 prepare my editor for reviewing rendered Spec Loop task files and
 glossary files.
 
-My coding harness may run in a terminal, but I review files in
+My coding tool may run in a terminal, but I review files in
 <VS Code or JetBrains>.
 ```
 
@@ -101,7 +101,7 @@ Tutorial-specific goals:
   - keeps the `setup-task-and-glossary-rendering` skill for later
     rendering help if needed.
 - Project setup:
-  - Spec Loop governance is available through the installed skills,
+  - Spec Loop workflow rules are available through the installed skills,
   - `tasks/` is used when task files are needed,
   - later glossary work uses the Spec Loop `glossary.adoc` format.
 - Tooling:
@@ -113,23 +113,23 @@ Tutorial-specific goals:
   - editor rendering support was prepared in B5 unless you knowingly
     skipped that step.
 - Verification:
-  - the LLM correctly restates the `PLAN -> IMPLEMENTATION` approval
+  - the assistant correctly restates the `PLAN -> IMPLEMENTATION` approval
     rule,
-  - the LLM can explain which skill it will use for planning, glossary
+  - the assistant can explain which skill it will use for planning, glossary
     work, and rendering setup.
 
 ### You learned (this step)
 
 - Setup is now package installation, with a separate
   editor-rendering step when needed.
-- The tutorial may be open in your browser while the LLM only sees the
+- The tutorial may be open in your browser while the assistant only sees the
   `wordle-tutorial-project`, so prompts must still carry the context it
   needs.
 - This tutorial does not need browser automation setup.
 
 ## If setup seems wrong
 
-1. Ask the LLM which installed skills are active.
+1. Ask the assistant which installed skills are active.
 2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
 3. If that still looks wrong, reinstall the skills with:
 
@@ -142,12 +142,12 @@ npx skills add dpolivaev/spec-loop -s '*' -y
    https://github.com/vercel-labs/skills.
 5. If `npx` is not available or does not help, copy the needed part of
    the `skills/` directory from
-   `https://github.com/dpolivaev/spec-loop` into the harness-specific
+   `https://github.com/dpolivaev/spec-loop` into the tool-specific
    skills directory.
-6. If the harness still does not automatically apply the expected
+6. If the tool still does not automatically apply the expected
    workflow, explicitly ask for the needed skill or see
    [README.md](../README.md#if-your-harness-does-not-automatically-apply-installed-skills).
-7. Continue only when the LLM clearly understands the setup and the
+7. Continue only when the assistant clearly understands the setup and the
    workflow rules.
 
 ## From here on
@@ -155,25 +155,25 @@ npx skills add dpolivaev/spec-loop -s '*' -y
 - each `You send` block is a prompt to adapt and send,
 - each `You see` block describes the expected outcome,
 - if you want to finish the tutorial in minimum time, send the next
-  prompt first and then read it and think about it while the LLM works,
-  because the LLM also needs time to act and respond,
-- validate progress from the LLM's chat output and the changed files
+  prompt first and then read it and think about it while the assistant works,
+  because the assistant also needs time to act and respond,
+- validate progress from the assistant's chat output and the changed files
   before continuing,
-- if the LLM misses a required setup, governance, glossary, or status
-  update, ask it to fix that before continuing,
+- if the assistant misses a required setup, project instructions, glossary,
+  or status update, ask it to fix that before continuing,
 - if the setup or workflow rules seem wrong, use the recovery steps
   above before continuing.
 
 ## Possible misalignment
 
-If one of these happens, interrupt the flow and ask the LLM to correct
+If one of these happens, interrupt the flow and ask the assistant to correct
 it before continuing:
 
 - it starts changing files or config before showing the plan and
   getting approval,
 - it cannot clearly explain which Spec Loop setup is active or restate
   the `PLAN -> IMPLEMENTATION` approval rule,
-- it ignores the installed governance,
+- it ignores the installed workflow rules,
 - it starts implementation before explicit approval,
 - unrelated changes are mixed into one subtask,
 - implementation changes are made without verification evidence,
@@ -225,10 +225,9 @@ Also create `glossary.adoc` from the approved project brief. It should
 define the canonical project terms needed for this tutorial and keep
 their wording consistent with the brief.
 
-Also update the active project governance entry point so it
-explicitly tells the LLM to read `README.md` and follow the
-"Project Brief" section there for project requirements unless I
-explicitly override it.
+Also update the active project instructions file so it explicitly
+tells the assistant to read `README.md` and follow the "Project Brief"
+section there for project requirements unless I explicitly override it.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -241,20 +240,20 @@ This is documentation-only work, we do not need a task file for it.
 - `glossary.adoc`:
   - exists and defines the canonical project terms from the brief,
   - uses wording consistent with the brief so later tasks can reuse it.
-- Project governance entry point:
-  - explicitly points the LLM to [README.md](../README.md) as the
+- Project instructions file:
+  - explicitly points the assistant to [README.md](../README.md) as the
     source of the project brief and requirements.
 
 ### After completion (commit)
 
 - After you accept this work item as done:
-  ask the LLM to `commit the README, glossary.adoc, and governance-entry changes`.
+  ask the assistant to `commit the README, glossary.adoc, and instructions-file changes`.
 
 ### You learned (this step)
 
-- The LLM can create documentation, wire persistent instructions to the
-  canonical project brief, and establish `glossary.adoc` as the project
-  vocabulary without creating a task file.
+- The assistant can create documentation, add lasting instructions that
+  point to the project brief, and establish `glossary.adoc` as the
+  project vocabulary without creating a task file.
 
 ## Step 3: Gradle Java project setup
 
@@ -286,12 +285,12 @@ The scope must include:
     only when explicitly preferred).
 
 Approve only after the task definition looks correct.
-If the LLM does not create the task automatically, the task content
+If the assistant does not create the task automatically, the task content
 does not have the required form, or embedded PlantUML does not render
 correctly, correct it before approving anything.
-If needed, send the error text or a screenshot and ask the LLM to fix
+If needed, send the error text or a screenshot and ask the assistant to fix
 the diagram.
-Then ask the LLM to `implement it`.
+Then ask the assistant to `implement it`.
 
 ### You see (after implementation is completed)
 
@@ -303,7 +302,7 @@ Then ask the LLM to `implement it`.
 ### After completion (move to done / commit)
 
 - After you accept this work item as done:
-  tell the LLM to `move the task to done and commit`.
+  tell the assistant to `move the task to done and commit`.
 
 ### You learned (this step)
 
@@ -319,7 +318,7 @@ Let us work on the Wordle domain model and evaluation rules in this
 repository.
 
 The scope must include:
-- UI-agnostic domain objects for words and feedback,
+- domain objects for words and feedback that are not tied to the UI,
 - deterministic duplicate-aware letter evaluation,
 - immutable model boundaries suitable for later engine and interface
   work.
@@ -344,14 +343,14 @@ subtask. Create only:
 ### Subtask-by-subtask workflow
 
 - Review the task header and the task breakdown first.
-- If the breakdown needs adjustment, ask the LLM to revise it before
+- If the breakdown needs adjustment, ask the assistant to revise it before
   any implementation starts.
-- If it looks good, ask the LLM to
-  `completely design only the first subtask`.
-- Review that current-subtask detail.
-  If it looks good, ask the LLM to `implement only that subtask`.
+- If it looks good, ask the assistant to
+  `fully design only the first subtask`.
+- Review that current subtask detail.
+  If it looks good, ask the assistant to `implement only that subtask`.
 - After each implemented subtask, either ask for changes or accept it
-  and ask the LLM to `move it to done`.
+  and ask the assistant to `move it to done`.
 - Then ask it to `create a separate commit` and only after that ask it
   to `design the next subtask`.
 
@@ -377,9 +376,9 @@ subtask. Create only:
 ### After completion (move to done / commit)
 
 - After you accept the first subtask as done:
-  ask the LLM to move that subtask to `done`, then commit.
+  ask the assistant to move that subtask to `done`, then commit.
 - After you accept the second subtask as done:
-  ask the LLM to move that subtask and the overall task to `done`,
+  ask the assistant to move that subtask and the overall task to `done`,
   then commit.
 
 ### You learned (this step)
@@ -416,7 +415,7 @@ The scope must include:
   - defines concrete automated tests for loader behavior.
 
 Approve only after the task definition looks correct.
-Then ask the LLM to `implement it`.
+Then ask the assistant to `implement it`.
 
 ### You see (after implementation is completed)
 
@@ -424,13 +423,13 @@ Then ask the LLM to `implement it`.
 - Loader code exists and returns validated words from the packaged list.
 - Tests prove header parsing, normalization, and selection behavior.
 - If the loader work stabilizes a shared term such as `Word List` and
-  the glossary was not updated, ask the LLM to add that missing glossary
+  the glossary was not updated, ask the assistant to add that missing glossary
   update before accepting the step.
 
 ### After completion (move to done / commit)
 
 - After you accept this work item as done:
-  tell the LLM `move the task to done, commit`.
+  tell the assistant `move the task to done, commit`.
 
 ### You learned (this step)
 
@@ -473,8 +472,8 @@ Break the work down into these subtasks:
 ### Subtask-by-subtask workflow
 
 - Review the task header and breakdown first.
-- If it looks good, ask the LLM to
-  `completely design only the first subtask`.
+- If it looks good, ask the assistant to
+  `fully design only the first subtask`.
 - Review that design and, if acceptable, ask it to
   `implement only that subtask`.
 - Accept, move to `done`, and commit before asking for the next
@@ -492,9 +491,9 @@ Break the work down into these subtasks:
 ### After completion (move to done / commit)
 
 - After you accept the first subtask as done:
-  ask the LLM to move that subtask to `done`, then commit.
+  ask the assistant to move that subtask to `done`, then commit.
 - After you accept the second subtask as done:
-  ask the LLM to move that subtask and the overall task to `done`,
+  ask the assistant to move that subtask and the overall task to `done`,
   then commit.
 
 ### You learned (this step)
@@ -527,7 +526,7 @@ The scope must include:
   - includes concrete verification for the full test suite.
 
 Approve only after the task definition looks correct.
-Then ask the LLM to `implement it`.
+Then ask the assistant to `implement it`.
 
 ### You see (after implementation is completed)
 
@@ -538,14 +537,14 @@ Then ask the LLM to `implement it`.
 ### After completion (move to done / commit)
 
 - After you accept this work item as done:
-  tell the LLM `move the task to done, commit`.
+  tell the assistant `move the task to done, commit`.
 
 ### You learned (this step)
 
 - Technical cleanup that changes build configuration and tests is still
   implementation work and still needs a task, verification, and review.
 
-## Step 8: ADR for CLI argument parsing
+## Step 8: Architecture Decision Record (ADR) for CLI argument parsing
 
 ### You send
 
@@ -584,12 +583,12 @@ or basic option parsing path.
 ### After completion (commit)
 
 - After you accept the ADR as done:
-  ask the LLM to `commit the ADR change`.
+  ask the assistant to `commit the ADR change`.
 
 ### You learned (this step)
 
-- ADRs are useful for durable tooling or design choices that should not
-  be rediscovered inside a later implementation task.
+- ADRs are useful for long-lived tooling or design choices that
+  should not be rediscovered inside a later implementation task.
 
 ## Step 9: CLI game interface
 
@@ -628,10 +627,10 @@ Break the implementation work down in this order:
 ### Subtask-by-subtask workflow
 
 - Review the overall task and ordered subtasks first.
-- Ask the LLM to `completely design only the first subtask`.
-- Review that current-subtask design.
-  If it looks correct, ask the LLM to `implement only that subtask`.
-- After each accepted subtask, ask the LLM to move it to `done`, then
+- Ask the assistant to `fully design only the first subtask`.
+- Review that current subtask design.
+  If it looks correct, ask the assistant to `implement only that subtask`.
+- After each accepted subtask, ask the assistant to move it to `done`, then
   create a separate commit before moving to the next subtask.
 
 ### You see (during subtask implementation)
@@ -647,9 +646,9 @@ Break the implementation work down in this order:
 ### After completion (move to done / commit)
 
 - After each accepted subtask:
-  ask the LLM to move that subtask to `done`, then commit.
+  ask the assistant to move that subtask to `done`, then commit.
 - After you accept the final subtask as done:
-  ask the LLM to move the overall task to `done`, then commit.
+  ask the assistant to move the overall task to `done`, then commit.
 
 ### You learned (this step)
 
@@ -693,10 +692,10 @@ Break the implementation work down in this order:
 ### Subtask-by-subtask workflow
 
 - Review the task header and the breakdown first.
-- Ask the LLM to `completely design only the first subtask`.
+- Ask the assistant to `fully design only the first subtask`.
 - Review that design and, if acceptable, ask it to
   `implement only that subtask`.
-- After each accepted subtask, ask the LLM to move it to `done`, then
+- After each accepted subtask, ask the assistant to move it to `done`, then
   create a separate commit before moving on.
 
 ### You see (during subtask implementation)
@@ -710,9 +709,9 @@ Break the implementation work down in this order:
 ### After completion (move to done / commit)
 
 - After each accepted subtask:
-  ask the LLM to move that subtask to `done`, then commit.
+  ask the assistant to move that subtask to `done`, then commit.
 - After you accept the final subtask as done:
-  ask the LLM to move the overall task to `done`, then commit.
+  ask the assistant to move the overall task to `done`, then commit.
 
 ### You learned (this step)
 
@@ -721,35 +720,35 @@ Break the implementation work down in this order:
 
 ## You learned
 
-Each step follows the Constitution interaction model:
+Each step follows the Spec Loop workflow model:
 
-- In chat, you ask the LLM to work on a feature, approved
-  documentation change, or durable design decision.
-- For implementation work, the LLM should create the needed task
+- In chat, you ask the assistant to work on a feature, approved
+  documentation change, or long-lived design decision.
+- For implementation work, the assistant should create the needed task
   automatically before making executable changes.
 - For larger tasks, the first planning pass may stop at the task
   header and an ordered subtask breakdown; only the current subtask is
-  fleshed out in detail before implementation.
+  designed in detail before implementation.
 - You approve or reject implementation explicitly.
-- Only after explicit approval should the LLM make executable changes.
+- Only after explicit approval should the assistant make executable changes.
 - Tasks should include automated tests for their deliverables.
 - Every implementation subtask includes both implementation and
   testing.
 - When subtasks exist, require separate status updates per subtask.
 - If `glossary.adoc` exists, later planning and implementation must
   keep it aligned with the approved shared terms.
-- Use ADRs for durable decisions such as the CLI parsing approach,
+- Use ADRs for long-lived decisions such as the CLI parsing approach,
   then make later tasks follow that decision.
-- If the LLM plans too much, skips needed artifact updates, or starts
+- If the assistant plans too much, skips needed file updates, or starts
   implementation too early, correct it and ask it to return to the
   expected workflow.
-- After you explicitly accept a work item as `done`, ask the LLM to
+- After you explicitly accept a work item as `done`, ask the assistant to
   commit before moving on.
 
 Learning outcomes:
 
 - Keep task and subtask scopes small and reviewable.
-- Use ADRs for durable decisions and tasks for incremental delivery.
+- Use ADRs for long-lived decisions and tasks for incremental delivery.
 - Use the glossary as the stable shared language across the project.
 - Verify behavior using concrete evidence, not assumptions.
 
@@ -757,8 +756,8 @@ How to think while running this tutorial:
 
 - Keep the process meaningful, not bureaucratic.
 - Chat is for coordination and approvals; task files and the glossary
-  are the durable specification artifacts.
+  are the long-lived specification files.
 - Trust the installed skills to choose the workflow, and correct the
-  LLM explicitly if it skips planning, over-designs future work, or
-  misses a required artifact update.
-- Only the user may relax or override Constitution workflow rules.
+  assistant explicitly if it skips planning, over-designs future work, or
+  misses a required file update.
+- Only the user may relax or override these workflow rules.
