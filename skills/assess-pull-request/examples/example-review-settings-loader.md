@@ -1,17 +1,17 @@
 # Review: Settings loader extraction, validation, and preview server
 - **Ticket:** github:example/acme-widget#42
 - **Review outcome:** request changes
-  - Intent judgment:
+  - Intent:
     - Independently justified keep candidate:
       - settings loader extraction and schema normalization
     - Conditionally justified area:
       - stricter validation, if migration for existing users and failure policy are clarified
     - Dependent on a disputed direction:
       - embedded preview server, which should wait for explicit product and security agreement
-  - Implementation judgment:
+  - Implementation:
     - The loader extraction is coherent, but the branch couples it to a breaking validation change
       and a default-enabled preview server.
-  - Verification judgment:
+  - Verification:
     - Unit tests cover parser happy paths and invalid-key rejection.
     - Missing evidence remains for migration compatibility, disabled-server startup, and end-to-end
       preview behavior.

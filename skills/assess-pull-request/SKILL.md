@@ -19,8 +19,8 @@ Use it as a pattern collection for structure, area-wise outcome synthesis, and r
 `Test specification`, not as a required review size.
 
 `review-guidance.md` = authoritative source for review purpose, evidence, file structure, 
-section semantics, `Review Area` behavior, assessment style, intent-vs-implementation analysis, 
-tone, translation rules, diagram rules, sharing variant behavior. 
+section semantics, `Review outcome` labels, `Review Area` behavior, assessment style, 
+intent-vs-implementation analysis, tone, translation rules, diagram rules, sharing variant behavior. 
 `SKILL.md` = orchestration/entry-point only, not second guidance doc.
 
 Reconstruct already-implemented work as the retrospective `plan-task`-style review artifact that

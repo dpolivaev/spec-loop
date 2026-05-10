@@ -145,9 +145,9 @@ Exact order and layout:
 - `do not merge`
 
 Include concise supporting bullets:
-- `Intent judgment`
-- `Implementation judgment`
-- `Verification judgment`
+- `Intent`
+- `Implementation`
+- `Verification`
 - blockers
 - required improvements
 - non-blocking improvements
@@ -165,10 +165,13 @@ When the verdict is clear, say so clearly. When evidence is mixed, differentiate
 Do not manufacture symmetry or invent offsetting pros/cons the evidence does not support.
 When recommending a split, state it explicitly and suggest the most coherent, valuable, and reviewable first slice.
 
-`Verification judgment`: outcome-level confidence from reconstructed `Test specification` — 
+Use review-visible labels `Intent`, `Implementation`, and `Verification`.
+Each of those bullets should contain a concise judgment/conclusion on that axis.
+
+`Verification`: outcome-level confidence from reconstructed `Test specification` —
 what verification should exist, what evidence is present, how strong, whether sufficient for merge confidence.
 
-`Intent judgment`: not generic aggregate praise when areas differ materially. Summarize area by area: 
+`Intent`: not generic aggregate praise when areas differ materially. Summarize area by area:
 independently justified, conditionally justified, depends on disputed direction, defer or drop.
 
 When refactoring mainly serves a questioned direction, say so. Do not recommend keeping it merely because 
@@ -236,7 +239,7 @@ executed commands, coverage gaps, missing evidence. Not a list of test classes o
 Explain which behaviors/contracts/regressions/integrations/boundaries/invariants should be covered, 
 what evidence is present, what is missing, whether tests appear sufficient, 
 whether assertions validate intended behavior vs. merely exercise code paths. 
-Apply both globally and per area. Global: distill into concise `Verification judgment` inside `Review outcome`.
+Apply both globally and per area. Global: distill into concise `Verification` inside `Review outcome`.
 - `Assessment` — AI analytic findings, uncertainties, unresolved concerns, recommendations,
 reviewer attention points, and trade-off analysis. Keep the overall verdict only in `Review outcome`.
 Use `Assessment` to surface quality, risk, clarity, complexity, consistency, and follow-up questions.
