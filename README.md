@@ -112,6 +112,11 @@ Apply the process to your repository.
 
 Recommended path:
 
+Install the full Spec Loop skill bundle together. Several skills hand
+off to each other, reuse the shared `plan-task` bundle, or support
+review of the same artifacts, so piecemeal installation leaves the
+workflow incomplete.
+
 1. Ensure Node.js is available so `npx` works.
 2. Install all Spec Loop skills for the current project, non-interactively:
 
@@ -164,8 +169,10 @@ npx skills update -g
 
 ### Manual fallback when `npx` is unavailable
 
-If `npx` is not available, clone or download this repository and copy the
-needed skill directories from `skills/` into your agent's skills directory.
+If `npx` is not available, clone or download this repository and copy all
+shipped Spec Loop skill directories from `skills/` into your agent's
+skills directory. Do not cherry-pick only a subset: the skills are
+intended to work together.
 
 Which directory your agent uses is agent-specific. See
 https://github.com/vercel-labs/skills for agent-specific installation details.
@@ -192,23 +199,32 @@ context alone.
 
 ## Included Skills
 
-This repository currently ships these skills:
+This repository currently ships these skills.
+They are interdependent and should be installed together because they
+share one workflow and the same task, glossary, review, and rendering
+artifacts:
 
 1. **`plan-task`**
-   - the planning and readiness-check skill for task-based work;
+   - the drafting and task-administration skill for task-based work;
    - defined by
      [skills/plan-task/constitution.md](skills/plan-task/constitution.md).
 
-2. **`write-glossary`**
+2. **`prepare-task-for-implementation-approval`**
+   - the mandatory approval-preparation skill used before the agent asks
+     for implementation approval within the `plan-task` workflow;
+   - defined by
+     [skills/prepare-task-for-implementation-approval/implementation-approval-guidance.md](skills/prepare-task-for-implementation-approval/implementation-approval-guidance.md).
+
+3. **`write-glossary`**
    - the Spec Loop AsciiDoc glossary-format skill;
    - defined by
      [skills/write-glossary/glossary-format.md](skills/write-glossary/glossary-format.md).
 
-3. **`setup-task-and-glossary-rendering`**
+4. **`setup-task-and-glossary-rendering`**
    - the setup and troubleshooting skill for rendering task files and
      glossary files.
 
-4. **`assess-pull-request`**
+5. **`assess-pull-request`**
    - the retrospective review skill for existing pull requests, branch
      diffs, or commit ranges;
    - defined by

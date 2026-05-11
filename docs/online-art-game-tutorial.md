@@ -98,6 +98,8 @@ Tutorial-specific goals:
   - confirms that the installed Spec Loop setup is available,
   - automatically applies the `plan-task` skill as the mandatory
     planning skill for non-trivial work,
+  - notes that before implementation approval the workflow also uses
+    `prepare-task-for-implementation-approval`,
   - explains that the `write-glossary` skill will be used for the
     tutorial's `glossary.adoc` work,
   - keeps the `setup-task-and-glossary-rendering` skill for later
@@ -114,10 +116,10 @@ Tutorial-specific goals:
   - editor rendering support was prepared in B5 unless you knowingly
     skipped that step.
 - Verification:
-  - the assistant correctly restates the `PLAN -> IMPLEMENTATION` approval
-    rule,
-  - the assistant can explain which skill it will use for planning, glossary
-    work, and rendering setup.
+  - the assistant correctly restates the `PLAN -> IMPLEMENTATION`
+    approval rule,
+  - the assistant can explain which skill it will use for planning,
+    approval preparation, glossary work, and rendering setup.
 
 ### You learned (this step)
 

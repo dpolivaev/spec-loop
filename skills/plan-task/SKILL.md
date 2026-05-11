@@ -1,36 +1,36 @@
 ---
 name: plan-task
 description: >-
-  Use to begin non-trivial work on features, bug fixes,
-  refactorings, and changes to code, tests, configuration,
-  dependencies, runtime assets, or design. This skill creates,
-  manages, and verifies the required task files. It covers
-  implementation preparation, mandatory task self-checks, and the
-  explicit user approval gate before implementation. Mandatory unless
-  the user
-  explicitly opts out for the current project or session.
+  Mandatory unless the user explicitly opts out. Use when
+  non-trivial work on features, bug fixes, refactorings, or
+  changes to code, tests, configuration, dependencies, runtime
+  assets, or design requires creating or updating task-based
+  planning artifacts.
 ---
 
-Use this skill to begin non-trivial work on features, bug fixes,
-refactorings, and changes to code, tests, configuration,
-dependencies, runtime assets, or design.
+This skill is mandatory unless the user explicitly opts out.
 
-It creates, manages, and verifies the required task files.
+Create or update the required task files under the shared workflow
+Constitution.
 
-It covers implementation preparation, mandatory task self-checks,
-and the explicit user approval gate before implementation.
+Draft or revise the active task: capture research, Scenario when
+required, Design, Test specification, and task administration needed
+for the current increment.
+
+Before returning planning output as complete or seeking
+implementation approval, you must use
+[../prepare-task-for-implementation-approval/SKILL.md](../prepare-task-for-implementation-approval/SKILL.md).
 
 This skill is mandatory unless the user explicitly opts out for the
-current project or session.
+current project or session. When this skill is in use,
+`prepare-task-for-implementation-approval` is part of the same
+mandatory workflow and is not independently optional.
 
 This skill is defined by [constitution.md](./constitution.md).
-
-The very first required action before using this skill is to read
-that file to the end, unless its contents are already known in the
-current session context.
-
-You must comply with it fully before proceeding. After confirming
-that, immediately emit 🫡.
+The first required action is to read that file to the end unless its
+contents are already known in the current session context. You must
+comply with it fully before proceeding. After confirming that,
+immediately emit 🫡.
 
 Read and apply project instructions such as `AGENTS.md` when present.
 

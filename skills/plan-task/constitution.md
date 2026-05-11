@@ -31,6 +31,7 @@ Quick lookup only. **Task-based Phases and Transitions** and **Task States** are
 | User explicitly approves implementation (`implement`, `go ahead`, `proceed`, equivalent explicit instruction) | Start implementation according to approved Design | IMPLEMENTATION |
 | Task file changed but no implementation directive exists | Stop and ask for review/approval before code/test/config edits | PLAN |
 | Scope drifts beyond approved Design (new flow/type/dependency/behavior) | Stop, update Research/Scenario/Design, request approval | PLAN |
+| New top-level production type, cross-class boundary, or externally meaningful identifier emerges during implementation | Stop, update Design, request approval | PLAN |
 
 | Scenario usage | Rule |
 | --- | --- |
@@ -61,6 +62,14 @@ Work starts in **PLAN**, returns to **PLAN** after each work item unless User sa
 - No permission questions for already requested work.
 - Starting PLAN artifacts, entering IMPLEMENTATION and marking DONE require explicit User instruction.
 - If scope, design, naming, or logic changes, request re-approval. No IMPLEMENTATION inertia across items.
+- After implementation approval, no new top-level production type,
+  renamed planned structural element, new cross-class boundary, or
+  new externally meaningful identifier may be introduced without
+  returning to PLAN and obtaining approval. Purely internal work
+  within an approved class boundary — including local variables,
+  private methods, private fields, and contained refactorings —
+  does not by itself require re-approval unless the User asked for
+  lower-level review.
 - Phases exclusive unless User allows combined planning+implementation.
 
 Backlog tasks may keep Research/Design high-level or `To be done` until current. Before IMPLEMENTATION, active task needs: required Research, required Constraints, required Scenario, implementation-ready Design, Test spec for increment — even when User allows combined phases.
@@ -145,6 +154,23 @@ Documents target system: architecture, data structures, data flow, interactions,
 Design = implementation contract. Must be reviewable and implementation-ready.
 
 Use only final intended names for design-owned terms, units, config keys, tool/API names, request/response fields, enum values, etc. No placeholders, temp names, candidate names, example names. Undecided name/unit/boundary = not ready for implementation.
+
+When production structure changes, Design must make the structural
+inventory explicit for every planned new or changed top-level
+production class, interface, enum, and every new or changed
+externally meaningful identifier in scope. Use the class diagram as
+the primary structural inventory when class diagrams are required.
+Companion prose, lists, or tables may capture exact ownership,
+responsibilities, collaborators, methods, fields, or identifiers that
+the diagram cannot express clearly enough for review. Examples of
+externally meaningful identifiers include persisted file names,
+serialized field names, config keys, action keys, menu placeholder
+names, and shared session/state flags.
+
+Local variables, private methods, private fields contained within one
+class, and other purely internal implementation details are excluded
+from this inventory unless the User explicitly requests lower-level
+review.
 
 Test-only elements go in **Test specification**, not Design, unless task changes test infrastructure.
 
@@ -293,6 +319,12 @@ Short orientation for someone unfamiliar with codebase: relevant modules, import
 - Structure and behavior both matter: use separate diagrams.
 - Declare component and sequence diagrams with explicit language keywords.
 - Always use class diagrams when classes are added, removed, or structurally modified.
+- When class diagrams are required, treat the class diagram as the
+  primary structural inventory for planned new or changed top-level
+  production types and their relationships.
+- Add a companion responsibility table, compact list, or equivalent
+  supporting artifact only when the diagram alone cannot make
+  ownership, structure, or exact identifiers clear enough for review.
 - Class diagrams: show only elements needed for change or structural interaction, meaningful dependency labels, at most one connector per class pair.
 
 #### PlantUML-specific rules
