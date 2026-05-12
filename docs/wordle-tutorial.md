@@ -15,7 +15,7 @@ git init
 ### B2. Install the Spec Loop skills
 
 ```bash
-npx skills add dpolivaev/spec-loop -s '*' -y
+npx skills add dpolivaev/spec-loop -s '*'
 ```
 
 This recommended path requires Node.js because it uses `npx`.
@@ -136,7 +136,7 @@ Tutorial-specific goals:
 3. If that still looks wrong, reinstall the skills with:
 
 ```bash
-npx skills add dpolivaev/spec-loop -s '*' -y
+npx skills add dpolivaev/spec-loop -s '*'
 ```
 
 4. For global installation for all agents, use `-g --all`.

@@ -118,10 +118,10 @@ review of the same artifacts, so piecemeal installation leaves the
 workflow incomplete.
 
 1. Ensure Node.js is available so `npx` works.
-2. Install all Spec Loop skills for the current project, non-interactively:
+2. Install all Spec Loop skills interactively for the current project:
 
 ```bash
-npx skills add dpolivaev/spec-loop -s '*' -y
+npx skills add dpolivaev/spec-loop -s '*'
 ```
 
 3. For global installation for all agents, non-interactively:
