@@ -33,9 +33,10 @@ format in
 The `spec-loop-setup-doc-rendering` skill helps users prepare and
 troubleshoot rendering for task files and glossary files.
 
-The `spec-loop-assess-pull-request` skill reconstructs retrospective review files
-from existing pull requests or commit ranges and can generate
-GitHub-friendly Mermaid variants from them when needed.
+The `spec-loop-assess-pull-request` skill is optional. It reconstructs
+retrospective review files from trusted pull requests, merge requests,
+or commit ranges and can generate GitHub-friendly Mermaid variants
+from them when needed.
 
 The model uses these skills while drafting and updating task or review
 artifacts; you review and approve at the task-file gate before
@@ -88,9 +89,10 @@ the same job or the same lifetime.
 - ADRs capture durable decisions and the reasons behind them.
 - A glossary captures stable shared language across tasks, design,
   tests, code symbols, and commits.
-- Review files reconstruct and assess already-implemented work such as
-  pull requests or commit ranges. When needed, they may also produce
-  GitHub-friendly Mermaid variants for sharing the review.
+- Review files reconstruct and assess already-implemented work from
+  trusted pull requests, merge requests, or commit ranges. When needed,
+  they may also produce GitHub-friendly Mermaid variants for sharing
+  the review.
 - Living project documents capture current truth that should remain
   useful after the task is accepted, such as technical shape,
   operations, or other stable project knowledge.
@@ -112,26 +114,43 @@ Apply the process to your repository.
 
 Recommended path:
 
-Install the full Spec Loop skill bundle together. Several skills hand
-off to each other, reuse the shared `spec-loop-plan-task` bundle, or support
-review of the same artifacts, so piecemeal installation leaves the
-workflow incomplete.
+Install the core planning skills together. `spec-loop-plan-task`,
+`spec-loop-prepare-implementation-approval`,
+`spec-loop-write-glossary`, and `spec-loop-setup-doc-rendering` hand
+off to each other, reuse the shared `spec-loop-plan-task` bundle, and
+support the same planning artifacts.
+
+`spec-loop-assess-pull-request` is optional. Install it only if you
+need retrospective review of pull requests, merge requests, or commit
+ranges from repositories you trust. It fetches provider or Git content
+as review evidence and is not required for the main planning workflow.
 
 1. Ensure Node.js is available so `npx` works.
-2. Install all Spec Loop skills interactively for the current project:
+2. If you do not need `spec-loop-assess-pull-request`, use a selective
+   installation variant from the skills tool documentation and install
+   only the four core planning skills listed above.
+3. If you want the full bundle, including optional
+   `spec-loop-assess-pull-request`, install all Spec Loop skills
+   interactively for the current project:
 
 ```bash
 npx skills add dpolivaev/spec-loop -s '*'
 ```
 
-3. For global installation for all agents, non-interactively:
+4. For global installation of the full bundle for all agents,
+   non-interactively:
 
 ```bash
 npx skills add dpolivaev/spec-loop -g --all
 ```
 
-`--all` installs all skills for all supported agents. For single-agent
-or other installation variants, see https://github.com/vercel-labs/skills.
+Those full-bundle commands install `spec-loop-assess-pull-request`
+too. If you do not need it, use a selective installation variant
+instead.
+
+`--all` installs all skills for all supported agents. For selective,
+single-agent, or other installation variants, see
+https://github.com/vercel-labs/skills.
 
 ### Prepare task and glossary rendering
 
@@ -169,10 +188,12 @@ npx skills update -g
 
 ### Manual fallback when `npx` is unavailable
 
-If `npx` is not available, clone or download this repository and copy all
-shipped Spec Loop skill directories from `skills/` into your agent's
-skills directory. Do not cherry-pick only a subset: the skills are
-intended to work together.
+If `npx` is not available, clone or download this repository and copy
+the core planning skills from `skills/` into your agent's skills
+directory. Keep that core bundle together.
+
+Install `spec-loop-assess-pull-request` only if you need retrospective
+review of trusted repositories.
 
 Which directory your agent uses is agent-specific. See
 https://github.com/vercel-labs/skills for agent-specific installation details.
@@ -200,9 +221,9 @@ context alone.
 ## Included Skills
 
 This repository currently ships these skills.
-They are interdependent and should be installed together because they
-share one workflow and the same task, glossary, review, and rendering
-artifacts:
+The first four form the core planning workflow and should be installed
+together. `spec-loop-assess-pull-request` is optional and intended only
+for retrospective review of trusted repositories:
 
 1. **`spec-loop-plan-task`**
    - the drafting and task-administration skill for task-based work;
@@ -225,8 +246,8 @@ artifacts:
      glossary files.
 
 5. **`spec-loop-assess-pull-request`**
-   - the retrospective review skill for existing pull requests, branch
-     diffs, or commit ranges;
+   - the optional retrospective review skill for existing pull requests,
+     branch diffs, or commit ranges from trusted repositories;
    - defined by
      [skills/spec-loop-assess-pull-request/review-guidance.md](skills/spec-loop-assess-pull-request/review-guidance.md).
 

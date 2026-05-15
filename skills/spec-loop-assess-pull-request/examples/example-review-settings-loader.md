@@ -78,7 +78,7 @@
   optionally opens a browser preview of the current document.
 
 - **Briefing:**
-  Review URL: `https://github.com/example/acme-widget/pull/42`
+  Review URL: `<trusted-review-url>`
 
   This review is decomposed into two areas because the configuration
   refactor has independent value, while the preview server introduces a
