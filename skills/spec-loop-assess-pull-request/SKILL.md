@@ -1,5 +1,5 @@
 ---
-name: assess-pull-request
+name: spec-loop-assess-pull-request
 description: >-
   Reconstruct a human-review-preparation file from an existing pull
   request, merge request, branch diff, or commit range. Use when the
@@ -11,7 +11,7 @@ description: >-
 
 Use for retrospective review of existing PR, MR, branch diff, or commit range.
 
-Before work: read `../plan-task/SKILL.md`, follow all files it requires, and apply the full `plan-task`
+Before work: read `../spec-loop-plan-task/SKILL.md`, follow all files it requires, and apply the full `spec-loop-plan-task`
 skill bundle as shared convention guidance. Then read [review-guidance.md](./review-guidance.md).
 Optional compact example:
 [examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
@@ -23,7 +23,7 @@ section semantics, `Review outcome` labels, `Review Area` behavior, assessment s
 intent-vs-implementation analysis, tone, translation rules, diagram rules, sharing variant behavior. 
 `SKILL.md` = orchestration/entry-point only, not second guidance doc.
 
-Reconstruct already-implemented work as the retrospective `plan-task`-style review artifact that
+Reconstruct already-implemented work as the retrospective `spec-loop-plan-task`-style review artifact that
 should have existed, then add AI assessment and recommendations.
 Do not treat the change as waiting at the normal PLAN -> IMPLEMENTATION gate.
 

@@ -1,8 +1,8 @@
 ---
-name: write-glossary
+name: spec-loop-write-glossary
 description: >-
   Create or update glossary entries in the Spec Loop AsciiDoc glossary
-  format. Use when the user, project instructions, or `plan-task`
+  format. Use when the user, project instructions, or `spec-loop-plan-task`
   already requires a glossary artifact. This skill is mandatory for
   AsciiDoc glossaries unless the user explicitly opts out for the
   current project or session.

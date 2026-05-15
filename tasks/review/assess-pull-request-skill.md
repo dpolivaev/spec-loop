@@ -1,9 +1,9 @@
 # Task: Create assess-pull-request skill
 
 - **Task Identifier:** 2026-05-07-assess-pull-request
-- **Scope:** Create a new `assess-pull-request` skill that analyzes an
+- **Scope:** Create a new `spec-loop-assess-pull-request` skill that analyzes an
   existing pull request, merge request, branch diff, or commit range and
-  writes a reviewable review file. Reuse the `plan-task` skill's shared
+  writes a reviewable review file. Reuse the `spec-loop-plan-task` skill's shared
   conventions, glossary policy, diagram guidance, and examples, while
   adding a global `Review outcome` near the beginning and an
   `Assessment` section as the last section of each generated review or
@@ -39,9 +39,9 @@
   the change, its risks, and any missing follow-up work without treating
   the review as pre-implementation planning.
 - **Constraints:**
-  - Implement this as a separate skill named `assess-pull-request`.
-    Do not extend `plan-task` in this first version.
-  - Reuse the `plan-task` skill as a whole, not only
+  - Implement this as a separate skill named `spec-loop-assess-pull-request`.
+    Do not extend `spec-loop-plan-task` in this first version.
+  - Reuse the `spec-loop-plan-task` skill as a whole, not only
     `constitution.md`, so the new skill inherits the same task-section
     conventions, glossary policy, diagram rules, and supporting
     examples.
@@ -59,8 +59,8 @@
   - `Review outcome` is the only place for the overall recommendation
     such as merge, request changes, or do not merge. Do not repeat that
     verdict inside `Assessment` sections.
-  - Keep `Assessment` specific to `assess-pull-request` outputs.
-    Do not add an `Assessment` section to `plan-task` or its
+  - Keep `Assessment` specific to `spec-loop-assess-pull-request` outputs.
+    Do not add an `Assessment` section to `spec-loop-plan-task` or its
     Constitution.
   - `Assessment` must be the last section in every generated review and
     every generated review area. It contains only the LLM's local
@@ -108,10 +108,10 @@
     Mermaid, simplify the diagram and explain the rest in prose.
   - This local planning task should stay out of commits unless the User
     later explicitly asks otherwise.
-- **Briefing:** This repository currently ships `plan-task`,
-  `write-glossary`, and `setup-task-and-glossary-rendering`.
-  `plan-task` already bundles `SKILL.md`, `constitution.md`, and a
-  PlantUML example task. The new skill should read `plan-task` as a
+- **Briefing:** This repository currently ships `spec-loop-plan-task`,
+  `spec-loop-write-glossary`, and `spec-loop-setup-doc-rendering`.
+  `spec-loop-plan-task` already bundles `SKILL.md`, `constitution.md`, and a
+  PlantUML example task. The new skill should read `spec-loop-plan-task` as a
   whole for shared artifact guidance, then apply a different workflow:
   it reconstructs work from an existing change instead of planning work
   before implementation. The skill should support both Git-only and
@@ -122,10 +122,10 @@
   permits read-only provider commands for inspection while blocking
   provider write commands.
 - **Research:** The current repository contains three committed skills:
-  `plan-task`, `write-glossary`, and
-  `setup-task-and-glossary-rendering`. `plan-task` currently consists of
+  `spec-loop-plan-task`, `spec-loop-write-glossary`, and
+  `spec-loop-setup-doc-rendering`. `spec-loop-plan-task` currently consists of
   `SKILL.md`, `constitution.md`, and
-  `examples/example-task-wordle-cli.md`. `plan-task` defines the task
+  `examples/example-task-wordle-cli.md`. `spec-loop-plan-task` defines the task
   lifecycle folders, task and subtask section ordering, glossary policy,
   diagram guidance, preferred use of `Ticket` when present, and
   PlantUML examples. The Constitution already uses `review` as a
@@ -144,10 +144,10 @@
 
 ```plantuml
 @startuml
-component "plan-task" as plan
-component "write-glossary" as glossary
+component "spec-loop-plan-task" as plan
+component "spec-loop-write-glossary" as glossary
 component "rendering setup" as render
-component "plan-task examples" as examples
+component "spec-loop-plan-task examples" as examples
 
 plan --> glossary : uses matching glossary format
 plan --> examples : points to PlantUML patterns
@@ -155,9 +155,9 @@ render ..> plan : supports rendered task review
 @enduml
 ```
 
-- **Design:** Create `skills/assess-pull-request/SKILL.md` as a new
+- **Design:** Create `skills/spec-loop-assess-pull-request/SKILL.md` as a new
   skill entry point. The skill instructs the LLM to read the
-  `plan-task` skill bundle first, then switch to a retrospective
+  `spec-loop-plan-task` skill bundle first, then switch to a retrospective
   workflow tailored to existing changes. The skill should accept two
   evidence modes.
 
@@ -262,7 +262,7 @@ render ..> plan : supports rendered task review
     provider-specific sharing variant;
   - if the effective or explicit local review-diagram mode is
     `plantuml`, use the same PlantUML patterns and examples as
-    `plan-task`;
+    `spec-loop-plan-task`;
   - if it is `mermaid`, generate Mermaid directly in the local review
     file;
   - if it is `none`, omit diagrams unless the user overrides the mode.
@@ -350,8 +350,8 @@ render ..> plan : supports rendered task review
 
 ```plantuml
 @startuml
-component "assess-pull-request" as assess
-component "plan-task" as plan
+component "spec-loop-assess-pull-request" as assess
+component "spec-loop-plan-task" as plan
 component "GitHub / GitLab read" as providerread
 component "Git-only diff" as gitdiff
 component "review file" as review
@@ -368,8 +368,8 @@ assess --> variant : writes sharing variant when needed
 ```plantuml
 @startuml
 actor User
-participant "assess-pull-request" as Assess
-participant "plan-task" as Plan
+participant "spec-loop-assess-pull-request" as Assess
+participant "spec-loop-plan-task" as Plan
 participant "provider / Git diff" as Evidence
 participant "reviews/..." as Review
 participant "provider variant" as Variant
@@ -389,9 +389,9 @@ Variant --> User : local sharing variant
 
 - **Test specification:** Verify the new skill at four levels.
   First, repository discovery: `npx skills add . -l --full-depth`
-  should list `assess-pull-request`. Second, documentation and artifact
+  should list `spec-loop-assess-pull-request`. Second, documentation and artifact
   structure: read the generated `SKILL.md` and confirm that it reuses
-  `plan-task` as a whole, writes to `reviews/`, requires `Assessment`
+  `spec-loop-plan-task` as a whole, writes to `reviews/`, requires `Assessment`
   as the last section of each generated review or review area,
   defines both the canonical local review file and optional provider-
   specific sharing-variant behavior, and uses the exact review-file
@@ -428,8 +428,8 @@ Variant --> User : local sharing variant
 
 ## Subtask: Refine review reconstruction for human decision support
 - **Status:** review
-- **Scope:** Update `skills/assess-pull-request/SKILL.md` and
-  `skills/assess-pull-request/review-guidance.md` so the generated
+- **Scope:** Update `skills/spec-loop-assess-pull-request/SKILL.md` and
+  `skills/spec-loop-assess-pull-request/review-guidance.md` so the generated
   review reconstructs the reviewed change itself, not the review
   activity, and decomposes substantial pull requests into task-like
   review areas for detailed human review preparation.
@@ -440,12 +440,12 @@ Variant --> User : local sharing variant
   before the AI recommendation layer.
 - **Scenario:** A user asks for assessment of an already-implemented
   pull request. The skill reconstructs the pull request as if it were a
-  retrospective `plan-task` task file with review-specific headings,
+  retrospective `spec-loop-plan-task` task file with review-specific headings,
   keeping `Scope` and `Motivation` tied to the implemented change and
   organizing major change areas as `Review Area` sections. The human
   reviewer then uses the reconstructed detail plus the AI `Assessment`
   to decide what to inspect, question, or approve.
-- **Briefing:** The existing skill already reuses `plan-task` for
+- **Briefing:** The existing skill already reuses `spec-loop-plan-task` for
   section ordering and diagram guidance, but its wording emphasizes
   retrospective review more than retrospective task reconstruction.
   The updated wording should preserve the existing evidence contract,
@@ -454,7 +454,7 @@ Variant --> User : local sharing variant
 - **Research:** The current `SKILL.md` says the skill reconstructs a
   review file from an existing pull request or diff, but it does not
   explicitly say that the result should anticipate the missing
-  `plan-task` artifact. `review-guidance.md` defines section ordering
+  `spec-loop-plan-task` artifact. `review-guidance.md` defines section ordering
   and evidence collection, yet it leaves room to interpret `Scope` and
   `Motivation` as properties of the review instead of the implemented
   change. It also says review areas are used only when needed,
@@ -464,7 +464,7 @@ Variant --> User : local sharing variant
 - **Design:** Clarify the skill in three places:
   - `SKILL.md` should define the artifact as a detailed human-review-
     preparation document that retrospectively reconstructs the task file
-    that should have existed under `plan-task`.
+    that should have existed under `spec-loop-plan-task`.
   - `SKILL.md` should state that `Scope` and `Motivation` describe the
     reviewed change itself and that multi-area changes should usually be
     decomposed into `Review Area` sections.
@@ -477,7 +477,7 @@ Variant --> User : local sharing variant
   - Manual tests:
     - re-read the updated skill files and confirm that they frame the
       artifact as human review preparation and retrospective
-      `plan-task` reconstruction
+      `spec-loop-plan-task` reconstruction
     - confirm that the section-mapping rules define `Scope` and
       `Motivation` as pull-request properties rather than review
       properties
@@ -489,8 +489,8 @@ Variant --> User : local sharing variant
 
 ## Subtask: Strengthen scenario, briefing, and trade-off analysis
 - **Status:** review
-- **Scope:** Update `skills/assess-pull-request/SKILL.md` and
-  `skills/assess-pull-request/review-guidance.md` so the generated
+- **Scope:** Update `skills/spec-loop-assess-pull-request/SKILL.md` and
+  `skills/spec-loop-assess-pull-request/review-guidance.md` so the generated
   review treats `Scenario` and `Briefing` as primary human-review
   support sections both globally and within each `Review Area`, and
   requires explicit pro/contra and complexity-justification analysis in
@@ -508,7 +508,7 @@ Variant --> User : local sharing variant
   without forcing artificial balance when the evidence clearly points in
   one direction.
 - **Briefing:** `Scenario` and `Briefing` already exist because the
-  review intentionally mirrors `plan-task` structure. The next
+  review intentionally mirrors `spec-loop-plan-task` structure. The next
   refinement is to make them more operational for human review.
   `Assessment` also needs stronger trade-off guidance so the review can
   help decide not only whether the PR is broken, but whether its design
@@ -559,8 +559,8 @@ Variant --> User : local sharing variant
 
 ## Subtask: Separate intent from implementation in review analysis
 - **Status:** review
-- **Scope:** Update `skills/assess-pull-request/review-guidance.md`
-  and, only as needed, `skills/assess-pull-request/SKILL.md` so the
+- **Scope:** Update `skills/spec-loop-assess-pull-request/review-guidance.md`
+  and, only as needed, `skills/spec-loop-assess-pull-request/SKILL.md` so the
   reconstructed review analyzes each review area and the overall PR from
   two explicit perspectives: intent and implementation.
 - **Motivation:** Human review needs help distinguishing between
@@ -614,8 +614,8 @@ Variant --> User : local sharing variant
 
 ## Subtask: Refine split recommendations, English translation, and tone
 - **Status:** review
-- **Scope:** Update `skills/assess-pull-request/review-guidance.md`
-  and, only as needed, `skills/assess-pull-request/SKILL.md` so the
+- **Scope:** Update `skills/spec-loop-assess-pull-request/review-guidance.md`
+  and, only as needed, `skills/spec-loop-assess-pull-request/SKILL.md` so the
   review can recommend splitting an oversized PR into smaller PRs,
   suggest a sensible first slice, translate non-English comments or
   names into English in the review, and use measured professional
@@ -670,7 +670,7 @@ Variant --> User : local sharing variant
 
 ## Subtask: Make review-area diagrams explicit and mandatory
 - **Status:** review
-- **Scope:** Update `skills/assess-pull-request/review-guidance.md` so
+- **Scope:** Update `skills/spec-loop-assess-pull-request/review-guidance.md` so
   diagrams are clearly required in reviews and review areas whenever the
   reviewed design changes materially, and then apply that guidance to
   the current reconstructed review.
@@ -686,16 +686,16 @@ Variant --> User : local sharing variant
   mandatory whenever design changes materially, and the review includes
   them accordingly.
 - **Briefing:** The existing skill already inherits general diagram
-  rules from `plan-task`, but the review guidance does not yet state
+  rules from `spec-loop-plan-task`, but the review guidance does not yet state
   strongly enough that review-area diagrams are required for major
   design changes. The refinement should make that expectation explicit
   and ensure that the current PR review follows it.
 - **Research:** The current local guidance already references diagram
-  handling and inherits the `plan-task` conventions, but it still leaves
+  handling and inherits the `spec-loop-plan-task` conventions, but it still leaves
   too much room to rely only on global diagrams. In a large review, that
   weakens reviewer comprehension exactly where diagrams are most useful.
 - **Design:** Clarify the guidance so that:
-  - retrospective reviews apply the `plan-task` diagram rules fully
+  - retrospective reviews apply the `spec-loop-plan-task` diagram rules fully
   - diagrams are mandatory whenever the reviewed change or review area
     changes structure, component interaction, runtime flow, or workflow
     in a non-trivial way
@@ -719,7 +719,7 @@ Variant --> User : local sharing variant
 
 ## Subtask: Make retrospective test specification reconstructive
 - **Status:** review
-- **Scope:** Update `skills/assess-pull-request/review-guidance.md` so
+- **Scope:** Update `skills/spec-loop-assess-pull-request/review-guidance.md` so
   `Test specification` in reconstructed reviews explains what should be
   tested, why it matters, what evidence exists, and whether the current
   tests and assertions appear sufficient, then apply that guidance to

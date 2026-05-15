@@ -6,7 +6,7 @@ Use the skills in `skills/` when working on this repository.
 
 ## Repository policy
 
-Use `plan-task` for non-trivial repository changes before
+Use `spec-loop-plan-task` for non-trivial repository changes before
 implementation.
 
 This repository itself has no glossary.

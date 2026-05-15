@@ -54,7 +54,7 @@ Run this step unless you already know your editor is prepared to render:
 ### You send
 
 ```text
-Please use the `setup-task-and-glossary-rendering` skill to help me
+Please use the `spec-loop-setup-doc-rendering` skill to help me
 prepare my editor for reviewing rendered Spec Loop task files and
 glossary files.
 
@@ -65,7 +65,7 @@ My coding tool may run in a terminal, but I review files in
 ### You see
 
 - Chat:
-  - uses the `setup-task-and-glossary-rendering` skill,
+  - uses the `spec-loop-setup-doc-rendering` skill,
   - reads the setup document for your editor,
   - guides you through the rendering setup needed for task and glossary
     review.
@@ -96,13 +96,13 @@ Tutorial-specific goals:
 
 - Chat:
   - confirms that the installed Spec Loop setup is available,
-  - automatically applies the `plan-task` skill as the mandatory
+  - automatically applies the `spec-loop-plan-task` skill as the mandatory
     planning skill for non-trivial work,
   - notes that before implementation approval the workflow also uses
-    `prepare-task-for-implementation-approval`,
-  - explains that the `write-glossary` skill will be used for the
+    `spec-loop-prepare-implementation-approval`,
+  - explains that the `spec-loop-write-glossary` skill will be used for the
     tutorial's `glossary.adoc` work,
-  - keeps the `setup-task-and-glossary-rendering` skill for later
+  - keeps the `spec-loop-setup-doc-rendering` skill for later
     rendering help if needed.
 - Project setup:
   - Spec Loop workflow rules are available through the installed skills,

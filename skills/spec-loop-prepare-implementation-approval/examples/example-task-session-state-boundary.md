@@ -1,6 +1,6 @@
 # Example task: Session-state boundary after approval preparation
 
-This compact example shows a task after `prepare-task-for-implementation-approval`
+This compact example shows a task after `spec-loop-prepare-implementation-approval`
 polishes it for implementation approval seeking.
 
 It demonstrates:

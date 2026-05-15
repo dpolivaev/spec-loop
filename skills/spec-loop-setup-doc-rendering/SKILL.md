@@ -1,5 +1,5 @@
 ---
-name: setup-task-and-glossary-rendering
+name: spec-loop-setup-doc-rendering
 description: >-
   Help set up and troubleshoot rendering for task files and glossary
   files. Use when the user asks about PlantUML, AsciiDoc, VS Code,

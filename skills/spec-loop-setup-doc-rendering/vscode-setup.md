@@ -1,6 +1,6 @@
-# VS Code Setup Reference for `setup-task-and-glossary-rendering`
+# VS Code Setup Reference for `spec-loop-setup-doc-rendering`
 
-Use this reference when `setup-task-and-glossary-rendering` is helping a user
+Use this reference when `spec-loop-setup-doc-rendering` is helping a user
 who works in Visual Studio Code or in a VS Code-compatible environment.
 
 ## Decision rules
@@ -72,7 +72,7 @@ Install:
 This is required whenever `glossary.adoc` is active or configured as the
 default format for new glossaries.
 
-## What `setup-task-and-glossary-rendering` should do
+## What `spec-loop-setup-doc-rendering` should do
 
 1. Detect whether VS Code support is already sufficient.
 2. If not, explain what is missing and why it matters.

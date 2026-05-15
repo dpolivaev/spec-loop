@@ -21,19 +21,19 @@ with tests. Keep the spec local to the next step. Repeat until done.
 
 Spec Loop is a framework of reusable skills.
 
-Its main governing rules live in the `plan-task` skill, in
-**[constitution.md](skills/plan-task/constitution.md)**.
+Its main governing rules live in the `spec-loop-plan-task` skill, in
+**[constitution.md](skills/spec-loop-plan-task/constitution.md)**.
 That skill governs plan-first work, task files, and the approval gate
 before implementation.
 
-The `write-glossary` skill defines the Spec Loop AsciiDoc glossary
+The `spec-loop-write-glossary` skill defines the Spec Loop AsciiDoc glossary
 format in
-**[glossary-format.md](skills/write-glossary/glossary-format.md)**.
+**[glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md)**.
 
-The `setup-task-and-glossary-rendering` skill helps users prepare and
+The `spec-loop-setup-doc-rendering` skill helps users prepare and
 troubleshoot rendering for task files and glossary files.
 
-The `assess-pull-request` skill reconstructs retrospective review files
+The `spec-loop-assess-pull-request` skill reconstructs retrospective review files
 from existing pull requests or commit ranges and can generate
 GitHub-friendly Mermaid variants from them when needed.
 
@@ -46,7 +46,7 @@ Spec Loop also defines explicit work phases: plan, implementation, and done.
 Any transitions to implementation and to done require explicit user approval.
 
 When a project maintains a glossary described by the Constitution's
-[project glossary section](skills/plan-task/constitution.md#project-glossary),
+[project glossary section](skills/spec-loop-plan-task/constitution.md#project-glossary),
 that glossary defines the shared domain language above individual tasks and the
 code. It keeps design documents, tests, code symbols, and commit text aligned
 on the same terms across the whole project.
@@ -113,7 +113,7 @@ Apply the process to your repository.
 Recommended path:
 
 Install the full Spec Loop skill bundle together. Several skills hand
-off to each other, reuse the shared `plan-task` bundle, or support
+off to each other, reuse the shared `spec-loop-plan-task` bundle, or support
 review of the same artifacts, so piecemeal installation leaves the
 workflow incomplete.
 
@@ -139,13 +139,13 @@ Spec Loop task files use embedded PlantUML diagrams, and Spec Loop
 glossaries may include embedded diagrams. Prepare your editor for
 reviewing rendered task files and glossary files before continuing.
 
-Ask the agent to use the `setup-task-and-glossary-rendering` skill to
+Ask the agent to use the `spec-loop-setup-doc-rendering` skill to
 prepare your editor preview setup.
 
 For example:
 
 ```text
-Please use the `setup-task-and-glossary-rendering` skill to help me
+Please use the `spec-loop-setup-doc-rendering` skill to help me
 prepare my editor for reviewing rendered Spec Loop task files and
 glossary files.
 
@@ -186,10 +186,10 @@ their use explicit.
 If your harness behaves that way, add a project instruction such as:
 
 ```text
-Use the `plan-task` skill for all non-trivial work unless I explicitly
+Use the `spec-loop-plan-task` skill for all non-trivial work unless I explicitly
 opt out.
-Use the `write-glossary` skill for `glossary.adoc` glossary work.
-Follow the Constitution loaded through the `plan-task` skill,
+Use the `spec-loop-write-glossary` skill for `glossary.adoc` glossary work.
+Follow the Constitution loaded through the `spec-loop-plan-task` skill,
 including the PLAN -> IMPLEMENTATION explicit approval gate.
 ```
 
@@ -204,37 +204,37 @@ They are interdependent and should be installed together because they
 share one workflow and the same task, glossary, review, and rendering
 artifacts:
 
-1. **`plan-task`**
+1. **`spec-loop-plan-task`**
    - the drafting and task-administration skill for task-based work;
    - defined by
-     [skills/plan-task/constitution.md](skills/plan-task/constitution.md).
+     [skills/spec-loop-plan-task/constitution.md](skills/spec-loop-plan-task/constitution.md).
 
-2. **`prepare-task-for-implementation-approval`**
+2. **`spec-loop-prepare-implementation-approval`**
    - the mandatory approval-preparation skill used before the agent asks
-     for implementation approval within the `plan-task` workflow;
+     for implementation approval within the `spec-loop-plan-task` workflow;
    - defined by
-     [skills/prepare-task-for-implementation-approval/implementation-approval-guidance.md](skills/prepare-task-for-implementation-approval/implementation-approval-guidance.md).
+     [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md).
 
-3. **`write-glossary`**
+3. **`spec-loop-write-glossary`**
    - the Spec Loop AsciiDoc glossary-format skill;
    - defined by
-     [skills/write-glossary/glossary-format.md](skills/write-glossary/glossary-format.md).
+     [skills/spec-loop-write-glossary/glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md).
 
-4. **`setup-task-and-glossary-rendering`**
+4. **`spec-loop-setup-doc-rendering`**
    - the setup and troubleshooting skill for rendering task files and
      glossary files.
 
-5. **`assess-pull-request`**
+5. **`spec-loop-assess-pull-request`**
    - the retrospective review skill for existing pull requests, branch
      diffs, or commit ranges;
    - defined by
-     [skills/assess-pull-request/review-guidance.md](skills/assess-pull-request/review-guidance.md).
+     [skills/spec-loop-assess-pull-request/review-guidance.md](skills/spec-loop-assess-pull-request/review-guidance.md).
 
 ## Documentation
 
 1. Check the Constitution briefly.
 
-   * **[skills/plan-task/constitution.md](skills/plan-task/constitution.md)**
+   * **[skills/spec-loop-plan-task/constitution.md](skills/spec-loop-plan-task/constitution.md)**
      defines the normative rules: task files, research/design discipline,
      approval gates, traceability requirements, and definition of done.
 
@@ -268,13 +268,13 @@ artifacts:
 5. Project glossary conventions.
 
    * See the Constitution's project glossary section above.
-   * **[skills/write-glossary/glossary-format.md](skills/write-glossary/glossary-format.md)**
+   * **[skills/spec-loop-write-glossary/glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md)**
      is the shared glossary-format guidance file and includes its own
      embedded example.
 
 Recommended quick-check order:
 - `README.md`
-- `skills/plan-task/constitution.md`
+- `skills/spec-loop-plan-task/constitution.md`
 - `docs/review-responsibility-and-traceability.md`
 - `docs/online-art-game-tutorial.md`
 - `docs/wordle-tutorial.md`
@@ -302,7 +302,7 @@ render PlantUML embedded in Markdown natively, so reading there can
 degrade the intended experience.
 
 For local preview setup, use the
-`setup-task-and-glossary-rendering` skill.
+`spec-loop-setup-doc-rendering` skill.
 
 ## License
 

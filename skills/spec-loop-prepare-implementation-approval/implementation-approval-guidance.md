@@ -1,6 +1,6 @@
-# Implementation-approval guidance for `prepare-task-for-implementation-approval`
+# Implementation-approval guidance for `spec-loop-prepare-implementation-approval`
 
-This skill reuses the full `plan-task` bundle for shared workflow
+This skill reuses the full `spec-loop-plan-task` bundle for shared workflow
 conventions.
 
 This file is the authoritative source for pre-implementation
@@ -25,7 +25,7 @@ state.
 Do not add a new task-file status or marker for readiness. The
 binding is behavioral:
 
-- before implementation approval seeking inside the `plan-task`
+- before implementation approval seeking inside the `spec-loop-plan-task`
   workflow, apply this skill;
 - if the task is still not ready, do not seek approval;
 - return exact remaining gaps instead.
@@ -37,9 +37,9 @@ file.
 
 Start from the existing active task.
 
-Refresh the relevant `plan-task` bundle requirements in active
+Refresh the relevant `spec-loop-plan-task` bundle requirements in active
 context. If the Constitution digest is not already available in the
-current context, read it through `../plan-task/SKILL.md` as that skill
+current context, read it through `../spec-loop-plan-task/SKILL.md` as that skill
 requires.
 
 Then reread only the sections needed for the current implementation
@@ -146,13 +146,13 @@ review faster and clearer.
 When a compact identifier list is enough, do not turn it into a second
 structural artifact.
 
-## 6. Interaction with `plan-task`
+## 6. Interaction with `spec-loop-plan-task`
 
-`plan-task` is the primary Constitution owner and the drafting skill.
+`spec-loop-plan-task` is the primary Constitution owner and the drafting skill.
 This skill is its approval-seeking companion.
 
 That means:
-- do not replace `plan-task`;
+- do not replace `spec-loop-plan-task`;
 - do not duplicate Constitution ownership here;
 - add only the approval-preparation delta;
 - if implementation-ready structure is still missing, keep working in

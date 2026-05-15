@@ -1,6 +1,6 @@
-# Review guidance for `assess-pull-request`
+# Review guidance for `spec-loop-assess-pull-request`
 
-This skill reuses the `plan-task` bundle for shared conventions.
+This skill reuses the `spec-loop-plan-task` bundle for shared conventions.
 
 This file is the authoritative source for retrospective review behavior, output structure,
 section semantics, assessment style, tone, translation rules, diagram handling, and sharing variants.
@@ -20,7 +20,7 @@ State strong negative findings clearly, but prefer measured phrasing such as `no
 when that preserves accuracy.
 
 Primary output: a human review-preparation artifact, not a terse verdict.
-Reconstruct the reviewed change as the retrospective `plan-task` artifact that should have existed,
+Reconstruct the reviewed change as the retrospective `spec-loop-plan-task` artifact that should have existed,
 then add AI assessment and recommendations.
 
 Global sections describe reviewed change:
@@ -45,7 +45,7 @@ Per area, use both seriously:
 Keep them concise for narrow areas; do not treat them as filler.
 
 For substantial or multi-area changes, decompose into `Review Area` sections aligned with logical work areas,
-like `plan-task` subtasks. Each area should still make clear what it adds, changes, or removes and why.
+like `spec-loop-plan-task` subtasks. Each area should still make clear what it adds, changes, or removes and why.
 
 ## 1. Evidence modes
 
@@ -322,7 +322,7 @@ Use `Assessment` to surface quality, risk, clarity, complexity, consistency, and
 
 ## 6. Diagram requirements in retrospective reviews
 
-Apply `plan-task` diagram rules fully. Diagrams required — not optional decoration — 
+Apply `spec-loop-plan-task` diagram rules fully. Diagrams required — not optional decoration — 
 whenever reviewed change alters structure, component interaction, runtime flow, or workflow non-trivially.
 
 For substantial or multi-area changes:
@@ -356,7 +356,7 @@ Provider-aware inherited defaults:
 - inherited `none` → stays `none`
 
 Explicit mode rules:
-- `plantuml` → follow PlantUML patterns and examples from `plan-task`
+- `plantuml` → follow PlantUML patterns and examples from `spec-loop-plan-task`
 - `mermaid` → generate Mermaid directly in local review file
 - `none` → omit diagrams unless user overrides
 

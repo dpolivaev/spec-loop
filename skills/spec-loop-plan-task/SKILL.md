@@ -1,5 +1,5 @@
 ---
-name: plan-task
+name: spec-loop-plan-task
 description: >-
   Mandatory unless the user explicitly opts out. Use when
   non-trivial work on features, bug fixes, refactorings, or
@@ -19,11 +19,11 @@ for the current increment.
 
 Before returning planning output as complete or seeking
 implementation approval, you must use
-[../prepare-task-for-implementation-approval/SKILL.md](../prepare-task-for-implementation-approval/SKILL.md).
+[../spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md).
 
 This skill is mandatory unless the user explicitly opts out for the
 current project or session. When this skill is in use,
-`prepare-task-for-implementation-approval` is part of the same
+`spec-loop-prepare-implementation-approval` is part of the same
 mandatory workflow and is not independently optional.
 
 This skill is defined by [constitution.md](./constitution.md).
@@ -48,7 +48,7 @@ Default glossary policy:
 - glossary use is opted in;
 - project or session instructions may opt out;
 - when the project uses the AsciiDoc glossary format defined by
-  `write-glossary`, use `write-glossary`;
+  `spec-loop-write-glossary`, use `spec-loop-write-glossary`;
 - otherwise follow the project's glossary format.
 
 If implementation must meaningfully deviate from the approved task
