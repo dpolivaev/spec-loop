@@ -15,12 +15,3 @@ For JetBrains IDEs, read [jetbrains-setup.md](./jetbrains-setup.md).
 
 Use only the setup documents that actually exist here.
 
-For Spec Loop skill installation or updates, tell the user to follow
-the installation instructions in the Spec Loop GitHub repository README
-and share:
-
-- `npx skills add dpolivaev/spec-loop -s '*' -y`
-- `npx skills add dpolivaev/spec-loop -g --all`
-- `--all` installs all skills for all supported agents
-- https://github.com/dpolivaev/spec-loop
-- https://github.com/vercel-labs/skills
