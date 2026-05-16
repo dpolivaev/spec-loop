@@ -1,84 +1,27 @@
-# Constitution
+# Task-file Constitution
 
-- **Principle over ceremony**
-- Intent-first. Judge by outcome, not checklist.
-- Whenever the LLM stops or pauses, it must explain the reason explicitly.
-- If `AGENTS.md` and this Constitution conflict, stop and ask the User.
-- **Enforcement, pre-edit gate, and LLM stewardship**
-- Constitution mandatory. LLM enforces it. Not User's job.
-- Only the User may override workflow rules.
+This file applies only on the task-file path of
+`spec-loop-plan-task`.
 
-## Constitution Handling (Global)
+It defines task-file structure, lifecycle, sections, diagrams,
+testing policy, and administration.
 
-- Constitution is global, identical across all dirs.
-- Already injected/attached: don't re-read.
-- Else: read once, keep 3-5 line digest in context.
-- Re-read only if digest missing or User says it changed.
+## Task-file path readiness
 
-### Core Invariants
+On the task-file path, the task file is the source of truth for the
+current increment.
 
-- Task work: plan-first.
-- Follow task formatting rules.
-
-### Decision Tables (Operational Shortcuts)
-
-Quick lookup only. **Task-based Phases and Transitions** and **Task States** are authoritative.
-
-| Situation | Required action | Resulting phase |
-| --- | --- | --- |
-| Request executable changes (code/test/config/deps/runtime assets) | Enter PLAN: update Research/Scenario/Design as needed | PLAN |
-| Refactoring that changes code, tests, or configuration | Enter PLAN: update Design | PLAN |
-| User explicitly approves implementation (`implement`, `go ahead`, `proceed`, equivalent explicit instruction) | Start implementation according to approved Design | IMPLEMENTATION |
-| Task file changed but no implementation directive exists | Stop and ask for review/approval before code/test/config edits | PLAN |
-| Scope drifts beyond approved Design (new flow/type/dependency/behavior) | Stop, update Research/Scenario/Design, request approval | PLAN |
-| New top-level production type, cross-class boundary, or externally meaningful identifier emerges during implementation | Stop, update Design, request approval | PLAN |
-
-| Scenario usage | Rule |
-| --- | --- |
-| Behavior or domain terms are introduced or changed | Scenario is required |
-| Work only implements existing shared domain terms | Scenario may be omitted |
-| Change is purely technical and does not change behavior or domain terms | Scenario may be omitted |
-| Scenario is omitted | Design must not introduce new domain terms; add Scenario first if terms change |
-
-## When work is task-based
-
-Code/test/config changes: must be task-based. Other work: task file optional unless User asks. No suitable task file: propose creating one first. Chat is coordination only, not design artifact.
-
-## Task-based Phases and Transitions
-
-Phases:
-
-- **PLAN** - research, design/spec, test spec.
-- **IMPLEMENTATION** - code + required tests, follow approved Design/Test spec unless User waives tests.
-- **DONE** - verified, accepted.
-
-PLAN: edits only to non-executable artifacts (task files, ADRs, docs, diagrams, instruction files). Commands allowed for research/verification only if they don't change repo contents outside those artifacts. If they would, treat as IMPLEMENTATION and get User approval first.
-
-Anything touching executable behavior, tests, build/config, deps, packaging, or runtime assets = IMPLEMENTATION. Needs explicit User instruction.
-
-Work starts in **PLAN**, returns to **PLAN** after each work item unless User says otherwise.
-
-- Ask questions before PLAN only to clarify scope or constraints.
-- No permission questions for already requested work.
-- Starting PLAN artifacts, entering IMPLEMENTATION and marking DONE require explicit User instruction.
-- If scope, design, naming, or logic changes, request re-approval. No IMPLEMENTATION inertia across items.
-- After implementation approval, no new top-level production type,
-  renamed planned structural element, new cross-class boundary, or
-  new externally meaningful identifier may be introduced without
-  returning to PLAN and obtaining approval. Purely internal work
-  within an approved class boundary — including local variables,
-  private methods, private fields, and contained refactorings —
-  does not by itself require re-approval unless the User asked for
-  lower-level review.
-- Phases exclusive unless User allows combined planning+implementation.
-
-Backlog tasks may keep Research/Design high-level or `To be done` until current. Before IMPLEMENTATION, active task needs: required Research, required Constraints, required Scenario, implementation-ready Design, Test spec for increment — even when User allows combined phases.
+Backlog tasks may keep Research/Design high-level or `To be done`
+until current. Before IMPLEMENTATION, the active task needs: required
+Research, required Constraints, required Scenario,
+implementation-ready Design, and Test specification for the current
+increment — even when the User allows combined phases.
 
 Before asking the User to approve a task file for IMPLEMENTATION, the
 LLM must self-check that the content for the current implementation
-increment meets all applicable requirements of this Constitution and is
-correct, internally consistent, and compliant with `AGENTS.md` and
-applicable glossary rules.
+increment meets all applicable requirements of this Task-file
+Constitution and is correct, internally consistent, and compliant with
+`AGENTS.md` and applicable glossary rules.
 
 In tasks with subtasks, this applies to the active subtask and any
 task-level context it depends on, not to future subtasks that are not
@@ -87,13 +30,7 @@ yet current.
 If asking the User to review a draft instead, say so explicitly and
 list the known gaps, open questions, and unresolved decisions.
 
-IMPLEMENTATION -> PLAN: LLM may initiate if required (scope drift, unclear classification, rule conflict, missing approved Design). State reason and what must be resolved before IMPLEMENTATION resumes.
-
-Phase model governs task-scoped work only. Non-code/test/config work is outside it unless User says otherwise.
-
 ## Task Artifacts and Administration
-
-Phase entry/exit/approval rules stay in **Task-based Phases and Transitions**.
 
 ### 1. Task files
 
@@ -126,26 +63,24 @@ Research may mention legacy terms. Design uses only canonical Scenario terms exc
 
 #### Project glossary
 
-A project glossary is optional until the project creates one. Recognize
-`glossary.adoc` and `glossary.md` as project glossary files. If both exist,
-ask the user which one is canonical before updating either. Once a project
-glossary exists, it defines shared domain language; use it during planning as
-reference. Creating the first project glossary from approved info = docs-only
-work, no task file needed unless User asks. No helper names, impl details,
-framework terms, or terms not needed to understand project
-rules/behavior/subsystem boundaries.
+A project glossary is optional until the project creates one.
+Recognize `glossary.adoc` and `glossary.md` as project glossary files.
+If both exist, ask which one is canonical before updating either.
 
-When a recognized project glossary exists, LLM must:
+Once a project glossary exists, use it as shared task language.
+Do not add helper names, implementation details, framework terms, or
+terms not needed to explain project rules, behavior, or subsystem
+boundaries.
 
-- check if approved work changes/clarifies/implements shared domain terms,
-- plan glossary updates during PLAN,
-- perform glossary updates during IMPLEMENTATION with traceability links,
-- use `spec-loop-write-glossary` if available when the project glossary uses the
-  AsciiDoc glossary format defined by the `spec-loop-write-glossary` skill;
-  otherwise update the glossary directly in the active project format.
+If the current task requires glossary work:
 
-If required glossary updates not planned: stop, return to PLAN, update task,
-get approval, continue.
+- reflect it in the task plan,
+- perform it during IMPLEMENTATION with traceability links,
+- use `spec-loop-write-glossary` for the Spec Loop AsciiDoc format;
+  otherwise update the project's active format.
+
+If the task plan is missing required glossary work, return to PLAN,
+update the task, get approval, and continue.
 
 #### Design
 
@@ -249,7 +184,7 @@ Lifecycle definitions:
 - **done** — User-verified completion.
 
 Lifecycle and transition rules:
-- Same transition guards as **Task-based Phases and Transitions**.
+- Same transition guards as `SKILL.md` and the readiness rules above.
 - Allowed task-file moves: `backlog` <-> `in-progress` -> `review` -> `done`.
 - If `in-progress` is empty and only one new task is being created, place it in `in-progress`, otherwise in `backlog`.
 - LLM moves `in-progress` -> `review` when implementation and local verification complete.
@@ -360,11 +295,3 @@ Before setting task or subtask to **review**:
 - Prefer automated tests.
 - Each implementation task without subtasks and each implementation subtask: include explicit Automated tests and Manual tests sublists.
 - Run and fix all required tests before moving to **review**, unless User waives tests.
-
-## Architecture Decision Records
-
-- Record architecture decisions in `architecture-decisions/` as one file per decision, meaningful names.
-- ADRs may be created directly without a task file unless User requests task-linked ADR work.
-- ADR file names: no prefixes (including numbers), no abbreviations; readable descriptive words.
-- Short template: Title, Date, Status, Context, Decision, Consequences.
-- Use ADRs for decisions affecting public behavior, dependencies, or long-term design.

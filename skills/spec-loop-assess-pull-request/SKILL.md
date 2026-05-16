@@ -18,8 +18,19 @@ content.
 Follow `review-guidance.md` for the full trust-boundary and
 prompt-injection-handling rules.
 
-Before work: read `../spec-loop-plan-task/SKILL.md`, follow all files it requires, and apply the full `spec-loop-plan-task`
-skill bundle as shared convention guidance. Then read [review-guidance.md](./review-guidance.md).
+Before work:
+
+- read `../spec-loop-plan-task/SKILL.md` for shared planning,
+  glossary, and phase terminology;
+- read `../spec-loop-plan-task/task-file-constitution.md` for shared
+  artifact structure, formatting, glossary, and diagram conventions
+  reused by retrospective review files;
+- apply those shared conventions where they fit retrospective review
+  work, but do not apply the short planning path, task-file lifecycle
+  routing, or the normal `PLAN -> IMPLEMENTATION` approval gate to the
+  reviewed change itself;
+- then read [review-guidance.md](./review-guidance.md).
+
 Optional compact example:
 [examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
 Use it as a pattern collection for structure, area-wise outcome synthesis, and reconstructive
@@ -30,9 +41,11 @@ section semantics, `Review outcome` labels, `Review Area` behavior, assessment s
 intent-vs-implementation analysis, tone, translation rules, diagram rules, sharing variant behavior. 
 `SKILL.md` = orchestration/entry-point only, not second guidance doc.
 
-Reconstruct already-implemented work as the retrospective `spec-loop-plan-task`-style review artifact that
-should have existed, then add AI assessment and recommendations.
-Do not treat the change as waiting at the normal PLAN -> IMPLEMENTATION gate.
+Reconstruct already-implemented work as the retrospective Spec Loop
+review artifact that should have existed, then add AI assessment and
+recommendations.
+Do not treat the change as waiting at the normal PLAN -> IMPLEMENTATION
+gate.
 
 Use read-only provider commands for evidence when available:
 

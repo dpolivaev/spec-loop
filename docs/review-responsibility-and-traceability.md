@@ -2,22 +2,30 @@
 
 This document captures what Spec Loop implies in team environments.
 
-## What the Constitution enforces
+## What the workflow rules and task-file constitution enforce
 
-The Constitution is the normative contract between the human developer and the
-model. It enforces, at minimum:
+The workflow rules are the normative contract between the human
+developer and the model. When Spec Loop uses a task file, the task-file
+constitution governs that artifact. Together, they enforce at minimum:
 
-* Task files as the source of truth for scope, constraints, research, design,
-  and execution status.
-* Research-first unless explicitly waived.
-* A default approval gate at the task file boundary before any code, test, or
-  configuration changes.
-* Implementation completeness: design, constraints when present, and test
-  specification implemented unless tests are explicitly waived.
-* Traceability discipline: identifiers in commit messages, and status/folder
-  consistency.
+* Explicit planning before executable work.
+* A short planning path in chat only for first-pass, straight-line work
+  with lightweight research, a single clear implementation path,
+  lightweight verification, and no existing task file.
+* Task files as the source of truth for scope, constraints, research,
+  design, and execution status when the task-file path is in use.
+* ADRs and documentation may stand as their own planning artifacts when
+  they are the requested work and no task-file rule overrides that.
+* A default approval gate before any code, test, or configuration
+  changes, with either chat-plan approval on the short path or
+  task-file approval on the task-file path.
+* Implementation completeness: design, constraints when present, and
+  test specification implemented unless tests are explicitly waived.
+* Traceability discipline: identifiers in commit messages, and
+  status/folder consistency.
 
-If a local convention conflicts with the Constitution, the Constitution wins.
+If a local convention conflicts with the applicable workflow rules or
+Task-file Constitution, the governing rule wins.
 
 ## The human developer’s role
 
@@ -27,9 +35,11 @@ primary source of understanding and intent**.
 The model is treated as a powerful implementation and reasoning aid that
 operates under explicit constraints, not as an independent decision-maker.
 
-The developer is responsible for judging correctness, scope, and relevance.
-The model operates within the boundaries defined by the task file and requires
-explicit approval to cross implementation gates.
+The developer is responsible for judging correctness, scope, and
+relevance. The model operates within the boundaries defined by the
+approved plan and requires explicit approval to cross implementation
+gates. On the task-file path, the task file is the source of truth for
+that approved plan.
 
 ## Task files as present truth
 
@@ -72,16 +82,25 @@ current intent.
 
 ## Approval boundaries
 
-The default approval gate is task file approval:
+Spec Loop has two planning approval surfaces:
+
+* Short planning path approval in chat.
+* Task-file approval on the task-file path.
+
+On the short planning path, the model must ask the user to approve both
+skipping task-file creation and implementing from the chat plan.
+
+On the task-file path:
 
 * The model may edit task files without prior approval.
-* If task files were edited and there is no implementation directive, the model
-  must request user review before changing code, tests, or configuration.
-* An explicit directive such as “implement”, “go ahead”, or “proceed” counts as
-  approval and must not trigger another approval request.
+* If task files were edited and there is no implementation directive,
+  the model must request user review before changing code, tests, or
+  configuration.
+* An explicit directive such as “implement”, “go ahead”, or “proceed”
+  counts as approval and must not trigger another approval request.
 
-If scope changes materially, the model proposes next steps and requests approval
-before continuing.
+If scope changes materially, the model proposes next steps and requests
+approval before continuing.
 
 ## Phase model
 
@@ -106,8 +125,9 @@ Reviewers assess correctness against approved intent.
 
 ## PlantUML as a design artifact
 
-The Constitution requires Design sections as PlantUML diagrams that model
-structure or flow (class, component, sequence), with strict formatting rules.
+The task-file constitution requires Design sections as PlantUML
+diagrams that model structure or flow (class, component, sequence),
+with strict formatting rules.
 
 Design remains reviewable as a first-class artifact and is not encoded only in
 implementation.

@@ -1,6 +1,8 @@
 # Review guidance for `spec-loop-assess-pull-request`
 
-This skill reuses the `spec-loop-plan-task` bundle for shared conventions.
+This skill reuses `spec-loop-plan-task/SKILL.md` for shared planning
+terminology plus `task-file-constitution.md` artifact conventions where
+they apply.
 
 This file is the authoritative source for retrospective review behavior, output structure,
 section semantics, assessment style, tone, translation rules, diagram handling, and sharing variants.
@@ -19,9 +21,16 @@ State strong negative findings clearly, but prefer measured phrasing such as `no
 `not yet complete`, `not yet supported by evidence`, or `does not currently demonstrate`
 when that preserves accuracy.
 
-Primary output: a human review-preparation artifact, not a terse verdict.
-Reconstruct the reviewed change as the retrospective `spec-loop-plan-task` artifact that should have existed,
-then add AI assessment and recommendations.
+Primary output: a human review-preparation artifact, not a terse
+verdict. Reconstruct the reviewed change as the retrospective Spec Loop
+artifact that should have existed, then add AI assessment and
+recommendations.
+
+Reuse `task-file-constitution.md` for section ordering, shared section
+semantics, formatting, glossary expectations, and diagram conventions.
+Do not reuse its task-file lifecycle folders or statuses, short-path
+routing, or implementation-approval gates for the reviewed change
+itself.
 
 Global sections describe reviewed change:
 

@@ -15,31 +15,33 @@ presentation, not as required task size.
 
 ## 0. Purpose and boundary
 
-Use this skill when an active task already exists and the agent is
+Use this skill when an active task file already exists and the agent is
 about to seek implementation approval.
 
-This skill is about pre-implementation task readiness. It is not the
-same thing as the Constitution's post-implementation `review` task
-state.
+Do not use this skill for short planning path work kept in chat.
+
+This skill is about pre-implementation task-file readiness. It is not
+the same thing as the Task-file Constitution's post-implementation
+`review` task state.
 
 Do not add a new task-file status or marker for readiness. The
 binding is behavioral:
 
-- before implementation approval seeking inside the `spec-loop-plan-task`
-  workflow, apply this skill;
+- before implementation approval seeking on the task-file path of the
+  `spec-loop-plan-task` workflow, apply this skill;
 - if the task is still not ready, do not seek approval;
 - return exact remaining gaps instead.
 
-Do not create a second task artifact. Update the same active task
-file.
+Do not create a second task artifact. Update the same active task file.
 
 ## 1. Read order and source of truth
 
-Start from the existing active task.
+Start from the existing active task file.
 
 Refresh the relevant `spec-loop-plan-task` bundle requirements in active
-context. If the Constitution digest is not already available in the
-current context, read it through `../spec-loop-plan-task/SKILL.md` as that skill
+context. If the `spec-loop-plan-task` skill digest or the Task-file
+Constitution scope is not already available in the current context,
+read them through `../spec-loop-plan-task/SKILL.md` as that skill
 requires.
 
 Then reread only the sections needed for the current implementation
@@ -76,7 +78,7 @@ Do not ask for implementation approval.
 State clearly that the task is not yet ready for approval-seeking,
 and list the exact missing items, for example:
 - unresolved structural decision;
-- missing diagram required by the Constitution;
+- missing diagram required by the Task-file Constitution;
 - incomplete test specification for the current increment;
 - stale or contradictory naming.
 
@@ -148,12 +150,13 @@ structural artifact.
 
 ## 6. Interaction with `spec-loop-plan-task`
 
-`spec-loop-plan-task` is the primary Constitution owner and the drafting skill.
+`spec-loop-plan-task` owns workflow routing and task drafting.
 This skill is its approval-seeking companion.
 
 That means:
 - do not replace `spec-loop-plan-task`;
-- do not duplicate Constitution ownership here;
+- do not duplicate `spec-loop-plan-task` or task-file-constitution
+  ownership here;
 - add only the approval-preparation delta;
 - if implementation-ready structure is still missing, keep working in
   the task instead of pretending approval can proceed.

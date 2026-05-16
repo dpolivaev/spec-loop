@@ -21,10 +21,14 @@ with tests. Keep the spec local to the next step. Repeat until done.
 
 Spec Loop is a framework of reusable skills.
 
-Its main governing rules live in the `spec-loop-plan-task` skill, in
-**[constitution.md](skills/spec-loop-plan-task/constitution.md)**.
-That skill governs plan-first work, task files, and the approval gate
-before implementation.
+Its main governing rules live in the `spec-loop-plan-task` skill
+itself, in
+**[SKILL.md](skills/spec-loop-plan-task/SKILL.md)**
+and, when the task-file path is chosen,
+**[task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md)**.
+That skill governs plan-first work, the short planning path in chat,
+the task-file path when needed, ADR and documentation routing,
+glossary triggers, and the approval gate before implementation.
 
 The `spec-loop-write-glossary` skill defines the Spec Loop AsciiDoc glossary
 format in
@@ -38,19 +42,20 @@ retrospective review files from trusted pull requests, merge requests,
 or commit ranges and can generate GitHub-friendly Mermaid variants
 from them when needed.
 
-The model uses these skills while drafting and updating task or review
-artifacts; you review and approve at the task-file gate before
-implementation, or inspect retrospective review files when the code
-already exists.
+The model uses these skills while drafting and updating plans, task, or
+review artifacts; you review and approve either a short chat plan or a
+task-file plan before implementation, or inspect retrospective review
+files when the code already exists.
 
 Spec Loop also defines explicit work phases: plan, implementation, and done.
 Any transitions to implementation and to done require explicit user approval.
 
-When a project maintains a glossary described by the Constitution's
-[project glossary section](skills/spec-loop-plan-task/constitution.md#project-glossary),
-that glossary defines the shared domain language above individual tasks and the
-code. It keeps design documents, tests, code symbols, and commit text aligned
-on the same terms across the whole project.
+When a project maintains a glossary described by the task-file
+constitution's
+[project glossary section](skills/spec-loop-plan-task/task-file-constitution.md#project-glossary),
+that glossary defines the shared domain language above individual tasks
+and the code. It keeps design documents, tests, code symbols, and
+commit text aligned on the same terms across the whole project.
 
 ## Why This Works with Large Codebases
 
@@ -84,9 +89,11 @@ Spec Loop uses more than one document type on purpose. They do not have
 the same job or the same lifetime.
 
 - Task files are short-lived working artifacts for the next concrete
-  slice of work. They exist to drive research, review, implementation,
-  and testing of that slice.
+  slice of work when the task-file path is in use. They exist to drive
+  research, review, implementation, and testing of that slice.
 - ADRs capture durable decisions and the reasons behind them.
+- Documentation-only work may stand on its own when no executable
+  change is involved and no project rule requires a task file.
 - A glossary captures stable shared language across tasks, design,
   tests, code symbols, and commits.
 - Review files reconstruct and assess already-implemented work from
@@ -210,8 +217,9 @@ If your harness behaves that way, add a project instruction such as:
 Use the `spec-loop-plan-task` skill for all non-trivial work unless I explicitly
 opt out.
 Use the `spec-loop-write-glossary` skill for `glossary.adoc` glossary work.
-Follow the Constitution loaded through the `spec-loop-plan-task` skill,
-including the PLAN -> IMPLEMENTATION explicit approval gate.
+Follow the workflow rules loaded through the `spec-loop-plan-task`
+skill, including the short-planning-path routing and the
+PLAN -> IMPLEMENTATION explicit approval gate.
 ```
 
 If your harness supports project instruction files such as `AGENTS.md`,
@@ -226,13 +234,16 @@ together. `spec-loop-assess-pull-request` is optional and intended only
 for retrospective review of trusted repositories:
 
 1. **`spec-loop-plan-task`**
-   - the drafting and task-administration skill for task-based work;
+   - the planning and task-administration skill for non-trivial work;
    - defined by
-     [skills/spec-loop-plan-task/constitution.md](skills/spec-loop-plan-task/constitution.md).
+     [skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md)
+     and, on the task-file path,
+     [skills/spec-loop-plan-task/task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md).
 
 2. **`spec-loop-prepare-implementation-approval`**
-   - the mandatory approval-preparation skill used before the agent asks
-     for implementation approval within the `spec-loop-plan-task` workflow;
+   - the approval-preparation skill used only on the task-file path
+     before the agent asks for implementation approval within the
+     `spec-loop-plan-task` workflow;
    - defined by
      [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md).
 
@@ -253,11 +264,14 @@ for retrospective review of trusted repositories:
 
 ## Documentation
 
-1. Check the Constitution briefly.
+1. Check the planning skill briefly.
 
-   * **[skills/spec-loop-plan-task/constitution.md](skills/spec-loop-plan-task/constitution.md)**
-     defines the normative rules: task files, research/design discipline,
-     approval gates, traceability requirements, and definition of done.
+   * **[skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md)**
+     defines planning-path selection, approval and escalation rules,
+     ADR and documentation routing, glossary triggers, and phase rules.
+   * **[skills/spec-loop-plan-task/task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md)**
+     defines the task-file-specific rules: task files, research/design
+     discipline, traceability requirements, and definition of done.
 
 2. Study the Wordle example by commit history.
 
@@ -268,8 +282,9 @@ for retrospective review of trusted repositories:
 
 3. Check
    **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**.
-   It explains how task files and the Constitution map to team development
-   practice: boundaries, responsibility, commit linking, and status discipline.
+   It explains how short chat planning, task files, workflow rules, and
+   the task-file constitution map to team development practice:
+   boundaries, responsibility, commit linking, and status discipline.
 
 4. Follow one of the hands-on tutorials.
 
@@ -288,14 +303,15 @@ for retrospective review of trusted repositories:
 
 5. Project glossary conventions.
 
-   * See the Constitution's project glossary section above.
+   * See the task-file constitution's project glossary section above.
    * **[skills/spec-loop-write-glossary/glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md)**
      is the shared glossary-format guidance file and includes its own
      embedded example.
 
 Recommended quick-check order:
 - `README.md`
-- `skills/spec-loop-plan-task/constitution.md`
+- `skills/spec-loop-plan-task/SKILL.md`
+- `skills/spec-loop-plan-task/task-file-constitution.md`
 - `docs/review-responsibility-and-traceability.md`
 - `docs/online-art-game-tutorial.md`
 - `docs/wordle-tutorial.md`
@@ -305,8 +321,8 @@ Recommended quick-check order:
 Spec Loop treats diagrams as specification artifacts: they make design
 intent reviewable at the same boundary as the surrounding text.
 
-Where the Constitution requires diagrams in task files, use PlantUML by
-default.
+Where the task-file constitution requires diagrams in task files, use
+PlantUML by default.
 
 Mermaid is a poorer but still possible alternative when the User or
 another governing instruction explicitly prefers Mermaid, for example
