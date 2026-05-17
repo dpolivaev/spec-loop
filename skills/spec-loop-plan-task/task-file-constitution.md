@@ -137,7 +137,14 @@ Use `git mv` for tracked task files, stage move immediately before editing. Pres
 
 #### Commit checks
 
-Update subtask status on lifecycle state change. Before each commit: check relevant task files, propose needed status/folder changes. Apply only after explicit User confirmation, except LLM applies `in-progress` -> `review` directly when implementation and local verification are complete.
+Update subtask status on lifecycle state change. Before each
+task-scoped commit: check relevant task files. If relevant task files
+are modified, those modifications must be staged and included in the
+same commit. Do not invent synthetic task-file edits solely to satisfy
+this coupling. Propose needed status/folder changes. Apply only after
+explicit User confirmation, except LLM applies `in-progress` ->
+`review` directly when implementation and local verification are
+complete.
 
 No generated or local-only artifacts in commits. If accidentally tracked: untrack, add/update ignore rule before continuing, unless intentionally versioned.
 
@@ -169,12 +176,15 @@ Intent: readable in plain text editors (vim, less, nano) and rendered views.
 ## Task States
 
 Tasks and subtasks share one lifecycle: `backlog`, `in-progress`, `review`, `done`.
+These status values are an exact enum. No other task or subtask status
+values are allowed.
 
 Phases = what work may happen now. Lifecycle states = where tracked work sits.
 
 Representation:
-- Task state = top-level folder until the file reaches `review` or `done`.
-- Files in `review` or `done` stay there. Later work uses the newest follow-up subtask status.
+- Task state = top-level folder.
+- Tasks in `review` or `done` stay there. Later work uses the newest follow-up subtask status.
+- Only subtasks have status fields. The task status itself is indicated only by its folder.
 - Subtask lifecycle: `- **Status:** <status>`.
 
 Lifecycle definitions:
@@ -189,11 +199,14 @@ Lifecycle and transition rules:
 - If `in-progress` is empty and only one new task is being created, place it in `in-progress`, otherwise in `backlog`.
 - LLM moves `in-progress` -> `review` when implementation and local verification complete.
 - Task (not in done) with subtasks: move task to `review` only when every subtask is `review`.
-- Moving into `done` requires explicit User request.
+- Moving into `done` is user-only, always. The LLM must never move a
+  task or subtask to `done` without explicit User request.
 
 ## Task Structure
 
-Each task uses this exact order and layout:
+Each task uses this exact order and layout.
+Do not add extra metadata fields, bold-label section labels, or custom
+readiness markers unless the User explicitly requests them.
 
 - Title line: `# Task: <title>`.
 - One identifier (mutually exclusive):
