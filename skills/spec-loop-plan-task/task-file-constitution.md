@@ -72,9 +72,8 @@ Research may mention legacy terms. Design uses only canonical Scenario terms exc
 
 #### Project glossary
 
-A project glossary is optional until the project creates one.
-Recognize `glossary.adoc` and `glossary.md` as project glossary files.
-If both exist, ask which one is canonical before updating either.
+Follow `SKILL.md` for glossary-file recognition and glossary-format
+routing.
 
 Once a project glossary exists, use it as shared task language.
 Do not add helper names, implementation details, framework terms, or
@@ -83,10 +82,8 @@ boundaries.
 
 If the current task requires glossary work:
 
-- reflect it in the task plan,
-- perform it during IMPLEMENTATION with traceability links,
-- use `spec-loop-write-glossary` for the Spec Loop AsciiDoc format;
-  otherwise update the project's active format.
+- reflect it in the task plan;
+- perform it during IMPLEMENTATION with traceability links.
 
 If the task plan is missing required glossary work, return to PLAN,
 update the task, get approval, and continue.

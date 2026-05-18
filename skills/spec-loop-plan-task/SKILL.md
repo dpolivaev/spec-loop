@@ -39,20 +39,22 @@ After loading the applicable rules, immediately emit 🫡.
 
 Phases:
 
-- **PLAN** - research, design/spec, and test specification.
-- **IMPLEMENTATION** - code, tests, config, docs, and related changes
-  executed according to the approved plan.
+- **PLAN** - research, design/spec, and test specification for
+  executable work.
+- **IMPLEMENTATION** - approved executable changes and their coupled
+  updates, including code, tests, config, dependencies, packaging,
+  runtime assets, and any required documentation updates.
 - **DONE** - verified and accepted.
 
-PLAN allows edits only to non-executable artifacts such as task files,
-ADRs, docs, diagrams, and instruction files. Commands are allowed for
-research or verification only if they do not change repository contents
-outside those artifacts. If they would, treat that work as
+PLAN allows edits only to planning artifacts for the current
+executable work item, especially task files. Commands are allowed for
+research or verification only if they do not change repository
+contents outside those artifacts. If they would, treat that work as
 IMPLEMENTATION and get explicit User approval first.
 
 Anything touching executable behavior, tests, build or config,
-dependencies, packaging, or runtime assets is IMPLEMENTATION and needs
-explicit User instruction.
+dependencies, packaging, runtime assets, or documentation coupled to
+those changes is IMPLEMENTATION and needs explicit User instruction.
 
 Work starts in **PLAN** and returns to **PLAN** after each work item
 unless the User says otherwise.
@@ -79,8 +81,9 @@ unless the User says otherwise.
 If implementation must meaningfully deviate from the approved plan, use
 this skill again before continuing.
 
-Phase model governs task-scoped work only. Non-code, non-test,
-non-config work is outside it unless the User says otherwise.
+Phase model governs executable work and documentation coupled to that
+work. Standalone documentation work is outside it unless the User or
+project instructions say otherwise.
 
 ## Planning paths
 
@@ -120,11 +123,23 @@ again and promote the task to a task file before continuing.
 
 ## ADR and documentation routing
 
-ADR-only work is not implementation-task planning by default.
-When the requested work is only to create, revise, or compare an ADR,
-do not create a task file unless the user explicitly asks for one or
-the ADR work is part of a larger task already being tracked in a task
-file.
+Ceremony follows executable impact, not file type.
+
+Standalone documentation work may stay outside the task-file path when
+all of the following are true:
+
+- the requested work is confined to documentation artifacts;
+- it does not require executable changes; and
+- no project rule requires a task file.
+
+ADRs and instruction files, including skill files, are normally treated
+as standalone documentation when the requested work is confined to
+those artifacts.
+
+ADR-only work is not implementation-task planning by default. When the
+requested work is only to create, revise, or compare an ADR, do not
+create a task file unless the user explicitly asks for one or the ADR
+work is part of a larger task already being tracked in a task file.
 
 Use ADRs for decisions affecting public behavior, dependencies, or
 long-term design.
@@ -136,9 +151,9 @@ long-term design.
 - Use the short template: Title, Date, Status, Context, Decision,
   Consequences.
 
-Documentation-only work may also stay outside the task-file path when
-it does not require executable changes and no project rule requires a
-task file for that documentation change.
+If documentation is part of a larger executable change, keep it in that
+task. Plan the documentation update during PLAN and perform it during
+IMPLEMENTATION.
 
 ## Glossary policy
 
@@ -157,14 +172,14 @@ Once a project glossary exists, it defines shared domain language above
 individual tasks and code.
 
 Creating the first project glossary from approved information is
-normally documentation-only work and does not require a task file
+normally standalone documentation work and does not require a task file
 unless the user or project rules require one.
 
 When approved work changes, clarifies, or implements shared domain
 terms:
 
-- include the glossary update in the plan and implementation path,
-  including short-path work;
+- include the glossary update in the plan, including short-path work;
+- perform the glossary update during IMPLEMENTATION;
 - use `spec-loop-write-glossary` when the glossary uses the Spec Loop
   AsciiDoc glossary format;
 - otherwise update the glossary directly in the project's active
