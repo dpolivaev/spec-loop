@@ -27,6 +27,13 @@ In tasks with subtasks, this applies to the active subtask and any
 task-level context it depends on, not to future subtasks that are not
 yet current.
 
+At any point while drafting or revising Research, Scenario, Design, or
+Test specification, if the LLM has essential doubts about scope,
+behavior, domain language, constraints, structural boundaries,
+naming, migration, or verification expectations, it must ask targeted
+User questions instead of guessing. Reduce uncertainty early; do not
+carry material ambiguity forward.
+
 If asking the User to review a draft instead, say so explicitly and
 list the known gaps, open questions, and unresolved decisions.
 
@@ -59,6 +66,8 @@ Anchors behavior and domain terms before implementation. Use when behavior or te
 
 Scenario = source of domain/behavior language. When terms introduced/changed: create/update Scenario first, use those terms in Design, tests, code, commits. No parallel synonyms.
 
+Across the whole task file, use domain-related words for planned behavior and structure. When referring to planned or changed production types, use exact intended class, interface, and enum names, not stand-ins or generic role placeholders.
+
 Research may mention legacy terms. Design uses only canonical Scenario terms except explicit legacy-to-target mapping tables. If code uses different names, align incrementally and document intentional mismatch in task file.
 
 #### Project glossary
@@ -88,7 +97,9 @@ Documents target system: architecture, data structures, data flow, interactions,
 
 Design = implementation contract. Must be reviewable and implementation-ready.
 
-Use only final intended names for design-owned terms, units, config keys, tool/API names, request/response fields, enum values, etc. No placeholders, temp names, candidate names, example names. Undecided name/unit/boundary = not ready for implementation.
+Use only final intended names for design-owned terms, units, config keys, tool/API names, request/response fields, enum values, etc. Prefer domain-related words and exact intended class names. No placeholders, temp names, candidate names, example names, or generic stand-ins such as `Controller`, `Collaborator`, `Helper`, `Manager`, or `Processor` unless they are established domain or framework terms that the design explicitly depends on. Undecided name/unit/boundary = not ready for implementation.
+
+If finding an exact name is hard, treat that as a design defect. Change the design until responsibilities and boundaries admit precise names, and immediately plan the required refactoring in the task file. Resolving precise domain language and exact structural names is the highest priority during design work.
 
 When production structure changes, Design must make the structural
 inventory explicit for every planned new or changed top-level

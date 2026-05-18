@@ -57,7 +57,12 @@ explicit User instruction.
 Work starts in **PLAN** and returns to **PLAN** after each work item
 unless the User says otherwise.
 
-- Ask questions before PLAN only to clarify scope or constraints.
+- Ask questions before PLAN whenever scope, constraints, domain
+  language, expected behavior, priorities, or other essential
+  uncertainties remain.
+- During PLAN, ask targeted User questions as soon as essential doubts
+  appear in Research or Design. Do not guess through material
+  ambiguity just because work is not yet formally blocked.
 - No permission questions for already requested work.
 - Starting PLAN artifacts, entering IMPLEMENTATION, and marking DONE
   require explicit User instruction.

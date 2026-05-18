@@ -3,9 +3,10 @@
 This skill reuses the full `spec-loop-plan-task` bundle for shared workflow
 conventions.
 
-This file is the authoritative source for pre-implementation
-approval-seeking behavior, readiness checks, diagram-first
-presentation, duplication removal, and response rules.
+This file is the authoritative source for user-facing task-review
+gating, pre-implementation approval-seeking behavior, readiness
+checks, diagram-first presentation, duplication removal, and response
+rules.
 Optional compact examples:
 - [examples/example-task-session-state-boundary.md](./examples/example-task-session-state-boundary.md)
 - [examples/example-task-serialized-payload-change.md](./examples/example-task-serialized-payload-change.md)
@@ -15,8 +16,9 @@ presentation, not as required task size.
 
 ## 0. Purpose and boundary
 
-Use this skill when an active task file already exists and the agent is
-about to seek implementation approval.
+Use this skill when an active task file already exists and the next
+user-facing action would otherwise present that task for evaluation,
+feedback, review, or implementation approval.
 
 Do not use this skill for short planning path work kept in chat.
 
@@ -24,13 +26,8 @@ This skill is about pre-implementation task-file readiness. It is not
 the same thing as the Task-file Constitution's post-implementation
 `review` task state.
 
-Do not add a new task-file status or marker for readiness. The
-binding is behavioral:
-
-- before implementation approval seeking on the task-file path of the
-  `spec-loop-plan-task` workflow, apply this skill;
-- if the task is still not ready, do not seek approval;
-- return exact remaining gaps instead.
+Do not add a new task-file status or marker for readiness. Section 2
+defines the allowed user-facing outcomes.
 
 Do not create a second task artifact. Update the same active task file.
 
@@ -57,12 +54,14 @@ complete.
 
 ## 2. Output contract
 
-Two outcomes are allowed.
+Three outcomes are allowed.
 
-### A. Approval-seeking may proceed
+### A. User-facing task review may proceed
 
-Polish the task for human design review, then ask the user for
-implementation approval.
+Polish the task for human design review before showing it to the User.
+
+If the next action is implementation approval, ask for implementation
+approval.
 
 Use approval language, for example:
 - `The task is ready for your implementation approval.`
@@ -71,16 +70,23 @@ Use approval language, for example:
 Avoid saying only `ready for review`, because `review` is overloaded
 between design review and post-implementation review state.
 
-### B. Approval-seeking is blocked
+### B. User-facing review is blocked
 
-Do not ask for implementation approval.
+Do not show the task as reviewable and do not ask for implementation
+approval.
 
-State clearly that the task is not yet ready for approval-seeking,
+State clearly that the task is not yet review ready,
 and list the exact missing items, for example:
 - unresolved structural decision;
 - missing diagram required by the Task-file Constitution;
 - incomplete test specification for the current increment;
 - stale or contradictory naming.
+
+### C. Ask targeted User questions
+
+If essential doubts remain during approval preparation, the task is
+not review ready. Keep it in PLAN and ask only the exact questions
+needed to remove the uncertainty.
 
 ## 3. Review-preparation transformation rules
 
@@ -102,6 +108,12 @@ Canonical ownership by information kind:
 Draft scaffolding may exist temporarily, but the approval-prepared task
 should remove or shrink duplicated content.
 
+The Design section prepared for approval must contain no placeholders
+of any kind. Do not leave role stand-ins, candidate names, temporary
+labels, abstract aliases, or generic structural placeholders in
+Design diagrams, tables, lists, or prose. If an exact intended name is
+not yet known, approval-seeking is blocked.
+
 Keep both a diagram and a table only when each adds distinct value.
 If a table only restates what the diagram already shows, remove it or
 reduce it to the exact information that the diagram cannot carry
@@ -109,15 +121,19 @@ cleanly.
 
 ## 4. Readiness checks
 
-Before seeking implementation approval, check at least these items for
-the current increment.
+Before showing the task to the User for evaluation or seeking
+implementation approval, check at least these items for the current
+increment.
 
 - The task is the correct active artifact and the current increment is
   clear.
 - Research, Scenario when required, Design, and Test specification are
   complete enough for the current increment.
+- No unresolved essential doubts remain about scope, behavior,
+  constraints, naming, or structural boundaries.
 - Final intended names are used for new structural elements and
-  externally meaningful identifiers.
+  externally meaningful identifiers, consistent with the exact-naming
+  and no-placeholder rule above.
 - Required diagrams are present and readable.
 - When production structure changes, new or changed top-level
   production types and externally meaningful identifiers are explicit
@@ -130,7 +146,8 @@ the current increment.
 - The task does not present duplicated diagram-plus-table restatements
   without added value.
 
-If any check fails, stay in PLAN and report the exact gap.
+If any check fails, stay in PLAN and use the applicable outcome from
+Section 2.
 
 ## 5. Diagram-first guidance
 
@@ -151,15 +168,13 @@ structural artifact.
 ## 6. Interaction with `spec-loop-plan-task`
 
 `spec-loop-plan-task` owns workflow routing and task drafting.
-This skill is its approval-seeking companion.
+This skill is its user-facing review and approval-seeking companion.
 
 That means:
 - do not replace `spec-loop-plan-task`;
 - do not duplicate `spec-loop-plan-task` or task-file-constitution
   ownership here;
-- add only the approval-preparation delta;
-- if implementation-ready structure is still missing, keep working in
-  the task instead of pretending approval can proceed.
+- add only the approval-preparation delta.
 
 If new structural decisions emerge during readiness checking, update
 the task in place and keep the conversation in PLAN until the gaps are
