@@ -13,14 +13,20 @@ constitution governs that artifact. Together, they enforce at minimum:
   with lightweight research, a single clear implementation path,
   lightweight verification, and no existing task file.
 * Task files as the source of truth for scope, constraints, research,
-  design, and execution status when the task-file path is in use.
+  design, test expectations, and execution status when the task-file
+  path is in use, plus `Implementation notes` when meaningful
+  implementation-time history must remain visible.
 * ADRs and documentation may stand as their own planning artifacts when
   they are the requested work and no task-file rule overrides that.
 * A default approval gate before any code, test, or configuration
   changes, with either chat-plan approval on the short path or
   task-file approval on the task-file path.
+* A separate post-approval implementation skill on the task-file path
+  that governs implementation-time clarification, task maintenance,
+  and the move to `review`.
 * Implementation completeness: design, constraints when present, and
-  test specification implemented unless tests are explicitly waived.
+  test specification implemented unless tests are explicitly waived,
+  plus any required implementation-note traceability captured.
 * Traceability discipline: identifiers in commit messages, and
   status/folder consistency.
 
@@ -43,8 +49,9 @@ that approved plan.
 
 ## Task files as present truth
 
-A task file is not a historical narrative. It is the stabilized description of
-what must be true now to implement the next increment correctly.
+A task file is not a general historical narrative. It is the
+stabilized description of what must be true now to implement the next
+increment correctly.
 
 Practically:
 
@@ -52,8 +59,13 @@ Practically:
 * Constraints record binding limits for the increment when needed.
 * Design records the approved target design intent for the increment.
 * Test specification defines the verification that must exist for completion.
+* Implementation notes, when present, keep only the bounded
+  implementation-time decision trail that later review needs.
 
-History belongs in version control. The task file represents the current intent.
+History still belongs primarily in version control. `Implementation
+notes` is the narrow exception for implementation-time decisions that
+would otherwise be lost. The task file still represents the current
+intent.
 
 ### Constraints as a control layer
 
@@ -98,9 +110,15 @@ On the task-file path:
   configuration.
 * An explicit directive such as “implement”, “go ahead”, or “proceed”
   counts as approval and must not trigger another approval request.
+* After task-file implementation approval,
+  `spec-loop-implement-task` governs implementation-time
+  clarification, task maintenance, and the move to `review`.
 
-If scope changes materially, the model proposes next steps and requests
-approval before continuing.
+If implementation stays within the approved design and only bounded
+clarification is needed, the task is updated in place and work
+continues. If scope or another approved contract changes materially,
+the model proposes next steps and requests renewed approval before
+continuing.
 
 ## Phase model
 

@@ -54,7 +54,7 @@ Task base names: no ticket IDs, abbreviations; use readable descriptive words.
 
 Backlog and done numbering independent. Same number may appear in multiple backlog folders, once in `done`.
 
-### 2. Planning artifacts
+### 2. Planning and execution artifacts
 
 #### Research
 
@@ -125,6 +125,14 @@ When Scenario exists, Design uses canonical Scenario terms. Diagram must show re
 
 Documents verification structure and concrete test coverage.
 
+#### Implementation notes
+
+Conditional execution-phase notes. This section is filled only during
+implementation under the `spec-loop-implement-task` skill. It is not
+part of the canonical planning truth, but its content may be relevant
+context for follow-up tasks and subtasks. Detailed behavior is
+governed by that skill and is not repeated here.
+
 #### Iterative discovery
 
 Iterate across Research, Scenario (if used), Design, Test spec until coherent. Record intermediate alternatives only when they aid reasoning/review. No implementation during this loop.
@@ -152,7 +160,7 @@ same commit. Do not invent synthetic task-file edits solely to satisfy
 this coupling. Propose needed status/folder changes. Apply only after
 explicit User confirmation, except LLM applies `in-progress` ->
 `review` directly when implementation and local verification are
-complete.
+complete under `spec-loop-implement-task`.
 
 No generated or local-only artifacts in commits. If accidentally tracked: untrack, add/update ignore rule before continuing, unless intentionally versioned.
 
@@ -205,7 +213,7 @@ Lifecycle and transition rules:
 - Same transition guards as `SKILL.md` and the readiness rules above.
 - Allowed task-file moves: `backlog` <-> `in-progress` -> `review` -> `done`.
 - If `in-progress` is empty and only one new task is being created, place it in `in-progress`, otherwise in `backlog`.
-- LLM moves `in-progress` -> `review` when implementation and local verification complete.
+- LLM moves `in-progress` -> `review` when implementation and local verification are complete under `spec-loop-implement-task`.
 - Task (not in done) with subtasks: move task to `review` only when every subtask is `review`.
 - Moving into `done` is user-only, always. The LLM must never move a
   task or subtask to `done` without explicit User request.
@@ -230,16 +238,22 @@ readiness markers unless the User explicitly requests them.
   - `- **Research:**`
   - `- **Design:**`
   - `- **Test specification:**`
-  In tasks with subtasks, main-task Research, Design, and Test specification may be omitted.
-  Omitted Scenario or Constraints: keep remaining sections in order.
+  - `- **Implementation notes:**` (conditional; include it whenever any meaningful implementation-phase note exists)
+  In tasks with subtasks, main-task Research, Design, Test specification, and empty Implementation notes may be omitted.
+  Omitted Scenario, Constraints, or empty Implementation notes: keep remaining sections in order.
 - Subtasks (if any): after all global task sections.
 
 ### Every Subtask
 - must start with `## Subtask: <title>` followed by `- **Status:** <status>`,
-- must use same list-item labels and ordering as main task (including conditional Scenario and optional Constraints),
+- must use same list-item labels and ordering as main task (including conditional Scenario, optional Constraints, and conditional Implementation notes),
 - must represent a functional increment; for implementation tasks must include executable work,
 - must satisfy **Testing Policy**.
 - No planning-only subtasks unless User explicitly asks.
+
+`Implementation notes` placement:
+- without subtasks: task level;
+- with subtasks: active implementation subtask, unless a genuine
+  task-level note is needed.
 
 ### Task Context Hygiene
 
@@ -294,19 +308,6 @@ Short orientation for someone unfamiliar with codebase: relevant modules, import
 - Class diagrams: use `classDiagram`.
 - Only single-level `namespace` blocks; no nesting.
 - Hierarchical boundaries: flatten namespace names instead of nesting.
-
-## Definition of Done for LLM
-
-Before setting task or subtask to **review**:
-
-1. **Research**: legacy state documented as needed.
-2. **Scenario**: expected behavior in natural language when applicable.
-3. **Design**: architecture, data flow, classes, interactions defined.
-4. **Implementation**: Scope, Design, Constraints, Test spec fully implemented as applicable.
-5. **Verification**: required tests pass locally.
-6. **Cleanliness**: no TODOs, placeholders, example names, temp comments, unused imports.
-7. **Documentation**: any deviation from approved design documented in task file.
-8. **Glossary**: required glossary work complete.
 
 ## Testing Policy
 

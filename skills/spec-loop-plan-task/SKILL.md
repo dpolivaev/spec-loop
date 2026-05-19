@@ -68,18 +68,13 @@ unless the User says otherwise.
 - No permission questions for already requested work.
 - Starting PLAN artifacts, entering IMPLEMENTATION, and marking DONE
   require explicit User instruction.
-- If scope, design, naming, or logic changes, request re-approval. No
-  IMPLEMENTATION inertia across items.
-- After approval, new top-level production types, renamed planned
-  structural elements, new cross-class boundaries, and new externally
-  meaningful identifiers require a return to PLAN and renewed
-  approval. Purely internal work inside an approved class boundary does
-  not, unless the User asked for lower-level review.
+- After approval, material implementation changes still require
+  renewed User approval. On the short planning path, use this skill
+  again before continuing. On the task-file path, follow
+  `../spec-loop-implement-task/SKILL.md` for implementation-time
+  handling and return-to-PLAN routing.
 - Phases are exclusive unless the User allows combined
   planning-plus-implementation.
-
-If implementation must meaningfully deviate from the approved plan, use
-this skill again before continuing.
 
 Phase model governs executable work and documentation coupled to that
 work. Standalone documentation work is outside it unless the User or
@@ -200,7 +195,11 @@ When the task-file path is in use:
   durable planning artifact for that task;
 - before treating task-file planning as complete or asking for
   implementation approval from a task file, use
-  [../spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md).
+  [../spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md);
+- after task-file implementation approval, use
+  [../spec-loop-implement-task/SKILL.md](../spec-loop-implement-task/SKILL.md)
+  for implementation-phase task maintenance, clarification handling,
+  and `in-progress` -> `review` checks.
 
 If project instructions do not define a task directory, use `tasks/`
 as the default.

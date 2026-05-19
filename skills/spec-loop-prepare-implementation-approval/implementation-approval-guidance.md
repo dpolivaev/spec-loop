@@ -14,26 +14,7 @@ Optional compact examples:
 Use the examples as pattern collections for approval-prepared task
 presentation, not as required task size.
 
-## 0. Purpose and boundary
-
-Use this skill when an active task file already exists and the next
-user-facing action would otherwise present that task for evaluation,
-feedback, review, or implementation approval.
-
-Do not use this skill for short planning path work kept in chat.
-
-This skill is about pre-implementation task-file readiness. It is not
-the same thing as the Task-file Constitution's post-implementation
-`review` task state.
-
-Do not add a new task-file status or marker for readiness. Section 2
-defines the allowed user-facing outcomes.
-
-Do not create a second task artifact. Update the same active task file.
-
 ## 1. Read order and source of truth
-
-Start from the existing active task file.
 
 Refresh the relevant `spec-loop-plan-task` bundle requirements in active
 context. If the `spec-loop-plan-task` skill digest or the Task-file
@@ -41,16 +22,13 @@ Constitution scope is not already available in the current context,
 read them through `../spec-loop-plan-task/SKILL.md` as that skill
 requires.
 
-Then reread only the sections needed for the current implementation
-increment:
+Use the active task or active subtask as the controlling
+specification for the current increment. Follow all applicable task
+sections. Re-read only the current increment and the sections that
+control approval readiness. Do not inflate future subtasks.
 
-- main-task context that the increment depends on;
-- the active subtask, if subtasks exist;
-- any diagrams, identifier lists, or test-spec sections that control
-  the current increment.
-
-Do not inflate future backlog subtasks just to make the task look
-complete.
+Capture any new readiness-check decisions in the task itself so the
+task stays internally consistent.
 
 ## 2. Output contract
 
@@ -175,6 +153,10 @@ That means:
 - do not duplicate `spec-loop-plan-task` or task-file-constitution
   ownership here;
 - add only the approval-preparation delta.
+
+After implementation approval, post-approval execution and the
+transition to `review` are handled by
+`../spec-loop-implement-task/SKILL.md`.
 
 If new structural decisions emerge during readiness checking, update
 the task in place and keep the conversation in PLAN until the gaps are

@@ -27,6 +27,9 @@ user-facing review gating, and approval-seeking output.
 Follow `implementation-approval-guidance.md` for the allowed user-facing
 outcomes and response rules.
 
+After task-file implementation approval, implementation is governed by
+`../spec-loop-implement-task/SKILL.md`.
+
 If no active task file exists, if the current increment is unclear, or
 if short-path planning is in use, do not use this skill. Continue task
 work under the `spec-loop-plan-task` bundle instead.
