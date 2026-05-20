@@ -188,6 +188,34 @@ My coding harness may run in a terminal, but I review files in
 <VS Code or JetBrains>.
 ```
 
+If you review files in VS Code, you can also run the helper script
+directly instead of asking an agent to use the skill. You can either
+run it from a local checkout or download the current main-branch copy
+directly from
+[`setup-vscode-server-based.sh`](https://raw.githubusercontent.com/dpolivaev/spec-loop/refs/heads/main/skills/spec-loop-setup-doc-rendering/scripts/setup-vscode-server-based.sh).
+The script requires a VS Code CLI command on `PATH` (`code`,
+`code-insiders`, `code.cmd`, or `code-insiders.cmd`) and is intended
+for macOS, Linux, WSL, and Git Bash for Windows.
+
+The helper automates only the VS Code server-based PlantUML preview
+path together with the AsciiDoc extension used by Spec Loop glossaries.
+It does not automate the local-only PlantUML path or JetBrains setup.
+
+From a local checkout:
+
+```bash
+bash skills/spec-loop-setup-doc-rendering/scripts/setup-vscode-server-based.sh --check
+bash skills/spec-loop-setup-doc-rendering/scripts/setup-vscode-server-based.sh --apply
+```
+
+Without a local checkout:
+
+```bash
+curl -fsSLO https://raw.githubusercontent.com/dpolivaev/spec-loop/refs/heads/main/skills/spec-loop-setup-doc-rendering/scripts/setup-vscode-server-based.sh
+bash setup-vscode-server-based.sh --check
+bash setup-vscode-server-based.sh --apply
+```
+
 ### Update installed skills
 
 Project-level update:

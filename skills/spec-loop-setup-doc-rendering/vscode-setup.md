@@ -43,6 +43,29 @@ Optional setting:
 
 Use the built-in VS Code Markdown preview after installation.
 
+The helper script
+[scripts/setup-vscode-server-based.sh](./scripts/setup-vscode-server-based.sh)
+is stored in this skill's scripts/ subdirectory, both in a repository
+checkout and in an installed skill bundle. If you want this
+server-based VS Code path and can access the skill directory, you can
+run the script directly instead of using the interactive skill flow.
+For example, from this directory:
+
+```bash
+bash ./scripts/setup-vscode-server-based.sh --check
+bash ./scripts/setup-vscode-server-based.sh --apply
+```
+
+If you are in a different working directory, run the same script by its
+full path.
+
+The helper requires a VS Code CLI command on `PATH` (`code`,
+`code-insiders`, `code.cmd`, or `code-insiders.cmd`) and is intended
+for macOS, Linux, WSL, and Git Bash for Windows. It covers only the
+server-based VS Code path. It does not configure the local-only
+PlantUML path, and it does not edit the optional
+`markdown.plantuml.server` setting.
+
 ### Option B: local-only Markdown preview
 
 Use this when the user wants local rendering.
