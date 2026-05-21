@@ -145,9 +145,25 @@ Meaning of the subheadings:
   was ambiguous but the approved contract remained intact;
 - `Tradeoffs` - meaningful alternatives considered during
   implementation and why the chosen path won; and
-- `Open questions` - non-blocking follow-up items explicitly deferred
-  to named follow-up work. Naming the intended follow-up work is
-  sufficient; the follow-up subtask does not need to exist yet.
+- `Open questions` - explicit non-blocking deferred decisions. Each
+  item should contain the deferred question and may include
+  supplementary information before or after it.
+
+Example task-file content when notes are relevant:
+
+- **Implementation notes:**
+  - **Interpretations:**
+    - Treated repeated invite submission as idempotent because the
+      approved task required retry-safe behavior but did not define
+      duplicate handling precisely.
+  - **Tradeoffs:**
+    - Kept duplicate detection in the service layer instead of the
+      repository so duplicate handling stays testable without
+      persistence-coupled error mapping.
+  - **Open questions:**
+    - Bulk invite behavior is out of scope for the current increment,
+      so one deferred decision remains: should bulk invite flow use
+      the same idempotency rule as single invite submission?
 
 Record policy:
 
@@ -169,9 +185,7 @@ Record policy:
 `Open questions` may remain only when all of the following are true:
 
 - they do not block the current increment;
-- they are explicitly deferred to named follow-up work, where naming
-  the intended follow-up work is sufficient even if the follow-up
-  subtask does not yet exist; and
+- they are explicitly left deferred; and
 - they therefore do not prevent the current task or subtask from
   moving to `review`.
 
@@ -195,8 +209,8 @@ Before moving the task or subtask to `review`, ensure that:
 - the mandatory `Implementation notes` check has been performed;
 - when relevant `Implementation notes` content exists,
   `Implementation notes` is recorded in the task file;
-- any remaining `Open questions` are non-blocking and explicitly
-  deferred to named follow-up work; and
+- any remaining `Open questions` are non-blocking and explicitly left
+  deferred; and
 - no obvious leftovers remain, such as TODOs, placeholders, example
   names, temporary comments, or unused imports.
 
