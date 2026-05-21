@@ -156,7 +156,7 @@ That means:
 
 After implementation approval, post-approval execution and the
 transition to `review` are handled by
-`../spec-loop-implement-task/SKILL.md`.
+`../spec-loop-implementation-flow/SKILL.md`.
 
 If new structural decisions emerge during readiness checking, update
 the task in place and keep the conversation in PLAN until the gaps are

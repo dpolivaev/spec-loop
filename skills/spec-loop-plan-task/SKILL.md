@@ -71,7 +71,7 @@ unless the User says otherwise.
 - After approval, material implementation changes still require
   renewed User approval. On the short planning path, use this skill
   again before continuing. On the task-file path, follow
-  `../spec-loop-implement-task/SKILL.md` for implementation-time
+  `../spec-loop-implementation-flow/SKILL.md` for implementation-time
   handling and return-to-PLAN routing.
 - Phases are exclusive unless the User allows combined
   planning-plus-implementation.
@@ -197,9 +197,10 @@ When the task-file path is in use:
   implementation approval from a task file, use
   [../spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md);
 - after task-file implementation approval, use
-  [../spec-loop-implement-task/SKILL.md](../spec-loop-implement-task/SKILL.md)
-  for implementation-phase task maintenance, clarification handling,
-  and `in-progress` -> `review` checks.
+  [../spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md)
+  for implementation-phase routing, clarification handling,
+  `Implementation notes` checks, and `in-progress` -> `review`
+  checks.
 
 If project instructions do not define a task directory, use `tasks/`
 as the default.

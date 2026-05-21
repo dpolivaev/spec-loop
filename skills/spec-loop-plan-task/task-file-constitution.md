@@ -127,11 +127,12 @@ Documents verification structure and concrete test coverage.
 
 #### Implementation notes
 
-Conditional execution-phase notes. This section is filled only during
-implementation under the `spec-loop-implement-task` skill. It is not
-part of the canonical planning truth, but its content may be relevant
-context for follow-up tasks and subtasks. Detailed behavior is
-governed by that skill and is not repeated here.
+Conditional execution-phase notes. This section is filled only at the
+post-implementation checkpoint under the
+`spec-loop-implementation-flow` skill. It is not part of the canonical
+planning truth, but its content may be relevant context for follow-up
+tasks and subtasks. Detailed behavior is governed by that skill and is
+not repeated here.
 
 #### Iterative discovery
 
@@ -160,7 +161,7 @@ same commit. Do not invent synthetic task-file edits solely to satisfy
 this coupling. Propose needed status/folder changes. Apply only after
 explicit User confirmation, except LLM applies `in-progress` ->
 `review` directly when implementation and local verification are
-complete under `spec-loop-implement-task`.
+complete under `spec-loop-implementation-flow`.
 
 No generated or local-only artifacts in commits. If accidentally tracked: untrack, add/update ignore rule before continuing, unless intentionally versioned.
 
@@ -213,7 +214,7 @@ Lifecycle and transition rules:
 - Same transition guards as `SKILL.md` and the readiness rules above.
 - Allowed task-file moves: `backlog` <-> `in-progress` -> `review` -> `done`.
 - If `in-progress` is empty and only one new task is being created, place it in `in-progress`, otherwise in `backlog`.
-- LLM moves `in-progress` -> `review` when implementation and local verification are complete under `spec-loop-implement-task`.
+- LLM moves `in-progress` -> `review` when implementation and local verification are complete under `spec-loop-implementation-flow`.
 - Task (not in done) with subtasks: move task to `review` only when every subtask is `review`.
 - Moving into `done` is user-only, always. The LLM must never move a
   task or subtask to `done` without explicit User request.
@@ -238,7 +239,7 @@ readiness markers unless the User explicitly requests them.
   - `- **Research:**`
   - `- **Design:**`
   - `- **Test specification:**`
-  - `- **Implementation notes:**` (conditional; include it whenever any meaningful implementation-phase note exists)
+  - `- **Implementation notes:**` (conditional; include it when the post-implementation checkpoint finds meaningful notes content)
   In tasks with subtasks, main-task Research, Design, Test specification, and empty Implementation notes may be omitted.
   Omitted Scenario, Constraints, or empty Implementation notes: keep remaining sections in order.
 - Subtasks (if any): after all global task sections.

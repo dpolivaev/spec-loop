@@ -111,8 +111,9 @@ On the task-file path:
 * An explicit directive such as “implement”, “go ahead”, or “proceed”
   counts as approval and must not trigger another approval request.
 * After task-file implementation approval,
-  `spec-loop-implement-task` governs implementation-time
-  clarification, task maintenance, and the move to `review`.
+  `spec-loop-implementation-flow` governs implementation-time
+  clarification, the post-implementation `Implementation notes`
+  checkpoint, and the move to `review`.
 
 If implementation stays within the approved design and only bounded
 clarification is needed, the task is updated in place and work

@@ -34,7 +34,8 @@ glossary triggers, and the approval gate before implementation.
 
 On the task-file path, pre-implementation readiness is prepared by
 `spec-loop-prepare-implementation-approval`, and approved
-implementation is then carried out under `spec-loop-implement-task`.
+implementation is then carried out under
+`spec-loop-implementation-flow`.
 
 The `spec-loop-write-glossary` skill defines the Spec Loop AsciiDoc glossary
 format in
@@ -51,9 +52,10 @@ from them when needed.
 The model uses these skills while drafting and updating plans, task, or
 review artifacts; you review and approve either a short chat plan or a
 task-file plan before implementation. On task-file work, approved
-implementation then continues under `spec-loop-implement-task`, which
-keeps the task file aligned during execution. When the code already
-exists, you inspect retrospective review files instead.
+implementation then continues under `spec-loop-implementation-flow`,
+which governs implementation-time routing, the
+`Implementation notes` checkpoint, and the move to `review`. When the
+code already exists, you inspect retrospective review files instead.
 
 Spec Loop also defines explicit work phases: plan, implementation, and done.
 Any transitions to implementation and to done require explicit user approval.
@@ -131,7 +133,7 @@ Recommended path:
 
 Install the core task-workflow skills together.
 `spec-loop-plan-task`, `spec-loop-prepare-implementation-approval`,
-`spec-loop-implement-task`, `spec-loop-write-glossary`, and
+`spec-loop-implementation-flow`, `spec-loop-write-glossary`, and
 `spec-loop-setup-doc-rendering` hand off to each other, reuse the
 shared `spec-loop-plan-task` bundle, and support the same planning
 artifacts.
@@ -255,7 +257,8 @@ Use the `spec-loop-plan-task` skill for all non-trivial work unless I explicitly
 opt out.
 On the task-file path, use `spec-loop-prepare-implementation-approval`
 before asking for implementation approval and
-`spec-loop-implement-task` after task-file implementation approval.
+`spec-loop-implementation-flow` after task-file implementation
+approval.
 Use the `spec-loop-write-glossary` skill for `glossary.adoc` glossary work.
 Follow the workflow rules loaded through the `spec-loop-plan-task`
 skill, including the short-planning-path routing and the
@@ -287,13 +290,13 @@ intended only for retrospective review of trusted repositories:
    - defined by
      [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md).
 
-3. **`spec-loop-implement-task`**
-   - the mandatory task-file-path implementation skill used after
-     implementation approval to carry out the approved increment,
-     maintain the task file during execution, and decide when the
-     current increment may move to `review`;
+3. **`spec-loop-implementation-flow`**
+   - the mandatory task-file-path implementation-flow skill used after
+     implementation approval when implementation deviates from the
+     approved task, when uncertainty or blocking questions arise, or
+     before handing implemented work over for review;
    - defined by
-     [skills/spec-loop-implement-task/implementation-guidance.md](skills/spec-loop-implement-task/implementation-guidance.md).
+     [skills/spec-loop-implementation-flow/implementation-flow-guidance.md](skills/spec-loop-implementation-flow/implementation-flow-guidance.md).
 
 4. **`spec-loop-write-glossary`**
    - the Spec Loop AsciiDoc glossary-format skill;
@@ -312,7 +315,7 @@ intended only for retrospective review of trusted repositories:
 
 ## Documentation
 
-1. Check the planning and task-implementation skills briefly.
+1. Check the planning and implementation-flow skills briefly.
 
    * **[skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md)**
      defines planning-path selection, approval and escalation rules,
@@ -324,8 +327,8 @@ intended only for retrospective review of trusted repositories:
    * **[skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md)**
      defines task-file approval-readiness preparation before
      implementation approval.
-   * **[skills/spec-loop-implement-task/implementation-guidance.md](skills/spec-loop-implement-task/implementation-guidance.md)**
-     defines post-approval task-file implementation behavior,
+   * **[skills/spec-loop-implementation-flow/implementation-flow-guidance.md](skills/spec-loop-implementation-flow/implementation-flow-guidance.md)**
+     defines post-approval implementation-time routing,
      `Implementation notes`, and `review` transition checks.
 
 2. Study the Wordle example by commit history.
@@ -368,7 +371,7 @@ Recommended quick-check order:
 - `skills/spec-loop-plan-task/SKILL.md`
 - `skills/spec-loop-plan-task/task-file-constitution.md`
 - `skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md`
-- `skills/spec-loop-implement-task/implementation-guidance.md`
+- `skills/spec-loop-implementation-flow/implementation-flow-guidance.md`
 - `docs/review-responsibility-and-traceability.md`
 - `docs/online-art-game-tutorial.md`
 - `docs/wordle-tutorial.md`
