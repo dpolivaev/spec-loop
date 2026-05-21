@@ -4,10 +4,40 @@ This skill reuses the full `spec-loop-plan-task` bundle for shared
 workflow conventions plus `task-file-constitution.md` for task-file
 structure, lifecycle, and formatting rules.
 
-This file is the authoritative source for implementation-phase task
-maintenance, clarification handling, `Implementation notes`,
-completion checks, and `in-progress` -> `review` behavior on the
-Task-file path.
+This file is the authoritative source for implementation-phase
+authorized task-file updates, clarification handling,
+`Implementation notes`, completion checks, and `in-progress` ->
+`review` behavior on the Task-file path.
+
+## 0. Closed permission model for task-file edits
+
+On the Task-file path during implementation flow, the active task file
+is an approved, reviewer-facing artifact plus a controlled
+post-implementation record. Do not treat it as a general scratchpad or
+silently normalize it to the code.
+
+Only these task-file edits are allowed:
+
+- add or update `Implementation notes` at the mandatory checkpoint;
+- update canonical task sections only when explicit authority exists
+  under Section 2;
+- perform the explicitly allowed lifecycle transition, including the
+  minimal status or folder edits required by the Task-file
+  Constitution; and
+- perform minimal mechanical cleanup strictly incidental to one of the
+  allowed edits above, such as wrapping, indentation, spacing, or
+  nearby list-formatting cleanup required to keep the file readable
+  and well-formed.
+
+Any other task-file edit during implementation flow requires explicit
+User approval.
+
+If the agent discovers that it has already made an unauthorized
+task-file edit during implementation flow, it must stop and disclose
+in chat the exact unauthorized edit. It must make no further task-file
+edits except those explicitly approved by the User or otherwise
+authorized by this guidance, and must then follow the applicable
+routing rule before continuing.
 
 ## 1. Implementation-time routing
 
@@ -58,51 +88,74 @@ Task-file path remains in use, revise the task there and use
 `spec-loop-prepare-implementation-approval` again before resuming
 implementation.
 
-### D. Move the task or subtask to `review`
+### D. Seek post-implementation User approval of an implemented deviation
+
+Use this route when the completion comparison shows that the
+implementation violates the approved task content.
+
+Describe the deviation exactly. Do not rewrite canonical task sections
+before the User responds.
+
+If the User approves keeping the deviation, update only the minimal
+affected canonical task sections needed to reflect that explicit
+approval and continue the completion checkpoint. This explicit post-
+implementation approval is sufficient authority even if the approved
+deviation would otherwise fall inside Section 1C. If the User refuses,
+revise the implementation to match the approved task before review.
+
+After such approval, return to PLAN only if the User explicitly asks
+for replanning, redesign, or further changes beyond approving the
+implemented result.
+
+### E. Move the task or subtask to `review`
 
 Use this route when implementation and local verification are
 complete for the current increment and the Task-file Constitution's
 lifecycle rules allow the move.
 
-## 2. Task updates after kept clarification
+## 2. When canonical task sections may change
 
-After an explicit User clarification statement, update canonical task
-sections only when that clarification must be kept in the task without
-returning to PLAN.
+Update canonical task sections only when an explicit authority exists
+for that change without silently normalizing the task to the code.
 
 The existing approved task specification remains controlling by
-default. Only an explicit User clarification statement may override
-earlier task wording or decisions.
+default. Only one of the following may override earlier task wording
+or decisions:
+
+- an explicit User clarification statement;
+- accepted review feedback; or
+- explicit post-implementation User approval of keeping an
+  implemented deviation.
 
 Update only the minimal affected canonical section or sections. Do not
 rewrite canonical task sections for ordinary internal implementation
-choices or for history that belongs in `Implementation notes`.
+choices, for unapproved implementation deviations, or for history that
+belongs in `Implementation notes`.
 
-Update whichever canonical section or sections the explicit User
-clarification actually changes, including `Scenario`, `Constraints`,
-`Design`, or `Test specification`.
+Update whichever canonical section or sections the explicit
+clarification, accepted review feedback, or explicit post-
+implementation approval actually changes, including `Research`,
+`Scenario`, `Constraints`, `Design`, or `Test specification`.
 
-Accepted review feedback follows the same rule: apply it directly to
-the relevant canonical task sections instead of recording the feedback
-itself in `Implementation notes`.
-
-Keep accepted clarifications and review adjustments in canonical task
-sections rather than logging that conversation history in
-`Implementation notes`.
+Keep accepted clarifications, approved deviations, and review
+adjustments in canonical task sections rather than logging that
+conversation history in `Implementation notes`.
 
 ## 3. Completion and transition to `review`
 
 Compare the implemented current task or subtask with the relevant
-approved task definition and verification expectations.
+approved task content and verification expectations.
 
 For each finding:
 
-- if it is a clear mismatch, omission, or mistake that can be
-  corrected within the approved task, fix it before review;
-- if it is an intentional implementation-side interpretation,
-  trade-off, or open question relevant to later review or
-  development, record it in `Implementation notes`;
-- if it reveals blocking uncertainty, needs explicit User
+- if it is an implementation-side interpretation, trade-off, or open
+  question that does not violate the approved task content and is
+  relevant to later review or development, record it in
+  `Implementation notes`;
+- if it shows that the implementation violates the approved task
+  content, follow Section 1D before changing canonical task sections
+  or moving to `review`;
+- otherwise, if it reveals blocking uncertainty, needs explicit User
   clarification, or affects the Section 1C boundaries, raise it in
   chat and do not move to `review`.
 
@@ -201,8 +254,10 @@ Before moving the task or subtask to `review`, ensure that:
 - the approved scope for the current increment is implemented;
 - `Constraints`, `Design`, and `Test specification` are implemented as
   applicable for that increment;
-- canonical task sections are updated to match the implemented current
-  truth for the increment;
+- any canonical task-section changes have explicit authority from an
+  explicit User clarification, accepted review feedback, or explicit
+  post-implementation User approval of keeping an implemented
+  deviation;
 - required tests or other local verification from `Test
   specification` pass, unless the User waived them;
 - required glossary work is complete;
@@ -230,10 +285,11 @@ gates.
 Task-file readiness and approval-seeking preparation.
 
 This skill owns post-approval execution on the Task-file path:
-implementation-phase task maintenance, clarification handling,
-`Implementation notes`, completion checks, and the transition to
-`review`.
+implementation-phase authorized task-file updates, clarification
+handling, `Implementation notes`, completion checks, and the
+transition to `review`.
 
 Do not replace the planning or approval-preparation skills. Reuse them
 when implementation uncovers a change that needs renewed planning or
-approval under Section 1C.
+approval under Section 1C outside the post-implementation approval
+case handled by Section 1D.

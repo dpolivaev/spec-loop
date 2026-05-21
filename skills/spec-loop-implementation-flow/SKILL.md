@@ -6,11 +6,12 @@ description: >-
   approved task, when uncertainty must be clarified instead of guessed
   through, when new blocking questions arise, or before presenting the
   current task or subtask to the User. Governs clarification routing,
-  canonical task updates after explicit User clarification or accepted
-  review feedback changes the current task definition, the
-  post-implementation `Implementation notes` check, and whether the
-  increment may move to `review`. May be applied in
-  parallel with other implementation-related skills.
+  canonical task updates when explicit User clarification, accepted
+  review feedback, or explicit post-implementation User approval
+  changes the current task definition, the post-implementation
+  `Implementation notes` check, and whether the increment may move to
+  `review`. May be applied in parallel with other
+  implementation-related skills.
 ---
 
 This skill is mandatory only for approved task-file-path
@@ -27,13 +28,16 @@ requires, and apply the full `spec-loop-plan-task` bundle as shared
 convention guidance. Then read
 [implementation-flow-guidance.md](./implementation-flow-guidance.md).
 
-Update the same active task file used for planning and approval.
+Use the same active task file used for planning and approval.
 Do not create a second implementation artifact or a new task status.
+Do not edit that active task file except as explicitly authorized by
+`implementation-flow-guidance.md`.
 
 Use `implementation-flow-guidance.md` as the authoritative source for
-implementation-phase task maintenance, clarification routing,
-`Implementation notes`, completion checks, and the `in-progress` ->
-`review` transition.
+implementation-phase authorized task-file updates, clarification
+routing, post-implementation approval handling for implemented
+deviations, `Implementation notes`, completion checks, and the
+`in-progress` -> `review` transition.
 
 `Implementation notes` simplifies change review by capturing relevant
 implementation decisions and reasons above code level. It is not a
