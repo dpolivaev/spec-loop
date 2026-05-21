@@ -95,16 +95,16 @@
   `SettingsValidator` path plus a `PreviewServer` that exposes rendered
   content over localhost.
 
-```mermaid
-flowchart LR
-    Bootstrap[UI bootstrap] --> Loader[SettingsLoader]
-    Loader --> Schema[SettingsSchema]
-    Loader --> Validator[SettingsValidator]
-    Schema --> Config[NormalizedConfig]
-    Desktop[Desktop app] --> Preview[PreviewServer]
-    Browser[Browser] --> Preview
-    Preview --> Renderer[DocumentRenderer]
-```
+  ```mermaid
+  flowchart LR
+      Bootstrap[UI bootstrap] --> Loader[SettingsLoader]
+      Loader --> Schema[SettingsSchema]
+      Loader --> Validator[SettingsValidator]
+      Schema --> Config[NormalizedConfig]
+      Desktop[Desktop app] --> Preview[PreviewServer]
+      Browser[Browser] --> Preview
+      Preview --> Renderer[DocumentRenderer]
+  ```
 
 - **Test specification:**
   What should be tested:
@@ -187,14 +187,14 @@ flowchart LR
 - **Design:**
   The new flow centralizes parsing, normalization, and validation.
 
-```mermaid
-flowchart LR
-    Bootstrap --> SettingsLoader
-    SettingsLoader --> SettingsSchema
-    SettingsLoader --> SettingsValidator
-    SettingsSchema --> NormalizedConfig
-    SettingsValidator --> ValidationReport
-```
+  ```mermaid
+  flowchart LR
+      Bootstrap --> SettingsLoader
+      SettingsLoader --> SettingsSchema
+      SettingsLoader --> SettingsValidator
+      SettingsSchema --> NormalizedConfig
+      SettingsValidator --> ValidationReport
+  ```
 
 - **Test specification:**
   What should be tested:
@@ -271,12 +271,12 @@ flowchart LR
   The application now starts a local server and routes browser requests to
   the existing renderer.
 
-```mermaid
-flowchart LR
-    DesktopApp --> PreviewServer
-    Browser --> PreviewServer
-    PreviewServer --> DocumentRenderer
-```
+  ```mermaid
+  flowchart LR
+      DesktopApp --> PreviewServer
+      Browser --> PreviewServer
+      PreviewServer --> DocumentRenderer
+  ```
 
 - **Test specification:**
   What should be tested:

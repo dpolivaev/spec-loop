@@ -21,16 +21,16 @@ Use it as a pattern collection, not as a required task size.
 - **Research:** The current client sends two similar request variants,
   which forces the server to branch on partially duplicated payloads.
 
-```plantuml
-@startuml
-component "Selection UI" as ui
-component "ExportRequestComposer" as composer
-component "Export API" as api
+  ```plantuml
+  @startuml
+  component "Selection UI" as ui
+  component "ExportRequestComposer" as composer
+  component "Export API" as api
 
-ui --> composer : selected items + options
-composer --> api : export request payload
-@enduml
-```
+  ui --> composer : selected items + options
+  composer --> api : export request payload
+  @enduml
+  ```
 
 - **Design:**
   Final structural decisions:

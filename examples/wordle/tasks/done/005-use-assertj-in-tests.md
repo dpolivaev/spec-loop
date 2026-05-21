@@ -12,31 +12,31 @@
   configuration already used Gradle Kotlin DSL with JUnit Jupiter.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "build" {
-    class "build.gradle.kts" as BuildFile
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "build" {
+      class "build.gradle.kts" as BuildFile
+    }
+    package "tests" {
+      class DomainTests
+      class WordsTests
+      class EngineTests
+    }
+    package "libraries" {
+      class AssertJ
+      class JUnitJupiter
+    }
   }
-  package "tests" {
-    class DomainTests
-    class WordsTests
-    class EngineTests
-  }
-  package "libraries" {
-    class AssertJ
-    class JUnitJupiter
-  }
-}
-
-BuildFile --> AssertJ : adds test dependency
-BuildFile --> JUnitJupiter : retains test platform
-DomainTests --> AssertJ : fluent assertions
-WordsTests --> AssertJ : fluent assertions
-EngineTests --> AssertJ : fluent assertions
-@enduml
-```
+  
+  BuildFile --> AssertJ : adds test dependency
+  BuildFile --> JUnitJupiter : retains test platform
+  DomainTests --> AssertJ : fluent assertions
+  WordsTests --> AssertJ : fluent assertions
+  EngineTests --> AssertJ : fluent assertions
+  @enduml
+  ```
 
   Assertion calls are migrated from JUnit assertion utilities to AssertJ
   equivalents while preserving existing test logic and coverage intent.

@@ -23,16 +23,16 @@ Use it as a pattern collection, not as a required task size.
   session registry, so even one-off background execution would be
   persisted and listed unless a second boundary is introduced.
 
-```plantuml
-@startuml
-component "UI" as ui
-component "LiveSessionManager" as live
-component "PersistenceStore" as store
+  ```plantuml
+  @startuml
+  component "UI" as ui
+  component "LiveSessionManager" as live
+  component "PersistenceStore" as store
 
-ui --> live : start visible work
-live --> store : persist session data
-@enduml
-```
+  ui --> live : start visible work
+  live --> store : persist session data
+  @enduml
+  ```
 
 - **Design:**
   Final structural decisions:
@@ -40,40 +40,40 @@ live --> store : persist session data
   2. Add one transient background path outside the registry.
   3. Persist only the visible path.
 
-```plantuml
-@startuml
-set separator none
+  ```plantuml
+  @startuml
+  set separator none
 
-package "example" {
-  class SessionController
-  class LiveSessionManager
-  class BackgroundRunner
-  class SessionStore
-}
+  package "example" {
+    class SessionController
+    class LiveSessionManager
+    class BackgroundRunner
+    class SessionStore
+  }
 
-SessionController --> LiveSessionManager : visible session
-SessionController --> BackgroundRunner : transient run
-LiveSessionManager --> SessionStore : persist visible session
-@enduml
-```
+  SessionController --> LiveSessionManager : visible session
+  SessionController --> BackgroundRunner : transient run
+  LiveSessionManager --> SessionStore : persist visible session
+  @enduml
+  ```
 
-```plantuml
-@startuml
-actor User
-participant "SessionController" as controller
-participant "LiveSessionManager" as live
-participant "BackgroundRunner" as background
-participant "SessionStore" as store
+  ```plantuml
+  @startuml
+  actor User
+  participant "SessionController" as controller
+  participant "LiveSessionManager" as live
+  participant "BackgroundRunner" as background
+  participant "SessionStore" as store
 
-User -> controller : start visible session
-controller -> live : createSession()
-live -> store : save(session)
+  User -> controller : start visible session
+  controller -> live : createSession()
+  live -> store : save(session)
 
-User -> controller : trigger background export
-controller -> background : runOnce()
-background --> controller : success / failure
-@enduml
-```
+  User -> controller : trigger background export
+  controller -> background : runOnce()
+  background --> controller : success / failure
+  @enduml
+  ```
 
   Externally meaningful identifiers:
   - `visibleSessions.json`

@@ -17,27 +17,27 @@
   rules, and no existing naming conventions for model boundaries.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "domain" {
-    class Word <<record>>
-    class Feedback <<record>>
-    class LetterFeedback <<record>>
-    enum LetterStatus
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "domain" {
+      class Word <<record>>
+      class Feedback <<record>>
+      class LetterFeedback <<record>>
+      enum LetterStatus
+    }
+    package "rules" {
+      class WordleRules
+    }
   }
-  package "rules" {
-    class WordleRules
-  }
-}
-
-WordleRules --> Word : evaluates solution and guess
-WordleRules --> Feedback : returns result
-Feedback --> LetterFeedback : contains entries
-LetterFeedback --> LetterStatus : uses status value
-@enduml
-```
+  
+  WordleRules --> Word : evaluates solution and guess
+  WordleRules --> Feedback : returns result
+  Feedback --> LetterFeedback : contains entries
+  LetterFeedback --> LetterStatus : uses status value
+  @enduml
+  ```
 
   `Word` owns normalization and shape validation, and `WordleRules` owns
   duplicate-aware scoring logic that first marks exact matches and then
@@ -65,22 +65,22 @@ LetterFeedback --> LetterStatus : uses status value
   present in `examples/wordle/src` when this subtask started.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "domain" {
-    class Word <<record>>
-    class Feedback <<record>>
-    class LetterFeedback <<record>>
-    enum LetterStatus
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "domain" {
+      class Word <<record>>
+      class Feedback <<record>>
+      class LetterFeedback <<record>>
+      enum LetterStatus
+    }
   }
-}
-
-Feedback --> LetterFeedback : ordered feedback entries
-LetterFeedback --> LetterStatus : status classification
-@enduml
-```
+  
+  Feedback --> LetterFeedback : ordered feedback entries
+  LetterFeedback --> LetterStatus : status classification
+  @enduml
+  ```
 
   The domain model is immutable and constructor-driven so state changes are
   explicit and controlled by object creation.
@@ -112,23 +112,23 @@ LetterFeedback --> LetterStatus : status classification
   required a two-pass strategy to avoid over-marking present letters.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "domain" {
-    class Word
-    class Feedback
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "domain" {
+      class Word
+      class Feedback
+    }
+    package "rules" {
+      class WordleRules
+    }
   }
-  package "rules" {
-    class WordleRules
-  }
-}
-
-WordleRules --> Word : reads letters
-WordleRules --> Feedback : builds feedback
-@enduml
-```
+  
+  WordleRules --> Word : reads letters
+  WordleRules --> Feedback : builds feedback
+  @enduml
+  ```
 
   The rules class evaluates exact matches first and tracks remaining
   unmatched solution letters before assigning present or absent statuses.

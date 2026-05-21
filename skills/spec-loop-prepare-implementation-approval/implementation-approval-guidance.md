@@ -113,6 +113,9 @@ increment.
   externally meaningful identifiers, consistent with the exact-naming
   and no-placeholder rule above.
 - Required diagrams are present and readable.
+- Markdown structure is renderer-safe under the Task-file
+  Constitution formatting rules, especially in list-item sections that
+  contain fenced blocks.
 - When production structure changes, new or changed top-level
   production types and externally meaningful identifiers are explicit
   enough for review.

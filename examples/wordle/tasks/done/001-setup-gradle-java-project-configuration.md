@@ -17,28 +17,28 @@
   should target that version.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "build" {
-    class "settings.gradle.kts" as SettingsFile
-    class "build.gradle.kts" as BuildFile
-    class "gradle-wrapper.properties" as WrapperProperties
-    class "gradlew / gradlew.bat" as WrapperScripts
-    class "src/main/java" as MainSource
-    class "src/test/java" as TestSource
-    class "src/main/resources" as ResourceSource
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "build" {
+      class "settings.gradle.kts" as SettingsFile
+      class "build.gradle.kts" as BuildFile
+      class "gradle-wrapper.properties" as WrapperProperties
+      class "gradlew / gradlew.bat" as WrapperScripts
+      class "src/main/java" as MainSource
+      class "src/test/java" as TestSource
+      class "src/main/resources" as ResourceSource
+    }
   }
-}
-
-SettingsFile --> BuildFile : declares project name
-BuildFile --> MainSource : compiles production code
-BuildFile --> TestSource : runs JUnit Platform tests
-BuildFile --> ResourceSource : packages runtime resources
-WrapperScripts --> WrapperProperties : resolves Gradle 9.3.0
-@enduml
-```
+  
+  SettingsFile --> BuildFile : declares project name
+  BuildFile --> MainSource : compiles production code
+  BuildFile --> TestSource : runs JUnit Platform tests
+  BuildFile --> ResourceSource : packages runtime resources
+  WrapperScripts --> WrapperProperties : resolves Gradle 9.3.0
+  @enduml
+  ```
 
   The build stays single-module and uses the Java and application plugins,
   Java 21 toolchain, UTF-8 compilation, and JUnit 5 test execution with

@@ -15,39 +15,39 @@
   engine and word list components; there was no Swing entry path.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "main" {
-    class Main
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "main" {
+      class Main
+    }
+    package "ui" {
+      class WordleApp
+      class GameUiController
+    }
+    package "cli" {
+      class CliOptions
+      class CliGameRunner
+    }
+    package "input" {
+      class GuessInputHandler
+    }
+    package "engine" {
+      class GameEngine
+      class GameState
+    }
   }
-  package "ui" {
-    class WordleApp
-    class GameUiController
-  }
-  package "cli" {
-    class CliOptions
-    class CliGameRunner
-  }
-  package "input" {
-    class GuessInputHandler
-  }
-  package "engine" {
-    class GameEngine
-    class GameState
-  }
-}
-
-Main --> CliOptions : parses mode and options
-Main --> WordleApp : launches UI path
-Main --> CliGameRunner : launches CLI fallback
-WordleApp --> GameUiController : wires UI events
-GameUiController --> GuessInputHandler : validates input
-GameUiController --> GameEngine : submits guesses
-GameUiController --> GameState : updates view state
-@enduml
-```
+  
+  Main --> CliOptions : parses mode and options
+  Main --> WordleApp : launches UI path
+  Main --> CliGameRunner : launches CLI fallback
+  WordleApp --> GameUiController : wires UI events
+  GameUiController --> GuessInputHandler : validates input
+  GameUiController --> GameEngine : submits guesses
+  GameUiController --> GameState : updates view state
+  @enduml
+  ```
 
   UI path and CLI path share validation and engine rules so gameplay
   semantics remain consistent across interaction modes.
@@ -73,29 +73,29 @@ GameUiController --> GameState : updates view state
   control in one flow.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "input" {
-    class GuessInputHandler
-    class GuessInputResult
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "input" {
+      class GuessInputHandler
+      class GuessInputResult
+    }
+    package "cli" {
+      class CliOptions
+      class CliGameRunner
+    }
+    package "engine" {
+      class GameEngine
+    }
   }
-  package "cli" {
-    class CliOptions
-    class CliGameRunner
-  }
-  package "engine" {
-    class GameEngine
-  }
-}
-
-CliOptions --> CliGameRunner : provides parsed options
-CliGameRunner --> GuessInputHandler : validates raw input
-GuessInputHandler --> GuessInputResult : returns outcome
-CliGameRunner --> GameEngine : submits validated guess
-@enduml
-```
+  
+  CliOptions --> CliGameRunner : provides parsed options
+  CliGameRunner --> GuessInputHandler : validates raw input
+  GuessInputHandler --> GuessInputResult : returns outcome
+  CliGameRunner --> GameEngine : submits validated guess
+  @enduml
+  ```
 
   Parsed options become passive data, while gameplay execution and input
   validation are separated into focused components.
@@ -126,35 +126,35 @@ CliGameRunner --> GameEngine : submits validated guess
   integration already existed.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "ui" {
-    class WordleApp
-    class GameUiController
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "ui" {
+      class WordleApp
+      class GameUiController
+    }
+    package "cli" {
+      class CliGameRunner
+    }
+    package "input" {
+      class GuessInputHandler
+    }
+    package "engine" {
+      class GameEngine
+      class GameState
+      enum GameStatus
+    }
   }
-  package "cli" {
-    class CliGameRunner
-  }
-  package "input" {
-    class GuessInputHandler
-  }
-  package "engine" {
-    class GameEngine
-    class GameState
-    enum GameStatus
-  }
-}
-
-WordleApp --> GameUiController : creates and displays controller
-GameUiController --> GuessInputHandler : validates entry
-GameUiController --> CliGameRunner : reuses loop callbacks
-GameUiController --> GameEngine : starts and advances game
-GameUiController --> GameState : updates rendered history
-GameUiController --> GameStatus : updates terminal state
-@enduml
-```
+  
+  WordleApp --> GameUiController : creates and displays controller
+  GameUiController --> GuessInputHandler : validates entry
+  GameUiController --> CliGameRunner : reuses loop callbacks
+  GameUiController --> GameEngine : starts and advances game
+  GameUiController --> GameState : updates rendered history
+  GameUiController --> GameStatus : updates terminal state
+  @enduml
+  ```
 
   The controller owns widget updates, routes submissions through shared
   validation, and disables input when status reaches a terminal value.
@@ -181,25 +181,25 @@ GameUiController --> GameStatus : updates terminal state
 - **Research:** Existing README documentation was CLI-centered.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "docs" {
-    class "README.md" as ReadmeFile
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "docs" {
+      class "README.md" as ReadmeFile
+    }
+    package "main" {
+      class Main
+    }
+    package "cli" {
+      class CliOptions
+    }
   }
-  package "main" {
-    class Main
-  }
-  package "cli" {
-    class CliOptions
-  }
-}
-
-ReadmeFile --> Main : documents default UI launch
-ReadmeFile --> CliOptions : documents --cli override
-@enduml
-```
+  
+  ReadmeFile --> Main : documents default UI launch
+  ReadmeFile --> CliOptions : documents --cli override
+  @enduml
+  ```
 
   This subtask changes documentation only and does not alter runtime logic.
 - **Test specification:**

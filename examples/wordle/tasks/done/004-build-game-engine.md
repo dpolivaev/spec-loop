@@ -16,35 +16,35 @@
   turn progression logic existed.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "engine" {
-    class GameEngine
-    class GameState
-    enum GameStatus
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "engine" {
+      class GameEngine
+      class GameState
+      enum GameStatus
+    }
+    package "domain" {
+      class Feedback
+      class Word
+    }
+    package "rules" {
+      class WordleRules
+    }
+    package "words" {
+      class WordListLoader
+    }
   }
-  package "domain" {
-    class Feedback
-    class Word
-  }
-  package "rules" {
-    class WordleRules
-  }
-  package "words" {
-    class WordListLoader
-  }
-}
-
-GameEngine --> WordListLoader : starts game with solution source
-GameEngine --> WordleRules : evaluates guess
-GameEngine --> GameState : returns new state
-GameState --> Feedback : stores feedback history
-GameState --> Word : stores solution
-GameState --> GameStatus : stores lifecycle status
-@enduml
-```
+  
+  GameEngine --> WordListLoader : starts game with solution source
+  GameEngine --> WordleRules : evaluates guess
+  GameEngine --> GameState : returns new state
+  GameState --> Feedback : stores feedback history
+  GameState --> Word : stores solution
+  GameState --> GameStatus : stores lifecycle status
+  @enduml
+  ```
 
   Engine operations are pure state transitions: `startGame` initializes
   `IN_PROGRESS`, and `submitGuess` returns a new `GameState` with updated
@@ -71,25 +71,25 @@ GameState --> GameStatus : stores lifecycle status
 - **Research:** No game state types existed at subtask start.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "engine" {
-    class GameState
-    enum GameStatus
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "engine" {
+      class GameState
+      enum GameStatus
+    }
+    package "domain" {
+      class Feedback
+      class Word
+    }
   }
-  package "domain" {
-    class Feedback
-    class Word
-  }
-}
-
-GameState --> Word : solution value
-GameState --> Feedback : ordered guess history
-GameState --> GameStatus : status value
-@enduml
-```
+  
+  GameState --> Word : solution value
+  GameState --> Feedback : ordered guess history
+  GameState --> GameStatus : status value
+  @enduml
+  ```
 
   `GameState` is immutable and becomes the single payload exchanged between
   gameplay engine and presentation layers.
@@ -116,27 +116,27 @@ GameState --> GameStatus : status value
   rules and word list components.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "engine" {
-    class GameEngine
-    class GameState
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "engine" {
+      class GameEngine
+      class GameState
+    }
+    package "rules" {
+      class WordleRules
+    }
+    package "words" {
+      class WordListLoader
+    }
   }
-  package "rules" {
-    class WordleRules
-  }
-  package "words" {
-    class WordListLoader
-  }
-}
-
-GameEngine --> WordListLoader : startGame(resourcePath)
-GameEngine --> WordleRules : submitGuess(state, guess)
-GameEngine --> GameState : emits next immutable state
-@enduml
-```
+  
+  GameEngine --> WordListLoader : startGame(resourcePath)
+  GameEngine --> WordleRules : submitGuess(state, guess)
+  GameEngine --> GameState : emits next immutable state
+  @enduml
+  ```
 
   `startGame` initializes attempts and empty history. `submitGuess` applies
   rule feedback, appends history, updates attempts, and transitions to `WON`

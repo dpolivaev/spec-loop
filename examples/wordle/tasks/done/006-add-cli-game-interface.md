@@ -15,31 +15,31 @@
   point, no argument parsing, and no terminal feedback formatter.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "cli" {
-    class Main
-    class CliOptions
-    class CliGameRunner
-    class FeedbackRenderer
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "cli" {
+      class Main
+      class CliOptions
+      class CliGameRunner
+      class FeedbackRenderer
+    }
+    package "engine" {
+      class GameEngine
+      class GameState
+      enum GameStatus
+    }
   }
-  package "engine" {
-    class GameEngine
-    class GameState
-    enum GameStatus
-  }
-}
-
-Main --> CliOptions : parses command options
-Main --> CliGameRunner : starts interactive session
-CliGameRunner --> GameEngine : submits guesses
-CliGameRunner --> GameState : tracks state transitions
-CliGameRunner --> FeedbackRenderer : formats rows
-CliGameRunner --> GameStatus : reports final result
-@enduml
-```
+  
+  Main --> CliOptions : parses command options
+  Main --> CliGameRunner : starts interactive session
+  CliGameRunner --> GameEngine : submits guesses
+  CliGameRunner --> GameState : tracks state transitions
+  CliGameRunner --> FeedbackRenderer : formats rows
+  CliGameRunner --> GameStatus : reports final result
+  @enduml
+  ```
 
   CLI mode supports configurable attempts and optional external word-list
   source while preserving engine-centric gameplay logic.
@@ -65,29 +65,29 @@ CliGameRunner --> GameStatus : reports final result
   the project before this subtask.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "cli" {
-    class Main
-    class CliOptions
-    class CliGameRunner
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "cli" {
+      class Main
+      class CliOptions
+      class CliGameRunner
+    }
+    package "engine" {
+      class GameEngine
+      class GameState
+      enum GameStatus
+    }
   }
-  package "engine" {
-    class GameEngine
-    class GameState
-    enum GameStatus
-  }
-}
-
-Main --> CliOptions : parse args
-Main --> CliGameRunner : execute session
-CliGameRunner --> GameEngine : start game and submit guess
-CliGameRunner --> GameState : receive updated state
-CliGameRunner --> GameStatus : determine terminal output
-@enduml
-```
+  
+  Main --> CliOptions : parse args
+  Main --> CliGameRunner : execute session
+  CliGameRunner --> GameEngine : start game and submit guess
+  CliGameRunner --> GameState : receive updated state
+  CliGameRunner --> GameStatus : determine terminal output
+  @enduml
+  ```
 
   CLI options include attempts and optional word-list source. Interactive
   input is read from standard input, and run completion always returns
@@ -115,21 +115,21 @@ CliGameRunner --> GameStatus : determine terminal output
 - **Research:** No renderer utility existed before this subtask.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "cli" {
-    class FeedbackRenderer
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "cli" {
+      class FeedbackRenderer
+    }
+    package "engine" {
+      class GameState
+    }
   }
-  package "engine" {
-    class GameState
-  }
-}
-
-FeedbackRenderer --> GameState : reads latest feedback entries
-@enduml
-```
+  
+  FeedbackRenderer --> GameState : reads latest feedback entries
+  @enduml
+  ```
 
   Renderer output is deterministic for a given `GameState` so tests can
   assert exact expected strings.
@@ -149,21 +149,21 @@ FeedbackRenderer --> GameState : reads latest feedback entries
 - **Research:** Documentation existed but did not include complete CLI usage.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "docs" {
-    class "README.md" as ReadmeFile
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "docs" {
+      class "README.md" as ReadmeFile
+    }
+    package "cli" {
+      class CliOptions
+    }
   }
-  package "cli" {
-    class CliOptions
-  }
-}
-
-ReadmeFile --> CliOptions : documents arguments and examples
-@enduml
-```
+  
+  ReadmeFile --> CliOptions : documents arguments and examples
+  @enduml
+  ```
 
   README content is the only artifact changed in this subtask.
 - **Test specification:**
@@ -185,25 +185,25 @@ ReadmeFile --> CliOptions : documents arguments and examples
   `build/distributions` with `bin/` and `lib/` contents.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "docs" {
-    class "README.md" as ReadmeFile
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "docs" {
+      class "README.md" as ReadmeFile
+    }
+    package "distribution" {
+      class DistZip
+      class DistTar
+      class BinScript
+    }
   }
-  package "distribution" {
-    class DistZip
-    class DistTar
-    class BinScript
-  }
-}
-
-ReadmeFile --> DistZip : documents build command
-ReadmeFile --> DistTar : documents build command
-ReadmeFile --> BinScript : documents runtime invocation
-@enduml
-```
+  
+  ReadmeFile --> DistZip : documents build command
+  ReadmeFile --> DistTar : documents build command
+  ReadmeFile --> BinScript : documents runtime invocation
+  @enduml
+  ```
 
   This subtask is documentation-only and does not modify runtime behavior.
 - **Test specification:**

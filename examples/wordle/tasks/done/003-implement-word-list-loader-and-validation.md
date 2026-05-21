@@ -16,25 +16,25 @@
   already performed normalization and validation.
 - **Design:**
 
-```plantuml
-@startuml
-set separator none
-package "wordle" {
-  package "domain" {
-    class Word
+  ```plantuml
+  @startuml
+  set separator none
+  package "wordle" {
+    package "domain" {
+      class Word
+    }
+    package "words" {
+      class WordListLoader
+    }
+    package "resources" {
+      class "wordlist.txt" as WordListResource
+    }
   }
-  package "words" {
-    class WordListLoader
-  }
-  package "resources" {
-    class "wordlist.txt" as WordListResource
-  }
-}
-
-WordListLoader --> WordListResource : reads lines and header count
-WordListLoader --> Word : returns selected word
-@enduml
-```
+  
+  WordListLoader --> WordListResource : reads lines and header count
+  WordListLoader --> Word : returns selected word
+  @enduml
+  ```
 
   The loader reads `<N> words` from line one, generates a random index in
   `[0, N-1]`, iterates remaining lines to the target entry, and constructs

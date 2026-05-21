@@ -184,8 +184,14 @@ Keep done tasks under `done` with global three-digit prefix (independent of back
 
 - Wrap prose ~72-80 chars; no horizontal scrolling.
 - Preserve semantic line breaks and consistent list indentation.
-- Fenced code blocks: unindented (except internal structure), start/end with backticks.
-- Standalone paragraphs unindented. List continuation lines may indent to align.
+- Fenced code blocks: start/end with backticks. For top-level content,
+  use flush-left fenced code blocks. When a fenced code block belongs
+  to a list item, indent the opening fence, block content, and closing
+  fence to that list item's content indentation so the block remains
+  inside the list item.
+- Standalone paragraphs unindented. List continuation lines may indent
+  to align. After a fenced code block inside a list item, resume either
+  the same list-content indentation or true top-level indentation.
 - Renders correctly on GitHub and GitLab.
 
 Intent: readable in plain text editors (vim, less, nano) and rendered views.
