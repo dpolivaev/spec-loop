@@ -113,6 +113,10 @@ Use this route when implementation and local verification are
 complete for the current increment and the Task-file Constitution's
 lifecycle rules allow the move.
 
+On subtask work, this route moves the current subtask to `review`
+and may also move the overall task to `review` when the
+Task-file Constitution's task-level conditions are met.
+
 ## 2. When canonical task sections may change
 
 Update canonical task sections only when an explicit authority exists
@@ -274,7 +278,17 @@ Either complete the missing checkpoint work or follow the
 appropriate route from Section 1.
 
 When the checks pass, follow the Task-file Constitution's lifecycle
-rules and move the task or subtask from `in-progress` to `review`.
+rules.
+
+- Without subtasks: move the task from `in-progress` to `review`.
+- With subtasks: move the current subtask from `in-progress` to
+  `review`.
+- When that subtask move leaves no more task-level or subtask-level
+  work expected and every subtask is either `review` or `done`, move
+  the overall task to `review` too.
+- Do not move the overall task to `review` yet if more task-level work
+  is still expected or another subtask is still `backlog` or
+  `in-progress`.
 
 ## 4. Interaction with the other task skills
 

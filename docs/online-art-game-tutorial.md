@@ -54,9 +54,9 @@ Run this step unless you already know your editor is prepared to render:
 If you review in VS Code and want to run the helper script directly
 instead of using the skill, use the instructions in
 [README.md: Prepare task and glossary rendering](../README.md#prepare-task-and-glossary-rendering).
-Then skip the `You send` prompt and the `Chat` part of `You see`
-below. Use [Verification](#verification) to confirm the expected
-editor state.
+Then skip the `You send` prompt below. Use
+[Verification](#verification) to confirm the expected editor
+state.
 
 ### You send
 
@@ -102,32 +102,15 @@ Tutorial-specific goals:
 
 ### You see
 
-- Chat:
-  - confirms that the installed Spec Loop setup is available,
-  - automatically applies the `spec-loop-plan-task` skill as the mandatory
-    planning skill for non-trivial work,
-  - notes that before implementation approval the workflow also uses
-    `spec-loop-prepare-implementation-approval`,
-  - explains that the `spec-loop-write-glossary` skill will be used for the
-    tutorial's `glossary.adoc` work,
-  - keeps the `spec-loop-setup-doc-rendering` skill for later
-    rendering help if needed.
-- Project setup:
-  - Spec Loop workflow rules are available through the installed skills,
-  - `tasks/` is used when task files are needed,
-  - later glossary work uses the Spec Loop `glossary.adoc` format.
-- Tooling:
-  - PlantUML is recommended unless there is a good reason to choose
-    Mermaid,
-  - AsciiDoc support matters because the tutorial will use
-    `glossary.adoc`,
-  - editor rendering support was prepared in B5 unless you knowingly
-    skipped that step.
-- Verification:
-  - the assistant correctly restates the `PLAN -> IMPLEMENTATION`
-    approval rule,
-  - the assistant can explain which skill it will use for planning,
-    approval preparation, glossary work, and rendering setup.
+Read the assistant's final response carefully, even if you skip
+intermediate reasoning. Before continuing, confirm these points:
+
+- the assistant says it will follow the installed Spec Loop workflow
+  in this project;
+- the assistant makes clear that non-trivial work will go through the
+  normal planning path before implementation;
+- the assistant correctly restates the `PLAN -> IMPLEMENTATION`
+  approval rule.
 
 ### You learned (this step)
 
@@ -136,8 +119,6 @@ Tutorial-specific goals:
 - The tutorial may be open in your browser while the assistant only sees the
   `museum-tutorial-project`, so prompts must still carry the context it
   needs.
-- This tutorial later uses public data from the Art Institute of
-  Chicago (AIC). The project is not affiliated with or endorsed by AIC.
 
 ## If setup seems wrong
 
@@ -169,8 +150,10 @@ npx skills add dpolivaev/spec-loop -s '*'
 - if you want to finish the tutorial in minimum time, send the next
   prompt first and then read it and think about it while the assistant works,
   because the assistant also needs time to act and respond,
-- validate progress from the assistant's chat output and the changed files
-  before continuing,
+- validate progress from the changed files and the assistant's final
+  response before continuing,
+- for routine steps, you can usually skip intermediate reasoning
+  and read the assistant's final response carefully once it finishes,
 - if the assistant misses a required setup, project instructions, glossary,
   or status update, ask it to fix that before continuing,
 - if the setup or workflow rules seem wrong, use the recovery steps
@@ -191,7 +174,8 @@ it before continuing:
 - implementation changes are made without verification evidence,
 - it misses required supporting updates such as glossary, task status,
   or ignore rules,
-- what it reports in chat does not match the actual changed files,
+- the assistant's final response does not match the actual changed
+  files,
 - a task or subtask is moved to `done` without explicit user
   confirmation.
 
@@ -331,8 +315,8 @@ Requirements:
 
 ### You see (plan)
 
-- Chat: reports that a task file was created automatically and asks for
-  explicit implementation approval.
+- A task file is created automatically, and implementation still
+  waits for explicit approval.
 - Instructions: the active project instructions file is updated to
   record the confirmed sibling `data-aggregator` path.
 - Task file:
@@ -351,12 +335,15 @@ the diagram.
 
 ### You see (after implementation is completed)
 
-- Chat: reports the exact local serve/open verification command and the
-  result.
+- Verification evidence includes the exact local serve/open command
+  and its result.
 - `site/index.html`: exists and shows exactly 20 artworks with title,
   artist, department, and image.
+- The task file is in `review`.
+- The task file may include `Implementation notes` when relevant; if
+  present, review them as part of the reviewer-facing task artifact.
 
-### After completion (move to done / commit)
+### After acceptance (move to done / commit)
 
 - After you accept this work item as done: tell the assistant 
   `move the task to done and commit`.
@@ -418,7 +405,7 @@ Record one final choice with rationale. In the same ADR:
 
 ### You see
 
-- Chat: discusses decision criteria before presenting the final ADR.
+- The final ADR is preceded by a decision-criteria discussion.
 - ADR:
   - Compares realistic stack options for the initial game implementation and records the chosen one with rationale.
   - Records the required core design style, not only the implementation stack.
@@ -469,8 +456,8 @@ subtask. Create only:
 
 ### You see (plan)
 
-- Chat: reports that a task file was created automatically with a task
-  header and an ordered subtask breakdown, then stops for review.
+- A task file is created automatically with a task header and an
+  ordered subtask breakdown, and it is waiting for your review.
 - Task file:
   - Overall Scope and Motivation are clear.
   - Each subtask has Scope and Motivation, but future subtasks are not
@@ -486,15 +473,16 @@ subtask. Create only:
 - If it looks good, ask the assistant to `fully design only the first subtask`.
 - Review that current subtask detail. If it looks good, ask the assistant to
   `implement only that subtask`.
-- After each implemented subtask, either ask for changes or accept it
-  and ask the assistant to `move it to done`.
+- After each implemented subtask reaches `review`, either ask for
+  changes or accept it and ask the assistant to move that subtask to
+  `done`.
 - Then ask it to `create a separate commit` and only after that ask it to
   `design the next subtask`.
 
 ### You see (current subtask design)
 
-- Chat: designs out only the current subtask and asks for explicit
-  implementation approval.
+- Only the current subtask is fully designed, and implementation
+  still waits for explicit approval.
 - Task file: the current subtask is designed with all class diagrams;
   future subtasks remain lightweight.
 - The current subtask Design and Constraints, when present,
@@ -503,16 +491,28 @@ subtask. Create only:
 
 ### You see (during subtask implementation)
 
-- Chat: implements only the approved current subtask and stops.
+- Only the approved current subtask is implemented before the next
+  review step.
+- The implemented current subtask moves to `review` when local
+  verification is complete.
+- When the last remaining unfinished subtask reaches `review` and no
+  more work remains, the overall task moves to `review` too.
 - Tests: separate verification evidence is provided per implemented
   subtask.
-- Git: there is a separate commit per accepted subtask; the overall
-  task is moved to `done` only after the last subtask is done.
+- Git: there is a separate commit per accepted subtask.
 - Code: game is reachable from `site/index.html` and playable (after
   relevant subtasks complete).
 - `glossary.adoc`: expands to cover the core gameplay
   terms introduced by the implementation and links those terms to the
   relevant code.
+
+### After acceptance (move to done / commit)
+
+- After you accept an earlier subtask as done: ask the assistant to
+  move that subtask to `done`, then commit.
+- After you accept the final subtask as done: ask the assistant to
+  move that subtask to `done`; if no more work remains, also move the
+  overall task to `done`, then commit.
 
 ### You learned (this step)
 
@@ -543,8 +543,8 @@ language.
 
 ### You see (plan)
 
-- Chat: reports that a task file was created automatically and stops
-  for review.
+- A task file is created automatically and is waiting for your
+  review.
 - Task file:
   - exists with ordered implementation subtasks,
   - keeps future implementation subtasks lightweight,
@@ -572,6 +572,7 @@ Implement it.
 
 - Verification evidence is provided for the in-memory leaderboard
   subtask.
+- The in-memory leaderboard subtask is in `review`.
 - Behavior: leaderboard sorting matches the required rules.
 - `glossary.adoc`: links the leaderboard terms to the
   implemented code.
@@ -611,20 +612,22 @@ Implement it.
 
 - Verification evidence is provided for the persistence implementation
   subtask.
+- The persistence implementation subtask is in `review`.
+- If no more work remains, the overall task is in `review` too.
 - Docs: storage location and reset procedure are documented with an exact
   command.
 - Behavior: leaderboard sorting matches the required rules and data
   survives restart.
 
-### After completion (move to done / commit)
+### After acceptance (move to done / commit)
 
 - After you accept the in-memory leaderboard subtask as done: ask the
-  assistant to move it to `done`, then commit.
+  assistant to move that subtask to `done`, then commit.
 - After you accept the persistence ADR: ask the assistant to commit the ADR
   change.
 - After you accept the persistence implementation subtask as done: ask
-  the assistant to move that subtask and the overall task to `done`, then
-  commit.
+  the assistant to move that subtask to `done`; if no more work
+  remains, also move the overall task to `done`, then commit.
 
 ### You learned (this step)
 
@@ -653,6 +656,9 @@ Each step follows the Spec Loop workflow model:
 - Every implementation subtask includes both implementation and testing.
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
+- Review-ready implementation moves the current task or subtask to
+  `review`; after you accept it, you may ask the assistant to move it
+  to `done`.
 - If the assistant plans too much, skips needed file updates, or starts
   implementation too early, correct it and ask it to return to the
   expected workflow.

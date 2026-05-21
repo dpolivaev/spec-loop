@@ -200,8 +200,11 @@ Phases = what work may happen now. Lifecycle states = where tracked work sits.
 
 Representation:
 - Task state = top-level folder.
-- Tasks in `review` or `done` stay there. Later work uses the newest follow-up subtask status.
-- Only subtasks have status fields. The task status itself is indicated only by its folder.
+- Tasks in `review` or `done` stay there. Later work may add follow-up
+  subtasks; the newest follow-up subtask status carries the active
+  work.
+- Only subtasks have status fields. The task status itself is
+  indicated only by its folder.
 - Subtask lifecycle: `- **Status:** <status>`.
 
 Lifecycle definitions:
@@ -215,7 +218,15 @@ Lifecycle and transition rules:
 - Allowed task-file moves: `backlog` <-> `in-progress` -> `review` -> `done`.
 - If `in-progress` is empty and only one new task is being created, place it in `in-progress`, otherwise in `backlog`.
 - LLM moves `in-progress` -> `review` when implementation and local verification are complete under `spec-loop-implementation-flow`.
-- Task (not in done) with subtasks: move task to `review` only when every subtask is `review`.
+- Subtask status changes apply only to that subtask unless the User
+  explicitly says otherwise.
+- Task with subtasks: move task to `review` when no unfinished
+  task-level or subtask-level work remains and at least one subtask is
+  in `review`.
+- Task with subtasks: move task to `done` only when every subtask is
+  `done` and the User explicitly requests moving the task to `done`.
+- The LLM may propose a task-level move when its guard becomes true,
+  but must not assume an unrequested task-level `done` move.
 - Moving into `done` is user-only, always. The LLM must never move a
   task or subtask to `done` without explicit User request.
 
