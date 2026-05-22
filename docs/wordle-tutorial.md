@@ -219,9 +219,15 @@ Also create `glossary.adoc` from the approved project brief. It should
 define the canonical project terms needed for this tutorial and keep
 their wording consistent with the brief.
 
-Also update the active project instructions file so it explicitly
-tells the assistant to read `README.md` and follow the "Project Brief"
-section there for project requirements unless I explicitly override it.
+Also create `.gitignore` if you find any harness-specific or IDE-specific
+configuration files in this repository.
+
+Also update the active project instructions file (for example
+`AGENTS.md`) so it explicitly tells the assistant to read `README.md`
+and follow the "Project Brief" section there for project requirements
+unless I explicitly override it. The instructions file must also say
+that this project never uses the short planning path: any code change
+requires creation of a task file.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -234,14 +240,19 @@ This is documentation-only work, we do not need a task file for it.
 - `glossary.adoc`:
   - exists and defines the canonical project terms from the brief,
   - uses wording consistent with the brief so later tasks can reuse it.
+- `.gitignore`:
+  - exists if harness-specific or IDE-specific configuration files were
+    found.
 - Project instructions file:
   - explicitly points the assistant to [README.md](../README.md) as the
-    source of the project brief and requirements.
+    source of the project brief and requirements,
+  - states that the short planning path is never allowed in this
+    project and that any code change requires a task file.
 
 ### After completion (commit)
 
 - After you accept this work item as done:
-  ask the assistant to `commit the README, glossary.adoc, and instructions-file changes`.
+  ask the assistant to `commit the README, glossary.adoc, .gitignore (if created), and instructions-file changes`.
 
 ### You learned (this step)
 
