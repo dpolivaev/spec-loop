@@ -11,30 +11,31 @@ usage() {
   cat <<EOF
 Usage: $SCRIPT_NAME [--check|--apply|--help]
 
-Check or apply the Spec Loop VS Code server-based rendering setup.
+Check or apply the Spec Loop VS Code-based IDE server-based rendering setup.
 
 Requirements:
-- A VS Code CLI command on PATH: code, code-insiders,
-  code.cmd, or code-insiders.cmd
+- A supported editor CLI command on PATH: code, code-insiders,
+  cursor, code.cmd, code-insiders.cmd, or cursor.cmd
 
 This helper is intended for macOS, Linux, WSL, and Git Bash for Windows.
 
 Actions:
-- --check  Detect the VS Code CLI and report whether the required
-           extensions are installed. This is the default.
+- --check  Detect the supported editor CLI and report whether the
+           required extensions are installed. This is the default.
 - --apply  Install any missing required extensions.
 - --help   Show this help.
 
-This helper covers only the server-based VS Code path. It does not:
+This helper covers only the server-based path for supported
+VS Code-based IDEs. It does not:
 - configure local PlantUML rendering,
 - automate JetBrains IDE setup, or
-- edit optional VS Code settings such as markdown.plantuml.server.
+- edit optional IDE settings such as markdown.plantuml.server.
 EOF
 }
 
 find_vscode_command() {
   local candidate
-  for candidate in code code-insiders code.cmd code-insiders.cmd; do
+  for candidate in code code-insiders cursor code.cmd code-insiders.cmd cursor.cmd; do
     if command -v "$candidate" >/dev/null 2>&1; then
       printf '%s\n' "$candidate"
       return 0
@@ -46,7 +47,7 @@ find_vscode_command() {
 list_extensions() {
   local output
   if ! output="$("$VSCODE_CMD" --list-extensions 2>&1)"; then
-    printf 'Error: Failed to query VS Code extensions with "%s --list-extensions".\n' "$VSCODE_CMD" >&2
+    printf 'Error: Failed to query editor extensions with "%s --list-extensions".\n' "$VSCODE_CMD" >&2
     printf '%s\n' "$output" >&2
     exit 1
   fi
@@ -71,7 +72,7 @@ collect_missing_extensions() {
 
 print_status() {
   local extension
-  printf 'VS Code CLI: %s\n' "$VSCODE_CMD"
+  printf 'Editor CLI: %s\n' "$VSCODE_CMD"
   for extension in "${REQUIRED_EXTENSIONS[@]}"; do
     if extension_is_installed "$extension"; then
       printf 'OK: %s\n' "$extension"
@@ -111,7 +112,7 @@ case "$MODE" in
 esac
 
 if ! VSCODE_CMD="$(find_vscode_command)"; then
-  printf 'Error: No VS Code CLI was found on PATH. Expected one of: code, code-insiders, code.cmd, code-insiders.cmd.\n' >&2
+  printf 'Error: No supported editor CLI was found on PATH. Expected one of: code, code-insiders, cursor, code.cmd, code-insiders.cmd, cursor.cmd.\n' >&2
   exit 1
 fi
 
@@ -121,7 +122,7 @@ print_status
 
 if [[ "$MODE" == "--check" ]]; then
   if [[ ${#MISSING_EXTENSIONS[@]} -eq 0 ]]; then
-    printf 'Ready: server-based VS Code rendering support is installed.\n'
+    printf 'Ready: server-based rendering support is installed for the detected VS Code-based IDE.\n'
     exit 0
   fi
   printf 'Not ready: install the missing extensions or rerun with --apply.\n' >&2
@@ -139,7 +140,7 @@ collect_missing_extensions
 print_status
 
 if [[ ${#MISSING_EXTENSIONS[@]} -eq 0 ]]; then
-  printf 'Done: server-based VS Code rendering support is installed.\n'
+  printf 'Done: server-based rendering support is installed for the detected VS Code-based IDE.\n'
   exit 0
 fi
 

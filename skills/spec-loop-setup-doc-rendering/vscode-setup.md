@@ -1,7 +1,13 @@
-# VS Code Setup Reference for `spec-loop-setup-doc-rendering`
+# VS Code-Based IDE Setup Reference for `spec-loop-setup-doc-rendering`
 
 Use this reference when `spec-loop-setup-doc-rendering` is helping a user
-who works in Visual Studio Code or in a VS Code-compatible environment.
+who works in Visual Studio Code, Cursor, or another VS Code-based
+environment.
+
+The extension IDs and settings below apply to VS Code, Cursor, and other
+VS Code-based IDEs. Where this document says "VS Code", read it as the
+user's VS Code-based IDE unless a step explicitly narrows the scope to the
+helper script.
 
 ## Decision rules
 
@@ -41,14 +47,14 @@ Optional setting:
 - `markdown.plantuml.server`
 - default: `https://www.plantuml.com/plantuml`
 
-Use the built-in VS Code Markdown preview after installation.
+Use the IDE's built-in Markdown preview after installation.
 
 The helper script
 [scripts/setup-vscode-server-based.sh](./scripts/setup-vscode-server-based.sh)
 is stored in this skill's scripts/ subdirectory, both in a repository
 checkout and in an installed skill bundle. If you want this
-server-based VS Code path and can access the skill directory, you can
-run the script directly instead of using the interactive skill flow.
+server-based path and can access the skill directory, you can run the
+script directly instead of using the interactive skill flow.
 For example, from this directory:
 
 ```bash
@@ -59,12 +65,13 @@ bash ./scripts/setup-vscode-server-based.sh --apply
 If you are in a different working directory, run the same script by its
 full path.
 
-The helper requires a VS Code CLI command on `PATH` (`code`,
-`code-insiders`, `code.cmd`, or `code-insiders.cmd`) and is intended
-for macOS, Linux, WSL, and Git Bash for Windows. It covers only the
-server-based VS Code path. It does not configure the local-only
-PlantUML path, and it does not edit the optional
-`markdown.plantuml.server` setting.
+The helper requires a supported editor CLI command on `PATH`
+(`code`, `code-insiders`, `cursor`, `code.cmd`, `code-insiders.cmd`, or
+`cursor.cmd`) and is intended for macOS, Linux, WSL, and Git Bash for
+Windows. It covers only the server-based path described here. In other
+VS Code-based IDEs, apply the same extension IDs and settings manually.
+It does not configure the local-only PlantUML path, and it does not edit
+the optional `markdown.plantuml.server` setting.
 
 ### Option B: local-only Markdown preview
 
@@ -97,7 +104,8 @@ default format for new glossaries.
 
 ## What `spec-loop-setup-doc-rendering` should do
 
-1. Detect whether VS Code support is already sufficient.
+1. Detect whether support in the user's VS Code-based IDE is already
+   sufficient.
 2. If not, explain what is missing and why it matters.
 3. Offer server-based vs local PlantUML setup unless the user already has a
    preference.

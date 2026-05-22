@@ -51,12 +51,12 @@ Run this step unless you already know your editor is prepared to render:
 - Markdown task files with embedded PlantUML
 - AsciiDoc glossary files with embedded diagrams
 
-If you review in VS Code and want to run the helper script directly
-instead of using the skill, use the instructions in
-[README.md: Prepare task and glossary rendering](../README.md#prepare-task-and-glossary-rendering).
-Then skip the `You send` prompt below. Use
-[Verification](#verification) to confirm the expected editor
-state.
+If you review in VS Code, Cursor, or another VS Code-based IDE and
+want to run the helper script directly instead of using the skill, use
+the instructions in [README.md: Prepare task and glossary
+rendering](../README.md#prepare-task-and-glossary-rendering). Then skip
+the `You send` prompt below. Use [Verification](#verification) to
+confirm the expected editor state.
 
 ### You send
 
@@ -66,7 +66,7 @@ prepare my editor for reviewing rendered Spec Loop task files and
 glossary files.
 
 My coding tool may run in a terminal, but I review files in
-<VS Code or JetBrains>.
+<VS Code, Cursor, another VS Code-based IDE, or JetBrains>.
 ```
 
 ### You see

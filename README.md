@@ -187,21 +187,25 @@ prepare my editor for reviewing rendered Spec Loop task files and
 glossary files.
 
 My coding harness may run in a terminal, but I review files in
-<VS Code or JetBrains>.
+<VS Code, Cursor, another VS Code-based IDE, or JetBrains>.
 ```
 
-If you review files in VS Code, you can also run the helper script
-directly instead of asking an agent to use the skill. You can either
-run it from a local checkout or download the current main-branch copy
-directly from
+If you review files in VS Code, Cursor, or another VS Code-based IDE,
+the same extension IDs and settings apply. When your editor exposes a
+supported CLI command, you can also run the helper script directly
+instead of asking an agent to use the skill. You can either run it from
+a local checkout or download the current main-branch copy directly from
 [`setup-vscode-server-based.sh`](https://raw.githubusercontent.com/dpolivaev/spec-loop/refs/heads/main/skills/spec-loop-setup-doc-rendering/scripts/setup-vscode-server-based.sh).
-The script requires a VS Code CLI command on `PATH` (`code`,
-`code-insiders`, `code.cmd`, or `code-insiders.cmd`) and is intended
-for macOS, Linux, WSL, and Git Bash for Windows.
+The script requires a supported editor CLI command on `PATH` (`code`,
+`code-insiders`, `cursor`, `code.cmd`, `code-insiders.cmd`, or
+`cursor.cmd`) and is intended for macOS, Linux, WSL, and Git Bash for
+Windows. Other VS Code-based IDEs should apply the same extension IDs
+and settings manually.
 
-The helper automates only the VS Code server-based PlantUML preview
-path together with the AsciiDoc extension used by Spec Loop glossaries.
-It does not automate the local-only PlantUML path or JetBrains setup.
+The helper automates only the server-based PlantUML preview path for
+supported VS Code-based IDEs together with the AsciiDoc extension used
+by Spec Loop glossaries. It does not automate the local-only PlantUML
+path or JetBrains setup.
 
 From a local checkout:
 
