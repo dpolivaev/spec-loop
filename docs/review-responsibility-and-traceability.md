@@ -2,33 +2,46 @@
 
 This document captures what Spec Loop implies in team environments.
 
-## What the workflow rules and task-file constitution enforce
+## What the workflow rules, shared task semantics, and task-file constitution enforce
 
 The workflow rules are the normative contract between the human
-developer and the model. When Spec Loop uses a task file, the task-file
-constitution governs that artifact. Together, they enforce at minimum:
+developer and the model. `shared-task-semantics.md` defines the shared
+no-subtask task form used on both planning paths. When Spec Loop uses
+a task file, the task-file constitution adds task-file-only mechanics.
+Together, they enforce at minimum:
 
 * Explicit planning before executable work.
-* A short planning path in chat only for first-pass, straight-line work
-  with lightweight research, a single clear implementation path,
-  lightweight verification, and no existing task file.
+* A fileless planning path in chat only for first-pass, straight-line
+  work with lightweight research, a single clear implementation path,
+  lightweight verification, no existing task file, and no need for
+  subtasks or diagrams.
+* One shared main-task structure and section semantics across both
+  planning paths, with task-file-only additions for subtasks,
+  lifecycle, and diagrams.
 * Task files as the source of truth for scope, constraints, research,
   design, test expectations, and execution status when the task-file
   path is in use, plus `Implementation notes` when meaningful
   implementation-time history must remain visible.
-* ADRs and documentation may stand as their own planning artifacts when
-  they are the requested work and no task-file rule overrides that.
+* A canonical fileless chat task as the source of truth on the
+  fileless path, with section-only chat updates and full-task
+  recovery re-emission when reconstruction confidence drops.
+* ADRs and documentation may stand as their own planning artifacts
+  when they are the requested work and no task-file rule overrides
+  that.
 * A default approval gate before any code, test, or configuration
-  changes, with either chat-plan approval on the short path or
+  changes, with either fileless-task approval on the fileless path or
   task-file approval on the task-file path.
-* A separate post-approval implementation skill on the task-file path
-  that governs implementation-time clarification, task maintenance,
-  and the move to `review`.
+* A separate post-approval implementation skill on both planning
+  paths. On the task-file path it governs implementation-time
+  clarification, task maintenance, and the move to `review`. On the
+  fileless path it governs canonical chat-task maintenance,
+  implementation-time clarification, recovery or promotion, and
+  readiness reporting.
 * Implementation completeness: design, constraints when present, and
   test specification implemented unless tests are explicitly waived,
   plus any required implementation-note traceability captured.
 * Traceability discipline: identifiers in commit messages, and
-  status/folder consistency.
+  status/folder consistency where task files are in use.
 
 If a local convention conflicts with the applicable workflow rules or
 Task-file Constitution, the governing rule wins.
@@ -96,11 +109,12 @@ current intent.
 
 Spec Loop has two planning approval surfaces:
 
-* Short planning path approval in chat.
+* Fileless planning-path approval in chat.
 * Task-file approval on the task-file path.
 
-On the short planning path, the model must ask the user to approve both
-skipping task-file creation and implementing from the chat plan.
+On the fileless planning path, the model must ask the user to approve
+both skipping task-file creation and implementing from the fileless
+chat task.
 
 On the task-file path:
 
@@ -115,11 +129,17 @@ On the task-file path:
   clarification, the post-implementation `Implementation notes`
   checkpoint, and the move to `review`.
 
+On the fileless path, after fileless implementation approval,
+`spec-loop-implementation-flow` governs implementation-time
+clarification, canonical chat-task updates, full-task recovery
+re-emission when needed, promotion to the task-file path when fileless
+simplicity no longer holds, and readiness reporting.
+
 If implementation stays within the approved design and only bounded
-clarification is needed, the task is updated in place and work
-continues. If scope or another approved contract changes materially,
-the model proposes next steps and requests renewed approval before
-continuing.
+clarification is needed, the canonical task artifact is updated in
+place and work continues. If scope or another approved contract
+changes materially, the model proposes next steps and requests renewed
+approval before continuing.
 
 ## Phase model
 
@@ -137,16 +157,17 @@ after scope changes.
 ## Review boundaries that map to normal practice
 
 Spec Loop separates agreement on intent from review of implementation.
-Even with simplified statuses, review gates still exist at the task-file
-approval boundary and at final completion approval.
+Even with simplified statuses, review gates still exist at the
+implementation-approval boundary, at the task-file-path move-to-review
+boundary when that path is in use, and at final completion approval.
 
 Reviewers assess correctness against approved intent.
 
 ## PlantUML as a design artifact
 
-The task-file constitution requires Design sections as PlantUML
-diagrams that model structure or flow (class, component, sequence),
-with strict formatting rules.
+The task-file constitution requires Design sections on the task-file
+path to use PlantUML diagrams that model structure or flow (class,
+component, sequence), with strict formatting rules.
 
 Design remains reviewable as a first-class artifact and is not encoded only in
 implementation.
@@ -155,7 +176,10 @@ implementation.
 
 Spec Loop makes intent recoverable after the fact:
 
-* Task files define the intent boundary for a set of commits.
+* Task files define the intent boundary for a set of commits when the
+  task-file path is in use.
+* Fileless tasks define the intent boundary in chat while the
+  fileless path remains active.
 * Commit messages are structured artifacts and must start with the Primary
   Identifier:
 
@@ -165,7 +189,8 @@ This links implementation changes to an explicit, reviewable specification.
 
 ## Status folders and lifecycle discipline
 
-Work is organized by status folders in the task directory:
+On the task-file path, work is organized by status folders in the
+task directory:
 
 * backlog: planned or deferred work; research and design live here until design
   is approved.
@@ -173,9 +198,10 @@ Work is organized by status folders in the task directory:
   subtasks carry explicit status.
 * done: user-verified completion; prefix rules preserve ordering.
 
-Before commits, the model validates task status consistency and proposes folder
-or status updates. These are applied only after explicit user confirmation,
-unless the user explicitly instructed to commit.
+Before commits on the task-file path, the model validates task
+status consistency and proposes folder or status updates. These are
+applied only after explicit user confirmation, unless the user
+explicitly instructed to commit.
 
 ## Definition of done in team context
 
@@ -185,7 +211,7 @@ An increment is considered done only when:
 
 * the approved design is fully implemented,
 * the test specification is implemented and passing,
-* any deviations are documented in the task file,
+* any deviations are documented in the active task artifact,
 * the user explicitly approves the transition to **done**.
 
 This applies equally to human-written and model-written code.

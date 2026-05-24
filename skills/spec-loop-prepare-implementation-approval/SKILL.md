@@ -8,8 +8,8 @@ description: >-
 ---
 
 This skill is mandatory only on the task-file path of the
-`spec-loop-plan-task` workflow. It is not used for short planning path
-work kept in chat.
+`spec-loop-plan-task` workflow. It is not used for fileless planning
+path work kept in chat.
 
 Before work: read `../spec-loop-plan-task/SKILL.md`, follow all files it
 requires, and apply the full `spec-loop-plan-task` bundle as shared
@@ -31,5 +31,5 @@ After task-file implementation approval, implementation is governed by
 `../spec-loop-implementation-flow/SKILL.md`.
 
 If no active task file exists, if the current increment is unclear, or
-if short-path planning is in use, do not use this skill. Continue task
+if fileless planning is in use, do not use this skill. Continue task
 work under the `spec-loop-plan-task` bundle instead.

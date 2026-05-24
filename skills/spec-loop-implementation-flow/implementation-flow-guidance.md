@@ -1,45 +1,36 @@
 # Implementation-flow guidance for `spec-loop-implementation-flow`
 
-This skill reuses the full `spec-loop-plan-task` bundle for shared
-workflow conventions plus `task-file-constitution.md` for task-file
-structure, lifecycle, and formatting rules.
+This file is the shared implementation-flow core.
 
-This file is the authoritative source for implementation-phase
-authorized task-file updates, clarification handling,
-`Implementation notes`, completion checks, and `in-progress` ->
-`review` behavior on the Task-file path.
+It reuses the full `spec-loop-plan-task` bundle, including
+`shared-task-semantics.md` on both planning paths.
+Use it with one of these path-specific companions:
 
-## 0. Closed permission model for task-file edits
+- [fileless-path-guidance.md](./fileless-path-guidance.md); or
+- [task-file-path-guidance.md](./task-file-path-guidance.md).
 
-On the Task-file path during implementation flow, the active task file
-is an approved, reviewer-facing artifact plus a controlled
-post-implementation record. Do not treat it as a general scratchpad or
-silently normalize it to the code.
+This core defines:
 
-Only these task-file edits are allowed:
+- implementation-time routes;
+- authority to change canonical sections;
+- the meaning of `review`;
+- `Implementation notes`; and
+- the completion checklist.
 
-- add or update `Implementation notes` at the mandatory checkpoint;
-- update canonical task sections only when explicit authority exists
-  under Section 2;
-- perform the explicitly allowed lifecycle transition, including the
-  minimal status or folder edits required by the Task-file
-  Constitution; and
-- perform minimal mechanical cleanup strictly incidental to one of the
-  allowed edits above, such as wrapping, indentation, spacing, or
-  nearby list-formatting cleanup required to keep the file readable
-  and well-formed.
+The path companion says how those shared rules work on the active
+path.
 
-Any other task-file edit during implementation flow requires explicit
-User approval.
+## 0. Shared implementation-flow ownership
 
-If the agent discovers that it has already made an unauthorized
-task-file edit during implementation flow, it must stop and disclose
-in chat the exact unauthorized edit. It must make no further task-file
-edits except those explicitly approved by the User or otherwise
-authorized by this guidance, and must then follow the applicable
-routing rule before continuing.
+Read this file with exactly one path companion, chosen by
+`SKILL.md`.
 
-## 1. Implementation-time routing
+The path companion does not override this file.
+
+When this file requires recording a change, `Implementation notes`,
+or `review`, use the path companion to decide how to record it.
+
+## 1. Shared implementation-time routes
 
 When implementation reaches a decision point, only these routes are
 allowed.
@@ -60,10 +51,11 @@ alone, but no redesign is yet known.
 Pause only the affected implementation area. Explain the exact reason
 for the pause.
 
-After the User clarifies the issue, update the canonical task sections.
-If the clarification still fits inside the approved design, the User's
-chat clarification plus the task update is sufficient authority to
-continue. No separate go-ahead step is required.
+After the User clarifies the issue, update the canonical task
+sections. If the clarification still fits inside the approved design,
+the User's chat clarification plus the canonical task update is
+sufficient authority to continue. No separate go-ahead step is
+required.
 
 ### C. Return to PLAN and seek renewed approval
 
@@ -83,18 +75,17 @@ Return to PLAN when the change affects any of the following:
 - serialized, persisted, or configuration contracts; or
 - dependency decisions not already approved.
 
-When this route applies, return to `spec-loop-plan-task`. If the
-Task-file path remains in use, revise the task there and use
-`spec-loop-prepare-implementation-approval` again before resuming
-implementation.
+When this route applies, return to `spec-loop-plan-task`.
+Use the path companion for the path-specific next steps before more
+executable work continues.
 
 ### D. Seek post-implementation User approval of an implemented deviation
 
 Use this route when the completion comparison shows that the
 implementation violates the approved task content.
 
-Describe the deviation exactly. Do not rewrite canonical task sections
-before the User responds.
+Describe the deviation exactly. Do not rewrite canonical task
+sections before the User responds.
 
 If the User approves keeping the deviation, update only the minimal
 affected canonical task sections needed to reflect that explicit
@@ -107,20 +98,20 @@ After such approval, return to PLAN only if the User explicitly asks
 for replanning, redesign, or further changes beyond approving the
 implemented result.
 
-### E. Move the task or subtask to `review`
+### E. Reach `review`
 
-Use this route when implementation and local verification are
-complete for the current increment and the Task-file Constitution's
-lifecycle rules allow the move.
+Use this route when the work is implemented, locally verified, and
+ready for User review.
 
-On subtask work, this route moves the current subtask to `review`
-and may also move the overall task to `review` when the
-Task-file Constitution's task-level conditions are met.
+On both planning paths, `review` means the work matches the approved
+task and has passed the required local checks.
+
+The path companion defines how that state is expressed.
 
 ## 2. When canonical task sections may change
 
-Update canonical task sections only when an explicit authority exists
-for that change without silently normalizing the task to the code.
+Change canonical task sections only when explicit authority exists.
+Do not silently normalize the task to the code.
 
 The existing approved task specification remains controlling by
 default. Only one of the following may override earlier task wording
@@ -141,14 +132,16 @@ clarification, accepted review feedback, or explicit post-
 implementation approval actually changes, including `Research`,
 `Scenario`, `Constraints`, `Design`, or `Test specification`.
 
+Record the authorized change as the path companion requires.
+
 Keep accepted clarifications, approved deviations, and review
 adjustments in canonical task sections rather than logging that
 conversation history in `Implementation notes`.
 
-## 3. Completion and transition to `review`
+## 3. Completion, `Implementation notes`, and `review`
 
-Compare the implemented current task or subtask with the relevant
-approved task content and verification expectations.
+Compare the implementation with the approved task and its
+verification expectations.
 
 For each finding:
 
@@ -158,10 +151,10 @@ For each finding:
   `Implementation notes`;
 - if it shows that the implementation violates the approved task
   content, follow Section 1D before changing canonical task sections
-  or moving to `review`;
+  or reaching `review`;
 - otherwise, if it reveals blocking uncertainty, needs explicit User
   clarification, or affects the Section 1C boundaries, raise it in
-  chat and do not move to `review`.
+  chat and do not reach `review`.
 
 ### `Implementation notes` checkpoint
 
@@ -169,24 +162,17 @@ For each finding:
 It is checked only at the post-implementation checkpoint described
 here.
 
-`Implementation notes` is conditional. Its purpose is to simplify
-change review by capturing relevant implementation decisions and
-reasons at a higher abstraction level than the code itself.
+Use `Implementation notes` only when they help later review.
+They capture implementation decisions and reasons above code level.
 
 It is not a live worklog during active coding. After implementation
-and verification, before presenting work as review-ready, moving the
-task or subtask to `review`, preparing or proposing a commit, or
-otherwise implying implementation closure, perform the mandatory
-`Implementation notes` check.
+and verification, before reaching `review`, preparing or proposing a
+commit, or otherwise implying implementation closure, perform the
+mandatory `Implementation notes` check.
 
 If relevant `Interpretations`, `Tradeoffs`, or `Open questions` exist,
-record them in the task file. If none exist, omit the section.
-
-Placement:
-
-- without subtasks: task level;
-- with subtasks: the active implementation subtask, unless a genuine
-  task-level note is needed.
+record them. If none exist, omit the section.
+Use the path companion to place or express the section.
 
 Use these fixed canonical subheadings when notes are present:
 
@@ -206,22 +192,6 @@ Meaning of the subheadings:
   item should contain the deferred question and may include
   supplementary information before or after it.
 
-Example task-file content when notes are relevant:
-
-- **Implementation notes:**
-  - **Interpretations:**
-    - Treated repeated invite submission as idempotent because the
-      approved task required retry-safe behavior but did not define
-      duplicate handling precisely.
-  - **Tradeoffs:**
-    - Kept duplicate detection in the service layer instead of the
-      repository so duplicate handling stays testable without
-      persistence-coupled error mapping.
-  - **Open questions:**
-    - Bulk invite behavior is out of scope for the current increment,
-      so one deferred decision remains: should bulk invite flow use
-      the same idempotency rule as single invite submission?
-
 Record policy:
 
 - `Implementation notes` is a durable implementation record, not a
@@ -231,7 +201,7 @@ Record policy:
   later review or development.
 - Record only the model's own implementation-time interpretations,
   trade-offs, and open questions.
-- Do not use it as a log of user clarification, review feedback, or
+- Do not use it as a log of User clarification, review feedback, or
   general conversation history.
 - Do not require chronological ordering.
 - Prefer organizing notes by meaning rather than by timestamp.
@@ -243,8 +213,8 @@ Record policy:
 
 - they do not block the current increment;
 - they are explicitly left deferred; and
-- they therefore do not prevent the current task or subtask from
-  moving to `review`.
+- they therefore do not prevent the current work from reaching
+  `review`.
 
 If an implementation question blocks the current increment, do not
 leave it unresolved in `Implementation notes`. Clarify it in chat.
@@ -253,7 +223,9 @@ returning to PLAN, update the affected canonical task section or
 sections instead of recording that clarification in
 `Implementation notes`.
 
-Before moving the task or subtask to `review`, ensure that:
+### Completion checklist
+
+Before reaching `review`, ensure that:
 
 - the approved scope for the current increment is implemented;
 - `Constraints`, `Design`, and `Test specification` are implemented as
@@ -267,41 +239,28 @@ Before moving the task or subtask to `review`, ensure that:
 - required glossary work is complete;
 - the mandatory `Implementation notes` check has been performed;
 - when relevant `Implementation notes` content exists,
-  `Implementation notes` is recorded in the task file;
+  `Implementation notes` is recorded;
 - any remaining `Open questions` are non-blocking and explicitly left
   deferred; and
 - no obvious leftovers remain, such as TODOs, placeholders, example
   names, temporary comments, or unused imports.
 
-If any check fails, do not move to `review`.
-Either complete the missing checkpoint work or follow the
-appropriate route from Section 1.
-
-When the checks pass, follow the Task-file Constitution's lifecycle
-rules.
-
-- Without subtasks: move the task from `in-progress` to `review`.
-- With subtasks: move the current subtask from `in-progress` to
-  `review`.
-- When that subtask move leaves no more task-level or subtask-level
-  work expected and every subtask is either `review` or `done`, move
-  the overall task to `review` too.
-- Do not move the overall task to `review` yet if more task-level work
-  is still expected or another subtask is still `backlog` or
-  `in-progress`.
+If any check fails, do not reach `review`.
+Either complete the missing checkpoint work or follow the appropriate
+route from Section 1.
 
 ## 4. Interaction with the other task skills
 
-`spec-loop-plan-task` owns workflow routing, planning, and approval
-gates.
+`spec-loop-plan-task` owns workflow routing, planning, fileless-path
+maintenance before implementation approval, and approval gates.
 
 `spec-loop-prepare-implementation-approval` owns pre-implementation
 Task-file readiness and approval-seeking preparation.
 
-This skill owns post-approval execution on the Task-file path:
-implementation-phase authorized task-file updates, clarification
-handling, `Implementation notes`, completion checks, and the
-transition to `review`.
+After approval, this shared core plus the active path companion
+govern route handling, authorized canonical updates,
+`Implementation notes`, the path-specific expression of `review`, and
+any needed fileless recovery or promotion.
 
 Do not replace the planning or approval-preparation skills. Reuse them
 when implementation uncovers a change that needs renewed planning or

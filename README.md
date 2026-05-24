@@ -22,19 +22,20 @@ with tests. Keep the spec local to the next step. Repeat until done.
 Spec Loop is a framework of reusable skills.
 
 Its main governing rules live in the `spec-loop-plan-task` bundle and
-its task-file companions.
+its companion files.
 
 The planning bundle starts with
-**[SKILL.md](skills/spec-loop-plan-task/SKILL.md)**
+**[SKILL.md](skills/spec-loop-plan-task/SKILL.md)**,
+**[shared-task-semantics.md](skills/spec-loop-plan-task/shared-task-semantics.md)**,
 and, when the task-file path is chosen,
 **[task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md)**.
-That bundle governs plan-first work, the short planning path in chat,
-the task-file path when needed, ADR and documentation routing,
+That bundle governs plan-first work, the fileless planning path in
+chat, the task-file path when needed, ADR and documentation routing,
 glossary triggers, and the approval gate before implementation.
 
 On the task-file path, pre-implementation readiness is prepared by
 `spec-loop-prepare-implementation-approval`, and approved
-implementation is then carried out under
+implementation on either planning path is then carried out under
 `spec-loop-implementation-flow`.
 
 The `spec-loop-write-glossary` skill defines the Spec Loop AsciiDoc glossary
@@ -49,30 +50,33 @@ retrospective review files from trusted pull requests, merge requests,
 or commit ranges and can generate GitHub-friendly Mermaid variants
 from them when needed.
 
-The model uses these skills while drafting and updating plans, task, or
-review artifacts; you review and approve either a short chat plan or a
-task-file plan before implementation. On task-file work, approved
-implementation then continues under `spec-loop-implementation-flow`,
-which governs implementation-time routing, the
-`Implementation notes` checkpoint, and the move to `review`. When the
-code already exists, you inspect retrospective review files instead.
+The model uses these skills while drafting and updating plans, task,
+or review artifacts; you review and approve either a fileless chat
+task or a task-file plan before implementation. Approved
+implementation then continues under `spec-loop-implementation-flow`.
+On task-file work, it governs implementation-time routing,
+`Implementation notes`, and the move to `review`. On the fileless
+path, it governs canonical chat-task maintenance, recovery re-emission
+or promotion, and readiness reporting. When the code already exists,
+you inspect retrospective review files instead.
 
 Spec Loop also defines explicit work phases: plan, implementation, and done.
 Any transitions to implementation and to done require explicit user approval.
 
-When a project maintains a glossary described by the task-file
-constitution's
-[project glossary section](skills/spec-loop-plan-task/task-file-constitution.md#project-glossary),
-that glossary defines the shared domain language above individual tasks
-and the code. It keeps design documents, tests, code symbols, and
-commit text aligned on the same terms across the whole project.
+When a project maintains a glossary described by the shared task
+semantics
+[project glossary section](skills/spec-loop-plan-task/shared-task-semantics.md#project-glossary),
+that glossary defines the shared domain language above individual
+tasks and the code. It keeps design documents, tests, code symbols,
+and commit text aligned on the same terms across the whole project.
 
 ## Why This Works with Large Codebases
 
 Spec Loop is designed to work with existing codebases at scale.
 Before any design or implementation step, the model captures relevant
-knowledge in the Research section of the task file: existing behavior,
-constraints, APIs, interfaces, and established code practices.
+knowledge in the Research section of the active task artifact:
+existing behavior, constraints, APIs, interfaces, and established
+code practices.
 
 It follows the classic research–plan–implement approach, broken down
 into small, incremental sub-tasks.
@@ -98,6 +102,11 @@ incremental change safer.
 Spec Loop uses more than one document type on purpose. They do not have
 the same job or the same lifetime.
 
+- Fileless chat tasks are short-lived canonical chat artifacts for
+  simple work on the fileless path. They exist to drive research,
+  implementation, and verification without task-file overhead. If
+  alignment becomes unsafe, they are re-emitted or promoted to task
+  files.
 - Task files are short-lived working artifacts for the next concrete
   slice of work when the task-file path is in use. They exist to drive
   research, review, implementation, and testing of that slice.
@@ -114,9 +123,10 @@ the same job or the same lifetime.
   useful after the task is accepted, such as technical shape,
   operations, or other stable project knowledge.
 
-Historical task files do not need to be kept mutually consistent across
-time. The active task, however, should stay aligned with the glossary,
-living project documents, and implemented code for its scope.
+Historical task files do not need to be kept mutually consistent
+across time. The active task artifact, however, should stay aligned
+with the glossary, living project documents, and implemented code for
+its scope.
 
 If a project maintains a technical design document, its purpose is to
 describe the current technical shape, stable boundaries, and important
@@ -260,12 +270,12 @@ If your harness behaves that way, add a project instruction such as:
 Use the `spec-loop-plan-task` skill for all non-trivial work unless I explicitly
 opt out.
 On the task-file path, use `spec-loop-prepare-implementation-approval`
-before asking for implementation approval and
-`spec-loop-implementation-flow` after task-file implementation
-approval.
+before asking for implementation approval.
+After implementation approval on either planning path, use
+`spec-loop-implementation-flow`.
 Use the `spec-loop-write-glossary` skill for `glossary.adoc` glossary work.
 Follow the workflow rules loaded through the `spec-loop-plan-task`
-skill, including the short-planning-path routing and the
+skill, including the fileless-planning-path routing and the
 PLAN -> IMPLEMENTATION explicit approval gate.
 ```
 
@@ -283,7 +293,8 @@ intended only for retrospective review of trusted repositories:
 1. **`spec-loop-plan-task`**
    - the planning and task-administration skill for non-trivial work;
    - defined by
-     [skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md)
+     [skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md),
+     [skills/spec-loop-plan-task/shared-task-semantics.md](skills/spec-loop-plan-task/shared-task-semantics.md),
      and, on the task-file path,
      [skills/spec-loop-plan-task/task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md).
 
@@ -295,12 +306,17 @@ intended only for retrospective review of trusted repositories:
      [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md).
 
 3. **`spec-loop-implementation-flow`**
-   - the mandatory task-file-path implementation-flow skill used after
-     implementation approval when implementation deviates from the
-     approved task, when uncertainty or blocking questions arise, or
-     before handing implemented work over for review;
-   - defined by
-     [skills/spec-loop-implementation-flow/implementation-flow-guidance.md](skills/spec-loop-implementation-flow/implementation-flow-guidance.md).
+   - the mandatory implementation-flow skill used after
+     implementation approval on either planning path when
+     implementation deviates from the approved task, when uncertainty
+     or blocking questions arise, or before handing implemented work
+     over for review or ready-state presentation;
+   - defined by the shared core
+     [skills/spec-loop-implementation-flow/implementation-flow-guidance.md](skills/spec-loop-implementation-flow/implementation-flow-guidance.md),
+     plus the path-specific companions
+     [skills/spec-loop-implementation-flow/fileless-path-guidance.md](skills/spec-loop-implementation-flow/fileless-path-guidance.md)
+     and
+     [skills/spec-loop-implementation-flow/task-file-path-guidance.md](skills/spec-loop-implementation-flow/task-file-path-guidance.md).
 
 4. **`spec-loop-write-glossary`**
    - the Spec Loop AsciiDoc glossary-format skill;
@@ -324,16 +340,28 @@ intended only for retrospective review of trusted repositories:
    * **[skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md)**
      defines planning-path selection, approval and escalation rules,
      ADR and documentation routing, glossary triggers, and phase rules.
+   * **[skills/spec-loop-plan-task/shared-task-semantics.md](skills/spec-loop-plan-task/shared-task-semantics.md)**
+     defines the shared no-subtask task form, section semantics,
+     readiness rules, formatting, and testing policy used on both
+     planning paths.
    * **[skills/spec-loop-plan-task/task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md)**
-     defines the task-file-specific rules: task files, research/design
-     discipline, lifecycle and traceability requirements, section
-     structure, and testing policy.
+     defines the task-file-specific rules: task files, lifecycle and
+     traceability requirements, subtasks, and diagram rules.
    * **[skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md)**
      defines task-file approval-readiness preparation before
      implementation approval.
    * **[skills/spec-loop-implementation-flow/implementation-flow-guidance.md](skills/spec-loop-implementation-flow/implementation-flow-guidance.md)**
-     defines post-approval implementation-time routing,
-     `Implementation notes`, and `review` transition checks.
+     defines the shared implementation-flow core: post-approval route
+     semantics, canonical-section authority, shared `review` meaning,
+     `Implementation notes`, and the semantic completion checklist.
+   * **[skills/spec-loop-implementation-flow/fileless-path-guidance.md](skills/spec-loop-implementation-flow/fileless-path-guidance.md)**
+     defines the fileless-path implementation-time mechanics:
+     canonical chat updates, recovery re-emission, promotion, and
+     fileless expression of `review`.
+   * **[skills/spec-loop-implementation-flow/task-file-path-guidance.md](skills/spec-loop-implementation-flow/task-file-path-guidance.md)**
+     defines the task-file-path implementation-time delta:
+     authorized task-file edits, task-file `Implementation notes`
+     expression, and task-file expression of `review`.
 
 2. Study the Wordle example by commit history.
 
@@ -344,8 +372,9 @@ intended only for retrospective review of trusted repositories:
 
 3. Check
    **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**.
-   It explains how short chat planning, task files, workflow rules, and
-   the task-file constitution map to team development practice:
+   It explains how fileless chat tasks, task files, workflow rules,
+   shared task semantics, and the task-file constitution map to team
+   development practice:
    boundaries, responsibility, commit linking, and status discipline.
 
 4. Follow one of the hands-on tutorials.
@@ -365,7 +394,7 @@ intended only for retrospective review of trusted repositories:
 
 5. Project glossary conventions.
 
-   * See the task-file constitution's project glossary section above.
+   * See the shared task semantics project glossary section above.
    * **[skills/spec-loop-write-glossary/glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md)**
      is the shared glossary-format guidance file and includes its own
      embedded example.
@@ -373,9 +402,12 @@ intended only for retrospective review of trusted repositories:
 Recommended quick-check order:
 - `README.md`
 - `skills/spec-loop-plan-task/SKILL.md`
+- `skills/spec-loop-plan-task/shared-task-semantics.md`
 - `skills/spec-loop-plan-task/task-file-constitution.md`
 - `skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md`
 - `skills/spec-loop-implementation-flow/implementation-flow-guidance.md`
+- `skills/spec-loop-implementation-flow/fileless-path-guidance.md`
+- `skills/spec-loop-implementation-flow/task-file-path-guidance.md`
 - `docs/review-responsibility-and-traceability.md`
 - `docs/online-art-game-tutorial.md`
 - `docs/wordle-tutorial.md`

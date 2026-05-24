@@ -226,7 +226,7 @@ Also update the active project instructions file (for example
 `AGENTS.md`) so it explicitly tells the assistant to read `README.md`
 and follow the "Project Brief" section there for project requirements
 unless I explicitly override it. The instructions file must also say
-that this project never uses the short planning path: any code change
+that this project never uses the fileless planning path: any code change
 requires creation of a task file.
 
 This is documentation-only work, we do not need a task file for it.
@@ -246,7 +246,7 @@ This is documentation-only work, we do not need a task file for it.
 - Project instructions file:
   - explicitly points the assistant to [README.md](../README.md) as the
     source of the project brief and requirements,
-  - states that the short planning path is never allowed in this
+  - states that the fileless planning path is never allowed in this
     project and that any code change requires a task file.
 
 ### After completion (commit)

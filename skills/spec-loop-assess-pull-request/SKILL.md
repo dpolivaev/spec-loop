@@ -22,13 +22,16 @@ Before work:
 
 - read `../spec-loop-plan-task/SKILL.md` for shared planning,
   glossary, and phase terminology;
-- read `../spec-loop-plan-task/task-file-constitution.md` for shared
-  artifact structure, formatting, glossary, and diagram conventions
+- read `../spec-loop-plan-task/shared-task-semantics.md` for shared
+  artifact structure, formatting, glossary, and section semantics
   reused by retrospective review files;
+- read `../spec-loop-plan-task/task-file-constitution.md` for
+  task-file-only diagram conventions and any other task-file-specific
+  rules that clearly fit retrospective review artifacts;
 - apply those shared conventions where they fit retrospective review
-  work, but do not apply the short planning path, task-file lifecycle
-  routing, or the normal `PLAN -> IMPLEMENTATION` approval gate to the
-  reviewed change itself;
+  work, but do not apply the fileless planning path, task-file
+  lifecycle routing, or the normal `PLAN -> IMPLEMENTATION` approval
+  gate to the reviewed change itself;
 - then read [review-guidance.md](./review-guidance.md).
 
 Optional compact example:

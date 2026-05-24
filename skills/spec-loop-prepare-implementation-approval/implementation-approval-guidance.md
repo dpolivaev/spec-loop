@@ -16,11 +16,11 @@ presentation, not as required task size.
 
 ## 1. Read order and source of truth
 
-Refresh the relevant `spec-loop-plan-task` bundle requirements in active
-context. If the `spec-loop-plan-task` skill digest or the Task-file
-Constitution scope is not already available in the current context,
-read them through `../spec-loop-plan-task/SKILL.md` as that skill
-requires.
+Refresh the relevant `spec-loop-plan-task` bundle requirements in
+active context. If the `spec-loop-plan-task` skill digest, shared task
+semantics scope, or Task-file Constitution scope is not already
+available in the current context, read them through
+`../spec-loop-plan-task/SKILL.md` as that skill requires.
 
 Use the active task or active subtask as the controlling
 specification for the current increment. Follow all applicable task
@@ -153,8 +153,9 @@ This skill is its user-facing review and approval-seeking companion.
 
 That means:
 - do not replace `spec-loop-plan-task`;
-- do not duplicate `spec-loop-plan-task` or task-file-constitution
-  ownership here;
+- do not duplicate `spec-loop-plan-task`,
+  `shared-task-semantics.md`, or task-file-constitution ownership
+  here;
 - add only the approval-preparation delta.
 
 After implementation approval, post-approval execution and the
