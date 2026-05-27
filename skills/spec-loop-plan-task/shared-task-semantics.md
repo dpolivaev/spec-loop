@@ -17,7 +17,10 @@ and other task-file administration stay in
 ## Current-increment readiness
 
 The active task artifact is the source of truth for the current
-increment.
+increment. Design-first allows learning during implementation while
+the approved Design stays authoritative. Findings that change the
+intended target lead to updates to the active task artifact and
+renewed approval before implementation continues.
 
 - On the fileless path, that artifact is the current canonical
   fileless task in chat.

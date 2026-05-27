@@ -129,8 +129,12 @@ belongs in `Implementation notes`.
 
 Update whichever canonical section or sections the explicit
 clarification, accepted review feedback, or explicit post-
-implementation approval actually changes, including `Research`,
-`Scenario`, `Constraints`, `Design`, or `Test specification`.
+implementation approval actually changes. After implementation
+starts, append to `Research` instead of rewriting it. In later
+`Research` entries, say when they amend earlier findings and when
+they rely on code already changed during implementation. Patch other
+changed canonical sections to current truth, including `Scenario`,
+`Constraints`, `Design`, or `Test specification`.
 
 Record the authorized change as the path companion requires.
 
