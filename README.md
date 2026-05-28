@@ -21,26 +21,31 @@ with tests. Keep the spec local to the next step. Repeat until done.
 
 Spec Loop is a framework of reusable skills.
 
-Its main governing rules live in the `spec-loop-plan-task` bundle and
-its companion files.
+Spec Loop follows this workflow:
+- **clarify** - `spec-loop-clarify-task` resolves material unresolved
+  questions before or during planning.
+- **plan** - the `spec-loop-plan-task` bundle governs plan-first
+  work, including the fileless planning path in chat, the task-file
+  path when needed, ADR and documentation routing, glossary
+  triggers, and the gate before implementation.
+- **approve** - you approve either a fileless task in chat or a
+  task-file plan; on the task-file path,
+  `spec-loop-prepare-implementation-approval` prepares the task for
+  that approval step.
+- **implement** - after implementation approval on either planning
+  path, `spec-loop-implementation-flow` governs
+  implementation-time work.
+- **review/ready** - `spec-loop-implementation-flow` also governs
+  the move to `review` on the task-file path and readiness
+  reporting on the fileless path.
+
+The planning and approval rules for that workflow live in the `spec-loop-plan-task` bundle and its companion files.
 
 The planning bundle starts with
 **[SKILL.md](skills/spec-loop-plan-task/SKILL.md)**,
 **[shared-task-semantics.md](skills/spec-loop-plan-task/shared-task-semantics.md)**,
 and, when the task-file path is chosen,
 **[task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md)**.
-That bundle governs plan-first work, the fileless planning path in
-chat, the task-file path when needed, ADR and documentation routing,
-glossary triggers, and the approval gate before implementation.
-
-The `spec-loop-clarify-task` skill is the preferred pre-planning
-clarification skill for new task creation, task updates, and design
-updates.
-
-On the task-file path, pre-implementation readiness is prepared by
-`spec-loop-prepare-implementation-approval`, and approved
-implementation on either planning path is then carried out under
-`spec-loop-implementation-flow`.
 
 The `spec-loop-write-glossary` skill defines the Spec Loop AsciiDoc glossary
 format in
