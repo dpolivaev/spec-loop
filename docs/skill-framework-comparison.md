@@ -1,13 +1,21 @@
 # AI Workflow Framework Comparison
 
-> Relative-fit comparison for a talk. Rows are **actions or workflow goals** ordered roughly by when they appear in the software-development cycle.
+> Relative-fit comparison of AI workflow frameworks. Rows are
+> **actions or workflow goals** ordered roughly by when they appear in
+> the software-development cycle.
 >
-> The stars show **how central that action is to the framework's intended use**, not how "good" the framework is overall.
+> The stars show how strongly the reviewed materials support each
+> activity for LLM use, based on the specificity, operational clarity,
+> and enforcement visible in the documents. They are not formal
+> benchmark results or a full real-world performance score.
 >
-> - **★★★★★** = core / first-class purpose
-> - **★★★☆☆** = meaningful secondary use
-> - **★☆☆☆☆** = limited / indirect coverage
-> - **-** = not really a purpose there, or not materially evidenced in the materials read
+> - **★★★★★** = strongest support
+> - **★★★★** = strong support
+> - **★★★** = meaningful secondary support
+> - **★★** = limited but real support
+> - **★** = weak / indirect support
+> - **-** = not a purpose there, or not evidenced in the materials
+>   reviewed
 
 ## Frameworks compared
 
@@ -34,62 +42,65 @@ specific task that is already chosen.
 ## 1. Upstream discovery and scoping
 
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
-|---|---|---|---|---|---|
-| Analyze a broad problem area before choosing implementation work | ★★★★★ | ★★★★★ | ★★☆☆☆ | ★★☆☆☆ | ★★★★☆ |
-| Clarify a specific requested task or increment before implementation | ★★★☆☆ | ★★★★☆ | ★★★★★ | ★★★★★ | ★★★★☆ |
-| Split a broad initiative or change into smaller deliverable slices/tasks | ★★★★☆ | ★★★★★ | ★★☆☆☆ | ★☆☆☆☆ | ★★★★☆ |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| Analyze a broad problem area before choosing implementation work | ★★★★★ | ★★★★★ | ★★ | ★★ | ★★★★ |
+| Clarify a specific requested task or increment before implementation | ★★★ | ★★★★ | ★★★★★ | ★★★★★ | ★★★★ |
+| Split a broad initiative or change into smaller deliverable slices/tasks | ★★★★ | ★★★★★ | ★★ | ★ | ★★★★ |
 
 ## 2. Shared language and durable decision context
 
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
-|---|---|---|---|---|---|
-| Challenge proposed terms against existing shared language and surface terminology conflicts | ★☆☆☆☆ | ★☆☆☆☆ | ★★★★☆ | ★★★★★ | ★☆☆☆☆ |
-| Maintain a shared project glossary / terminology | ★☆☆☆☆ | - | ★★★★★ | ★★★★★ | ★☆☆☆☆ |
-| Model multiple domains/contexts and their boundaries | ★★☆☆☆ | - | ★☆☆☆☆ | ★★★★★ | - |
-| Surface and record architecture decisions that need durable rationale | ★★★☆☆ | - | ★★★☆☆ | ★★★★☆ | ★★★★☆ |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| Challenge proposed terms against existing shared language and surface terminology conflicts | ★ | ★ | ★★★★ | ★★★★★ | ★ |
+| Maintain a shared project glossary / terminology | ★ | - | ★★★★★ | ★★★★★ | ★ |
+| Model multiple domains/contexts and their boundaries | ★★ | - | ★ | ★★★★★ | - |
+| Surface and record architecture decisions that need durable rationale | ★★★ | - | ★★★ | ★★★★ | ★★★★ |
 
 ## 3. Define the intended change
 
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
-|---|---|---|---|---|---|
-| Create durable spec/change artifacts that remain the source of truth | ★★★★★ | ★★★★☆ | ★★★★☆ | ★★☆☆☆ | ★★★★☆ |
-| Write detailed technical design before implementation | ★★★★★ | ★★★★★ | ★★★★★ | ★★☆☆☆ | ★★★☆☆ |
-| Make current and target structure/behavior explicit with reviewable diagrams | ★☆☆☆☆ | ★☆☆☆☆ | ★★★★★ | ★☆☆☆☆ | ★☆☆☆☆ |
-| Maintain brownfield deltas between current and proposed behavior | ★★★★★ | - | ★☆☆☆☆ | - | - |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| Create durable spec/change artifacts that remain the source of truth | ★★★★★ | ★★★★ | ★★★★ | ★★ | ★★★★ |
+| Write detailed technical design before implementation | ★★★★★ | ★★★★★ | ★★★★★ | ★★ | ★★★ |
+| Make current and target structure/behavior explicit with reviewable diagrams | ★ | ★ | ★★★★★ | ★ | ★ |
+| Maintain brownfield deltas between current and proposed behavior | ★★★★★ | - | ★ | - | - |
 
 ## 4. Make the next increment implementation-ready
 
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
-|---|---|---|---|---|---|
-| Make one implementation increment ready by explicitly capturing research, constraints, design, and test expectations | ★★★☆☆ | ★★★★☆ | ★★★★★ | ★★★☆☆ | ★★★☆☆ |
-| Break approved work into actionable implementation tasks/checklists | ★★★★★ | ★★★★★ | ★★★★☆ | ★☆☆☆☆ | ★★★★☆ |
-| Support lightweight planning for one simple increment without opening a full formal artifact workflow | ★★☆☆☆ | ★☆☆☆☆ | ★★★★★ | ★★☆☆☆ | ★☆☆☆☆ |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| Make one implementation increment ready by explicitly capturing research, constraints, design, and test expectations | ★★★ | ★★★★ | ★★★★★ | ★★★ | ★★★ |
+| Break approved work into actionable implementation tasks/checklists | ★★★★★ | ★★★★★ | ★★★★ | ★ | ★★★★ |
+| Support lightweight planning for one simple increment without opening a full formal artifact workflow | ★★ | ★ | ★★★★★ | ★★ | ★ |
 
 ## 5. Govern implementation while coding
 
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
-|---|---|---|---|---|---|
-| Keep implementation constrained to the approved increment/task/change during coding | ★★★★☆ | ★★★★★ | ★★★★★ | - | ★★★☆☆ |
-| Use explicit guardrails against rationalization and unjustified confidence during execution | ★☆☆☆☆ | ★★★★★ | ★★★☆☆ | ★☆☆☆☆ | ★★★★★ |
-| Treat test-first development as a required implementation method | ★☆☆☆☆ | ★★★★★ | ★★☆☆☆ | - | ★☆☆☆☆ |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| Keep implementation constrained to the approved increment/task/change during coding | ★★★★ | ★★★★★ | ★★★★★ | - | ★★★ |
+| Use explicit guardrails against rationalization and unjustified confidence during execution | ★ | ★★★★★ | ★★★ | ★ | ★★★★★ |
+| Treat test-first development as a required implementation method | ★ | ★★★★★ | ★★ | - | ★ |
 | Require root-cause analysis before fixes when debugging | - | ★★★★★ | - | - | - |
-| Use subagents plus review loops as a primary implementation strategy | - | ★★★★★ | - | - | ★☆☆☆☆ |
-| Use isolated development workspaces/branches as part of the normal implementation flow | ★☆☆☆☆ | ★★★★★ | - | - | - |
+| Use subagents plus review loops as a primary implementation strategy | - | ★★★★★ | - | - | ★ |
+| Use isolated development workspaces/branches as part of the normal implementation flow | ★ | ★★★★★ | - | - | - |
 | Coordinate implementation across multiple repos or linked workspaces | ★★★★★ | - | - | - | - |
 
 ## 6. Verify and close out
 
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
-|---|---|---|---|---|---|
-| Check implemented work against the agreed artifacts before calling it done | ★★★★☆ | ★★★★★ | ★★★★★ | - | ★★★★☆ |
-| Support code review, PR, or merge completion as a first-class workflow step | ★☆☆☆☆ | ★★★★★ | ★☆☆☆☆ | - | ★★☆☆☆ |
-| Preserve completed change context in an archive or other durable historical record | ★★★★★ | ★☆☆☆☆ | ★★☆☆☆ | - | - |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| Check implemented work against the agreed artifacts before calling it done | ★★★★ | ★★★★★ | ★★★★★ | - | ★★★★ |
+| Support code review, PR, or merge completion as a first-class workflow step | ★ | ★★★★★ | ★ | - | ★★ |
+| Preserve completed change context in an archive or other durable historical record | ★★★★★ | ★ | ★★ | - | - |
 
 ## 7. Workflow costs
 
 This is a different kind of comparison. Lower is not automatically
 better: a framework can be cheaper here because it covers less of the
 job, or because it keeps less written state.
+
+These cost labels are comparative judgments based on the reviewed
+materials, not measurements or benchmark results.
 
 ### Activities
 
@@ -106,7 +117,7 @@ job, or because it keeps less written state.
 ### Analysis
 
 | Activity | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
-|---|---|---|---|---|---|
+|:---|:---:|:---:|:---:|:---:|:---:|
 | Before coding | High | Very high | Medium | Low | High |
 | Coding and testing | High | Very high | Medium | High | High |
 | Keeping written understanding in sync as the system grows | High | Medium | Medium | Medium | Medium |
