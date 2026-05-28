@@ -33,6 +33,10 @@ That bundle governs plan-first work, the fileless planning path in
 chat, the task-file path when needed, ADR and documentation routing,
 glossary triggers, and the approval gate before implementation.
 
+The `spec-loop-clarify-task` skill is the preferred pre-planning
+clarification skill for new task creation, task updates, and design
+updates.
+
 On the task-file path, pre-implementation readiness is prepared by
 `spec-loop-prepare-implementation-approval`, and approved
 implementation on either planning path is then carried out under
@@ -142,7 +146,8 @@ Apply the process to your repository.
 Recommended path:
 
 Install the core task-workflow skills together.
-`spec-loop-plan-task`, `spec-loop-prepare-implementation-approval`,
+`spec-loop-plan-task`, `spec-loop-clarify-task`,
+`spec-loop-prepare-implementation-approval`,
 `spec-loop-implementation-flow`, `spec-loop-write-glossary`, and
 `spec-loop-setup-doc-rendering` hand off to each other, reuse the
 shared `spec-loop-plan-task` bundle, and support the same planning
@@ -156,7 +161,7 @@ as review evidence and is not required for the main planning workflow.
 1. Ensure Node.js is available so `npx` works.
 2. If you do not need `spec-loop-assess-pull-request`, use a selective
    installation variant from the skills tool documentation and install
-   only the five core task-workflow skills listed above.
+   only the six core task-workflow skills listed above.
 3. If you want the full bundle, including optional
    `spec-loop-assess-pull-request`, install all Spec Loop skills
    interactively for the current project:
@@ -269,11 +274,14 @@ If your harness behaves that way, add a project instruction such as:
 ```text
 Use the `spec-loop-plan-task` skill for all non-trivial work unless I explicitly
 opt out.
+Use the `spec-loop-clarify-task` skill to clarify underspecified
+tasks, task updates, and design updates before or during planning.
 On the task-file path, use `spec-loop-prepare-implementation-approval`
 before asking for implementation approval.
 After implementation approval on either planning path, use
 `spec-loop-implementation-flow`.
-Use the `spec-loop-write-glossary` skill for `glossary.adoc` glossary work.
+Use the `spec-loop-write-glossary` skill for `glossary.adoc` glossary
+work.
 Follow the workflow rules loaded through the `spec-loop-plan-task`
 skill, including the fileless-planning-path routing and the
 PLAN -> IMPLEMENTATION explicit approval gate.
@@ -286,7 +294,7 @@ context alone.
 ## Included Skills
 
 This repository currently ships these skills.
-The first five form the core task-workflow bundle and should be
+The first six form the core task-workflow bundle and should be
 installed together. `spec-loop-assess-pull-request` is optional and
 intended only for retrospective review of trusted repositories:
 
@@ -298,14 +306,21 @@ intended only for retrospective review of trusted repositories:
      and, on the task-file path,
      [skills/spec-loop-plan-task/task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md).
 
-2. **`spec-loop-prepare-implementation-approval`**
+2. **`spec-loop-clarify-task`**
+   - the clarification skill for underspecified task creation, task
+     updates, and design updates; preferred over generic grill-me
+     variants in Spec Loop workflows;
+   - defined by
+     [skills/spec-loop-clarify-task/SKILL.md](skills/spec-loop-clarify-task/SKILL.md).
+
+3. **`spec-loop-prepare-implementation-approval`**
    - the approval-preparation skill used only on the task-file path
      before the agent asks for implementation approval within the
      `spec-loop-plan-task` workflow;
    - defined by
      [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md).
 
-3. **`spec-loop-implementation-flow`**
+4. **`spec-loop-implementation-flow`**
    - the mandatory implementation-flow skill used after
      implementation approval on either planning path when
      implementation deviates from the approved task, when uncertainty
@@ -318,16 +333,16 @@ intended only for retrospective review of trusted repositories:
      and
      [skills/spec-loop-implementation-flow/task-file-path-guidance.md](skills/spec-loop-implementation-flow/task-file-path-guidance.md).
 
-4. **`spec-loop-write-glossary`**
+5. **`spec-loop-write-glossary`**
    - the Spec Loop AsciiDoc glossary-format skill;
    - defined by
      [skills/spec-loop-write-glossary/glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md).
 
-5. **`spec-loop-setup-doc-rendering`**
+6. **`spec-loop-setup-doc-rendering`**
    - the setup and troubleshooting skill for rendering task files and
      glossary files.
 
-6. **`spec-loop-assess-pull-request`**
+7. **`spec-loop-assess-pull-request`**
    - the optional retrospective review skill for existing pull requests,
      branch diffs, or commit ranges from trusted repositories;
    - defined by
@@ -335,11 +350,15 @@ intended only for retrospective review of trusted repositories:
 
 ## Documentation
 
-1. Check the planning and implementation-flow skills briefly.
+1. Check the planning, clarification, and implementation-flow skills
+   briefly.
 
    * **[skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md)**
      defines planning-path selection, approval and escalation rules,
      ADR and documentation routing, glossary triggers, and phase rules.
+   * **[skills/spec-loop-clarify-task/SKILL.md](skills/spec-loop-clarify-task/SKILL.md)**
+     defines how Spec Loop clarifies underspecified task creation,
+     task updates, and design updates before or during planning.
    * **[skills/spec-loop-plan-task/shared-task-semantics.md](skills/spec-loop-plan-task/shared-task-semantics.md)**
      defines the shared no-subtask task form, section semantics,
      readiness rules, formatting, and testing policy used on both
@@ -402,6 +421,7 @@ intended only for retrospective review of trusted repositories:
 Recommended quick-check order:
 - `README.md`
 - `skills/spec-loop-plan-task/SKILL.md`
+- `skills/spec-loop-clarify-task/SKILL.md`
 - `skills/spec-loop-plan-task/shared-task-semantics.md`
 - `skills/spec-loop-plan-task/task-file-constitution.md`
 - `skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md`

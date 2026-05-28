@@ -17,6 +17,12 @@ Apply project instructions such as `AGENTS.md` when present.
 
 After loading the applicable rules, immediately emit 🫡.
 
+Before moving beyond Research for a non-trivial task, run the
+unresolved-questions scan required by this skill's phase rules. If
+that scan shows material unresolved questions that require
+clarification, use `../spec-loop-clarify-task/SKILL.md` before
+continuing.
+
 ## Shared workflow rules
 
 - **Principle over ceremony**
@@ -59,21 +65,26 @@ those changes is IMPLEMENTATION and needs explicit User instruction.
 Work starts in **PLAN** and returns to **PLAN** after each work item
 unless the User says otherwise.
 
-- Ask questions before PLAN whenever scope, constraints, domain
-  language, expected behavior, priorities, or other essential
-  uncertainties remain.
-- During PLAN, ask targeted User questions as soon as essential doubts
-  appear in Research or Design. Do not guess through material
-  ambiguity just because work is not yet formally blocked.
+- During PLAN, once Research for the current increment is
+  sufficient to expose the main open questions, and before drafting
+  or hardening planning content beyond Research, perform an
+  unresolved-questions scan and make the result explicit in the
+  conversation or active planning artifact. Treat materially
+  different code design solutions as design questions for this
+  scan. If no material unresolved question remains that is
+  user-preference-sensitive or could materially change scope,
+  constraints, design, or test specification, continue planning.
+  Otherwise, stop planning, use `../spec-loop-clarify-task/SKILL.md`,
+  and resume planning only after the clarification result is
+  incorporated.
 - No permission questions for already requested work.
 - Starting PLAN artifacts, entering IMPLEMENTATION, and marking DONE
   require explicit User instruction.
-- After approval, material implementation changes still require
-  renewed User approval. After implementation approval on either
-  planning path, follow
-  `../spec-loop-implementation-flow/SKILL.md` for implementation-time
-  handling, clarification routing, fileless recovery or promotion,
-  and any return-to-PLAN routing.
+- After implementation approval on either planning path, follow
+  `../spec-loop-implementation-flow/SKILL.md` for
+  implementation-time handling, clarification routing, fileless
+  recovery or promotion, `Implementation notes` checks, and any
+  return-to-PLAN routing.
 - Phases are exclusive unless the User allows combined
   planning-plus-implementation.
 
@@ -170,8 +181,8 @@ and do all of the following:
 - treat that full task as the current canonical fileless task;
 - keep only one active fileless task in the conversation at a time;
 - present it to the User as a request to approve both using the
-  fileless planning path without creating a task file and
-  implementation from that fileless task.
+  fileless planning path without creating a task file and moving
+  from planning into implementation from that fileless task.
 
 When proposing the fileless path to a User who may not already be
 informed, include one brief inline note that fileless avoids task-file
@@ -285,7 +296,8 @@ When the task-file path is in use:
 - chat stays for coordination and approvals, but the task file is the
   durable planning artifact for that task;
 - before treating task-file planning as complete or asking for
-  implementation approval from a task file, use
+  approval to move from planning into implementation on the
+  task-file path, use
   [../spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md);
 - after task-file implementation approval, use
   [../spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md)

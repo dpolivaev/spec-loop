@@ -23,6 +23,11 @@ when uncertainty must be clarified instead of guessed through, when
 new blocking questions arise, or before presenting the current
 increment to the User.
 
+If new unresolved questions appear during implementation and they are
+user-preference-sensitive or could materially change scope,
+constraints, design, or test specification, stop and use
+`../spec-loop-clarify-task/SKILL.md` before continuing.
+
 Before work: read `../spec-loop-plan-task/SKILL.md`, follow all files
 it requires, and apply the full `spec-loop-plan-task` bundle as
 shared convention guidance.
