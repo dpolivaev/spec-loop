@@ -47,3 +47,13 @@ For each question you ask, provide a recommended answer. Usually present it as a
 If you provide options, enumerate them with letters like A, B, C, D.
 
 Ask one question at a time whenever direct user input is required.
+
+## Clarification exit check
+
+Before handing work back to planning, confirm that:
+
+- no material unresolved question remains for the current branch;
+- any glossary conflict has been resolved or explicitly surfaced;
+- any code/docs-vs-claim contradiction has been surfaced;
+- any required glossary follow-up has been noted in the active task
+  when one exists.
