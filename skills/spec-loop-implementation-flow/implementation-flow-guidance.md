@@ -3,7 +3,7 @@
 This file is the shared implementation-flow core.
 
 It reuses the full `spec-loop-plan-task` bundle, including
-`shared-task-semantics.md` on both planning paths.
+`common-task-guidance.md` on both planning paths.
 Use it with one of these path-specific companions:
 
 - [fileless-path-guidance.md](./fileless-path-guidance.md); or

@@ -2,12 +2,12 @@
 
 This document captures what Spec Loop implies in team environments.
 
-## What the workflow rules, shared task semantics, and task-file constitution enforce
+## What the workflow rules, common task guidance, and task-file path guidance enforce
 
 The workflow rules are the normative contract between the human
-developer and the model. `shared-task-semantics.md` defines the shared
+developer and the model. `common-task-guidance.md` defines the shared
 no-subtask task form used on both planning paths. When Spec Loop uses
-a task file, the task-file constitution adds task-file-only mechanics.
+a task file, the task-file path guidance adds task-file-only mechanics.
 Together, they enforce at minimum:
 
 * Explicit planning before executable work.
@@ -23,8 +23,9 @@ Together, they enforce at minimum:
   path is in use, plus `Implementation notes` when meaningful
   implementation-time history must remain visible.
 * A canonical fileless chat task as the source of truth on the
-  fileless path, with section-only chat updates and full-task
-  recovery re-emission when reconstruction confidence drops.
+  fileless path, allowing an initial task with only the established
+  sections, then section-only chat updates and full-task recovery
+  re-emission when reconstruction confidence drops.
 * ADRs and documentation may stand as their own planning artifacts
   when they are the requested work and no task-file rule overrides
   that.
@@ -44,7 +45,7 @@ Together, they enforce at minimum:
   status/folder consistency where task files are in use.
 
 If a local convention conflicts with the applicable workflow rules or
-Task-file Constitution, the governing rule wins.
+Task-file Path Guidance, the governing rule wins.
 
 ## The human developer’s role
 
@@ -165,7 +166,7 @@ Reviewers assess correctness against approved intent.
 
 ## PlantUML as a design artifact
 
-The task-file constitution requires Design sections on the task-file
+The task-file path guidance requires Design sections on the task-file
 path to use PlantUML diagrams that model structure or flow (class,
 component, sequence), with strict formatting rules.
 

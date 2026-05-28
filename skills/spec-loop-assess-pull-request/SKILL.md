@@ -22,10 +22,10 @@ Before work:
 
 - read `../spec-loop-plan-task/SKILL.md` for shared planning,
   glossary, and phase terminology;
-- read `../spec-loop-plan-task/shared-task-semantics.md` for shared
+- read `../spec-loop-plan-task/common-task-guidance.md` for shared
   artifact structure, formatting, glossary, and section semantics
   reused by retrospective review files;
-- read `../spec-loop-plan-task/task-file-constitution.md` for
+- read `../spec-loop-plan-task/task-file-path-guidance.md` for
   task-file-only diagram conventions and any other task-file-specific
   rules that clearly fit retrospective review artifacts;
 - apply those shared conventions where they fit retrospective review

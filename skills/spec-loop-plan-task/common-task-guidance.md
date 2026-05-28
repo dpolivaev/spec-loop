@@ -1,4 +1,4 @@
-# Shared Task Semantics
+# Common Task Guidance
 
 This file applies to executable task planning on both planning paths of
 `spec-loop-plan-task`.
@@ -12,7 +12,7 @@ context-preservation rules, and formatting conventions used by both:
 
 Task-file-only lifecycle, folders, tracked moves, subtasks, diagrams,
 and other task-file administration stay in
-[task-file-constitution.md](./task-file-constitution.md).
+[task-file-path-guidance.md](./task-file-path-guidance.md).
 
 ## Current-increment readiness
 
@@ -224,7 +224,7 @@ labels below.
   the remaining sections in order.
 
 Task-file-only subtask rules stay in
-[task-file-constitution.md](./task-file-constitution.md).
+[task-file-path-guidance.md](./task-file-path-guidance.md).
 
 ## Constraints (optional)
 

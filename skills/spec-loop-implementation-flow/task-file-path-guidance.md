@@ -1,4 +1,4 @@
-# Task-file-path guidance for `spec-loop-implementation-flow`
+# Task-file Path Guidance for `spec-loop-implementation-flow`
 
 This file applies only on the Task-file path during
 implementation.
@@ -6,11 +6,11 @@ implementation.
 Use it with the shared core in
 [implementation-flow-guidance.md](./implementation-flow-guidance.md)
 and the task-file mechanics in
-`../spec-loop-plan-task/task-file-constitution.md`.
+`../spec-loop-plan-task/task-file-path-guidance.md`.
 It defines only the task-file implementation-time delta.
 
 Task-file lifecycle, subtask, and folder ownership remain in the
-Task-file Constitution.
+Task-file Path Guidance.
 
 ## 0. Authorized task-file updates
 
@@ -26,7 +26,7 @@ Only these task-file edits are allowed:
   explicit authority for that change;
 - perform the explicitly allowed lifecycle transition, including the
   minimal status or folder edits required by the Task-file
-  Constitution; and
+  Path Guidance; and
 - perform minimal mechanical cleanup strictly incidental to one of the
   allowed edits above, such as wrapping, indentation, spacing, or
   nearby list-formatting cleanup required to keep the file readable
@@ -96,7 +96,7 @@ Example task-file content when notes are relevant:
 ## 3. Task-file expression of `review`
 
 When the shared completion checklist passes, express `review` on the
-Task-file path using the Task-file Constitution's lifecycle rules.
+Task-file path using the Task-file Path Guidance lifecycle rules.
 
 - Without subtasks: move the task from `in-progress` to `review`.
 - With subtasks: move the current subtask from `in-progress` to

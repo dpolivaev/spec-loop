@@ -43,7 +43,7 @@
   Relevant files currently span planning, implementation flow, and
   supporting documentation:
   `skills/spec-loop-plan-task/SKILL.md`,
-  `skills/spec-loop-plan-task/task-file-constitution.md`,
+  `skills/spec-loop-plan-task/task-file-path-guidance.md`,
   `skills/spec-loop-implementation-flow/SKILL.md`,
   `skills/spec-loop-implementation-flow/implementation-flow-guidance.md`,
   `skills/spec-loop-prepare-implementation-approval/SKILL.md`,
@@ -61,14 +61,14 @@
   component "spec-loop-plan-task" as PlanTask
   artifact "Short chat plan" as ShortChatPlan
   artifact "Task file" as TaskFile
-  component "Task-file Constitution" as Constitution
+  component "Task-file Path Guidance" as TaskFileGuidance
   component "spec-loop-prepare-implementation-approval" as PrepareApproval
   component "spec-loop-implementation-flow" as ImplementationFlow
 
   User --> PlanTask : request planning
   PlanTask --> ShortChatPlan : short planning path
   PlanTask --> TaskFile : task-file path
-  TaskFile --> Constitution : governed by
+  TaskFile --> TaskFileGuidance : governed by
   TaskFile --> PrepareApproval : pre-implementation readiness
   PrepareApproval --> ImplementationFlow : after task-file approval
   @enduml
@@ -81,7 +81,7 @@
     planning pass, with lightweight research, a single clear
     implementation path, lightweight verification, and no existing
     task file.
-  - `task-file-constitution.md` explicitly applies only on the
+  - `task-file-path-guidance.md` explicitly applies only on the
     task-file path and combines section semantics with task-file-only
     mechanics such as folders, tracked moves, subtasks, and diagrams.
   - `spec-loop-implementation-flow/SKILL.md` currently says it is
@@ -136,7 +136,7 @@
   - Rename the current short planning path to the fileless planning
     path.
   - Introduce
-    `skills/spec-loop-plan-task/shared-task-semantics.md` as the
+    `skills/spec-loop-plan-task/common-task-guidance.md` as the
     shared source for the no-subtask main-task form used by both
     paths: task header, identifier rules, section order, section
     meanings, section conditionality, testing policy, and
@@ -151,16 +151,16 @@
     Move fileless-path-specific operating rules from `Planning paths`
     into the explicit `Fileless path` section.
   - Reduce
-    `skills/spec-loop-plan-task/task-file-constitution.md` to
+    `skills/spec-loop-plan-task/task-file-path-guidance.md` to
     task-file-only mechanics plus references to the shared semantics
     source.
-  - In `shared-task-semantics.md`, make the readiness summary reflect
+  - In `common-task-guidance.md`, make the readiness summary reflect
     the full required shared task form instead of starting ambiguously
     at Research. The summary should explicitly cover Scope,
     Motivation, Briefing, implementation-ready Design, Test
     specification, and any required Research, Scenario, or
     Constraints.
-  - In `shared-task-semantics.md`, remove wording that appears to ban
+  - In `common-task-guidance.md`, remove wording that appears to ban
     bold-label section labels, because the shared task structure
     below requires those labels.
   - Keep subtask semantics task-file-only. The fileless path is
@@ -168,15 +168,18 @@
   - Limit the fileless path to a single active task in one
     conversation. Do not allow fileless subtasks, fileless diagrams,
     or fileless folder-derived statuses.
-  - Require one full fileless task artifact before implementation.
-    During approved fileless implementation, later canonical chat
-    updates may re-emit only the changed sections for the single
-    active fileless task and rely on chat context rather than
-    repeated title or identifier lines.
+  - Require one canonical fileless task artifact before
+    implementation approval. Allow the initial canonical fileless
+    task to include only the sections already established, while
+    requiring title and identifier. During approved fileless
+    implementation, later canonical chat updates may re-emit only
+    the changed sections for the single active fileless task and
+    rely on chat context rather than repeated title or identifier
+    lines.
   - Add a compact inline fileless example directly to the fileless
-    guidance. It should show both a concise full fileless task and a
-    section-only fileless update, and it should make clear why the
-    task is a good fit for the fileless path.
+    guidance. It should show both an initial canonical fileless
+    task and a section-only fileless update, and it should make
+    clear why the task is a good fit for the fileless path.
   - When new work appears after a fileless task, use the User's
     message or later clarification to decide whether it is a subtask
     or extension of the earlier task, or a new follow-up task. Ask
@@ -246,7 +249,7 @@
     - If such coverage already exists, update only the directly
       affected assertions.
   - **Manual tests:**
-    - Compare the current `task-file-constitution.md` against the new
+    - Compare the current `task-file-path-guidance.md` against the new
       shared/task-file split and verify that no normative section
       content is lost.
     - Run a lightweight fileless planning prompt and verify that the
@@ -270,10 +273,10 @@
     - Verify that fileless tasks use the same shared section
       conditionality as the task-file path instead of placeholder-only
       fileless rules.
-    - Verify that the shared-task-semantics readiness summary covers
+    - Verify that the common-task-guidance readiness summary covers
       the full required shared task form instead of implying that the
       required content starts only at Research.
-    - Verify that the shared-task-semantics task-structure wording no
+    - Verify that the common-task-guidance task-structure wording no
       longer conflicts with the required bold-label section format.
     - Run a task that needs diagrams, subtasks, or a second active
       task and verify promotion to the task-file path.
@@ -308,7 +311,7 @@
   - Keep shared governance in the core and path-specific expression in
     the companions.
   - Keep task-file lifecycle, folder, and subtask ownership in
-    `task-file-constitution.md`.
+    `task-file-path-guidance.md`.
 - **Briefing:**
   Main files for this subtask are:
   `skills/spec-loop-implementation-flow/SKILL.md`,
@@ -348,13 +351,13 @@
     updates and review-ready handoff in chat, while the task-file
     companion should express the same review state through the
     task-file update mechanics and the additional folder or subtask
-    status move governed by `task-file-constitution.md`.
+    status move governed by `task-file-path-guidance.md`.
   - Keep the fileless companion implementation-focused but allow a
     short orientation preface with only the minimum fileless facts
     needed to interpret the path.
   - Keep the task-file companion limited to the implementation-time
     delta for task files. It should rely on
-    `task-file-constitution.md` for task-file lifecycle, subtask, and
+    `task-file-path-guidance.md` for task-file lifecycle, subtask, and
     folder rules.
 - **Test specification:**
   - **Automated tests:**
@@ -368,7 +371,7 @@
       and fileless review-state expression.
     - Verify that the task-file companion contains only the
       implementation-time task-file delta and defers lifecycle and
-      subtask ownership to `task-file-constitution.md`.
+      subtask ownership to `task-file-path-guidance.md`.
     - Verify that `skills/spec-loop-implementation-flow/SKILL.md`
       reads the shared core and exactly one path companion based on
       the active path.

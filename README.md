@@ -42,10 +42,12 @@ Spec Loop follows this workflow:
 The planning and approval rules for that workflow live in the `spec-loop-plan-task` bundle and its companion files.
 
 The planning bundle starts with
-**[SKILL.md](skills/spec-loop-plan-task/SKILL.md)**,
-**[shared-task-semantics.md](skills/spec-loop-plan-task/shared-task-semantics.md)**,
-and, when the task-file path is chosen,
-**[task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md)**.
+**[SKILL.md](skills/spec-loop-plan-task/SKILL.md)** and
+**[common-task-guidance.md](skills/spec-loop-plan-task/common-task-guidance.md)**,
+plus **[fileless-path-guidance.md](skills/spec-loop-plan-task/fileless-path-guidance.md)**
+on the fileless path and
+**[task-file-path-guidance.md](skills/spec-loop-plan-task/task-file-path-guidance.md)**
+on the task-file path.
 
 The `spec-loop-write-glossary` skill defines the Spec Loop AsciiDoc glossary
 format in
@@ -74,7 +76,7 @@ Any transitions to implementation and to done require explicit user approval.
 
 When a project maintains a glossary described by the shared task
 semantics
-[project glossary section](skills/spec-loop-plan-task/shared-task-semantics.md#project-glossary),
+[project glossary section](skills/spec-loop-plan-task/common-task-guidance.md#project-glossary),
 that glossary defines the shared domain language above individual
 tasks and the code. It keeps design documents, tests, code symbols,
 and commit text aligned on the same terms across the whole project.
@@ -307,9 +309,11 @@ intended only for retrospective review of trusted repositories:
    - the planning and task-administration skill for non-trivial work;
    - defined by
      [skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md),
-     [skills/spec-loop-plan-task/shared-task-semantics.md](skills/spec-loop-plan-task/shared-task-semantics.md),
-     and, on the task-file path,
-     [skills/spec-loop-plan-task/task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md).
+     [skills/spec-loop-plan-task/common-task-guidance.md](skills/spec-loop-plan-task/common-task-guidance.md),
+     [skills/spec-loop-plan-task/fileless-path-guidance.md](skills/spec-loop-plan-task/fileless-path-guidance.md)
+     on the fileless path, and
+     [skills/spec-loop-plan-task/task-file-path-guidance.md](skills/spec-loop-plan-task/task-file-path-guidance.md)
+     on the task-file path.
 
 2. **`spec-loop-clarify-task`**
    - the clarification skill for underspecified task creation, task
@@ -364,11 +368,16 @@ intended only for retrospective review of trusted repositories:
    * **[skills/spec-loop-clarify-task/SKILL.md](skills/spec-loop-clarify-task/SKILL.md)**
      defines how Spec Loop clarifies underspecified task creation,
      task updates, and design updates before or during planning.
-   * **[skills/spec-loop-plan-task/shared-task-semantics.md](skills/spec-loop-plan-task/shared-task-semantics.md)**
+   * **[skills/spec-loop-plan-task/common-task-guidance.md](skills/spec-loop-plan-task/common-task-guidance.md)**
      defines the shared no-subtask task form, section semantics,
      readiness rules, formatting, and testing policy used on both
      planning paths.
-   * **[skills/spec-loop-plan-task/task-file-constitution.md](skills/spec-loop-plan-task/task-file-constitution.md)**
+   * **[skills/spec-loop-plan-task/fileless-path-guidance.md](skills/spec-loop-plan-task/fileless-path-guidance.md)**
+     defines the fileless-path planning mechanics: initial canonical
+     chat-task expression, section-only updates, recovery
+     re-emission, later-work relation handling, and promotion to the
+     task-file path.
+   * **[skills/spec-loop-plan-task/task-file-path-guidance.md](skills/spec-loop-plan-task/task-file-path-guidance.md)**
      defines the task-file-specific rules: task files, lifecycle and
      traceability requirements, subtasks, and diagram rules.
    * **[skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md)**
@@ -397,7 +406,7 @@ intended only for retrospective review of trusted repositories:
 3. Check
    **[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)**.
    It explains how fileless chat tasks, task files, workflow rules,
-   shared task semantics, and the task-file constitution map to team
+   common task guidance, and the task-file path guidance map to team
    development practice:
    boundaries, responsibility, commit linking, and status discipline.
 
@@ -418,7 +427,7 @@ intended only for retrospective review of trusted repositories:
 
 5. Project glossary conventions.
 
-   * See the shared task semantics project glossary section above.
+   * See the common task guidance project glossary section above.
    * **[skills/spec-loop-write-glossary/glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md)**
      is the shared glossary-format guidance file and includes its own
      embedded example.
@@ -427,8 +436,9 @@ Recommended quick-check order:
 - `README.md`
 - `skills/spec-loop-plan-task/SKILL.md`
 - `skills/spec-loop-clarify-task/SKILL.md`
-- `skills/spec-loop-plan-task/shared-task-semantics.md`
-- `skills/spec-loop-plan-task/task-file-constitution.md`
+- `skills/spec-loop-plan-task/common-task-guidance.md`
+- `skills/spec-loop-plan-task/fileless-path-guidance.md`
+- `skills/spec-loop-plan-task/task-file-path-guidance.md`
 - `skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md`
 - `skills/spec-loop-implementation-flow/implementation-flow-guidance.md`
 - `skills/spec-loop-implementation-flow/fileless-path-guidance.md`
@@ -442,7 +452,7 @@ Recommended quick-check order:
 Spec Loop treats diagrams as specification artifacts: they make design
 intent reviewable at the same boundary as the surrounding text.
 
-Where the task-file constitution requires diagrams in task files, use
+Where the task-file path guidance requires diagrams in task files, use
 PlantUML by default.
 
 Mermaid is a poorer but still possible alternative when the User or

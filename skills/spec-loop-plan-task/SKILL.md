@@ -126,11 +126,11 @@ If documentation is part of a larger executable change, keep it in that
 task. Plan the documentation update during PLAN and perform it during
 IMPLEMENTATION.
 
-## Shared task semantics
+## Common task guidance
 
 For executable task planning on either planning path:
 
-- read [shared-task-semantics.md](./shared-task-semantics.md)
+- read [common-task-guidance.md](./common-task-guidance.md)
   fully;
 - use it as the shared source for the no-subtask main-task form,
   section order and conditionality, section meanings, current-
@@ -139,7 +139,7 @@ For executable task planning on either planning path:
 - on the fileless path, use that shared main-task form without
   subtasks or diagrams; and
 - on the task-file path, combine it with
-  [task-file-constitution.md](./task-file-constitution.md).
+  [task-file-path-guidance.md](./task-file-path-guidance.md).
 
 ## Planning paths
 
@@ -173,119 +173,19 @@ that task instead of moving planning back into chat.
 
 ## Fileless path
 
-When the fileless planning path is in use, keep the work in chat only
-and do all of the following:
+When the fileless planning path is in use:
 
-- emit one full fileless task in chat using the shared no-subtask
-  main-task form and no diagrams;
-- treat that full task as the current canonical fileless task;
-- keep only one active fileless task in the conversation at a time;
-- present it to the User as a request to approve both using the
-  fileless planning path without creating a task file and moving
-  from planning into implementation from that fileless task.
-
-When proposing the fileless path to a User who may not already be
-informed, include one brief inline note that fileless avoids task-file
-overhead for simple work but carries higher chat-alignment risk and
-may require a full task re-emission or promotion if confidence drops.
-Do not repeat that note when the User is already informed unless the
-risk basis materially changes.
-
-While the fileless path remains active, normal canonical updates may
-re-emit only the changed sections. Those updates must use the exact
-marker `Fileless task update:` followed by only the changed sections
-with their exact shared section labels. Omitted sections mean
-unchanged, not removed. To remove a previously present section,
-re-emit a fresh full current task instead of a section-only update.
-
-If the assistant cannot confidently reconstruct the current canonical
-fileless task, it must first re-emit a fresh full current task in chat
-with title, identifier, and all current sections before continuing. If
-safe reconstruction still cannot be restored, promote the work to the
-task-file path.
-
-When new work appears after a fileless task, use the User's message
-or later clarification to decide whether it is a subtask or extension
-of the earlier task, or a new follow-up task. Ask only when that
-relation is not clear.
-
-If the User's message or later clarification shows it is a subtask or
-extension, use the task-file path because fileless work has no
-subtasks.
-
-If the User's message or later clarification shows it is a new
-follow-up task, a new fileless task may start in chat without
-creating any task file when the earlier fileless task is no longer
-active and the new task independently still fits the fileless
-criteria.
-
-Do not allow two active fileless tasks at once. If the new work
-extends the active task or the combined work stops being simple, stay
-in the same task or promote to the task-file path.
-
-If the fileless path later needs heavier research, more than one
-plausible implementation path, heavier verification, more than one
-active task, or diagrams that would materially help, use this skill
-again and promote the task to a task file before continuing.
-
-Compact example of a good fileless task:
-
-Good fit because the change is local, there is one clear
-implementation path, and verification is one targeted regression test
-plus the normal test run.
-
-```md
-# Task: Fix read-only viewer line truncation
-
-- **Task Identifier:** 2026-05-24-viewer-truncation
-
-- **Scope:**
-  Prevent the read-only viewer from failing on overlong rendered
-  lines.
-
-- **Motivation:**
-  The current viewer can fail on long lines. The fix is local and has
-  one clear implementation path.
-
-- **Constraints:**
-  Keep existing viewer behavior unchanged apart from safe truncation.
-
-- **Briefing:**
-  Relevant files: the read-only viewer render path and its tests.
-
-- **Research:**
-  The viewer can return lines wider than the terminal width.
-
-- **Design:**
-  Truncate rendered lines to the available width before display and
-  add one regression test.
-
-- **Test specification:**
-  - **Automated tests:**
-    - One targeted regression test for overlong viewer lines.
-    - Full `npm test`.
-  - **Manual tests:**
-    - N/A.
-```
-
-Later clarification on the same task:
-
-```md
-Fileless task update:
-
-- **Constraints:**
-  Preserve existing color rendering while truncating width.
-
-- **Design:**
-  Truncate only the rendered line width. Do not change content before
-  color formatting.
-```
+- read [fileless-path-guidance.md](./fileless-path-guidance.md)
+  fully;
+- keep the work in chat only; and
+- follow that file together with
+  [common-task-guidance.md](./common-task-guidance.md).
 
 ## Task-file path
 
 When the task-file path is in use:
 
-- read [task-file-constitution.md](./task-file-constitution.md)
+- read [task-file-path-guidance.md](./task-file-path-guidance.md)
   fully;
 - create or update the required task files under it;
 - draft or revise the active task file to capture the shared task

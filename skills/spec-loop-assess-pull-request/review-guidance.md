@@ -1,8 +1,8 @@
 # Review guidance for `spec-loop-assess-pull-request`
 
 This skill reuses `spec-loop-plan-task/SKILL.md` for shared planning
-terminology, `shared-task-semantics.md` for shared artifact
-conventions, and `task-file-constitution.md` for diagram conventions
+terminology, `common-task-guidance.md` for shared artifact
+conventions, and `task-file-path-guidance.md` for diagram conventions
 where they apply.
 
 This file is the authoritative source for retrospective review behavior, output structure,
@@ -27,9 +27,9 @@ verdict. Reconstruct the reviewed change as the retrospective Spec Loop
 artifact that should have existed, then add AI assessment and
 recommendations.
 
-Reuse `shared-task-semantics.md` for section ordering, shared section
+Reuse `common-task-guidance.md` for section ordering, shared section
 semantics, formatting, glossary expectations, and testing-policy
-shape. Reuse `task-file-constitution.md` only for diagram conventions
+shape. Reuse `task-file-path-guidance.md` only for diagram conventions
 and any task-file-specific structural rule that clearly fits
 retrospective review artifacts. Do not reuse task-file lifecycle
 folders or statuses, fileless-path routing, or implementation-

@@ -18,7 +18,7 @@ presentation, not as required task size.
 
 Refresh the relevant `spec-loop-plan-task` bundle requirements in
 active context. If the `spec-loop-plan-task` skill digest, shared task
-semantics scope, or Task-file Constitution scope is not already
+semantics scope, or Task-file Path Guidance scope is not already
 available in the current context, read them through
 `../spec-loop-plan-task/SKILL.md` as that skill requires.
 
@@ -56,7 +56,7 @@ approval.
 State clearly that the task is not yet review ready,
 and list the exact missing items, for example:
 - unresolved structural decision;
-- missing diagram required by the Task-file Constitution;
+- missing diagram required by the Task-file Path Guidance;
 - incomplete test specification for the current increment;
 - stale or contradictory naming.
 
@@ -154,7 +154,7 @@ This skill is its user-facing review and approval-seeking companion.
 That means:
 - do not replace `spec-loop-plan-task`;
 - do not duplicate `spec-loop-plan-task`,
-  `shared-task-semantics.md`, or task-file-constitution ownership
+  `common-task-guidance.md`, or task-file path guidance ownership
   here;
 - add only the approval-preparation delta.
 

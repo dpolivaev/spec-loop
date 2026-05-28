@@ -1,9 +1,9 @@
-# Task-file Constitution
+# Task-file Path Guidance
 
 This file applies only on the task-file path of
 `spec-loop-plan-task`.
 
-Read [shared-task-semantics.md](./shared-task-semantics.md) first.
+Read [common-task-guidance.md](./common-task-guidance.md) first.
 That file defines the shared no-subtask main-task form, section
 semantics, current-increment readiness rules, testing policy,
 context-preservation rules, and formatting conventions used on both
@@ -150,7 +150,7 @@ Lifecycle and transition rules:
 ## Task Structure on the task-file path
 
 Use the shared no-subtask main-task structure from
-[shared-task-semantics.md](./shared-task-semantics.md).
+[common-task-guidance.md](./common-task-guidance.md).
 
 When a task uses subtasks:
 
@@ -266,7 +266,7 @@ promote fileless work to the task-file path before using them.
 ## Testing Policy on tasks with subtasks
 
 Use the shared Testing Policy from
-[shared-task-semantics.md](./shared-task-semantics.md) for all
+[common-task-guidance.md](./common-task-guidance.md) for all
 no-subtask tasks.
 
 For task-file subtasks:
