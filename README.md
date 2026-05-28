@@ -410,7 +410,13 @@ intended only for retrospective review of trusted repositories:
    development practice:
    boundaries, responsibility, commit linking, and status discipline.
 
-4. Follow one of the hands-on tutorials.
+4. Compare framework trade-offs.
+
+   * **[AI Workflow Framework Comparison](docs/skill-framework-comparison.md)**
+     compares Spec Loop with OpenSpec, Superpowers, grill-with-docs,
+     and agent-skills by workflow purpose and cost.
+
+5. Follow one of the hands-on tutorials.
 
    * **[Wordle Tutorial](docs/wordle-tutorial.md)** walks through a
      compact Java example with staged planning, approvals,
@@ -425,7 +431,7 @@ intended only for retrospective review of trusted repositories:
      setting: Wordle is a compact Java path, while the online art game
      is browser-oriented. You can choose either tutorial.
 
-5. Project glossary conventions.
+6. Project glossary conventions.
 
    * See the common task guidance project glossary section above.
    * **[skills/spec-loop-write-glossary/glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md)**
@@ -444,6 +450,7 @@ Recommended quick-check order:
 - `skills/spec-loop-implementation-flow/fileless-path-guidance.md`
 - `skills/spec-loop-implementation-flow/task-file-path-guidance.md`
 - `docs/review-responsibility-and-traceability.md`
+- `docs/skill-framework-comparison.md`
 - `docs/online-art-game-tutorial.md`
 - `docs/wordle-tutorial.md`
 
