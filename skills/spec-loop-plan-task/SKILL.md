@@ -1,14 +1,17 @@
 ---
 name: spec-loop-plan-task
 description: >-
-  Mandatory unless the user explicitly opts out. Use when
-  non-trivial work on features, bug fixes, refactorings, or
-  changes to code, tests, configuration, dependencies, runtime
-  assets, or design requires explicit planning before
-  implementation.
+  Mandatory unless the user opts out. Opt-out includes approving a
+  suggested concrete modification or giving an explicit and precise
+  instruction for a concrete and clear action. Use when non-trivial
+  work on features, bug fixes, refactorings, or changes to code,
+  tests, configuration, dependencies, runtime assets, or design
+  requires explicit planning before implementation.
 ---
 
-This skill is mandatory unless the user explicitly opts out.
+This skill is mandatory unless the user opts out. Opt-out includes
+approving a suggested concrete modification or giving an explicit and
+precise instruction for a concrete and clear action.
 
 Read this file fully unless it is already loaded in the current
 session context.
@@ -33,6 +36,15 @@ continuing.
 - **Enforcement, pre-edit gate, and LLM stewardship**
 - These rules are mandatory. The LLM enforces them.
 - Only the User may override these rules.
+- Treat either of the following as an implicit User opt-out from the
+  task-based planning procedure for the current work item unless the
+  User says to keep that procedure:
+  - approval of a suggested concrete modification;
+  - an explicit and precise instruction for a concrete and clear
+    action.
+- This opt-out still allows direct verification coupled to the
+  requested action, such as running relevant tests after a dependency
+  version change.
 
 ## Read and enforcement model
 
