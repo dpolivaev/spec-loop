@@ -219,9 +219,10 @@ promote fileless work to the task-file path before using them.
   prefers it.
 - **Research** = current state. **Design** = target state.
 - **Research** must include diagram when analyzing current behavior,
-  message flow, context selection, or component interaction.
-- **Design** must include diagram when change affects structure or
-  component interaction.
+  message flow, context selection, component interaction, or current
+  class design.
+- **Design** must include diagram when change affects structure,
+  component interaction, or target class design.
 - When Scenario exists, Design diagrams must show the relevant units
   and names in the diagram itself, not only in surrounding prose.
 - Prefer diagrams over text when they can express research or design
@@ -232,17 +233,29 @@ promote fileless work to the task-file path before using them.
 - Each diagram in its own paragraph under the owning section.
 - No notes inside diagrams. Put explanation below the diagram only
   when needed.
+- Do not restate diagram-carried structure or behavior in surrounding
+  prose unless the diagram cannot express it cleanly.
 - Structure and behavior both matter: use separate diagrams.
 - Declare component and sequence diagrams with explicit language
   keywords.
-- Always use class diagrams when classes are added, removed, or
-  structurally modified.
-- When class diagrams are required, treat the class diagram as the
-  primary structural inventory for planned new or changed top-level
-  production types and their relationships.
+- Use class diagrams whenever current or target class design is
+  materially relevant.
+- In **Research**, show the current classes, interfaces, enums,
+  relationships, and review-relevant members needed for review.
+- In **Design**, show the target classes, interfaces, enums,
+  relationships, and review-relevant members needed for review.
+- Treat the class diagram as the primary structural inventory for those
+  types, relationships, and review-relevant members.
+- Put review-relevant operations in interface and class boxes.
+- Put review-relevant fields in DTO, request, response, result,
+  value-object, and similar data-type boxes.
+- Do not restate those members in prose, lists, or tables unless the
+  diagram would become unreadable or the information is not naturally
+  owned by a class box.
 - Add a companion responsibility table, compact list, or equivalent
   supporting artifact only when the diagram alone cannot make
-  ownership, structure, or exact identifiers clear enough for review.
+  ownership, structure, or exact external identifiers clear enough for
+  review.
 - Class diagrams: show only elements needed for change or structural
   interaction, meaningful dependency labels, and at most one
   connector per class pair.

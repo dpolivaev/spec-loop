@@ -45,10 +45,19 @@ Use it as a pattern collection, not as a required task size.
   set separator none
 
   package "example" {
-    class SessionController
-    class LiveSessionManager
-    class BackgroundRunner
-    class SessionStore
+    class SessionController {
+      + startVisibleSession()
+      + triggerBackgroundExport()
+    }
+    class LiveSessionManager {
+      + createSession()
+    }
+    class BackgroundRunner {
+      + runOnce()
+    }
+    class SessionStore {
+      + save(session)
+    }
   }
 
   SessionController --> LiveSessionManager : visible session

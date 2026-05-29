@@ -121,13 +121,14 @@ is the highest priority during design work.
 When production structure changes, Design must make the structural
 inventory explicit for every planned new or changed top-level
 production class, interface, enum, and every new or changed
-externally meaningful identifier in scope. Companion prose, lists, or
-tables may capture exact ownership, responsibilities, collaborators,
-methods, fields, or identifiers that plain section prose cannot
-express clearly enough for review. Examples of externally meaningful
-identifiers include persisted file names, serialized field names,
-config keys, action keys, menu placeholder names, and shared
-session/state flags.
+externally meaningful identifier in scope. In class diagrams, put
+review-relevant methods and fields of displayed types in the diagram
+itself. Companion prose, lists, or tables may capture exact ownership,
+responsibilities, collaborators, or external identifiers that the
+diagram cannot express clearly enough for review.
+Examples of externally meaningful identifiers include persisted file
+names, serialized field names, config keys, action keys, menu
+placeholder names, and shared session/state flags.
 
 Local variables, private methods, private fields contained within one
 class, and other purely internal implementation details are excluded

@@ -126,18 +126,32 @@ PlantUML writing hints:
 
   package "wordle.tutorial" {
     package "app" {
-      class WordleApplication
-      class CommandLineOptions
+      class WordleApplication {
+        + main(args)
+      }
+      class CommandLineOptions {
+        + cliMode : boolean
+        + wordListPath : String
+        + attempts : int
+      }
     }
 
     package "cli" {
-      class CliGameLoop
-      class FeedbackRenderer
+      class CliGameLoop {
+        + run()
+      }
+      class FeedbackRenderer {
+        + render(feedback) : String
+      }
     }
 
     package "domain" {
-      class Game
-      class GameEngine
+      class Game {
+        + applyGuess(guess)
+      }
+      class GameEngine {
+        + submitGuess(guess) : Feedback
+      }
       class Feedback
       class Word
     }

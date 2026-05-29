@@ -78,9 +78,10 @@ Preferred review surface:
 
 Canonical ownership by information kind:
 - design decisions and approvals -> concise decision lists;
-- structure, boundaries, and collaborators -> diagrams;
-- exact identifiers, file names, schema names, action keys, and
-  serialized field names -> compact lists or tables;
+- structure, boundaries, collaborators, and review-relevant members of
+  displayed types -> diagrams;
+- exact external identifiers, file names, schema names, action keys,
+  and serialized field names -> compact lists or tables;
 - unresolved questions and remaining gaps -> explicit gap lists.
 
 Draft scaffolding may exist temporarily, but the approval-prepared task
@@ -96,6 +97,15 @@ Keep both a diagram and a table only when each adds distinct value.
 If a table only restates what the diagram already shows, remove it or
 reduce it to the exact information that the diagram cannot carry
 cleanly.
+
+If a class diagram exists, review-relevant methods and fields of
+displayed types must appear in it, not only in prose, lists, or
+tables. Prose blocks such as `X contract:` or `Y fields:` are
+duplication unless they add information the diagram cannot carry
+cleanly.
+
+Approval is blocked if those members are missing from the class
+diagram.
 
 ## 4. Readiness checks
 
@@ -119,6 +129,9 @@ increment.
 - When production structure changes, new or changed top-level
   production types and externally meaningful identifiers are explicit
   enough for review.
+- When current or target class design is materially relevant, the
+  required class diagrams are present in Research and/or Design and show
+  the review-relevant members of displayed types.
 - Stale alternatives, obsolete wording, and contradictory descriptions
   are removed.
 - Design review focuses on structural concerns, not local variables,
@@ -135,8 +148,8 @@ Section 2.
 Use the smallest diagram set that makes the increment reviewable.
 Typical choices:
 
-- class diagram when classes are added, removed, or structurally
-  modified;
+- class diagram when current or target class design, structural
+  ownership, or review-relevant members matter;
 - component diagram for subsystem or plugin boundaries;
 - sequence diagram when runtime flow or control handoff matters.
 
