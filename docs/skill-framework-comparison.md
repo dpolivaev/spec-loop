@@ -90,7 +90,8 @@ specific task that is already chosen.
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | Check implemented work against the agreed artifacts before calling it done | ★★★★ | ★★★★★ | ★★★★★ | - | ★★★★ |
-| Support code review, PR, or merge completion as a first-class workflow step | ★ | ★★★★★ | ★ | - | ★★ |
+| Assess pull requests, merge requests, or diffs and prepare review artifacts | ★ | ★★★★ | ★★★★★ | - | - |
+| Drive merge or branch-closeout as an operational workflow step | - | ★★★★★ | - | - | - |
 | Preserve completed change context in an archive or other durable historical record | ★★★★★ | ★ | ★★ | - | - |
 
 ## 7. Workflow costs
@@ -110,9 +111,12 @@ materials, not measurements or benchmark results.
 - **Coding and testing** = the cost once the increment is already
   chosen: coding mechanics, testing method, review loops, and
   implementation-time clarification.
-- **Keeping written understanding in sync as the system grows** = the
-  long-term cost of keeping written artifacts believable as the
-  codebase and behavior evolve.
+- **Maintaining authoritative written artifacts as the system grows**
+  = the cost of keeping specs, glossary files, ADRs, or similar
+  written artifacts believable as the codebase and behavior evolve.
+- **Repeated research and re-alignment per increment** = the cost of
+  re-checking current truth and rebuilding enough local context for
+  each new increment.
 
 ### Analysis
 
@@ -120,19 +124,22 @@ materials, not measurements or benchmark results.
 |:---|:---:|:---:|:---:|:---:|:---:|
 | Before coding | High | Very high | Medium | Low | High |
 | Coding and testing | High | Very high | Medium | High | High |
-| Keeping written understanding in sync as the system grows | High | Medium | Medium | Medium | Medium |
+| Maintaining authoritative written artifacts as the system grows | High | Medium | Low | Medium | Medium |
+| Repeated research and re-alignment per increment | Medium | Medium | Medium | High | Medium |
 
-- **Spec Loop:** lower ongoing artifact burden than OpenSpec because
-  it re-checks current system truth through codebase research and keeps
-  the written source of truth mostly at the current-increment level.
-- **OpenSpec:** higher ongoing burden because it asks a larger enduring
-  spec set to stay believable as the system grows.
+- **Spec Loop:** low artifact-maintenance cost because it keeps the
+  authoritative written state relatively narrow, but medium repeated
+  re-alignment cost because it re-checks current system truth through
+  codebase research for each increment.
+- **OpenSpec:** higher artifact-maintenance cost because it asks a
+  larger enduring spec set to stay believable as the system grows.
 - **Superpowers:** very high upfront and execution-phase cost because
   it wants design, planning, TDD, and strong execution controls before
   and during coding.
 - **grill-with-docs:** low upfront cost mainly because it covers the
   clarification/shared-language slice, not the whole end-to-end
-  workflow.
+  workflow, but repeated re-alignment cost is higher because it does
+  not carry the later implementation workflow itself.
 - **agent-skills:** scored here as a representative spec -> plan ->
   implement -> verify path, not as the whole catalog abstractly.
 
