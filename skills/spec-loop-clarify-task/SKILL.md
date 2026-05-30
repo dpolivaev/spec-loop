@@ -46,6 +46,8 @@ For each question you ask, provide a recommended answer. Usually present it as a
 
 If you provide options, enumerate them with letters like A, B, C, D.
 
+If the user's answer does not cleanly select one presented option, restate your understanding and require explicit user confirmation before moving to the next question.
+
 Ask one question at a time whenever direct user input is required.
 
 ## Clarification exit check
