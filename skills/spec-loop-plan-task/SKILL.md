@@ -20,6 +20,15 @@ Apply project instructions such as `AGENTS.md` when present.
 
 After loading the applicable rules, immediately emit 🫡.
 
+For task creation and task updates,
+`../spec-loop-clarify-task/SKILL.md` is the default clarification path
+when material unresolved questions remain.
+
+If a new request or active task is already obviously underspecified or
+exposes material open alternatives, do only enough research to frame
+the clarification well. Then use `../spec-loop-clarify-task/SKILL.md`
+before drafting or revising planning content further.
+
 Before moving beyond Research for a non-trivial task, run the
 unresolved-questions scan required by this skill's phase rules. If
 that scan shows material unresolved questions that require
@@ -77,7 +86,12 @@ those changes is IMPLEMENTATION and needs explicit User instruction.
 Work starts in **PLAN** and returns to **PLAN** after each work item
 unless the User says otherwise.
 
-- During PLAN, once Research for the current increment is
+- During PLAN, if task creation or task updates are already
+  obviously underspecified or expose material open alternatives, do
+  only enough Research to frame the clarification well. Then use
+  `../spec-loop-clarify-task/SKILL.md` before drafting or revising
+  planning content further.
+- Otherwise, once Research for the current increment is
   sufficient to expose the main open questions, and before drafting
   or hardening planning content beyond Research, perform an
   unresolved-questions scan and make the result explicit in the

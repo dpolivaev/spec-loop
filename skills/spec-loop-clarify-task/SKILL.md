@@ -1,6 +1,6 @@
 ---
 name: spec-loop-clarify-task
-description: Clarify a proposed task, plan, or design update by interrogating the highest-value unresolved decisions until the inputs are ready for task creation, task planning, or task/design updates. Use this as the default clarification path when Spec Loop planning, approval, or implementation skills encounter material unresolved questions that are user-preference-sensitive or could materially change scope, constraints, design, or test specification. It may also be used for general grilling when explicitly selected or when no other default grilling skill is available.
+description: Clarify a proposed task, plan, or design update by interrogating the highest-value unresolved decisions until the inputs are ready for task creation, task planning, or task/design updates. Use this as the default clarification path for Spec Loop task creation, task updates, and any planning, approval, or implementation step that encounters material unresolved questions that are user-preference-sensitive or could materially change scope, constraints, design, or test specification. When clarification ends, resume the invoking workflow. It may also be used for general grilling when explicitly selected or when no other default grilling skill is available.
 ---
 
 Use this skill when a new task, task update, or design update is
@@ -8,7 +8,20 @@ underspecified, when materially different code design solutions
 remain open, or when the user wants to stress-test a plan or be
 grilled on a design.
 
-When both this skill and a generic grill-me variant are available, prefer this skill for Spec Loop task creation, task updates, and design updates. If no default general grilling skill is available, it may also be used for general grilling.
+For Spec Loop task creation and task updates, this is the default
+clarification path whenever material unresolved questions remain.
+
+When both this skill and a generic grill-me variant are available,
+prefer this skill for Spec Loop task creation, task updates, and
+design updates. If no default general grilling skill is available, it
+may also be used for general grilling.
+
+When clarification ends, hand control back to the workflow that
+invoked this skill:
+- task creation and task updates normally resume
+  `../spec-loop-plan-task/SKILL.md`;
+- implementation-time clarification resumes
+  `../spec-loop-implementation-flow/SKILL.md`.
 
 Select the next unresolved branch by descending importance and uncertainty. Once a branch is selected, traverse it depth first, resolving dependencies one-by-one. Start with a brief, provisional overview of the most important currently visible unresolved branches and which branch you will address first. This overview is a map, not a commitment to an exact final question list.
 
@@ -33,10 +46,29 @@ first-class evidence during clarification:
 
 If clarification resolves or changes shared domain terms, record that glossary follow-up is required through the normal Spec Loop glossary path. Put the note in the active task when one exists or is being prepared.
 
-For each unresolved decision in the active branch, first decide whether to resolve it directly or ask the user:
-- If it can be resolved from prior user decisions or by exploring the repository or existing task materials, resolve it directly.
-- If you have a strong, evidence-based recommendation that does not primarily depend on user preference, tentatively resolve it directly.
-- Otherwise, ask the user one question at a time when the decision is material, depends on user goals or risk tolerance, or remains meaningfully uncertain. If it exposes a high-impact, non-trivial trade-off that would be hard to reverse or surprising without context, you may suggest creating an ADR as part of that question, but do not create one unless the user requests it or explicitly approves.
+For each unresolved decision in the active branch, first decide
+whether to resolve it directly or ask the user:
+- If it can be resolved from prior user decisions or by exploring the
+  repository or existing task materials, resolve it directly.
+- If you have a strong, evidence-based recommendation that does not
+  primarily depend on user preference, resolve it directly and later
+  present it as assistant-proposed.
+- Otherwise, ask the user one question at a time when the decision is
+  material, depends on user goals or risk tolerance, or remains
+  meaningfully uncertain. If it exposes a high-impact, non-trivial
+  trade-off that would be hard to reverse or surprising without
+  context, you may suggest creating an ADR as part of that question,
+  but do not create one unless the user requests it or explicitly
+  approves.
+
+Treat user attention as scarce. Do not ask the user to choose among
+options when one option is clearly preferable under the current
+evidence, repository rules, and reversibility of the decision. Prefer
+direct resolution for workflow, routing, and editorial decisions
+unless user goals or risk tolerance could materially change the
+answer. Ask only when the decision is material, preference-sensitive,
+hard to reverse, or a wrong inference would likely cause meaningful
+rework.
 
 Whenever you resolve one or more decisions directly, add them to a queue of newly resolved but not yet presented decisions, preserving resolution order. Present only that unpresented queue in batches of at most 6. You may present a batch at any time, and you must present all newly resolved decisions before asking the next question that offers alternatives or depends on those decisions for context. Single questions and decision batches may be mixed as the depth-first traversal proceeds. After a batch is presented, do not repeat those decisions before later single questions unless the user asks for a recap, reopens a decision, or a later decision changes them.
 
@@ -48,11 +80,13 @@ If you provide options, enumerate them with letters like A, B, C, D.
 
 If the user's answer does not cleanly select one presented option, restate your understanding and require explicit user confirmation before moving to the next question.
 
+When the user cleanly selects or confirms a presented option, acknowledge it briefly in the same turn with a minimal confirmation such as `B recorded`, `yes recorded`, or `no recorded`. Then treat that choice as internal state. Do not restate the substance of the choice in later turns unless the user asks for a recap, reopens the choice, or one brief reminder is strictly necessary to keep the current question clear and easy to answer.
+
 Ask one question at a time whenever direct user input is required.
 
 ## Clarification exit check
 
-Before handing work back to planning, confirm that:
+Before handing work back to the invoking workflow, confirm that:
 
 - no material unresolved question remains for the current branch;
 - any glossary conflict has been resolved or explicitly surfaced;
