@@ -247,9 +247,16 @@ areas.
   tasks: set `Automated tests: N/A` and `Manual tests: N/A`.
 - Separate test-focused tasks allowed when adding or extending
   coverage as standalone scope.
-- Prefer automated tests.
-- Each implementation task without subtasks: include explicit
-  Automated tests and Manual tests sublists.
+- Prefer automated tests. Manual tests are optional and should be
+  used only when the same verification purpose cannot be covered
+  adequately by automated tests.
+- If a command's purpose is to run automated tests or automated
+  checks, list it under `Automated tests`, not `Manual tests`, even
+  though a person invokes the command.
+- Each implementation task without subtasks: include an explicit
+  `Automated tests` sublist. Include a `Manual tests` sublist only
+  when non-automatable verification remains; otherwise set
+  `Manual tests: N/A`.
 - Run and fix all required tests before moving a task-file task to
   `review`, before presenting fileless work as ready, or before
   otherwise implying implementation closure, unless the User waives

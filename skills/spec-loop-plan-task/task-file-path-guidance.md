@@ -289,7 +289,9 @@ For task-file subtasks:
   functional increment.
 - Separate test-focused tasks allowed when adding or extending
   coverage as standalone scope.
-- Each implementation subtask: include explicit Automated tests and
-  Manual tests sublists.
+- Each implementation subtask: include an explicit `Automated tests`
+  sublist.
+- Include a `Manual tests` sublist only when non-automatable
+  verification remains; otherwise set `Manual tests: N/A`.
 - Run and fix all required tests before moving a task or subtask to
   `review`, unless the User waives tests.

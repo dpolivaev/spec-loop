@@ -207,6 +207,6 @@ PlantUML writing hints:
     - CLI argument parsing defaults and validation.
     - Feedback rendering text.
     - Delegation from the CLI path into the existing engine.
-  - Manual tests:
     - `./gradlew test`
+  - Manual tests:
     - `./gradlew run --args='--cli'`
