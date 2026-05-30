@@ -9,17 +9,16 @@ semantics, current-increment readiness rules, testing policy,
 context-preservation rules, and formatting conventions used on both
 planning paths.
 
-This file adds only chat-based path mechanics: canonical chat-task
-expression, change-list revisions, reconstruction, later-work
-relationship handling, and promotion to the task-file path.
+This file covers only chat-based path mechanics: the chat task,
+`Task changes:`, reconstruction, later-work handling, and promotion
+to the task-file path.
 
-User-facing term: `chat-based`.
-This path is still a full structured Spec Loop task kept in chat. It
-is not taskless work.
+User-facing term: `chat-based`. This is still a full structured Spec
+Loop task kept in chat, not taskless work.
 
-If the User asks for the sectioned task format, emit the canonical
-full task in chat. Do not replace a requested chat-based task with an
-informal compressed plan.
+If the User asks for the sectioned task format, emit the full task in
+chat. Do not replace a requested chat-based task with an informal
+short plan.
 
 The task-file prose-wrap requirement does not apply to chat-based work
 unless the User asks for wrapped lines. Keep chat-based tasks readable
@@ -27,12 +26,12 @@ and structurally clear.
 
 After implementation approval on the chat-based path, follow
 `../spec-loop-implementation-flow/SKILL.md` and its chat-based path
-companion for implementation-time handling, canonical task revisions,
-`Implementation notes`, and chat-based expression of `review`.
+companion for implementation-time handling, task revisions,
+`Implementation notes`, and chat-based `review`.
 
 ## Chat-based path mechanics
 
-When the chat-based planning path is in use, keep the work in chat only.
+On the chat-based path, keep the work in chat only.
 
 ### Canonical chat-based task
 
@@ -62,7 +61,7 @@ risk basis materially changes.
 
 The first chat-based task for a work item is a full task.
 
-Later revisions normally use a change list instead of reprinting the
+Later revisions normally use `Task changes:` instead of reprinting the
 full task.
 
 Use this marker:
@@ -95,13 +94,13 @@ Rules:
 - Do not mix unlabeled full-section text with `Added`, `Removed`, or
   `Replaced` in the same section.
 
-Use the actual old and new text so the current chat-based task can be
+Quote the old and new text so the current chat-based task can be
 reconstructed without guessing.
 
-Treat the previous full chat-based task plus all later `Task changes:`
-blocks as the current canonical state.
+The most recent full chat-based task plus later `Task changes:`
+blocks is the current task state.
 
-Reprint a full current chat-based task only when:
+Reprint the full current chat-based task only when:
 
 - the User asks for it;
 - reconstruction is no longer safe;
@@ -110,12 +109,11 @@ Reprint a full current chat-based task only when:
 
 ### Reconstruction and recovery
 
-If the assistant cannot confidently reconstruct the current chat-based
-task from the latest full task plus later `Task changes:` blocks, it
-must first re-emit a fresh full current task in chat with title,
-identifier, and all current sections before continuing. If safe
-reconstruction still cannot be restored, promote the work to the
-task-file path.
+If the current chat-based task cannot be reconstructed safely from the
+most recent full task plus later `Task changes:` blocks, re-emit a
+fresh full current task in chat with title, identifier, and all
+current sections before continuing. If that still does not restore a
+safe state, promote the work to the task-file path.
 
 ### Later work relation handling
 

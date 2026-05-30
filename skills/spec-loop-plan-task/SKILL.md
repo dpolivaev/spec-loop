@@ -1,67 +1,46 @@
 ---
 name: spec-loop-plan-task
 description: >-
-  Governs route selection and planning before implementation. Use it
-  to classify work as trivial or non-trivial, choose among chat-based,
-  task-file, and taskless handling, and produce explicit planning for
-  non-trivial changes before implementation.
+  Choose the route for new work and plan it before implementation.
+  Use this skill to decide whether the work is taskless, chat-based,
+  or task-file, and to create the needed plan for non-trivial
+  executable work.
 ---
 
-This skill governs route selection and planning before implementation.
-Classify each new work item as trivial or non-trivial before choosing
-among a chat-based spec-loop task, a task-file spec-loop task, or
-taskless handling. Non-trivial work requires a spec-loop task.
-Trivial work may be taskless only with explicit user agreement.
+Use this skill to choose the route for new work and plan it before
+implementation.
 
 Read this file fully unless it is already loaded in the current
 session context.
 
 Apply project instructions such as `AGENTS.md` when present.
 
-After loading the applicable rules, immediately emit 🫡.
+## Read model
 
-For task creation and task updates,
-`../spec-loop-clarify-task/SKILL.md` is the default clarification path
-when material unresolved questions remain.
+If these rules are not already in context, read this file once and
+keep a short digest. Re-read only if the digest is missing or the User
+says the rules changed.
 
-If a new request or active task is already obviously underspecified or
-exposes material open alternatives, do only enough research to frame
-the clarification well. Then use `../spec-loop-clarify-task/SKILL.md`
-before drafting or revising planning content further.
+## Core rules
 
-Before moving beyond Research for a non-trivial task, run the
-unresolved-questions scan required by this skill's phase rules. If
-that scan shows material unresolved questions that require
-clarification, use `../spec-loop-clarify-task/SKILL.md` before
-continuing.
-
-## Shared workflow rules
-
-- **Principle over ceremony**
-- Intent-first. Judge by outcome, not checklist.
-- Whenever the LLM stops or pauses, it must explain the reason
-  explicitly.
-- If `AGENTS.md` and these rules conflict, stop and ask the User.
-- **Enforcement, pre-edit gate, and LLM stewardship**
-- These rules are mandatory. The LLM enforces them.
-- Only the User may override these rules.
-- Do not infer taskless handling from a concrete request alone.
-- If the User explicitly asks for a planning procedure or route, do
-  not shorten it unless the User explicitly approves the
-  simplification.
-- No permission questions for already requested work, except the route
-  selection prompts required by this skill.
-
-## Read and enforcement model
-
-- Already injected or attached: don't re-read.
-- Else: read once, keep a 3-5 line digest in context.
-- Re-read only if the digest is missing or the User says the rules
-  changed.
+- First classify each new work item as trivial or non-trivial.
+- If the work is non-trivial, use a Spec Loop task.
+- If the work looks trivial, ask: `This looks trivial. May I do this
+  without a plan?`
+- If the User explicitly asks for a route, planning procedure, or
+  sectioned task format, do not simplify it unless the User
+  explicitly agrees.
+- For task creation or task updates, use
+  `../spec-loop-clarify-task/SKILL.md` when material unresolved
+  questions remain.
+- After implementation approval, follow
+  `../spec-loop-implementation-flow/SKILL.md`.
+- These rules are mandatory. Only the User may override them.
+- If `AGENTS.md` conflicts with these rules, stop and ask the User.
+- If the assistant stops or pauses, explain why.
 
 ## Route selection
 
-- First classify each new work item as trivial or non-trivial.
 - Treat the work as non-trivial when any of the following hold:
   - changes span multiple files and need more than a
     straightforward mechanical edit;
@@ -71,18 +50,15 @@ continuing.
   - targeted test design or verification is needed beyond a
     mechanical edit; or
   - more than one plausible implementation path exists.
-- If the work is non-trivial, default to a spec-loop task. Ask
-  whether it may be chat-based or should use a task file. Use a prompt
-  equivalent to: `This looks non-trivial. I think we should use a
-  spec-loop task. May we keep it chat-based, or do you want a task
+- If the work is non-trivial, ask: `This looks non-trivial. We should
+  use a Spec Loop task. May it be chat-based, or do you want a task
   file?`
-- If the work looks trivial, ask a direct question such as: `This
-  looks trivial. May I do this without a plan?`
-- Before drafting a task or starting implementation on a new work
-  item, declare the chosen or proposed route explicitly, for example:
+- Before drafting a task or starting implementation, state the route:
   - `Planning route: chat-based task`
   - `Planning route: task-file`
   - `Proposed route: taskless, pending your agreement`
+- No permission questions for already requested work, except the
+  route-selection prompts required by this skill.
 
 ## Phase model
 
@@ -95,50 +71,36 @@ Phases:
   runtime assets, and any required documentation updates.
 - **DONE** - verified and accepted.
 
-PLAN allows edits only to planning artifacts for the current
-executable work item, especially task files. Commands are allowed for
-research or verification only if they do not change repository
-contents outside those artifacts. If they would, treat that work as
-IMPLEMENTATION and get explicit User approval first.
+Rules:
 
-Anything touching executable behavior, tests, build or config,
-dependencies, packaging, runtime assets, or documentation coupled to
-those changes is IMPLEMENTATION and needs explicit User instruction.
-
-Work starts in **PLAN** and returns to **PLAN** after each work item
-unless the User says otherwise.
-
-- During PLAN, if task creation or task updates are already
-  obviously underspecified or expose material open alternatives, do
-  only enough Research to frame the clarification well. Then use
-  `../spec-loop-clarify-task/SKILL.md` before drafting or revising
-  planning content further.
-- Otherwise, once Research for the current increment is
-  sufficient to expose the main open questions, and before drafting
-  or hardening planning content beyond Research, perform an
-  unresolved-questions scan and make the result explicit in the
-  conversation or active planning artifact. Treat materially
-  different code design solutions as design questions for this
-  scan. If no material unresolved question remains that is
-  user-preference-sensitive or could materially change scope,
-  constraints, design, or test specification, continue planning.
-  Otherwise, stop planning, use `../spec-loop-clarify-task/SKILL.md`,
-  and resume planning only after the clarification result is
-  incorporated.
-- No permission questions for already requested work.
+- Work starts in **PLAN** and returns to **PLAN** after each work item
+  unless the User says otherwise.
+- PLAN may change only planning artifacts for the current work item.
+- During PLAN, commands may be used for research or verification only
+  if they do not change repository contents outside planning
+  artifacts. If they would, treat that work as IMPLEMENTATION and get
+  explicit User approval first.
+- Any change to executable behavior, tests, build or config,
+  dependencies, packaging, runtime assets, or coupled documentation is
+  IMPLEMENTATION and needs explicit User instruction.
 - Starting PLAN artifacts, entering IMPLEMENTATION, and marking DONE
   require explicit User instruction.
-- After implementation approval on either planning path, follow
-  `../spec-loop-implementation-flow/SKILL.md` for
-  implementation-time handling, clarification routing, chat-based
-  recovery or promotion, `Implementation notes` checks, and any
-  return-to-PLAN routing.
-- Phases are exclusive unless the User allows combined
-  planning-plus-implementation.
+- If a new request or active task is already clearly underspecified or
+  has material open alternatives, do only enough research to ask good
+  clarification questions. Then use
+  `../spec-loop-clarify-task/SKILL.md` before drafting or revising
+  planning content further.
+- Before planning past Research on non-trivial work, run an
+  unresolved-questions scan. If material unresolved questions remain
+  that are user-preference-sensitive or could materially change scope,
+  constraints, design, or test specification, stop planning, use
+  `../spec-loop-clarify-task/SKILL.md`, and resume planning only after
+  the clarification result is incorporated.
+- Phases are exclusive unless the User allows combined planning and
+  implementation.
 
-Phase model governs executable work and documentation coupled to that
-work. Standalone documentation work is outside it unless the User or
-project instructions say otherwise.
+Standalone documentation work is outside this phase model unless the
+User or project instructions say otherwise.
 
 ## ADR and documentation routing
 

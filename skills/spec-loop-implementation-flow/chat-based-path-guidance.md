@@ -8,35 +8,34 @@ Use it with the shared core in
 It says how the shared implementation-flow rules work on the chat-based
 path.
 
-Minimal orientation only:
+Basic facts:
 
 - one active chat-based task at a time;
 - no chat-based subtasks;
 - no chat-based diagrams; and
 - the current canonical chat-based task lives in chat.
 
-If chat-based simplicity no longer holds, promote the work to the
+If the work is no longer simple enough for chat, promote it to the
 task-file path before continuing executable work.
 
 ## 0. Authorized canonical chat updates
 
-On the chat-based path, the canonical task in chat is the approved
-artifact for this work plus the controlled post-implementation
-record. Do not use canonical chat-based revisions as a scratchpad or
-silently normalize them to the code.
+On the chat-based path, the task in chat is the approved task for
+this work and the post-implementation record. Do not use chat-based
+revisions as a scratchpad or silently rewrite the task to match the
+code.
 
 Use `Task changes:` as the default canonical revision format during
 implementation.
 
-Treat the latest full chat-based task plus all later `Task changes:`
-blocks as the current canonical state.
+The most recent full chat-based task plus later `Task changes:`
+blocks is the current task state.
 
-Only these canonical chat-based revisions are allowed:
+Only these chat-based revisions are allowed:
 
-- emit `Task changes:` with changed sections only, using the same
-  change-list rules as
+- emit `Task changes:` with changed sections only, following
   `../spec-loop-plan-task/chat-based-path-guidance.md`, when the
-  shared core gives authority for that change;
+  shared core allows that change;
 - emit `Task changes:` that records `Implementation notes` at the
   mandatory checkpoint when relevant notes content exists;
 - re-emit a fresh full current chat-based task with title, identifier,
@@ -46,19 +45,19 @@ Only these canonical chat-based revisions are allowed:
 - perform minimal mechanical cleanup strictly incidental to one of the
   allowed revisions above.
 
-Any other canonical chat-based revision during implementation flow
-requires explicit User approval.
+Any other chat-based revision during implementation needs explicit
+User approval.
 
-If the agent discovers that it has already made an unauthorized
-canonical chat-based revision during implementation flow, it must stop
-and disclose in chat the exact unauthorized revision. It must make no
-further canonical chat-based revisions except those explicitly
-approved by the User or otherwise authorized by this guidance, and
-must then follow the applicable shared route before continuing.
+If the agent finds that it already made an unauthorized chat-based
+revision during implementation, it must stop and disclose the exact
+revision in chat. It must make no further chat-based revisions except
+those explicitly approved by the User or otherwise allowed by this
+guidance, and must then follow the applicable shared route before
+continuing.
 
 Omitted sections in `Task changes:` mean unchanged. If the User asks
 for the full current task, if a change cannot be expressed clearly as
-a change list, or if safe reconstruction is no longer possible,
+a change list, or if the task can no longer be reconstructed safely,
 re-emit a fresh full current chat-based task instead.
 
 ## 1. Chat-based actions for the shared routes
