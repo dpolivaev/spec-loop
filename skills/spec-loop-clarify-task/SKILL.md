@@ -40,47 +40,107 @@ first-class evidence during clarification:
 - Stress-test both behavior-level and code-design alternatives with
   concrete scenarios, edge cases, and boundary cases.
 - When the user states current behavior, boundaries, or design
-  constraints, compare that claim with the repository and existing
+  constraints, compare that claim with the codebase and existing
   task materials when possible. Surface contradictions explicitly
   instead of smoothing them over.
 
 If clarification resolves or changes shared domain terms, record that glossary follow-up is required through the normal Spec Loop glossary path. Put the note in the active task when one exists or is being prepared.
 
-For each unresolved decision in the active branch, first decide
-whether to resolve it directly or ask the user:
-- If it can be resolved from prior user decisions or by exploring the
-  repository or existing task materials, resolve it directly.
-- If you have a strong, evidence-based recommendation that does not
-  primarily depend on user preference, resolve it directly and later
-  present it as assistant-proposed.
-- Otherwise, ask the user one question at a time when the decision is
-  material, depends on user goals or risk tolerance, or remains
-  meaningfully uncertain. If it exposes a high-impact, non-trivial
-  trade-off that would be hard to reverse or surprising without
-  context, you may suggest creating an ADR as part of that question,
-  but do not create one unless the user requests it or explicitly
-  approves.
+For each unresolved item in the active branch, first determine
+whether existing evidence already answers it. Evidence includes prior
+confirmed user decisions, current task materials, glossary terms,
+code, and docs.
 
-Treat user attention as scarce. Do not ask the user to choose among
-options when one option is clearly preferable under the current
-evidence, repository rules, and reversibility of the decision. Prefer
-direct resolution for workflow, routing, and editorial decisions
-unless user goals or risk tolerance could materially change the
-answer. Ask only when the decision is material, preference-sensitive,
-hard to reverse, or a wrong inference would likely cause meaningful
-rework.
+If existing evidence already answers it, resolve it directly as a
+finding. Do not treat it as an alternative, do not present it as
+A/B/C, and do not attach confidence.
 
-Whenever you resolve one or more decisions directly, add them to a queue of newly resolved but not yet presented decisions, preserving resolution order. Present only that unpresented queue in batches of at most 6. You may present a batch at any time, and you must present all newly resolved decisions before asking the next question that offers alternatives or depends on those decisions for context. Single questions and decision batches may be mixed as the depth-first traversal proceeds. After a batch is presented, do not repeat those decisions before later single questions unless the user asks for a recap, reopens a decision, or a later decision changes them.
+If existing evidence does not already answer it and unresolved user
+goals, priorities, or risk tolerance could materially change the
+answer, ask the user.
 
-For each decision presented in a batch, include the chosen answer, a brief rationale or key trade-off, and whether it is repository-derived or assistant-proposed. Let the user confirm or disagree with any presented decision before you continue deeper into that branch. Record confirmed decisions in the task file when one exists or is being prepared.
+Otherwise estimate confidence in the current best answer:
+- If confidence is above 80%, resolve it directly and queue it for
+  batch presentation.
+- If confidence is 80% or below, do not ask by default. Ask only when
+  the decision is material, hard to reverse, needed to choose the
+  next decision path, or a wrong inference would likely cause
+  meaningful rework. Otherwise resolve it directly and queue it for
+  batch presentation.
 
-For each question you ask, provide a recommended answer. Usually present it as a tentative default rather than a strong preference. If you do have a strong preference, say so explicitly.
+Treat confidence as an operational estimate used to force a decision,
+not as a calibrated statistical probability.
 
-If you provide options, enumerate them with letters like A, B, C, D.
+Prefer direct resolution for workflow, routing, and editorial
+decisions unless user goals, priorities, or risk tolerance could
+materially change the answer.
 
-If the user's answer does not cleanly select one presented option, restate your understanding and require explicit user confirmation before moving to the next question.
+When you ask about a high-impact, non-trivial trade-off that would be
+hard to reverse or surprising without context, you may suggest
+creating an ADR as part of that question, but do not create one unless
+the user requests it or explicitly approves.
 
-When the user cleanly selects or confirms a presented option, acknowledge it briefly in the same turn with a minimal confirmation such as `B recorded`, `yes recorded`, or `no recorded`. Then treat that choice as internal state. Do not restate the substance of the choice in later turns unless the user asks for a recap, reopens the choice, or one brief reminder is strictly necessary to keep the current question clear and easy to answer.
+Whenever you resolve one or more items directly, add them to a queue of
+newly resolved but not yet presented items, preserving resolution
+order. Present only that unpresented queue in batches of at most 6. A
+batch may contain one item. Do not emit standalone decision or finding
+lines outside those batches. You may present a batch at any time, and
+you must present all newly resolved items before asking the next
+question that offers alternatives or depends on those items for
+context. Single questions and item batches may be mixed as the
+depth-first traversal proceeds. After a batch is presented, do not
+repeat those items before later single questions unless the user asks
+for a recap, reopens an item, or a later decision changes it.
+
+For each finding presented in a batch, use this format:
+
+Finding: <finding>
+Basis: <one or more of code, docs, task materials, prior confirmed user decision, glossary>
+Reason: <short reason>
+
+For each assistant-resolved decision presented in a batch, use this
+format:
+
+Decision: <answer>
+Basis: assistant judgment
+Evidence: <one or more of code, docs, task materials, prior confirmed user decision, glossary>
+Confidence: <N>%
+Reason: <short reason>
+
+If the decision corresponds to an explicit option, you may include the
+option letter in the Decision line, for example `Decision: B - Reuse
+the current chat`.
+
+Let the user confirm, question, or disagree with any presented item
+before you continue deeper into that branch. Record confirmed items in
+the task file when one exists or is being prepared.
+
+For each question you ask, provide a recommended answer. The
+Recommendation line must be exactly one line and use this format:
+
+Recommendation: <answer> (<N>%) - <short reason>
+
+If you ask the user to choose among alternatives, enumerate the
+options in the same turn with letters like A, B, C, D and use the
+option letter as the answer. Do not use an option letter in the
+Recommendation line unless that lettered option is explicitly listed
+in the same turn.
+
+For yes/no questions, use `yes` or `no` as the answer text unless you
+explicitly enumerate them as options. For other questions, use the
+shortest precise answer text.
+
+If the user's answer does not cleanly select one presented option,
+restate your understanding and require explicit user confirmation
+before moving to the next question.
+
+When the user cleanly selects or confirms a presented option,
+acknowledge it briefly in the same turn with a minimal confirmation
+such as `B recorded`, `yes recorded`, or `no recorded`. Then treat
+that choice as internal state. Do not restate the substance of the
+choice in later turns unless the user asks for a recap, reopens the
+choice, or one brief reminder is strictly necessary to keep the
+current question clear and easy to answer.
 
 Ask one question at a time whenever direct user input is required.
 
