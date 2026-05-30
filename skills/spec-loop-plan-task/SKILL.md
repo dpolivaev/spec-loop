@@ -2,7 +2,7 @@
 name: spec-loop-plan-task
 description: >-
   Choose the route for new work and plan it before implementation.
-  Use this skill to decide whether the work is taskless, chat-based,
+  Use this skill to decide whether the work is taskless, chat-only,
   or task-file, and to create the needed plan for non-trivial
   executable work.
 ---
@@ -51,10 +51,10 @@ says the rules changed.
     mechanical edit; or
   - more than one plausible implementation path exists.
 - If the work is non-trivial, ask: `This looks non-trivial. We should
-  use a Spec Loop task. May it be chat-based, or do you want a task
+  use a Spec Loop task. May it be chat-only, or do you want a task
   file?`
 - Before drafting a task or starting implementation, state the route:
-  - `Planning route: chat-based task`
+  - `Planning route: chat-only task`
   - `Planning route: task-file`
   - `Proposed route: taskless, pending your agreement`
 - No permission questions for already requested work, except the
@@ -143,7 +143,7 @@ For executable task planning on either planning path:
   increment readiness, testing policy, context preservation, and
   formatting rules used on both task routes, with any task-file-only
   requirements called out there explicitly;
-- on the chat-based path, use that shared main-task form without
+- on the chat-only path, use that shared main-task form without
   subtasks or diagrams; and
 - on the task-file path, combine it with
   [task-file-path-guidance.md](./task-file-path-guidance.md).
@@ -152,14 +152,14 @@ For executable task planning on either planning path:
 
 Choose among:
 
-- the chat-based task route documented in chat;
+- the chat-only task route documented in chat;
 - the task-file route documented in task artifacts; and
 - taskless handling with no spec-loop task.
 
-Non-trivial work must use either the chat-based route or the
+Non-trivial work must use either the chat-only route or the
 task-file route.
 
-Take the chat-based route when all of the following are true:
+Take the chat-only route when all of the following are true:
 
 - this is the first planning pass for the work item in the current
   conversation;
@@ -200,11 +200,11 @@ the User explicitly agrees.
 - Direct verification coupled to the requested change may still follow
   taskless work.
 
-## Chat-based path
+## Chat-only path
 
-When the chat-based planning path is in use:
+When the chat-only planning path is in use:
 
-- read [chat-based-path-guidance.md](./chat-based-path-guidance.md)
+- read [chat-only-path-guidance.md](./chat-only-path-guidance.md)
   fully;
 - keep the work in chat only; and
 - follow that file together with
@@ -266,7 +266,7 @@ unless the user or project rules require one.
 When approved work changes, clarifies, or implements shared domain
 terms:
 
-- include the glossary update in the plan, including chat-based
+- include the glossary update in the plan, including chat-only
   work;
 - perform the glossary update during IMPLEMENTATION;
 - use `spec-loop-write-glossary` when the glossary uses the Spec Loop

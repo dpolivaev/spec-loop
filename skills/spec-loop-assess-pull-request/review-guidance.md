@@ -32,7 +32,7 @@ semantics, formatting, glossary expectations, and testing-policy
 shape. Reuse `task-file-path-guidance.md` only for diagram conventions
 and any task-file-specific structural rule that clearly fits
 retrospective review artifacts. Do not reuse task-file lifecycle
-folders or statuses, chat-based routing, or implementation-
+folders or statuses, chat-only routing, or implementation-
 approval gates for the reviewed change itself.
 
 Global sections describe reviewed change:

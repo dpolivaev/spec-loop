@@ -9,7 +9,7 @@ context-preservation rules, and formatting conventions used by both
 planning paths, with any task-file-only formatting rules called out
 explicitly:
 
-- the chat-based planning path kept in chat; and
+- the chat-only planning path kept in chat; and
 - the task-file path.
 
 Task-file-only lifecycle, folders, tracked moves, subtasks, diagrams,
@@ -24,8 +24,8 @@ the approved Design stays authoritative. Findings that change the
 intended target lead to updates to the active task artifact and
 renewed approval before implementation continues.
 
-- On the chat-based path, that artifact is the current canonical
-  chat-based task in chat.
+- On the chat-only path, that artifact is the current canonical
+  chat-only task in chat.
 - On the task-file path, that artifact is the active task file.
 
 Before IMPLEMENTATION, the active task needs: Scope, Motivation,
@@ -172,7 +172,7 @@ loop.
   requirements are unclear.
 - Active task artifact = working source of truth for the current
   item.
-- Older task files or superseded chat-based task states = historical
+- Older task files or superseded chat-only task states = historical
   records; they need not stay consistent with the active artifact when
   superseded.
 - Keep only relevant task content in active context.
@@ -180,7 +180,7 @@ loop.
 ## Formatting
 
 - Task-file artifacts must wrap prose to roughly 72-80 characters and
-  avoid horizontal scrolling. Chat-based work in chat does not need a
+  avoid horizontal scrolling. Chat-only work in chat does not need a
   fixed wrap width unless the User asks for it, but it must remain
   readable and structurally clear.
 - Preserve semantic line breaks and consistent list indentation.
@@ -263,6 +263,6 @@ areas.
   when non-automatable verification remains; otherwise set
   `Manual tests: N/A`.
 - Run and fix all required tests before moving a task-file task to
-  `review`, before presenting chat-based work as ready, or before
+  `review`, before presenting chat-only work as ready, or before
   otherwise implying implementation closure, unless the User waives
   tests.

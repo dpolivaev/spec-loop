@@ -216,7 +216,7 @@ When a task uses subtasks:
 
 Diagrams are task-file-only planning artifacts. If diagrams would
 materially help because research or design is no longer simple,
-promote chat-based work to the task-file path before using them.
+promote chat-only work to the task-file path before using them.
 
 - Governs diagrams in task **Research** and **Design**.
 - Use **PlantUML** by default.

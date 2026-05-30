@@ -2,12 +2,12 @@
 name: spec-loop-implementation-flow
 description: >-
   Use this skill after implementation approval for an approved
-  chat-based or task-file task. It governs implementation-time
+  chat-only or task-file task. It governs implementation-time
   routing, canonical task updates, and the final review checkpoint.
 ---
 
 Use this skill after implementation approval for an approved
-chat-based or task-file task.
+chat-only or task-file task.
 
 If no approved active task exists, return to
 `../spec-loop-plan-task/SKILL.md`.
@@ -36,16 +36,16 @@ If no approved active task exists, return to
 - Choose the active path:
   - task-file path = an approved task file controls the current
     increment
-  - chat-based path = an approved canonical chat-based task in chat
+  - chat-only path = an approved canonical chat-only task in chat
     controls the current increment
 - Then read:
   - [implementation-flow-guidance.md](./implementation-flow-guidance.md)
   - the matching path companion for the active path:
-    - [chat-based-path-guidance.md](./chat-based-path-guidance.md)
+    - [chat-only-path-guidance.md](./chat-only-path-guidance.md)
     - [task-file-path-guidance.md](./task-file-path-guidance.md)
 
 Keep using the approved active task as the source of truth. Edit the
-active task file or canonical chat-based task only when the shared
+active task file or canonical chat-only task only when the shared
 core and the active path companion allow it.
 
 `implementation-flow-guidance.md` defines the route rules, when
@@ -53,7 +53,7 @@ canonical task sections may change, the meaning of `review`,
 `Implementation notes`, and the completion checklist.
 
 The path companion defines the active path mechanics, including
-chat-based recovery or promotion or the task-file move into `review`.
+chat-only recovery or promotion or the task-file move into `review`.
 
 If the current increment is unclear, do not use this skill. Return to
 `../spec-loop-plan-task/SKILL.md`.

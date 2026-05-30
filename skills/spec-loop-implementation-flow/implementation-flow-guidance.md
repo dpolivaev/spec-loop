@@ -6,7 +6,7 @@ It reuses the full `spec-loop-plan-task` bundle, including
 `common-task-guidance.md` on both planning paths.
 Use it with one of these path-specific companions:
 
-- [chat-based-path-guidance.md](./chat-based-path-guidance.md); or
+- [chat-only-path-guidance.md](./chat-only-path-guidance.md); or
 - [task-file-path-guidance.md](./task-file-path-guidance.md).
 
 This core defines:
@@ -256,7 +256,7 @@ route from Section 1.
 ## 4. Interaction with the other task skills
 
 `spec-loop-plan-task` owns workflow routing, trivial/non-trivial
-classification, chat-based path maintenance before implementation
+classification, chat-only path maintenance before implementation
 approval, taskless eligibility, and approval gates.
 
 `spec-loop-prepare-implementation-approval` owns pre-implementation
@@ -265,7 +265,7 @@ Task-file readiness and approval-seeking preparation.
 After approval, this shared core plus the active path companion
 govern route handling, authorized canonical updates,
 `Implementation notes`, the path-specific expression of `review`, and
-any needed chat-based recovery or promotion.
+any needed chat-only recovery or promotion.
 
 Do not replace the planning or approval-preparation skills. Reuse them
 when implementation uncovers a change that needs renewed planning or

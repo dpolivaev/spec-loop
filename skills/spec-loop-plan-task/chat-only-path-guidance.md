@@ -1,6 +1,6 @@
-# Chat-based Path Guidance
+# Chat-only Path Guidance
 
-This file applies only on the chat-based planning path of
+This file applies only on the chat-only planning path of
 `spec-loop-plan-task`.
 
 Read [common-task-guidance.md](./common-task-guidance.md) first.
@@ -9,57 +9,57 @@ semantics, current-increment readiness rules, testing policy,
 context-preservation rules, and formatting conventions used on both
 planning paths.
 
-This file covers only chat-based path mechanics: the chat task,
+This file covers only chat-only path mechanics: the chat task,
 `Task changes:`, reconstruction, later-work handling, and promotion
 to the task-file path.
 
-User-facing term: `chat-based`. This is still a full structured Spec
+User-facing term: `chat-only`. This is still a full structured Spec
 Loop task kept in chat, not taskless work.
 
 If the User asks for the sectioned task format, emit the full task in
-chat. Do not replace a requested chat-based task with an informal
+chat. Do not replace a requested chat-only task with an informal
 short plan.
 
-The task-file prose-wrap requirement does not apply to chat-based work
-unless the User asks for wrapped lines. Keep chat-based tasks readable
+The task-file prose-wrap requirement does not apply to chat-only work
+unless the User asks for wrapped lines. Keep chat-only tasks readable
 and structurally clear.
 
-After implementation approval on the chat-based path, follow
-`../spec-loop-implementation-flow/SKILL.md` and its chat-based path
+After implementation approval on the chat-only path, follow
+`../spec-loop-implementation-flow/SKILL.md` and its chat-only path
 companion for implementation-time handling, task revisions,
-`Implementation notes`, and chat-based `review`.
+`Implementation notes`, and chat-only `review`.
 
-## Chat-based path mechanics
+## Chat-only path mechanics
 
-On the chat-based path, keep the work in chat only.
+On the chat-only path, keep the work in chat only.
 
-### Canonical chat-based task
+### Canonical chat-only task
 
-- emit an initial canonical chat-based task in chat using the shared
+- emit an initial canonical chat-only task in chat using the shared
   no-subtask main-task form and no diagrams;
 - always include the title line and exactly one identifier;
 - include any established sections in the exact shared order; on
   this initial emission, omitted sections mean not yet
   established;
-- treat that emitted task as the current canonical chat-based task;
-- keep only one active chat-based task in the conversation at a
+- treat that emitted task as the current canonical chat-only task;
+- keep only one active chat-only task in the conversation at a
   time;
 - when the current increment reaches implementation readiness,
-  present the canonical chat-based task to the User as a request to
-  approve both continuing on the chat-based planning path without
+  present the canonical chat-only task to the User as a request to
+  approve both continuing on the chat-only planning path without
   creating a task file and moving from planning into
-  implementation from that chat-based task.
+  implementation from that chat-only task.
 
-When proposing the chat-based path to a User who may not already be
-informed, include one brief inline note that chat-based avoids task-file
+When proposing the chat-only path to a User who may not already be
+informed, include one brief inline note that chat-only avoids task-file
 overhead for simple work but carries higher chat-alignment risk and
 may require a full task re-emission or promotion if confidence drops.
 Do not repeat that note when the User is already informed unless the
 risk basis materially changes.
 
-### Chat-based task revisions
+### Chat-only task revisions
 
-The first chat-based task for a work item is a full task.
+The first chat-only task for a work item is a full task.
 
 Later revisions normally use `Task changes:` instead of reprinting the
 full task.
@@ -94,13 +94,13 @@ Rules:
 - Do not mix unlabeled full-section text with `Added`, `Removed`, or
   `Replaced` in the same section.
 
-Quote the old and new text so the current chat-based task can be
+Quote the old and new text so the current chat-only task can be
 reconstructed without guessing.
 
-The most recent full chat-based task plus later `Task changes:`
+The most recent full chat-only task plus later `Task changes:`
 blocks is the current task state.
 
-Reprint the full current chat-based task only when:
+Reprint the full current chat-only task only when:
 
 - the User asks for it;
 - reconstruction is no longer safe;
@@ -109,7 +109,7 @@ Reprint the full current chat-based task only when:
 
 ### Reconstruction and recovery
 
-If the current chat-based task cannot be reconstructed safely from the
+If the current chat-only task cannot be reconstructed safely from the
 most recent full task plus later `Task changes:` blocks, re-emit a
 fresh full current task in chat with title, identifier, and all
 current sections before continuing. If that still does not restore a
@@ -117,28 +117,28 @@ safe state, promote the work to the task-file path.
 
 ### Later work relation handling
 
-When new work appears after a chat-based task, use the User's message
+When new work appears after a chat-only task, use the User's message
 or later clarification to decide whether it is a subtask or extension
 of the earlier task, or a new follow-up task. Ask only when that
 relation is not clear.
 
 If the User's message or later clarification shows it is a subtask or
-extension, use the task-file path because chat-based work has no
+extension, use the task-file path because chat-only work has no
 subtasks.
 
 If the User's message or later clarification shows it is a new
 follow-up task, re-run route selection for that new work item. A new
-chat-based task may start in chat without creating any task file only
-when the earlier chat-based task is no longer active and the new task
-independently still fits the chat-based criteria.
+chat-only task may start in chat without creating any task file only
+when the earlier chat-only task is no longer active and the new task
+independently still fits the chat-only criteria.
 
-Do not allow two active chat-based tasks at once. If the new work
+Do not allow two active chat-only tasks at once. If the new work
 extends the active task or the combined work stops being simple, stay
 in the same task or promote to the task-file path.
 
 ### Promotion triggers
 
-If the chat-based path later needs heavier research, more than one
+If the chat-only path later needs heavier research, more than one
 plausible implementation path, heavier verification, more than one
 active task, or diagrams that would materially help, use
 `spec-loop-plan-task` again and promote the task to a task file
@@ -211,8 +211,8 @@ Required assistant behavior:
 
 1. classify the follow-up as non-trivial;
 2. say that a Spec Loop task should be used;
-3. ask whether it may be chat-based or should use a task file;
-4. if the User chooses chat-based, emit the canonical full chat-based
+3. ask whether it may be chat-only or should use a task file;
+4. if the User chooses chat-only, emit the canonical full chat-only
    task in the shared sectioned format; and
 5. do not shorten the work to an informal plan or taskless handling
    just because the requested change is concrete.
