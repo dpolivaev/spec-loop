@@ -48,18 +48,20 @@ first-class evidence during clarification:
 
 If clarification resolves or changes shared domain terms, record that glossary follow-up is required through the normal Spec Loop glossary path. Put the note in the active task when one exists or is being prepared.
 
-For each unresolved item in the active branch, first determine
-whether existing evidence already answers it. Evidence includes prior
-confirmed user decisions, current task materials, glossary terms,
-code, and docs.
+For each unresolved decision in the active branch, clarification
+proceeds by deciding what can be decided and asking only what must be
+asked.
 
-If existing evidence already answers it, resolve it directly as a
-finding. Do not treat it as an alternative, do not present it as
-A/B/C, and do not attach confidence.
+First use existing evidence such as prior confirmed user decisions,
+current task materials, glossary terms, code, and docs. Do not
+present facts, findings, or implications as standalone items. Use
+them only inside decision reasons.
 
-If existing evidence does not already answer it and unresolved user
-goals, priorities, or risk tolerance could materially change the
-answer, ask the user.
+If existing evidence fully determines the answer, resolve it directly
+as a decision with `Confidence: 100%`.
+
+If unresolved user goals, priorities, or risk tolerance could
+materially change the answer, ask the user.
 
 Otherwise estimate confidence in the current best answer:
 - If confidence is above 80%, resolve it directly and queue it for
@@ -69,6 +71,9 @@ Otherwise estimate confidence in the current best answer:
   next decision path, or a wrong inference would likely cause
   meaningful rework. Otherwise resolve it directly and queue it for
   batch presentation.
+
+If you resolve a decision directly with confidence below 90%, include
+the main alternatives in the decision presentation.
 
 Treat confidence as an operational estimate used to force a decision,
 not as a calibrated statistical probability.
@@ -82,40 +87,49 @@ hard to reverse or surprising without context, you may suggest
 creating an ADR as part of that question, but do not create one unless
 the user requests it or explicitly approves.
 
-Whenever you resolve one or more items directly, add them to a queue of
-newly resolved but not yet presented items, preserving resolution
-order. Present only that unpresented queue in batches of at most 6. A
-batch may contain one item. Do not emit standalone decision or finding
-lines outside those batches. You may present a batch at any time, and
-you must present all newly resolved items before asking the next
-question that offers alternatives or depends on those items for
-context. Single questions and item batches may be mixed as the
-depth-first traversal proceeds. After a batch is presented, do not
-repeat those items before later single questions unless the user asks
-for a recap, reopens an item, or a later decision changes it.
+Whenever you resolve one or more decisions directly, add them to a
+queue of newly resolved but not yet presented decisions, preserving
+resolution order. Present only that unpresented queue in batches of at
+most 6. A batch may contain one decision. Present at most one decision
+batch in a single response. After presenting a decision batch, stop
+and wait for the user's response before presenting another batch or
+asking the next question. If more than 6 unpresented decisions remain,
+present only the first batch and keep the rest queued until the user
+responds. Do not emit standalone decision lines outside those batches.
+Do not silently apply directly resolved decisions. Every directly
+resolved decision must be presented to the user in a decision batch
+before it is treated as confirmed state, recorded in the task, used as
+settled context for later branch conclusions, or before clarification
+ends and control returns to the invoking workflow. You may present a
+batch at any time. You must present all newly resolved decisions
+before the next question that offers alternatives or depends on those
+decisions for context, and in all cases before clarification ends and
+control returns to the invoking workflow. Single questions and
+decision batches may be mixed as the depth-first traversal proceeds.
+After a batch is presented, do not repeat those decisions before later
+single questions unless the user asks for a recap, reopens a decision,
+or a later decision changes it.
 
-For each finding presented in a batch, use this format:
-
-Finding: <finding>
-Basis: <one or more of code, docs, task materials, prior confirmed user decision, glossary>
-Reason: <short reason>
-
-For each assistant-resolved decision presented in a batch, use this
-format:
+For each decision presented in a batch, use this format:
 
 Decision: <answer>
-Basis: assistant judgment
-Evidence: <one or more of code, docs, task materials, prior confirmed user decision, glossary>
 Confidence: <N>%
+Alternatives:
+- A. <short alternative>
+- B. <short alternative>
 Reason: <short reason>
+
+Include `Alternatives` whenever confidence is below 90%. Omit it when
+confidence is 90% or above.
 
 If the decision corresponds to an explicit option, you may include the
 option letter in the Decision line, for example `Decision: B - Reuse
 the current chat`.
 
-Let the user confirm, question, or disagree with any presented item
-before you continue deeper into that branch. Record confirmed items in
-the task file when one exists or is being prepared.
+Let the user confirm, question, or disagree with any presented
+decision before you continue deeper into that branch. Record
+confirmed decisions in the task file when one exists or is being
+prepared.
 
 For each question you ask, provide a recommended answer. The
 Recommendation line must be exactly one line and use this format:
@@ -144,6 +158,7 @@ choice in later turns unless the user asks for a recap, reopens the
 choice, or one brief reminder is strictly necessary to keep the
 current question clear and easy to answer.
 
+At each step, either present a decision batch or ask one question.
 Ask one question at a time whenever direct user input is required.
 
 ## Clarification exit check
