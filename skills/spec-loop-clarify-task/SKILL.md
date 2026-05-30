@@ -20,6 +20,8 @@ When clarification ends, hand control back to the workflow that
 invoked this skill:
 - task creation and task updates normally resume
   `../spec-loop-plan-task/SKILL.md`;
+- approval-preparation clarification resumes
+  `../spec-loop-prepare-implementation-approval/SKILL.md`;
 - implementation-time clarification resumes
   `../spec-loop-implementation-flow/SKILL.md`.
 

@@ -60,11 +60,13 @@ and list the exact missing items, for example:
 - incomplete test specification for the current increment;
 - stale or contradictory naming.
 
-### C. Ask targeted User questions
+### C. Clarification is required
 
-If essential doubts remain during approval preparation, the task is
-not review ready. Keep it in PLAN and ask only the exact questions
-needed to remove the uncertainty.
+If any material unresolved question remains during approval
+preparation, the task is not review ready. Keep it in PLAN, invoke
+`../spec-loop-clarify-task/SKILL.md` in the same turn, and ask only
+the exact questions needed to remove the uncertainty through that
+workflow.
 
 ## 3. Review-preparation transformation rules
 
@@ -140,8 +142,18 @@ increment.
 - The task does not present duplicated diagram-plus-table restatements
   without added value.
 
-If any check fails, stay in PLAN and use the applicable outcome from
-Section 2.
+If any check fails, stay in PLAN and apply this branch order:
+
+1. If the failure is directly fixable in the active task, fix it and
+   re-run the readiness checks.
+2. If the failure can be resolved from existing evidence, update the
+   active task and re-run the readiness checks.
+3. If any material unresolved question remains, use `Clarification is
+   required` immediately.
+4. Use `User-facing review is blocked` only for non-question blockers
+   that remain after the applicable direct fixes and evidence-based
+   updates, or when the User explicitly asked for status-only
+   feedback.
 
 ## 5. Diagram-first guidance
 

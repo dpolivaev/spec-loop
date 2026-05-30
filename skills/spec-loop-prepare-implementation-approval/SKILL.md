@@ -27,11 +27,20 @@ user-facing review gating, and approval-seeking output.
 Follow `implementation-approval-guidance.md` for the allowed user-facing
 outcomes and response rules.
 
-If readiness fails because material unresolved questions remain and
-they are user-preference-sensitive or could materially change scope,
-constraints, design, or test specification, stop and use
-`../spec-loop-clarify-task/SKILL.md` before seeking implementation
-approval.
+If readiness checks find directly fixable task defects, update the
+active task in place and re-run the readiness checks before producing
+user-facing output.
+
+If readiness checks find issues that can be resolved from existing
+evidence, update the active task in place and re-run the readiness
+checks before producing user-facing output.
+
+If any material unresolved question remains and it is
+user-preference-sensitive, needed to choose the next decision path, or
+could materially change scope, constraints, design, or test
+specification, do not end with a blocker list. Invoke
+`../spec-loop-clarify-task/SKILL.md` in the same turn and resume this
+skill after clarification before seeking implementation approval.
 
 After task-file implementation approval, implementation is governed by
 `../spec-loop-implementation-flow/SKILL.md`.
