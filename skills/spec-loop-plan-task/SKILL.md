@@ -1,17 +1,17 @@
 ---
 name: spec-loop-plan-task
 description: >-
-  Mandatory unless the user opts out. Opt-out includes approving a
-  suggested concrete modification or giving an explicit and precise
-  instruction for a concrete and clear action. Use when non-trivial
-  work on features, bug fixes, refactorings, or changes to code,
-  tests, configuration, dependencies, runtime assets, or design
-  requires explicit planning before implementation.
+  Governs route selection and planning before implementation. Use it
+  to classify work as trivial or non-trivial, choose among chat-based,
+  task-file, and taskless handling, and produce explicit planning for
+  non-trivial changes before implementation.
 ---
 
-This skill is mandatory unless the user opts out. Opt-out includes
-approving a suggested concrete modification or giving an explicit and
-precise instruction for a concrete and clear action.
+This skill governs route selection and planning before implementation.
+Classify each new work item as trivial or non-trivial before choosing
+among a chat-based spec-loop task, a task-file spec-loop task, or
+taskless handling. Non-trivial work requires a spec-loop task.
+Trivial work may be taskless only with explicit user agreement.
 
 Read this file fully unless it is already loaded in the current
 session context.
@@ -45,15 +45,12 @@ continuing.
 - **Enforcement, pre-edit gate, and LLM stewardship**
 - These rules are mandatory. The LLM enforces them.
 - Only the User may override these rules.
-- Treat either of the following as an implicit User opt-out from the
-  task-based planning procedure for the current work item unless the
-  User says to keep that procedure:
-  - approval of a suggested concrete modification;
-  - an explicit and precise instruction for a concrete and clear
-    action.
-- This opt-out still allows direct verification coupled to the
-  requested action, such as running relevant tests after a dependency
-  version change.
+- Do not infer taskless handling from a concrete request alone.
+- If the User explicitly asks for a planning procedure or route, do
+  not shorten it unless the User explicitly approves the
+  simplification.
+- No permission questions for already requested work, except the route
+  selection prompts required by this skill.
 
 ## Read and enforcement model
 
@@ -61,6 +58,31 @@ continuing.
 - Else: read once, keep a 3-5 line digest in context.
 - Re-read only if the digest is missing or the User says the rules
   changed.
+
+## Route selection
+
+- First classify each new work item as trivial or non-trivial.
+- Treat the work as non-trivial when any of the following hold:
+  - changes span multiple files and need more than a
+    straightforward mechanical edit;
+  - any exploration or research is needed before editing;
+  - changes span modules, packages, or plugins;
+  - public or shared API changes are involved;
+  - targeted test design or verification is needed beyond a
+    mechanical edit; or
+  - more than one plausible implementation path exists.
+- If the work is non-trivial, default to a spec-loop task. Ask
+  whether it may be chat-based or should use a task file. Use a prompt
+  equivalent to: `This looks non-trivial. I think we should use a
+  spec-loop task. May we keep it chat-based, or do you want a task
+  file?`
+- If the work looks trivial, ask a direct question such as: `This
+  looks trivial. May I do this without a plan?`
+- Before drafting a task or starting implementation on a new work
+  item, declare the chosen or proposed route explicitly, for example:
+  - `Planning route: chat-based task`
+  - `Planning route: task-file`
+  - `Proposed route: taskless, pending your agreement`
 
 ## Phase model
 
@@ -108,7 +130,7 @@ unless the User says otherwise.
   require explicit User instruction.
 - After implementation approval on either planning path, follow
   `../spec-loop-implementation-flow/SKILL.md` for
-  implementation-time handling, clarification routing, fileless
+  implementation-time handling, clarification routing, chat-based
   recovery or promotion, `Implementation notes` checks, and any
   return-to-PLAN routing.
 - Phases are exclusive unless the User allows combined
@@ -122,21 +144,17 @@ project instructions say otherwise.
 
 Ceremony follows executable impact, not file type.
 
-Standalone documentation work may stay outside the task-file path when
-all of the following are true:
-
-- the requested work is confined to documentation artifacts;
-- it does not require executable changes; and
-- no project rule requires a task file.
+Standalone non-executable documentation work is taskless by default
+when it stays confined to documentation artifacts and no project rule
+requires a task file.
 
 ADRs and instruction files, including skill files, are normally treated
 as standalone documentation when the requested work is confined to
 those artifacts.
 
-ADR-only work is not implementation-task planning by default. When the
-requested work is only to create, revise, or compare an ADR, do not
-create a task file unless the user explicitly asks for one or the ADR
-work is part of a larger task already being tracked in a task file.
+ADR-only work is taskless by default. Use a task only when the User
+explicitly asks for one, project rules require one, or the ADR work is
+part of a larger executable change already being tracked in a task.
 
 Use ADRs for decisions affecting public behavior, dependencies, or
 long-term design.
@@ -161,47 +179,70 @@ For executable task planning on either planning path:
 - use it as the shared source for the no-subtask main-task form,
   section order and conditionality, section meanings, current-
   increment readiness, testing policy, context preservation, and
-  formatting that apply equally in chat and task files;
-- on the fileless path, use that shared main-task form without
+  formatting rules used on both task routes, with any task-file-only
+  requirements called out there explicitly;
+- on the chat-based path, use that shared main-task form without
   subtasks or diagrams; and
 - on the task-file path, combine it with
   [task-file-path-guidance.md](./task-file-path-guidance.md).
 
-## Planning paths
+## Planning routes
 
-Executable changes require explicit planning before implementation.
+Choose among:
 
-Choose between:
+- the chat-based task route documented in chat;
+- the task-file route documented in task artifacts; and
+- taskless handling with no spec-loop task.
 
-- the fileless planning path documented in chat, and
-- the task-file path documented in task artifacts.
+Non-trivial work must use either the chat-based route or the
+task-file route.
 
-Take the fileless planning path when all of the following are true:
+Take the chat-based route when all of the following are true:
 
-- this is the first planning pass for the task in the current
+- this is the first planning pass for the work item in the current
   conversation;
 - the required research is lightweight;
 - the design has a single clear implementation path;
 - the required verification is lightweight and easy to track in chat;
-- no task file exists yet for this task.
+- no active task file controls this same work item; and
+- no project rule or User preference requires a task file.
 
-Use the task-file path instead if subtasks are already needed or if
-research or design is complex enough that diagrams would materially
-help clarify the plan.
+Use the task-file route instead if any of the following hold:
 
-Project instructions or the User may still require the task-file path
-for work that would otherwise match the fileless planning path.
+- an active task file already controls the current work item;
+- subtasks are needed;
+- research or design is complex enough that diagrams would materially
+  help clarify the plan;
+- project instructions require a task file; or
+- the User prefers a task file.
 
-Use the task-file path otherwise.
+When a prior task file is in `review` or `done` and a new follow-up
+work item appears, do not stay in that task-file context by inertia.
+Re-run route selection for the new work item. Reuse the existing task
+file only when it still controls the same active work item.
 
-Once a task file exists for a task, continue using that task file for
-that task instead of moving planning back into chat.
+## Taskless route
 
-## Fileless path
+Taskless by default:
 
-When the fileless planning path is in use:
+- ADR-only work; and
+- standalone non-executable documentation work.
 
-- read [fileless-path-guidance.md](./fileless-path-guidance.md)
+For executable work, use taskless only when the work is trivial and
+the User explicitly agrees.
+
+- If the work looks trivial, ask: `This looks trivial. May I do this
+  without a plan?`
+- If the User agrees, proceed taskless.
+- Otherwise use a Spec Loop task.
+- Direct verification coupled to the requested change may still follow
+  taskless work.
+
+## Chat-based path
+
+When the chat-based planning path is in use:
+
+- read [chat-based-path-guidance.md](./chat-based-path-guidance.md)
   fully;
 - keep the work in chat only; and
 - follow that file together with
@@ -263,7 +304,7 @@ unless the user or project rules require one.
 When approved work changes, clarifies, or implements shared domain
 terms:
 
-- include the glossary update in the plan, including fileless-path
+- include the glossary update in the plan, including chat-based
   work;
 - perform the glossary update during IMPLEMENTATION;
 - use `spec-loop-write-glossary` when the glossary uses the Spec Loop

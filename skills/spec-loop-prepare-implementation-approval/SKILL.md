@@ -8,7 +8,7 @@ description: >-
 ---
 
 This skill is mandatory only on the task-file path of the
-`spec-loop-plan-task` workflow. It is not used for fileless planning
+`spec-loop-plan-task` workflow. It is not used for chat-based planning
 path work kept in chat.
 
 Before work: read `../spec-loop-plan-task/SKILL.md`, follow all files it
@@ -46,5 +46,5 @@ After task-file implementation approval, implementation is governed by
 `../spec-loop-implementation-flow/SKILL.md`.
 
 If no active task file exists, if the current increment is unclear, or
-if fileless planning is in use, do not use this skill. Continue task
+if chat-based planning is in use, do not use this skill. Continue task
 work under the `spec-loop-plan-task` bundle instead.

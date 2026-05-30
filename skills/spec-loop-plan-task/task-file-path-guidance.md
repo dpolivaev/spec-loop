@@ -13,6 +13,11 @@ This file adds only task-file-specific mechanics: task files,
 lifecycle, tracked moves, subtasks, task-file-only testing additions,
 and diagram rules.
 
+After implementation approval on the task-file path, follow
+`../spec-loop-implementation-flow/SKILL.md` and its task-file path
+companion for implementation-time handling, task-file updates,
+`Implementation notes`, and the move into `review`.
+
 ## Task-file path readiness
 
 On the task-file path, the task file is the source of truth for the
@@ -211,7 +216,7 @@ When a task uses subtasks:
 
 Diagrams are task-file-only planning artifacts. If diagrams would
 materially help because research or design is no longer simple,
-promote fileless work to the task-file path before using them.
+promote chat-based work to the task-file path before using them.
 
 - Governs diagrams in task **Research** and **Design**.
 - Use **PlantUML** by default.

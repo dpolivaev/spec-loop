@@ -29,7 +29,7 @@ Before work:
   task-file-only diagram conventions and any other task-file-specific
   rules that clearly fit retrospective review artifacts;
 - apply those shared conventions where they fit retrospective review
-  work, but do not apply the fileless planning path, task-file
+  work, but do not apply the chat-based planning path, task-file
   lifecycle routing, or the normal `PLAN -> IMPLEMENTATION` approval
   gate to the reviewed change itself;
 - then read [review-guidance.md](./review-guidance.md).
