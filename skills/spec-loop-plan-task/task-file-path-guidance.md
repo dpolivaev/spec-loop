@@ -30,6 +30,21 @@ In tasks with subtasks, the shared readiness rules apply to the active
 subtask and any task-level context it depends on, not to future
 subtasks that are not yet current.
 
+During clarification on the task-file path, keep the active task file
+aligned with confirmed clarification state.
+
+However, you may accumulate multiple confirmed clarification results
+before syncing them into the task file.
+
+Do not let the task file fall materially behind confirmed
+clarification state. Sync it at a clean checkpoint before confirmed
+state would be hard to reconstruct safely from chat alone, and always
+before clarification returns control to another workflow.
+
+These sync edits preserve state. Do not ask the User to review them
+separately during clarification. If unresolved questions remain after
+a sync, continue clarification from the updated task file.
+
 ## Task Artifacts and Administration
 
 ### 1. Task files

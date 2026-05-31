@@ -15,8 +15,10 @@ Basic facts:
 - no chat-only diagrams; and
 - the current canonical chat-only task lives in chat.
 
-If the work is no longer simple enough for chat, promote it to the
-task-file path before continuing executable work.
+If the work is no longer simple enough for chat, or confirmed
+clarification decisions kept only in chat would risk loss through
+compaction or context loss, promote it to the task-file path before
+continuing executable work.
 
 ## 0. Authorized canonical chat updates
 
@@ -69,6 +71,8 @@ This file gives the chat-only actions for those routes.
 For shared route **B. Pause the affected implementation and ask
  targeted User questions**:
 
+- use this route only while confirmed clarification state can safely
+  remain in chat; if not, switch to route **C**; and
 - after a clarification that still fits inside the approved design,
   emit `Task changes:` with only the minimal affected canonical
   sections before continuing.
@@ -77,8 +81,10 @@ For shared route **C. Return to PLAN and seek renewed approval**:
 
 - also use that route when chat-only simplicity no longer holds,
   including when more than one active task is needed, diagrams would
-  materially help, or reliable canonical reconstruction cannot be
-  maintained safely in chat;
+  materially help, reliable canonical reconstruction cannot be
+  maintained safely in chat, or confirmed clarification decisions
+  kept only in chat would risk loss through compaction or context
+  loss;
 - if reconstruction confidence is insufficient, first re-emit a fresh
   full current chat-only task in chat;
 - if the chat-only path must be promoted, reconstruct the task file

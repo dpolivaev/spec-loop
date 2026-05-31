@@ -183,8 +183,29 @@ For non-lettered decisions, include `Alternatives` whenever
 confidence is below 99%. Omit it when confidence is 99% or above.
 Keep `Topic:` and `Reason:` brief and non-redundant.
 
-After the user confirms a presented decision, record it in the task
-file when one exists or is being prepared.
+After the user confirms a presented decision, it becomes confirmed
+state.
+
+Use the task-file path for durable clarification state, because
+confirmed clarification decisions kept only in chat can be lost
+through compaction or context loss.
+
+If clarification starts on the chat-only path, promote it to the
+task-file path before chat-only storage becomes unsafe. After that,
+chat-only is no longer allowed for that task.
+
+However, you may accumulate multiple confirmed clarification results
+before syncing them into the task file.
+
+Do not let the active task file fall materially behind the confirmed
+clarification state. Sync it at a clean checkpoint before confirmed
+state would be hard to reconstruct safely from chat alone, and always
+before clarification returns control to another workflow.
+
+These task-file sync edits are internal state-preservation steps. Do
+not ask the User to review them separately during clarification. If
+unresolved questions remain after a sync, continue clarification from
+the updated task file.
 
 For each clarification question you ask, start with a brief opening
 line and then provide the recommendation in compact form.

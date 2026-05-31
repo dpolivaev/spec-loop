@@ -51,11 +51,16 @@ alone, but no redesign is yet known.
 Pause only the affected implementation area. Explain the exact reason
 for the pause.
 
-After the User clarifies the issue, update the canonical task
-sections. If the clarification still fits inside the approved design,
-the User's chat clarification plus the canonical task update is
-sufficient authority to continue. No separate go-ahead step is
-required.
+Clarification under this route may take more than one
+question-and-answer step. Use the path companion to decide whether
+interim canonical task updates are required to preserve confirmed
+state during that clarification.
+
+When the relevant clarification result is confirmed, update the
+canonical task sections as the path companion requires. If the
+clarification still fits inside the approved design, the User's chat
+clarification plus the canonical task update is sufficient authority
+to continue. No separate go-ahead step is required.
 
 ### C. Return to PLAN and seek renewed approval
 

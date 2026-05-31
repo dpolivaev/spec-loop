@@ -20,6 +20,10 @@ If no approved active task exists, return to
 - If unresolved questions appear and they could materially change
   scope, constraints, design, or test specification, use
   `../spec-loop-clarify-task/SKILL.md` before continuing.
+- Chat-only implementation is allowed only while confirmed task state
+  can safely remain in chat. If confirmed clarification decisions
+  kept only in chat would risk loss through compaction or context
+  loss, promote to the task-file path before continuing.
 - If the User introduces new follow-up work after an approved
   increment, do not continue as if it were the same implementation.
   Return that new work to `../spec-loop-plan-task/SKILL.md` for route

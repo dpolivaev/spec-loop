@@ -90,6 +90,8 @@ Rules:
   clarification questions. Then use
   `../spec-loop-clarify-task/SKILL.md` before drafting or revising
   planning content further.
+- On the task-file path, internal task-file sync edits made during
+  clarification are allowed before clarification is fully finished.
 - Before planning past Research on non-trivial work, run an
   unresolved-questions scan. If material unresolved questions remain
   that are user-preference-sensitive or could materially change scope,
@@ -150,6 +152,11 @@ For executable task planning on either planning path:
 
 ## Planning routes
 
+Chat-only is allowed only while confirmed task state can safely
+remain in chat. If confirmed clarification decisions kept only in
+chat would risk loss through compaction or context loss, use or
+switch to the task-file route before continuing.
+
 Choose among:
 
 - the chat-only task route documented in chat;
@@ -172,6 +179,8 @@ Take the chat-only route when all of the following are true:
 Use the task-file route instead if any of the following hold:
 
 - an active task file already controls the current work item;
+- confirmed clarification state already exists for this work item and
+  keeping it only in chat would be unsafe;
 - subtasks are needed;
 - research or design is complex enough that diagrams would materially
   help clarify the plan;
@@ -206,7 +215,7 @@ When the chat-only planning path is in use:
 
 - read [chat-only-path-guidance.md](./chat-only-path-guidance.md)
   fully;
-- keep the work in chat only; and
+- keep the work in chat only while that remains safe; and
 - follow that file together with
   [common-task-guidance.md](./common-task-guidance.md).
 
@@ -224,6 +233,9 @@ When the task-file path is in use:
   changes;
 - chat stays for coordination and approvals, but the task file is the
   durable planning artifact for that task;
+- during clarification, sync the task file at clean checkpoints to
+  preserve confirmed state; do not ask the User to review those sync
+  edits separately before clarification is finished;
 - before treating task-file planning as complete or asking for
   approval to move from planning into implementation on the
   task-file path, use
