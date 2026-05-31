@@ -57,23 +57,44 @@ current task materials, glossary terms, code, and docs. Do not
 present facts, findings, or implications as standalone items. Use
 them only inside decision reasons.
 
-If existing evidence fully determines the answer, resolve it directly
-as a decision with `Confidence: 100%`.
+If existing evidence fully determines the answer, resolve it directly,
+queue it, and later present it in the decision batch using the
+standard decision format with `(100%)`.
 
 If unresolved user goals, priorities, or risk tolerance could
 materially change the answer, ask the user.
 
 Otherwise estimate confidence in the current best answer:
-- If confidence is above 80%, resolve it directly and queue it for
+- If confidence is above 85%, resolve it directly and queue it for
   batch presentation.
-- If confidence is 80% or below, do not ask by default. Ask only when
+- If confidence is 85% or below, do not ask by default. Ask only when
   the decision is material, hard to reverse, needed to choose the
   next decision path, or a wrong inference would likely cause
   meaningful rework. Otherwise resolve it directly and queue it for
   batch presentation.
 
-If you resolve a decision directly with confidence below 90%, include
-the main alternatives in the decision presentation.
+Use the Question/Options/Recommendation form only when additional
+user input is actually required.
+
+If your confidence is above 85% and no additional user input is
+required, present a Decision in the decision batch instead of using
+the Question/Options/Recommendation form.
+
+If your confidence is above 85% and you still use the
+Question/Options/Recommendation form, first state the specific reason
+additional user input is required. If you cannot name one, present a
+Decision in the decision batch instead.
+
+If you present a Decision in the decision batch with confidence below
+99%, show the main alternatives in compact form.
+
+If the decision corresponds to explicit lettered options, include a
+brief `Options:` list that shows the chosen option and the relevant
+distinctions immediately.
+
+For non-lettered decisions, you may omit `Alternatives` only when
+confidence is 99% or above, or when existing evidence fully determines
+the answer and confidence is 100%.
 
 Treat confidence as an operational estimate used to force a decision,
 not as a calibrated statistical probability.
@@ -87,64 +108,120 @@ hard to reverse or surprising without context, you may suggest
 creating an ADR as part of that question, but do not create one unless
 the user requests it or explicitly approves.
 
-Whenever you resolve one or more decisions directly, add them to a
-queue of newly resolved but not yet presented decisions, preserving
-resolution order. Present only that unpresented queue in batches of at
-most 6. A batch may contain one decision. Present at most one decision
-batch in a single response. After presenting a decision batch, stop
-and wait for the user's response before presenting another batch or
-asking the next question. If more than 6 unpresented decisions remain,
-present only the first batch and keep the rest queued until the user
-responds. Do not emit standalone decision lines outside those batches.
-Do not silently apply directly resolved decisions. Every directly
-resolved decision must be presented to the user in a decision batch
-before it is treated as confirmed state, recorded in the task, used as
-settled context for later branch conclusions, or before clarification
-ends and control returns to the invoking workflow. You may present a
-batch at any time. You must present all newly resolved decisions
-before the next question that offers alternatives or depends on those
-decisions for context, and in all cases before clarification ends and
-control returns to the invoking workflow. Single questions and
-decision batches may be mixed as the depth-first traversal proceeds.
+Add each directly resolved decision to a queue in resolution order.
+
+Do not present the queue immediately. Keep clarifying until one of
+these happens:
+- the queue reaches 6 decisions;
+- the next step would require one question with a Recommendation; or
+- clarification for the current branch is complete.
+
+The queue must never exceed 6 decisions.
+
+When one of those boundaries is reached, present one decision batch:
+- if the queue reached 6, present exactly those 6 decisions;
+- otherwise, present all queued decisions in one shorter batch.
+
+Do not emit standalone decision lines outside decision batches. Do not
+silently apply directly resolved decisions. Every directly resolved
+decision must be presented to the user in a decision batch before it
+is treated as confirmed state, recorded in the task, used as context
+for later branch conclusions, or before clarification ends and control
+returns to the invoking workflow.
+
+Do not ask a question before presenting queued decisions it depends on
+or needs for context.
+
+Do not ask the next clarification question in the same response as a
+decision batch.
+
+After every decision batch, ask the user to confirm, question, or
+disagree with it, then wait for the user's response. That confirmation
+prompt is part of the decision batch, not a separate clarification
+question.
+
 After a batch is presented, do not repeat those decisions before later
-single questions unless the user asks for a recap, reopens a decision,
-or a later decision changes it.
+questions unless the user asks for a recap, reopens a decision, or a
+later decision changes it.
 
-For each decision presented in a batch, use this format:
+For each decision presented in a batch, use a compact form.
 
-Decision: <answer>
-Confidence: <N>%
+Start each decision item with a brief opening line:
+
+Topic: <brief decision topic>
+
+If the decision corresponds to explicit lettered options, use:
+
+Topic: <brief decision topic>
+Decision: <letter> (<N>%)
+Options:
+- A. <brief option summary>
+- B. <brief option summary>
+- C. <brief option summary>
+Reason: <brief reason>
+
+Include the chosen option in `Options`. Keep the `Topic:` line and
+each option summary as short as possible while still showing the real
+distinction. Do not repeat the full chosen option text in the
+Decision line.
+
+Otherwise use:
+
+Topic: <brief decision topic>
+Decision: <single-word answer> (<N>%)
 Alternatives:
-- A. <short alternative>
-- B. <short alternative>
-Reason: <short reason>
+- <brief alternative>
+- <brief alternative>
+Reason: <brief reason>
 
-Include `Alternatives` whenever confidence is below 90%. Omit it when
-confidence is 90% or above.
+The only allowed non-letter Decision or Recommendation answer is a
+single-word answer. If the answer is not naturally a single word,
+define explicit lettered options and use the selected or recommended
+letter instead.
 
-If the decision corresponds to an explicit option, you may include the
-option letter in the Decision line, for example `Decision: B - Reuse
-the current chat`.
+For non-lettered decisions, include `Alternatives` whenever
+confidence is below 99%. Omit it when confidence is 99% or above.
+Keep `Topic:` and `Reason:` brief and non-redundant.
 
-Let the user confirm, question, or disagree with any presented
-decision before you continue deeper into that branch. Record
-confirmed decisions in the task file when one exists or is being
-prepared.
+After the user confirms a presented decision, record it in the task
+file when one exists or is being prepared.
 
-For each question you ask, provide a recommended answer. The
-Recommendation line must be exactly one line and use this format:
+For each clarification question you ask, start with a brief opening
+line and then provide the recommendation in compact form.
 
-Recommendation: <answer> (<N>%) - <short reason>
+Question: <brief question>
+
+If the question asks the user to choose among explicit lettered
+options, use:
+
+Question: <brief question>
+Recommendation: <letter> (<N>%)
+Options:
+- A. <brief option summary>
+- B. <brief option summary>
+- C. <brief option summary>
+Reason: <brief reason>
+
+Include the recommended option in `Options`. Keep the `Question:`
+line and each option summary as short as possible while still showing
+the real distinction. Do not repeat the full recommended option text
+in the Recommendation line.
+
+Otherwise use:
+
+Question: <brief question>
+Recommendation: <single-word answer> (<N>%)
+Reason: <brief reason>
 
 If you ask the user to choose among alternatives, enumerate the
 options in the same turn with letters like A, B, C, D and use the
-option letter as the answer. Do not use an option letter in the
-Recommendation line unless that lettered option is explicitly listed
-in the same turn.
+option letter as the recommendation answer. Do not use an option
+letter in the Recommendation line unless that lettered option is
+explicitly listed in the same turn. Keep `Question:` and `Reason:`
+brief and non-redundant.
 
-For yes/no questions, use `yes` or `no` as the answer text unless you
-explicitly enumerate them as options. For other questions, use the
-shortest precise answer text.
+For yes/no questions, use `yes` or `no` unless you explicitly
+enumerate them as options.
 
 If the user's answer does not cleanly select one presented option,
 restate your understanding and require explicit user confirmation
@@ -153,13 +230,31 @@ before moving to the next question.
 When the user cleanly selects or confirms a presented option,
 acknowledge it briefly in the same turn with a minimal confirmation
 such as `B recorded`, `yes recorded`, or `no recorded`. Then treat
-that choice as internal state. Do not restate the substance of the
-choice in later turns unless the user asks for a recap, reopens the
-choice, or one brief reminder is strictly necessary to keep the
-current question clear and easy to answer.
+that choice as internal state.
 
-At each step, either present a decision batch or ask one question.
-Ask one question at a time whenever direct user input is required.
+An explicit prior user choice or a previously confirmed decision is
+already confirmed state for the same unchanged decision. Reuse it
+silently. Do not present it again as a new decision batch item unless
+the User reopened it or you are not sure it still applies.
+
+If the User asks for a recap, restate it as a recap, not as a new
+decision batch item.
+
+If the current decision is inferred from prior confirmed choices but
+was not itself explicitly chosen, state that inference in `Reason`. Do
+not say the User chose it unless the User actually chose it.
+
+If you are not sure whether a prior user choice or previously
+confirmed decision still applies, state what is uncertain instead of
+treating it as already settled.
+
+Do not restate the substance of a confirmed choice in later turns
+unless the User asked for a recap, reopened it, or one brief reminder
+is strictly necessary to keep the current question clear and easy to
+answer.
+
+At each step, either present one decision batch or ask one question
+with its Recommendation.
 
 ## Clarification exit check
 
