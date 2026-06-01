@@ -47,12 +47,13 @@ that can materially change scope, behavior, policy, conceptual
 model, conceptual contract boundaries, acceptance logic, or route.
 
 If a distinction would change whether two concepts are the same
-thing, different surfaces, or governed by different rules, treat it
+thing, different concepts, or governed by different rules, treat it
 as a material boundary decision and clarify it.
 
 Do not use clarification for exact names, wording, labels, field
-names, enum names, or other cheap-to-change design text. Put that in
-Design and let the User review it there.
+names, enum names, or other cheap-to-change design text when the
+boundary is already settled. Put that in Design and let the User
+review it there.
 
 Stop clarification when the remaining unresolved points would mainly
 change the shape of the design draft rather than those boundaries.
