@@ -87,7 +87,9 @@ Canonical ownership by information kind:
 - unresolved questions and remaining gaps -> explicit gap lists.
 
 Draft scaffolding may exist temporarily, but the approval-prepared task
-should remove or shrink duplicated content.
+should remove or shrink duplicated content. Before approval seeking,
+use `../spec-loop-compact-task-file/SKILL.md`. Then resume this
+skill.
 
 The Design section prepared for approval must contain no placeholders
 of any kind. Do not leave role stand-ins, candidate names, temporary

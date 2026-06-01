@@ -35,6 +35,9 @@ If readiness checks find issues that can be resolved from existing
 evidence, update the active task in place and re-run the readiness
 checks before producing user-facing output.
 
+If readiness checks show that task-file compaction is needed, use
+`../spec-loop-compact-task-file/SKILL.md` and then resume this skill.
+
 If any material unresolved question remains and it is
 user-preference-sensitive, needed to choose the next decision path, or
 could materially change scope, constraints, design, or test

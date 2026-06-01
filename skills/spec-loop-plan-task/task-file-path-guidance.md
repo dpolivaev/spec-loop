@@ -186,8 +186,8 @@ When a task uses subtasks:
 - If a task without subtasks gains its first separate functional
   increment, convert it to subtask form by default.
 - During that conversion, keep only shared context at task level and
-  move increment-specific Research, Design, and Test specification
-  into the relevant subtasks.
+  move subtask-specific Research, Design, and Test specification into
+  the relevant subtask.
 - If the original no-subtask task already describes a concrete
   functional increment, promote that increment into its own subtask.
 - Do not create a synthetic "original task" subtask when the former
@@ -229,6 +229,14 @@ When a task uses subtasks:
 - Repeat diagrams, types, payloads, or prose only when it adds local
   reasoning value or shows genuinely different
   behavior, ownership, or contract.
+
+### Task Compaction
+
+Use `../spec-loop-compact-task-file/SKILL.md` when:
+- converting a task from no-subtask form to subtask form;
+- adding a new subtask after earlier subtasks already contain full
+  section content; or
+- the active task file has become too large to use safely.
 
 ## Diagrams
 
