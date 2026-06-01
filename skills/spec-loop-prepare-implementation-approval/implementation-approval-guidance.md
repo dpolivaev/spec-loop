@@ -68,6 +68,12 @@ preparation, the task is not review ready. Keep it in PLAN, invoke
 the exact questions needed to remove the uncertainty through that
 workflow.
 
+Approval preparation and any clarification it invokes both stay in
+PLAN. They do not freeze the active task.
+
+Before seeking implementation approval, repair and revise the active
+task in place as needed for the current work item.
+
 ## 3. Review-preparation transformation rules
 
 Make the design section reviewer-friendly without losing planning

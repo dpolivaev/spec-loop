@@ -36,6 +36,16 @@ invoked this skill:
 - implementation-time clarification resumes
   `../spec-loop-implementation-flow/SKILL.md`.
 
+When this skill is invoked from planning or approval preparation, it
+still runs in PLAN. It does not freeze the active task.
+
+During PLAN, revise the active task in place as needed for the
+current work item. Planning-artifact changes are allowed. Executable
+changes are not.
+
+When this skill is invoked from implementation, phase handling
+remains governed by `../spec-loop-implementation-flow/SKILL.md`.
+
 Select the next unresolved branch by descending importance and uncertainty. Once a branch is selected, traverse it depth first, resolving dependencies one-by-one. Start with a brief, provisional overview of the most important currently visible unresolved branches and which branch you will address first. This overview is a map, not a commitment to an exact final question list.
 
 Treat unresolved branches as including both behavior-level
