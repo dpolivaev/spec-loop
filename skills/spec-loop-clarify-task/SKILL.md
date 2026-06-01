@@ -85,50 +85,23 @@ present facts, findings, or implications as standalone items. Use
 them only inside decision reasons.
 
 If existing evidence fully determines the answer, resolve it directly,
-queue it, and later present it in the decision batch using the
-standard decision format with `(100%)`.
+queue it, and later present it in the decision batch with `(100%)`.
 
-If unresolved user goals, priorities, or risk tolerance could
-materially change the answer, ask the user.
+Otherwise, resolve the decision directly and queue it for batch
+presentation unless at least one of these is true:
+- confidence is below 80%;
+- the decision would be hard to revert once implemented; or
+- the downstream decisions or implementation it would unlock would be
+  hard to revert once implemented.
 
-Otherwise estimate confidence in the current best answer:
-- If confidence is above 85%, resolve it directly and queue it for
-  batch presentation.
-- If confidence is 85% or below, do not ask by default. Ask only when
-  the decision is material, hard to reverse, needed to choose the
-  next decision path, or a wrong inference would likely cause
-  meaningful rework. Otherwise resolve it directly and queue it for
-  batch presentation.
-
-Use the Question/Options/Recommendation form only when additional
-user input is actually required.
-
-If your confidence is above 85% and no additional user input is
-required, present a Decision in the decision batch instead of using
-the Question/Options/Recommendation form.
-
-If your confidence is above 85% and you still use the
-Question/Options/Recommendation form, first state the specific reason
-additional user input is required. If you cannot name one, present a
-Decision in the decision batch instead.
-
-If you present a Decision in the decision batch with confidence below
-99%, show the main alternatives in compact form.
-
-If the decision corresponds to explicit lettered options, include a
-brief `Options:` list that shows the chosen option and the relevant
-distinctions immediately.
-
-For non-lettered decisions, you may omit `Alternatives` only when
-confidence is 99% or above, or when existing evidence fully determines
-the answer and confidence is 100%.
+Use the Question/Options/Recommendation form only when user input is
+still required under those conditions.
 
 Treat confidence as an operational estimate used to force a decision,
 not as a calibrated statistical probability.
 
 Prefer direct resolution for workflow, routing, and editorial
-decisions unless user goals, priorities, or risk tolerance could
-materially change the answer.
+decisions.
 
 When you ask about a high-impact, non-trivial trade-off that would be
 hard to reverse or surprising without context, you may suggest
@@ -171,44 +144,15 @@ After a batch is presented, do not repeat those decisions before later
 questions unless the user asks for a recap, reopens a decision, or a
 later decision changes it.
 
-For each decision presented in a batch, use a compact form.
+For each decision presented in a batch, use this form:
 
-Start each decision item with a brief opening line:
-
-Topic: <brief decision topic>
-
-If the decision corresponds to explicit lettered options, use:
-
-Topic: <brief decision topic>
-Decision: <letter> (<N>%)
-Options:
-- A. <brief option summary>
-- B. <brief option summary>
-- C. <brief option summary>
+Decision: <brief answer> (<N>%)
 Reason: <brief reason>
 
-Include the chosen option in `Options`. Keep the `Topic:` line and
-each option summary as short as possible while still showing the real
-distinction. Do not repeat the full chosen option text in the
-Decision line.
-
-Otherwise use:
-
-Topic: <brief decision topic>
-Decision: <single-word answer> (<N>%)
-Alternatives:
-- <brief alternative>
-- <brief alternative>
-Reason: <brief reason>
-
-The only allowed non-letter Decision or Recommendation answer is a
-single-word answer. If the answer is not naturally a single word,
-define explicit lettered options and use the selected or recommended
-letter instead.
-
-For non-lettered decisions, include `Alternatives` whenever
-confidence is below 99%. Omit it when confidence is 99% or above.
-Keep `Topic:` and `Reason:` brief and non-redundant.
+Keep `Decision:` and `Reason:` brief and non-redundant. The
+`Decision:` line must contain the actual answer text. Do not use a
+separate `Topic:` line, option letters, `Options:`, or
+`Alternatives:` in direct decisions.
 
 After the user confirms a presented decision, it becomes confirmed
 state.
@@ -234,6 +178,9 @@ not ask the User to review them separately during clarification. If
 unresolved questions remain after a sync, continue clarification from
 the updated task file.
 
+Record confirmed clarification results in the task sections they
+change.
+
 For each clarification question you ask, start with a brief opening
 line and then provide the recommendation in compact form.
 
@@ -258,15 +205,16 @@ in the Recommendation line.
 Otherwise use:
 
 Question: <brief question>
-Recommendation: <single-word answer> (<N>%)
+Recommendation: <answer> (<N>%)
 Reason: <brief reason>
 
 If you ask the user to choose among alternatives, enumerate the
 options in the same turn with letters like A, B, C, D and use the
 option letter as the recommendation answer. Do not use an option
 letter in the Recommendation line unless that lettered option is
-explicitly listed in the same turn. Keep `Question:` and `Reason:`
-brief and non-redundant.
+explicitly listed in the same turn. For non-lettered
+Recommendations, use the shortest precise answer. Keep `Question:`
+and `Reason:` brief and non-redundant.
 
 For yes/no questions, use `yes` or `no` unless you explicitly
 enumerate them as options.
