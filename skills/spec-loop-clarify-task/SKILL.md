@@ -1,12 +1,23 @@
 ---
 name: spec-loop-clarify-task
-description: Clarify a proposed task, plan, or design update by interrogating the highest-value unresolved decisions until the inputs are ready for task creation, task planning, or task/design updates. Use this as the default clarification path for Spec Loop task creation, task updates, and any planning, approval, or implementation step that encounters material unresolved questions that are user-preference-sensitive or could materially change scope, constraints, design, or test specification. When clarification ends, resume the invoking workflow. It may also be used for general grilling when explicitly selected or when no other default grilling skill is available.
+description: >-
+  Clarify a proposed task, plan, or design update by resolving the
+  highest-value unresolved decisions until the inputs are ready for
+  task creation, task planning, task/design updates, or safe
+  implementation continuation. Use this as the default clarification
+  path for Spec Loop task creation, task updates, and any planning,
+  approval, or implementation step that encounters material unresolved
+  questions. When clarification ends, resume the invoking workflow. It
+  may also be used for general grilling when explicitly selected or
+  when no other default grilling skill is available.
 ---
 
 Use this skill when a new task, task update, or design update is
-underspecified, when materially different code design solutions
-remain open, or when the user wants to stress-test a plan or be
-grilled on a design.
+underspecified, when material boundary decisions remain open, when
+planning or implementation cannot continue safely because the
+relevant task context is still unclear after rereading the needed
+task sections and diagrams, or when the user wants to stress-test a
+plan or be grilled on a design.
 
 For Spec Loop task creation and task updates, this is the default
 clarification path whenever material unresolved questions remain.

@@ -12,6 +12,11 @@ It defines only the task-file implementation-time delta.
 Task-file lifecycle, subtask, and folder ownership remain in the
 Task-file Path Guidance.
 
+Do not treat the active subtask as self-sufficient. Before
+implementation or implementation-time clarification from a subtask,
+read the relevant task-level sections and diagrams needed to
+understand it correctly.
+
 ## 0. Authorized task-file updates
 
 On the task-file path during implementation flow, the active task file

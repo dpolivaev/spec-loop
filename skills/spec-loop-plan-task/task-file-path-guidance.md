@@ -203,6 +203,9 @@ When a task uses subtasks:
   and conditional Implementation notes,
 - must represent a functional increment; for implementation tasks must
   include executable work,
+- is not assumed to be self-sufficient; before working from a
+  subtask, read the relevant task-level sections and diagrams needed
+  to understand it correctly;
 - must satisfy **Testing Policy**.
 - No planning-only subtasks unless User explicitly asks.
 

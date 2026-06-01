@@ -172,6 +172,9 @@ loop.
 
 - Re-read relevant task sections before implementation or when
   requirements are unclear.
+- When a task uses subtasks, re-read the relevant main-task sections
+  and diagrams before working from the active subtask. Do not assume
+  the subtask repeats all required context.
 - Active task artifact = working source of truth for the current
   item.
 - Older task files or superseded chat-only task states = historical
