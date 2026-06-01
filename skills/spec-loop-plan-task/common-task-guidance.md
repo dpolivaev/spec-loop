@@ -41,10 +41,12 @@ and compliant with `AGENTS.md` and applicable glossary rules.
 
 At any point while drafting or revising Research, Scenario, Design, or
 Test specification, if the LLM has essential doubts about scope,
-behavior, domain language, constraints, structural boundaries,
-naming, migration, or verification expectations, it must ask targeted
-User questions instead of guessing. Reduce uncertainty early; do not
-carry material ambiguity forward.
+behavior, policy, conceptual model, conceptual contract boundaries,
+constraints, migration, acceptance logic, or verification
+expectations, it must return to clarification instead of guessing.
+
+If drafting or reviewing Design exposes a new material boundary
+decision, return to clarification before continuing.
 
 If asking the User to review a draft instead, say so explicitly and
 list the known gaps, open questions, and unresolved decisions.

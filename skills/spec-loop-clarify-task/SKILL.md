@@ -28,19 +28,35 @@ invoked this skill:
 Select the next unresolved branch by descending importance and uncertainty. Once a branch is selected, traverse it depth first, resolving dependencies one-by-one. Start with a brief, provisional overview of the most important currently visible unresolved branches and which branch you will address first. This overview is a map, not a commitment to an exact final question list.
 
 Treat unresolved branches as including both behavior-level
-alternatives and materially different code design solutions. When
-relevant, explore not only logical alternatives but also
-alternative code design solutions such as module boundaries,
-interfaces, state ownership, data flow, extension points, and
-testable implementation shapes.
+alternatives and material boundary distinctions that the design is
+not allowed to guess.
+
+During clarification, ask only questions and present only decisions
+that can materially change scope, behavior, policy, conceptual
+model, conceptual contract boundaries, acceptance logic, or route.
+
+If a distinction would change whether two concepts are the same
+thing, different surfaces, or governed by different rules, treat it
+as a material boundary decision and clarify it.
+
+Do not use clarification for exact names, wording, labels, field
+names, enum names, or other cheap-to-change design text. Put that in
+Design and let the User review it there.
+
+Stop clarification when the remaining unresolved points would mainly
+change the shape of the design draft rather than those boundaries.
+
+If drafting or reviewing Design exposes a new material boundary
+decision, return to clarification before continuing.
 
 Treat existing glossary language, task materials, and code as
 first-class evidence during clarification:
 - If the user's wording conflicts with existing glossary or task
-  language, call it out immediately and force the term choice to be
-  resolved.
-- Stress-test both behavior-level and code-design alternatives with
-  concrete scenarios, edge cases, and boundary cases.
+  language in a way that could change the conceptual model or rules,
+  call it out immediately and resolve the distinction.
+- Stress-test behavior-level alternatives and material boundary
+  distinctions with concrete scenarios, edge cases, and boundary
+  cases.
 - When the user states current behavior, boundaries, or design
   constraints, compare that claim with the codebase and existing
   task materials when possible. Surface contradictions explicitly

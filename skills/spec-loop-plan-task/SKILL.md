@@ -95,9 +95,10 @@ Rules:
 - Before planning past Research on non-trivial work, run an
   unresolved-questions scan. If material unresolved questions remain
   that are user-preference-sensitive or could materially change scope,
-  constraints, design, or test specification, stop planning, use
-  `../spec-loop-clarify-task/SKILL.md`, and resume planning only after
-  the clarification result is incorporated.
+  behavior, policy, conceptual model, conceptual contract boundaries,
+  constraints, acceptance logic, route, or test specification, stop
+  planning, use `../spec-loop-clarify-task/SKILL.md`, and resume
+  planning only after the clarification result is incorporated.
 - Phases are exclusive unless the User allows combined planning and
   implementation.
 
