@@ -1,10 +1,14 @@
 # Summary
 
-[Overview](index.md)
-[Review, Responsibility, and Traceability](docs/review-responsibility-and-traceability.md)
+[Getting Started](index.md)
+[How Spec Loop Works](docs/how-spec-loop-works.md)
+[Governance, Review, and Traceability](docs/review-responsibility-and-traceability.md)
 [AI Workflow Framework Comparison](docs/skill-framework-comparison.md)
+[Skills Overview](docs/skills-overview.md)
+[Diagram and Rendering Policy](docs/diagram-and-rendering-policy.md)
 
 # Tutorials
 
-- [Wordle Tutorial](docs/wordle-tutorial.md)
 - [Online Art Game Tutorial](docs/online-art-game-tutorial.md)
+- [Wordle Tutorial](docs/wordle-tutorial.md)
+

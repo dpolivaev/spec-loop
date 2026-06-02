@@ -1,6 +1,6 @@
-# Spec Loop — Task Files, Review, Responsibility, and Traceability
+# Governance, Review, and Traceability
 
-This document captures what Spec Loop implies in team environments.
+This document defines the governance, review, and traceability rules around Spec Loop work.
 
 ## What the workflow rules, common task guidance, and task-file path guidance enforce
 
