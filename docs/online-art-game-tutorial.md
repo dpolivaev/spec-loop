@@ -71,7 +71,7 @@ My coding tool may run in a terminal, but I review files in
 
 ### You see
 
-- uses the `spec-loop-setup-doc-rendering` skill,
+- uses the [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) skill,
 - reads the setup document for your editor,
 - guides you through the rendering setup needed for task and glossary
   review.
@@ -134,7 +134,7 @@ npx skills add dpolivaev/spec-loop -s '*'
    For other installation variants, check
    https://github.com/vercel-labs/skills.
 5. If `npx` is not available or does not help, copy the needed part of
-   the `skills/` directory from
+   the [skills/](../skills/) directory from
    `https://github.com/dpolivaev/spec-loop` into the tool-specific
    skills directory.
 6. If the tool still does not automatically apply the expected

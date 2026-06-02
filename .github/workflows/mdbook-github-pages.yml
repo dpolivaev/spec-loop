@@ -1,0 +1,51 @@
+name: mdbook-github-pages
+
+env:
+  mdbook_version: v0.4.35
+  mdbook_toc_version: 0.14.1
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  pages: write
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+    concurrency: pages-${{ github.ref }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Install mdBook tooling 🔧
+        run: |
+          mkdir -p build/tools
+          cd build/tools
+          curl -fsSLO https://github.com/rust-lang/mdBook/releases/download/$mdbook_version/mdbook-$mdbook_version-x86_64-unknown-linux-gnu.tar.gz
+          tar xf mdbook-$mdbook_version-x86_64-unknown-linux-gnu.tar.gz
+          curl -fsSLO https://github.com/badboy/mdbook-toc/releases/download/$mdbook_toc_version/mdbook-toc-$mdbook_toc_version-x86_64-unknown-linux-gnu.tar.gz
+          tar xf mdbook-toc-$mdbook_toc_version-x86_64-unknown-linux-gnu.tar.gz
+
+      - name: Build site 📘
+        env:
+          GITHUB_REPO_URL: https://github.com/${{ github.repository }}
+          SITE_GIT_REF: ${{ github.ref_name }}
+        run: |
+          PATH="$PWD/build/tools:$PATH" bash site/build-mdbook-site.sh "$PWD/build/gh-pages"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/gh-pages
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

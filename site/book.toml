@@ -1,0 +1,18 @@
+[book]
+title = "Spec Loop — Design-First AI-Assisted Development"
+authors = ["dpolivaev"]
+language = "en"
+multilingual = false
+src = "src"
+
+[output.html]
+git-repository-url = "https://github.com/dpolivaev/spec-loop"
+git-repository-icon = "fa-github"
+
+[output.html.fold]
+enable = true
+
+[preprocessor.toc]
+command = "mdbook-toc"
+renderer = ["html"]
+max-level = 4

@@ -149,9 +149,11 @@ materials, not measurements or benchmark results.
 This comparison is based on the following materials.
 
 - **Spec Loop:** current repository skills and docs, especially
-  `skills/spec-loop-plan-task/`, `skills/spec-loop-clarify-task/`,
-  `skills/spec-loop-implementation-flow/`,
-  `docs/review-responsibility-and-traceability.md`, and `README.md`.
+  [skills/spec-loop-plan-task/](../skills/spec-loop-plan-task/),
+  [skills/spec-loop-clarify-task/](../skills/spec-loop-clarify-task/),
+  [skills/spec-loop-implementation-flow/](../skills/spec-loop-implementation-flow/),
+  [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md),
+  and [README.md](../README.md).
 - **grill-with-docs:** `SKILL.md`, `CONTEXT-FORMAT.md`, and
   `ADR-FORMAT.md`.
 - **OpenSpec:** `README.md`, `docs/concepts.md`, and

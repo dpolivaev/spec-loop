@@ -22,24 +22,24 @@ with tests. Keep the spec local to the next step. Repeat until done.
 Spec Loop is a framework of reusable skills.
 
 Spec Loop follows this workflow:
-- **clarify** - `spec-loop-clarify-task` resolves material unresolved
+- **clarify** - [spec-loop-clarify-task](skills/spec-loop-clarify-task/) resolves material unresolved
   questions before or during planning.
-- **plan** - the `spec-loop-plan-task` bundle governs plan-first
+- **plan** - the [spec-loop-plan-task](skills/spec-loop-plan-task/) bundle governs plan-first
   work, including the fileless planning path in chat, the task-file
   path when needed, ADR and documentation routing, glossary
   triggers, and the gate before implementation.
 - **approve** - you approve either a fileless task in chat or a
   task-file plan; on the task-file path,
-  `spec-loop-prepare-implementation-approval` prepares the task for
+  [spec-loop-prepare-implementation-approval](skills/spec-loop-prepare-implementation-approval/) prepares the task for
   that approval step.
 - **implement** - after implementation approval on either planning
-  path, `spec-loop-implementation-flow` governs
+  path, [spec-loop-implementation-flow](skills/spec-loop-implementation-flow/) governs
   implementation-time work.
-- **review/ready** - `spec-loop-implementation-flow` also governs
+- **review/ready** - [spec-loop-implementation-flow](skills/spec-loop-implementation-flow/) also governs
   the move to `review` on the task-file path and readiness
   reporting on the fileless path.
 
-The planning and approval rules for that workflow live in the `spec-loop-plan-task` bundle and its companion files.
+The planning and approval rules for that workflow live in the [spec-loop-plan-task](skills/spec-loop-plan-task/) bundle and its companion files.
 
 The planning bundle starts with
 **[SKILL.md](skills/spec-loop-plan-task/SKILL.md)** and
@@ -49,14 +49,14 @@ on the fileless path and
 **[task-file-path-guidance.md](skills/spec-loop-plan-task/task-file-path-guidance.md)**
 on the task-file path.
 
-The `spec-loop-write-glossary` skill defines the Spec Loop AsciiDoc glossary
+The [spec-loop-write-glossary](skills/spec-loop-write-glossary/) skill defines the Spec Loop AsciiDoc glossary
 format in
 **[glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md)**.
 
-The `spec-loop-setup-doc-rendering` skill helps users prepare and
+The [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) skill helps users prepare and
 troubleshoot rendering for task files and glossary files.
 
-The `spec-loop-assess-pull-request` skill is optional. It reconstructs
+The [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) skill is optional. It reconstructs
 retrospective review files from trusted pull requests, merge requests,
 or commit ranges and can generate GitHub-friendly Mermaid variants
 from them when needed.
@@ -64,7 +64,7 @@ from them when needed.
 The model uses these skills while drafting and updating plans, task,
 or review artifacts; you review and approve either a fileless chat
 task or a task-file plan before implementation. Approved
-implementation then continues under `spec-loop-implementation-flow`.
+implementation then continues under [spec-loop-implementation-flow](skills/spec-loop-implementation-flow/).
 On task-file work, it governs implementation-time routing,
 `Implementation notes`, and the move to `review`. On the fileless
 path, it governs canonical chat-task maintenance, recovery re-emission
@@ -153,24 +153,24 @@ Apply the process to your repository.
 Recommended path:
 
 Install the core task-workflow skills together.
-`spec-loop-plan-task`, `spec-loop-clarify-task`,
-`spec-loop-prepare-implementation-approval`,
-`spec-loop-implementation-flow`, `spec-loop-write-glossary`, and
-`spec-loop-setup-doc-rendering` hand off to each other, reuse the
-shared `spec-loop-plan-task` bundle, and support the same planning
+[spec-loop-plan-task](skills/spec-loop-plan-task/), [spec-loop-clarify-task](skills/spec-loop-clarify-task/),
+[spec-loop-prepare-implementation-approval](skills/spec-loop-prepare-implementation-approval/),
+[spec-loop-implementation-flow](skills/spec-loop-implementation-flow/), [spec-loop-write-glossary](skills/spec-loop-write-glossary/), and
+[spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) hand off to each other, reuse the
+shared [spec-loop-plan-task](skills/spec-loop-plan-task/) bundle, and support the same planning
 artifacts.
 
-`spec-loop-assess-pull-request` is optional. Install it only if you
+[spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) is optional. Install it only if you
 need retrospective review of pull requests, merge requests, or commit
 ranges from repositories you trust. It fetches provider or Git content
 as review evidence and is not required for the main planning workflow.
 
 1. Ensure Node.js is available so `npx` works.
-2. If you do not need `spec-loop-assess-pull-request`, use a selective
+2. If you do not need [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/), use a selective
    installation variant from the skills tool documentation and install
    only the six core task-workflow skills listed above.
 3. If you want the full bundle, including optional
-   `spec-loop-assess-pull-request`, install all Spec Loop skills
+   [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/), install all Spec Loop skills
    interactively for the current project:
 
 ```bash
@@ -184,7 +184,7 @@ npx skills add dpolivaev/spec-loop -s '*'
 npx skills add dpolivaev/spec-loop -g --all
 ```
 
-Those full-bundle commands install `spec-loop-assess-pull-request`
+Those full-bundle commands install [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/)
 too. If you do not need it, use a selective installation variant
 instead.
 
@@ -198,7 +198,7 @@ Spec Loop task files use embedded PlantUML diagrams, and Spec Loop
 glossaries may include embedded diagrams. Prepare your editor for
 reviewing rendered task files and glossary files before continuing.
 
-Ask the agent to use the `spec-loop-setup-doc-rendering` skill to
+Ask the agent to use the [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) skill to
 prepare your editor preview setup.
 
 For example:
@@ -261,10 +261,10 @@ npx skills update -g
 ### Manual fallback when `npx` is unavailable
 
 If `npx` is not available, clone or download this repository and copy
-the core task-workflow skills from `skills/` into your agent's skills
+the core task-workflow skills from [skills/](skills/) into your agent's skills
 directory. Keep that core bundle together.
 
-Install `spec-loop-assess-pull-request` only if you need retrospective
+Install [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) only if you need retrospective
 review of trusted repositories.
 
 Which directory your agent uses is agent-specific. See
@@ -274,10 +274,10 @@ https://github.com/vercel-labs/skills for agent-specific installation details.
 
 This repository currently ships these skills.
 The first six form the core task-workflow bundle and should be
-installed together. `spec-loop-assess-pull-request` is optional and
+installed together. [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) is optional and
 intended only for retrospective review of trusted repositories:
 
-1. **`spec-loop-plan-task`**
+1. **[spec-loop-plan-task](skills/spec-loop-plan-task/)**
    - the planning and task-administration skill for non-trivial work;
    - defined by
      [skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md),
@@ -287,21 +287,21 @@ intended only for retrospective review of trusted repositories:
      [skills/spec-loop-plan-task/task-file-path-guidance.md](skills/spec-loop-plan-task/task-file-path-guidance.md)
      on the task-file path.
 
-2. **`spec-loop-clarify-task`**
+2. **[spec-loop-clarify-task](skills/spec-loop-clarify-task/)**
    - the clarification skill for underspecified task creation, task
      updates, and design updates; preferred over generic grill-me
      variants in Spec Loop workflows;
    - defined by
      [skills/spec-loop-clarify-task/SKILL.md](skills/spec-loop-clarify-task/SKILL.md).
 
-3. **`spec-loop-prepare-implementation-approval`**
+3. **[spec-loop-prepare-implementation-approval](skills/spec-loop-prepare-implementation-approval/)**
    - the approval-preparation skill used only on the task-file path
      before the agent asks for implementation approval within the
-     `spec-loop-plan-task` workflow;
+     [spec-loop-plan-task](skills/spec-loop-plan-task/) workflow;
    - defined by
      [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md).
 
-4. **`spec-loop-implementation-flow`**
+4. **[spec-loop-implementation-flow](skills/spec-loop-implementation-flow/)**
    - the mandatory implementation-flow skill used after
      implementation approval on either planning path when
      implementation deviates from the approved task, when uncertainty
@@ -314,16 +314,16 @@ intended only for retrospective review of trusted repositories:
      and
      [skills/spec-loop-implementation-flow/task-file-path-guidance.md](skills/spec-loop-implementation-flow/task-file-path-guidance.md).
 
-5. **`spec-loop-write-glossary`**
+5. **[spec-loop-write-glossary](skills/spec-loop-write-glossary/)**
    - the Spec Loop AsciiDoc glossary-format skill;
    - defined by
      [skills/spec-loop-write-glossary/glossary-format.md](skills/spec-loop-write-glossary/glossary-format.md).
 
-6. **`spec-loop-setup-doc-rendering`**
+6. **[spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/)**
    - the setup and troubleshooting skill for rendering task files and
      glossary files.
 
-7. **`spec-loop-assess-pull-request`**
+7. **[spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/)**
    - the optional retrospective review skill for existing pull requests,
      branch diffs, or commit ranges from trusted repositories;
    - defined by
@@ -411,20 +411,20 @@ intended only for retrospective review of trusted repositories:
      embedded example.
 
 Recommended quick-check order:
-- `README.md`
-- `skills/spec-loop-plan-task/SKILL.md`
-- `skills/spec-loop-clarify-task/SKILL.md`
-- `skills/spec-loop-plan-task/common-task-guidance.md`
-- `skills/spec-loop-plan-task/fileless-path-guidance.md`
-- `skills/spec-loop-plan-task/task-file-path-guidance.md`
-- `skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md`
-- `skills/spec-loop-implementation-flow/implementation-flow-guidance.md`
-- `skills/spec-loop-implementation-flow/fileless-path-guidance.md`
-- `skills/spec-loop-implementation-flow/task-file-path-guidance.md`
-- `docs/review-responsibility-and-traceability.md`
-- `docs/skill-framework-comparison.md`
-- `docs/online-art-game-tutorial.md`
-- `docs/wordle-tutorial.md`
+- [README.md](README.md)
+- [skills/spec-loop-plan-task/SKILL.md](skills/spec-loop-plan-task/SKILL.md)
+- [skills/spec-loop-clarify-task/SKILL.md](skills/spec-loop-clarify-task/SKILL.md)
+- [skills/spec-loop-plan-task/common-task-guidance.md](skills/spec-loop-plan-task/common-task-guidance.md)
+- [skills/spec-loop-plan-task/fileless-path-guidance.md](skills/spec-loop-plan-task/fileless-path-guidance.md)
+- [skills/spec-loop-plan-task/task-file-path-guidance.md](skills/spec-loop-plan-task/task-file-path-guidance.md)
+- [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md)
+- [skills/spec-loop-implementation-flow/implementation-flow-guidance.md](skills/spec-loop-implementation-flow/implementation-flow-guidance.md)
+- [skills/spec-loop-implementation-flow/fileless-path-guidance.md](skills/spec-loop-implementation-flow/fileless-path-guidance.md)
+- [skills/spec-loop-implementation-flow/task-file-path-guidance.md](skills/spec-loop-implementation-flow/task-file-path-guidance.md)
+- [docs/review-responsibility-and-traceability.md](docs/review-responsibility-and-traceability.md)
+- [docs/skill-framework-comparison.md](docs/skill-framework-comparison.md)
+- [docs/online-art-game-tutorial.md](docs/online-art-game-tutorial.md)
+- [docs/wordle-tutorial.md](docs/wordle-tutorial.md)
 
 ## Diagrams: PlantUML Default, Mermaid Fallback
 
@@ -449,7 +449,7 @@ render PlantUML embedded in Markdown natively, so reading there can
 degrade the intended experience.
 
 For local preview setup, use the
-`spec-loop-setup-doc-rendering` skill.
+[spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) skill.
 
 ## License
 
