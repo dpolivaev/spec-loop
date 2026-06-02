@@ -52,9 +52,12 @@ Treat unresolved branches as including both behavior-level
 alternatives and material boundary distinctions that the design is
 not allowed to guess.
 
-During clarification, ask only questions and present only decisions
-that can materially change scope, behavior, policy, conceptual
-model, conceptual contract boundaries, acceptance logic, or route.
+During clarification, ask only when different answers would
+materially change scope, behavior, policy, conceptual model,
+conceptual contract boundaries, acceptance logic, route, Design, or
+Test specification, and the answer is not already determined by
+confirmed user choices, existing evidence, or a low-risk mechanical
+consequence of those choices.
 
 If a distinction would change whether two concepts are the same
 thing, different concepts, or governed by different rules, treat it
@@ -87,15 +90,16 @@ first-class evidence during clarification:
 If clarification resolves or changes shared domain terms, record that glossary follow-up is required through the normal Spec Loop glossary path. Put the note in the active task when one exists or is being prepared.
 
 For each unresolved decision in the active branch, clarification
-proceeds by deciding what can be decided and asking only what must be
-asked.
+proceeds by resolving directly what is already determined and asking
+only what still requires user input.
 
 First use existing evidence such as prior confirmed user decisions,
 current task materials, glossary terms, code, and docs. Do not
 present facts, findings, or implications as standalone items. Use
 them only inside decision reasons.
 
-If existing evidence fully determines the answer, resolve it directly,
+If confirmed user choices, existing evidence, or a direct consequence
+of those choices fully determine the answer, resolve it directly,
 queue it, and later present it in the decision batch with `(100%)`.
 
 Otherwise, resolve the decision directly and queue it for batch
@@ -111,8 +115,9 @@ still required under those conditions.
 Treat confidence as an operational estimate used to force a decision,
 not as a calibrated statistical probability.
 
-Prefer direct resolution for workflow, routing, and editorial
-decisions.
+Prefer direct resolution for workflow, routing, editorial, and other
+questions already determined by confirmed choices or existing
+evidence.
 
 When you ask about a high-impact, non-trivial trade-off that would be
 hard to reverse or surprising without context, you may suggest
@@ -255,10 +260,10 @@ If you are not sure whether a prior user choice or previously
 confirmed decision still applies, state what is uncertain instead of
 treating it as already settled.
 
-Do not restate the substance of a confirmed choice in later turns
-unless the User asked for a recap, reopened it, or one brief reminder
-is strictly necessary to keep the current question clear and easy to
-answer.
+Do not restate the substance of a confirmed choice or ask again about
+its direct consequences in later turns unless the User asked for a
+recap, reopened it, or one brief reminder is strictly necessary to
+keep the current question clear and easy to answer.
 
 At each step, either present one decision batch or ask one question
 with its Recommendation.

@@ -30,9 +30,6 @@ says the rules changed.
 - If the User explicitly asks for a route, planning procedure, or
   sectioned task format, do not simplify it unless the User
   explicitly agrees.
-- For task creation or task updates, use
-  `../spec-loop-clarify-task/SKILL.md` when material unresolved
-  questions remain.
 - After implementation approval, follow
   `../spec-loop-implementation-flow/SKILL.md`.
 - These rules are mandatory. Only the User may override them.
@@ -85,20 +82,17 @@ Rules:
   IMPLEMENTATION and needs explicit User instruction.
 - Starting PLAN artifacts, entering IMPLEMENTATION, and marking DONE
   require explicit User instruction.
-- If a new request or active task is already clearly underspecified or
-  has material open alternatives, do only enough research to ask good
-  clarification questions. Then use
-  `../spec-loop-clarify-task/SKILL.md` before drafting or revising
-  planning content further.
+- For task creation or task updates, before drafting or revising
+  planning content as current truth, if any content would depend on an
+  unresolved branch that could materially change scope, behavior,
+  policy, conceptual model, conceptual contract boundaries,
+  constraints, acceptance logic, route, or test specification, do only
+  enough research to ask good clarification questions and use
+  `../spec-loop-clarify-task/SKILL.md` before continuing. Re-run this
+  check whenever later drafting exposes a new material branch,
+  including before planning past Research.
 - On the task-file path, internal task-file sync edits made during
   clarification are allowed before clarification is fully finished.
-- Before planning past Research on non-trivial work, run an
-  unresolved-questions scan. If material unresolved questions remain
-  that are user-preference-sensitive or could materially change scope,
-  behavior, policy, conceptual model, conceptual contract boundaries,
-  constraints, acceptance logic, route, or test specification, stop
-  planning, use `../spec-loop-clarify-task/SKILL.md`, and resume
-  planning only after the clarification result is incorporated.
 - Phases are exclusive unless the User allows combined planning and
   implementation.
 

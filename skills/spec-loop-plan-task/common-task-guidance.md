@@ -39,11 +39,12 @@ increment meets all applicable requirements of this file and any
 path-specific companion rules, and is correct, internally consistent,
 and compliant with `AGENTS.md` and applicable glossary rules.
 
-At any point while drafting or revising Research, Scenario, Design, or
-Test specification, if the LLM has essential doubts about scope,
-behavior, policy, conceptual model, conceptual contract boundaries,
-constraints, migration, acceptance logic, or verification
-expectations, it must return to clarification instead of guessing.
+At any point while drafting or revising the active task for the
+current increment, if any content would depend on an unresolved
+material branch about scope, behavior, policy, conceptual model,
+conceptual contract boundaries, constraints, migration, acceptance
+logic, or verification expectations, it must return to clarification
+instead of guessing.
 
 If drafting or reviewing Design exposes a new material boundary
 decision, return to clarification before continuing.
