@@ -136,8 +136,7 @@ npx skills add dpolivaev/spec-loop -s '*'
    `https://github.com/dpolivaev/spec-loop` into the tool-specific
    skills directory.
 6. If the tool still does not automatically apply the expected
-   workflow, explicitly ask for the needed skill or see
-   [README.md](../README.md#if-your-harness-does-not-automatically-apply-installed-skills).
+   workflow, explicitly ask for the needed skill by name.
 7. Continue only when the assistant clearly understands the setup and the
    workflow rules.
 
@@ -177,7 +176,7 @@ it before continuing:
 - a task or subtask is moved to `done` without explicit user
   confirmation.
 
-## Step 2: Project README ([README.md](../README.md))
+## Step 2: Project README (`README.md`)
 
 ### You send
 
@@ -234,7 +233,7 @@ This is documentation-only work, we do not need a task file for it.
 
 ### You see
 
-- [README.md](../README.md):
+- `README.md`:
   - exists and captures the project brief requirements,
   - includes the project brief text under `Project Brief`.
 - `glossary.adoc`:
@@ -244,7 +243,7 @@ This is documentation-only work, we do not need a task file for it.
   - exists if harness-specific or IDE-specific configuration files were
     found.
 - Project instructions file:
-  - explicitly points the assistant to [README.md](../README.md) as the
+  - explicitly points the assistant to `README.md` as the
     source of the project brief and requirements,
   - states that the fileless planning path is never allowed in this
     project and that any code change requires a task file.

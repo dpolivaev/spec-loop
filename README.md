@@ -270,34 +270,6 @@ review of trusted repositories.
 Which directory your agent uses is agent-specific. See
 https://github.com/vercel-labs/skills for agent-specific installation details.
 
-### If your harness does not automatically apply installed skills
-
-Some coding harnesses expose installed skills to the model but do not
-reliably apply them unless the user prompt or project instructions make
-their use explicit.
-
-If your harness behaves that way, add a project instruction such as:
-
-```text
-Use the `spec-loop-plan-task` skill for all non-trivial work unless I explicitly
-opt out.
-Use the `spec-loop-clarify-task` skill to clarify underspecified
-tasks, task updates, and design updates before or during planning.
-On the task-file path, use `spec-loop-prepare-implementation-approval`
-before asking for implementation approval.
-After implementation approval on either planning path, use
-`spec-loop-implementation-flow`.
-Use the `spec-loop-write-glossary` skill for `glossary.adoc` glossary
-work.
-Follow the workflow rules loaded through the `spec-loop-plan-task`
-skill, including the fileless-planning-path routing and the
-PLAN -> IMPLEMENTATION explicit approval gate.
-```
-
-If your harness supports project instruction files such as `AGENTS.md`,
-put the rule there. That is more reliable than relying on ordinary chat
-context alone.
-
 ## Included Skills
 
 This repository currently ships these skills.
