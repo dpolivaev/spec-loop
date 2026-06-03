@@ -40,31 +40,21 @@ need retrospective review of pull requests, merge requests, or commit
 ranges from repositories you trust. It fetches provider or Git content
 as review evidence and is not required for the main planning workflow.
 
-1. Ensure Node.js is available so `npx` works.
-2. If you do not need [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/), use a selective
-   installation variant from the skills tool documentation and install
-   only the six core task-workflow skills listed above.
-3. If you want the full bundle, including optional
-   [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/), install all Spec Loop skills
-   interactively for the current project:
+Ensure Node.js is available so `npx` works.
+
+Install Spec Loop in the current project with:
 
 ```bash
 npx skills add dpolivaev/spec-loop -s '*'
 ```
 
-4. For global installation of the full bundle for all agents,
-   non-interactively:
+Variations:
+- `-s '*'` installs the full bundle, including optional [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/).
+- Remove `-s '*'` to select skills interactively instead of installing the full bundle. That lets you skip optional [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) and install only the six core task-workflow skills listed above.
+- Add `-g` for a global install.
+- Use `-g --all` for a global, non-interactive install for all supported agents.
 
-```bash
-npx skills add dpolivaev/spec-loop -g --all
-```
-
-Those full-bundle commands install [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/)
-too. If you do not need it, use a selective installation variant
-instead.
-
-`--all` installs all skills for all supported agents. For selective,
-single-agent, or other installation variants, see
+For selective, single-agent, or other installation variants, see
 https://github.com/vercel-labs/skills.
 
 ### Prepare task and glossary rendering
