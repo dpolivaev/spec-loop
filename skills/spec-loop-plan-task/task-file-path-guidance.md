@@ -24,7 +24,7 @@ On the task-file path, the task file is the source of truth for the
 current increment.
 
 Backlog tasks may keep Research and Design high-level or `To be
-done` until current. Omit Decisions until final clarification
+done` until current. Omit Analysis until final clarification
 decisions exist.
 
 In tasks with subtasks, the shared readiness rules apply to the active
@@ -33,7 +33,7 @@ subtasks that are not yet current.
 
 During clarification on the task-file path, keep the active task file
 aligned with the current final clarification state, including the
-`Decisions` section and every affected canonical section.
+`Analysis` section and every affected canonical section.
 
 However, you may accumulate multiple final clarification decisions
 before syncing them into the task file.
@@ -177,9 +177,9 @@ Use the shared no-subtask main-task structure from
 When a task uses subtasks:
 
 - keep subtasks after all global task sections;
-- main-task Research, Decisions, Design, Test specification, and
+- main-task Research, Analysis, Design, Test specification, and
   empty Implementation notes may be omitted;
-- omitted Scenario, Constraints, Decisions, or empty Implementation
+- omitted Scenario, Constraints, Analysis, or empty Implementation
   notes keep the remaining sections in order.
 - Do not create a new subtask unless the work adds a separate
   functional increment.
@@ -188,7 +188,7 @@ When a task uses subtasks:
 - If a task without subtasks gains its first separate functional
   increment, convert it to subtask form by default.
 - During that conversion, keep only shared context at task level and
-  move subtask-specific Research, Decisions, Design, and Test
+  move subtask-specific Research, Analysis, Design, and Test
   specification into the relevant subtask.
 - If the original no-subtask task already describes a concrete
   functional increment, promote that increment into its own subtask.
@@ -202,7 +202,7 @@ When a task uses subtasks:
   `- **Status:** <status>`,
 - must use the same list-item labels and ordering as the shared main
   task form, including conditional Scenario, optional Constraints,
-  conditional Decisions, and conditional Implementation notes,
+  conditional Analysis, and conditional Implementation notes,
 - must represent a functional increment; for implementation tasks must
   include executable work,
 - is not assumed to be self-sufficient; before working from a
@@ -222,7 +222,7 @@ When a task uses subtasks:
   context: reference briefly, state only local adaptation, risk, or
   decision.
 - Future subtasks may keep Research, Design, and Test specification
-  lightweight until current. Decisions may stay omitted or minimal
+  lightweight until current. Analysis may stay omitted or minimal
   until final clarification decisions exist. Placeholders like `To be
   done` or `See main task` are allowed for Research, Design, and Test
   specification.

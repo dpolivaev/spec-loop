@@ -30,7 +30,7 @@ renewed approval before implementation continues.
 
 Before IMPLEMENTATION, the active task needs: Scope, Motivation,
 Briefing, implementation-ready Design, Test specification, and any
-required Research, Scenario, Decisions, or Constraints for the
+required Research, Scenario, Analysis, or Constraints for the
 current increment — even when the User allows combined phases.
 
 Before asking the User to approve a task for IMPLEMENTATION, the LLM
@@ -76,7 +76,7 @@ behavior and structure. When referring to planned or changed
 production types, use exact intended class, interface, and enum
 names, not stand-ins or generic role placeholders.
 
-Research may mention legacy terms. Decisions and Design use only
+Research may mention legacy terms. Analysis and Design use only
 canonical Scenario terms except explicit legacy-to-target mapping
 tables. If code uses different names, align incrementally and
 document intentional mismatch in the active task artifact.
@@ -99,7 +99,7 @@ If the current task requires glossary work:
 If the task plan is missing required glossary work, return to PLAN,
 update the task, get approval, and continue.
 
-### Decisions
+### Analysis
 
 Cross-cutting record of final clarification decisions and brief
 reasons.
@@ -108,7 +108,7 @@ Use this section when clarification produces final decisions for the
 current increment. Record final decisions only. Use one short bullet
 per decision in the form `- <decision> because <reason>.`
 
-`Decisions` is a compact ledger, not a second Design or Constraints
+`Analysis` is a compact ledger, not a second Design or Constraints
 section. Keep each item to one short line and move all structural,
 behavioral, contract, and verification detail into the affected
 canonical sections.
@@ -185,7 +185,7 @@ behavior is governed by that skill and is not repeated here.
 
 ### Iterative discovery
 
-Iterate across Research, Scenario (if used), Decisions (if used),
+Iterate across Research, Scenario (if used), Analysis (if used),
 Design, and Test specification until coherent. Record intermediate
 alternatives only when they aid reasoning or review. No
 implementation during this loop.
@@ -249,13 +249,13 @@ labels below.
     implementation must obey)
   - `- **Briefing:**`
   - `- **Research:**`
-  - `- **Decisions:**` (conditional; include it when final
+  - `- **Analysis:**` (conditional; include it when final
     clarification decisions exist for the current increment)
   - `- **Design:**`
   - `- **Test specification:**`
   - `- **Implementation notes:**` (conditional; include it when the
     post-implementation checkpoint finds meaningful notes content)
-  Omitted Scenario, Constraints, Decisions, or empty
+  Omitted Scenario, Constraints, Analysis, or empty
   Implementation notes: keep the remaining sections in order.
 
 Task-file-only subtask rules stay in

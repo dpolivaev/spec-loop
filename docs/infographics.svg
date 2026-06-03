@@ -637,10 +637,10 @@
      style="fill:none;stroke:#000000;stroke-width:3.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(#ConcaveTriangle_Fnone_S-000000-3)" />
   <text
      x="555.06628"
-     y="521.91339"
+     y="519.86487"
      class="sans body"
      id="text1"
-     style="font-size:21.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Decisions</text>
+     style="font-size:21.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Analysis</text>
   <path
      fill="#010101"
      d="   M 675.87 319.84   Q 675.87 320.39 675.44 320.76   Q 675.08 321.06 674.47 321.06   Q 635.93 321.19 601.38 321.04   A 0.66 0.66 0.0 0 0 600.75 321.90   L 601.87 325.29   A 0.44 0.44 0.0 0 1 601.26 325.82   L 589.97 320.22   A 0.11 0.04 24.9 0 1 589.93 320.18   Q 589.80 319.97 589.80 319.85   Q 589.80 319.73 589.93 319.51   A 0.11 0.04 -24.9 0 1 589.97 319.47   L 601.26 313.87   A 0.44 0.44 0.0 0 1 601.87 314.40   L 600.75 317.79   A 0.66 0.66 0.0 0 0 601.38 318.65   Q 635.93 318.50 674.47 318.62   Q 675.08 318.62 675.44 318.92   Q 675.87 319.29 675.87 319.84   Z"
@@ -650,7 +650,7 @@
      d="m 527.04991,514.08903 h 16.28696 v 0"
      id="path7" />
   <path
-     d="m 668.47317,482.12593 c 2.82499,5.32179 1.12707,11.89955 -5.58236,18.54869"
+     d="m 659.84286,490.97589 c 1.35136,5.87161 -1.99114,11.78579 -10.1929,16.47183"
      class="thin"
      marker-end="url(#arrowSmall)"
      id="path3"

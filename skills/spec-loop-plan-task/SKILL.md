@@ -116,6 +116,15 @@ ADR-only work is taskless by default. Use a task only when the User
 explicitly asks for one, project rules require one, or the ADR work is
 part of a larger executable change already being tracked in a task.
 
+Use `../spec-loop-write-adr/SKILL.md` for ADR structure, update
+rules, and clarification-time routing.
+
+If ADR work still has material unresolved questions about the
+decision, decision criteria, or governing boundaries,
+`../spec-loop-write-adr/SKILL.md` may invoke
+`../spec-loop-clarify-task/SKILL.md`, preserving any clarification
+grill level already in force for the work item.
+
 Use ADRs for decisions affecting public behavior, dependencies, or
 long-term design.
 
@@ -123,11 +132,11 @@ long-term design.
   file per decision with meaningful names.
 - ADR file names should use readable descriptive words, without
   prefixes, numbering, or abbreviations.
-- Use the short template: Title, Date, Status, Context, Decision,
-  Consequences.
 
-If documentation is part of a larger executable change, keep it in that
-task. Plan the documentation update during PLAN and perform it during
+If ADR work is part of a larger executable change, keep it in that
+task. Use the task's `Research` and `Analysis` sections as ADR input,
+plan the documentation update during PLAN, and use
+`../spec-loop-write-adr/SKILL.md` when performing the ADR update during
 IMPLEMENTATION.
 
 ## Common task guidance

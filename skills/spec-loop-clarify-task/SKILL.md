@@ -31,17 +31,23 @@ When clarification ends, hand control back to the workflow that
 invoked this skill:
 - task creation and task updates normally resume
   `../spec-loop-plan-task/SKILL.md`;
+- ADR-writing clarification resumes
+  `../spec-loop-write-adr/SKILL.md`;
 - approval-preparation clarification resumes
   `../spec-loop-prepare-implementation-approval/SKILL.md`;
 - implementation-time clarification resumes
   `../spec-loop-implementation-flow/SKILL.md`.
 
 When this skill is invoked from planning or approval preparation, it
-still runs in PLAN. It does not freeze the active task.
+still runs in PLAN. It does not freeze the governing artifact.
 
-During PLAN, revise the active task in place as needed for the
+During PLAN, revise the governing artifact in place as needed for the
 current work item. Planning-artifact changes are allowed. Executable
 changes are not.
+
+When this skill is invoked from ADR writing, revise the ADR draft in
+place as needed for the current work item. Documentation-artifact
+changes are allowed. Executable changes are not.
 
 When this skill is invoked from implementation, phase handling
 remains governed by `../spec-loop-implementation-flow/SKILL.md`.
@@ -93,7 +99,7 @@ The clarification grill level affects chat-time surfacing and
 question frequency during the clarification session. It does not
 change batch size, question format, the definition of a material
 unresolved question, or whether final clarification decisions must be
-recorded in the task.
+preserved in the durable record.
 
 Select the next unresolved branch by descending importance and uncertainty. Once a branch is selected, traverse it depth first, resolving dependencies one-by-one. Start with a brief, provisional overview of the most important currently visible unresolved branches and which branch you will address first. This overview is a map, not a commitment to an exact final question list.
 
@@ -138,29 +144,44 @@ first-class evidence during clarification:
 
 If clarification resolves or changes shared domain terms, record that glossary follow-up is required through the normal Spec Loop glossary path. Put the note in the active task when one exists or is being prepared.
 
-The active task artifact should keep a `Decisions` section close to
-`Research` that records final clarification decisions in very short
-form:
+Clarification always runs against one governing artifact for the
+current work item.
+- When invoked from task planning, approval preparation, or
+  implementation, the governing artifact is the active task artifact.
+- When invoked from ADR writing, the governing artifact is the ADR
+  being drafted or updated.
+
+Keep final clarification decisions in the governing artifact's
+`Analysis` section.
+
+In task artifacts, keep `Analysis` close to `Research` and record
+final clarification decisions in very short form:
 - `<decision> because <reason>.`
 
-This section is a compact decision ledger. Include final decisions
-only. Do not put open questions, options, confidence values,
-tentative assumptions, or transient working notes there.
+In ADRs, use `Analysis` for the ADR-relevant subset of final
+clarification decisions, still recorded as short bullets with brief
+reasons.
+
+`Analysis` is a compact ledger, not a second Design or Constraints
+section. Include final decisions only. Do not put open questions,
+options, confidence values, tentative assumptions, or transient
+working notes there.
 
 Clarification is cross-cutting. A final clarification decision may
-affect Scope, Scenario, Constraints, Briefing, Research, Design,
-Test specification, route, or approval readiness. When a
-clarification decision becomes final, update the `Decisions`
-section and every affected section of the active task artifact.
+affect any section of the governing artifact. When a clarification
+decision becomes final, update the governing artifact's `Analysis`
+section and every other affected section of that artifact.
 
 Clarification uses these state terms:
 - **Open question** = not final and still needs user input.
 - **Pending surfaced decision** = queued or presented in a decision
-  batch, but not yet accepted and not yet recorded in `Decisions`.
-- **Final clarification decision** = settled and recorded in
-  `Decisions`.
+  batch, but not yet accepted and not yet recorded in the governing
+  artifact's `Analysis` section.
+- **Final clarification decision** = settled and recorded in the
+  governing artifact's `Analysis` section.
 - **Final clarification state** = the set of final clarification
-  decisions currently recorded in `Decisions`.
+  decisions currently recorded in the governing artifact's
+  `Analysis` section.
 
 For each unresolved decision in the active branch, clarification
 proceeds by resolving directly what is already determined and asking
@@ -200,19 +221,19 @@ the user requests it or explicitly approves.
 
 For each directly resolved decision, choose one of these handling
 paths:
-- record it immediately in `Decisions` as a final clarification
-  decision;
+- record it immediately in the governing artifact's `Analysis`
+  section as a final clarification decision;
 - queue it for clarification presentation as a pending surfaced
   decision; or
 - leave it open and ask the User.
 
-A decision may be recorded directly in `Decisions` without a
-decision batch only when it is fully determined by confirmed user
-choices, existing evidence, or a low-risk mechanical consequence of
-those choices; is not likely to surprise the User if left
-unsurfaced; is not needed as explicit shared state for later
-clarification; and would be easy to revise before approval or
-implementation if later evidence changes it.
+A decision may be recorded directly without a decision batch only
+when it is fully determined by confirmed user choices, existing
+evidence, or a low-risk mechanical consequence of those choices; is
+not likely to surprise the User if left unsurfaced; is not needed as
+explicit shared state for later clarification; and would be easy to
+revise before approval or implementation if later evidence changes
+it.
 
 Queue a pending surfaced decision when it is material enough that the
 User should see it during clarification, when later clarification
@@ -234,10 +255,10 @@ direct-recording gate above.
 
 A pending surfaced decision stays outside the final clarification
 state until the User accepts the batch that presents it. It must not
-yet be recorded in `Decisions` or used as explicit shared state
-for later material branch conclusions. If later clarification would
-materially depend on a pending surfaced decision, present the batch
-and wait for the User's response first.
+yet be recorded in the governing artifact's `Analysis` section or
+used as explicit shared state for later material branch conclusions.
+If later clarification would materially depend on a pending surfaced
+decision, present the batch and wait for the User's response first.
 
 Add each directly resolved decision chosen for clarification
 presentation to a queue in resolution order.
@@ -255,9 +276,10 @@ When one of those boundaries is reached, present one decision batch:
 - otherwise, present all queued decisions in one shorter batch.
 
 Do not emit standalone decision lines outside decision batches. A
-pending surfaced decision must not be recorded in `Decisions` or used
-as explicit shared state for later material branch conclusions
-before the User accepts the batch that presents it.
+pending surfaced decision must not be recorded in the governing
+artifact's `Analysis` section or used as explicit shared state for
+later material branch conclusions before the User accepts the batch
+that presents it.
 
 Do not ask a question before presenting queued decisions it depends on
 or needs for context.
@@ -286,13 +308,12 @@ separate `Topic:` line, option letters, `Options:`, or
 
 After the User accepts a presented decision batch, each accepted
 pending surfaced decision becomes a final clarification decision.
-Record those decisions in `Decisions` in short
-`- <decision> because <reason>.` form and update every affected
-section of the active task artifact.
+Record those decisions in the governing artifact's `Analysis`
+section and update every other affected section of that artifact.
 
-Use the task-file path for durable clarification state, because final
-clarification decisions kept only in chat can be lost through
-compaction or context loss.
+For task-controlled work, use the task-file path for durable
+clarification state, because final clarification decisions kept only
+in chat can be lost through compaction or context loss.
 
 If clarification starts on the chat-only path, promote it to the
 task-file path before chat-only storage becomes unsafe. After that,
@@ -311,8 +332,14 @@ not ask the User to review them separately during clarification. If
 unresolved questions remain after a sync, continue clarification from
 the updated task file.
 
-Keep the `Decisions` section and every affected task section aligned
-with the current final clarification state.
+When the governing artifact is an ADR draft, keep its `Analysis`
+section and every affected ADR section aligned with the current final
+clarification state before clarification returns control to
+`../spec-loop-write-adr/SKILL.md`.
+
+When the governing artifact is a task artifact, keep its `Analysis`
+section and every affected task section aligned with the current
+final clarification state.
 
 For each clarification question you ask, start with a brief opening
 line and then provide the recommendation in compact form.
@@ -394,7 +421,7 @@ Before handing work back to the invoking workflow, confirm that:
 - any code/docs-vs-claim contradiction has been surfaced;
 - any required glossary follow-up has been noted in the active task
   when one exists;
-- every final clarification decision is recorded in `Decisions` with
-  a brief reason; and
-- every affected task section reflects the recorded clarification
-  decisions.
+- every final clarification decision is recorded in the governing
+  artifact's `Analysis` section with a brief reason; and
+- every affected section of the governing artifact reflects the
+  recorded clarification decisions.

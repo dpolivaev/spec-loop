@@ -102,7 +102,7 @@ PlantUML writing hints:
   - The repository already separates application wiring from domain
     logic.
   - No CLI-specific adapter classes exist yet.
-- **Decisions:**
+- **Analysis:**
   - CLI mode stays a thin adapter because gameplay logic must remain
     reusable in the existing engine.
   - Feedback is rendered in adapter classes because presentation
