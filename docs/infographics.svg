@@ -86,12 +86,34 @@
        markerWidth="1"
        markerHeight="1"
        viewBox="0 0 1 1"
-       preserveAspectRatio="xMidYMid">
+       preserveAspectRatio="xMidYMid"
+       markerUnits="strokeWidth">
       <path
          transform="scale(0.7)"
          d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
          style="fill:#000000;fill-rule:evenodd;stroke:none"
          id="path1-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="ConcaveTriangle_Fnone_S-000000_reversed"
+       refX="0"
+       refY="0"
+       orient="auto"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       preserveAspectRatio="xMidYMid"
+       markerUnits="strokeWidth">
+      <g
+         transform="rotate(180,0,0)"
+         id="g8">
+        <path
+           transform="scale(0.7)"
+           d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+           style="fill:#000000;fill-rule:evenodd;stroke:none"
+           id="path8" />
+      </g>
     </marker>
     <marker
        style="overflow:visible"
@@ -191,12 +213,8 @@
      id="path1425" />
   <path
      fill="#010101"
-     d="   M 632.09 451.12   A 0.99 0.98 33.6 0 0 633.57 450.83   Q 635.03 448.16 635.83 447.78   A 0.55 0.54 76.9 0 1 636.61 448.27   L 636.73 460.82   A 0.67 0.67 0.0 0 1 635.66 461.37   L 626.37 454.64   A 0.91 0.90 48.2 0 1 626.45 453.12   Q 627.04 452.80 628.49 452.99   A 0.80 0.80 0.0 0 0 629.19 451.65   Q 623.95 445.90 615.55 446.21   A 1.19 1.18 85.9 0 1 614.32 445.14   L 614.31 445.03   A 1.08 1.08 0.0 0 1 615.35 443.84   Q 622.91 443.63 628.63 447.70   C 629.81 448.54 631.28 450.48 632.09 451.12   Z"
+     d="m 637.05022,454.42681 a 0.99,0.98 33.6 0 0 1.48,-0.29 q 1.46,-2.67 2.26,-3.05 a 0.55,0.54 76.9 0 1 0.78,0.49 l 0.12,12.55 a 0.67,0.67 0 0 1 -1.07,0.55 l -9.29,-6.73 a 0.91,0.9 48.2 0 1 0.08,-1.52 q 0.59,-0.32 2.04,-0.13 a 0.8,0.8 0 0 0 0.7,-1.34 q -5.24,-5.75 -13.64,-5.44 a 1.19,1.18 85.9 0 1 -1.23,-1.07 l -0.01,-0.11 a 1.08,1.08 0 0 1 1.04,-1.19 q 7.56,-0.21 13.28,3.86 c 1.18,0.84 2.65,2.78 3.46,3.42 z"
      id="path1442" />
-  <path
-     fill="#010101"
-     d="   M 524.30 510.27   A 0.63 0.62 -87.5 0 1 525.12 511.17   Q 523.79 513.10 523.93 514.85   A 0.78 0.78 0.0 0 0 524.68 515.56   Q 570.26 516.41 587.23 517.15   Q 606.35 517.98 620.13 514.96   Q 628.99 513.02 634.35 506.21   A 1.45 1.45 0.0 0 1 636.14 505.81   L 636.34 505.91   A 0.97 0.96 -60.4 0 1 636.72 507.30   C 630.88 516.32 617.73 518.92 607.37 519.39   Q 596.66 519.88 589.26 519.64   Q 555.66 518.56 524.15 518.09   A 0.43 0.43 0.0 0 0 523.77 518.73   L 525.30 521.38   A 0.87 0.87 0.0 0 1 524.16 522.59   L 513.61 517.36   A 0.51 0.51 0.0 0 1 513.58 516.46   L 524.30 510.27   Z"
-     id="path1528" />
   <path
      fill="#010101"
      d="m 545.26,543.57609 q 3.31,0 3.9,-0.01 a 0.56,0.57 78.6 0 0 0.52,-0.77 l -1.53,-3.91 a 0.44,0.44 0 0 1 0.6,-0.56 q 4.18,2 10.5,5.5 0.59,0.33 0.59,0.85 0,0.51 -0.59,0.84 -6.32,3.5 -10.5,5.5 a 0.44,0.44 0 0 1 -0.6,-0.56 l 1.53,-3.91 a 0.57,0.56 11.4 0 0 -0.52,-0.77 q -0.59,-0.01 -3.9,-0.01 -3.31,0 -3.9,0.01 a 0.56,0.57 78.6 0 0 -0.52,0.77 l 1.53,3.91 a 0.44,0.44 0 0 1 -0.6,0.56 q -4.18,-2 -10.49,-5.5 -0.6,-0.33 -0.59,-0.85 0,-0.52 0.59,-0.84 6.31,-3.5 10.49,-5.5 a 0.44,0.44 0 0 1 0.6,0.56 l -1.53,3.91 a 0.57,0.56 11.4 0 0 0.52,0.77 q 0.59,0.01 3.9,0.01 z"
@@ -508,19 +526,13 @@
      style="font-size:21.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Motivation</text>
   <g
      id="g82"
-     transform="translate(-38.043479,-6.5217391)">
+     transform="translate(-0.81531821,-7.4694753)">
     <text
-       x="619.58228"
-       y="487.62024"
+       x="588.16754"
+       y="492.58047"
        class="sans body"
        id="text30"
        style="font-size:21.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Scenario</text>
-    <text
-       x="617.04346"
-       y="503.91306"
-       class="sans body"
-       id="text31"
-       style="font-size:21.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">(optional)</text>
   </g>
   <text
      x="440.48099"
@@ -622,5 +634,25 @@
      class="thin"
      marker-end="url(#arrowSmall)"
      id="path36-6-6"
+     style="fill:none;stroke:#000000;stroke-width:3.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(#ConcaveTriangle_Fnone_S-000000-3)" />
+  <text
+     x="555.06628"
+     y="521.91339"
+     class="sans body"
+     id="text1"
+     style="font-size:21.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Decisions</text>
+  <path
+     fill="#010101"
+     d="   M 675.87 319.84   Q 675.87 320.39 675.44 320.76   Q 675.08 321.06 674.47 321.06   Q 635.93 321.19 601.38 321.04   A 0.66 0.66 0.0 0 0 600.75 321.90   L 601.87 325.29   A 0.44 0.44 0.0 0 1 601.26 325.82   L 589.97 320.22   A 0.11 0.04 24.9 0 1 589.93 320.18   Q 589.80 319.97 589.80 319.85   Q 589.80 319.73 589.93 319.51   A 0.11 0.04 -24.9 0 1 589.97 319.47   L 601.26 313.87   A 0.44 0.44 0.0 0 1 601.87 314.40   L 600.75 317.79   A 0.66 0.66 0.0 0 0 601.38 318.65   Q 635.93 318.50 674.47 318.62   Q 675.08 318.62 675.44 318.92   Q 675.87 319.29 675.87 319.84   Z"
+     id="path6" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);paint-order:markers stroke fill"
+     d="m 527.04991,514.08903 h 16.28696 v 0"
+     id="path7" />
+  <path
+     d="m 668.47317,482.12593 c 2.82499,5.32179 1.12707,11.89955 -5.58236,18.54869"
+     class="thin"
+     marker-end="url(#arrowSmall)"
+     id="path3"
      style="fill:none;stroke:#000000;stroke-width:3.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(#ConcaveTriangle_Fnone_S-000000-3)" />
 </svg>

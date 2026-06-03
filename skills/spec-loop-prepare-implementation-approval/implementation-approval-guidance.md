@@ -64,9 +64,10 @@ and list the exact missing items, for example:
 
 If any material unresolved question remains during approval
 preparation, the task is not review ready. Keep it in PLAN, invoke
-`../spec-loop-clarify-task/SKILL.md` in the same turn, and ask only
-the exact questions needed to remove the uncertainty through that
-workflow.
+`../spec-loop-clarify-task/SKILL.md` in the same turn while
+preserving any clarification grill level already in force for the
+current work item, and ask only the exact questions needed to remove
+the uncertainty through that workflow.
 
 Approval preparation and any clarification it invokes both stay in
 PLAN. They do not freeze the active task.

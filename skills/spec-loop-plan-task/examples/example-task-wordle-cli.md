@@ -36,6 +36,15 @@ PlantUML writing hints:
   gameplay rules in the existing engine and domain classes.
 - **Motivation:** This example demonstrates current task structure and
   PlantUML patterns that render reliably in Markdown task files.
+- **Scenario:** A player starts the application in CLI mode, enters
+  guesses one line at a time, sees textual feedback after each guess,
+  and the session ends when the word is solved or attempts are
+  exhausted. Optional flags choose the word list and attempt count.
+- **Constraints:**
+  - Gameplay rules remain in domain classes.
+  - The CLI adapter may format output, but it must not reimplement
+    evaluation logic.
+  - The UI path must stay replaceable by a later Swing adapter.
 - **Briefing:** The project already contains a reusable game engine and
   a packaged word list. The CLI adapter must depend on the application
   and domain layers without moving gameplay logic into the UI path.
@@ -93,6 +102,14 @@ PlantUML writing hints:
   - The repository already separates application wiring from domain
     logic.
   - No CLI-specific adapter classes exist yet.
+- **Decisions:**
+  - CLI mode stays a thin adapter because gameplay logic must remain
+    reusable in the existing engine.
+  - Feedback is rendered in adapter classes because presentation
+    belongs in the UI path, not in domain classes.
+  - Only `--cli`, `--wordlist`, and `--attempts` are supported because
+    the example should keep the external CLI contract minimal and
+    reviewable.
 - **Design:**
   Target project structure, structural collaboration, and runtime flow
   for the CLI path:
@@ -197,11 +214,6 @@ PlantUML writing hints:
   - `--cli`
   - `--wordlist`
   - `--attempts`
-- **Constraints:**
-  - Gameplay rules remain in domain classes.
-  - The CLI adapter may format output, but it must not reimplement
-    evaluation logic.
-  - The UI path must stay replaceable by a later Swing adapter.
 - **Test specification:**
   - Automated tests:
     - CLI argument parsing defaults and validation.

@@ -42,8 +42,10 @@ If any material unresolved question remains and it is
 user-preference-sensitive, needed to choose the next decision path, or
 could materially change scope, constraints, design, or test
 specification, do not end with a blocker list. Invoke
-`../spec-loop-clarify-task/SKILL.md` in the same turn and resume this
-skill after clarification before seeking implementation approval.
+`../spec-loop-clarify-task/SKILL.md` in the same turn, preserving any
+clarification grill level already in force for the current work item,
+and resume this skill after clarification before seeking
+implementation approval.
 
 After task-file implementation approval, implementation is governed by
 `../spec-loop-implementation-flow/SKILL.md`.

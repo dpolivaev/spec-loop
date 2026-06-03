@@ -46,6 +46,55 @@ changes are not.
 When this skill is invoked from implementation, phase handling
 remains governed by `../spec-loop-implementation-flow/SKILL.md`.
 
+## Clarification grill level
+
+Clarification is the goal. It combines two methods:
+- reasoning = resolve what existing evidence already determines
+  without new user input; and
+- grilling = use decision batches and direct questions to expose,
+  test, or confirm remaining uncertainty.
+
+The current clarification grill level controls how strongly
+clarification relies on grilling rather than reasoning for the
+current work item.
+
+Use the current clarification grill level already in force for the
+current work item when one exists. If the user has not set one for
+the work item and no session or project default is already in force,
+default to `medium`.
+
+Levels:
+- `light` = stronger bias toward reasoning and lighter grilling:
+  show fewer final decisions in chat through decision batches, ask
+  fewer direct questions during the clarification session, and exit
+  earlier once clarification is safe;
+- `medium` = balanced default; and
+- `heavy` = stronger bias toward grilling: show more final decisions
+  in chat through decision batches, ask more direct questions during
+  the clarification session, and exit later.
+
+On the first clarification turn for a task or work item in the
+current conversation, state the current clarification grill level and
+briefly explain what it changes: `light` means fewer questions and
+fewer decisions shown in chat; `heavy` means more. Do not repeat
+this notice on later clarification turns for the same task or work
+item unless the user asks or the level changes. When clarification
+starts for a different task or work item, give the notice again.
+
+A user-facing clarification step is either one presented decision
+batch or one `Question:` block that requires new user input.
+
+After every clarification step, re-run the exit check. Spend another
+clarification step only when the remaining unresolved point is
+material enough to justify slowing the User down at the current
+clarification grill level.
+
+The clarification grill level affects chat-time surfacing and
+question frequency during the clarification session. It does not
+change batch size, question format, the definition of a material
+unresolved question, or whether final clarification decisions must be
+recorded in the task.
+
 Select the next unresolved branch by descending importance and uncertainty. Once a branch is selected, traverse it depth first, resolving dependencies one-by-one. Start with a brief, provisional overview of the most important currently visible unresolved branches and which branch you will address first. This overview is a map, not a commitment to an exact final question list.
 
 Treat unresolved branches as including both behavior-level
@@ -89,6 +138,30 @@ first-class evidence during clarification:
 
 If clarification resolves or changes shared domain terms, record that glossary follow-up is required through the normal Spec Loop glossary path. Put the note in the active task when one exists or is being prepared.
 
+The active task artifact should keep a `Decisions` section close to
+`Research` that records final clarification decisions in very short
+form:
+- `<decision> because <reason>.`
+
+This section is a compact decision ledger. Include final decisions
+only. Do not put open questions, options, confidence values,
+tentative assumptions, or transient working notes there.
+
+Clarification is cross-cutting. A final clarification decision may
+affect Scope, Scenario, Constraints, Briefing, Research, Design,
+Test specification, route, or approval readiness. When a
+clarification decision becomes final, update the `Decisions`
+section and every affected section of the active task artifact.
+
+Clarification uses these state terms:
+- **Open question** = not final and still needs user input.
+- **Pending surfaced decision** = queued or presented in a decision
+  batch, but not yet accepted and not yet recorded in `Decisions`.
+- **Final clarification decision** = settled and recorded in
+  `Decisions`.
+- **Final clarification state** = the set of final clarification
+  decisions currently recorded in `Decisions`.
+
 For each unresolved decision in the active branch, clarification
 proceeds by resolving directly what is already determined and asking
 only what still requires user input.
@@ -99,11 +172,12 @@ present facts, findings, or implications as standalone items. Use
 them only inside decision reasons.
 
 If confirmed user choices, existing evidence, or a direct consequence
-of those choices fully determine the answer, resolve it directly,
-queue it, and later present it in the decision batch with `(100%)`.
+of those choices fully determine the answer, resolve it directly. If
+you later present that directly resolved answer in a decision batch,
+mark it with `(100%)`.
 
-Otherwise, resolve the decision directly and queue it for batch
-presentation unless at least one of these is true:
+Otherwise, resolve the decision directly unless at least one of these
+is true:
 - confidence is below 80%;
 - the decision would be hard to revert once implemented; or
 - the downstream decisions or implementation it would unlock would be
@@ -124,7 +198,49 @@ hard to reverse or surprising without context, you may suggest
 creating an ADR as part of that question, but do not create one unless
 the user requests it or explicitly approves.
 
-Add each directly resolved decision to a queue in resolution order.
+For each directly resolved decision, choose one of these handling
+paths:
+- record it immediately in `Decisions` as a final clarification
+  decision;
+- queue it for clarification presentation as a pending surfaced
+  decision; or
+- leave it open and ask the User.
+
+A decision may be recorded directly in `Decisions` without a
+decision batch only when it is fully determined by confirmed user
+choices, existing evidence, or a low-risk mechanical consequence of
+those choices; is not likely to surprise the User if left
+unsurfaced; is not needed as explicit shared state for later
+clarification; and would be easy to revise before approval or
+implementation if later evidence changes it.
+
+Queue a pending surfaced decision when it is material enough that the
+User should see it during clarification, when later clarification
+depends on it as explicit shared state, when it would be surprising if
+left implicit, or when artifact-only review would be a poor surface
+for catching errors.
+
+Bias this choice by clarification grill level:
+- `light` = stronger bias toward direct recording and fewer
+  questions;
+- `medium` = balance direct recording, decision batches, and direct
+  questions; and
+- `heavy` = stronger bias toward surfacing decisions and asking more
+  before clarification ends.
+
+The clarification grill level may change whether an eligible final
+clarification decision is surfaced, but it does not relax the
+direct-recording gate above.
+
+A pending surfaced decision stays outside the final clarification
+state until the User accepts the batch that presents it. It must not
+yet be recorded in `Decisions` or used as explicit shared state
+for later material branch conclusions. If later clarification would
+materially depend on a pending surfaced decision, present the batch
+and wait for the User's response first.
+
+Add each directly resolved decision chosen for clarification
+presentation to a queue in resolution order.
 
 Do not present the queue immediately. Keep clarifying until one of
 these happens:
@@ -138,12 +254,10 @@ When one of those boundaries is reached, present one decision batch:
 - if the queue reached 6, present exactly those 6 decisions;
 - otherwise, present all queued decisions in one shorter batch.
 
-Do not emit standalone decision lines outside decision batches. Do not
-silently apply directly resolved decisions. Every directly resolved
-decision must be presented to the user in a decision batch before it
-is treated as confirmed state, recorded in the task, used as context
-for later branch conclusions, or before clarification ends and control
-returns to the invoking workflow.
+Do not emit standalone decision lines outside decision batches. A
+pending surfaced decision must not be recorded in `Decisions` or used
+as explicit shared state for later material branch conclusions
+before the User accepts the batch that presents it.
 
 Do not ask a question before presenting queued decisions it depends on
 or needs for context.
@@ -170,23 +284,26 @@ Keep `Decision:` and `Reason:` brief and non-redundant. The
 separate `Topic:` line, option letters, `Options:`, or
 `Alternatives:` in direct decisions.
 
-After the user confirms a presented decision, it becomes confirmed
-state.
+After the User accepts a presented decision batch, each accepted
+pending surfaced decision becomes a final clarification decision.
+Record those decisions in `Decisions` in short
+`- <decision> because <reason>.` form and update every affected
+section of the active task artifact.
 
-Use the task-file path for durable clarification state, because
-confirmed clarification decisions kept only in chat can be lost
-through compaction or context loss.
+Use the task-file path for durable clarification state, because final
+clarification decisions kept only in chat can be lost through
+compaction or context loss.
 
 If clarification starts on the chat-only path, promote it to the
 task-file path before chat-only storage becomes unsafe. After that,
 chat-only is no longer allowed for that task.
 
-However, you may accumulate multiple confirmed clarification results
+However, you may accumulate multiple final clarification decisions
 before syncing them into the task file.
 
-Do not let the active task file fall materially behind the confirmed
-clarification state. Sync it at a clean checkpoint before confirmed
-state would be hard to reconstruct safely from chat alone, and always
+Do not let the active task file fall materially behind the final
+clarification state. Sync it at a clean checkpoint before that state
+would be hard to reconstruct safely from chat alone, and always
 before clarification returns control to another workflow.
 
 These task-file sync edits are internal state-preservation steps. Do
@@ -194,8 +311,8 @@ not ask the User to review them separately during clarification. If
 unresolved questions remain after a sync, continue clarification from
 the updated task file.
 
-Record confirmed clarification results in the task sections they
-change.
+Keep the `Decisions` section and every affected task section aligned
+with the current final clarification state.
 
 For each clarification question you ask, start with a brief opening
 line and then provide the recommendation in compact form.
@@ -276,4 +393,8 @@ Before handing work back to the invoking workflow, confirm that:
 - any glossary conflict has been resolved or explicitly surfaced;
 - any code/docs-vs-claim contradiction has been surfaced;
 - any required glossary follow-up has been noted in the active task
-  when one exists.
+  when one exists;
+- every final clarification decision is recorded in `Decisions` with
+  a brief reason; and
+- every affected task section reflects the recorded clarification
+  decisions.

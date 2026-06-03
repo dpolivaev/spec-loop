@@ -34,10 +34,10 @@ companion for implementation-time handling, task revisions,
 On the chat-only path, keep the work in chat only while confirmed
 state can safely remain in chat.
 
-If confirmed clarification decisions kept only in chat would risk
-loss through compaction or context loss, promote the work to the
-task-file path before continuing. After that, do not return to the
-chat-only path for that task.
+If final clarification decisions kept only in chat would risk loss
+through compaction or context loss, promote the work to the task-file
+path before continuing. After that, do not return to the chat-only
+path for that task.
 
 ### Canonical chat-only task
 
@@ -146,7 +146,7 @@ in the same task or promote to the task-file path.
 
 If the chat-only path later needs heavier research, more than one
 plausible implementation path, heavier verification, more than one
-active task, diagrams that would materially help, or confirmed
+active task, diagrams that would materially help, or final
 clarification decisions that would be unsafe to keep only in chat,
 use `spec-loop-plan-task` again and promote the task to a task file
 before continuing.

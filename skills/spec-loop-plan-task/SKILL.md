@@ -88,9 +88,10 @@ Rules:
   policy, conceptual model, conceptual contract boundaries,
   constraints, acceptance logic, route, or test specification, do only
   enough research to ask good clarification questions and use
-  `../spec-loop-clarify-task/SKILL.md` before continuing. Re-run this
-  check whenever later drafting exposes a new material branch,
-  including before planning past Research.
+  `../spec-loop-clarify-task/SKILL.md` before continuing, preserving
+  any clarification grill level already in force for the current work
+  item. Re-run this check whenever later drafting exposes a new
+  material branch, including before planning past Research.
 - On the task-file path, internal task-file sync edits made during
   clarification are allowed before clarification is fully finished.
 - Phases are exclusive unless the User allows combined planning and
@@ -148,9 +149,9 @@ For executable task planning on either planning path:
 ## Planning routes
 
 Chat-only is allowed only while confirmed task state can safely
-remain in chat. If confirmed clarification decisions kept only in
-chat would risk loss through compaction or context loss, use or
-switch to the task-file route before continuing.
+remain in chat. If final clarification decisions kept only in chat
+would risk loss through compaction or context loss, use or switch to
+the task-file route before continuing.
 
 Choose among:
 
@@ -174,7 +175,7 @@ Take the chat-only route when all of the following are true:
 Use the task-file route instead if any of the following hold:
 
 - an active task file already controls the current work item;
-- confirmed clarification state already exists for this work item and
+- final clarification state already exists for this work item and
   keeping it only in chat would be unsafe;
 - subtasks are needed;
 - research or design is complex enough that diagrams would materially
@@ -229,8 +230,8 @@ When the task-file path is in use:
 - chat stays for coordination and approvals, but the task file is the
   durable planning artifact for that task;
 - during clarification, sync the task file at clean checkpoints to
-  preserve confirmed state; do not ask the User to review those sync
-  edits separately before clarification is finished;
+  preserve final clarification state; do not ask the User to review
+  those sync edits separately before clarification is finished;
 - before treating task-file planning as complete or asking for
   approval to move from planning into implementation on the
   task-file path, use

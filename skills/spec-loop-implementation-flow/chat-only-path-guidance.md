@@ -71,7 +71,7 @@ This file gives the chat-only actions for those routes.
 For shared route **B. Pause the affected implementation and ask
  targeted User questions**:
 
-- use this route only while confirmed clarification state can safely
+- use this route only while final clarification state can safely
   remain in chat; if not, switch to route **C**; and
 - after a clarification that still fits inside the approved design,
   emit `Task changes:` with only the minimal affected canonical
@@ -82,9 +82,8 @@ For shared route **C. Return to PLAN and seek renewed approval**:
 - also use that route when chat-only simplicity no longer holds,
   including when more than one active task is needed, diagrams would
   materially help, reliable canonical reconstruction cannot be
-  maintained safely in chat, or confirmed clarification decisions
-  kept only in chat would risk loss through compaction or context
-  loss;
+  maintained safely in chat, or final clarification decisions kept
+  only in chat would risk loss through compaction or context loss;
 - if reconstruction confidence is insufficient, first re-emit a fresh
   full current chat-only task in chat;
 - if the chat-only path must be promoted, reconstruct the task file

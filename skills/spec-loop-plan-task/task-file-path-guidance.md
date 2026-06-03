@@ -23,23 +23,25 @@ companion for implementation-time handling, task-file updates,
 On the task-file path, the task file is the source of truth for the
 current increment.
 
-Backlog tasks may keep Research/Design high-level or `To be done`
-until current.
+Backlog tasks may keep Research and Design high-level or `To be
+done` until current. Omit Decisions until final clarification
+decisions exist.
 
 In tasks with subtasks, the shared readiness rules apply to the active
 subtask and any task-level context it depends on, not to future
 subtasks that are not yet current.
 
 During clarification on the task-file path, keep the active task file
-aligned with confirmed clarification state.
+aligned with the current final clarification state, including the
+`Decisions` section and every affected canonical section.
 
-However, you may accumulate multiple confirmed clarification results
+However, you may accumulate multiple final clarification decisions
 before syncing them into the task file.
 
-Do not let the task file fall materially behind confirmed
-clarification state. Sync it at a clean checkpoint before confirmed
-state would be hard to reconstruct safely from chat alone, and always
-before clarification returns control to another workflow.
+Do not let the task file fall materially behind final clarification
+state. Sync it at a clean checkpoint before that state would be hard
+to reconstruct safely from chat alone, and always before
+clarification returns control to another workflow.
 
 These sync edits preserve state. Do not ask the User to review them
 separately during clarification. If unresolved questions remain after
@@ -175,10 +177,10 @@ Use the shared no-subtask main-task structure from
 When a task uses subtasks:
 
 - keep subtasks after all global task sections;
-- main-task Research, Design, Test specification, and empty
-  Implementation notes may be omitted;
-- omitted Scenario, Constraints, or empty Implementation notes keep
-  the remaining sections in order.
+- main-task Research, Decisions, Design, Test specification, and
+  empty Implementation notes may be omitted;
+- omitted Scenario, Constraints, Decisions, or empty Implementation
+  notes keep the remaining sections in order.
 - Do not create a new subtask unless the work adds a separate
   functional increment.
 - If the current increment changes without adding one, revise the
@@ -186,8 +188,8 @@ When a task uses subtasks:
 - If a task without subtasks gains its first separate functional
   increment, convert it to subtask form by default.
 - During that conversion, keep only shared context at task level and
-  move subtask-specific Research, Design, and Test specification into
-  the relevant subtask.
+  move subtask-specific Research, Decisions, Design, and Test
+  specification into the relevant subtask.
 - If the original no-subtask task already describes a concrete
   functional increment, promote that increment into its own subtask.
 - Do not create a synthetic "original task" subtask when the former
@@ -200,7 +202,7 @@ When a task uses subtasks:
   `- **Status:** <status>`,
 - must use the same list-item labels and ordering as the shared main
   task form, including conditional Scenario, optional Constraints,
-  and conditional Implementation notes,
+  conditional Decisions, and conditional Implementation notes,
 - must represent a functional increment; for implementation tasks must
   include executable work,
 - is not assumed to be self-sufficient; before working from a
@@ -220,8 +222,10 @@ When a task uses subtasks:
   context: reference briefly, state only local adaptation, risk, or
   decision.
 - Future subtasks may keep Research, Design, and Test specification
-  lightweight until current. Placeholders like `To be done` or
-  `See main task` allowed.
+  lightweight until current. Decisions may stay omitted or minimal
+  until final clarification decisions exist. Placeholders like `To be
+  done` or `See main task` are allowed for Research, Design, and Test
+  specification.
 - Current implementation subtask must have detail needed for review
   and execution.
 - Once a decision is made, remove obsolete or superseded
