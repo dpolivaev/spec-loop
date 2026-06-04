@@ -21,6 +21,20 @@ skill.
 
 Use the same ADR format whether or not a task artifact also exists.
 
+## Mandatory clarification gate
+
+Before drafting or revising the ADR as current truth, check whether
+any material unresolved question remains about the decision, decision
+criteria, trade-offs, credible options, or governing boundaries.
+
+If yes, create only enough ADR structure to hold the topic and
+current evidence safely, then use
+`../spec-loop-clarify-task/SKILL.md` before continuing. Do not wait
+for the user to ask for clarification explicitly.
+
+Re-run this gate whenever later ADR drafting exposes a new material
+unresolved branch.
+
 Before writing or revising, classify each input item into its proper
 section:
 - `Context` = pre-decision facts that would still be true under
@@ -38,11 +52,6 @@ Treat `Analysis` as the ADR's authoritative decision-and-reason
 ledger.
 Do not repeat an `Analysis` point elsewhere in decision-and-reason
 form.
-
-If material unresolved questions remain about the decision, decision
-criteria, or governing boundaries, create or update the ADR draft
-enough to hold its required sections, then use
-`../spec-loop-clarify-task/SKILL.md` before finalizing the ADR.
 
 When a task artifact exists, use its `Research`, `Analysis`, and
 other ADR-relevant sections such as `Constraints`, `Design`, and,

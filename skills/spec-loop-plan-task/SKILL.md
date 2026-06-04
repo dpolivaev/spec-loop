@@ -34,6 +34,17 @@ agrees.
 After implementation approval, follow
 `../spec-loop-implementation-flow/SKILL.md`.
 
+## Mandatory clarification gate
+
+Before drafting or revising a planning artifact as current truth,
+check whether any material unresolved branch remains about scope,
+behavior, policy, conceptual model, conceptual contract boundaries,
+constraints, route, acceptance logic, or verification.
+
+If yes, do only enough research to ask good clarification questions
+and use `../spec-loop-clarify-task/SKILL.md` before continuing. Do
+not wait for the user to ask for clarification explicitly.
+
 ## First classification
 
 Classify each work item as one of:
@@ -92,10 +103,8 @@ Rules:
 Standalone documentation work is outside this phase model unless the
 user or project instructions say otherwise.
 
-If planning depends on a material unresolved branch, do only enough
-research to ask good clarification questions and use
-`../spec-loop-clarify-task/SKILL.md` before continuing. Re-run this
-check whenever later drafting exposes a new material branch.
+Re-run the mandatory clarification gate whenever later drafting
+exposes a new material branch.
 
 ## Route selection
 
