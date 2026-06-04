@@ -58,6 +58,12 @@ rendering](../README.md#prepare-task-and-glossary-rendering). Then skip
 the `You send` prompt below. Use [Verification](#verification) to
 confirm the expected editor state.
 
+If you do not want to use the skill, use these editor-specific
+references instead:
+[VS Code-Based IDE Setup](../skills/spec-loop-setup-doc-rendering/vscode-setup.md)
+and
+[JetBrains Setup Reference](../skills/spec-loop-setup-doc-rendering/jetbrains-setup.md).
+
 ### You send
 
 ```text

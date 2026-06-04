@@ -33,7 +33,12 @@ format in
 **[glossary-format.md](../skills/spec-loop-write-glossary/glossary-format.md)**.
 
 The [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) skill helps users prepare and
-troubleshoot rendering for task files and glossary files.
+troubleshoot rendering for task files and glossary files. If a user
+does not want to use the skill directly, see
+**[vscode-setup.md](../skills/spec-loop-setup-doc-rendering/vscode-setup.md)**
+and
+**[jetbrains-setup.md](../skills/spec-loop-setup-doc-rendering/jetbrains-setup.md)**
+for manual editor-specific setup references.
 
 The [spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) skill is optional. It reconstructs
 retrospective review files from trusted pull requests, merge requests,

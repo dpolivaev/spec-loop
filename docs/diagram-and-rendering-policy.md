@@ -22,3 +22,8 @@ degrade the intended experience.
 
 For local preview setup, use the
 [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) skill.
+If you do not want to use the skill and prefer manual setup, use these
+editor-specific references:
+[VS Code-Based IDE Setup](../skills/spec-loop-setup-doc-rendering/vscode-setup.md)
+and
+[JetBrains Setup Reference](../skills/spec-loop-setup-doc-rendering/jetbrains-setup.md).

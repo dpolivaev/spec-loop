@@ -66,6 +66,12 @@ reviewing rendered task files and glossary files before continuing.
 Ask the agent to use the [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) skill to
 prepare your editor preview setup.
 
+If you do not want to use the skill and prefer manual setup, use these
+editor-specific references:
+[VS Code-Based IDE Setup](skills/spec-loop-setup-doc-rendering/vscode-setup.md)
+and
+[JetBrains Setup Reference](skills/spec-loop-setup-doc-rendering/jetbrains-setup.md).
+
 For example:
 
 ```text
