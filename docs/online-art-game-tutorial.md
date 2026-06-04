@@ -95,6 +95,10 @@ For the rest of this tutorial, if the assistant asks a clarification
 question and gives a recommendation, follow the recommendation unless
 you intentionally want a different path.
 
+If the assistant starts asking too many separate clarification
+questions and you want to speed the rest up, tell it:
+`Please prefer decision batches over separate questions for the rest of this clarification round.`
+
 ## Step 1: Confirm Spec Loop in the tutorial project
 
 ### You send
@@ -111,6 +115,13 @@ Tutorial-specific goals:
 - tell me how you will work here and restate the
   `PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
+
+### Your intent
+
+- Confirm that the assistant is actually following the installed Spec
+  Loop workflow in this repository.
+- Make it restate the planning-before-implementation approval boundary
+  before any real work starts.
 
 ### You see
 
@@ -248,6 +259,13 @@ requires creation of a task file.
 This is documentation-only work, we do not need a task file for it.
 ```
 
+### Your intent
+
+- Turn the project brief into durable project files before
+  implementation starts.
+- Lock in the shared vocabulary, attribution rules, and the rule that
+  every later code change needs a task file.
+
 ### You see
 
 - `README.md`:
@@ -304,6 +322,13 @@ project instructions file so future work can reuse it without
 re-asking.
 ```
 
+### Your intent
+
+- Resolve the external sibling dependency up front instead of letting
+  later steps guess or re-ask.
+- Record the confirmed path in project instructions so later work can
+  reuse it.
+
 ### You see
 
 - `../data-aggregator` exists as a sibling checkout.
@@ -328,6 +353,13 @@ Requirements:
 - add automated checks that prove the page can be served and opened
 - report the exact local serve command in chat
 ```
+
+### Your intent
+
+- Force real external API research before implementation instead of
+  invented or local-only assumptions.
+- Keep the page task reviewable with exact serve/open verification
+  requirements.
 
 ### You see (plan)
 
@@ -419,9 +451,21 @@ Record one final choice with rationale. In the same ADR:
 - mark persistence as out of scope and deferred to the leaderboard work
 ```
 
+### Your intent
+
+- Ask for the criteria discussion in a way that should make the
+  assistant use the normal `spec-loop-clarify-task` flow instead of
+  free-form brainstorming.
+- Capture stack, design style, tooling, and the persistence deferral
+  in one durable ADR.
+
 ### You see
 
-- The ADR is preceded by a decision-criteria discussion.
+- The ADR is preceded by a decision-criteria discussion in the normal
+  `spec-loop-clarify-task` format.
+- If the assistant starts an unstructured discussion instead, stop it
+  and say:
+  `Use the spec-loop-clarify-task skill for the criteria discussion before writing the ADR.`
 - ADR:
   - Compares realistic stack options for the initial game implementation and records the chosen one with rationale.
   - Records the required core design style, not only the implementation stack.
@@ -469,6 +513,13 @@ subtask. Create only:
 - the overall task,
 - subtasks containing Scope and Motivation each.
 ```
+
+### Your intent
+
+- Make the assistant break gameplay into reviewable subtasks instead
+  of designing the whole feature in one pass.
+- Reuse the approved ADR and earlier research rather than
+  rediscovering those decisions inside the task.
 
 ### You see (plan)
 
@@ -546,6 +597,13 @@ Let us work on the leaderboard in this repository.
 I want you to fully design the new leaderboard task in the backlog.
 ```
 
+### Your intent
+
+- Intentionally leave the leaderboard under-specified so the assistant
+  must surface the missing persistence decision.
+- Once that branch is resolved, keep the work staged: in-memory first,
+  persistence later.
+
 ### You see (clarification)
 
 - If the assistant starts fully designing the leaderboard task instead
@@ -569,8 +627,9 @@ Break the implementation work down in this order:
 
 Design only the in-memory leaderboard subtask fully.
 
-If any other unresolved decisions remain, present them in decision
-batches before you continue with the design.
+If any other unresolved decisions remain, please prefer decision
+batches over separate questions for the rest of this clarification
+round.
 ```
 
 If the assistant asks any other clarification question, or presents a
