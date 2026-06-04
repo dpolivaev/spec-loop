@@ -15,7 +15,6 @@ Use this exact top-level section order:
 - `Context:`
 - `Alternatives:`
 - `Analysis:`
-- `Consequences:`
 
 Use plain label lines with colon suffixes, as in existing ADR files.
 
@@ -41,15 +40,23 @@ Put the chosen outcome first.
 Keep it short, direct, and reviewable. The reader should understand
 the answer without reading the rest of the document.
 
+Include explicit deferrals or major retained boundaries here when they
+are part of the chosen outcome.
+
 ### Context
 
-Record the factual background, constraints, current-state findings,
-and other conditions that shape the decision.
+Record only pre-decision facts: background, constraints,
+current-state findings, scope boundaries, explicit deferrals, and
+other conditions that were already true before the choice.
+
+A `Context` item must still be true if another credible alternative
+had been chosen.
 
 When a task artifact exists, draw this section mainly from its
 `Research` section.
 
-Do not turn `Context` into a transcript or argument section.
+Do not put accepted option choices, ranking outcomes, clarified
+preference statements, or decision rationale here.
 
 ### Alternatives
 
@@ -63,8 +70,8 @@ briefly rather than inflating the section.
 
 ### Analysis
 
-Record the accepted clarification decisions and brief reasons that
-support the chosen decision.
+Record the accepted decision criteria, accepted clarification
+decisions, and brief reasons that support the chosen decision.
 
 Use a compact bullet list, not a prose paragraph.
 
@@ -73,17 +80,12 @@ Keep only the ADR-relevant subset here.
 When a task artifact exists, draw this section from the ADR-relevant
 subset of its `Analysis` section. Do not copy the whole task ledger.
 
-Do not duplicate the full alternatives here. Do not put open
-questions, confidence values, transient notes, chain-of-thought,
-chat history, or step-by-step internal reasoning here.
-
-### Consequences
-
-Record the concrete effects of the decision.
-
-Include costs, follow-on constraints, migration implications,
-operational consequences, and other meaningful trade-offs that remain
-after the choice.
+`Analysis` is the ADR's authoritative decision-and-reason ledger.
+Do not repeat its points elsewhere in decision-and-reason form.
+Do not duplicate the full alternatives here.
+Do not put open questions, confidence values, transient notes,
+chain-of-thought, chat history, or step-by-step internal reasoning
+here.
 
 ## Update and supersede rules
 
@@ -92,5 +94,4 @@ after the choice.
 - Create a new ADR when the architectural decision is materially new
   or when an accepted ADR is being replaced.
 - When one ADR supersedes another, mark the older ADR as
-  `Superseded` and mention the replacement in the older ADR's
-  `Consequences:` section or equivalent nearby prose.
+  `Superseded` and mention the replacement in nearby prose.

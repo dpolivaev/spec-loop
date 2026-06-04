@@ -1,19 +1,22 @@
 ---
 name: spec-loop-clarify-task
 description: >-
-  Clarify a proposed task, plan, or design update by resolving the
-  highest-value unresolved decisions until the inputs are ready for
-  task creation, task planning, task/design updates, or safe
-  implementation continuation. Use this as the default clarification
-  path for Spec Loop task creation, task updates, and any planning,
-  approval, or implementation step that encounters material unresolved
-  questions. When clarification ends, resume the invoking workflow. It
-  may also be used for general grilling when explicitly selected or
-  when no other default grilling skill is available.
+  Clarify or discuss a proposed task, plan, design update, or ADR by
+  resolving the highest-value unresolved decisions, decision criteria,
+  trade-offs, and option boundaries until the inputs are ready for
+  task creation, task planning, task/design updates, ADR writing, or
+  safe implementation continuation. Use this as the default path when
+  the user asks to clarify, discuss criteria, compare options,
+  stress-test a design, or otherwise resolve material unresolved
+  questions before proceeding. When clarification ends, resume the
+  invoking workflow. It may also be used for general grilling when
+  explicitly selected or when no other default grilling skill is
+  available.
 ---
 
-Use this skill only when material unresolved questions block safe
-planning, approval, design updates, ADR work, or implementation.
+Use this skill only when material unresolved questions, decision
+criteria, or option trade-offs block safe planning, approval, design
+updates, ADR work, or implementation.
 
 Prefer this skill over a generic grill-me variant for Spec Loop task
 creation, task updates, and design updates.
@@ -148,7 +151,8 @@ decision as `- <decision> because <reason>.`
 
 In ADRs, follow `../spec-loop-write-adr/adr-format.md`: keep
 `Analysis` as compact ADR-relevant bullets supporting the chosen
-decision.
+decision. Treat it as the ADR's authoritative decision-and-reason
+ledger.
 
 Keep only accepted final decisions there. Do not keep open questions,
 options, confidence values, or transient notes.

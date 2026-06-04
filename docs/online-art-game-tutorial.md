@@ -89,13 +89,23 @@ My coding tool may run in a terminal, but I review files in
 - your editor is ready to review AsciiDoc glossary files with
   embedded diagrams.
 
+## ⚠️ Default rule for later clarification questions
+
+For the rest of this tutorial, if the assistant asks a clarification
+question and gives a recommendation, follow the recommendation unless
+you intentionally want a different path.
+
+If the assistant starts asking too many separate clarification
+questions and you want to speed the rest up, tell it:
+`Please prefer decision batches over separate questions for the rest of this clarification round.`
+
 ## Step 1: Confirm Spec Loop in the tutorial project
 
 ### You send
 
 ```text
 I am following the Spec Loop online art game tutorial from my browser.
-Please work in this project according to the installed Spec Loop setup.
+Please work in this project according to the Spec Loop workflow defined by the installed skills.
 
 Tutorial-specific goals:
 - use the normal planning workflow for non-trivial work,
@@ -106,12 +116,19 @@ Tutorial-specific goals:
   `PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
 
+### Your intent
+
+- Confirm that the assistant is actually following the installed Spec
+  Loop workflow in this repository.
+- Make it restate the planning-before-implementation approval boundary
+  before any real work starts.
+
 ### You see
 
 Read the assistant's final response carefully, even if you skip
 intermediate reasoning. Before continuing, confirm these points:
 
-- the assistant says it will follow the installed Spec Loop workflow
+- the assistant says it will follow the Spec Loop workflow defined by the installed skills
   in this project;
 - the assistant makes clear that non-trivial work will go through the
   normal planning path before implementation;
@@ -242,6 +259,13 @@ requires creation of a task file.
 This is documentation-only work, we do not need a task file for it.
 ```
 
+### Your intent
+
+- Turn the project brief into durable project files before
+  implementation starts.
+- Lock in the shared vocabulary, attribution rules, and the rule that
+  every later code change needs a task file.
+
 ### You see
 
 - `README.md`:
@@ -293,8 +317,17 @@ into a parallel directory first.
 If the clone fails because you do not have the needed access, stop and
 ask me either to run the clone myself or to give you the needed access.
 
-Once the sibling checkout is available, continue with the next step.
+After the correct location is confirmed, add it to the active
+project instructions file so future work can reuse it without
+re-asking.
 ```
+
+### Your intent
+
+- Resolve the external sibling dependency up front instead of letting
+  later steps guess or re-ask.
+- Record the confirmed path in project instructions so later work can
+  reuse it.
 
 ### You see
 
@@ -306,14 +339,6 @@ Once the sibling checkout is available, continue with the next step.
 ### You send
 
 ```text
-A sibling `data-aggregator` checkout exists at `../data-aggregator`
-relative to this repository root (parallel directory, not inside this repository).
-Use it for reference only.
-
-After the correct location is confirmed, add it to the active
-project instructions file so future work can reuse it without
-re-asking.
-
 Let us work on the museum overview page in this repository by creating
 `site/index.html`.
 
@@ -328,6 +353,13 @@ Requirements:
 - add automated checks that prove the page can be served and opened
 - report the exact local serve command in chat
 ```
+
+### Your intent
+
+- Force real external API research before implementation instead of
+  invented or local-only assumptions.
+- Keep the page task reviewable with exact serve/open verification
+  requirements.
 
 ### You see (plan)
 
@@ -419,9 +451,21 @@ Record one final choice with rationale. In the same ADR:
 - mark persistence as out of scope and deferred to the leaderboard work
 ```
 
+### Your intent
+
+- Ask for the criteria discussion in a way that should make the
+  assistant use the normal `spec-loop-clarify-task` flow instead of
+  free-form brainstorming.
+- Capture stack, design style, tooling, and the persistence deferral
+  in one durable ADR.
+
 ### You see
 
-- The final ADR is preceded by a decision-criteria discussion.
+- The ADR is preceded by a decision-criteria discussion in the normal
+  `spec-loop-clarify-task` format.
+- If the assistant starts an unstructured discussion instead, stop it
+  and say:
+  `Use the spec-loop-clarify-task skill for the criteria discussion before writing the ADR.`
 - ADR:
   - Compares realistic stack options for the initial game implementation and records the chosen one with rationale.
   - Records the required core design style, not only the implementation stack.
@@ -439,7 +483,7 @@ Record one final choice with rationale. In the same ADR:
 
 ### After completion (commit)
 
-- After you accept the ADR as done: ask the assistant to `commit the ADR change`.
+- After you accept the ADR as done: ask the assistant to `commit the ADR`.
   This step is ADR-only and does not involve moving anything to `done`.
 
 ### You learned (this step)
@@ -469,6 +513,13 @@ subtask. Create only:
 - the overall task,
 - subtasks containing Scope and Motivation each.
 ```
+
+### Your intent
+
+- Make the assistant break gameplay into reviewable subtasks instead
+  of designing the whole feature in one pass.
+- Reuse the approved ADR and earlier research rather than
+  rediscovering those decisions inside the task.
 
 ### You see (plan)
 
@@ -536,47 +587,67 @@ subtask. Create only:
   current subtask in detail, implement it, verify it, commit it, then
   move on.
 
-## Step 6: Leaderboard (In-Memory, Then Persistence)
+## Step 6: Leaderboard Clarification (In-Memory, Then Persistence)
 
 ### You send
 
 ```text
 Let us work on the leaderboard in this repository.
 
+I want you to fully design the new leaderboard task in the backlog.
+```
+
+### Your intent
+
+- Intentionally leave the leaderboard under-specified so the assistant
+  must surface the missing persistence decision.
+- Once that branch is resolved, keep the work staged: in-memory first,
+  persistence later.
+
+### You see (clarification)
+
+- If the assistant starts fully designing the leaderboard task instead
+  of clarifying first, stop it and say:
+  `Use the spec-loop-clarify-task skill before designing this task.`
+- The assistant does not fully design the task immediately.
+- It first surfaces the material unresolved branch or branches and asks
+  clarifying questions in the normal `spec-loop-clarify-task` format:
+  - `Question:`
+  - `Recommendation:`
+  - `Options:` when explicit options are needed
+  - `Reason:`
+
+If the assistant's first clarification is about persistence scope,
+reply exactly with:
+
+```text
 Break the implementation work down in this order:
 1. in-memory leaderboard implementation
 2. persistence implementation
 
-The sorting must be reached level descending and total completion time
-ascending for ties. Persistence acceptance criteria are that data
-survives restart, the storage location is documented, and the reset
-procedure for local development and tests is documented with an exact
-command.
+Design only the in-memory leaderboard subtask fully.
 
-Keep leaderboard terminology aligned with the established project
-language.
+If any other unresolved decisions remain, please prefer decision
+batches over separate questions for the rest of this clarification
+round.
 ```
 
-### You see (plan)
+If the assistant asks any other clarification question, or presents a
+decision batch, accept the recommended options unless you intentionally
+want a different path. If it includes persistence scope again and
+recommends something else, correct that answer to the in-memory-then-
+persistence path above.
 
-- A task file is created automatically and is waiting for your
-  review.
+### You see (plan after clarification)
+
+- A separate leaderboard backlog task is created automatically and is
+  waiting for your review.
 - Task file:
   - exists with ordered implementation subtasks,
   - keeps future implementation subtasks lightweight,
   - requires a separate persistence ADR before persistence
-    implementation is fully designed.
-
-### You send
-
-```text
-Please fully design only the in-memory leaderboard subtask.
-```
-
-### You see (in-memory subtask design)
-
-- Task file: the in-memory leaderboard subtask is fully designed; future
-  implementation subtasks remain lightweight.
+    implementation is fully designed, and
+  - has the in-memory leaderboard subtask fully designed.
 
 ### You send
 
@@ -647,6 +718,8 @@ Implement it.
 
 ### You learned (this step)
 
+- Intentionally incomplete prompts can trigger proactive clarification
+  before task drafting.
 - Ordered delivery reduces risk: get the in-memory behavior working
   first, make the persistence decision explicitly, then implement
   persistence.

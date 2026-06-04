@@ -86,13 +86,23 @@ My coding tool may run in a terminal, but I review files in
 - your editor is ready to review AsciiDoc glossary files with
   embedded diagrams.
 
+## ⚠️ Default rule for later clarification questions
+
+For the rest of this tutorial, if the assistant asks a clarification
+question and gives a recommendation, follow the recommendation unless
+you intentionally want a different path.
+
+If the assistant starts asking too many separate clarification
+questions and you want to speed the rest up, tell it:
+`Please prefer decision batches over separate questions for the rest of this clarification round.`
+
 ## Step 1: Confirm Spec Loop in the tutorial project
 
 ### You send
 
 ```text
 I am following the Spec Loop Wordle tutorial from my browser.
-Please work in this project according to the installed Spec Loop setup.
+Please work in this project according to the Spec Loop workflow defined by the installed skills.
 
 Tutorial-specific goals:
 - use the normal planning workflow for non-trivial work,
@@ -104,12 +114,19 @@ Tutorial-specific goals:
   `PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
 
+### Your intent
+
+- Confirm that the assistant is actually following the installed Spec
+  Loop workflow in this repository.
+- Make it restate the planning-before-implementation approval boundary
+  before any real work starts.
+
 ### You see
 
 Read the assistant's final response carefully, even if you skip
 intermediate reasoning. Before continuing, confirm these points:
 
-- the assistant says it will follow the installed Spec Loop workflow
+- the assistant says it will follow the Spec Loop workflow defined by the installed skills
   in this project;
 - the assistant makes clear that non-trivial work will go through the
   normal planning path before implementation;
@@ -203,7 +220,7 @@ Gameplay rules:
 
 Interaction modes:
 - CLI mode is required
-- later, add a minimal Swing UI that reuses the same core logic
+- later, add a minimal UI that reuses the same core logic
 
 Word list rules:
 - keep an internal packaged word list
@@ -217,7 +234,7 @@ Technical direction:
 Please write `README.md` for this repository based on the project brief.
 Include the project brief verbatim in the README under a "Project Brief"
 section. The README must clearly describe the game rules, the later CLI
-and Swing paths, and the word-list expectations. Keep the README concise
+and UI paths, and the word-list expectations. Keep the README concise
 and practical.
 
 Also create `glossary.adoc` from the approved project brief. It should
@@ -236,6 +253,13 @@ requires creation of a task file.
 
 This is documentation-only work, we do not need a task file for it.
 ```
+
+### Your intent
+
+- Turn the project brief into durable project files before
+  implementation starts.
+- Lock in the shared vocabulary and the rule that every later code
+  change needs a task file.
 
 ### You see
 
@@ -282,6 +306,13 @@ The scope must include:
   layout,
 - just enough code to prove the application can build, test, and run.
 ```
+
+### Your intent
+
+- Start with a small implementation task that proves the normal
+  plan-review-implement loop.
+- Keep scope tight: just enough Gradle and Java setup to build, test,
+  and run.
 
 ### You see (plan)
 
@@ -344,6 +375,13 @@ subtask. Create only:
 - the overall task,
 - subtasks containing Scope and Motivation each.
 ```
+
+### Your intent
+
+- Make the assistant decompose the core gameplay model into reviewable
+  subtasks instead of over-designing everything at once.
+- Establish domain terms and boundaries that later engine and
+  interface work will reuse.
 
 ### You see (plan)
 
@@ -424,6 +462,13 @@ The scope must include:
   validation.
 ```
 
+### Your intent
+
+- Treat word-list loading as real planned work, not a quick hidden
+  utility.
+- Force explicit file-format research and automated tests before
+  implementation.
+
 ### You see (plan)
 
 - A task file is created automatically, and implementation still
@@ -480,6 +525,12 @@ Break the work down into these subtasks:
 1. define game state model
 2. implement game engine logic
 ```
+
+### Your intent
+
+- Separate stable state structure from state-transition behavior.
+- Preserve ordered subtask review instead of merging the whole engine
+  into one jump.
 
 ### You see (plan)
 
@@ -542,6 +593,12 @@ The scope must include:
 - verifying that the full test suite still passes.
 ```
 
+### Your intent
+
+- Keep a testing-focused change narrow and reviewable.
+- Require proof that the full suite still passes after the assertion
+  migration.
+
 ### You see (plan)
 
 - A task file is created automatically, and implementation still
@@ -598,9 +655,21 @@ Also record the practical verification command for checking the CLI help
 or basic option parsing path.
 ```
 
+### Your intent
+
+- Ask for the criteria discussion in a way that should make the
+  assistant use the normal `spec-loop-clarify-task` flow instead of
+  free-form brainstorming.
+- Record the parsing decision as a durable ADR with a real
+  verification command.
+
 ### You see
 
-- The final ADR is preceded by a criteria discussion.
+- The final ADR is preceded by a criteria discussion in the normal
+  `spec-loop-clarify-task` format.
+- If the assistant starts an unstructured discussion instead, stop it
+  and say:
+  `Use the spec-loop-clarify-task skill for the criteria discussion before writing the ADR.`
 - ADR:
   - compares realistic options,
   - records the chosen parsing approach with rationale,
@@ -641,6 +710,12 @@ Break the implementation work down in this order:
 3. document CLI build and usage
 4. document application distribution packaging
 ```
+
+### Your intent
+
+- Make the CLI feature follow the approved ADR instead of
+  rediscovering parsing choices inside the task.
+- Keep runtime behavior, rendering, and docs in ordered increments.
 
 ### You see (plan)
 
@@ -691,7 +766,7 @@ Break the implementation work down in this order:
   keeping the increments ordered and separately accepted preserves
   reviewability.
 
-## Step 10: Minimal Swing UI
+## Step 10: UI Clarification and Minimal Swing UI
 
 ### You send
 
@@ -699,23 +774,59 @@ Break the implementation work down in this order:
 Starting point: build on the existing gameplay logic in this
 repository.
 
-Let us work on a minimal Swing UI in this repository.
+Let us work on a UI in this repository.
 
-Requirements:
-- keep CLI availability,
-- when a display is available and `--cli` is not set, the application
-  should start the UI,
-- in headless mode or when `--cli` is set, the application should use
-  the CLI path,
-- the UI should reuse existing gameplay logic instead of duplicating it.
+I want you to fully design the new UI task in the backlog.
+```
+
+### Your intent
+
+- Leave the UI approach open so the assistant has to surface the
+  missing framework decision.
+- After that, steer it to Swing while keeping CLI fallback and
+  launch-policy constraints explicit.
+
+### You see (clarification)
+
+- The UI approach is intentionally left open here.
+- If the assistant asks what UI approach or framework this task should
+  assume, choose Swing even if Swing is not the recommendation and is
+  not listed in its options.
+- If the assistant starts fully designing the task without first asking
+  what UI approach/framework it should assume, stop it and say:
+  `Use the spec-loop-clarify-task skill before designing this task.`
+- If it still skips that question, say:
+  `Before designing this task, ask which UI approach/framework this task should assume.`
+
+If the assistant asks what UI approach/framework this task should
+assume, reply exactly with:
+
+```text
+Use Swing.
+
+Keep CLI availability.
+When a display is available and `--cli` is not set, the application
+should start the UI.
+In headless mode or when `--cli` is set, the application should use
+the CLI path.
 
 Break the implementation work down in this order:
 1. prepare shared input validation for CLI and UI
 2. implement the minimal Swing UI
 3. document UI build and usage
+
+If any other unresolved decisions remain, please prefer decision
+batches over separate questions for the rest of this clarification
+round.
 ```
 
-### You see (plan)
+If the assistant asks any other clarification question, or presents a
+decision batch, follow the recommended options unless you intentionally
+want a different path. If it includes the UI approach/framework
+question again and recommends something else, correct that answer to
+Swing.
+
+### You see (plan after clarification)
 
 - A task file is created automatically with a task header and an
   ordered subtask breakdown, and it is waiting for your review.
@@ -757,8 +868,11 @@ Break the implementation work down in this order:
 
 ### You learned (this step)
 
-- The interface layer can stay small and reviewable when shared
-  validation and engine behavior are separated first.
+- Leaving the UI approach open can force the missing framework decision
+  into a clarification round before task design.
+- Once the UI direction is chosen, the interface layer can stay small
+  and reviewable when shared validation and engine behavior are
+  separated first.
 
 ## You learned
 

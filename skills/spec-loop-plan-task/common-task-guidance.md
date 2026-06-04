@@ -57,9 +57,11 @@ list the known gaps, open questions, and unresolved decisions.
 ### Research
 
 Start with research unless waived. Record observations, constraints,
-verified facts only. Plans go in **Design**. Documents current
-system: behavior, implementation, legacy arch, flows, data
-structures, findings, and constraints.
+verified facts, and current-state findings only. Plans go in
+**Design**. Documents current system: behavior, implementation,
+legacy arch, flows, data structures, findings, and constraints.
+
+Do not repeat `Analysis` points here in decision-and-reason form.
 
 ### Scenario
 
@@ -101,21 +103,28 @@ update the task, get approval, and continue.
 
 ### Analysis
 
-Cross-cutting ledger of final clarification decisions and reasons.
+Authoritative ledger of final clarification decisions and reasons.
 
 Use one short bullet per final decision:
 `- <decision> because <reason>.`
 
 Keep only final decisions here. Move structural, behavioral,
-contract, and verification detail into the affected canonical
-sections.
+contract, and verification consequences into the affected canonical
+sections and diagrams.
 
+`Analysis` is read together with the other sections:
+- do not repeat `Analysis` points in other narrative text; but
+- the affected sections and diagrams must still contain names,
+  structures, contracts, lists, tables, diagram content, and test
+  cases when those are the actual consequences of the decision.
 Do not put open questions, options, confidence values, tentative
 assumptions, or transient working notes here.
 
-When a final clarification decision changes another section, update
-that section too. Clarification workflow and recording procedure
-belong to `spec-loop-clarify-task`.
+When a final clarification decision changes another section or
+diagram, update that section or diagram to reflect the resulting
+state. Diagrams should reflect any relevant textual decisions they
+own. Clarification workflow and recording procedure belong to
+`spec-loop-clarify-task`.
 
 ### Design
 
@@ -170,6 +179,8 @@ When Scenario exists, Design uses canonical Scenario terms.
 ### Test specification
 
 Documents verification structure and concrete test coverage.
+Do not restate `Analysis` points here in decision-and-reason form;
+record the resulting verification consequences instead.
 
 ### Implementation notes
 
