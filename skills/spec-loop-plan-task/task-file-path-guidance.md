@@ -31,15 +31,14 @@ In tasks with subtasks, the shared readiness rules apply to the active
 subtask and any task-level context it depends on, not to future
 subtasks that are not yet current.
 
-During clarification on the task-file path, keep the active task file
-aligned with the current final clarification state, including the
-`Analysis` section and every affected canonical section.
+During clarification on the task-file path, the active task file is
+the governing artifact. Follow
+`../spec-loop-clarify-task/SKILL.md` for clarification batching and
+recording rules.
 
-However, you may accumulate multiple final clarification decisions
-before syncing them into the task file.
-
-Do not let the task file fall materially behind final clarification
-state. Sync it at a clean checkpoint before that state would be hard
+Keep the task file aligned with the current final clarification
+state, including the `Analysis` section and every affected canonical
+section. Sync at a clean checkpoint before that state would be hard
 to reconstruct safely from chat alone, and always before
 clarification returns control to another workflow.
 

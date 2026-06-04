@@ -1,13 +1,12 @@
 # Example task: Wordle CLI adapter with embedded PlantUML
 
 This compact example task shows valid embedded PlantUML for four common
-task-diagram needs.
-It is primarily a collection of valid diagram patterns in a realistic
-task context, not a required minimum task size and not a signal that
-every first planning pass should be this detailed.
+task-diagram needs. It is primarily a collection of valid diagram
+patterns in a realistic task context, not a required minimum task size
+and not a signal that every first planning pass should be this
+detailed.
 
-This example task shows valid embedded PlantUML for four common
-task-diagram needs:
+It covers:
 
 - filesystem / project structure
 - component interaction

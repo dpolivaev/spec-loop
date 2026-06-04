@@ -116,28 +116,16 @@ ADR-only work is taskless by default. Use a task only when the User
 explicitly asks for one, project rules require one, or the ADR work is
 part of a larger executable change already being tracked in a task.
 
-Use `../spec-loop-write-adr/SKILL.md` for ADR structure, update
-rules, and clarification-time routing.
-
-If ADR work still has material unresolved questions about the
-decision, decision criteria, or governing boundaries,
-`../spec-loop-write-adr/SKILL.md` may invoke
-`../spec-loop-clarify-task/SKILL.md`, preserving any clarification
-grill level already in force for the work item.
+Use `../spec-loop-write-adr/SKILL.md` for ADR location, naming,
+structure, update rules, and clarification-time handling.
 
 Use ADRs for decisions affecting public behavior, dependencies, or
 long-term design.
 
-- Record architecture decisions in `architecture-decisions/` as one
-  file per decision with meaningful names.
-- ADR file names should use readable descriptive words, without
-  prefixes, numbering, or abbreviations.
-
 If ADR work is part of a larger executable change, keep it in that
 task. Use the task's `Research` and `Analysis` sections as ADR input,
 plan the documentation update during PLAN, and use
-`../spec-loop-write-adr/SKILL.md` when performing the ADR update during
-IMPLEMENTATION.
+`../spec-loop-write-adr/SKILL.md` during IMPLEMENTATION.
 
 ## Common task guidance
 
@@ -238,9 +226,6 @@ When the task-file path is in use:
   changes;
 - chat stays for coordination and approvals, but the task file is the
   durable planning artifact for that task;
-- during clarification, sync the task file at clean checkpoints to
-  preserve final clarification state; do not ask the User to review
-  those sync edits separately before clarification is finished;
 - before treating task-file planning as complete or asking for
   approval to move from planning into implementation on the
   task-file path, use

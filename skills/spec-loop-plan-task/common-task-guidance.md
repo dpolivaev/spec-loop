@@ -101,24 +101,21 @@ update the task, get approval, and continue.
 
 ### Analysis
 
-Cross-cutting record of final clarification decisions and brief
-reasons.
+Cross-cutting ledger of final clarification decisions and reasons.
 
-Use this section when clarification produces final decisions for the
-current increment. Record final decisions only. Use one short bullet
-per decision in the form `- <decision> because <reason>.`
+Use one short bullet per final decision:
+`- <decision> because <reason>.`
 
-`Analysis` is a compact ledger, not a second Design or Constraints
-section. Keep each item to one short line and move all structural,
-behavioral, contract, and verification detail into the affected
-canonical sections.
+Keep only final decisions here. Move structural, behavioral,
+contract, and verification detail into the affected canonical
+sections.
 
 Do not put open questions, options, confidence values, tentative
 assumptions, or transient working notes here.
 
-Final clarification decisions may affect any other section. When one
-changes Scope, Scenario, Constraints, Briefing, Research, Design, or
-Test specification, update those sections too.
+When a final clarification decision changes another section, update
+that section too. Clarification workflow and recording procedure
+belong to `spec-loop-clarify-task`.
 
 ### Design
 

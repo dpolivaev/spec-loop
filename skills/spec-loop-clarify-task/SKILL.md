@@ -332,14 +332,9 @@ not ask the User to review them separately during clarification. If
 unresolved questions remain after a sync, continue clarification from
 the updated task file.
 
-When the governing artifact is an ADR draft, keep its `Analysis`
-section and every affected ADR section aligned with the current final
-clarification state before clarification returns control to
-`../spec-loop-write-adr/SKILL.md`.
-
-When the governing artifact is a task artifact, keep its `Analysis`
-section and every affected task section aligned with the current
-final clarification state.
+Before clarification returns, keep the governing artifact's
+`Analysis` section and every affected section aligned with the
+current final clarification state.
 
 For each clarification question you ask, start with a brief opening
 line and then provide the recommendation in compact form.

@@ -25,15 +25,7 @@ If material unresolved questions remain about the decision, decision
 criteria, or governing boundaries, create or update the ADR draft
 enough to hold its required sections, then use
 `../spec-loop-clarify-task/SKILL.md` before finalizing the ADR.
-Clarification invoked from this skill records accepted clarification
-results in the ADR's `Analysis` section.
 
 When a task artifact exists, use its `Research` and `Analysis`
 sections as the primary ADR inputs. Otherwise use the confirmed chat
 clarification and other current evidence.
-
-When the requested work updates an existing ADR:
-- update in place when it is still the same decision and the change
-  only clarifies, corrects, or completes that ADR; and
-- create a new ADR and mark the old one as superseded when an
-  accepted architectural decision is being materially replaced.
