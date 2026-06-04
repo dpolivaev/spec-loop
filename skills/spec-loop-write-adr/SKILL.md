@@ -26,6 +26,7 @@ criteria, or governing boundaries, create or update the ADR draft
 enough to hold its required sections, then use
 `../spec-loop-clarify-task/SKILL.md` before finalizing the ADR.
 
-When a task artifact exists, use its `Research` and `Analysis`
-sections as the primary ADR inputs. Otherwise use the confirmed chat
-clarification and other current evidence.
+When a task artifact exists, use its `Research`, `Analysis`, and
+other ADR-relevant sections such as `Constraints`, `Design`, and,
+when relevant, `Scenario` as the primary ADR inputs. Otherwise use
+confirmed chat clarification and other current evidence.

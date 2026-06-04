@@ -154,18 +154,17 @@ current work item.
 Keep final clarification decisions in the governing artifact's
 `Analysis` section.
 
-In task artifacts, keep `Analysis` close to `Research` and record
-final clarification decisions in very short form:
-- `<decision> because <reason>.`
+In both artifact types, keep accepted final clarification results
+only. Do not put open questions, options, confidence values,
+tentative assumptions, or transient working notes there.
 
-In ADRs, use `Analysis` for the ADR-relevant subset of final
-clarification decisions, still recorded as short bullets with brief
-reasons.
-
-`Analysis` is a compact ledger, not a second Design or Constraints
-section. Include final decisions only. Do not put open questions,
-options, confidence values, tentative assumptions, or transient
-working notes there.
+- In task artifacts, follow
+  `../spec-loop-plan-task/common-task-guidance.md`: place `Analysis`
+  immediately after `Research` and record each final clarification
+  decision as `- <decision> because <reason>.`
+- In ADRs, follow `../spec-loop-write-adr/adr-format.md`: keep
+  `Analysis` as compact ADR-relevant bullets supporting the chosen
+  decision, not as the full task ledger.
 
 Clarification is cross-cutting. A final clarification decision may
 affect any section of the governing artifact. When a clarification
