@@ -52,6 +52,20 @@ changes are allowed. Executable changes are not.
 When this skill is invoked from implementation, phase handling
 remains governed by `../spec-loop-implementation-flow/SKILL.md`.
 
+## Plain confirmation exclusion
+
+Handle obvious typo fixes, trivial one-word disambiguations, and
+simple factual confirmations inline when they would not materially
+change scope, behavior, policy, conceptual model, conceptual
+contract boundaries, acceptance logic, route, Design, or Test
+specification.
+
+These are outside the grilling protocol: no grill-level notice,
+decision batches, or `Question:` / `Recommendation:` format.
+
+If such a point turns out to have a material design consequence,
+resume normal clarification.
+
 ## Clarification grill level
 
 Clarification is the goal. It combines two methods:
@@ -61,13 +75,15 @@ Clarification is the goal. It combines two methods:
   test, or confirm remaining uncertainty.
 
 The current clarification grill level controls how strongly
-clarification relies on grilling rather than reasoning for the
-current work item.
+clarification relies on grilling rather than reasoning.
 
-Use the current clarification grill level already in force for the
-current work item when one exists. If the user has not set one for
-the work item and no session or project default is already in force,
-default to `medium`.
+Use the current grill level already in force for the work item when
+one exists. Otherwise, if no user, session, or project default is in
+force, default to `medium`.
+
+Keep the grill level implicit unless clarification is likely to
+require more than 3 user-facing clarification steps. Plain
+confirmations under the exclusion above do not count.
 
 Levels:
 - `light` = stronger bias toward reasoning and lighter grilling:
@@ -79,16 +95,16 @@ Levels:
   in chat through decision batches, ask more direct questions during
   the clarification session, and exit later.
 
-On the first clarification turn for a task or work item in the
-current conversation, state the current clarification grill level and
-briefly explain what it changes: `light` means fewer questions and
-fewer decisions shown in chat; `heavy` means more. Do not repeat
-this notice on later clarification turns for the same task or work
-item unless the user asks or the level changes. When clarification
-starts for a different task or work item, give the notice again.
+If clarification is likely to require more than 3 user-facing
+clarification steps, state the current grill level once for that work
+item and briefly explain it: `light` means fewer questions and fewer
+surfaced decisions; `heavy` means more. If that only becomes clear
+later, give the notice then before continuing. Do not repeat it
+unless the user asks, the level changes, or clarification starts for a
+different work item.
 
-A user-facing clarification step is either one presented decision
-batch or one `Question:` block that requires new user input.
+A user-facing clarification step is one decision batch or one
+`Question:` block that requires new user input.
 
 After every clarification step, re-run the exit check. Spend another
 clarification step only when the remaining unresolved point is
@@ -403,8 +419,8 @@ its direct consequences in later turns unless the User asked for a
 recap, reopened it, or one brief reminder is strictly necessary to
 keep the current question clear and easy to answer.
 
-At each step, either present one decision batch or ask one question
-with its Recommendation.
+At each clarification step, either present one decision batch or ask
+one question with its Recommendation.
 
 ## Clarification exit check
 
