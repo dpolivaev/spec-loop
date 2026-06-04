@@ -92,7 +92,7 @@ My coding tool may run in a terminal, but I review files in
 
 ```text
 I am following the Spec Loop Wordle tutorial from my browser.
-Please work in this project according to the installed Spec Loop setup.
+Please work in this project according to the Spec Loop workflow defined by the installed skills.
 
 Tutorial-specific goals:
 - use the normal planning workflow for non-trivial work,
@@ -109,7 +109,7 @@ Tutorial-specific goals:
 Read the assistant's final response carefully, even if you skip
 intermediate reasoning. Before continuing, confirm these points:
 
-- the assistant says it will follow the installed Spec Loop workflow
+- the assistant says it will follow the Spec Loop workflow defined by the installed skills
   in this project;
 - the assistant makes clear that non-trivial work will go through the
   normal planning path before implementation;

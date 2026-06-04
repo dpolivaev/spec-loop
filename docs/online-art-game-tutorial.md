@@ -95,7 +95,7 @@ My coding tool may run in a terminal, but I review files in
 
 ```text
 I am following the Spec Loop online art game tutorial from my browser.
-Please work in this project according to the installed Spec Loop setup.
+Please work in this project according to the Spec Loop workflow defined by the installed skills.
 
 Tutorial-specific goals:
 - use the normal planning workflow for non-trivial work,
@@ -111,7 +111,7 @@ Tutorial-specific goals:
 Read the assistant's final response carefully, even if you skip
 intermediate reasoning. Before continuing, confirm these points:
 
-- the assistant says it will follow the installed Spec Loop workflow
+- the assistant says it will follow the Spec Loop workflow defined by the installed skills
   in this project;
 - the assistant makes clear that non-trivial work will go through the
   normal planning path before implementation;
@@ -293,7 +293,9 @@ into a parallel directory first.
 If the clone fails because you do not have the needed access, stop and
 ask me either to run the clone myself or to give you the needed access.
 
-Once the sibling checkout is available, continue with the next step.
+After the correct location is confirmed, add it to the active
+project instructions file so future work can reuse it without
+re-asking.
 ```
 
 ### You see
@@ -306,14 +308,6 @@ Once the sibling checkout is available, continue with the next step.
 ### You send
 
 ```text
-A sibling `data-aggregator` checkout exists at `../data-aggregator`
-relative to this repository root (parallel directory, not inside this repository).
-Use it for reference only.
-
-After the correct location is confirmed, add it to the active
-project instructions file so future work can reuse it without
-re-asking.
-
 Let us work on the museum overview page in this repository by creating
 `site/index.html`.
 
@@ -421,7 +415,7 @@ Record one final choice with rationale. In the same ADR:
 
 ### You see
 
-- The final ADR is preceded by a decision-criteria discussion.
+- The ADR is preceded by a decision-criteria discussion.
 - ADR:
   - Compares realistic stack options for the initial game implementation and records the chosen one with rationale.
   - Records the required core design style, not only the implementation stack.
@@ -439,7 +433,7 @@ Record one final choice with rationale. In the same ADR:
 
 ### After completion (commit)
 
-- After you accept the ADR as done: ask the assistant to `commit the ADR change`.
+- After you accept the ADR as done: ask the assistant to `commit the ADR`.
   This step is ADR-only and does not involve moving anything to `done`.
 
 ### You learned (this step)

@@ -21,6 +21,24 @@ skill.
 
 Use the same ADR format whether or not a task artifact also exists.
 
+Before writing or revising, classify each input item into its proper
+section:
+- `Context` = pre-decision facts that would still be true under
+  another credible alternative, such as requirements, constraints,
+  current-state findings, scope boundaries, and explicit deferrals;
+- `Alternatives` = credible competing options;
+- `Analysis` = the clarified reasoning, accepted criteria,
+  trade-offs, option comparisons, and brief reasons the chosen option
+  won; and
+- `Decision` = the chosen outcome as a concise TL;DR, including any
+  explicit deferrals or major retained boundaries that are part of the
+  outcome.
+
+Treat `Analysis` as the ADR's authoritative decision-and-reason
+ledger.
+Do not repeat an `Analysis` point elsewhere in decision-and-reason
+form.
+
 If material unresolved questions remain about the decision, decision
 criteria, or governing boundaries, create or update the ADR draft
 enough to hold its required sections, then use
