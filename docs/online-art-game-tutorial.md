@@ -89,6 +89,12 @@ My coding tool may run in a terminal, but I review files in
 - your editor is ready to review AsciiDoc glossary files with
   embedded diagrams.
 
+## ⚠️ Default rule for later clarification questions
+
+For the rest of this tutorial, if the assistant asks a clarification
+question and gives a recommendation, follow the recommendation unless
+you intentionally want a different path.
+
 ## Step 1: Confirm Spec Loop in the tutorial project
 
 ### You send
@@ -530,47 +536,59 @@ subtask. Create only:
   current subtask in detail, implement it, verify it, commit it, then
   move on.
 
-## Step 6: Leaderboard (In-Memory, Then Persistence)
+## Step 6: Leaderboard Clarification (In-Memory, Then Persistence)
 
 ### You send
 
 ```text
 Let us work on the leaderboard in this repository.
 
+I want you to fully design the new leaderboard task in the backlog.
+```
+
+### You see (clarification)
+
+- If the assistant starts fully designing the leaderboard task instead
+  of clarifying first, stop it and say:
+  `Use the spec-loop-clarify-task skill before designing this task.`
+- The assistant does not fully design the task immediately.
+- It first surfaces the material unresolved branch or branches and asks
+  clarifying questions in the normal `spec-loop-clarify-task` format:
+  - `Question:`
+  - `Recommendation:`
+  - `Options:` when explicit options are needed
+  - `Reason:`
+
+If the assistant's first clarification is about persistence scope,
+reply exactly with:
+
+```text
 Break the implementation work down in this order:
 1. in-memory leaderboard implementation
 2. persistence implementation
 
-The sorting must be reached level descending and total completion time
-ascending for ties. Persistence acceptance criteria are that data
-survives restart, the storage location is documented, and the reset
-procedure for local development and tests is documented with an exact
-command.
+Design only the in-memory leaderboard subtask fully.
 
-Keep leaderboard terminology aligned with the established project
-language.
+If any other unresolved decisions remain, present them in decision
+batches before you continue with the design.
 ```
 
-### You see (plan)
+If the assistant asks any other clarification question, or presents a
+decision batch, accept the recommended options unless you intentionally
+want a different path. If it includes persistence scope again and
+recommends something else, correct that answer to the in-memory-then-
+persistence path above.
 
-- A task file is created automatically and is waiting for your
-  review.
+### You see (plan after clarification)
+
+- A separate leaderboard backlog task is created automatically and is
+  waiting for your review.
 - Task file:
   - exists with ordered implementation subtasks,
   - keeps future implementation subtasks lightweight,
   - requires a separate persistence ADR before persistence
-    implementation is fully designed.
-
-### You send
-
-```text
-Please fully design only the in-memory leaderboard subtask.
-```
-
-### You see (in-memory subtask design)
-
-- Task file: the in-memory leaderboard subtask is fully designed; future
-  implementation subtasks remain lightweight.
+    implementation is fully designed, and
+  - has the in-memory leaderboard subtask fully designed.
 
 ### You send
 
@@ -641,6 +659,8 @@ Implement it.
 
 ### You learned (this step)
 
+- Intentionally incomplete prompts can trigger proactive clarification
+  before task drafting.
 - Ordered delivery reduces risk: get the in-memory behavior working
   first, make the persistence decision explicitly, then implement
   persistence.

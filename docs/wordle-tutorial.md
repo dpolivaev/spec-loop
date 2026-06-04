@@ -86,6 +86,12 @@ My coding tool may run in a terminal, but I review files in
 - your editor is ready to review AsciiDoc glossary files with
   embedded diagrams.
 
+## ⚠️ Default rule for later clarification questions
+
+For the rest of this tutorial, if the assistant asks a clarification
+question and gives a recommendation, follow the recommendation unless
+you intentionally want a different path.
+
 ## Step 1: Confirm Spec Loop in the tutorial project
 
 ### You send
@@ -203,7 +209,7 @@ Gameplay rules:
 
 Interaction modes:
 - CLI mode is required
-- later, add a minimal Swing UI that reuses the same core logic
+- later, add a minimal UI that reuses the same core logic
 
 Word list rules:
 - keep an internal packaged word list
@@ -217,7 +223,7 @@ Technical direction:
 Please write `README.md` for this repository based on the project brief.
 Include the project brief verbatim in the README under a "Project Brief"
 section. The README must clearly describe the game rules, the later CLI
-and Swing paths, and the word-list expectations. Keep the README concise
+and UI paths, and the word-list expectations. Keep the README concise
 and practical.
 
 Also create `glossary.adoc` from the approved project brief. It should
@@ -691,7 +697,7 @@ Break the implementation work down in this order:
   keeping the increments ordered and separately accepted preserves
   reviewability.
 
-## Step 10: Minimal Swing UI
+## Step 10: UI Clarification and Minimal Swing UI
 
 ### You send
 
@@ -699,23 +705,51 @@ Break the implementation work down in this order:
 Starting point: build on the existing gameplay logic in this
 repository.
 
-Let us work on a minimal Swing UI in this repository.
+Let us work on a UI in this repository.
 
-Requirements:
-- keep CLI availability,
-- when a display is available and `--cli` is not set, the application
-  should start the UI,
-- in headless mode or when `--cli` is set, the application should use
-  the CLI path,
-- the UI should reuse existing gameplay logic instead of duplicating it.
+I want you to fully design the new UI task in the backlog.
+```
+
+### You see (clarification)
+
+- The UI approach is intentionally left open here.
+- If the assistant asks what UI approach or framework this task should
+  assume, choose Swing even if Swing is not the recommendation and is
+  not listed in its options.
+- If the assistant starts fully designing the task without first asking
+  what UI approach/framework it should assume, stop it and say:
+  `Use the spec-loop-clarify-task skill before designing this task.`
+- If it still skips that question, say:
+  `Before designing this task, ask which UI approach/framework this task should assume.`
+
+If the assistant asks what UI approach/framework this task should
+assume, reply exactly with:
+
+```text
+Use Swing.
+
+Keep CLI availability.
+When a display is available and `--cli` is not set, the application
+should start the UI.
+In headless mode or when `--cli` is set, the application should use
+the CLI path.
 
 Break the implementation work down in this order:
 1. prepare shared input validation for CLI and UI
 2. implement the minimal Swing UI
 3. document UI build and usage
+
+If any other unresolved decisions remain, present them in decision
+batches before you continue with the design.
 ```
 
-### You see (plan)
+If the assistant asks any other clarification question, or presents a
+decision batch, follow the recommended options unless you intentionally
+want a different path. If it includes the UI approach/framework
+question again and recommends something else, correct that answer to
+Swing.
+
+### You see (plan after clarification)
 
 - A task file is created automatically with a task header and an
   ordered subtask breakdown, and it is waiting for your review.
@@ -757,8 +791,11 @@ Break the implementation work down in this order:
 
 ### You learned (this step)
 
-- The interface layer can stay small and reviewable when shared
-  validation and engine behavior are separated first.
+- Leaving the UI approach open can force the missing framework decision
+  into a clarification round before task design.
+- Once the UI direction is chosen, the interface layer can stay small
+  and reviewable when shared validation and engine behavior are
+  separated first.
 
 ## You learned
 
