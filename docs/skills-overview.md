@@ -3,9 +3,16 @@
 ## Included Skills
 
 This repository currently ships these skills.
-The first six form the core task-workflow bundle and should be
-installed together. [spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) is optional and
-intended only for retrospective review of trusted repositories:
+The core task-workflow bundle is [spec-loop-plan-task](../skills/spec-loop-plan-task/),
+[spec-loop-clarify-task](../skills/spec-loop-clarify-task/),
+[spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/),
+[spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/), and
+[spec-loop-write-adr](../skills/spec-loop-write-adr/).
+[spec-loop-write-glossary](../skills/spec-loop-write-glossary/) is required when a
+project uses a glossary.
+[spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) and
+[spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) are
+optional.
 
 1. **[spec-loop-plan-task](../skills/spec-loop-plan-task/)**
    - the planning and task-administration skill for non-trivial work;
@@ -45,15 +52,24 @@ intended only for retrospective review of trusted repositories:
      [skills/spec-loop-implementation-flow/task-file-path-guidance.md](../skills/spec-loop-implementation-flow/task-file-path-guidance.md).
 
 5. **[spec-loop-write-glossary](../skills/spec-loop-write-glossary/)**
-   - the Spec Loop AsciiDoc glossary-format skill;
+   - the Spec Loop AsciiDoc glossary-format skill, required when the
+     project uses that glossary format;
    - defined by
      [skills/spec-loop-write-glossary/glossary-format.md](../skills/spec-loop-write-glossary/glossary-format.md).
 
 6. **[spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/)**
-   - the setup and troubleshooting skill for rendering task files and
-     glossary files.
+   - the optional setup and troubleshooting skill for rendering task
+     files and glossary files.
 
-7. **[spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/)**
+7. **[spec-loop-write-adr](../skills/spec-loop-write-adr/)**
+   - the ADR-writing skill used when planning routes work to an
+     architecture decision record or when the user asks for ADR work;
+   - defined by
+     [skills/spec-loop-write-adr/SKILL.md](../skills/spec-loop-write-adr/SKILL.md)
+     and
+     [skills/spec-loop-write-adr/adr-format.md](../skills/spec-loop-write-adr/adr-format.md).
+
+8. **[spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/)**
    - the optional retrospective review skill for existing pull requests,
      branch diffs, or commit ranges from trusted repositories;
    - defined by

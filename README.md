@@ -30,15 +30,24 @@ Recommended path:
 Install the core task-workflow skills together.
 [spec-loop-plan-task](skills/spec-loop-plan-task/), [spec-loop-clarify-task](skills/spec-loop-clarify-task/),
 [spec-loop-prepare-implementation-approval](skills/spec-loop-prepare-implementation-approval/),
-[spec-loop-implementation-flow](skills/spec-loop-implementation-flow/), [spec-loop-write-glossary](skills/spec-loop-write-glossary/), and
-[spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) hand off to each other, reuse the
-shared [spec-loop-plan-task](skills/spec-loop-plan-task/) bundle, and support the same planning
-artifacts.
+[spec-loop-implementation-flow](skills/spec-loop-implementation-flow/), and
+[spec-loop-write-adr](skills/spec-loop-write-adr/) hand off to each other,
+reuse the shared [spec-loop-plan-task](skills/spec-loop-plan-task/)
+bundle, and support the same planning artifacts.
 
-[spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) is optional. Install it only if you
-need retrospective review of pull requests, merge requests, or commit
-ranges from repositories you trust. It fetches provider or Git content
-as review evidence and is not required for the main planning workflow.
+Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your
+project uses a glossary. It is mandatory for the Spec Loop AsciiDoc
+glossary format.
+
+[spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) is
+optional. Install it only if you want the rendering setup and
+troubleshooting helper for task files and glossary files.
+
+[spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) is
+optional. Install it only if you need retrospective review of pull
+requests, merge requests, or commit ranges from repositories you trust.
+It fetches provider or Git content as review evidence and is not
+required for the main planning workflow.
 
 Ensure Node.js is available so `npx` works.
 
@@ -49,8 +58,8 @@ npx skills add dpolivaev/spec-loop -s '*'
 ```
 
 Variations:
-- `-s '*'` installs the full bundle, including optional [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/).
-- Remove `-s '*'` to select skills interactively instead of installing the full bundle. That lets you skip optional [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) and install only the six core task-workflow skills listed above.
+- `-s '*'` installs all shipped skills.
+- Remove `-s '*'` to select skills interactively instead of installing the full bundle. That lets you skip the optional [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) and [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) skills, and skip [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project will not use a glossary.
 - Add `-g` for a global install.
 - Use `-g --all` for a global, non-interactive install for all supported agents.
 
@@ -134,6 +143,10 @@ npx skills update -g
 If `npx` is not available, clone or download this repository and copy
 the core task-workflow skills from [skills/](skills/) into your agent's skills
 directory. Keep that core bundle together.
+
+Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project uses a glossary.
+
+Install [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) only if you want rendering setup or troubleshooting help.
 
 Install [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) only if you need retrospective
 review of trusted repositories.
