@@ -12,53 +12,35 @@ description: >-
   when no other default grilling skill is available.
 ---
 
-Use this skill when a new task, task update, or design update is
-underspecified, when material boundary decisions remain open, when
-planning or implementation cannot continue safely because the
-relevant task context is still unclear after rereading the needed
-task sections and diagrams, or when the user wants to stress-test a
-plan or be grilled on a design.
+Use this skill only when material unresolved questions block safe
+planning, approval, design updates, ADR work, or implementation.
 
-For Spec Loop task creation and task updates, this is the default
-clarification path whenever material unresolved questions remain.
+Prefer this skill over a generic grill-me variant for Spec Loop task
+creation, task updates, and design updates.
 
-When both this skill and a generic grill-me variant are available,
-prefer this skill for Spec Loop task creation, task updates, and
-design updates. If no default general grilling skill is available, it
-may also be used for general grilling.
-
-When clarification ends, hand control back to the workflow that
-invoked this skill:
-- task creation and task updates normally resume
-  `../spec-loop-plan-task/SKILL.md`;
-- ADR-writing clarification resumes
-  `../spec-loop-write-adr/SKILL.md`;
+When clarification ends, return control to the invoking workflow:
+- task planning resumes `../spec-loop-plan-task/SKILL.md`;
+- ADR clarification resumes `../spec-loop-write-adr/SKILL.md`;
 - approval-preparation clarification resumes
   `../spec-loop-prepare-implementation-approval/SKILL.md`;
 - implementation-time clarification resumes
   `../spec-loop-implementation-flow/SKILL.md`.
 
-When this skill is invoked from planning or approval preparation, it
-still runs in PLAN. It does not freeze the governing artifact.
+Clarification stays in the phase of the invoking workflow:
+- planning clarification stays in PLAN;
+- ADR clarification stays in ADR work;
+- implementation-time clarification follows
+  `../spec-loop-implementation-flow/SKILL.md`.
 
-During PLAN, revise the governing artifact in place as needed for the
-current work item. Planning-artifact changes are allowed. Executable
-changes are not.
-
-When this skill is invoked from ADR writing, revise the ADR draft in
-place as needed for the current work item. Documentation-artifact
-changes are allowed. Executable changes are not.
-
-When this skill is invoked from implementation, phase handling
-remains governed by `../spec-loop-implementation-flow/SKILL.md`.
+During PLAN or ADR work, revise the governing artifact in place as
+needed for the current work item. Executable changes are not allowed.
 
 ## Plain confirmation exclusion
 
 Handle obvious typo fixes, trivial one-word disambiguations, and
 simple factual confirmations inline when they would not materially
-change scope, behavior, policy, conceptual model, conceptual
-contract boundaries, acceptance logic, route, Design, or Test
-specification.
+change scope, behavior, policy, conceptual model, conceptual contract
+boundaries, acceptance logic, route, Design, or Test specification.
 
 These are outside the grilling protocol: no grill-level notice,
 decision batches, or `Question:` / `Recommendation:` format.
@@ -66,298 +48,143 @@ decision batches, or `Question:` / `Recommendation:` format.
 If such a point turns out to have a material design consequence,
 resume normal clarification.
 
-## Clarification grill level
+## Core method
 
-Clarification is the goal. It combines two methods:
-- reasoning = resolve what existing evidence already determines
-  without new user input; and
-- grilling = use decision batches and direct questions to expose,
-  test, or confirm remaining uncertainty.
+For each unresolved point:
 
-The current clarification grill level controls how strongly
-clarification relies on grilling rather than reasoning.
+1. Check whether the answer is already determined by confirmed user
+   choices, existing task materials, glossary language, code, docs,
+   or a low-risk mechanical consequence of those choices.
+2. If yes, resolve it directly.
+3. If no, ask only if different answers would materially change
+   scope, behavior, policy, conceptual model, conceptual contract
+   boundaries, acceptance logic, route, Design, or Test
+   specification.
+4. If no material change would result, do not clarify it here.
 
-Use the current grill level already in force for the work item when
-one exists. Otherwise, if no user, session, or project default is in
-force, default to `medium`.
+Treat conflicts between user wording, glossary language, task
+materials, and code as evidence to surface explicitly.
 
-Keep the grill level implicit unless clarification is likely to
-require more than 3 user-facing clarification steps. Plain
-confirmations under the exclusion above do not count.
-
-Levels:
-- `light` = stronger bias toward reasoning and lighter grilling:
-  show fewer final decisions in chat through decision batches, ask
-  fewer direct questions during the clarification session, and exit
-  earlier once clarification is safe;
-- `medium` = balanced default; and
-- `heavy` = stronger bias toward grilling: show more final decisions
-  in chat through decision batches, ask more direct questions during
-  the clarification session, and exit later.
-
-If clarification is likely to require more than 3 user-facing
-clarification steps, state the current grill level once for that work
-item and briefly explain it: `light` means fewer questions and fewer
-surfaced decisions; `heavy` means more. If that only becomes clear
-later, give the notice then before continuing. Do not repeat it
-unless the user asks, the level changes, or clarification starts for a
-different work item.
-
-A user-facing clarification step is one decision batch or one
-`Question:` block that requires new user input.
-
-After every clarification step, re-run the exit check. Spend another
-clarification step only when the remaining unresolved point is
-material enough to justify slowing the User down at the current
-clarification grill level.
-
-The clarification grill level affects chat-time surfacing and
-question frequency during the clarification session. It does not
-change batch size, question format, the definition of a material
-unresolved question, or whether final clarification decisions must be
-preserved in the durable record.
-
-Select the next unresolved branch by descending importance and uncertainty. Once a branch is selected, traverse it depth first, resolving dependencies one-by-one. Start with a brief, provisional overview of the most important currently visible unresolved branches and which branch you will address first. This overview is a map, not a commitment to an exact final question list.
-
-Treat unresolved branches as including both behavior-level
-alternatives and material boundary distinctions that the design is
-not allowed to guess.
-
-During clarification, ask only when different answers would
-materially change scope, behavior, policy, conceptual model,
-conceptual contract boundaries, acceptance logic, route, Design, or
-Test specification, and the answer is not already determined by
-confirmed user choices, existing evidence, or a low-risk mechanical
-consequence of those choices.
-
-If a distinction would change whether two concepts are the same
-thing, different concepts, or governed by different rules, treat it
-as a material boundary decision and clarify it.
+If a distinction would change whether two concepts are the same thing,
+different things, or governed by different rules, treat it as
+material.
 
 Do not use clarification for exact names, wording, labels, field
 names, enum names, or other cheap-to-change design text when the
-boundary is already settled. Put that in Design and let the User
-review it there.
-
-Stop clarification when the remaining unresolved points would mainly
-change the shape of the design draft rather than those boundaries.
+boundary is already settled. Put that in Design instead.
 
 If drafting or reviewing Design exposes a new material boundary
-decision, return to clarification before continuing.
+question, return to clarification before continuing.
 
-Treat existing glossary language, task materials, and code as
-first-class evidence during clarification:
-- If the user's wording conflicts with existing glossary or task
-  language in a way that could change the conceptual model or rules,
-  call it out immediately and resolve the distinction.
-- Stress-test behavior-level alternatives and material boundary
-  distinctions with concrete scenarios, edge cases, and boundary
-  cases.
-- When the user states current behavior, boundaries, or design
-  constraints, compare that claim with the codebase and existing
-  task materials when possible. Surface contradictions explicitly
-  instead of smoothing them over.
+## Clarification surface
 
-If clarification resolves or changes shared domain terms, record that glossary follow-up is required through the normal Spec Loop glossary path. Put the note in the active task when one exists or is being prepared.
+Clarification uses three tools:
+- direct recording of fully determined decisions;
+- surfaced decision batches for material decisions the user should
+  explicitly see; and
+- explicit questions when user input is still required.
 
-Clarification always runs against one governing artifact for the
-current work item.
-- When invoked from task planning, approval preparation, or
-  implementation, the governing artifact is the active task artifact.
-- When invoked from ADR writing, the governing artifact is the ADR
-  being drafted or updated.
+Use the current clarification grill level already in force for the
+work item when one exists. Otherwise, if no user, session, or project
+default is in force, default to `medium`.
+
+Keep the grill level implicit unless clarification is likely to
+require more than 3 user-facing clarification steps. A clarification
+step is one decision batch or one `Question:` block. Plain
+confirmations do not count.
+
+If the threshold is exceeded, state the current grill level once for
+that work item:
+- `light` = fewer questions and fewer surfaced decisions;
+- `medium` = balanced default;
+- `heavy` = more questions and more surfaced decisions.
+
+If the need for more than 3 clarification steps becomes clear only
+later, give the notice then before continuing. Do not repeat it unless
+the user asks, the level changes, or clarification starts for a
+different work item.
+
+The grill level affects surfacing and question frequency only. It does
+not change the definition of a material unresolved question or the
+need to preserve final clarification state.
+
+Select unresolved branches by descending importance and uncertainty.
+Traverse the selected branch depth first. Start with a brief map of the
+most important visible unresolved branches and which branch you will
+address first.
+
+For directly resolved decisions:
+- record them immediately when they are fully determined, unsurprising
+  if left implicit, and easy to revise before approval or
+  implementation; or
+- queue them for a surfaced decision batch when the user should see
+  them explicitly, later clarification depends on them as explicit
+  shared state, or leaving them implicit would be surprising.
+
+### Decision batch size
+
+A surfaced decision batch must contain at most 6 decisions.
+
+At each clarification step, present either:
+- one decision batch; or
+- one question.
+
+Do not ask a question before presenting queued decisions it depends on.
+Do not ask a new question in the same response as a decision batch.
+
+## Governing artifact and durable state
+
+Clarification always works against one governing artifact:
+- task artifact for planning, approval preparation, or implementation;
+- ADR for ADR work.
 
 Keep final clarification decisions in the governing artifact's
 `Analysis` section.
 
-In both artifact types, keep accepted final clarification results
-only. Do not put open questions, options, confidence values,
-tentative assumptions, or transient working notes there.
+In task artifacts, follow
+`../spec-loop-plan-task/common-task-guidance.md`: place `Analysis`
+immediately after `Research` and record each final clarification
+decision as `- <decision> because <reason>.`
 
-- In task artifacts, follow
-  `../spec-loop-plan-task/common-task-guidance.md`: place `Analysis`
-  immediately after `Research` and record each final clarification
-  decision as `- <decision> because <reason>.`
-- In ADRs, follow `../spec-loop-write-adr/adr-format.md`: keep
-  `Analysis` as compact ADR-relevant bullets supporting the chosen
-  decision, not as the full task ledger.
+In ADRs, follow `../spec-loop-write-adr/adr-format.md`: keep
+`Analysis` as compact ADR-relevant bullets supporting the chosen
+decision.
 
-Clarification is cross-cutting. A final clarification decision may
-affect any section of the governing artifact. When a clarification
-decision becomes final, update the governing artifact's `Analysis`
-section and every other affected section of that artifact.
+Keep only accepted final decisions there. Do not keep open questions,
+options, confidence values, or transient notes.
 
-Clarification uses these state terms:
-- **Open question** = not final and still needs user input.
-- **Pending surfaced decision** = queued or presented in a decision
-  batch, but not yet accepted and not yet recorded in the governing
-  artifact's `Analysis` section.
-- **Final clarification decision** = settled and recorded in the
-  governing artifact's `Analysis` section.
-- **Final clarification state** = the set of final clarification
-  decisions currently recorded in the governing artifact's
-  `Analysis` section.
+Clarification is cross-cutting. When a decision becomes final, update
+`Analysis` and every affected section of the governing artifact.
 
-For each unresolved decision in the active branch, clarification
-proceeds by resolving directly what is already determined and asking
-only what still requires user input.
+If clarification resolves or changes shared domain terms, note the
+required glossary follow-up in the active task when one exists or is
+being prepared.
 
-First use existing evidence such as prior confirmed user decisions,
-current task materials, glossary terms, code, and docs. Do not
-present facts, findings, or implications as standalone items. Use
-them only inside decision reasons.
+For task-controlled work, do not let final clarification state live
+only in chat once that becomes unsafe. Promote to the task-file path
+before chat-only storage becomes unsafe, and always sync the final
+clarification state before returning control.
 
-If confirmed user choices, existing evidence, or a direct consequence
-of those choices fully determine the answer, resolve it directly. If
-you later present that directly resolved answer in a decision batch,
-mark it with `(100%)`.
+## Response forms
 
-Otherwise, resolve the decision directly unless at least one of these
-is true:
-- confidence is below 80%;
-- the decision would be hard to revert once implemented; or
-- the downstream decisions or implementation it would unlock would be
-  hard to revert once implemented.
-
-Use the Question/Options/Recommendation form only when user input is
-still required under those conditions.
-
-Treat confidence as an operational estimate used to force a decision,
-not as a calibrated statistical probability.
-
-Prefer direct resolution for workflow, routing, editorial, and other
-questions already determined by confirmed choices or existing
-evidence.
-
-When you ask about a high-impact, non-trivial trade-off that would be
-hard to reverse or surprising without context, you may suggest
-creating an ADR as part of that question, but do not create one unless
-the user requests it or explicitly approves.
-
-For each directly resolved decision, choose one of these handling
-paths:
-- record it immediately in the governing artifact's `Analysis`
-  section as a final clarification decision;
-- queue it for clarification presentation as a pending surfaced
-  decision; or
-- leave it open and ask the User.
-
-A decision may be recorded directly without a decision batch only
-when it is fully determined by confirmed user choices, existing
-evidence, or a low-risk mechanical consequence of those choices; is
-not likely to surprise the User if left unsurfaced; is not needed as
-explicit shared state for later clarification; and would be easy to
-revise before approval or implementation if later evidence changes
-it.
-
-Queue a pending surfaced decision when it is material enough that the
-User should see it during clarification, when later clarification
-depends on it as explicit shared state, when it would be surprising if
-left implicit, or when artifact-only review would be a poor surface
-for catching errors.
-
-Bias this choice by clarification grill level:
-- `light` = stronger bias toward direct recording and fewer
-  questions;
-- `medium` = balance direct recording, decision batches, and direct
-  questions; and
-- `heavy` = stronger bias toward surfacing decisions and asking more
-  before clarification ends.
-
-The clarification grill level may change whether an eligible final
-clarification decision is surfaced, but it does not relax the
-direct-recording gate above.
-
-A pending surfaced decision stays outside the final clarification
-state until the User accepts the batch that presents it. It must not
-yet be recorded in the governing artifact's `Analysis` section or
-used as explicit shared state for later material branch conclusions.
-If later clarification would materially depend on a pending surfaced
-decision, present the batch and wait for the User's response first.
-
-Add each directly resolved decision chosen for clarification
-presentation to a queue in resolution order.
-
-Do not present the queue immediately. Keep clarifying until one of
-these happens:
-- the queue reaches 6 decisions;
-- the next step would require one question with a Recommendation; or
-- clarification for the current branch is complete.
-
-The queue must never exceed 6 decisions.
-
-When one of those boundaries is reached, present one decision batch:
-- if the queue reached 6, present exactly those 6 decisions;
-- otherwise, present all queued decisions in one shorter batch.
-
-Do not emit standalone decision lines outside decision batches. A
-pending surfaced decision must not be recorded in the governing
-artifact's `Analysis` section or used as explicit shared state for
-later material branch conclusions before the User accepts the batch
-that presents it.
-
-Do not ask a question before presenting queued decisions it depends on
-or needs for context.
-
-Do not ask the next clarification question in the same response as a
-decision batch.
-
-After every decision batch, ask the user to confirm, question, or
-disagree with it, then wait for the user's response. That confirmation
-prompt is part of the decision batch, not a separate clarification
-question.
-
-After a batch is presented, do not repeat those decisions before later
-questions unless the user asks for a recap, reopens a decision, or a
-later decision changes it.
-
-For each decision presented in a batch, use this form:
+For each surfaced decision in a batch, use:
 
 Decision: <brief answer> (<N>%)
 Reason: <brief reason>
 
-Keep `Decision:` and `Reason:` brief and non-redundant. The
-`Decision:` line must contain the actual answer text. Do not use a
-separate `Topic:` line, option letters, `Options:`, or
-`Alternatives:` in direct decisions.
+Keep both lines brief. The `Decision:` line must contain the actual
+answer.
 
-After the User accepts a presented decision batch, each accepted
-pending surfaced decision becomes a final clarification decision.
-Record those decisions in the governing artifact's `Analysis`
-section and update every other affected section of that artifact.
+After a decision batch, ask the user to confirm, question, or
+disagree, then wait.
 
-For task-controlled work, use the task-file path for durable
-clarification state, because final clarification decisions kept only
-in chat can be lost through compaction or context loss.
-
-If clarification starts on the chat-only path, promote it to the
-task-file path before chat-only storage becomes unsafe. After that,
-chat-only is no longer allowed for that task.
-
-However, you may accumulate multiple final clarification decisions
-before syncing them into the task file.
-
-Do not let the active task file fall materially behind the final
-clarification state. Sync it at a clean checkpoint before that state
-would be hard to reconstruct safely from chat alone, and always
-before clarification returns control to another workflow.
-
-These task-file sync edits are internal state-preservation steps. Do
-not ask the User to review them separately during clarification. If
-unresolved questions remain after a sync, continue clarification from
-the updated task file.
-
-Before clarification returns, keep the governing artifact's
-`Analysis` section and every affected section aligned with the
-current final clarification state.
-
-For each clarification question you ask, start with a brief opening
-line and then provide the recommendation in compact form.
+For explicit questions, use:
 
 Question: <brief question>
+Recommendation: <answer> (<N>%)
+Reason: <brief reason>
 
-If the question asks the user to choose among explicit lettered
-options, use:
+If the question is a choice among listed alternatives, use:
 
 Question: <brief question>
 Recommendation: <letter> (<N>%)
@@ -367,71 +194,17 @@ Options:
 - C. <brief option summary>
 Reason: <brief reason>
 
-Include the recommended option in `Options`. Keep the `Question:`
-line and each option summary as short as possible while still showing
-the real distinction. Do not repeat the full recommended option text
-in the Recommendation line.
+For yes/no questions, use `yes` or `no` unless you explicitly list
+lettered options.
 
-Otherwise use:
+When the user cleanly confirms a presented option, acknowledge it
+briefly, such as `B recorded` or `yes recorded`.
 
-Question: <brief question>
-Recommendation: <answer> (<N>%)
-Reason: <brief reason>
-
-If you ask the user to choose among alternatives, enumerate the
-options in the same turn with letters like A, B, C, D and use the
-option letter as the recommendation answer. Do not use an option
-letter in the Recommendation line unless that lettered option is
-explicitly listed in the same turn. For non-lettered
-Recommendations, use the shortest precise answer. Keep `Question:`
-and `Reason:` brief and non-redundant.
-
-For yes/no questions, use `yes` or `no` unless you explicitly
-enumerate them as options.
-
-If the user's answer does not cleanly select one presented option,
-restate your understanding and require explicit user confirmation
-before moving to the next question.
-
-When the user cleanly selects or confirms a presented option,
-acknowledge it briefly in the same turn with a minimal confirmation
-such as `B recorded`, `yes recorded`, or `no recorded`. Then treat
-that choice as internal state.
-
-An explicit prior user choice or a previously confirmed decision is
-already confirmed state for the same unchanged decision. Reuse it
-silently. Do not present it again as a new decision batch item unless
-the User reopened it or you are not sure it still applies.
-
-If the User asks for a recap, restate it as a recap, not as a new
-decision batch item.
-
-If the current decision is inferred from prior confirmed choices but
-was not itself explicitly chosen, state that inference in `Reason`. Do
-not say the User chose it unless the User actually chose it.
-
-If you are not sure whether a prior user choice or previously
-confirmed decision still applies, state what is uncertain instead of
-treating it as already settled.
-
-Do not restate the substance of a confirmed choice or ask again about
-its direct consequences in later turns unless the User asked for a
-recap, reopened it, or one brief reminder is strictly necessary to
-keep the current question clear and easy to answer.
-
-At each clarification step, either present one decision batch or ask
-one question with its Recommendation.
-
-## Clarification exit check
+## Exit
 
 Before handing work back to the invoking workflow, confirm that:
-
 - no material unresolved question remains for the current branch;
-- any glossary conflict has been resolved or explicitly surfaced;
-- any code/docs-vs-claim contradiction has been surfaced;
-- any required glossary follow-up has been noted in the active task
-  when one exists;
-- every final clarification decision is recorded in the governing
-  artifact's `Analysis` section with a brief reason; and
-- every affected section of the governing artifact reflects the
-  recorded clarification decisions.
+- glossary conflicts and code/docs contradictions have been resolved or
+  explicitly surfaced;
+- required glossary follow-up has been noted when relevant; and
+- the governing artifact matches the final clarification state.
