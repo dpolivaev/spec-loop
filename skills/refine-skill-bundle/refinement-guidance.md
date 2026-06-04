@@ -3,6 +3,22 @@
 Use this guidance to improve skill quality without relying on hidden
 conversation history.
 
+## Short operating method
+
+Use this sequence by default:
+
+- classify the file role first;
+- decide whether the file actually needs refinement;
+- preserve kernel behavior unless a policy change is explicit;
+- move procedure, examples, and repeated prose out of `SKILL.md` when
+  possible;
+- remove duplication without merging distinct routes, outcomes,
+  thresholds, or checkpoints;
+- make thresholds, boundaries, handoffs, source-of-truth rules, and
+  stop conditions easier to find, or at least no harder to find; and
+- verify the result before finishing, including linked docs when names
+  or paths changed.
+
 ## 1. Classify file roles first
 
 For each file, decide which role it serves:
@@ -16,13 +32,30 @@ For each file, decide which role it serves:
 - **Example or overview doc** = patterns, discoverability, and install
   or maintenance guidance.
 
-Do not compact all roles the same way.
+Do not refine all roles the same way.
 
-## 2. Target shape by file role
+## 2. Decide whether refinement is actually needed
+
+Before changing a file, decide whether it is:
+
+- overpacked;
+- duplicated;
+- unclear;
+- stale; or
+- mis-layered.
+
+If a file already serves its role well, leave its structure alone. Do
+not shorten merely to shorten.
+
+## 3. Target shape by file role
 
 ### Kernel skill file
 
-Keep only the shortest form that still preserves safe behavior.
+Keep only the smallest clear kernel that still preserves safe behavior.
+
+A successful kernel rewrite may stay the same length or become
+slightly longer if that makes a threshold, boundary, handoff, or stop
+condition easier to find.
 
 Keep in `SKILL.md`:
 - route selection and handoffs;
@@ -71,31 +104,37 @@ If a skill is optional, say so plainly.
 If a file name or skill name changes, update linked overview and
 install docs.
 
-## 3. Simplification moves that are usually good
+## 4. Simplification moves that are usually good
 
 - Merge repeated ownership statements.
 - Name a concept once, then reuse the shorter name.
 - Convert repetitive prose into compact bullets.
 - Promote hidden thresholds, limits, and batch sizes into visible
   bullets or headings.
+- Make route splits, approval boundaries, source-of-truth rules, and
+  stop conditions at least as easy to find as before.
 - Separate agent-only behavior from user-facing reference docs.
 - Keep distinctions explicit: route vs phase, symptom vs root cause,
   canonical state vs notes, blocking vs non-blocking.
 - Keep examples only when they show a non-obvious pattern.
 
-## 4. Simplification moves that are usually wrong
+## 5. Simplification moves that are usually wrong
 
+- Shortening a file that is already serving its role well just because
+  it is in scope.
 - Deleting meaningful constraints just to shorten the file.
 - Merging distinct routes, outcomes, or checkpoints.
 - Hiding approval boundaries inside prose where they become easy to
   miss.
+- Making thresholds, route logic, handoffs, source-of-truth rules, or
+  stop conditions harder to find even if they still exist.
 - Moving normative format rules into examples.
 - Claiming behavior is preserved when thresholds, route logic,
   approval gates, or source-of-truth rules changed.
 - Putting agent-policy rules into docs intended to be shared
   human-facing references.
 
-## 5. Verification checklist
+## 6. Verification checklist
 
 Before finishing, verify that:
 
@@ -104,7 +143,8 @@ Before finishing, verify that:
 - allowed routes or outcomes are still explicit;
 - approval boundaries are still explicit;
 - thresholds and limits are still easy to find;
-- stop conditions still exist where needed;
+- route splits, handoffs, and stop conditions are no harder to find
+  than before;
 - linked docs are updated when names or locations changed; and
 - no rule became ambiguous just because the prose got shorter.
 

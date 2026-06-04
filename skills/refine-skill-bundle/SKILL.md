@@ -2,12 +2,12 @@
 name: refine-skill-bundle
 description: >-
   Refine SKILL.md files, workflow guidance, and related skill-bundle
-  docs so they are shorter, clearer, and easier for later sessions to
-  follow without losing required behavior.
+  docs so they are clearer, better layered, and easier for later
+  sessions to follow without losing required behavior.
 ---
 
-Use this skill when asked to create, review, simplify, compact,
-refactor, or repair a skill bundle or instruction bundle.
+Use this skill when asked to review, simplify, refactor, repair, or
+structurally reorganize a skill bundle or instruction bundle.
 
 This skill applies to maintenance artifacts such as:
 - `SKILL.md`;
@@ -25,10 +25,19 @@ Before editing:
 - re-read any file the user says changed; and
 - apply project instructions such as `AGENTS.md` when present.
 
+First decide which target files actually need refinement. Do not
+shorten files merely because they are in scope.
+
 Preserve behavior unless the user explicitly asks for a policy change.
 If a proposed simplification would change route logic, approval
 boundaries, thresholds, source-of-truth rules, or stop conditions,
 keep the rule or surface the change explicitly.
+
+Do not shorten merely to shorten. A successful refinement may keep
+length flat or even increase it slightly when that makes an important
+rule easier to find. If a rewrite makes route logic, approval
+boundaries, thresholds, source-of-truth rules, or stop conditions
+harder to find, treat that as a regression.
 
 When public skill names, file names, or locations change, update
 linked docs and overview or install references in the same work item.
