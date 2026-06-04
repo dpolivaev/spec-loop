@@ -26,11 +26,14 @@ helper script.
 
 Check whether the environment already has:
 
-- PlantUML preview support for Markdown, and
+- PlantUML preview support for Markdown,
 - AsciiDoc support whenever `glossary.adoc` is active or configured as the
-  default format for new glossaries.
+  default format for new glossaries, and
+- for the local-only Markdown preview path, Java, Graphviz (`dot` on
+  `PATH`), and the local `plantuml.jar`.
 
-If both are already sufficient, report that no editor setup change is needed.
+If the required pieces for the selected path are already sufficient, report
+that no editor setup change is needed.
 
 ## PlantUML setup options
 
@@ -84,8 +87,11 @@ Install:
 Require:
 
 - Java
-- Graphviz
+- Graphviz (`dot` executable on `PATH`)
 - local `plantuml.jar`
+
+Here, Graphviz means the `dot` command must be installed and available on
+`PATH`.
 
 Required setting:
 
@@ -101,15 +107,3 @@ Install:
 
 This is required whenever `glossary.adoc` is active or configured as the
 default format for new glossaries.
-
-## What `spec-loop-setup-doc-rendering` should do
-
-1. Detect whether support in the user's VS Code-based IDE is already
-   sufficient.
-2. If not, explain what is missing and why it matters.
-3. Offer server-based vs local PlantUML setup unless the user already has a
-   preference.
-4. Show the exact planned extension or settings changes.
-5. Apply them after confirmation when the harness can do so.
-6. Otherwise, tell the user exactly which extension IDs or settings they must
-   install or change.

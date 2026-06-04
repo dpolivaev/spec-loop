@@ -21,11 +21,12 @@ who works in a JetBrains IDE.
 Check whether the IDE already has:
 
 - a working Markdown preview,
-- the Markdown PlantUML extension path available, and
+- the Markdown PlantUML extension path available,
+- Graphviz available as the `dot` command on `PATH`, and
 - AsciiDoc support whenever `glossary.adoc` is active or configured as the
   default format for new glossaries.
 
-If those pieces are already in place, report that no JetBrains setup change is
+If the required pieces are already in place, no JetBrains setup change is
 needed.
 
 ## PlantUML setup
@@ -42,6 +43,16 @@ If Markdown preview is missing or blank, especially in Android Studio:
    JetBrains Runtime with JCEF.
 2. After preview works, enable the PlantUML Markdown extension.
 
+If PlantUML preview shows `graphviz not found`, install Graphviz and ensure
+that the `dot` command is available on `PATH`.
+
+Graphviz here means the `dot` executable. Observed field evidence shows
+that some JetBrains PlantUML rendering cases, including at least one class
+diagram case, fail with `graphviz not found` when Graphviz is missing or
+not configured. This reference does not claim that every JetBrains
+PlantUML preview always requires Graphviz, only that it must be checked on
+this path and treated as required when that error appears.
+
 ## AsciiDoc setup
 
 Install the **AsciiDoc** plugin.
@@ -49,12 +60,3 @@ Install the **AsciiDoc** plugin.
 If `glossary.adoc` is active or configured as the default format for new
 glossaries, also ensure the preview path needed by the plugin works in the
 current IDE/runtime.
-
-## What `spec-loop-setup-doc-rendering` should do
-
-1. Detect whether the IDE already supports Markdown PlantUML preview and, if
-   needed, AsciiDoc.
-2. If support is missing, explain what is missing and why it matters.
-3. Show the exact planned plugin or IDE-setting changes.
-4. Apply them after confirmation when the harness can do so.
-5. Otherwise, tell the user exactly which plugin or setting to enable.
