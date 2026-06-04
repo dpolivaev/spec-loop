@@ -15,8 +15,9 @@ optional and is not required for the core Spec Loop planning workflow.
 If trust is unclear, stop and ask before fetching provider or Git
 content.
 
-Follow `review-guidance.md` for the full trust-boundary and
-prompt-injection-handling rules.
+Follow [review-guidance.md](./review-guidance.md) for trust
+handling, evidence collection, review structure, diagram rules, and
+sharing-variant behavior.
 
 Before work:
 
@@ -26,40 +27,22 @@ Before work:
   artifact structure, formatting, glossary, and section semantics
   reused by retrospective review files;
 - read `../spec-loop-plan-task/task-file-path-guidance.md` for
-  task-file-only diagram conventions and any other task-file-specific
-  rules that clearly fit retrospective review artifacts;
+  diagram conventions and any other task-file-specific rules that
+  clearly fit retrospective review artifacts;
 - apply those shared conventions where they fit retrospective review
   work, but do not apply the chat-only planning path, task-file
   lifecycle routing, or the normal `PLAN -> IMPLEMENTATION` approval
-  gate to the reviewed change itself;
+  gate to the reviewed change itself; and
 - then read [review-guidance.md](./review-guidance.md).
-
-Optional compact example:
-[examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
-Use it as a pattern collection for structure, area-wise outcome synthesis, and reconstructive
-`Test specification`, not as a required review size.
-
-`review-guidance.md` = authoritative source for review purpose, evidence, file structure, 
-section semantics, `Review outcome` labels, `Review Area` behavior, assessment style, 
-intent-vs-implementation analysis, tone, translation rules, diagram rules, sharing variant behavior. 
-`SKILL.md` = orchestration/entry-point only, not second guidance doc.
 
 Reconstruct already-implemented work as the retrospective Spec Loop
 review artifact that should have existed, then add AI assessment and
-recommendations.
-Do not treat the change as waiting at the normal PLAN -> IMPLEMENTATION
-gate.
+recommendations. Do not treat the change as waiting at the normal
+`PLAN -> IMPLEMENTATION` gate.
 
 Use read-only provider commands for evidence when available:
-
 - `gh` for GitHub
 - `glab` for GitLab, including self-hosted GitLab when available
 
-Detect provider from explicit review reference first. If unclear, inspect repo origin/remote host. 
-If provider, evidence source, or comparison range still unclear, stop and ask.
-
-Write local review artifacts under `reviews/`.
-
-If the user wants a provider-specific sharing variant, follow `review-guidance.md`
-to decide whether a local sibling variant is needed or whether the canonical artifact can be reused directly.
-Posting to the provider is outside this skill.
+When trust, provider, evidence source, or comparison range is unclear,
+stop and ask.

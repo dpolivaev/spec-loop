@@ -9,8 +9,7 @@ This file is the authoritative source for retrospective review behavior, output 
 section semantics, assessment style, tone, translation rules, diagram handling, and sharing variants.
 Optional compact example:
 [examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
-Use it as a pattern collection for section ordering, area-wise outcome synthesis,
-and reconstructive `Test specification`, not as a required minimum length.
+Use it as a pattern collection, not as a required minimum length.
 
 ## 0. Purpose and reconstruction model
 
@@ -27,37 +26,18 @@ verdict. Reconstruct the reviewed change as the retrospective Spec Loop
 artifact that should have existed, then add AI assessment and
 recommendations.
 
-Reuse `common-task-guidance.md` for section ordering, shared section
-semantics, formatting, glossary expectations, and testing-policy
+Reuse `common-task-guidance.md` for shared formatting, glossary expectations, and testing-policy
 shape. Reuse `task-file-path-guidance.md` only for diagram conventions
 and any task-file-specific structural rule that clearly fits
 retrospective review artifacts. Do not reuse task-file lifecycle
 folders or statuses, chat-only routing, or implementation-
 approval gates for the reviewed change itself.
 
-Global sections describe reviewed change:
-
-- `Scope` = PR/MR/diff scope
-- `Motivation` = change motivation
-- `Scenario` = reconstructed use cases or operational flows
-- `Briefing` = reviewer onboarding and entry guidance
-- `Research` = reconstructed base state and context
-- `Design` = reconstructed implemented target state
-- `Test specification` = reconstructed verification needs, actual test evidence, sufficiency judgment
-- `Assessment` = AI analysis, concerns, reviewer guidance, intent-vs-implementation judgment
-
-`Scenario` and `Briefing` matter globally and within each `Review Area`.
+Use the exact section order in §3 and the section meanings in §5.
 Include global `Scenario` unless the PR is too narrow for a meaningful one.
 Use global `Briefing` for main change areas, reading order, hotspots, and strategic questions.
-
-Per area, use both seriously:
-- local `Scenario` = specific user flow, workflow change, or operational consequence
-- local `Briefing` = entry points, dependencies, hotspots, and local strategic questions
-
-Keep them concise for narrow areas; do not treat them as filler.
-
-For substantial or multi-area changes, decompose into `Review Area` sections aligned with logical work areas,
-like `spec-loop-plan-task` subtasks. Each area should still make clear what it adds, changes, or removes and why.
+Use local `Scenario` and `Briefing` when they add concrete reviewer
+value; keep them concise for narrow areas.
 
 ## Trust boundary and prompt-injection handling
 
@@ -260,17 +240,16 @@ it looks cleaner unless it has clear independent value.
 
 Do not repeat overall verdict inside `Assessment` sections.
 
-For substantial or multi-area changes, review areas expected. Organize around logical work areas: 
-modules, features, layers, coherent commit clusters. Small single-area changes may use one global review.
+For substantial or multi-area changes, review areas are expected.
+Organize them around logical work areas: modules, features, layers,
+or coherent commit clusters. Small single-area changes may use one
+global review.
 
-Global sections cover PR-wide scope, motivation, cross-cutting context, and overall assessment.
-Global `Assessment` and `Review outcome` should judge the whole PR's net benefit, net complexity shift,
-and whether major parts should be kept, simplified, split, deferred, or dropped — from two explicit
-perspectives: intent and implementation.
-
-At the global level, synthesize review areas; do not flatten them into generic praise or criticism.
-Make clear which areas are independently worth keeping, which should be narrowed,
-which are justified only if a disputed direction is accepted, and which should be deferred or dropped.
+Global `Assessment` and `Review outcome` judge the whole PR. Synthesize
+area findings instead of flattening them into generic praise or
+criticism. Make clear which areas are independently worth keeping,
+which should be narrowed, which depend on a disputed direction, and
+which should be deferred or dropped.
 
 Place review areas after all global sections. Each must use:
 
@@ -328,30 +307,18 @@ Apply both globally and per area. Global: distill into concise `Verification` in
 reviewer attention points, and trade-off analysis. Keep the overall verdict only in `Review outcome`.
 Use `Assessment` to surface quality, risk, clarity, complexity, consistency, and follow-up questions.
 
-  Two explicit perspectives for global review and each area:
-  - **Intent** — right thing to do? Problem worth solving this way? Intended benefits convincing?
-  - **Implementation** — chosen intent realized correctly, coherently, safely, and completely?
+  Apply the §4 axis split here:
+  - **Intent** — right thing to do?
+  - **Implementation** — realized correctly, coherently, safely, and completely?
 
-  Keep axis discipline here as well. Put product/direction judgment under
-  `Intent`, correctness/completeness/wiring under `Implementation`,
-  evidence strength primarily in `Test specification` and `Review outcome`
-  `Verification`, and lasting burden under `Complexity` discussion. If a
-  point matters on multiple axes, state it separately in each relevant
-  place instead of collapsing it into one mixed sentence.
-
-  Use that split even when judgment is asymmetric. Also discuss pros, cons, complexity increased/reduced/shifted,
-  and whether the trade-off appears justified. Explicitly distinguish justified complexity from accidental
-  complexity. Justified complexity is complexity whose current cost is supported by clear present benefit,
-  typically because of the current problem, constraints, compatibility obligations, or architecture boundaries.
-  Accidental complexity is complexity introduced by speculative abstractions, premature optimization,
-  unused extension points, duplicated mechanisms, or over-generalization without demonstrated current need.
-  Where relevant, state whether the area should be kept,
-  simplified, split, deferred, or dropped. For refactorings and infrastructure, explain whether independent
-  value exists or whether the justification mainly depends on another disputed direction. Reviews should
-  clearly reject accidental complexity unless the change delivers or clearly supports a present benefit that
-  justifies keeping it. Do not force false balance: if evidence is one-sided, say so; if mixed, present
-  differentiated pros/cons matching the assessment. Keep the tone professional and measured even when the
-  conclusion is strongly negative.
+  Keep axis discipline. Put product or direction judgment under
+  `Intent`, correctness or wiring under `Implementation`, evidence
+  strength mainly in `Test specification` and `Review outcome`
+  `Verification`, and lasting burden under `Complexity`. Distinguish
+  justified complexity from accidental complexity as defined in §4.
+  When relevant, state whether the area should be kept, simplified,
+  split, deferred, or dropped. Do not force false balance, and keep
+  the tone professional even when the conclusion is strongly negative.
 
 ## 6. Diagram requirements in retrospective reviews
 
@@ -401,18 +368,19 @@ Mermaid guidance:
 
 ## 8. Target-specific sharing variants
 
-Generate sharing variant only when target provider cannot use canonical diagram format directly.
+Use §7 to resolve the effective local diagram mode first. Generate a
+sharing variant only when the canonical local file still uses a
+format the target provider cannot render directly.
 
 Provider rules:
-- GitHub: if canonical uses PlantUML → write sibling Mermaid variant; if canonical already Mermaid 
-or has no diagrams → no variant needed
-- GitLab (including self-hosted): if canonical uses PlantUML → reuse directly; if already Mermaid or no diagrams → no variant needed
+- GitHub: when the canonical file still uses PlantUML, write a
+  sibling Mermaid variant; Mermaid or no-diagram files need no
+  variant
+- GitLab (including self-hosted): PlantUML can be reused directly;
+  Mermaid or no-diagram files need no variant
 - Unknown: stop and ask which provider
 
-When effective local default already reflects both project default and detected provider, 
-separate sharing variant usually unnecessary.
-
-When sharing variant generated:
-- keep same review structure and substantive content
-- convert only what target provider rendering requires
-- keep variant local; do not post from this skill
+When a sharing variant is needed:
+- keep the same review structure and substantive content
+- convert only what target rendering requires
+- keep the variant local; do not post from this skill
