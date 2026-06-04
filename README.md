@@ -159,7 +159,7 @@ https://github.com/vercel-labs/skills for agent-specific installation details.
 
 ## License
 
-Licensed under the MIT License. See [LICENSE](LICENSE).
+Licensed under the MIT License. See [LICENSE](LICENSE.md).
 
 ## Origin
 

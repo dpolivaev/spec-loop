@@ -33,6 +33,7 @@ trap cleanup EXIT
 mkdir -p "$WORKSPACE/src" "$(dirname -- "$OUTPUT_DIR")"
 cp "$SCRIPT_DIR/book.toml" "$WORKSPACE/book.toml"
 cp "$SCRIPT_DIR/src/SUMMARY.md" "$WORKSPACE/src/SUMMARY.md"
+cp "$REPO_ROOT/LICENSE.md" "$WORKSPACE/src/LICENSE.md"
 
 REPO_ROOT="$REPO_ROOT" WORKSPACE="$WORKSPACE" REPO_URL="$REPO_URL" REPO_REF="$REPO_REF" python3 <<'PY'
 from __future__ import annotations
