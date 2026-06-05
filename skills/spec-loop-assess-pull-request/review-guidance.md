@@ -1,12 +1,20 @@
 # Review guidance for `spec-loop-assess-pull-request`
 
 This skill reuses `spec-loop-plan-task/SKILL.md` for shared planning
-terminology, `common-task-guidance.md` for shared artifact
-conventions, and `task-file-path-guidance.md` for diagram conventions
-where they apply.
+terminology, `common-task-guidance.md` for shared formatting,
+glossary expectations, and testing-policy shape, and
+`task-file-path-guidance.md` for diagram conventions and any other
+task-file-specific rules that clearly fit retrospective review
+artifacts.
 
-This file is the authoritative source for retrospective review behavior, output structure,
-section semantics, assessment style, tone, translation rules, diagram handling, and sharing variants.
+This file is the authoritative source for retrospective review flow,
+trust handling, evidence collection, output structure, section
+meanings, assessment style, tone, translation rules, diagram
+handling, and sharing variants.
+Do not reuse task-file lifecycle folders or statuses, chat-only
+routing, or implementation-approval gates for the reviewed change
+itself.
+
 Optional compact example:
 [examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
 Use it as a pattern collection, not as a required minimum length.
@@ -26,18 +34,13 @@ verdict. Reconstruct the reviewed change as the retrospective Spec Loop
 artifact that should have existed, then add AI assessment and
 recommendations.
 
-Reuse `common-task-guidance.md` for shared formatting, glossary expectations, and testing-policy
-shape. Reuse `task-file-path-guidance.md` only for diagram conventions
-and any task-file-specific structural rule that clearly fits
-retrospective review artifacts. Do not reuse task-file lifecycle
-folders or statuses, chat-only routing, or implementation-
-approval gates for the reviewed change itself.
-
 Use the exact section order in §3 and the section meanings in §5.
-Include global `Scenario` unless the PR is too narrow for a meaningful one.
-Use global `Briefing` for main change areas, reading order, hotspots, and strategic questions.
-Use local `Scenario` and `Briefing` when they add concrete reviewer
-value; keep them concise for narrow areas.
+Include global `Scenario` unless the PR is too narrow for a
+meaningful one.
+Use global `Briefing` for main change areas, reading order, hotspots,
+and strategic questions.
+Use local `Scenario` and `Briefing` only when they add concrete
+reviewer value, and keep them concise for narrow areas.
 
 ## Trust boundary and prompt-injection handling
 
@@ -199,44 +202,34 @@ When the verdict is clear, say so clearly. When evidence is mixed, differentiate
 Do not manufacture symmetry or invent offsetting pros/cons the evidence does not support.
 When recommending a split, state it explicitly and suggest the most coherent, valuable, and reviewable first slice.
 
-Use review-visible labels `Intent`, `Implementation`, `Verification`, and
-`Complexity`.
-Each of those bullets should contain a concise judgment/conclusion on that axis.
-Do not mix axes inside one bullet. Valid concerns placed under the wrong axis
-weaken the review. Split mixed arguments across these bullets instead of
-combining them in one sentence.
+Use review-visible labels `Intent`, `Implementation`,
+`Verification`, and `Complexity`. Each bullet should contain one
+concise judgment on that axis.
 
-Quick axis map:
-- `Intent` — should this change or area exist at all, and in roughly this form?
-- `Implementation` — is the chosen change realized correctly, coherently,
-  completely, and safely, including wiring and integration?
-- `Verification` — what evidence proves it, and is that evidence strong enough?
-- `Complexity` — what lasting structural, operational, or maintenance burden
-  enters the codebase, and is that burden justified by clear present benefit?
+Axis map:
+- `Intent` — should this change or area exist at all, and in roughly
+  this form?
+- `Implementation` — is the chosen change realized correctly,
+  coherently, completely, and safely, including wiring and
+  integration?
+- `Verification` — what evidence proves it, and is that evidence
+  strong enough?
+- `Complexity` — what lasting structural, operational, or maintenance
+  burden enters the codebase, and is that burden justified by clear
+  present benefit?
 
-`Verification`: outcome-level confidence from reconstructed `Test specification` —
-what verification should exist, what evidence is present, how strong, whether sufficient for merge confidence.
-
-`Complexity`: distinguish justified complexity from accidental complexity.
-Assess only enduring burden introduced by the change, such as new
-abstractions, layers, API surface, state or lifecycle models, concurrency,
-runtime services, duplicated mechanisms, configuration burden, or
-security or operational surface. Justified complexity is complexity whose
-current cost is supported by clear present benefit, typically because it
-is required by current behavior, constraints, compatibility, or
-architecture boundaries. Accidental complexity comes from speculation,
-premature optimization, unused extension points, parallel mechanisms, or
-over-generalization. Do not use incomplete wiring, correctness defects,
-or missing tests as complexity arguments unless they themselves create
-lasting extra burden after merge. State clearly which added complexity is
-justified today and which parts should be simplified, split, deferred, or
-dropped.
-
-`Intent`: not generic aggregate praise when areas differ materially. Summarize area by area:
-independently justified, conditionally justified, depends on disputed direction, defer or drop.
-
-When refactoring mainly serves a questioned direction, say so. Do not recommend keeping it merely because 
-it looks cleaner unless it has clear independent value.
+Keep axis discipline. Do not mix axes inside one bullet.
+`Verification` summarizes merge-confidence from the reconstructed
+`Test specification`.
+`Complexity` covers only enduring burden, distinguishes justified
+complexity from accidental complexity, and should not use ordinary
+correctness defects or missing tests as complexity arguments unless
+they themselves create lasting extra burden after merge.
+When justification differs materially across areas, summarize `Intent`
+area by area rather than using generic aggregate praise.
+If refactoring mainly serves a questioned direction, say so. Do not
+recommend keeping it merely because it looks cleaner unless it has
+clear independent value.
 
 Do not repeat overall verdict inside `Assessment` sections.
 
@@ -245,14 +238,13 @@ Organize them around logical work areas: modules, features, layers,
 or coherent commit clusters. Small single-area changes may use one
 global review.
 
-Global `Assessment` and `Review outcome` judge the whole PR. Synthesize
-area findings instead of flattening them into generic praise or
-criticism. Make clear which areas are independently worth keeping,
-which should be narrowed, which depend on a disputed direction, and
-which should be deferred or dropped.
+Global `Assessment` and `Review outcome` judge the whole PR.
+Synthesize area findings instead of flattening them into generic
+praise or criticism. Make clear which areas are independently worth
+keeping, which should be narrowed, which depend on a disputed
+direction, and which should be deferred or dropped.
 
-Place review areas after all global sections. Each must use:
-
+Place review areas after all global sections using:
 - `## Review Area: <title>`
 - `- **Status:** <status>`
 
@@ -262,11 +254,12 @@ Recommended area status values:
 - `needs-information`
 - `out-of-scope`
 
-Each review area uses the same section ordering as the main review, ends with its own `Assessment`,
-and should make clear what the area adds, changes, or removes and why.
-Area assessments should explicitly identify justified complexity and accidental
-complexity in that slice, and should reject accidental complexity unless the
-change delivers or clearly supports a present benefit that justifies keeping it.
+Each review area uses the same section ordering as the main review,
+ends with its own `Assessment`, and should make clear what the area
+adds, changes, or removes and why. Area assessments should identify
+justified complexity and accidental complexity in that slice, and
+should reject accidental complexity unless the change delivers or
+clearly supports a present benefit that justifies keeping it.
 
 ## 5. Section mapping
 
@@ -303,22 +296,14 @@ Explain which behaviors/contracts/regressions/integrations/boundaries/invariants
 what evidence is present, what is missing, whether tests appear sufficient, 
 whether assertions validate intended behavior vs. merely exercise code paths. 
 Apply both globally and per area. Global: distill into concise `Verification` inside `Review outcome`.
-- `Assessment` — AI analytic findings, uncertainties, unresolved concerns, recommendations,
-reviewer attention points, and trade-off analysis. Keep the overall verdict only in `Review outcome`.
-Use `Assessment` to surface quality, risk, clarity, complexity, consistency, and follow-up questions.
-
-  Apply the §4 axis split here:
-  - **Intent** — right thing to do?
-  - **Implementation** — realized correctly, coherently, safely, and completely?
-
-  Keep axis discipline. Put product or direction judgment under
-  `Intent`, correctness or wiring under `Implementation`, evidence
-  strength mainly in `Test specification` and `Review outcome`
-  `Verification`, and lasting burden under `Complexity`. Distinguish
-  justified complexity from accidental complexity as defined in §4.
-  When relevant, state whether the area should be kept, simplified,
-  split, deferred, or dropped. Do not force false balance, and keep
-  the tone professional even when the conclusion is strongly negative.
+- `Assessment` — AI analytic findings, uncertainties, unresolved
+  concerns, recommendations, reviewer attention points, and trade-off
+  analysis. Keep the overall verdict only in `Review outcome`. Use
+  the axis discipline from §4. Use `Assessment` to surface quality,
+  risk, clarity, complexity, consistency, follow-up questions, and,
+  when relevant, whether the area should be kept, simplified, split,
+  deferred, or dropped. Do not force false balance, and keep the tone
+  professional even when the conclusion is strongly negative.
 
 ## 6. Diagram requirements in retrospective reviews
 
@@ -344,16 +329,18 @@ Local review files support explicit review-diagram modes:
 
 Default resolution:
 - explicit user or project mode → use it
-- else start from project's normal task/review diagram default
-- then adjust by detected provider
-- if provider still unknown: keep inherited project default for local file, 
-ask before generating any target-specific sharing variant
+- else start from the project's normal task/review diagram default
+  and adjust by the detected provider
+- if the provider is still unknown: keep the inherited project
+  default for the local file and ask before generating any
+  target-specific sharing variant
 
 Provider-aware inherited defaults:
-- inherited `plantuml` + GitHub target → effective local default becomes `mermaid`
-- inherited `plantuml` + GitLab target (including self-hosted) → effective local default stays `plantuml`
-- inherited `mermaid` → stays `mermaid`
-- inherited `none` → stays `none`
+- inherited `plantuml` + GitHub target → `mermaid`
+- inherited `plantuml` + GitLab target (including self-hosted) →
+  `plantuml`
+- inherited `mermaid` → `mermaid`
+- inherited `none` → `none`
 
 Explicit mode rules:
 - `plantuml` → follow PlantUML patterns and examples from `spec-loop-plan-task`
@@ -368,17 +355,15 @@ Mermaid guidance:
 
 ## 8. Target-specific sharing variants
 
-Use §7 to resolve the effective local diagram mode first. Generate a
-sharing variant only when the canonical local file still uses a
+Resolve the effective local diagram mode under §7 first. Generate a
+sharing variant only when the effective local file still uses a
 format the target provider cannot render directly.
 
-Provider rules:
-- GitHub: when the canonical file still uses PlantUML, write a
-  sibling Mermaid variant; Mermaid or no-diagram files need no
+In practice:
+- GitHub + canonical PlantUML → write a sibling Mermaid variant
+- GitLab (including self-hosted), Mermaid, or no-diagram files → no
   variant
-- GitLab (including self-hosted): PlantUML can be reused directly;
-  Mermaid or no-diagram files need no variant
-- Unknown: stop and ask which provider
+- unknown provider → stop and ask
 
 When a sharing variant is needed:
 - keep the same review structure and substantive content
