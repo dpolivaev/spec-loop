@@ -10,6 +10,8 @@ Use this sequence by default:
 - classify the file role first;
 - decide whether the file actually needs refinement;
 - preserve kernel behavior unless a policy change is explicit;
+- keep always-read kernel files and normal route-specific working sets
+  as small as practical;
 - move procedure, examples, and repeated prose out of `SKILL.md` when
   possible;
 - remove duplication without merging distinct routes, outcomes,
@@ -51,11 +53,17 @@ not shorten merely to shorten.
 
 ### Kernel skill file
 
-Keep only the smallest clear kernel that still preserves safe behavior.
+Keep only the smallest clear kernel that still preserves safe
+behavior.
 
-A successful kernel rewrite may stay the same length or become
-slightly longer if that makes a threshold, boundary, handoff, or stop
-condition easier to find.
+Because context is limited, shorter always-read kernel files are
+usually better. A successful kernel rewrite should normally shrink the
+kernel or keep it roughly flat.
+
+Allow a small increase only when it materially improves the visibility
+of a safety-critical threshold, boundary, handoff, source-of-truth
+rule, or stop condition and does not materially enlarge the normal
+working set for the route.
 
 Keep in `SKILL.md`:
 - route selection and handoffs;
@@ -128,6 +136,8 @@ install docs.
   miss.
 - Making thresholds, route logic, handoffs, source-of-truth rules, or
   stop conditions harder to find even if they still exist.
+- Increasing the usual route-specific working set without comparable
+  safety benefit.
 - Moving normative format rules into examples.
 - Claiming behavior is preserved when thresholds, route logic,
   approval gates, or source-of-truth rules changed.
@@ -145,6 +155,8 @@ Before finishing, verify that:
 - thresholds and limits are still easy to find;
 - route splits, handoffs, and stop conditions are no harder to find
   than before;
+- the usual route-specific working set did not grow without clear
+  safety benefit;
 - linked docs are updated when names or locations changed; and
 - no rule became ambiguous just because the prose got shorter.
 

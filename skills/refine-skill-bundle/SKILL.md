@@ -33,11 +33,17 @@ If a proposed simplification would change route logic, approval
 boundaries, thresholds, source-of-truth rules, or stop conditions,
 keep the rule or surface the change explicitly.
 
-Do not shorten merely to shorten. A successful refinement may keep
-length flat or even increase it slightly when that makes an important
-rule easier to find. If a rewrite makes route logic, approval
+Because context is limited, shorter always-read skill files are
+usually better. Prefer refinements that shrink, or at least do not
+materially increase, the text the model usually must load for the
+current route.
+
+A small increase is justified only when it materially improves the
+visibility of a safety-critical rule and does not materially enlarge
+the normal working set. If a rewrite makes route logic, approval
 boundaries, thresholds, source-of-truth rules, or stop conditions
-harder to find, treat that as a regression.
+harder to find, or increases the usual working-set size without
+comparable safety benefit, treat that as a regression.
 
 When public skill names, file names, or locations change, update
 linked docs and overview or install references in the same work item.
