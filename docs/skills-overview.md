@@ -19,8 +19,8 @@ optional.
    - defined by
      [skills/spec-loop-plan-task/SKILL.md](../skills/spec-loop-plan-task/SKILL.md),
      [skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md),
-     [skills/spec-loop-plan-task/fileless-path-guidance.md](../skills/spec-loop-plan-task/fileless-path-guidance.md)
-     on the fileless path, and
+     [skills/spec-loop-plan-task/chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)
+     on the chat-only path, and
      [skills/spec-loop-plan-task/task-file-path-guidance.md](../skills/spec-loop-plan-task/task-file-path-guidance.md)
      on the task-file path.
 
@@ -47,7 +47,7 @@ optional.
    - defined by the shared core
      [skills/spec-loop-implementation-flow/implementation-flow-guidance.md](../skills/spec-loop-implementation-flow/implementation-flow-guidance.md),
      plus the path-specific companions
-     [skills/spec-loop-implementation-flow/fileless-path-guidance.md](../skills/spec-loop-implementation-flow/fileless-path-guidance.md)
+     [skills/spec-loop-implementation-flow/chat-only-path-guidance.md](../skills/spec-loop-implementation-flow/chat-only-path-guidance.md)
      and
      [skills/spec-loop-implementation-flow/task-file-path-guidance.md](../skills/spec-loop-implementation-flow/task-file-path-guidance.md).
 
@@ -90,8 +90,8 @@ optional.
      defines the shared no-subtask task form, section semantics,
      readiness rules, formatting, and testing policy used on both
      planning paths.
-   * **[skills/spec-loop-plan-task/fileless-path-guidance.md](../skills/spec-loop-plan-task/fileless-path-guidance.md)**
-     defines the fileless-path planning mechanics: initial canonical
+   * **[skills/spec-loop-plan-task/chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)**
+     defines the chat-only-path planning mechanics: initial canonical
      chat-task expression, section-only updates, recovery
      re-emission, later-work relation handling, and promotion to the
      task-file path.
@@ -105,10 +105,10 @@ optional.
      defines the shared implementation-flow core: post-approval route
      semantics, canonical-section authority, shared `review` meaning,
      `Implementation notes`, and the semantic completion checklist.
-   * **[skills/spec-loop-implementation-flow/fileless-path-guidance.md](../skills/spec-loop-implementation-flow/fileless-path-guidance.md)**
-     defines the fileless-path implementation-time mechanics:
+   * **[skills/spec-loop-implementation-flow/chat-only-path-guidance.md](../skills/spec-loop-implementation-flow/chat-only-path-guidance.md)**
+     defines the chat-only-path implementation-time mechanics:
      canonical chat updates, recovery re-emission, promotion, and
-     fileless expression of `review`.
+     chat-only expression of `review`.
    * **[skills/spec-loop-implementation-flow/task-file-path-guidance.md](../skills/spec-loop-implementation-flow/task-file-path-guidance.md)**
      defines the task-file-path implementation-time delta:
      authorized task-file edits, task-file `Implementation notes`
@@ -153,19 +153,20 @@ optional.
 
    * See the common task guidance project glossary section above.
    * **[skills/spec-loop-write-glossary/glossary-format.md](../skills/spec-loop-write-glossary/glossary-format.md)**
-     is the shared glossary-format guidance file and includes its own
-     embedded example.
+     is the shared glossary-format guidance file.
+   * Companion glossary examples live under
+     [skills/spec-loop-write-glossary/examples/](../skills/spec-loop-write-glossary/examples/).
 
 Recommended quick-check order:
 - [README.md](../README.md)
 - [skills/spec-loop-plan-task/SKILL.md](../skills/spec-loop-plan-task/SKILL.md)
 - [skills/spec-loop-clarify-task/SKILL.md](../skills/spec-loop-clarify-task/SKILL.md)
 - [skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)
-- [skills/spec-loop-plan-task/fileless-path-guidance.md](../skills/spec-loop-plan-task/fileless-path-guidance.md)
+- [skills/spec-loop-plan-task/chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)
 - [skills/spec-loop-plan-task/task-file-path-guidance.md](../skills/spec-loop-plan-task/task-file-path-guidance.md)
 - [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](../skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md)
 - [skills/spec-loop-implementation-flow/implementation-flow-guidance.md](../skills/spec-loop-implementation-flow/implementation-flow-guidance.md)
-- [skills/spec-loop-implementation-flow/fileless-path-guidance.md](../skills/spec-loop-implementation-flow/fileless-path-guidance.md)
+- [skills/spec-loop-implementation-flow/chat-only-path-guidance.md](../skills/spec-loop-implementation-flow/chat-only-path-guidance.md)
 - [skills/spec-loop-implementation-flow/task-file-path-guidance.md](../skills/spec-loop-implementation-flow/task-file-path-guidance.md)
 - [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md)
 - [docs/skill-framework-comparison.md](skill-framework-comparison.md)

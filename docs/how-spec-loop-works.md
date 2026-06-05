@@ -23,8 +23,8 @@ The planning and approval rules for that workflow live in the [spec-loop-plan-ta
 The planning bundle starts with
 **[SKILL.md](../skills/spec-loop-plan-task/SKILL.md)** and
 **[common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**,
-plus **[fileless-path-guidance.md](../skills/spec-loop-plan-task/fileless-path-guidance.md)**
-on the fileless path and
+plus **[chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)**
+on the chat-only path and
 **[task-file-path-guidance.md](../skills/spec-loop-plan-task/task-file-path-guidance.md)**
 on the task-file path.
 
