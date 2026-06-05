@@ -1,0 +1,50 @@
+= Domain Glossary
+
+Short intro.
+
+== Overview
+
+[#overview-table]
+[cols="3,9",options="header"]
+|===
+| Subsystem | Usage
+
+| <<subsystem-example,Example Area>>: Short subsystem definition with
+<<term-example,linked terms>>.
+a|
+* The user works with <<subsystem-example,Example Area>>.
+* <<subsystem-example,Example Area>> relates to
+  <<subsystem-other,Other Area>> through
+  <<term-example,linked terms>>.
+
+|===
+
+[mermaid]
+----
+graph LR
+  user["User"]
+
+  subgraph subsystems["Domain"]
+    example["Example Area"]
+    other["Other Area"]
+  end
+
+  user -->|uses| example
+  example -->|relates to| other
+----
+
+[#subsystem-example]
+== <<overview-table,Example Area>>
+
+[cols="6,10",options="header"]
+|===
+| Term | Usage
+
+| [[term-example]]link:src/main/java/example/Example.java[Example Term]:
+Short definition of the term.
+a|
+* One <<term-example,Example Term>> relates to another
+  <<term-other,Other Term>>.
+* The <<term-example,Example Term>> can appear in a boundary case.
+
+|===

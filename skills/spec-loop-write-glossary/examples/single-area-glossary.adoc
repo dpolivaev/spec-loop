@@ -1,0 +1,35 @@
+= Purchase Approval Glossary
+
+This glossary defines the canonical language for purchase approval.
+
+[cols="6,10",options="header"]
+|===
+| Term | Usage
+
+| [[term-approval-rule]]link:src/main/java/example/ApprovalRule.java[Approval Rule]:
+Business rule deciding whether a request needs approval.
+a|
+* An <<term-approval-rule,Approval Rule>> evaluates a
+  <<term-purchase-request,Purchase Request>>.
+* One <<term-approval-rule,Approval Rule>> can require a specific
+  <<term-reviewer-group,Reviewer Group>>.
+
+| [[term-purchase-request]]link:src/main/java/example/PurchaseRequest.java[Purchase Request]:
+Request to buy one or more items.
+a|
+* A <<term-purchase-request,Purchase Request>> can trigger an
+  <<term-approval-rule,Approval Rule>>.
+* A <<term-purchase-request,Purchase Request>> is reviewed by a
+  <<term-reviewer-group,Reviewer Group>> when its amount exceeds a
+  threshold.
+
+| [[term-reviewer-group]]link:src/main/java/example/ReviewerGroup.java[Reviewer Group]:
+Named set of reviewers for business approval.
+a|
+* A <<term-reviewer-group,Reviewer Group>> receives a
+  <<term-purchase-request,Purchase Request>> selected by an
+  <<term-approval-rule,Approval Rule>>.
+* One <<term-reviewer-group,Reviewer Group>> can review many
+  <<term-purchase-request,Purchase Requests>>.
+
+|===

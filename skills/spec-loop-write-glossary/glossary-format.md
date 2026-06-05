@@ -46,57 +46,19 @@ subsystem areas.
 
 ### Multi-area glossary
 
+A complete multi-area example lives in
+[examples/multi-area-glossary.adoc](./examples/multi-area-glossary.adoc).
+
+Use this shape:
+
 ```adoc
 = Domain Glossary
 
-Short intro.
-
 == Overview
+...
 
-[#overview-table]
-[cols="3,9",options="header"]
-|===
-| Subsystem | Usage
-
-| <<subsystem-example,Example Area>>: Short subsystem definition with
-<<term-example,linked terms>>.
-a|
-* The user works with <<subsystem-example,Example Area>>.
-* <<subsystem-example,Example Area>> relates to
-  <<subsystem-other,Other Area>> through
-  <<term-example,linked terms>>.
-
-|===
-
-[mermaid]
-----
-graph LR
-  user["User"]
-
-  subgraph subsystems["Domain"]
-    example["Example Area"]
-    other["Other Area"]
-  end
-
-  user -->|uses| example
-  example -->|relates to| other
-----
-
-[#subsystem-example]
 == <<overview-table,Example Area>>
-
-[cols="6,10",options="header"]
-|===
-| Term | Usage
-
-| [[term-example]]link:src/main/java/example/Example.java[Example Term]:
-Short definition of the term.
-a|
-* One <<term-example,Example Term>> relates to another
-  <<term-other,Other Term>>.
-* The <<term-example,Example Term>> can appear in a boundary case.
-
-|===
+...
 ```
 
 If the glossary covers only one area, the overview section is optional.
@@ -104,43 +66,19 @@ If the glossary covers only one area, the overview section is optional.
 ### Single-area glossary
 
 Use the structure below when a self-contained, single-area glossary is
-enough:
+enough.
+A complete single-area example lives in
+[examples/single-area-glossary.adoc](./examples/single-area-glossary.adoc).
+
+Use this shape:
 
 ```adoc
 = Purchase Approval Glossary
 
-This glossary defines the canonical language for purchase approval.
-
 [cols="6,10",options="header"]
 |===
 | Term | Usage
-
-| [[term-approval-rule]]link:src/main/java/example/ApprovalRule.java[Approval Rule]:
-Business rule deciding whether a request needs approval.
-a|
-* An <<term-approval-rule,Approval Rule>> evaluates a
-  <<term-purchase-request,Purchase Request>>.
-* One <<term-approval-rule,Approval Rule>> can require a specific
-  <<term-reviewer-group,Reviewer Group>>.
-
-| [[term-purchase-request]]link:src/main/java/example/PurchaseRequest.java[Purchase Request]:
-Request to buy one or more items.
-a|
-* A <<term-purchase-request,Purchase Request>> can trigger an
-  <<term-approval-rule,Approval Rule>>.
-* A <<term-purchase-request,Purchase Request>> is reviewed by a
-  <<term-reviewer-group,Reviewer Group>> when its amount exceeds a
-  threshold.
-
-| [[term-reviewer-group]]link:src/main/java/example/ReviewerGroup.java[Reviewer Group]:
-Named set of reviewers for business approval.
-a|
-* A <<term-reviewer-group,Reviewer Group>> receives a
-  <<term-purchase-request,Purchase Request>> selected by an
-  <<term-approval-rule,Approval Rule>>.
-* One <<term-reviewer-group,Reviewer Group>> can review many
-  <<term-purchase-request,Purchase Requests>>.
-
+...
 |===
 ```
 
