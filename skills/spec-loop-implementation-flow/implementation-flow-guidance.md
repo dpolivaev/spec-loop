@@ -103,9 +103,12 @@ implemented result.
 Use this route when the work is implemented, locally verified, and
 ready for user review.
 
-On both planning paths, `review` means the implementation matches the
-approved task and has passed the required local checks. The path
-companion defines how that state is expressed.
+Reaching `review` means the current implemented state matches the
+approved task and has passed the required local checks at that
+checkpoint. The path companion defines how that state is expressed.
+
+After route E is expressed, this skill is done for that increment.
+Later executable follow-up returns to `spec-loop-plan-task`.
 
 ## 3. Canonical task updates during implementation
 
@@ -114,8 +117,7 @@ not silently normalize the task to the code.
 
 Only these sources may override earlier canonical task wording or
 decisions:
-- an explicit user clarification statement;
-- accepted review feedback; or
+- an explicit user clarification statement; or
 - explicit post-implementation user approval of keeping an implemented
   deviation.
 
@@ -125,10 +127,11 @@ Do not rewrite canonical task sections for:
 - unapproved implementation deviations; or
 - history that belongs in `Implementation notes`.
 
-After implementation starts, append to `Research` instead of rewriting
-it. Later `Research` entries should say when they amend earlier
-findings and when they rely on code already changed during
-implementation.
+After implementation starts, extend `Research` only with newly
+revealed relevant facts about the original pre-implementation state.
+Later `Research` entries should say when they amend earlier findings.
+Do not use canonical `Research` to record repository states created
+during the current increment.
 
 Patch other changed canonical sections to current truth when explicit
 authority exists, including `Scenario`, `Constraints`, `Design`, and
@@ -136,9 +139,9 @@ authority exists, including `Scenario`, `Constraints`, `Design`, and
 
 Record the authorized change as the path companion requires.
 
-Keep accepted clarifications, approved deviations, and review
-adjustments in canonical task sections rather than logging that
-conversation history in `Implementation notes`.
+Keep accepted clarifications and approved deviations in canonical task
+sections rather than logging that conversation history in
+`Implementation notes`.
 
 ## 4. `Implementation notes`
 
@@ -212,9 +215,8 @@ Before reaching `review`, ensure that:
 - `Constraints`, `Design`, and `Test specification` are implemented as
   applicable for that increment;
 - any canonical task-section changes have explicit authority from an
-  explicit user clarification, accepted review feedback, or explicit
-  post-implementation user approval of keeping an implemented
-  deviation;
+  explicit user clarification or explicit post-implementation user
+  approval of keeping an implemented deviation;
 - required tests or other local verification from `Test specification`
   pass, unless the user waived them;
 - required glossary work is complete;
@@ -250,7 +252,7 @@ when implementation uncovers a change that needs renewed planning or
 approval under route C outside the post-implementation approval case
 handled by route D.
 
-When the user introduces a new follow-up work item after the approved
-increment, do not continue in implementation mode by inertia. Return
-that new work item to `spec-loop-plan-task` for route selection before
-more executable work continues.
+When additional executable work appears outside the approved current
+increment before route E, do not continue in implementation mode by
+inertia. Return it to `spec-loop-plan-task` for route selection
+before more executable work continues.

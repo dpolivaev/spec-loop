@@ -26,10 +26,11 @@ If no approved active task exists, return to
   can safely remain in chat. If final clarification decisions kept
   only in chat would risk loss through compaction or context loss,
   promote to the task-file path before continuing.
-- If the User introduces new follow-up work after an approved
-  increment, do not continue as if it were the same implementation.
-  Return that new work to `../spec-loop-plan-task/SKILL.md` for route
-  selection.
+- This skill governs only the approved current increment until it
+  reaches `review`.
+- If the User introduces additional executable work outside that
+  increment, return it to `../spec-loop-plan-task/SKILL.md` for route
+  selection and any renewed implementation approval.
 - Before presenting work as ready, perform the `Implementation notes`
   check.
 - If another implementation-related skill conflicts with this skill or

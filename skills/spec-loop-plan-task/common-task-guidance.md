@@ -52,14 +52,64 @@ decision, return to clarification before continuing.
 If asking the User to review a draft instead, say so explicitly and
 list the known gaps, open questions, and unresolved decisions.
 
+## Later executable follow-up from `review` or `done`
+
+On the chat-only path, the equivalent starting point is a task
+already presented as ready for User review.
+
+When a task or subtask already in `review` or `done`, or a chat-only
+task already presented as ready for User review, receives a later
+executable change request, return to PLAN before more
+implementation.
+
+From `review`, or from a chat-only task already presented as ready
+for User review, keep the same task or subtask by default when the
+User's message or later clarification shows that the follow-up is
+still the same overall task and the work is not a distinct work item.
+
+From `done`, ask whether to reuse the same task or subtask or use
+separate tracking unless the User already specified that choice.
+
+Otherwise ask only when that relation is unclear.
+
+Significant scope change or widening is evidence that the work may be
+a distinct work item. If that boundary is unclear, clarify in PLAN
+before choosing whether to keep the same task or use separate
+tracking.
+
+Discard implementation-created intermediate states from canonical
+planning artifacts by default. An implementation-created intermediate
+state alone is not a reason to force separate tracking.
+
+Preserve such a state only when the User explicitly wants
+history-preserving separate tracking or when a separate governed
+starting state is actually required.
+
+If separate tracking is needed while the work is still part of the
+same overall task, recommend a new subtask and wait for explicit User
+confirmation before creating it. If the work is a distinct work item,
+recommend a new task and wait for explicit User confirmation before
+creating it.
+
+If the same task or subtask is kept, update the governing artifact in
+PLAN, discard any implementation-created intermediate state from
+canonical planning sections, and seek renewed implementation approval
+before more executable work.
+
 ## Shared planning and execution sections
 
 ### Research
 
 Start with research unless waived. Record observations, constraints,
 verified facts, and current-state findings only. Plans go in
-**Design**. Documents current system: behavior, implementation,
-legacy arch, flows, data structures, findings, and constraints.
+**Design**. Documents the original pre-implementation system state
+for the governed increment: behavior, implementation, legacy arch,
+flows, data structures, findings, and constraints.
+
+Do not record repository states created during the current increment
+in canonical Research. If later clarification, implementation, or
+review reveals new relevant facts about the original
+pre-implementation state, extend Research with those facts only.
 
 Do not repeat `Analysis` points here in decision-and-reason form.
 
@@ -134,6 +184,14 @@ Research and Scenario behavior.
 
 Design = implementation contract. Must be reviewable and
 implementation-ready.
+
+Design must describe only the current intended end state for the
+governed increment. Do not describe repository states created during
+the current increment, including staged refactor states or
+transformations such as `S1 -> S2`. If such an intermediate state
+must be preserved, use a new task or subtask where that state can
+appear as **Research**. Implementation detours that do not belong in
+canonical sections may go in **Implementation notes** when relevant.
 
 Use only final intended names for design-owned terms, units, config
 keys, tool/API names, request/response fields, enum values, etc.

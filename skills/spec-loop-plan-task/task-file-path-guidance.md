@@ -78,10 +78,22 @@ to fit target. Remove backlog prefix only when moving out of
 `backlog`. Moving into `done`: assign next global `done` prefix
 independently.
 
-Tasks in `review` or `done` stay in place. Perform minor review
-adjustments without a separate subtask, but do not substantially
-rework finished sections or subtasks unless the User asks. Append new
-subtasks for substantial rework or extension.
+Later executable follow-up from a task or subtask already in
+`review` or `done` returns to PLAN and follows the shared follow-up
+rule in [common-task-guidance.md](./common-task-guidance.md) before
+more implementation.
+
+If that shared rule keeps the same task or subtask from `review`, it
+stays in place by default during that planning and renewed-approval
+work. Do not require a move back to `in-progress` or separate
+tracking solely because the earlier implementation created an
+intermediate state. Briefly mention that the User may instead request
+a new task or subtask, a task move, or a subtask status change.
+
+Tasks in `done` stay in place. If the User has not already specified
+whether to reuse the same task or subtask or use separate tracking,
+ask. Do not substantially rework `done` sections or subtasks unless
+the User asks.
 
 #### Tracked moves
 
@@ -133,9 +145,11 @@ work sits.
 
 Representation:
 - Task state = top-level folder.
-- Tasks in `review` or `done` stay there. Later work may add follow-up
-  subtasks; the newest follow-up subtask status carries the active
-  work.
+- Tasks in `review` or `done` stay there by default.
+- Later executable follow-up from `review` or `done` returns to PLAN.
+  During that planning and renewed-approval work, a `review` item may
+  stay in place without a new subtask. A `done` item is reused only
+  when the User chooses that.
 - Only subtasks have status fields. The task status itself is
   indicated only by its folder.
 - Subtask lifecycle: `- **Status:** <status>`.
@@ -144,18 +158,32 @@ Lifecycle definitions:
 - **backlog** — planned or deferred. New tasks default here.
 - **in-progress** — active research, design, implementation, or
   verification.
-- **review** — implementation complete, locally verified, awaiting
-  User review or acceptance.
+- **review** — in the User review cycle. By default, a task or
+  subtask stays in `review` once that cycle is reached, including
+  same-task executable follow-up that planning keeps on that task or
+  subtask, unless the User explicitly asks for more formal tracking.
 - **done** — User-verified completion.
 
 Lifecycle and transition rules:
 - Same transition guards as `SKILL.md` and the shared readiness rules.
 - Allowed task-file moves: `backlog` <-> `in-progress` -> `review` ->
-  `done`.
+  `done`, plus explicit User-requested `review` -> `in-progress`.
 - If `in-progress` is empty and only one new task is being created,
   place it in `in-progress`, otherwise in `backlog`.
 - LLM moves `in-progress` -> `review` when implementation and local
   verification are complete under `spec-loop-implementation-flow`.
+- Later executable follow-up from `review` or `done` returns to PLAN
+  before more implementation.
+- During that planning and renewed-approval work, a `review` item
+  stays in `review` by default. The LLM must not move a task back to
+  `in-progress` or change a subtask from `review` to `in-progress`
+  unless the User explicitly asks.
+- For follow-up from `done`, if the User has not already chosen
+  whether to reuse the same task or subtask or use separate tracking,
+  ask before revising the artifact.
+- When the User explicitly changes a subtask from `review` to
+  `in-progress` during that follow-up, the overall task may stay in
+  `review` unless the User also requests a task-level move.
 - Subtask status changes apply only to that subtask unless the User
   explicitly says otherwise.
 - Task with subtasks: move task to `review` when no unfinished
@@ -180,12 +208,24 @@ When a task uses subtasks:
   empty Implementation notes may be omitted;
 - omitted Scenario, Constraints, Analysis, or empty Implementation
   notes keep the remaining sections in order.
-- Do not create a new subtask unless the work adds a separate
-  functional increment.
-- If the current increment changes without adding one, revise the
-  active task or subtask in place.
-- If a task without subtasks gains its first separate functional
-  increment, convert it to subtask form by default.
+- For later executable follow-up from `review` or `done`, first apply
+  the shared follow-up rule in
+  [common-task-guidance.md](./common-task-guidance.md).
+- Do not create a new subtask by default when that shared rule keeps
+  the same task or subtask.
+- An implementation-created intermediate state alone does not force a
+  new subtask.
+- If the shared rule keeps the same overall task but the User wants
+  separate tracking or a separate governed starting state is actually
+  required, recommend a new subtask and wait for explicit User
+  confirmation before creating it.
+- When a new subtask is created to preserve a separate governed
+  starting state or history-preserving intermediate state, that state
+  may appear only in the new subtask's Research as its starting
+  state.
+- If a task without subtasks needs its first separately tracked
+  follow-up within the same overall task, convert it to subtask form
+  by default.
 - During that conversion, keep only shared context at task level and
   move subtask-specific Research, Analysis, Design, and Test
   specification into the relevant subtask.
@@ -202,8 +242,10 @@ When a task uses subtasks:
 - must use the same list-item labels and ordering as the shared main
   task form, including conditional Scenario, optional Constraints,
   conditional Analysis, and conditional Implementation notes,
-- must represent a functional increment; for implementation tasks must
-  include executable work,
+- must represent a separately tracked work unit within the same
+  overall task; for implementation tasks it must include executable
+  work; this is usually a functional increment, but a
+  history-preserving review follow-up may also justify a subtask,
 - is not assumed to be self-sufficient; before working from a
   subtask, read the relevant task-level sections and diagrams needed
   to understand it correctly;

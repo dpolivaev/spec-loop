@@ -128,9 +128,12 @@ Use task-file if any of these hold:
 
 Otherwise chat-only is allowed.
 
-When a prior task file is in `review` or `done` and a new follow-up
-work item appears, re-run route selection. Reuse the existing task
-file only when it still governs the same active work item.
+When later executable follow-up appears after a task or subtask
+already in `review` or `done`, or after a chat-only task already
+presented as ready for User review, return to PLAN and re-run route
+selection. Reuse the existing task artifact only when the shared
+follow-up rule in `common-task-guidance.md` still allows it to govern
+the same active work item.
 
 ## Planning content
 

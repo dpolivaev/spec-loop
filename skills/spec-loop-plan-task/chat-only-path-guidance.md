@@ -123,20 +123,33 @@ safe state, promote the work to the task-file path.
 
 ### Later work relation handling
 
-When new work appears after a chat-only task, use the User's message
-or later clarification to decide whether it is a subtask or extension
-of the earlier task, or a new follow-up task. Ask only when that
-relation is not clear.
+When new work appears after a chat-only task, first decide whether
+that earlier task is still an active planning task or has already been
+presented as ready for User review.
 
-If the User's message or later clarification shows it is a subtask or
-extension, use the task-file path because chat-only work has no
-subtasks.
+If it has already been presented as ready for User review, use the
+shared follow-up rule in
+[common-task-guidance.md](./common-task-guidance.md) to decide whether
+later executable follow-up may stay in the current chat-only task,
+needs task-file promotion for separate tracked history, or is a new
+follow-up task.
 
-If the User's message or later clarification shows it is a new
-follow-up task, re-run route selection for that new work item. A new
-chat-only task may start in chat without creating any task file only
-when the earlier chat-only task is no longer active and the new task
-independently still fits the chat-only criteria.
+If it is still an active planning task, use the User's message or
+later clarification to decide whether the new work extends that task
+or is a new follow-up task. Ask only when that relation is not clear.
+
+If the work stays in the same chat-only task, keep it there only while
+chat-only safety still holds. Do not force task-file promotion solely
+because the earlier implementation created an intermediate state.
+
+If separate tracking within the same overall task is needed, use the
+task-file path because chat-only work has no subtasks.
+
+If it is a new follow-up task, re-run route selection for that new
+work item. A new chat-only task may start in chat without creating
+any task file only when the earlier chat-only task is no longer
+active and the new task independently still fits the chat-only
+criteria.
 
 Do not allow two active chat-only tasks at once. If the new work
 extends the active task or the combined work stops being simple, stay
