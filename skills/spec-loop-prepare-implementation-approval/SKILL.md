@@ -29,7 +29,8 @@ outcomes and response rules.
 
 If readiness checks find directly fixable task defects, update the
 active task in place and re-run the readiness checks before producing
-user-facing output.
+user-facing output, except for structural decomposition changes
+handled specially by `implementation-approval-guidance.md`.
 
 If readiness checks find issues that can be resolved from existing
 evidence, update the active task in place and re-run the readiness

@@ -83,6 +83,31 @@ If readiness checks fail, use this branch order:
    applicable direct fixes and evidence-based updates, or when the
    user explicitly asked for status-only feedback.
 
+Unlike ordinary directly fixable defects, structural decomposition
+changes must not be applied silently. If approval preparation finds
+that converting a no-subtask task to subtask form or splitting the
+active subtask would materially improve decomposition of the current
+work item by splitting it into parts that are easier to review and
+implement, briefly present the proposed restructuring and ask whether
+to apply it now.
+
+If the User agrees, restructure in place, keep only genuinely shared
+context at task level, move subtask-specific Research, Analysis,
+Design, and Test specification into the relevant subtask, avoid
+parallel task-level and subtask-level restatements of the same
+material, then use `../spec-loop-compact-task-file/SKILL.md` and
+resume this skill.
+
+After restructuring and compaction and before re-running readiness
+checks, verify that no needed content was lost or moved incorrectly,
+that no meaning changed unintentionally, that shared and
+subtask-specific content now have one authoritative location at the
+correct level, and that no contradictory duplicate statements remain.
+
+Then re-run readiness checks and continue approval preparation. If the
+User declines, continue approval preparation on the current
+structure.
+
 ## 4. Review-preparation rules
 
 Make the Design section reviewer-friendly without losing planning
@@ -155,7 +180,9 @@ increment:
   private methods, or other implementation-local details unless the
   user explicitly asked for that level; and
 - the task does not present duplicated diagram-plus-table restatements
-  without added value.
+  without added value; and
+- the active task file's current main-task/subtask structure is a good
+  fit for the current increment.
 
 ## 6. Diagram choice
 
