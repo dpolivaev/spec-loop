@@ -132,6 +132,8 @@ revealed relevant facts about the original pre-implementation state.
 Later `Research` entries should say when they amend earlier findings.
 Do not use canonical `Research` to record repository states created
 during the current increment.
+Any edit that makes `Research` reflect state created by work on
+this task is forbidden.
 
 Patch other changed canonical sections to current truth when explicit
 authority exists, including `Scenario`, `Constraints`, `Design`, and

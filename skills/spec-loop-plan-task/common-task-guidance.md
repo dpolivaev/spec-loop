@@ -101,10 +101,11 @@ before more executable work.
 ### Research
 
 Start with research unless waived. Record observations, constraints,
-verified facts, and current-state findings only. Plans go in
-**Design**. Documents the original pre-implementation system state
-for the governed increment: behavior, implementation, legacy arch,
-flows, data structures, findings, and constraints.
+verified facts, and findings about the original pre-implementation
+state only. Plans go in **Design**. Documents the original
+pre-implementation system state for the governed increment:
+behavior, implementation, legacy arch, flows, data structures,
+findings, and constraints.
 
 Do not record repository states created during the current increment
 in canonical Research. If later clarification, implementation, or
