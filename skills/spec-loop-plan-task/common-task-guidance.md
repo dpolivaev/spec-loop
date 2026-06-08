@@ -30,8 +30,8 @@ renewed approval before implementation continues.
 
 Before IMPLEMENTATION, the active task needs: Scope, Motivation,
 Briefing, implementation-ready Design, Test specification, and any
-required Research, Scenario, Analysis, or Constraints for the
-current increment — even when the User allows combined phases.
+required Research, Scenario, Glossary, Analysis, or Constraints for
+the current increment — even when the User allows combined phases.
 
 Before asking the User to approve a task for IMPLEMENTATION, the LLM
 must self-check that the content for the current implementation
@@ -116,13 +116,18 @@ Do not repeat `Analysis` points here in decision-and-reason form.
 
 ### Scenario
 
-Anchors behavior and domain terms before implementation. Use when
-behavior or terms introduced/changed; else omit. Keep concise,
-implementation-free.
+`Scenario` explains what happens and grounds domain language before
+implementation. Keep it concise, implementation-free, and
+behavior-first.
 
-Scenario = source of domain/behavior language. When terms
-introduced/changed: create/update Scenario first, use those terms in
-Design, tests, code, commits. No parallel synonyms.
+Use `Scenario` when behavior, flow, boundaries, or user-visible
+outcomes are introduced, changed, or clarified.
+
+If behavior changes but shared vocabulary does not, keep `Scenario`
+only. If neither behavior nor shared vocabulary changes, omit both
+`Scenario` and `Glossary`. Prefer `Scenario` over `Glossary` when
+only one section is needed. Do not use `Glossary` without `Scenario`
+by default.
 
 Across the whole task artifact, use domain-related words for planned
 behavior and structure. When referring to planned or changed
@@ -130,24 +135,55 @@ production types, use exact intended class, interface, and enum
 names, not stand-ins or generic role placeholders.
 
 Research may mention legacy terms. Analysis and Design use only
-canonical Scenario terms except explicit legacy-to-target mapping
-tables. If code uses different names, align incrementally and
-document intentional mismatch in the active task artifact.
+canonical Scenario and Glossary terms except explicit
+legacy-to-target mapping tables. If code uses different names, align
+incrementally and document intentional mismatch in the active task
+artifact.
+
+### Glossary
+
+Use task `Glossary` only when shared domain terms are introduced,
+changed, or redefined.
+
+When used:
+- include `Scenario` too;
+- write or update both together;
+- place `Glossary` immediately after `Scenario`; and
+- follow
+  [scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
+
+Task `Glossary` is delta-only relative to the current shared
+domain-language source. Include only:
+- new or changed shared domain terms;
+- named abstractions that task behavior or Design/Test
+  specification must treat as stable concepts; and
+- task-specific usage constraints not yet canonicalized
+  project-wide.
+
+Do not redefine unchanged terms from that source.
 
 ### Project glossary
 
 Follow `SKILL.md` for glossary-file recognition and glossary-format
 routing.
 
-Once a project glossary exists, use it as shared task language.
-Do not add helper names, implementation details, framework terms, or
-terms not needed to explain project rules, behavior, or subsystem
-boundaries.
+Current shared domain-language source:
+- if a project glossary exists, use it;
+- otherwise use `Research` plus the existing codebase until a project
+  glossary is created.
 
-If the current task requires glossary work:
+Once a project glossary exists, use it as shared task language above
+individual tasks and code. Do not add helper names, implementation
+details, framework terms, or terms not needed to explain project
+rules, behavior, or subsystem boundaries.
 
-- reflect it in the task plan;
-- perform it during IMPLEMENTATION with traceability links.
+If glossary work is required for the current task:
+- reflect it in the task plan; and
+- during IMPLEMENTATION, follow `SKILL.md` rules for project glossary
+  creation or update.
+
+If a project glossary update would change approved meaning rather
+than record it, return to PLAN first.
 
 If the task plan is missing required glossary work, return to PLAN,
 update the task, get approval, and continue.
@@ -181,7 +217,7 @@ own. Clarification workflow and recording procedure belong to
 
 Documents target system: architecture, data structures, data flow,
 interactions, implementation boundaries. Draft from validated
-Research and Scenario behavior.
+Research and Scenario behavior, using Glossary when present.
 
 Design = implementation contract. Must be reviewable and
 implementation-ready.
@@ -233,7 +269,8 @@ When changing tools/APIs/serialized payloads, Design must show full
 target request/response structures and enums. Examples supplement,
 don't replace spec.
 
-When Scenario exists, Design uses canonical Scenario terms.
+When Scenario or Glossary exists, Design uses their canonical terms.
+Do not redefine Glossary terms in Design.
 
 ### Test specification
 
@@ -252,10 +289,10 @@ behavior is governed by that skill and is not repeated here.
 
 ### Iterative discovery
 
-Iterate across Research, Scenario (if used), Analysis (if used),
-Design, and Test specification until coherent. Record intermediate
-alternatives only when they aid reasoning or review. No
-implementation during this loop.
+Iterate across Research, Scenario (if used), Glossary (if used),
+Analysis (if used), Design, and Test specification until coherent.
+Record intermediate alternatives only when they aid reasoning or
+review. No implementation during this loop.
 
 ## Context Preservation
 
@@ -310,8 +347,10 @@ labels below.
 - Main task sections as bold-label list items in this order:
   - `- **Scope:**`
   - `- **Motivation:**`
-  - `- **Scenario:**` (conditional; only when behavior or terms are
-    introduced or refined)
+  - `- **Scenario:**` (conditional; use when behavior, flow,
+    boundaries, or user-visible outcomes need grounding)
+  - `- **Glossary:**` (conditional; use with Scenario when shared
+    domain terms are introduced, changed, or redefined)
   - `- **Constraints:**` (optional; important limits Design and
     implementation must obey)
   - `- **Briefing:**`
@@ -322,8 +361,8 @@ labels below.
   - `- **Test specification:**`
   - `- **Implementation notes:**` (conditional; include it when the
     post-implementation checkpoint finds meaningful notes content)
-  Omitted Scenario, Constraints, Analysis, or empty
-  Implementation notes: keep the remaining sections in order.
+  When a conditional or optional section is omitted, omit it entirely
+  and keep the remaining sections in the order listed above.
 
 Task-file-only subtask rules stay in
 [task-file-path-guidance.md](./task-file-path-guidance.md).

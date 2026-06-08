@@ -36,8 +36,8 @@ reuse the shared [spec-loop-plan-task](skills/spec-loop-plan-task/)
 bundle, and support the same planning artifacts.
 
 Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your
-project uses a glossary. It is mandatory for the Spec Loop AsciiDoc
-glossary format.
+project uses a project glossary in the Spec Loop AsciiDoc glossary
+format.
 
 [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) is
 optional. Install it only if you want the rendering setup and
@@ -59,7 +59,7 @@ npx skills add dpolivaev/spec-loop -s '*'
 
 Variations:
 - `-s '*'` installs all shipped skills.
-- Remove `-s '*'` to select skills interactively instead of installing the full bundle. That lets you skip the optional [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) and [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) skills, and skip [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project will not use a glossary.
+- Remove `-s '*'` to select skills interactively instead of installing the full bundle. That lets you skip the optional [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) and [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) skills, and skip [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project will not use a project glossary.
 - Add `-g` for a global install.
 - Use `-g --all` for a global, non-interactive install for all supported agents.
 
@@ -68,9 +68,10 @@ https://github.com/vercel-labs/skills.
 
 ### Prepare task and glossary rendering
 
-Spec Loop task files use embedded PlantUML diagrams, and Spec Loop
-glossaries may include embedded diagrams. Prepare your editor for
-reviewing rendered task files and glossary files before continuing.
+Spec Loop task files use embedded PlantUML diagrams and may also
+include Mermaid visual glossaries. Spec Loop project glossaries may
+include Mermaid diagrams. Prepare your editor for reviewing rendered
+task files and glossary files before continuing.
 
 Ask the agent to use the [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) skill to
 prepare your editor preview setup.
@@ -144,7 +145,7 @@ If `npx` is not available, clone or download this repository and copy
 the core task-workflow skills from [skills/](skills/) into your agent's skills
 directory. Keep that core bundle together.
 
-Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project uses a glossary.
+Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project uses a project glossary.
 
 Install [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) only if you want rendering setup or troubleshooting help.
 

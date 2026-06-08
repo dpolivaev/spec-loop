@@ -205,11 +205,21 @@ Recognize `glossary.adoc` and `glossary.md` as project glossary files.
 If both exist, ask which one is canonical before updating either.
 
 Once a project glossary exists, treat it as the shared domain-language
-source above individual tasks and code.
+source above individual tasks and code. If no explicit project
+glossary exists, use `Research` plus the existing codebase as the
+source of current domain language until a project glossary is created.
 
 When approved work changes, clarifies, or implements shared domain
-terms, include the glossary update in the plan and perform it during
-IMPLEMENTATION.
+terms, include any required glossary work in the plan. Perform project
+glossary file edits during IMPLEMENTATION. If no project glossary
+exists, create one during IMPLEMENTATION only when the task plan,
+project instructions, or the User requires project-level glossary
+work.
+
+When a task or subtask needs `Scenario` or `Glossary`, read
+`./scenario-and-glossary-guidance.md` and follow it. Task
+`Glossary` sections are planning artifacts; project glossary file
+edits happen only during IMPLEMENTATION.
 
 ## Related skills
 

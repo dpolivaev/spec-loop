@@ -206,8 +206,8 @@ When a task uses subtasks:
 - keep subtasks after all global task sections;
 - main-task Research, Analysis, Design, Test specification, and
   empty Implementation notes may be omitted;
-- omitted Scenario, Constraints, Analysis, or empty Implementation
-  notes keep the remaining sections in order.
+- when a conditional or optional section is omitted, omit it entirely
+  and keep the remaining sections in the shared order.
 - For later executable follow-up from `review` or `done`, first apply
   the shared follow-up rule in
   [common-task-guidance.md](./common-task-guidance.md).
@@ -240,8 +240,9 @@ When a task uses subtasks:
 - must start with `## Subtask: <title>` followed by
   `- **Status:** <status>`,
 - must use the same list-item labels and ordering as the shared main
-  task form, including conditional Scenario, optional Constraints,
-  conditional Analysis, and conditional Implementation notes,
+  task form, including conditional Scenario, conditional Glossary,
+  optional Constraints, conditional Analysis, and conditional
+  Implementation notes,
 - must represent a separately tracked work unit within the same
   overall task; for implementation tasks it must include executable
   work; this is usually a functional increment, but a
@@ -286,21 +287,26 @@ Use `../spec-loop-compact-task-file/SKILL.md` when:
 ## Diagrams
 
 Diagrams are task-file-only planning artifacts. If diagrams would
-materially help because research or design is no longer simple,
-promote chat-only work to the task-file path before using them.
+materially help because research, glossary grounding, or design is no
+longer simple, promote chat-only work to the task-file path before
+using them.
 
-- Governs diagrams in task **Research** and **Design**.
-- Use **PlantUML** by default.
+- Governs diagrams in task **Research** and **Design**, plus Mermaid
+  visual glossaries in task **Glossary**.
+- Use **PlantUML** by default for **Research** and **Design**.
 - Use **Mermaid** only when User or governing instruction explicitly
-  prefers it.
+  prefers it, except for task **Glossary** visual glossaries required
+  by [scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
 - **Research** = current state. **Design** = target state.
+  **Glossary** Mermaid diagrams = domain-language grounding.
 - **Research** must include diagram when analyzing current behavior,
   message flow, context selection, component interaction, or current
   class design.
 - **Design** must include diagram when change affects structure,
   component interaction, or target class design.
-- When Scenario exists, Design diagrams must show the relevant units
-  and names in the diagram itself, not only in surrounding prose.
+- When Scenario or Glossary exists, Design diagrams must show the
+  relevant units and names in the diagram itself, not only in
+  surrounding prose.
 - Prefer diagrams over text when they can express research or design
   clearly.
 - Omit diagrams only when task is confined to a single method or a
@@ -347,6 +353,8 @@ promote chat-only work to the task-file path before using them.
 
 ### Mermaid-specific rules
 
+- Task `Glossary` Mermaid diagrams must follow
+  [scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
 - Class diagrams: use `classDiagram`.
 - Only single-level `namespace` blocks; no nesting.
 - Hierarchical boundaries: flatten namespace names instead of

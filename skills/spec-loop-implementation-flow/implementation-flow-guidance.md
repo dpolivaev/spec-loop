@@ -66,6 +66,10 @@ approved contract or needs redesign.
 Return to PLAN when the change affects any of the following:
 - approved scope;
 - business behavior or scenario contract;
+- approved `Glossary` meaning, shared domain terms, or glossary usage
+  constraints;
+- when no explicit project glossary exists, current domain language
+  derived from `Research` and the existing codebase;
 - constraints or non-goals;
 - new or renamed planned top-level production types;
 - new or renamed planned structural elements with externally relevant
@@ -89,8 +93,14 @@ implementation violates the approved task content.
 - If the user approves keeping the deviation, update only the minimal
   affected canonical section or sections needed to reflect that
   approval, then continue the completion checkpoint.
+- Do not use this route to approve a deviation that changes approved
+  `Scenario` meaning, approved `Glossary` meaning, shared domain
+  terms, glossary usage constraints, or — when no explicit project
+  glossary exists — current domain language derived from `Research`
+  and the existing codebase. Use route C instead.
 - That explicit post-implementation approval is sufficient authority
-  even if the approved deviation would otherwise require route C.
+  only for deviations that stay outside those route-C domain-language
+  boundaries.
 - If the user refuses, revise the implementation to match the approved
   task before review.
 
@@ -136,8 +146,14 @@ Any edit that makes `Research` reflect state created by work on
 this task is forbidden.
 
 Patch other changed canonical sections to current truth when explicit
-authority exists, including `Scenario`, `Constraints`, `Design`, and
-`Test specification` as applicable.
+authority exists, including `Scenario`, `Glossary`, `Constraints`,
+`Design`, and `Test specification` as applicable.
+
+When project glossary file work happens during implementation, use it
+only to record approved task `Glossary` meaning. If no explicit
+project glossary exists and the approved task does not require
+creating one, keep glossary meaning in the task artifact rather than
+inventing a project glossary edit.
 
 Record the authorized change as the path companion requires.
 
@@ -214,14 +230,20 @@ For each finding:
 
 Before reaching `review`, ensure that:
 - the approved scope for the current increment is implemented;
-- `Constraints`, `Design`, and `Test specification` are implemented as
-  applicable for that increment;
+- `Scenario`, `Glossary`, `Constraints`, `Design`, and `Test
+  specification` are implemented as applicable for that increment;
 - any canonical task-section changes have explicit authority from an
   explicit user clarification or explicit post-implementation user
   approval of keeping an implemented deviation;
 - required tests or other local verification from `Test specification`
   pass, unless the user waived them;
-- required glossary work is complete;
+- if `Scenario` or `Glossary` is present, implementation and
+  verification still match their approved behavior and domain-language
+  contract;
+- if task `Glossary` is present, `Design`, `Test specification`, and
+  any project glossary file changes still match its approved terms;
+- required glossary work is complete, including any planned project
+  glossary creation or update;
 - the mandatory `Implementation notes` check has been performed;
 - when relevant `Implementation notes` content exists,
   `Implementation notes` is recorded;

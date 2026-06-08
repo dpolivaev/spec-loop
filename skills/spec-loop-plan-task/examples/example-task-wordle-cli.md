@@ -1,23 +1,24 @@
-# Example task: Wordle CLI adapter with embedded PlantUML
+# Example task: Wordle CLI adapter with embedded diagrams
 
-This compact example task shows valid embedded PlantUML for four common
-task-diagram needs. It is primarily a collection of valid diagram
-patterns in a realistic task context, not a required minimum task size
-and not a signal that every first planning pass should be this
-detailed.
+This compact example task shows valid embedded Mermaid and PlantUML
+for common task-diagram needs. It is primarily a collection of valid
+diagram patterns in a realistic task context, not a required minimum
+task size and not a signal that every first planning pass should be
+this detailed.
 
 It covers:
 
+- task `Glossary` with Mermaid visual glossary
 - filesystem / project structure
 - component interaction
 - class structure
 - sequence flow
 
 It also demonstrates the Markdown-sensitive case where task sections
-are list items, diagrams stay inside those list items, and more bullets
-follow the diagrams without rendering as code blocks.
+are list items, diagrams stay inside those list items, and more
+bullets follow the diagrams without rendering as code blocks.
 
-Keep different concerns in separate PlantUML blocks instead of mixing
+Keep different concerns in separate diagram blocks instead of mixing
 diagram types.
 
 PlantUML writing hints:
@@ -31,14 +32,49 @@ PlantUML writing hints:
   for review.
 
 - **Scope:** Add a CLI adapter for Wordle that starts a game, reads
-  guesses from standard input, renders feedback text, and keeps
+  guesses from standard input, renders CLI feedback, and keeps
   gameplay rules in the existing engine and domain classes.
 - **Motivation:** This example demonstrates current task structure and
-  PlantUML patterns that render reliably in Markdown task files.
+  diagram patterns that render reliably in Markdown task files.
 - **Scenario:** A player starts the application in CLI mode, enters
-  guesses one line at a time, sees textual feedback after each guess,
-  and the session ends when the word is solved or attempts are
-  exhausted. Optional flags choose the word list and attempt count.
+  guesses one line at a time, sees CLI feedback after each guess, and
+  the session ends when the word is solved or attempts are exhausted.
+  Optional flags choose the word list path and attempt count.
+- **Glossary:**
+  - **CLI mode:** application mode where the player enters guesses
+    through standard input and reads CLI feedback in the terminal.
+    - In CLI mode, the player enters one guess per input line.
+    - In CLI mode, the session ends when the word is solved or
+      attempts are exhausted.
+  - **CLI feedback:** terminal-visible rendering of one guess result.
+    - CLI feedback is shown after each guess.
+    - CLI feedback belongs to the CLI adapter, not to the gameplay
+      rules.
+  - **Word list path:** optional CLI input selecting the source word
+    list.
+    - The word list path is chosen through a CLI flag.
+  - **Attempt count:** optional CLI input selecting the allowed number
+    of guesses.
+    - The attempt count is chosen through a CLI flag.
+
+  ```mermaid
+  flowchart LR
+      subgraph actor[Actor]
+          P[Player]
+      end
+
+      subgraph cli[CLI concepts]
+          CM[CLI mode]
+          FT[CLI feedback]
+          WLP[Word list path]
+          AC[Attempt count]
+      end
+
+      P -->|uses| CM
+      CM -->|shows| FT
+      CM -->|selects| WLP
+      CM -->|selects| AC
+  ```
 - **Constraints:**
   - Gameplay rules remain in domain classes.
   - The CLI adapter may format output, but it must not reimplement
@@ -104,7 +140,7 @@ PlantUML writing hints:
 - **Analysis:**
   - CLI mode stays a thin adapter because gameplay logic must remain
     reusable in the existing engine.
-  - Feedback is rendered in adapter classes because presentation
+  - CLI feedback is rendered in adapter classes because presentation
     belongs in the UI path, not in domain classes.
   - Only `--cli`, `--wordlist`, and `--attempts` are supported because
     the example should keep the external CLI contract minimal and
@@ -197,7 +233,7 @@ PlantUML writing hints:
   Game --> GameEngine : updated state + feedback
   GameEngine --> CliGameLoop : game state + feedback
   CliGameLoop -> FeedbackRenderer : render(feedback)
-  FeedbackRenderer --> Player : feedback text
+  FeedbackRenderer --> Player : CLI feedback
   @enduml
   ```
 
@@ -216,7 +252,7 @@ PlantUML writing hints:
 - **Test specification:**
   - Automated tests:
     - CLI argument parsing defaults and validation.
-    - Feedback rendering text.
+    - CLI feedback rendering.
     - Delegation from the CLI path into the existing engine.
     - `./gradlew test`
   - Manual tests:

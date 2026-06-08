@@ -45,7 +45,8 @@ tutorial prompts from there unless a later step says otherwise.
 
 Run this step unless you already know your editor is prepared to render:
 
-- Markdown task files with embedded PlantUML
+- Markdown task files with embedded PlantUML diagrams and Mermaid
+  visual glossaries
 - AsciiDoc glossary files with embedded diagrams
 
 If you review in VS Code, Cursor, or another VS Code-based IDE and
@@ -82,7 +83,7 @@ My coding tool may run in a terminal, but I review files in
 ### Verification
 
 - your editor is ready to review Markdown task files with embedded
-  PlantUML,
+  PlantUML diagrams and Mermaid visual glossaries,
 - your editor is ready to review AsciiDoc glossary files with
   embedded diagrams.
 
@@ -327,8 +328,9 @@ The scope must include:
 
 Approve only after the task definition looks correct.
 If the assistant does not create the task automatically, the task content
-does not have the required form, or embedded PlantUML does not render
-correctly, correct it before approving anything.
+does not have the required form, or an embedded PlantUML diagram or
+Mermaid visual glossary does not render correctly, correct it before
+approving anything.
 If needed, send the error text or a screenshot and ask the assistant to fix
 the diagram.
 Then ask the assistant to `implement it`.
@@ -389,6 +391,8 @@ subtask. Create only:
   ordered subtask breakdown, and it is waiting for your review.
 - Task file:
   - has clear overall Scope, Motivation, and Scenario,
+  - includes task `Glossary` when shared terms are introduced,
+    changed, or redefined,
   - keeps future subtasks lightweight,
   - uses `glossary.adoc` terms consistently.
 

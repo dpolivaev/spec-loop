@@ -48,7 +48,8 @@ tutorial prompts from there unless a later step says otherwise.
 
 Run this step unless you already know your editor is prepared to render:
 
-- Markdown task files with embedded PlantUML
+- Markdown task files with embedded PlantUML diagrams and Mermaid
+  visual glossaries
 - AsciiDoc glossary files with embedded diagrams
 
 If you review in VS Code, Cursor, or another VS Code-based IDE and
@@ -85,7 +86,7 @@ My coding tool may run in a terminal, but I review files in
 ### Verification
 
 - your editor is ready to review Markdown task files with embedded
-  PlantUML,
+  PlantUML diagrams and Mermaid visual glossaries,
 - your editor is ready to review AsciiDoc glossary files with
   embedded diagrams.
 
@@ -369,15 +370,17 @@ Requirements:
   record the confirmed sibling `data-aggregator` path.
 - Task file:
   - Contains Scope, Motivation, Research, Design, and Test specification
-    (and other required sections, for example Scenario when applicable).
+    (and other required sections, for example Scenario and task
+    `Glossary` when applicable).
   - Research includes curl verification evidence and practical rules
     needed for the museum page (including image URL rules) and any
     relevant reference notes from `data-aggregator`.
 
 Approve only after the task definition looks correct.
 If the assistant does not create the task automatically, the task content
-does not have the required form, or embedded PlantUML does not render
-correctly, correct it before approving anything.
+does not have the required form, or an embedded PlantUML diagram or
+Mermaid visual glossary does not render correctly, correct it before
+approving anything.
 If needed, send the error text or a screenshot and ask the assistant to fix
 the diagram.
 

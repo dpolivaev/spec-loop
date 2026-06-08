@@ -157,8 +157,8 @@ implementation approval, check at least these items for the current
 increment:
 - the task is the correct active artifact and the current increment is
   clear;
-- `Research`, `Scenario` when required, `Design`, and `Test
-  specification` are complete enough for the current increment;
+- `Research`, `Scenario` and `Glossary` when required, `Design`, and
+  `Test specification` are complete enough for the current increment;
 - no unresolved essential doubts remain about scope, behavior,
   constraints, naming, or structural boundaries;
 - final intended names are used for new structural elements and

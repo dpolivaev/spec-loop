@@ -191,5 +191,6 @@ Exclude by default:
 - If a diagram is still too crowded after that restructuring, split
   the content into smaller diagrams.
 - Keep Mermaid node labels as plain text.
+- Label every Mermaid connection.
 - Do not rely on Mermaid click or href links for document navigation;
   use AsciiDoc anchors and cross-references instead.

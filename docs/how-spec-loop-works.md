@@ -5,8 +5,8 @@ Spec Loop follows this workflow:
   questions before or during planning.
 - **plan** - the [spec-loop-plan-task](../skills/spec-loop-plan-task/) bundle governs plan-first
   work, including the fileless planning path in chat, the task-file
-  path when needed, ADR and documentation routing, glossary
-  triggers, and the gate before implementation.
+  path when needed, ADR and documentation routing, Scenario and task
+  Glossary triggers, and the gate before implementation.
 - **approve** - you approve either a fileless task in chat or a
   task-file plan; on the task-file path,
   [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/) prepares the task for
@@ -22,13 +22,15 @@ The planning and approval rules for that workflow live in the [spec-loop-plan-ta
 
 The planning bundle starts with
 **[SKILL.md](../skills/spec-loop-plan-task/SKILL.md)** and
-**[common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**,
+**[common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**.
+When Scenario or task Glossary work is needed, it also uses
+**[scenario-and-glossary-guidance.md](../skills/spec-loop-plan-task/scenario-and-glossary-guidance.md)**,
 plus **[chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)**
 on the chat-only path and
 **[task-file-path-guidance.md](../skills/spec-loop-plan-task/task-file-path-guidance.md)**
 on the task-file path.
 
-The [spec-loop-write-glossary](../skills/spec-loop-write-glossary/) skill defines the Spec Loop AsciiDoc glossary
+The [spec-loop-write-glossary](../skills/spec-loop-write-glossary/) skill defines the Spec Loop AsciiDoc project glossary
 format in
 **[glossary-format.md](../skills/spec-loop-write-glossary/glossary-format.md)**.
 
@@ -58,12 +60,21 @@ you inspect retrospective review files instead.
 Spec Loop also defines explicit work phases: plan, implementation, and done.
 Any transitions to implementation and to done require explicit user approval.
 
+During planning, active task artifacts may use `Scenario` and task
+`Glossary` sections to ground behavior and extract increment-local
+terms. On the task-file path this means task files. On the chat-only
+path this means the canonical chat-only task kept in chat.
+
 When a project maintains a glossary described by the shared task
 semantics
 [project glossary section](../skills/spec-loop-plan-task/common-task-guidance.md#project-glossary),
-that glossary defines the shared domain language above individual
-tasks and the code. It keeps design documents, tests, code symbols,
-and commit text aligned on the same terms across the whole project.
+that project glossary defines the shared domain language above
+individual tasks and the code. It keeps design documents, tests, code
+symbols, and commit text aligned on the same terms across the whole
+project.
+
+If no explicit project glossary exists yet, current domain language
+comes from `Research` plus the existing codebase until one is created.
 
 Spec Loop is designed to work with existing codebases at scale.
 Before any design or implementation step, the model captures relevant
@@ -79,9 +90,9 @@ what is required to implement that increment correctly, and is intentionally
 partial. The result is a bounded, reviewable understanding whose size
 remains manageable.
 
-For large codebases, the glossary is especially useful because it
-keeps domain terms stable across many increments, files, and
-subsystems.
+For large codebases, task `Glossary` sections and the project glossary
+are especially useful because they keep domain terms stable across
+many increments, files, and subsystems.
 
 Because the scope can be kept reasonably small and the research is
 written down, you can verify that the model examined the right parts of
@@ -102,12 +113,14 @@ the same job or the same lifetime.
   files.
 - Task files are short-lived working artifacts for the next concrete
   slice of work when the task-file path is in use. They exist to drive
-  research, review, implementation, and testing of that slice.
+  research, review, implementation, and testing of that slice. When
+  the current increment needs them, they may also include `Scenario`
+  and task `Glossary` sections.
 - ADRs capture durable decisions and the reasons behind them.
 - Documentation-only work may stand on its own when no executable
   change is involved and no project rule requires a task file.
-- A glossary captures stable shared language across tasks, design,
-  tests, code symbols, and commits.
+- A project glossary captures stable shared language across tasks,
+  design, tests, code symbols, and commits.
 - Review files reconstruct and assess already-implemented work from
   trusted pull requests, merge requests, or commit ranges. When needed,
   they may also produce GitHub-friendly Mermaid variants for sharing
