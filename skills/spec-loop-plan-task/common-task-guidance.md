@@ -142,8 +142,14 @@ artifact.
 
 ### Glossary
 
-Use task `Glossary` only when shared domain terms are introduced,
-changed, or redefined.
+Use task `Glossary` when the current increment introduces or changes
+review-relevant shared domain terms, or exact external technical terms
+whose precise type or API is part of the reviewed contract, relative to
+the current shared domain-language source.
+
+Before approval seeking, if the term-reduction and classification
+pass finds such a qualifying term delta and task `Glossary` is
+absent, add `Scenario` and task `Glossary` before continuing.
 
 When used:
 - include `Scenario` too;
@@ -153,14 +159,12 @@ When used:
   [scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
 
 Task `Glossary` is delta-only relative to the current shared
-domain-language source. Include only:
-- new or changed shared domain terms;
-- named abstractions that task behavior or Design/Test
-  specification must treat as stable concepts; and
-- task-specific usage constraints not yet canonicalized
-  project-wide.
+domain-language source. Do not redefine unchanged terms from that
+source.
 
-Do not redefine unchanged terms from that source.
+For glossary sources, extension points, and candidate-term selection
+rules, follow
+[scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
 
 ### Project glossary
 
@@ -271,6 +275,18 @@ don't replace spec.
 
 When Scenario or Glossary exists, Design uses their canonical terms.
 Do not redefine Glossary terms in Design.
+
+Every new review-relevant term introduced in Design must remain
+classifiable under
+[scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
+Before approval seeking, the active task must complete the
+term-reduction and classification pass required there. If any such
+term cannot be classified, treat it as a design defect.
+
+Internal implementation terms may appear only in implementation-level
+design such as class-level structure. Do not use them as if they were
+domain language in `Scenario`, task `Glossary`, or behavior-level
+diagrams and prose.
 
 ### Test specification
 

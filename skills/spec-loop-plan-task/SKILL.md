@@ -209,6 +209,11 @@ source above individual tasks and code. If no explicit project
 glossary exists, use `Research` plus the existing codebase as the
 source of current domain language until a project glossary is created.
 
+The presence or absence of a project glossary does not by itself
+determine whether a task or subtask needs task `Glossary`. It
+determines only which shared domain-language source task vocabulary
+and task-glossary deltas are compared against.
+
 When approved work changes, clarifies, or implements shared domain
 terms, include any required glossary work in the plan. Perform project
 glossary file edits during IMPLEMENTATION. If no project glossary

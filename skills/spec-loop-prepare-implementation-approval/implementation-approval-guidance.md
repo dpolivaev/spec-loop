@@ -159,12 +159,35 @@ increment:
   clear;
 - `Research`, `Scenario` and `Glossary` when required, `Design`, and
   `Test specification` are complete enough for the current increment;
+- approval preparation has completed the pre-approval term-reduction,
+  term-classification, and glossary-repair pass required by
+  `../spec-loop-plan-task/scenario-and-glossary-guidance.md`, and has
+  recorded the result by repairing canonical sections rather than by
+  adding a separate classification table unless the User asked for
+  one;
+- approval is blocked if coined terms remain where existing canonical
+  terms or ordinary prose would preserve review-relevant precision;
+- approval is blocked if any new review-relevant term introduced in
+  `Design`, diagrams, or `Test specification` remains unclassified or
+  ambiguously classified;
+- qualifying shared domain terms appear in `Scenario` and, when they
+  are a delta for the current increment, in task `Glossary`;
+  qualifying exact external technical terms appear in task `Glossary`
+  when the exact external type or API is part of the reviewed
+  contract; approval is blocked if required canonical repairs are
+  missing;
+- internal implementation terms are not used in `Scenario`, task
+  `Glossary`, or behavior-level diagrams and prose;
 - no unresolved essential doubts remain about scope, behavior,
   constraints, naming, or structural boundaries;
 - final intended names are used for new structural elements and
   externally meaningful identifiers, consistent with the no-placeholder
   rule above;
 - required diagrams are present and readable;
+- when task `Glossary` is present, its focused Mermaid visual glossary
+  is in sync with the text glossary; approval is blocked if they
+  diverge, including disagreement, omission, or stale mismatch, on
+  terms, relationships, boundaries, actors, or flows;
 - markdown structure is renderer-safe under the Task-file
   Constitution formatting rules, especially in list-item sections that
   contain fenced blocks;

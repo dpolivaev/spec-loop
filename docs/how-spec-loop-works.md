@@ -76,6 +76,10 @@ project.
 If no explicit project glossary exists yet, current domain language
 comes from `Research` plus the existing codebase until one is created.
 
+Consistent reuse of approved terms across the shared glossary source,
+`Scenario`, `Design`, and `Test specification` keeps meaning,
+behavior, design contracts, and verification aligned.
+
 Spec Loop is designed to work with existing codebases at scale.
 Before any design or implementation step, the model captures relevant
 knowledge in the Research section of the active task artifact:
