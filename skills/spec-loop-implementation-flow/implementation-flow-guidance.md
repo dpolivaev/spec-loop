@@ -166,8 +166,10 @@ sections rather than logging that conversation history in
 `Implementation notes` is not part of the canonical task definition.
 It is checked only at the post-implementation checkpoint.
 
-Use it only when it helps later review or development. It records
-implementation-time decisions and reasons above code level.
+Use it when it might help later review or development. If present, it
+describes the current implementation state, not the target state in
+canonical sections. It records implementation-time decisions and
+reasons above code level.
 
 It is not a live worklog during active coding. After implementation and
 verification, and before reaching `review`, preparing or proposing a
@@ -198,8 +200,12 @@ Record policy:
   trade-offs, and open questions;
 - do not use it for user clarification history, review feedback, or
   general conversation history;
-- do not require chronological ordering; and
-- allow only light cleanup that preserves the decision trail.
+- do not require chronological ordering;
+- after each implementation phase, update `Implementation notes` to
+  match the current implementation state and remove superseded notes; and
+- during later review or planning phases, keep `Implementation notes`
+  aligned to the current implementation state rather than rewriting it
+  to match the current target.
 
 `Open questions` may remain only when all of the following are true:
 - they do not block the current increment;
@@ -247,6 +253,8 @@ Before reaching `review`, ensure that:
 - the mandatory `Implementation notes` check has been performed;
 - when relevant `Implementation notes` content exists,
   `Implementation notes` is recorded;
+- when `Implementation notes` is present, it matches the current
+  implementation state and outdated notes have been removed;
 - any remaining `Open questions` are non-blocking and explicitly left
   deferred; and
 - no obvious leftovers remain, such as TODOs, placeholders, example

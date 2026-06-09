@@ -299,9 +299,11 @@ record the resulting verification consequences instead.
 Conditional execution-phase notes. This section is filled only at the
 post-implementation checkpoint under the
 `spec-loop-implementation-flow` skill. It is not part of the
-canonical planning truth, but its content may be relevant context for
-follow-up tasks and, on the task-file path, subtasks. Detailed
-behavior is governed by that skill and is not repeated here.
+canonical planning truth. If present, it describes the current
+implementation state, not the target state in canonical sections. Its
+content may still be relevant context for follow-up tasks and, on the
+task-file path, subtasks. Detailed behavior is governed by that skill
+and is not repeated here.
 
 ### Iterative discovery
 

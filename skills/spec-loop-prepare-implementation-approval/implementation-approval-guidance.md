@@ -159,6 +159,10 @@ increment:
   clear;
 - `Research`, `Scenario` and `Glossary` when required, `Design`, and
   `Test specification` are complete enough for the current increment;
+- when an `Implementation notes` section is present, it describes the
+  current implementation state and is clearly distinguishable from the
+  current target-state plan; approval is blocked if it is stale or if
+  it presents target-only content as already implemented;
 - approval preparation has completed the pre-approval term-reduction,
   term-classification, and glossary-repair pass required by
   `../spec-loop-plan-task/scenario-and-glossary-guidance.md`, and has
