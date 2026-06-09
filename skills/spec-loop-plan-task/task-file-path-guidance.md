@@ -347,6 +347,15 @@ using them.
 - Prefer separate diagrams over `allowmixing`; keep file or folder
   tree, component, class, and sequence diagrams separate unless one
   mixed diagram is genuinely required.
+- Do not apply normal prose line wrapping inside PlantUML fences.
+- Keep each line-oriented PlantUML statement on one physical line.
+- Use multiple physical lines only for syntax that is explicitly
+  block-based, such as `package { ... }`, `class { ... }`,
+  `note ... end note`, and `legend ... endlegend`.
+- If inline text on a line-oriented statement becomes too long,
+  shorten it or use `\n` inside the same statement.
+- In sequence diagrams, each `A -> B : message` line is one
+  statement and must stay on one physical line.
 - Class diagrams: one outer `package` with nested inner packages and
   `set separator none`.
 - Use escape character `~` for text matching creole markup like `--`.

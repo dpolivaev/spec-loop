@@ -23,11 +23,10 @@ diagram types.
 
 PlantUML writing hints:
 
-- Do not apply normal prose line-wrapping rules inside PlantUML fences.
-- Keep each declaration, relationship, and labeled arrow on one
-  physical line.
-- If a label becomes too long, shorten it and explain the rest in prose
-  below the diagram.
+- Follow the PlantUML-specific rules in
+  [task-file-path-guidance.md](../task-file-path-guidance.md).
+- This example keeps line-oriented PlantUML statements on one physical
+  line.
 - If rendering fails, fix the diagram before treating the task as ready
   for review.
 
