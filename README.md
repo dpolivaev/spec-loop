@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="docs/infographics.svg">
-    <img src="docs/infographics.svg" alt="Spec-Loop infographic" width="80%" style="border: 1px solid rgba(127, 127, 127, 0.35); border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
+    <img src="docs/infographics.svg" alt="Spec-Loop infographic" width="80%">
   </a>
 </p>
 
