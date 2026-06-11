@@ -32,7 +32,9 @@
        refX="6.6999998"
        refY="4"
        orient="auto"
-       markerUnits="userSpaceOnUse">
+       markerUnits="userSpaceOnUse"
+       viewBox="0 0 8 8"
+       preserveAspectRatio="xMidYMid">
       <path
          d="M 0,0 8,4 0,8 Z"
          fill="#000000"
@@ -45,7 +47,9 @@
        refX="6.6999998"
        refY="4"
        orient="auto"
-       markerUnits="userSpaceOnUse">
+       markerUnits="userSpaceOnUse"
+       viewBox="0 0 8 8"
+       preserveAspectRatio="xMidYMid">
       <path
          d="M 0,0 8,4 0,8 Z"
          fill="#000000"
@@ -58,7 +62,9 @@
        refX="6.6999998"
        refY="4"
        orient="auto"
-       markerUnits="userSpaceOnUse">
+       markerUnits="userSpaceOnUse"
+       viewBox="0 0 8 8"
+       preserveAspectRatio="xMidYMid">
       <path
          d="M 0,0 8,4 0,8 Z"
          fill="#000000"
@@ -70,8 +76,10 @@
        markerHeight="7"
        refX="5.8000002"
        refY="3.5"
-       orient="auto"
-       markerUnits="userSpaceOnUse">
+       orient="0,00"
+       markerUnits="userSpaceOnUse"
+       viewBox="0 0 7 7"
+       preserveAspectRatio="xMidYMid">
       <path
          d="M 0,0 7,3.5 0,7 Z"
          fill="#000000"
@@ -83,8 +91,8 @@
        refX="0"
        refY="0"
        orient="auto-start-reverse"
-       markerWidth="0.8"
-       markerHeight="0.8"
+       markerWidth="0.80000001"
+       markerHeight="0.80000001"
        viewBox="0 0 1 1"
        preserveAspectRatio="xMidYMid"
        markerUnits="strokeWidth">
@@ -325,20 +333,20 @@
      id="line16"
      style="fill:none;stroke:#000000;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round" />
   <text
-     x="72"
-     y="416"
+     x="39.681641"
+     y="446.16797"
      class="sans sec-b"
      id="text67"
-     style="font-weight:700;font-size:29.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Task ↔ Subtasks</text>
+     style="font-weight:700;font-size:29.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Tasks</text>
   <text
-     x="48"
-     y="448"
+     x="34.656704"
+     y="481.09021"
      class="sans sec"
      id="text68"
      style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Split spec content into subtasks;</text>
   <text
-     x="63"
-     y="480"
+     x="54.113731"
+     y="513.09021"
      class="sans sec"
      id="text69"
      style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">join when it's one increment.</text>
@@ -658,4 +666,34 @@
      style="fill:none;fill-rule:nonzero;stroke:#000000;stroke-width:3.00094;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
      id="path15"
      d="m 630.97861,536.86701 a 20.606606,14.912676 0 0 1 21.71262,9.55136 20.606606,14.912676 0 0 1 -7.60706,17.54489" />
+  <text
+     x="40.963821"
+     y="340.11609"
+     class="sans sec-b"
+     id="text3"
+     style="font-weight:700;font-size:26.6667px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Project Glossary</text>
+  <text
+     x="158.62335"
+     y="380.74432"
+     class="sans sec-b"
+     id="text4"
+     style="font-weight:700;font-size:26.6667px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">ADR</text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:3.77952;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
+     d="m 82.538758,375.48628 v 30.718"
+     id="path20" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
+     d="m 128.51575,413.85628 22.62926,-16.89064"
+     id="path21" />
+  <text
+     x="226.12213"
+     y="446.33267"
+     class="sans sec-b"
+     id="text25"
+     style="font-weight:700;font-size:29.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Subtasks</text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
+     d="M 184.80843,437.78323 H 156.0281"
+     id="path26" />
 </svg>
