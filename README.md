@@ -28,26 +28,6 @@ Spec Loop is a framework of reusable skills.
 Recommended path:
 
 Install the core task-workflow skills together.
-[spec-loop-plan-task](skills/spec-loop-plan-task/), [spec-loop-clarify-task](skills/spec-loop-clarify-task/),
-[spec-loop-prepare-implementation-approval](skills/spec-loop-prepare-implementation-approval/),
-[spec-loop-implementation-flow](skills/spec-loop-implementation-flow/), and
-[spec-loop-write-adr](skills/spec-loop-write-adr/) hand off to each other,
-reuse the shared [spec-loop-plan-task](skills/spec-loop-plan-task/)
-bundle, and support the same planning artifacts.
-
-Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your
-project uses a project glossary in the Spec Loop AsciiDoc glossary
-format.
-
-[spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) is
-optional. Install it only if you want the rendering setup and
-troubleshooting helper for task files and glossary files.
-
-[spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) is
-optional. Install it only if you need retrospective review of pull
-requests, merge requests, or commit ranges from repositories you trust.
-It fetches provider or Git content as review evidence and is not
-required for the main planning workflow.
 
 Ensure Node.js is available so `npx` works.
 

@@ -2,17 +2,17 @@
 
 ## Included Skills
 
-This repository currently ships these skills.
-The core task-workflow bundle is [spec-loop-plan-task](../skills/spec-loop-plan-task/),
-[spec-loop-clarify-task](../skills/spec-loop-clarify-task/),
-[spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/),
-[spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/), and
-[spec-loop-write-adr](../skills/spec-loop-write-adr/).
-[spec-loop-write-glossary](../skills/spec-loop-write-glossary/) is required when a
-project uses a project glossary in the Spec Loop AsciiDoc format.
-[spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) and
-[spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) are
-optional.
+This repository currently ships these skills:
+- The core task-workflow bundle is [spec-loop-plan-task](../skills/spec-loop-plan-task/),
+  [spec-loop-clarify-task](../skills/spec-loop-clarify-task/),
+  [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/),
+  [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/), and
+  [spec-loop-write-adr](../skills/spec-loop-write-adr/).
+- [spec-loop-write-glossary](../skills/spec-loop-write-glossary/) is required when a
+  project uses a project glossary in the Spec Loop AsciiDoc format.
+- [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) and
+  [spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) are
+  optional.
 
 1. **[spec-loop-plan-task](../skills/spec-loop-plan-task/)**
    - the planning and task-administration skill for non-trivial work;
