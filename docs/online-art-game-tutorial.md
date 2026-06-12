@@ -81,7 +81,10 @@ My coding tool may run in a terminal, but I review files in
 - uses the [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) skill,
 - reads the setup document for your editor,
 - guides you through the rendering setup needed for task and glossary
-  review.
+  review,
+- suggests small Markdown and AsciiDoc probe files when an end-to-end
+  rendering check is useful; those probes should include a class
+  diagram and the other relevant diagram types.
 
 ### Verification
 
@@ -514,7 +517,10 @@ site/index.html.
 For the initial task creation, do not fully design every future
 subtask. Create only:
 - the overall task,
-- subtasks containing Scope and Motivation each.
+- subtasks containing Scope and Motivation each,
+- implementation subtasks that are vertical gameplay slices and can
+  each reach `review` with the tests for that slice,
+- no separate scaffolding, model, logic, or UI subtasks.
 ```
 
 ### Your intent
@@ -532,14 +538,35 @@ subtask. Create only:
   - Overall Scope and Motivation are clear.
   - Each subtask has Scope and Motivation, but future subtasks are not
     fully designed yet.
+  - Implementation subtasks are vertical gameplay slices rather than
+    scaffolding/model/logic/UI buckets.
   - Relevant earlier task-file research is referenced where needed.
   - Task and subtask terminology aligns with `glossary.adoc`.
+
+### ⚠️ Attention point: inspect the subtask split
+
+- Check the initial subtask breakdown carefully.
+- If the model proposes `scaffolding`, `model`, `logic`, `UI`, or any
+  other layer split, reject it.
+- Correct it immediately: ask for vertical gameplay slices where each
+  implementation subtask delivers reviewable behavior and the tests
+  for that slice.
+- A good correction prompt is:
+
+```text
+Reject this split. Re-plan the task into vertical gameplay slices.
+Each implementation subtask must deliver reviewable behavior with the
+needed tests for that slice. Do not create scaffolding/model/logic/UI
+subtasks.
+```
 
 ### Subtask-by-subtask workflow
 
 - Review the task header and the task breakdown first.
 - If the breakdown needs adjustment, ask the assistant to revise it before
   any implementation starts.
+- Keep the split vertical: each implementation subtask must stay a
+  reviewable gameplay slice with its own tests.
 - If it looks good, ask the assistant to `fully design only the first subtask`.
 - Review that current subtask detail. If it looks good, ask the assistant to
   `implement only that subtask`.
@@ -553,11 +580,32 @@ subtask. Create only:
 
 - Only the current subtask is fully designed, and implementation
   still waits for explicit approval.
-- Task file: the current subtask is designed with all class diagrams;
-  future subtasks remain lightweight.
+- Task file: the current subtask includes fully specified class
+  diagrams for the slice; future subtasks remain lightweight.
+- Test specification: every required check for the slice is listed
+  explicitly.
 - The current subtask Design and Constraints, when present,
   use glossary terms from `glossary.adoc` consistently and make any
   glossary term change explicit before approval.
+
+### ⚠️ Attention point: inspect the current subtask design
+
+- Reject the subtask if the class diagrams are partial or vague.
+- The diagrams should already show the review-relevant classes,
+  relationships, methods, and fields for this slice.
+- Reject the subtask if the Test specification leaves checks implicit,
+  vague, or missing.
+- The Test specification should list every required automated check
+  and any remaining manual check for this slice.
+- A good correction prompt is:
+
+```text
+Do not implement this subtask yet. Complete the design first.
+Make the class diagrams fully specified for this slice: include the
+review-relevant classes, relationships, methods, and fields.
+Make the Test specification explicit: list every required automated
+check and any remaining manual check for this slice.
+```
 
 ### You see (during subtask implementation)
 
