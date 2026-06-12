@@ -30,7 +30,3 @@ Analysis:
 - Accept a small dependency increase because clearer option
   definitions and lower custom parsing cost matter more here.
 
-Consequences:
-We add a dependency and follow picocli conventions in the CLI entry
-point. In exchange, we get validated option parsing and automatic help
-output with less custom code.
