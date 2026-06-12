@@ -22,6 +22,12 @@ report:
 - what is missing or broken, and
 - what you still cannot verify directly.
 
+After the direct checks, suggest creating small Markdown and AsciiDoc
+probe files to verify rendering end to end. Those probes should cover
+the diagram kinds the current workflow expects to use and must include
+at least one class diagram. Include other relevant kinds too, such as
+sequence, component, and Mermaid glossary diagrams.
+
 Prefer direct checks over assigning routine checks to the user.
 
 Follow the selected setup path:

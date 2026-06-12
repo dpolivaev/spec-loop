@@ -73,6 +73,10 @@ My coding harness may run in a terminal, but I review files in
 <VS Code, Cursor, another VS Code-based IDE, or JetBrains>.
 ```
 
+When an end-to-end rendering check is useful, the skill should also
+suggest small Markdown and AsciiDoc probe files that exercise the
+relevant diagram types, including a class diagram.
+
 If you review files in VS Code, Cursor, or another VS Code-based IDE,
 the same extension IDs and settings apply. When your editor exposes a
 supported CLI command, you can also run the helper script directly
