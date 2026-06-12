@@ -54,13 +54,13 @@ missing items.
 
 ### C. Clarification is required
 
-If any material unresolved question remains during approval
+If any important open decision remains during approval
 preparation, the task is not review ready.
 
 Keep the work in PLAN, invoke `../spec-loop-clarify-task/SKILL.md` in
 the same turn while preserving any clarification grill level already in
-force for the work item, and ask only the exact questions needed to
-remove the uncertainty through that workflow.
+force for the work item, and ask only the exact questions still needed
+to resolve those open decisions through that workflow.
 
 Approval preparation and any clarification it invokes both stay in
 PLAN. They do not freeze the active task.
@@ -77,7 +77,7 @@ If readiness checks fail, use this branch order:
    active task and re-run the readiness checks.
 3. If compaction is needed, use
    `../spec-loop-compact-task-file/SKILL.md`, then resume this skill.
-4. If any material unresolved question remains, use outcome C
+4. If any important open decision remains, use outcome C
    immediately.
 5. Use outcome B only for non-question blockers that remain after the
    applicable direct fixes and evidence-based updates, or when the

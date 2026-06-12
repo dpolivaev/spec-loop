@@ -1,27 +1,44 @@
 ---
 name: spec-loop-clarify-task
 description: >-
-  Clarify or discuss a proposed task, plan, design update, or ADR by
-  resolving the highest-value unresolved decisions, decision criteria,
-  trade-offs, and option boundaries until the inputs are ready for
-  task creation, task planning, task/design updates, ADR writing, or
-  safe implementation continuation. Use this as the default path when
-  the user asks to clarify, discuss criteria, compare options,
-  stress-test a design, or otherwise resolve material unresolved
-  questions before proceeding. When clarification ends, resume the
-  invoking workflow. It may also be used for general grilling when
-  explicitly selected or when no other default grilling skill is
-  available.
+  Analyze, clarify, and resolve important open decisions in a proposed
+  task, plan, design update, or ADR. Use this skill when the user asks
+  to analyze, clarify, discuss criteria, compare options, or
+  stress-test a design, or when the current workflow may have reached
+  an important open question or choice. First check whether any open
+  decision or question could still change scope, behavior, policy,
+  constraints, route, Design, Test specification, or the ADR decision
+  or its justification. If yes, resolve what is already clear from the
+  existing evidence, ask focused questions only for what remains,
+  record the final result in the governing artifact, and then return
+  control to the invoking workflow. If not, return control promptly.
+  It may also be used for general grilling when explicitly selected or
+  when no other default grilling skill is available.
 ---
 
-Use this skill only when material unresolved questions, decision
-criteria, or option trade-offs block safe planning, approval, design
-updates, ADR work, or implementation.
+Use this skill when analysis is needed to check whether any important
+open decision remains for the current work item, or to resolve one once
+identified.
+
+An important open decision includes any open question, choice,
+decision criterion, trade-off, credible option, or boundary that could
+materially change scope, behavior, policy, conceptual model,
+conceptual contract boundaries, constraints, route, acceptance logic,
+verification expectations, Design, Test specification, or the ADR
+decision or its justification.
+
+If the current work item is already clearly free of such points, do not
+use this skill.
+
+This skill is not limited to asking the user questions. It also
+analyzes the open decision, resolves what is already determined
+directly, records the final result in the governing artifact, and asks
+questions only when user input is still required.
 
 Prefer this skill over a generic grill-me variant for Spec Loop task
 creation, task updates, and design updates.
 
-When clarification ends, return control to the invoking workflow:
+When this skill ends, return control to the invoking workflow:
 - task planning resumes `../spec-loop-plan-task/SKILL.md`;
 - ADR clarification resumes `../spec-loop-write-adr/SKILL.md`;
 - approval-preparation clarification resumes
@@ -48,12 +65,31 @@ boundaries, acceptance logic, route, Design, or Test specification.
 These are outside the grilling protocol: no grill-level notice,
 decision batches, or `Question:` / `Recommendation:` format.
 
-If such a point turns out to have a material design consequence,
+If such a point turns out to have an important design consequence,
 resume normal clarification.
+
+## Entry assessment
+
+First check whether any important open decision remains for the current
+work item.
+
+Treat a point as important only if different answers would materially
+change scope, behavior, policy, conceptual model, conceptual contract
+boundaries, constraints, route, acceptance logic, verification
+expectations, Design, Test specification, or the ADR decision or its
+justification.
+
+If none remain:
+- return control to the invoking workflow promptly; and
+- do not start clarification batching or durable-state recording for
+  this skill.
+
+If one or more important open decisions remain, continue with the core
+method.
 
 ## Core method
 
-For each unresolved point:
+For each important open decision:
 
 1. Check whether the answer is already determined by confirmed user
    choices, existing task materials, glossary language, code, docs,
@@ -70,20 +106,20 @@ materials, and code as evidence to surface explicitly.
 
 If a distinction would change whether two concepts are the same thing,
 different things, or governed by different rules, treat it as
-material.
+important.
 
 Do not use clarification for exact names, wording, labels, field
 names, enum names, or other cheap-to-change design text when the
 boundary is already settled. Put that in Design instead.
 
-If drafting or reviewing Design exposes a new material boundary
-question, return to clarification before continuing.
+If drafting or reviewing Design exposes a new important open decision,
+return to clarification before continuing.
 
-## Clarification surface
+## How to work through open decisions
 
-Clarification uses three tools:
+This skill uses three tools:
 - direct recording of fully determined decisions;
-- surfaced decision batches for material decisions the user should
+- surfaced decision batches for important decisions the user should
   explicitly see; and
 - explicit questions when user input is still required.
 
@@ -108,13 +144,13 @@ the user asks, the level changes, or clarification starts for a
 different work item.
 
 The grill level affects surfacing and question frequency only. It does
-not change the definition of a material unresolved question or the
-need to preserve final clarification state.
+not change what counts as an important open decision or the need to
+preserve the final result.
 
-Select unresolved branches by descending importance and uncertainty.
-Traverse the selected branch depth first. Start with a brief map of the
-most important visible unresolved branches and which branch you will
-address first.
+Choose open decisions by descending importance and uncertainty. Work
+through the chosen issue depth first. Start with a brief map of the
+most important visible open decisions and which one you will address
+first.
 
 For directly resolved decisions:
 - record them immediately when they are fully determined, unsurprising
@@ -135,39 +171,44 @@ At each clarification step, present either:
 Do not ask a question before presenting queued decisions it depends on.
 Do not ask a new question in the same response as a decision batch.
 
-## Governing artifact and durable state
+## Where to store the result
 
 Clarification always works against one governing artifact:
 - task artifact for planning, approval preparation, or implementation;
 - ADR for ADR work.
 
-Keep final clarification decisions in the governing artifact's
-`Analysis` section.
+Store the final result according to artifact type.
 
-In task artifacts, follow
-`../spec-loop-plan-task/common-task-guidance.md`: place `Analysis`
-immediately after `Research` and record each final clarification
-decision as `- <decision> because <reason>.`
+In task artifacts, keep final resolved decisions in `Analysis`.
+Follow `../spec-loop-plan-task/common-task-guidance.md`: place
+`Analysis` immediately after `Research` and record each final
+clarification decision as `- <decision> because <reason>.`
 
-In ADRs, follow `../spec-loop-write-adr/adr-format.md`: keep
-`Analysis` as compact ADR-relevant bullets supporting the chosen
-decision. Treat it as the ADR's authoritative decision-and-reason
-ledger.
+In ADRs, do not force all final resolved content into `Analysis`.
+Follow `../spec-loop-write-adr/adr-format.md`: classify final
+resolved content into `Decision`, `Context`, `Alternatives`, and
+`Analysis`. Put pre-decision facts in `Context`, credible competing
+options in `Alternatives`, the chosen outcome in `Decision`, and keep
+only the ADR-relevant reasoning subset in `Analysis` as compact
+bullets supporting the chosen decision.
 
-Keep only accepted final decisions there. Do not keep open questions,
-options, confidence values, or transient notes.
+Keep only final resolved content in those sections.
+Do not keep open questions, confidence values, or transient notes.
+For ADRs, keep credible alternatives in `Alternatives`, not duplicated
+inside `Analysis`.
 
-Clarification is cross-cutting. When a decision becomes final, update
-`Analysis` and every affected section of the governing artifact.
+This skill is cross-cutting. When a decision becomes final, update the
+correct section or sections above and every affected section of the
+governing artifact.
 
 If clarification resolves or changes shared domain terms, note the
 required glossary follow-up in the active task when one exists or is
 being prepared.
 
-For task-controlled work, do not let final clarification state live
+For task-controlled work, do not let the final resolved state live
 only in chat once that becomes unsafe. Promote to the task-file path
 before chat-only storage becomes unsafe, and always sync the final
-clarification state before returning control.
+resolved state before returning control.
 
 ## Response forms
 
@@ -207,8 +248,9 @@ briefly, such as `B recorded` or `yes recorded`.
 ## Exit
 
 Before handing work back to the invoking workflow, confirm that:
-- no material unresolved question remains for the current branch;
+- no important open decision remains in the part of the work item
+  being handed back;
 - glossary conflicts and code/docs contradictions have been resolved or
   explicitly surfaced;
 - required glossary follow-up has been noted when relevant; and
-- the governing artifact matches the final clarification state.
+- the governing artifact matches the final resolved state.

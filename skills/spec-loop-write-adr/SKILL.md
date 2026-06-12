@@ -24,16 +24,16 @@ Use the same ADR format whether or not a task artifact also exists.
 ## Mandatory clarification gate
 
 Before drafting or revising the ADR as current truth, check whether
-any material unresolved question remains about the decision, decision
-criteria, trade-offs, credible options, or governing boundaries.
+any important open decision remains about the decision, its criteria,
+trade-offs, credible options, or the boundaries of the decision.
 
 If yes, create only enough ADR structure to hold the topic and
 current evidence safely, then use
 `../spec-loop-clarify-task/SKILL.md` before continuing. Do not wait
 for the user to ask for clarification explicitly.
 
-Re-run this gate whenever later ADR drafting exposes a new material
-unresolved branch.
+Re-run this gate whenever later ADR drafting exposes a new important
+open decision.
 
 Before writing or revising, classify each input item into its proper
 section:

@@ -39,10 +39,10 @@ checks before producing user-facing output.
 If readiness checks show that task-file compaction is needed, use
 `../spec-loop-compact-task-file/SKILL.md` and then resume this skill.
 
-If any material unresolved question remains and it is
-user-preference-sensitive, needed to choose the next decision path, or
-could materially change scope, constraints, design, or test
-specification, do not end with a blocker list. Invoke
+If any important open decision remains and it is
+user-preference-sensitive, needed to choose the next path, or could
+materially change scope, constraints, design, or test specification,
+do not end with a blocker list. Invoke
 `../spec-loop-clarify-task/SKILL.md` in the same turn, preserving any
 clarification grill level already in force for the current work item,
 and resume this skill after clarification before seeking

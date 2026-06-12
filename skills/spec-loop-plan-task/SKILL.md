@@ -37,11 +37,11 @@ After implementation approval, follow
 ## Mandatory clarification gate
 
 Before drafting or revising a planning artifact as current truth,
-check whether any material unresolved branch remains about scope,
+check whether any important open decision remains about scope,
 behavior, policy, conceptual model, conceptual contract boundaries,
 constraints, route, acceptance logic, or verification.
 
-If yes, do only enough research to ask good clarification questions
+If yes, do only enough research to frame the open decision clearly
 and use `../spec-loop-clarify-task/SKILL.md` before continuing. Do
 not wait for the user to ask for clarification explicitly.
 

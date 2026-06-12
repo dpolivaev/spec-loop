@@ -17,15 +17,15 @@ If no approved active task exists, return to
 - Keep the approved active task as the source of truth.
 - Do not create a second implementation artifact or silently rewrite
   the task to match the code.
-- If unresolved questions appear and they could materially change
+- If important open decisions appear and they could materially change
   scope, constraints, design, or test specification, use
   `../spec-loop-clarify-task/SKILL.md` before continuing, preserving
   any clarification grill level already in force for the current work
   item.
 - Chat-only implementation is allowed only while confirmed task state
-  can safely remain in chat. If final clarification decisions kept
-  only in chat would risk loss through compaction or context loss,
-  promote to the task-file path before continuing.
+  can safely remain in chat. If resolved decisions kept only in chat
+  would risk loss through compaction or context loss, promote to the
+  task-file path before continuing.
 - This skill governs only the approved current increment until it
   reaches `review`.
 - If the User introduces additional executable work outside that
