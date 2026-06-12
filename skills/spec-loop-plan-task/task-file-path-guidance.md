@@ -247,6 +247,15 @@ When a task uses subtasks:
   overall task; for implementation tasks it must include executable
   work; this is usually a functional increment, but a
   history-preserving review follow-up may also justify a subtask,
+- for feature implementation, implementation subtasks must be
+  vertical slices: each implementation subtask must cover the
+  cross-layer work needed for one reviewable behavior and its own
+  automated tests,
+- do not split a feature into scaffolding-only or layer-only
+  implementation subtasks such as separate `scaffolding`, `model`,
+  `logic`, or `UI` subtasks unless the User explicitly requests that
+  structure or a governed history-preserving follow-up truly requires
+  it,
 - is not assumed to be self-sufficient; before working from a
   subtask, read the relevant task-level sections and diagrams needed
   to understand it correctly;
