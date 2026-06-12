@@ -141,7 +141,7 @@
     </marker>
   </defs>
   <rect
-     style="display:inline;fill:#fefefe;fill-opacity:1;stroke:#7f7f7f;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;paint-order:markers stroke fill"
+     style="display:none;fill:#fefefe;fill-opacity:1;stroke:#7f7f7f;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;paint-order:markers stroke fill"
      id="rect1"
      width="1372.2205"
      height="764.22046"
@@ -242,20 +242,24 @@
      style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000"><tspan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif Bold';letter-spacing:-1px"
    id="tspan78">Lifecycle</tspan> (status) — for each task and each subtask</text>
-  <text
-     x="47.931713"
-     y="193.08025"
-     class="sans sec"
-     id="text17"
-     style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000"><tspan
+  <g
+     id="g15"
+     transform="translate(-9.914135)">
+    <text
+       x="47.931713"
+       y="193.08025"
+       class="sans sec"
+       id="text17"
+       style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000"><tspan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif Bold'"
    id="tspan1">Outer loop</tspan> (applies to</text>
-  <text
-     x="72.931717"
-     y="219.90633"
-     class="sans sec"
-     id="text18"
-     style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">tasks and subtasks)</text>
+    <text
+       x="72.931717"
+       y="219.90633"
+       class="sans sec"
+       id="text18"
+       style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">tasks and subtasks)</text>
+  </g>
   <rect
      style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3.11413;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;paint-order:markers stroke fill"
      id="rect1755"
@@ -343,22 +347,26 @@
      style="fill:none;stroke:#000000;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round" />
   <text
      x="39.681641"
-     y="553.7832"
+     y="511.02072"
      class="sans sec-b"
      id="text67"
-     style="font-weight:700;font-size:29.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Tasks</text>
-  <text
-     x="34.656704"
-     y="588.70544"
-     class="sans sec"
-     id="text68"
-     style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Split spec content into subtasks;</text>
-  <text
-     x="54.113731"
-     y="620.70544"
-     class="sans sec"
-     id="text69"
-     style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">join when it's one increment.</text>
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Tasks</text>
+  <g
+     id="g10"
+     transform="translate(0,-179.89723)">
+    <text
+       x="34.656704"
+       y="622.62048"
+       class="sans sec"
+       id="text68"
+       style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Split spec content into subtasks;</text>
+    <text
+       x="54.113731"
+       y="654.62048"
+       class="sans sec"
+       id="text69"
+       style="font-size:24px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">join when it's one increment.</text>
+  </g>
   <text
      x="510.17389"
      y="335.26086"
@@ -677,32 +685,56 @@
      d="m 630.97861,536.86701 a 20.606606,14.912676 0 0 1 21.71262,9.55136 20.606606,14.912676 0 0 1 -7.60706,17.54489" />
   <text
      x="42.594357"
-     y="340.11609"
+     y="643.87701"
      class="sans sec-b"
      id="text3"
-     style="font-weight:700;font-size:26.6667px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Project Glossary</text>
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Project Glossary</text>
   <text
-     x="225.47523"
-     y="418.53967"
+     x="260.86487"
+     y="588.11493"
      class="sans sec-b"
      id="text4"
-     style="font-weight:700;font-size:26.6667px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">ADR</text>
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">ADR</text>
   <path
      style="fill:none;stroke:#000000;stroke-width:3.77951;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
-     d="m 85.799823,389.96142 v 114.2346"
+     d="m 85.799822,544.23391 v 48.99324"
      id="path20" />
   <path
      style="fill:none;stroke:#000000;stroke-width:3.77952;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
-     d="m 120.97443,510.5477 109.7118,-72.93805"
+     d="m 120.97443,536.0677 109.7118,38.22438"
      id="path21" />
   <text
      x="226.12213"
-     y="553.94794"
+     y="511.18546"
      class="sans sec-b"
      id="text25"
-     style="font-weight:700;font-size:29.3333px;font-family:Arial, Helvetica, sans-serif;letter-spacing:-1px;fill:#000000">Subtasks</text>
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Subtasks</text>
   <path
      style="fill:none;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
-     d="M 184.80843,545.39846 H 156.0281"
+     d="m 194.73779,502.63597 h -42.7408"
      id="path26" />
+  <text
+     x="39.060547"
+     y="297.35361"
+     class="sans sec-b"
+     id="text5"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Analysis:</text>
+  <text
+     x="170.88173"
+     y="297.36533"
+     class="sans sec-b"
+     id="text7"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Questions</text>
+  <text
+     x="170.88173"
+     y="334.82718"
+     class="sans sec-b"
+     id="text9"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Decisions</text>
+  <text
+     x="170.88173"
+     y="371.23431"
+     class="sans sec-b"
+     id="text10"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Reasons</text>
 </svg>
