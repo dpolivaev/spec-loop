@@ -254,9 +254,11 @@ inventory explicit for every planned new or changed top-level
 production class, interface, enum, and every new or changed
 externally meaningful identifier in scope. In class diagrams, put
 review-relevant methods and fields of displayed types in the diagram
-itself. Companion prose, lists, or tables may capture exact ownership,
-responsibilities, collaborators, or external identifiers that the
-diagram cannot express clearly enough for review.
+itself. On the task-file path, follow
+[task-file-path-guidance.md](./task-file-path-guidance.md) for the
+rules that govern diagrams, allowed non-diagram text, and local
+ordering between a diagram and its related text in **Research** and
+**Design**.
 Examples of externally meaningful identifiers include persisted file
 names, serialized field names, config keys, action keys, menu
 placeholder names, and shared session/state flags.

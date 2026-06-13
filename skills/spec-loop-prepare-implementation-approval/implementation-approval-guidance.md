@@ -108,22 +108,27 @@ Then re-run readiness checks and continue approval preparation. If the
 User declines, continue approval preparation on the current
 structure.
 
-## 4. Review-preparation rules
+## 4. Research and Design review-preparation rules
 
-Make the Design section reviewer-friendly without losing planning
-precision.
+Make the Research and Design sections reviewer-friendly without losing
+planning precision.
+
+For diagram, non-diagram-text, and ordering rules in **Research** and
+**Design**, follow `../spec-loop-plan-task/task-file-path-guidance.md`
+as the source of truth.
+
+Approval is blocked if those rules are violated.
 
 Preferred review surface:
-- final decisions first;
-- diagrams for structure, boundaries, and interaction; and
+- diagrams first for structure, boundaries, and interaction; and
 - compact supporting inventories only where diagrams are weak.
 
 Canonical ownership by information kind:
-- design decisions and approvals -> concise decision lists;
-- structure, boundaries, collaborators, and review-relevant members of
-  displayed types -> diagrams;
-- exact external identifiers, file names, schema names, action keys,
-  and serialized field names -> compact lists or tables; and
+- non-diagrammable design decisions and approvals -> concise decision
+  lists;
+- diagrammable content in **Research** and **Design** -> diagrams;
+- exact external identifiers or other precise inventories the diagram
+  cannot carry clearly -> compact lists or tables; and
 - unresolved questions and remaining gaps -> explicit gap lists.
 
 Draft scaffolding may exist temporarily, but the approval-prepared task
@@ -134,16 +139,16 @@ this skill.
 The Design section prepared for approval must contain no placeholders.
 Do not leave role stand-ins, candidate names, temporary labels,
 abstract aliases, or generic structural placeholders in Design
-prose, diagrams, tables, or lists. If an exact intended name is not
-yet known, approval-seeking is blocked.
+non-diagram text, diagrams, tables, or lists. If an exact intended
+name is not yet known, approval-seeking is blocked.
 
 Keep both a diagram and a table only when each adds distinct value. If
 a table only restates the diagram, remove it or reduce it to the exact
 information the diagram cannot carry cleanly.
 
 If a class diagram exists, review-relevant methods and fields of
-displayed types must appear in it, not only in prose, lists, or
-tables. Prose blocks such as `X contract:` or `Y fields:` are
+displayed types must appear in it, not only in non-diagram text,
+lists, or tables. Text blocks such as `X contract:` or `Y fields:` are
 duplication unless they add information the diagram cannot carry
 cleanly.
 
@@ -184,30 +189,16 @@ increment:
   `Glossary`, or behavior-level diagrams and prose;
 - no unresolved essential doubts remain about scope, behavior,
   constraints, naming, or structural boundaries;
-- final intended names are used for new structural elements and
-  externally meaningful identifiers, consistent with the no-placeholder
-  rule above;
-- required diagrams are present and readable;
+- the approval-preparation rules in section 4 and all applicable
+  Research, Design, and diagram requirements from the
+  `spec-loop-plan-task` bundle are satisfied;
 - when task `Glossary` is present, its focused Mermaid visual glossary
   is in sync with the text glossary; approval is blocked if they
   diverge, including disagreement, omission, or stale mismatch, on
   terms, relationships, boundaries, actors, or flows;
 - markdown structure is renderer-safe under the Task-file
   Constitution formatting rules, especially in list-item sections that
-  contain fenced blocks;
-- when production structure changes, new or changed top-level
-  production types and externally meaningful identifiers are explicit
-  enough for review;
-- when current or target class design is materially relevant, the
-  required class diagrams are present in `Research` and/or `Design`
-  and show the review-relevant members of displayed types;
-- stale alternatives, obsolete wording, and contradictory
-  descriptions are removed;
-- design review focuses on structural concerns, not local variables,
-  private methods, or other implementation-local details unless the
-  user explicitly asked for that level; and
-- the task does not present duplicated diagram-plus-table restatements
-  without added value; and
+  contain fenced blocks; and
 - the active task file's current main-task/subtask structure is a good
   fit for the current increment.
 

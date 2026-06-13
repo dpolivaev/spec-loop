@@ -315,17 +315,31 @@ using them.
   component interaction, or target class design.
 - When Scenario or Glossary exists, Design diagrams must show the
   relevant units and names in the diagram itself, not only in
-  surrounding prose.
-- Prefer diagrams over text when they can express research or design
-  clearly.
-- Omit diagrams only when task is confined to a single method or a
-  trivially local change with no meaningful flow or interaction.
+  non-diagram text.
+- `Non-diagram text` means text outside diagram blocks.
+- These rules apply only within task-file **Research** and
+  **Design**. They do not change **Analysis**, **Test
+  specification**, or other sections.
+- In **Research** and **Design**, diagrams are primary because they
+  are compact. No notes or legends inside diagrams.
+- Whatever can be expressed clearly in a diagram without notes or
+  legends belongs only in the diagram; non-diagram text, lists, and
+  tables there may cover only what cannot be expressed clearly that
+  way.
+- If non-diagram text explains a specific diagram or diagram group,
+  use this local order:
+  - relevant diagram or diagram group;
+  - immediately following related non-diagram text, if any; and
+  - next relevant diagram or diagram group.
+- Do not place explanatory non-diagram text before the diagram or
+  diagram group it explains.
+- If any non-diagram points in **Research** or **Design** are not tied
+  to a specific diagram or diagram group, place them at the end of
+  that section, after the last diagram-related block.
+- Omit diagrams only when the task is confined to a single method or
+  a trivially local change with no meaningful flow or interaction.
 - No test classes, fixtures, or test-only helpers in diagrams.
 - Each diagram in its own paragraph under the owning section.
-- No notes inside diagrams. Put explanation below the diagram only
-  when needed.
-- Do not restate diagram-carried structure or behavior in surrounding
-  prose unless the diagram cannot express it cleanly.
 - Structure and behavior both matter: use separate diagrams.
 - Declare component and sequence diagrams with explicit language
   keywords.
@@ -340,13 +354,14 @@ using them.
 - Put review-relevant operations in interface and class boxes.
 - Put review-relevant fields in DTO, request, response, result,
   value-object, and similar data-type boxes.
-- Do not restate those members in prose, lists, or tables unless the
-  diagram would become unreadable or the information is not naturally
-  owned by a class box.
-- Add a companion responsibility table, compact list, or equivalent
-  supporting artifact only when the diagram alone cannot make
-  ownership, structure, or exact external identifiers clear enough for
-  review.
+- Do not restate those members in non-diagram text, lists, or tables
+  unless the diagram would become unreadable or the information is not
+  naturally owned by a class box.
+- Do not add a companion table or list just to compensate for content
+  that should be in the diagram.
+- Add a companion compact list or table only when the diagram is
+  already complete and some exact facts still need a precise
+  inventory.
 - Class diagrams: show only elements needed for change or structural
   interaction, meaningful dependency labels, and at most one
   connector per class pair.
@@ -359,8 +374,9 @@ using them.
 - Do not apply normal prose line wrapping inside PlantUML fences.
 - Keep each line-oriented PlantUML statement on one physical line.
 - Use multiple physical lines only for syntax that is explicitly
-  block-based, such as `package { ... }`, `class { ... }`,
-  `note ... end note`, and `legend ... endlegend`.
+  block-based, such as `package { ... }` and `class { ... }`.
+- `note ... end note` and `legend ... endlegend` are not allowed in
+  task diagrams.
 - If inline text on a line-oriented statement becomes too long,
   shorten it or use `\n` inside the same statement.
 - In sequence diagrams, each `A -> B : message` line is one
