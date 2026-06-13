@@ -83,8 +83,6 @@ PlantUML writing hints:
   a packaged word list. The CLI adapter must depend on the application
   and domain layers without moving gameplay logic into the UI path.
 - **Research:**
-  Current repository structure and runtime boundary relevant to the
-  change:
 
   ```plantuml
   @startuml
@@ -136,6 +134,7 @@ PlantUML writing hints:
   - The repository already separates application wiring from domain
     logic.
   - No CLI-specific adapter classes exist yet.
+
 - **Analysis:**
   - CLI mode stays a thin adapter because gameplay logic must remain
     reusable in the existing engine.
@@ -145,8 +144,6 @@ PlantUML writing hints:
     the example should keep the external CLI contract minimal and
     reviewable.
 - **Design:**
-  Target project structure, structural collaboration, and runtime flow
-  for the CLI path:
 
   ```plantuml
   @startuml
@@ -208,7 +205,7 @@ PlantUML writing hints:
     }
   }
 
-  WordleApplication --> CommandLineOptions : parses ~--cli, ~--wordlist, ~--attempts
+  WordleApplication --> CommandLineOptions : parses CLI options
   WordleApplication --> CliGameLoop : starts
   CliGameLoop --> GameEngine : uses
   CliGameLoop --> FeedbackRenderer : uses
@@ -236,18 +233,11 @@ PlantUML writing hints:
   @enduml
   ```
 
-  Design notes:
-  - Keep filesystem, component, class, and sequence diagrams in
-    separate PlantUML blocks.
-  - Do not mix `file` / `folder` elements with classes in the same
-    diagram unless there is a strong reason.
-  - Use the class diagram for structural changes and the sequence
-    diagram for runtime behavior.
-
   Externally meaningful identifiers:
   - `--cli`
   - `--wordlist`
   - `--attempts`
+
 - **Test specification:**
   - Automated tests:
     - CLI argument parsing defaults and validation.

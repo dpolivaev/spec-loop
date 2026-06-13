@@ -44,8 +44,7 @@ Use it as a pattern collection, not as a required task size.
   ```
 - **Briefing:** The change affects one client composer, one Export API,
   and one serialized export request payload shape.
-- **Research:** The current client sends two similar request variants,
-  which forces the server to branch on partially duplicated payloads.
+- **Research:**
 
   ```plantuml
   @startuml
@@ -54,15 +53,26 @@ Use it as a pattern collection, not as a required task size.
   component "Export API" as api
 
   ui --> composer : selected items + options
-  composer --> api : export request payload
+  composer --> api : request variant A
+  composer --> api : request variant B
   @enduml
   ```
 
+  - The current client sends two similar request variants, which
+    forces the server to branch on partially duplicated payloads.
+
 - **Design:**
-  Final structural decisions:
-  1. Keep one request composer.
-  2. Use one normalized export request payload.
-  3. Remove the legacy parallel request shape from the new path.
+
+  ```plantuml
+  @startuml
+  component "Selection UI" as ui
+  component "ExportRequestComposer" as composer
+  component "Export API" as api
+
+  ui --> composer : selected items + options
+  composer --> api : normalized export request payload
+  @enduml
+  ```
 
   Export request payload:
 
@@ -85,8 +95,6 @@ Use it as a pattern collection, not as a required task size.
   | `format` | request field | target export format |
   | `/api/export` | endpoint | normalized export request target |
 
-  No second structural table is kept because the component diagram and
-  payload block already describe the review-relevant boundary.
 
 - **Test specification:**
   - Automated tests:

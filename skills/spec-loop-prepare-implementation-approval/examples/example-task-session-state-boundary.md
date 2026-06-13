@@ -4,8 +4,8 @@ This compact example shows a task after `spec-loop-prepare-implementation-approv
 polishes it for implementation approval seeking.
 
 It demonstrates:
-- final decisions before detail;
-- a class diagram plus a sequence diagram;
+- diagram-first structural review;
+- a class diagram plus a sequence diagram; and
 - a compact identifier list instead of a repeated responsibility table.
 
 Use it as a pattern collection, not as a required task size.
@@ -19,9 +19,7 @@ Use it as a pattern collection, not as a required task size.
   not appear in the persisted session list.
 - **Briefing:** The change touches one session manager, one transient
   runner, and one persistence boundary.
-- **Research:** The current design stores all work through the visible
-  session registry, so even one-off background execution would be
-  persisted and listed unless a second boundary is introduced.
+- **Research:**
 
   ```plantuml
   @startuml
@@ -34,11 +32,11 @@ Use it as a pattern collection, not as a required task size.
   @enduml
   ```
 
+  - The current design stores all work through the visible session
+    registry, so even one-off background execution would be persisted
+    and listed unless a second boundary is introduced.
+
 - **Design:**
-  Final structural decisions:
-  1. Keep one visible session path inside the live-session registry.
-  2. Add one transient background path outside the registry.
-  3. Persist only the visible path.
 
   ```plantuml
   @startuml
@@ -88,8 +86,6 @@ Use it as a pattern collection, not as a required task size.
   - `visibleSessions.json`
   - `backgroundExportEnabled`
 
-  No separate responsibility table is kept here because the diagrams
-  already carry the structural review load.
 
 - **Test specification:**
   - Automated tests:
