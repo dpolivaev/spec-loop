@@ -117,6 +117,11 @@ For diagram, non-diagram-text, and ordering rules in **Research** and
 **Design**, follow `../spec-loop-plan-task/task-file-path-guidance.md`
 as the source of truth.
 
+During approval preparation, apply those rules to both main-task and
+subtask **Research** and **Design** sections. They do not override the
+task context hygiene rules against duplication across task and subtask
+levels.
+
 Approval is blocked if those rules are violated.
 
 Preferred review surface:
@@ -191,7 +196,8 @@ increment:
   constraints, naming, or structural boundaries;
 - the approval-preparation rules in section 4 and all applicable
   Research, Design, and diagram requirements from the
-  `spec-loop-plan-task` bundle are satisfied;
+  `spec-loop-plan-task` bundle are satisfied at the correct main-task
+  or subtask level;
 - when task `Glossary` is present, its focused Mermaid visual glossary
   is in sync with the text glossary; approval is blocked if they
   diverge, including disagreement, omission, or stale mismatch, on

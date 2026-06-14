@@ -272,6 +272,9 @@ When a task uses subtasks:
 - No redundant duplication across main task and subtasks. Reused
   context: reference briefly, state only local adaptation, risk, or
   decision.
+- The Research and Design diagram rules do not justify repeating the
+  same content at both task and subtask level; keep shared context at
+  task level and local context at subtask level.
 - Future subtasks may keep Research, Design, and Test specification
   lightweight until current. Analysis may stay omitted or minimal
   until final clarification decisions exist. Placeholders like `To be
@@ -320,6 +323,9 @@ using them.
 - These rules apply only within task-file **Research** and
   **Design**. They do not change **Analysis**, **Test
   specification**, or other sections.
+- They apply to both main-task and subtask **Research** and
+  **Design** sections and do not override the task context hygiene
+  rules against duplication across task and subtask levels.
 - In **Research** and **Design**, diagrams are primary because they
   are compact. No notes or legends inside diagrams.
 - Whatever can be expressed clearly in a diagram without notes or
