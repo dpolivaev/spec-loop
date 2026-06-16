@@ -50,6 +50,15 @@ Optional setting:
 - `markdown.plantuml.server`
 - default: `https://www.plantuml.com/plantuml`
 
+Privacy note for this option: `myml.vscode-markdown-plantuml-preview`
+sends PlantUML render URLs to the configured PlantUML server. The
+PlantUML diagram representation is encoded in those URLs. The default
+server uses HTTPS, so the URL path is encrypted in transit unless TLS is
+terminated or intercepted by a proxy. The PlantUML FAQ says URLs are not
+saved on their server, but the public service still processes the diagram
+during rendering. Use local-only rendering or an intranet PlantUML server
+when project policy forbids third-party processing of diagrams.
+
 Use the IDE's built-in Markdown preview after installation.
 
 The helper script
