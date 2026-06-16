@@ -293,6 +293,17 @@ diagrams and prose.
 ### Test specification
 
 Documents verification structure and concrete test coverage.
+Separate required agent verification from optional human-reader hints:
+
+- `Automated tests` = tests, automated checks, and other agent-run
+  local checks required before `review`, unless waived.
+- `Manual tests` = optional checks a human reviewer may perform after
+  handoff. They do not block `review` and must not be reported as done
+  unless actually performed.
+
+If a check can be automated enough for the task, put it under
+`Automated tests`, not `Manual tests`.
+
 Do not restate `Analysis` points here in decision-and-reason form;
 record the resulting verification consequences instead.
 
@@ -407,17 +418,18 @@ areas.
   tasks: set `Automated tests: N/A` and `Manual tests: N/A`.
 - Separate test-focused tasks allowed when adding or extending
   coverage as standalone scope.
-- Prefer automated tests. Manual tests are optional and should be
-  used only when the same verification purpose cannot be covered
-  adequately by automated tests.
+- Prefer automated tests and automated checks. `Manual tests` are
+  optional human-reader hints for post-handoff review. Use them only
+  when the same verification purpose cannot be covered adequately by
+  automated tests.
 - If a command's purpose is to run automated tests or automated
   checks, list it under `Automated tests`, not `Manual tests`, even
   though a person invokes the command.
 - Each implementation task without subtasks: include an explicit
-  `Automated tests` sublist. Include a `Manual tests` sublist only
-  when non-automatable verification remains; otherwise set
-  `Manual tests: N/A`.
-- Run and fix all required tests before moving a task-file task to
-  `review`, before presenting chat-only work as ready, or before
-  otherwise implying implementation closure, unless the User waives
-  tests.
+  `Automated tests` sublist. Include a `Manual tests` sublist only for
+  useful optional human-reader checks that cannot be automated enough
+  for the task; otherwise set `Manual tests: N/A`.
+- Run and fix all `Automated tests` and other required agent-run
+  checks before moving a task-file task to `review`, before presenting
+  chat-only work as ready, or before otherwise implying implementation
+  closure, unless the User waives them.

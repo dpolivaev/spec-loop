@@ -23,6 +23,20 @@ companion for implementation-time handling, task-file updates,
 On the task-file path, the task file is the source of truth for the
 current increment.
 
+When a task file has or may have subtasks, do not infer the active
+increment or subtask status from the folder path. Before identifying
+the active increment, claiming lifecycle status, moving a task or
+subtask status, seeking implementation approval, or presenting
+completion, search the file for subtask heading and status lines:
+
+`rg -n '^## Subtask:|^- \*\*Status:\*\*' <task-file>`
+
+Use the folder path as task-level status only. Use subtask
+`- **Status:**` lines as subtask-level status. If a task in `review`
+has an `in-progress` subtask, state both statuses explicitly and use
+the active subtask plus needed task-level context as the controlling
+increment.
+
 Backlog tasks may keep Research and Design high-level or `To be
 done` until current. Omit Analysis until final clarification
 decisions exist.
@@ -110,8 +124,8 @@ are modified, those modifications must be staged and included in the
 same commit. Do not invent synthetic task-file edits solely to satisfy
 this coupling. Propose needed status or folder changes. Apply only
 after explicit User confirmation, except LLM applies `in-progress` ->
-`review` directly when implementation and local verification are
-complete under `spec-loop-implementation-flow`.
+`review` directly when implementation and required agent-run
+verification are complete under `spec-loop-implementation-flow`.
 
 No generated or local-only artifacts in commits. If accidentally
 tracked: untrack, add or update ignore rule before continuing, unless
@@ -170,8 +184,9 @@ Lifecycle and transition rules:
   `done`, plus explicit User-requested `review` -> `in-progress`.
 - If `in-progress` is empty and only one new task is being created,
   place it in `in-progress`, otherwise in `backlog`.
-- LLM moves `in-progress` -> `review` when implementation and local
-  verification are complete under `spec-loop-implementation-flow`.
+- LLM moves `in-progress` -> `review` when implementation and
+  required agent-run verification are complete under
+  `spec-loop-implementation-flow`.
 - Later executable follow-up from `review` or `done` returns to PLAN
   before more implementation.
 - During that planning and renewed-approval work, a `review` item
@@ -415,7 +430,12 @@ For task-file subtasks:
   coverage as standalone scope.
 - Each implementation subtask: include an explicit `Automated tests`
   sublist.
-- Include a `Manual tests` sublist only when non-automatable
-  verification remains; otherwise set `Manual tests: N/A`.
-- Run and fix all required tests before moving a task or subtask to
-  `review`, unless the User waives tests.
+- Include a `Manual tests` sublist only for useful optional
+  human-reader checks that cannot be covered adequately by automated
+  tests; otherwise set `Manual tests: N/A`.
+- Manual tests are reviewer hints, not agent review gates. Do not
+  move automatable verification into `Manual tests`; list it under
+  `Automated tests`.
+- Run and fix all automated tests and other required agent-run checks
+  before moving a task or subtask to `review`, unless the User waives
+  them.

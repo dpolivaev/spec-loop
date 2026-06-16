@@ -12,6 +12,12 @@ It defines only the task-file implementation-time delta.
 Task-file lifecycle, subtask, and folder ownership remain in the
 Task-file Path Guidance.
 
+When a task file has or may have subtasks, apply the subtask
+heading/status search rule from
+`../spec-loop-plan-task/task-file-path-guidance.md` before selecting
+the active subtask, claiming lifecycle status, or making lifecycle
+changes.
+
 Do not treat the active subtask as self-sufficient. Before
 implementation or implementation-time clarification from a subtask,
 read the relevant task-level sections and diagrams needed to

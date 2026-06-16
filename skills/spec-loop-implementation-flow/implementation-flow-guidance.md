@@ -27,6 +27,18 @@ expressing those shared rules.
   `Implementation notes`, or `review`, use the path companion to
   decide how to express it.
 
+Implementation-start checklist:
+- stay inside the approved current increment;
+- return new executable work outside that increment to PLAN;
+- do not make executable edits outside the approved design boundary
+  unless this guidance or the User explicitly authorizes them;
+- if `Implementation notes` are later needed, use only the fixed
+  subheadings `Interpretations`, `Tradeoffs`, and `Open questions`;
+- do not write `Implementation notes` as a chronological worklog,
+  test log, user clarification history, or scratchpad; and
+- treat `Manual tests` as optional human-review hints, not as
+  blockers for `review`.
+
 ## 2. Allowed implementation-time routes
 
 Only these routes are allowed when implementation reaches a decision
@@ -110,12 +122,14 @@ implemented result.
 
 ### E. Reach `review`
 
-Use this route when the work is implemented, locally verified, and
-ready for user review.
+Use this route when the work is implemented, required agent-run
+verification has passed, and it is ready for user review.
 
 Reaching `review` means the current implemented state matches the
-approved task and has passed the required local checks at that
-checkpoint. The path companion defines how that state is expressed.
+approved task and has passed the required automated tests and other
+agent-run local checks at that checkpoint. Optional `Manual tests`
+listed as human-review hints need not be performed before `review`.
+The path companion defines how that state is expressed.
 
 After route E is expressed, this skill is done for that increment.
 Later executable follow-up returns to `spec-loop-plan-task`.
@@ -241,8 +255,11 @@ Before reaching `review`, ensure that:
 - any canonical task-section changes have explicit authority from an
   explicit user clarification or explicit post-implementation user
   approval of keeping an implemented deviation;
-- required tests or other local verification from `Test specification`
-  pass, unless the user waived them;
+- required automated tests and other agent-run local verification from
+  `Test specification` pass, unless the user waived them;
+- any `Manual tests` listed as optional human-review hints are not
+  treated as blockers for `review`, and are not claimed as performed
+  unless they were actually performed;
 - if `Scenario` or `Glossary` is present, implementation and
   verification still match their approved behavior and domain-language
   contract;
