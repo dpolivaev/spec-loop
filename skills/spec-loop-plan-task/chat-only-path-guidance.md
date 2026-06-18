@@ -198,8 +198,8 @@ plus the normal test run.
 
 - **Test specification:**
   - **Automated tests:**
-    - One targeted regression test for overlong viewer lines.
-    - Full `npm test`.
+    - Overlong read-only viewer lines are truncated to the available
+      terminal width.
   - **Manual tests:**
     - N/A.
 ```

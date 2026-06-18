@@ -240,9 +240,12 @@ PlantUML writing hints:
 
 - **Test specification:**
   - Automated tests:
-    - CLI argument parsing defaults and validation.
-    - CLI feedback rendering.
-    - Delegation from the CLI path into the existing engine.
-    - `./gradlew test`
+    - Missing optional CLI arguments use default wordlist and attempt
+      values.
+    - Invalid CLI argument values are rejected with user-facing
+      feedback.
+    - CLI feedback rendering matches the engine guess result.
+    - CLI mode delegates valid guess validation and scoring to the
+      existing engine.
   - Manual tests:
-    - `./gradlew run --args='--cli'`
+    - Start the CLI and complete one short game from the terminal.

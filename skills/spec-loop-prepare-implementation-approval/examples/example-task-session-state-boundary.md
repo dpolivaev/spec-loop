@@ -89,12 +89,14 @@ Use it as a pattern collection, not as a required task size.
 
 - **Test specification:**
   - Automated tests:
-    - visible sessions are persisted;
-    - background runs are not persisted;
-    - failures in the background path do not alter the visible-session
-      list.
+    - Visible session completion persists the session in the
+      visible-session list.
+    - Background run completion does not add the run to the
+      visible-session list.
+    - Background path failure leaves the visible-session list
+      unchanged.
   - Manual tests:
-    - run one visible session and confirm it appears in the session
-      list;
-    - trigger one background export and confirm it stays out of the
+    - Run one visible session and confirm it appears in the session
+      list.
+    - Trigger one background export and confirm it stays out of the
       persisted session list.

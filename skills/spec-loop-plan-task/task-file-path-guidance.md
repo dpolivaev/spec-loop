@@ -124,7 +124,7 @@ are modified, those modifications must be staged and included in the
 same commit. Do not invent synthetic task-file edits solely to satisfy
 this coupling. Propose needed status or folder changes. Apply only
 after explicit User confirmation, except LLM applies `in-progress` ->
-`review` directly when implementation and required agent-run
+`review` directly when implementation and required automated
 verification are complete under `spec-loop-implementation-flow`.
 
 No generated or local-only artifacts in commits. If accidentally
@@ -185,7 +185,7 @@ Lifecycle and transition rules:
 - If `in-progress` is empty and only one new task is being created,
   place it in `in-progress`, otherwise in `backlog`.
 - LLM moves `in-progress` -> `review` when implementation and
-  required agent-run verification are complete under
+  required automated verification are complete under
   `spec-loop-implementation-flow`.
 - Later executable follow-up from `review` or `done` returns to PLAN
   before more implementation.
@@ -274,7 +274,8 @@ When a task uses subtasks:
 - is not assumed to be self-sufficient; before working from a
   subtask, read the relevant task-level sections and diagrams needed
   to understand it correctly;
-- must satisfy **Testing Policy**.
+- must satisfy the testing policy in
+  [test-specification-guidance.md](./test-specification-guidance.md).
 - No planning-only subtasks unless User explicitly asks.
 
 `Implementation notes` placement:
@@ -418,8 +419,8 @@ using them.
 ## Testing Policy on tasks with subtasks
 
 Use the shared Testing Policy from
-[common-task-guidance.md](./common-task-guidance.md) for all
-no-subtask tasks.
+[test-specification-guidance.md](./test-specification-guidance.md) for
+all no-subtask tasks.
 
 For task-file subtasks:
 
@@ -429,13 +430,15 @@ For task-file subtasks:
 - Separate test-focused tasks allowed when adding or extending
   coverage as standalone scope.
 - Each implementation subtask: include an explicit `Automated tests`
-  sublist.
+  sublist of task-specific verification cases.
 - Include a `Manual tests` sublist only for useful optional
   human-reader checks that cannot be covered adequately by automated
   tests; otherwise set `Manual tests: N/A`.
 - Manual tests are reviewer hints, not agent review gates. Do not
   move automatable verification into `Manual tests`; list it under
   `Automated tests`.
-- Run and fix all automated tests and other required agent-run checks
-  before moving a task or subtask to `review`, unless the User waives
-  them.
+- Do not list test execution commands, framework names, or pass/fail
+  status in `Test specification`.
+- Run and fix the automated tests that implement the specified cases
+  and any required project-level checks before moving a task or
+  subtask to `review`, unless the User waives them.

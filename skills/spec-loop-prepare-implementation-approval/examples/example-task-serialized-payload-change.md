@@ -98,9 +98,11 @@ Use it as a pattern collection, not as a required task size.
 
 - **Test specification:**
   - Automated tests:
-    - composer emits the normalized request shape;
-    - selected identifiers preserve order;
-    - `selectionCount` matches the emitted list size.
+    - Export request composition emits the normalized request shape.
+    - Multiple selected identifiers keep their order in the emitted
+      request.
+    - `selectionCount` equals the emitted selected-identifier count.
   - Manual tests:
-    - export two selected items and inspect the outgoing request;
-    - verify that the server receives only the normalized payload shape.
+    - Export two selected items and inspect the outgoing request.
+    - Verify that the server receives only the normalized payload
+      shape.

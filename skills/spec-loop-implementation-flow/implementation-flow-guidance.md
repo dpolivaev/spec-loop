@@ -122,14 +122,16 @@ implemented result.
 
 ### E. Reach `review`
 
-Use this route when the work is implemented, required agent-run
-verification has passed, and it is ready for user review.
+Use this route when the work is implemented, required automated
+verification and project-level checks have passed, and it is ready for
+user review.
 
 Reaching `review` means the current implemented state matches the
-approved task and has passed the required automated tests and other
-agent-run local checks at that checkpoint. Optional `Manual tests`
-listed as human-review hints need not be performed before `review`.
-The path companion defines how that state is expressed.
+approved task and has passed the automated tests that implement the
+`Test specification` plus any required project-level checks at that
+checkpoint. Optional `Manual tests` listed as human-review hints need
+not be performed before `review`. The path companion defines how that
+state is expressed.
 
 After route E is expressed, this skill is done for that increment.
 Later executable follow-up returns to `spec-loop-plan-task`.
@@ -255,8 +257,8 @@ Before reaching `review`, ensure that:
 - any canonical task-section changes have explicit authority from an
   explicit user clarification or explicit post-implementation user
   approval of keeping an implemented deviation;
-- required automated tests and other agent-run local verification from
-  `Test specification` pass, unless the user waived them;
+- automated tests that implement `Test specification` and any required
+  project-level checks pass, unless the user waived them;
 - any `Manual tests` listed as optional human-review hints are not
   treated as blockers for `review`, and are not claimed as performed
   unless they were actually performed;
