@@ -5,9 +5,9 @@ This file applies only on the chat-only planning path of
 
 Read [common-task-guidance.md](./common-task-guidance.md) first.
 That file defines the shared no-subtask main-task form, section
-semantics, current-increment readiness rules, testing policy,
-context-preservation rules, and formatting conventions used on both
-planning paths.
+semantics, current-increment readiness rules, context-preservation
+rules, formatting conventions, and the required use of detailed Test
+specification guidance for both planning paths.
 
 This file covers only chat-only path mechanics: the chat task,
 `Task changes:`, reconstruction, later-work handling, and promotion

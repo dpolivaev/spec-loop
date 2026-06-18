@@ -5,9 +5,9 @@ This file applies only on the task-file path of
 
 Read [common-task-guidance.md](./common-task-guidance.md) first.
 That file defines the shared no-subtask main-task form, section
-semantics, current-increment readiness rules, testing policy,
-context-preservation rules, and formatting conventions used on both
-planning paths.
+semantics, current-increment readiness rules, context-preservation
+rules, formatting conventions, and the required use of detailed Test
+specification guidance for both planning paths.
 
 This file adds only task-file-specific mechanics: task files,
 lifecycle, tracked moves, subtasks, task-file-only testing additions,
@@ -254,10 +254,11 @@ When a task uses subtasks:
 
 - must start with `## Subtask: <title>` followed by
   `- **Status:** <status>`,
-- must use the same list-item labels and ordering as the shared main
-  task form, including conditional Scenario, conditional Glossary,
-  optional Constraints, conditional Analysis, and conditional
+- must use the same bold-label list-item labels and ordering as the
+  shared main task form, including conditional Scenario, conditional
+  Glossary, optional Constraints, conditional Analysis, and conditional
   Implementation notes,
+- must not convert those section labels into Markdown headings,
 - must represent a separately tracked work unit within the same
   overall task; for implementation tasks it must include executable
   work; this is usually a functional increment, but a

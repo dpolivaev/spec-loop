@@ -4,8 +4,9 @@ This file applies to executable task planning on both planning paths of
 `spec-loop-plan-task`.
 
 It defines the shared no-subtask main-task form, section meanings,
-current-increment readiness rules, context-preservation rules, and
-formatting conventions used by both planning paths, with any
+current-increment readiness rules, context-preservation rules,
+formatting conventions, and the required use of detailed Test
+specification guidance for both planning paths, with any
 task-file-only formatting rules called out explicitly:
 
 - the chat-only planning path kept in chat; and
@@ -95,23 +96,63 @@ PLAN, discard any implementation-created intermediate state from
 canonical planning sections, and seek renewed implementation approval
 before more executable work.
 
-## Shared planning and execution sections
+## Task artifact structure and sections
 
-### Research
+Each task without subtasks uses this exact order and layout.
+Do not add extra metadata fields or custom readiness markers unless
+the User explicitly requests them. Use the exact bold-label section
+labels below.
 
-Start with research unless waived. Record observations, constraints,
-verified facts, and findings about the original pre-implementation
-state only. Plans go in **Design**. Documents the original
-pre-implementation system state for the governed increment:
-behavior, implementation, legacy arch, flows, data structures,
-findings, and constraints.
+- Title line: `# Task: <title>`.
+- One identifier (mutually exclusive):
+  - `- **Ticket:**` Ticket ID, preferred.
+  - `- **Task Identifier:**` if no Ticket;
+    `YYYY-MM-DD-<slug>` where `<slug>` is 1-2 keywords from the
+    task title or intended filename.
+  - Value present = **Primary Identifier** for commit messages.
+- Main task sections as bold-label list items in this order:
+  - `- **Scope:**`
+  - `- **Motivation:**`
+  - `- **Scenario:**` (conditional; use when behavior, flow,
+    boundaries, or user-visible outcomes need grounding)
+  - `- **Glossary:**` (conditional; use with Scenario when shared
+    domain terms are introduced, changed, or redefined)
+  - `- **Constraints:**` (optional; important limits Design and
+    implementation must obey)
+  - `- **Briefing:**`
+  - `- **Research:**`
+  - `- **Analysis:**` (conditional; include it when final
+    clarification decisions exist for the current increment)
+  - `- **Design:**`
+  - `- **Test specification:**`
+  - `- **Implementation notes:**` (conditional; include it when the
+    post-implementation checkpoint finds meaningful notes content)
+  When a conditional or optional section is omitted, omit it entirely
+  and keep the remaining sections in the order listed above.
 
-Do not record repository states created during the current increment
-in canonical Research. If later clarification, implementation, or
-review reveals new relevant facts about the original
-pre-implementation state, extend Research with those facts only.
+The `###` headings below are guidance-document headings only. In task
+artifacts, these sections must be bold-label list items such as
+`- **Design:**`, not Markdown headings. This keeps task files with
+subtasks from creating extra heading levels under each subtask.
 
-Do not repeat `Analysis` points here in decision-and-reason form.
+Task-file-only subtask rules stay in
+[task-file-path-guidance.md](./task-file-path-guidance.md).
+
+Task-section descriptions below follow this order. Extra cross-section
+guidance appears near the sections it affects. This is not drafting
+order. Draft sections in whatever order gives accurate content. For
+example, finalize `Briefing` after research when research identifies
+relevant modules, conventions, or risks.
+
+### Scope
+
+Defines the current increment's boundaries: what is included, what is
+excluded, and which user-visible or system behavior is in scope.
+
+### Motivation
+
+Explains why the change is needed. Use confirmed user intent,
+observed defects, project goals, or clearly marked inference.
 
 ### Scenario
 
@@ -165,10 +206,10 @@ For glossary sources, extension points, and candidate-term selection
 rules, follow
 [scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
 
-### Project glossary
+#### Project glossary policy
 
-Follow `SKILL.md` for glossary-file recognition and glossary-format
-routing.
+Follow [SKILL.md](./SKILL.md) for glossary-file recognition and
+glossary-format routing.
 
 Current shared domain-language source:
 - if a project glossary exists, use it;
@@ -190,6 +231,43 @@ than record it, return to PLAN first.
 
 If the task plan is missing required glossary work, return to PLAN,
 update the task, get approval, and continue.
+
+### Constraints
+
+Use for important limits Design and implementation must obey.
+Typical content: semantic invariants, non-goals, compatibility
+limits, performance limits, identity rules, forbidden
+simplifications.
+
+### Briefing
+
+Short orientation for someone unfamiliar with the codebase: relevant
+modules, important classes, framework context, repo conventions, risk
+areas.
+
+Finalize Briefing late in PLAN, shortly before seeking implementation
+approval, after Research, Design, and Test specification are coherent.
+Keep target-state plans in Design, not Briefing.
+
+### Research
+
+Research and clarification are iterative. Do enough clarification to
+know the research scope, then research the current system and return
+to clarification whenever findings expose material choices about
+intent, scope, constraints, design, acceptance logic, or verification.
+
+Record observations, constraints, verified facts, and findings about
+the original pre-implementation state only. Plans go in **Design**.
+Documents the original pre-implementation system state for the
+governed increment: behavior, implementation, legacy arch, flows, data
+structures, findings, and constraints.
+
+Do not record repository states created during the current increment
+in canonical Research. If later clarification, implementation, or
+review reveals new relevant facts about the original
+pre-implementation state, extend Research with those facts only.
+
+Do not repeat `Analysis` points here in decision-and-reason form.
 
 ### Analysis
 
@@ -224,6 +302,9 @@ Research and Scenario behavior, using Glossary when present.
 
 Design = implementation contract. Must be reviewable and
 implementation-ready.
+
+Design must follow Constraints and Analysis when they are present. If
+Design conflicts with either, fix Design or return to clarification.
 
 Design must describe only the current intended end state for the
 governed increment. Do not describe repository states created during
@@ -359,54 +440,4 @@ review. No implementation during this loop.
 Intent: readable in plain text editors (vim, less, nano), chat views,
 and rendered markdown views.
 
-## Task Structure
-
-Each task without subtasks uses this exact order and layout.
-Do not add extra metadata fields or custom readiness markers unless
-the User explicitly requests them. Use the exact bold-label section
-labels below.
-
-- Title line: `# Task: <title>`.
-- One identifier (mutually exclusive):
-  - `- **Ticket:**` Ticket ID, preferred.
-  - `- **Task Identifier:**` if no Ticket;
-    `YYYY-MM-DD-<slug>` where `<slug>` is 1-2 keywords from the
-    task title or intended filename.
-  - Value present = **Primary Identifier** for commit messages.
-- Main task sections as bold-label list items in this order:
-  - `- **Scope:**`
-  - `- **Motivation:**`
-  - `- **Scenario:**` (conditional; use when behavior, flow,
-    boundaries, or user-visible outcomes need grounding)
-  - `- **Glossary:**` (conditional; use with Scenario when shared
-    domain terms are introduced, changed, or redefined)
-  - `- **Constraints:**` (optional; important limits Design and
-    implementation must obey)
-  - `- **Briefing:**`
-  - `- **Research:**`
-  - `- **Analysis:**` (conditional; include it when final
-    clarification decisions exist for the current increment)
-  - `- **Design:**`
-  - `- **Test specification:**`
-  - `- **Implementation notes:**` (conditional; include it when the
-    post-implementation checkpoint finds meaningful notes content)
-  When a conditional or optional section is omitted, omit it entirely
-  and keep the remaining sections in the order listed above.
-
-Task-file-only subtask rules stay in
-[task-file-path-guidance.md](./task-file-path-guidance.md).
-
-## Constraints (optional)
-
-- Use for important limits Design and implementation must obey.
-- Typical content: semantic invariants, non-goals, compatibility
-  limits, performance limits, identity rules, forbidden
-  simplifications.
-- If Design conflicts with Constraints, Constraints wins.
-
-## Briefing
-
-Short orientation for someone unfamiliar with the codebase: relevant
-modules, important classes, framework context, repo conventions, risk
-areas.
 
