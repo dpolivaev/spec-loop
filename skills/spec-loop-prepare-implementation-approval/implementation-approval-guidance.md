@@ -58,9 +58,8 @@ If any important open decision remains during approval
 preparation, the task is not review ready.
 
 Keep the work in PLAN, invoke [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) in
-the same turn while preserving any clarification grill level already in
-force for the work item, and ask only the exact questions still needed
-to resolve those open decisions through that workflow.
+the same turn, and ask only the exact questions still needed to resolve
+those open decisions through that workflow.
 
 Approval preparation and any clarification it invokes both stay in
 PLAN. They do not freeze the active task.

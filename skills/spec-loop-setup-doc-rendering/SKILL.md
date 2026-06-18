@@ -63,7 +63,7 @@ or editor settings.
 
 When the user clearly means an obvious typo fix or a trivial one-word
 ambiguity, confirm it plainly. Do not invoke formal clarification
-framing or grill-level wording for that.
+framing for that.
 
 For VS Code, Cursor, and other VS Code-based IDEs, read
 [vscode-setup.md](vscode-setup.md).

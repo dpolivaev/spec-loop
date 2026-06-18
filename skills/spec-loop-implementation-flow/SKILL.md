@@ -19,9 +19,7 @@ If no approved active task exists, return to
   the task to match the code.
 - If important open decisions appear and they could materially change
   scope, constraints, design, or test specification, use
-  [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing, preserving
-  any clarification grill level already in force for the current work
-  item.
+  [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing.
 - Chat-only implementation is allowed only while confirmed task state
   can safely remain in chat. If resolved decisions kept only in chat
   would risk loss through compaction or context loss, promote to the

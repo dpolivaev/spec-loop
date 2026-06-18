@@ -62,8 +62,9 @@ simple factual confirmations inline when they would not materially
 change scope, behavior, policy, conceptual model, conceptual contract
 boundaries, acceptance logic, route, Design, or Test specification.
 
-These are outside the grilling protocol: no grill-level notice,
-decision batches, or `Question:` / `Recommendation:` format.
+These are outside the clarification protocol: no scope preface,
+involvement question, decision batch, question-with-alternatives, or
+`Question:` / `Recommendation:` format.
 
 If such a point turns out to have an important design consequence,
 resume normal clarification.
@@ -123,34 +124,86 @@ This skill uses three tools:
   explicitly see; and
 - explicit questions when user input is still required.
 
-Use the current clarification grill level already in force for the
-work item when one exists. Otherwise, if no user, session, or project
-default is in force, default to `medium`.
-
-Keep the grill level implicit unless clarification is likely to
-require more than 3 user-facing clarification steps. A clarification
-step is one decision batch or one `Question:` block. Plain
-confirmations do not count.
-
-If the threshold is exceeded, state the current grill level once for
-that work item:
-- `light` = fewer questions and fewer surfaced decisions;
-- `medium` = balanced default;
-- `heavy` = more questions and more surfaced decisions.
-
-If the need for more than 3 clarification steps becomes clear only
-later, give the notice then before continuing. Do not repeat it unless
-the user asks, the level changes, or clarification starts for a
-different work item.
-
-The grill level affects surfacing and question frequency only. It does
-not change what counts as an important open decision or the need to
-preserve the final result.
-
 Choose open decisions by descending importance and uncertainty. Work
-through the chosen issue depth first. Start with a brief map of the
-most important visible open decisions and which one you will address
-first.
+through the chosen issue depth first.
+
+Clarification can start without asking the user how involved they want
+to be. For short clarification, ask the needed questions and make the
+needed decisions visible. Prefer the normal `Question:` /
+`Recommendation:` / `Reason:` form when it helps precision.
+
+Clarification effort is unset until the involvement question has been
+answered or defaulted.
+
+Ask the involvement question only when clarification is likely to take
+more than two substantive steps, or when that becomes clear later. Ask
+earlier when the visible decision space is broad enough that user
+control over involvement matters.
+
+A substantive clarification step is either:
+- one decision batch; or
+- one substantive question about the work item.
+
+Before the involvement question, briefly say what needs clarification
+and why. The scope statement and involvement question do not count as
+substantive steps.
+
+The involvement question may come before any substantive step or after
+one or more steps. These are all valid:
+- involvement question, 1, 2, 3
+- 1, involvement question, 2, 3
+- 1, 2, involvement question, 3, 4, 5
+
+Numbers are substantive steps.
+
+Do not ask the involvement question when clarification is expected to
+finish within two substantive steps.
+
+The involvement question uses this fixed template; vary only the
+recommendation and reason:
+
+Question: How involved do you want to be in this clarification session?
+Recommendation: <A/B/C/D> (<N>%)
+Options:
+- A. Low effort: show important chosen decisions with reasons; ask only when needed.
+- B. Normal effort: show alternatives when the choice is uncertain.
+- C. High effort: show alternatives when the choice is uncertain or the decision is among the most important.
+- D. Exhaustive: show all credible alternatives for important decisions.
+Reason: <brief reason for the recommended option>
+You can change this later by saying "show fewer alternatives", "show more alternatives", or "show all credible alternatives".
+
+Recommend the option that best fits the situation. Use Normal effort
+when there is no stronger reason for another recommendation.
+
+After asking the involvement question, wait for the user's next reply.
+If that reply does not answer it, use the recommended option, say that
+you are doing so, and continue.
+
+Once set, clarification effort applies to the current clarification run
+unless the user changes it. For later clarification in the same chat
+session, the agent may recommend the last selected preference when
+asking the involvement question again, or recommend a different option
+when the situation warrants it. Do not silently reuse a previous effort
+setting as active for a new clarification run. If the user asks to
+remember the preference, available memory or project instructions may
+be used.
+
+Internally, use `clarification effort` for this setting. Treat Low,
+Normal, High, and Exhaustive as named anchors on a continuum, not as
+the only possible settings. Interpret "show fewer alternatives" and
+"show more alternatives" as relative adjustments along that
+continuum. Interpret "show all credible alternatives" as Exhaustive.
+
+Natural wording such as "grill me more", "grill me heavier", "grill
+me less", or "grill me lighter" may be interpreted as involvement
+adjustments, but do not advertise those phrases in the user-facing
+text.
+
+Clarification effort affects both how often questions show alternatives
+and how many chosen decisions are surfaced as decision batches. Higher
+effort surfaces more chosen decisions. Lower effort leaves more safe
+decisions implicit. It does not change what counts as an important
+open decision or the need to preserve the final result.
 
 For directly resolved decisions:
 - record them immediately when they are fully determined, unsurprising
@@ -160,16 +213,23 @@ For directly resolved decisions:
   them explicitly, later clarification depends on them as explicit
   shared state, or leaving them implicit would be surprising.
 
-### Decision batch size
-
 A surfaced decision batch must contain at most 6 decisions.
 
-At each clarification step, present either:
-- one decision batch; or
-- one question.
+Present surfaced decisions in batches by default. A single surfaced
+decision may appear before a substantive question only when needed to
+make that question clear.
 
-Do not ask a question before presenting queued decisions it depends on.
-Do not ask a new question in the same response as a decision batch.
+At each substantive clarification step, present either one decision
+batch or one question. Do not ask a question before presenting queued
+decisions it depends on. Do not ask a new question in the same response
+as a decision batch.
+
+If the user has already made a clear and unambiguous choice, do not
+present it again as a `Decision:` with `Reason:`. Acknowledge it as
+recorded, for example: `Recorded: <choice>.`
+
+Use `Decision:` batches only for agent-chosen or agent-resolved
+decisions that need user visibility.
 
 ## Where to store the result
 
