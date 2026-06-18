@@ -14,7 +14,7 @@ AsciiDoc format.
 This skill is mandatory for AsciiDoc project glossaries unless the
 user explicitly opts out for the current project or session.
 
-Before doing that work, read [glossary-format.md](./glossary-format.md)
+Before doing that work, read [glossary-format.md](glossary-format.md)
 and apply it.
 
 Read and apply project instructions such as `AGENTS.md` when present.

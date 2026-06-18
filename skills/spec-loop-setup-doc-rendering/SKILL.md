@@ -10,8 +10,8 @@ description: >-
 Use for setting up or fixing rendering of task files and glossary
 files.
 
-Keep agent-only behavior in this file. Treat `vscode-setup.md` and
-`jetbrains-setup.md` as shared setup references rather than the place
+Keep agent-only behavior in this file. Treat [vscode-setup.md](vscode-setup.md) and
+[jetbrains-setup.md](jetbrains-setup.md) as shared setup references rather than the place
 for agent-policy instructions.
 
 Do not just restate the setup references. First gather evidence
@@ -66,7 +66,7 @@ ambiguity, confirm it plainly. Do not invoke formal clarification
 framing or grill-level wording for that.
 
 For VS Code, Cursor, and other VS Code-based IDEs, read
-[vscode-setup.md](./vscode-setup.md).
-For JetBrains IDEs, read [jetbrains-setup.md](./jetbrains-setup.md).
+[vscode-setup.md](vscode-setup.md).
+For JetBrains IDEs, read [jetbrains-setup.md](jetbrains-setup.md).
 
 Use only the setup documents that actually exist here.

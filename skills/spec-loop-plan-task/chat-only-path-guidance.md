@@ -3,7 +3,7 @@
 This file applies only on the chat-only planning path of
 `spec-loop-plan-task`.
 
-Read [common-task-guidance.md](./common-task-guidance.md) first.
+Read [common-task-guidance.md](common-task-guidance.md) first.
 That file defines the shared no-subtask main-task form, section
 semantics, current-increment readiness rules, context-preservation
 rules, formatting conventions, and the required use of detailed Test
@@ -25,7 +25,7 @@ unless the User asks for wrapped lines. Keep chat-only tasks readable
 and structurally clear.
 
 After implementation approval on the chat-only path, follow
-`../spec-loop-implementation-flow/SKILL.md` and its chat-only path
+[spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md) and its chat-only path
 companion for implementation-time handling, task revisions,
 `Implementation notes`, and chat-only `review`.
 
@@ -129,7 +129,7 @@ presented as ready for User review.
 
 If it has already been presented as ready for User review, use the
 shared follow-up rule in
-[common-task-guidance.md](./common-task-guidance.md) to decide whether
+[common-task-guidance.md](common-task-guidance.md) to decide whether
 later executable follow-up may stay in the current chat-only task,
 needs task-file promotion for separate tracked history, or is a new
 follow-up task.

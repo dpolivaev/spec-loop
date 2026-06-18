@@ -2,9 +2,9 @@
 
 This file is the shared implementation-flow core.
 
-Use it with exactly one path companion chosen by `SKILL.md`:
-- [chat-only-path-guidance.md](./chat-only-path-guidance.md)
-- [task-file-path-guidance.md](./task-file-path-guidance.md)
+Use it with exactly one path companion chosen by [SKILL.md](SKILL.md):
+- [chat-only-path-guidance.md](chat-only-path-guidance.md)
+- [task-file-path-guidance.md](task-file-path-guidance.md)
 
 This core owns:
 - implementation-time routes;

@@ -8,13 +8,13 @@ description: >-
 
 Use this skill for ADR writing only.
 
-Before doing that work, read [adr-format.md](./adr-format.md) and
+Before doing that work, read [adr-format.md](adr-format.md) and
 apply it.
 
 Read and apply project instructions such as `AGENTS.md` when present.
 
 This skill writes ADRs. It does not decide whether an ADR is
-required. Routing belongs to `../spec-loop-plan-task/SKILL.md`.
+required. Routing belongs to [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md).
 
 The ADR being drafted or updated is the governing artifact for this
 skill.
@@ -29,7 +29,7 @@ trade-offs, credible options, or the boundaries of the decision.
 
 If yes, create only enough ADR structure to hold the topic and
 current evidence safely, then use
-`../spec-loop-clarify-task/SKILL.md` before continuing. Do not wait
+[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing. Do not wait
 for the user to ask for clarification explicitly.
 
 Re-run this gate whenever later ADR drafting exposes a new important

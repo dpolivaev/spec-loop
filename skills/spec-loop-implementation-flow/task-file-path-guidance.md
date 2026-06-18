@@ -4,9 +4,9 @@ This file applies only on the Task-file path during
 implementation.
 
 Use it with the shared core in
-[implementation-flow-guidance.md](./implementation-flow-guidance.md)
+[implementation-flow-guidance.md](implementation-flow-guidance.md)
 and the task-file mechanics in
-`../spec-loop-plan-task/task-file-path-guidance.md`.
+[spec-loop-plan-task/task-file-path-guidance.md](../spec-loop-plan-task/task-file-path-guidance.md).
 It defines only the task-file implementation-time delta.
 
 Task-file lifecycle, subtask, and folder ownership remain in the
@@ -14,7 +14,7 @@ Task-file Path Guidance.
 
 When a task file has or may have subtasks, apply the subtask
 heading/status search rule from
-`../spec-loop-plan-task/task-file-path-guidance.md` before selecting
+[spec-loop-plan-task/task-file-path-guidance.md](../spec-loop-plan-task/task-file-path-guidance.md) before selecting
 the active subtask, claiming lifecycle status, or making lifecycle
 changes.
 
@@ -56,7 +56,7 @@ applicable shared route before continuing.
 ## 1. Task-file actions for the shared routes
 
 Use the shared route semantics from
-[implementation-flow-guidance.md](./implementation-flow-guidance.md).
+[implementation-flow-guidance.md](implementation-flow-guidance.md).
 This file gives the task-file actions for those routes.
 
 For shared route **B. Pause the affected implementation and ask
@@ -74,7 +74,7 @@ For shared route **B. Pause the affected implementation and ask
 For shared route **C. Return to PLAN and seek renewed approval**:
 
 - revise the task file as needed;
-- use `../spec-loop-prepare-implementation-approval/SKILL.md` again
+- use [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md) again
   before resuming implementation.
 
 For shared route **D. Seek post-implementation User approval of an

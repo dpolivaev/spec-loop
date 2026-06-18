@@ -32,7 +32,7 @@ sectioned task format, do not simplify it unless the user explicitly
 agrees.
 
 After implementation approval, follow
-`../spec-loop-implementation-flow/SKILL.md`.
+[spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 
 ## Mandatory clarification gate
 
@@ -42,7 +42,7 @@ behavior, policy, conceptual model, conceptual contract boundaries,
 constraints, route, acceptance logic, or verification.
 
 If yes, do only enough research to frame the open decision clearly
-and use `../spec-loop-clarify-task/SKILL.md` before continuing. Do
+and use [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing. Do
 not wait for the user to ask for clarification explicitly.
 
 ## First classification
@@ -132,7 +132,7 @@ When later executable follow-up appears after a task or subtask
 already in `review` or `done`, or after a chat-only task already
 presented as ready for User review, return to PLAN and re-run route
 selection. Reuse the existing task artifact only when the shared
-follow-up rule in `common-task-guidance.md` still allows it to govern
+follow-up rule in [common-task-guidance.md](common-task-guidance.md) still allows it to govern
 the same active work item.
 
 ## Planning content
@@ -145,7 +145,7 @@ For executable work, planning must cover:
 - verification approach.
 
 Use the shared task guidance from
-`./common-task-guidance.md`.
+[common-task-guidance.md](common-task-guidance.md).
 
 ## Route-specific handling
 
@@ -164,8 +164,8 @@ Use the chat-only route only while canonical task state can safely
 remain in chat.
 
 When this route is in use:
-- read `./chat-only-path-guidance.md` fully; and
-- follow it together with `./common-task-guidance.md`.
+- read [chat-only-path-guidance.md](chat-only-path-guidance.md) fully; and
+- follow it together with [common-task-guidance.md](common-task-guidance.md).
 
 If durable state becomes unsafe to keep only in chat, switch to the
 task-file route before continuing.
@@ -173,23 +173,23 @@ task-file route before continuing.
 ### Task-file
 
 When this route is in use:
-- read `./task-file-path-guidance.md` fully;
-- use it together with `./common-task-guidance.md`;
+- read [task-file-path-guidance.md](task-file-path-guidance.md) fully;
+- use it together with [common-task-guidance.md](common-task-guidance.md);
 - create or update the active task file before executable changes; and
 - use `tasks/` as the default task directory when project
   instructions do not define one.
 
 Before requesting implementation approval on the task-file path, use
-`../spec-loop-prepare-implementation-approval/SKILL.md`.
+[spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md).
 
 ## Special routing
 
 ADR-only work is taskless by default. Use
-`../spec-loop-write-adr/SKILL.md` for ADR location, naming,
+[spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) for ADR location, naming,
 structure, and update rules.
 
 If ADR work is part of a larger executable change, keep it in that
-task and use `../spec-loop-write-adr/SKILL.md` during
+task and use [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) during
 IMPLEMENTATION.
 
 ## Glossary policy
@@ -198,7 +198,7 @@ Default glossary policy:
 - glossary use is opted in;
 - project or session instructions may opt out;
 - when the project uses the Spec Loop AsciiDoc glossary format, use
-  `../spec-loop-write-glossary/SKILL.md`;
+  [spec-loop-write-glossary/SKILL.md](../spec-loop-write-glossary/SKILL.md);
 - otherwise follow the project's glossary format.
 
 Recognize `glossary.adoc` and `glossary.md` as project glossary files.
@@ -222,10 +222,10 @@ project instructions, or the User requires project-level glossary
 work.
 
 When a task or subtask needs `Scenario` or `Glossary`, read
-`./scenario-and-glossary-guidance.md` and follow it. Task
+[scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md) and follow it. Task
 `Glossary` sections are planning artifacts; project glossary file
 edits happen only during IMPLEMENTATION.
 
 ## Related skills
 
-Use `../spec-loop-setup-doc-rendering/SKILL.md` for rendering setup.
+Use [spec-loop-setup-doc-rendering/SKILL.md](../spec-loop-setup-doc-rendering/SKILL.md) for rendering setup.

@@ -39,18 +39,18 @@ Prefer this skill over a generic grill-me variant for Spec Loop task
 creation, task updates, and design updates.
 
 When this skill ends, return control to the invoking workflow:
-- task planning resumes `../spec-loop-plan-task/SKILL.md`;
-- ADR clarification resumes `../spec-loop-write-adr/SKILL.md`;
+- task planning resumes [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md);
+- ADR clarification resumes [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md);
 - approval-preparation clarification resumes
-  `../spec-loop-prepare-implementation-approval/SKILL.md`;
+  [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md);
 - implementation-time clarification resumes
-  `../spec-loop-implementation-flow/SKILL.md`.
+  [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 
 Clarification stays in the phase of the invoking workflow:
 - planning clarification stays in PLAN;
 - ADR clarification stays in ADR work;
 - implementation-time clarification follows
-  `../spec-loop-implementation-flow/SKILL.md`.
+  [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 
 During PLAN or ADR work, revise the governing artifact in place as
 needed for the current work item. Executable changes are not allowed.
@@ -180,12 +180,12 @@ Clarification always works against one governing artifact:
 Store the final result according to artifact type.
 
 In task artifacts, keep final resolved decisions in `Analysis`.
-Follow `../spec-loop-plan-task/common-task-guidance.md`: place
+Follow [spec-loop-plan-task/common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md): place
 `Analysis` immediately after `Research` and record each final
 clarification decision as `- <decision> because <reason>.`
 
 In ADRs, do not force all final resolved content into `Analysis`.
-Follow `../spec-loop-write-adr/adr-format.md`: classify final
+Follow [spec-loop-write-adr/adr-format.md](../spec-loop-write-adr/adr-format.md): classify final
 resolved content into `Decision`, `Context`, `Alternatives`, and
 `Analysis`. Put pre-decision facts in `Context`, credible competing
 options in `Alternatives`, the chosen outcome in `Decision`, and keep

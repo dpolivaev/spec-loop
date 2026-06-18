@@ -10,7 +10,7 @@ Use this skill after implementation approval for an approved
 chat-only or task-file task.
 
 If no approved active task exists, return to
-`../spec-loop-plan-task/SKILL.md`.
+[spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md).
 
 ## Core rules
 
@@ -19,7 +19,7 @@ If no approved active task exists, return to
   the task to match the code.
 - If important open decisions appear and they could materially change
   scope, constraints, design, or test specification, use
-  `../spec-loop-clarify-task/SKILL.md` before continuing, preserving
+  [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing, preserving
   any clarification grill level already in force for the current work
   item.
 - Chat-only implementation is allowed only while confirmed task state
@@ -29,7 +29,7 @@ If no approved active task exists, return to
 - This skill governs only the approved current increment until it
   reaches `review`.
 - If the User introduces additional executable work outside that
-  increment, return it to `../spec-loop-plan-task/SKILL.md` for route
+  increment, return it to [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md) for route
   selection and any renewed implementation approval.
 - Before presenting work as ready, perform the `Implementation notes`
   check.
@@ -39,23 +39,23 @@ If no approved active task exists, return to
 
 ## Read and path selection
 
-- Read `../spec-loop-plan-task/SKILL.md` and the files it requires.
+- Read [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md) and the files it requires.
 - Choose the active path:
   - task-file path = an approved task file controls the current
     increment
   - chat-only path = an approved canonical chat-only task in chat
     controls the current increment
 - Then read:
-  - [implementation-flow-guidance.md](./implementation-flow-guidance.md)
+  - [implementation-flow-guidance.md](implementation-flow-guidance.md)
   - the matching path companion for the active path:
-    - [chat-only-path-guidance.md](./chat-only-path-guidance.md)
-    - [task-file-path-guidance.md](./task-file-path-guidance.md)
+    - [chat-only-path-guidance.md](chat-only-path-guidance.md)
+    - [task-file-path-guidance.md](task-file-path-guidance.md)
 
 Keep using the approved active task as the source of truth. Edit the
 active task file or canonical chat-only task only when the shared
 core and the active path companion allow it.
 
-`implementation-flow-guidance.md` defines the route rules, when
+[implementation-flow-guidance.md](implementation-flow-guidance.md) defines the route rules, when
 canonical task sections may change, the meaning of `review`,
 `Implementation notes`, and the completion checklist.
 
@@ -63,4 +63,4 @@ The path companion defines the active path mechanics, including
 chat-only recovery or promotion or the task-file move into `review`.
 
 If the current increment is unclear, do not use this skill. Return to
-`../spec-loop-plan-task/SKILL.md`.
+[spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md).

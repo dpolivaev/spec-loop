@@ -1,6 +1,6 @@
 # Scenario and Glossary Guidance
 
-This file applies only after `common-task-guidance.md` has already
+This file applies only after [common-task-guidance.md](common-task-guidance.md) has already
 established that the current task or subtask needs `Scenario` or
 `Glossary`.
 
@@ -97,7 +97,7 @@ This file covers only the extra drafting guidance. It does not repeat:
 - On the task-file path, when `Glossary` is present, include at least
   one focused Mermaid visual glossary directly under it.
 - Apply the Mermaid diagram rules from
-  `../spec-loop-write-glossary/glossary-format.md` to task visual
+  [spec-loop-write-glossary/glossary-format.md](../spec-loop-write-glossary/glossary-format.md) to task visual
   glossaries too.
 - In particular:
   - keep the diagram consistent with the glossary text;

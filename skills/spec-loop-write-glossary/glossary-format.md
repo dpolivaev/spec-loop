@@ -47,7 +47,7 @@ subsystem areas.
 ### Multi-area glossary
 
 A complete multi-area example lives in
-[examples/multi-area-glossary.adoc](./examples/multi-area-glossary.adoc).
+[examples/multi-area-glossary.adoc](examples/multi-area-glossary.adoc).
 
 Use this shape:
 
@@ -68,7 +68,7 @@ If the glossary covers only one area, the overview section is optional.
 Use the structure below when a self-contained, single-area glossary is
 enough.
 A complete single-area example lives in
-[examples/single-area-glossary.adoc](./examples/single-area-glossary.adoc).
+[examples/single-area-glossary.adoc](examples/single-area-glossary.adoc).
 
 Use this shape:
 

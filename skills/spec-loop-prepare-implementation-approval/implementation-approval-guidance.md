@@ -8,8 +8,8 @@ It reuses the full `spec-loop-plan-task` bundle for shared workflow
 conventions.
 
 Optional compact examples:
-- [examples/example-task-session-state-boundary.md](./examples/example-task-session-state-boundary.md)
-- [examples/example-task-serialized-payload-change.md](./examples/example-task-serialized-payload-change.md)
+- [examples/example-task-session-state-boundary.md](examples/example-task-session-state-boundary.md)
+- [examples/example-task-serialized-payload-change.md](examples/example-task-serialized-payload-change.md)
 
 Use the examples as pattern collections, not as required task size.
 
@@ -57,7 +57,7 @@ missing items.
 If any important open decision remains during approval
 preparation, the task is not review ready.
 
-Keep the work in PLAN, invoke `../spec-loop-clarify-task/SKILL.md` in
+Keep the work in PLAN, invoke [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) in
 the same turn while preserving any clarification grill level already in
 force for the work item, and ask only the exact questions still needed
 to resolve those open decisions through that workflow.
@@ -76,7 +76,7 @@ If readiness checks fail, use this branch order:
 2. If the failure can be resolved from existing evidence, update the
    active task and re-run the readiness checks.
 3. If compaction is needed, use
-   `../spec-loop-compact-task-file/SKILL.md`, then resume this skill.
+   [spec-loop-compact-task-file/SKILL.md](../spec-loop-compact-task-file/SKILL.md), then resume this skill.
 4. If any important open decision remains, use outcome C
    immediately.
 5. Use outcome B only for non-question blockers that remain after the
@@ -95,7 +95,7 @@ If the User agrees, restructure in place, keep only genuinely shared
 context at task level, move subtask-specific Research, Analysis,
 Design, and Test specification into the relevant subtask, avoid
 parallel task-level and subtask-level restatements of the same
-material, then use `../spec-loop-compact-task-file/SKILL.md` and
+material, then use [spec-loop-compact-task-file/SKILL.md](../spec-loop-compact-task-file/SKILL.md) and
 resume this skill.
 
 After restructuring and compaction and before re-running readiness
@@ -114,7 +114,7 @@ Make the Research and Design sections reviewer-friendly without losing
 planning precision.
 
 For diagram, non-diagram-text, and ordering rules in **Research** and
-**Design**, follow `../spec-loop-plan-task/task-file-path-guidance.md`
+**Design**, follow [spec-loop-plan-task/task-file-path-guidance.md](../spec-loop-plan-task/task-file-path-guidance.md)
 as the source of truth.
 
 During approval preparation, apply those rules to both main-task and
@@ -138,7 +138,7 @@ Canonical ownership by information kind:
 
 Draft scaffolding may exist temporarily, but the approval-prepared task
 should remove or shrink duplicated content. Before approval seeking,
-use `../spec-loop-compact-task-file/SKILL.md` when needed, then resume
+use [spec-loop-compact-task-file/SKILL.md](../spec-loop-compact-task-file/SKILL.md) when needed, then resume
 this skill.
 
 The Design section prepared for approval must contain no placeholders.
@@ -175,8 +175,9 @@ increment:
   it presents target-only content as already implemented;
 - approval preparation has completed the pre-approval term-reduction,
   term-classification, and glossary-repair pass required by
-  `../spec-loop-plan-task/scenario-and-glossary-guidance.md`, and has
-  recorded the result by repairing canonical sections rather than by
+  [spec-loop-plan-task/scenario-and-glossary-guidance.md](../spec-loop-plan-task/scenario-and-glossary-guidance.md),
+  and has recorded the result by repairing canonical sections rather
+  than by
   adding a separate classification table unless the User asked for
   one;
 - approval is blocked if coined terms remain where existing canonical
@@ -231,13 +232,13 @@ skill is its user-facing review and approval-seeking companion.
 That means:
 - do not replace `spec-loop-plan-task`;
 - do not duplicate `spec-loop-plan-task`,
-  `common-task-guidance.md`, or task-file path guidance ownership
+  [common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md), or task-file path guidance ownership
   here; and
 - add only the approval-preparation delta.
 
 After implementation approval, post-approval execution and the
 transition to `review` are handled by
-`../spec-loop-implementation-flow/SKILL.md`.
+[spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 
 If new structural decisions emerge during readiness checking, update
 the task in place and keep the conversation in PLAN until the gaps are

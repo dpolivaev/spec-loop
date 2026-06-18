@@ -57,7 +57,7 @@ If no compaction is needed under these rules, make no task changes and
 return control to the invoking workflow.
 
 If compaction reveals a material unresolved question, stop and use
-`../spec-loop-clarify-task/SKILL.md`, preserving any clarification
+[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md), preserving any clarification
 grill level already in force for the current work item.
 
 When compaction is complete, return control to the workflow that

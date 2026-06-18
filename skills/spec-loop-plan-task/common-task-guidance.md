@@ -14,7 +14,7 @@ task-file-only formatting rules called out explicitly:
 
 Task-file-only lifecycle, folders, tracked moves, subtasks, diagrams,
 and other task-file administration stay in
-[task-file-path-guidance.md](./task-file-path-guidance.md).
+[task-file-path-guidance.md](task-file-path-guidance.md).
 
 ## Current-increment readiness
 
@@ -136,7 +136,7 @@ artifacts, these sections must be bold-label list items such as
 subtasks from creating extra heading levels under each subtask.
 
 Task-file-only subtask rules stay in
-[task-file-path-guidance.md](./task-file-path-guidance.md).
+[task-file-path-guidance.md](task-file-path-guidance.md).
 
 Task-section descriptions below follow this order. Extra cross-section
 guidance appears near the sections it affects. This is not drafting
@@ -196,7 +196,7 @@ When used:
 - write or update both together;
 - place `Glossary` immediately after `Scenario`; and
 - follow
-  [scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
+  [scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md).
 
 Task `Glossary` is delta-only relative to the current shared
 domain-language source. Do not redefine unchanged terms from that
@@ -204,11 +204,11 @@ source.
 
 For glossary sources, extension points, and candidate-term selection
 rules, follow
-[scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
+[scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md).
 
 #### Project glossary policy
 
-Follow [SKILL.md](./SKILL.md) for glossary-file recognition and
+Follow [SKILL.md](SKILL.md) for glossary-file recognition and
 glossary-format routing.
 
 Current shared domain-language source:
@@ -223,7 +223,7 @@ rules, behavior, or subsystem boundaries.
 
 If glossary work is required for the current task:
 - reflect it in the task plan; and
-- during IMPLEMENTATION, follow `SKILL.md` rules for project glossary
+- during IMPLEMENTATION, follow [SKILL.md](SKILL.md) rules for project glossary
   creation or update.
 
 If a project glossary update would change approved meaning rather
@@ -335,7 +335,7 @@ production class, interface, enum, and every new or changed
 externally meaningful identifier in scope. In class diagrams, put
 review-relevant methods and fields of displayed types in the diagram
 itself. On the task-file path, follow
-[task-file-path-guidance.md](./task-file-path-guidance.md) for the
+[task-file-path-guidance.md](task-file-path-guidance.md) for the
 rules that govern diagrams, allowed non-diagram text, and local
 ordering between a diagram and its related text in **Research** and
 **Design**.
@@ -360,7 +360,7 @@ Do not redefine Glossary terms in Design.
 
 Every new review-relevant term introduced in Design must remain
 classifiable under
-[scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
+[scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md).
 Before approval seeking, the active task must complete the
 term-reduction and classification pass required there. If any such
 term cannot be classified, treat it as a design defect.
@@ -376,7 +376,7 @@ Specifies how the current task's requirements and task-relevant
 modified code paths are verified.
 
 Before drafting or revising `Test specification`, you must read and
-follow [test-specification-guidance.md](./test-specification-guidance.md).
+follow [test-specification-guidance.md](test-specification-guidance.md).
 
 Separate automated verification cases from optional human-reader hints:
 

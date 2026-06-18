@@ -62,7 +62,7 @@ when project policy forbids third-party processing of diagrams.
 Use the IDE's built-in Markdown preview after installation.
 
 The helper script
-[scripts/setup-vscode-server-based.sh](./scripts/setup-vscode-server-based.sh)
+[scripts/setup-vscode-server-based.sh](scripts/setup-vscode-server-based.sh)
 is stored in this skill's scripts/ subdirectory, both in a repository
 checkout and in an installed skill bundle. If you want this
 server-based path and can access the skill directory, you can run the

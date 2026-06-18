@@ -1,7 +1,7 @@
 # Test specification guidance
 
 Read and follow this file just before drafting or revising a task
-`Test specification`. Return to `common-task-guidance.md` afterward.
+`Test specification`. Return to [common-task-guidance.md](common-task-guidance.md) afterward.
 
 This file defines the testing policy and what belongs in `Automated
 tests` and `Manual tests`. It is not a separate workflow and does not

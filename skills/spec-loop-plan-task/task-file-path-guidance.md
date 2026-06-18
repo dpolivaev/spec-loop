@@ -3,7 +3,7 @@
 This file applies only on the task-file path of
 `spec-loop-plan-task`.
 
-Read [common-task-guidance.md](./common-task-guidance.md) first.
+Read [common-task-guidance.md](common-task-guidance.md) first.
 That file defines the shared no-subtask main-task form, section
 semantics, current-increment readiness rules, context-preservation
 rules, formatting conventions, and the required use of detailed Test
@@ -14,7 +14,7 @@ lifecycle, tracked moves, subtasks, task-file-only testing additions,
 and diagram rules.
 
 After implementation approval on the task-file path, follow
-`../spec-loop-implementation-flow/SKILL.md` and its task-file path
+[spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md) and its task-file path
 companion for implementation-time handling, task-file updates,
 `Implementation notes`, and the move into `review`.
 
@@ -47,7 +47,7 @@ subtasks that are not yet current.
 
 During clarification on the task-file path, the active task file is
 the governing artifact. Follow
-`../spec-loop-clarify-task/SKILL.md` for clarification batching and
+[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) for clarification batching and
 recording rules.
 
 Keep the task file aligned with the current final clarification
@@ -94,7 +94,7 @@ independently.
 
 Later executable follow-up from a task or subtask already in
 `review` or `done` returns to PLAN and follows the shared follow-up
-rule in [common-task-guidance.md](./common-task-guidance.md) before
+rule in [common-task-guidance.md](common-task-guidance.md) before
 more implementation.
 
 If that shared rule keeps the same task or subtask from `review`, it
@@ -179,7 +179,7 @@ Lifecycle definitions:
 - **done** — User-verified completion.
 
 Lifecycle and transition rules:
-- Same transition guards as `SKILL.md` and the shared readiness rules.
+- Same transition guards as [SKILL.md](SKILL.md) and the shared readiness rules.
 - Allowed task-file moves: `backlog` <-> `in-progress` -> `review` ->
   `done`, plus explicit User-requested `review` -> `in-progress`.
 - If `in-progress` is empty and only one new task is being created,
@@ -214,7 +214,7 @@ Lifecycle and transition rules:
 ## Task Structure on the task-file path
 
 Use the shared no-subtask main-task structure from
-[common-task-guidance.md](./common-task-guidance.md).
+[common-task-guidance.md](common-task-guidance.md).
 
 When a task uses subtasks:
 
@@ -225,7 +225,7 @@ When a task uses subtasks:
   and keep the remaining sections in the shared order.
 - For later executable follow-up from `review` or `done`, first apply
   the shared follow-up rule in
-  [common-task-guidance.md](./common-task-guidance.md).
+  [common-task-guidance.md](common-task-guidance.md).
 - Do not create a new subtask by default when that shared rule keeps
   the same task or subtask.
 - An implementation-created intermediate state alone does not force a
@@ -276,7 +276,7 @@ When a task uses subtasks:
   subtask, read the relevant task-level sections and diagrams needed
   to understand it correctly;
 - must satisfy the testing policy in
-  [test-specification-guidance.md](./test-specification-guidance.md).
+  [test-specification-guidance.md](test-specification-guidance.md).
 - No planning-only subtasks unless User explicitly asks.
 
 `Implementation notes` placement:
@@ -307,7 +307,7 @@ When a task uses subtasks:
 
 ### Task Compaction
 
-Use `../spec-loop-compact-task-file/SKILL.md` when:
+Use [spec-loop-compact-task-file/SKILL.md](../spec-loop-compact-task-file/SKILL.md) when:
 - converting a task from no-subtask form to subtask form;
 - adding a new subtask after earlier subtasks already contain full
   section content; or
@@ -325,7 +325,7 @@ using them.
 - Use **PlantUML** by default for **Research** and **Design**.
 - Use **Mermaid** only when User or governing instruction explicitly
   prefers it, except for task **Glossary** visual glossaries required
-  by [scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
+  by [scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md).
 - **Research** = current state. **Design** = target state.
   **Glossary** Mermaid diagrams = domain-language grounding.
 - **Research** must include diagram when analyzing current behavior,
@@ -411,7 +411,7 @@ using them.
 ### Mermaid-specific rules
 
 - Task `Glossary` Mermaid diagrams must follow
-  [scenario-and-glossary-guidance.md](./scenario-and-glossary-guidance.md).
+  [scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md).
 - Class diagrams: use `classDiagram`.
 - Only single-level `namespace` blocks; no nesting.
 - Hierarchical boundaries: flatten namespace names instead of
@@ -420,7 +420,7 @@ using them.
 ## Testing Policy on tasks with subtasks
 
 Use the shared Testing Policy from
-[test-specification-guidance.md](./test-specification-guidance.md) for
+[test-specification-guidance.md](test-specification-guidance.md) for
 all no-subtask tasks.
 
 For task-file subtasks:

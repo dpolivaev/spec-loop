@@ -1,9 +1,9 @@
 # Review guidance for `spec-loop-assess-pull-request`
 
-This skill reuses `spec-loop-plan-task/SKILL.md` for shared planning
-terminology, `common-task-guidance.md` for shared formatting,
+This skill reuses [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md) for shared planning
+terminology, [common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md) for shared formatting,
 glossary expectations, and testing-policy shape, and
-`task-file-path-guidance.md` for diagram conventions and any other
+[task-file-path-guidance.md](../spec-loop-plan-task/task-file-path-guidance.md) for diagram conventions and any other
 task-file-specific rules that clearly fit retrospective review
 artifacts.
 
@@ -16,7 +16,7 @@ routing, or implementation-approval gates for the reviewed change
 itself.
 
 Optional compact example:
-[examples/example-review-settings-loader.md](./examples/example-review-settings-loader.md).
+[examples/example-review-settings-loader.md](examples/example-review-settings-loader.md).
 Use it as a pattern collection, not as a required minimum length.
 
 ## 0. Purpose and reconstruction model

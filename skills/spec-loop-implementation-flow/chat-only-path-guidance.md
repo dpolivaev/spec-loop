@@ -4,7 +4,7 @@ This file applies only on the chat-only planning path during
 implementation.
 
 Use it with the shared core in
-[implementation-flow-guidance.md](./implementation-flow-guidance.md).
+[implementation-flow-guidance.md](implementation-flow-guidance.md).
 It says how the shared implementation-flow rules work on the chat-only
 path.
 
@@ -36,7 +36,7 @@ blocks is the current task state.
 Only these chat-only revisions are allowed:
 
 - emit `Task changes:` with changed sections only, following
-  `../spec-loop-plan-task/chat-only-path-guidance.md`, when the
+  [spec-loop-plan-task/chat-only-path-guidance.md](../spec-loop-plan-task/chat-only-path-guidance.md), when the
   shared core allows that change;
 - emit `Task changes:` that records `Implementation notes` at the
   mandatory checkpoint when relevant notes content exists;
@@ -65,7 +65,7 @@ re-emit a fresh full current chat-only task instead.
 ## 1. Chat-only actions for the shared routes
 
 Use the shared route semantics from
-[implementation-flow-guidance.md](./implementation-flow-guidance.md).
+[implementation-flow-guidance.md](implementation-flow-guidance.md).
 This file gives the chat-only actions for those routes.
 
 For shared route **B. Pause the affected implementation and ask
@@ -88,7 +88,7 @@ For shared route **C. Return to PLAN and seek renewed approval**:
   full current chat-only task in chat;
 - if the chat-only path must be promoted, reconstruct the task file
   from the current canonical chat-only task state;
-- then use `../spec-loop-prepare-implementation-approval/SKILL.md`
+- then use [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md)
   and regain normal task-file implementation approval before
   continuing executable work.
 
