@@ -183,6 +183,29 @@ npx skills add dpolivaev/spec-loop -s '*'
 - if the setup or workflow rules seem wrong, use the recovery steps
   above before continuing.
 
+## ⚠️ Useful prompts
+
+The installed skills usually choose the workflow automatically, but you
+can name the needed behavior when the assistant drifts:
+
+- Say `clarify`, `discuss this`, `discuss the criteria`,
+  `compare the options`, `stress-test this`, or `resolve the open
+  questions` when you want general discussion or material open-decision
+  resolution. If a task file or ADR governs the discussion, final
+  decisions are recorded there. If not, decisions stay in chat until
+  you say where they should be captured. This activates the
+  [spec-loop-clarify-task](../skills/spec-loop-clarify-task/) skill.
+- Say `is this task ready for implementation?`, `prepare this task for
+  implementation approval`, or `review this task before I approve
+  implementation` when you want task-file readiness checked and
+  repaired before implementation approval. If important open decisions
+  remain, clarification runs first. This activates the
+  [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/) skill.
+- Say `implement it` only after you approve the plan, when you want the
+  approved increment implemented, verified, reflected in the task file,
+  and moved to `review`. This activates the
+  [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) skill.
+
 ## Possible misalignment
 
 If one of these happens, interrupt the flow and ask the assistant to correct
