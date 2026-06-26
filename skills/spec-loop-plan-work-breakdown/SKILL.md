@@ -1,25 +1,33 @@
 ---
 name: spec-loop-plan-work-breakdown
 description: >-
-  Create or revise a Spec Loop file-based work breakdown. Use when the
-  user brings a large project, feature, or initiative idea that needs
-  task-file planning; asks to plan work as tasks or subtasks; asks to
-  create, order, or refine a backlog; or asks to revise an existing
-  work breakdown. Because chat-only planning is not durable project
-  state, work breakdown planning is captured in task files. Enforces
-  that each task or subtask is independently acceptable by default and
-  each implementation task or subtask is releasable; non-releasable
-  items require explicit user opt-out.
+  Start a Spec Loop file-based work breakdown before drafting a single
+  task file when the user brings a whole project, product, app, game,
+  feature set, initiative, or other outcome likely to need multiple
+  independently acceptable increments, even if phrased as "implement
+  ...". Also use when the user asks to split, order, create, or
+  refine tasks, subtasks, a backlog, or an existing work breakdown.
+  Because chat-only planning is not durable project state, work
+  breakdown planning is captured in task files. Enforces that each
+  task or subtask is independently acceptable by default and each
+  implementation task or subtask is releasable; non-releasable items
+  require explicit user opt-out.
 ---
 
-Use this skill only on the task-file path for file-based Spec Loop
-work breakdown. It is a planning companion to `spec-loop-plan-task`;
+Use this skill for file-based Spec Loop work breakdown on the
+task-file path. It is a planning companion to `spec-loop-plan-task`;
 it does not replace route selection, clarification, task-file rules,
 or approval gates.
 
+If an initial request matches this skill before route selection is
+complete, use `spec-loop-plan-task` only for classification and route
+selection, then return here before drafting a single task file.
+
 Use it when:
-- a large project, feature, or initiative idea needs task-file
-  planning;
+- a whole project, product, app, game, feature set, initiative, or
+  other outcome likely needs multiple independently acceptable
+  increments;
+- a request should be decomposed before a single task file is drafted;
 - work needs to be planned as tasks or subtasks;
 - an ordered list of future task-file work items is created, ordered,
   or refined; or
