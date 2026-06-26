@@ -7,6 +7,10 @@ Spec Loop follows this workflow:
   work, including the fileless planning path in chat, the task-file
   path when needed, ADR and documentation routing, Scenario and task
   Glossary triggers, and the gate before implementation.
+- **break down work** -
+  [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/) governs
+  file-based decomposition into task-file tasks or subtasks and
+  enforces releasable implementation increments by default.
 - **approve** - you approve either a fileless task in chat or a
   task-file plan; on the task-file path,
   [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/) prepares the task for
@@ -18,7 +22,10 @@ Spec Loop follows this workflow:
   the move to `review` on the task-file path and readiness
   reporting on the fileless path.
 
-The planning and approval rules for that workflow live in the [spec-loop-plan-task](../skills/spec-loop-plan-task/) bundle and its companion files.
+The planning and approval rules for that workflow live in the
+[spec-loop-plan-task](../skills/spec-loop-plan-task/) bundle and its
+companion files. File-based work breakdown rules live in
+[spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/).
 
 The planning bundle starts with
 **[SKILL.md](../skills/spec-loop-plan-task/SKILL.md)** and
@@ -81,10 +88,9 @@ Consistent reuse of approved terms across the shared glossary source,
 behavior, design contracts, and verification aligned.
 
 Spec Loop is designed to work with existing codebases at scale.
-Before any design or implementation step, the model captures relevant
-knowledge in the Research section of the active task artifact:
-existing behavior, constraints, APIs, interfaces, and established
-code practices.
+Before detailed design or implementation, the model captures relevant
+knowledge in Research for the current increment: existing behavior,
+constraints, APIs, interfaces, and established code practices.
 
 It follows the classic research–plan–implement approach, broken down
 into small, incremental sub-tasks.

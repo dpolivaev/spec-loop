@@ -23,8 +23,12 @@ edge cases, and risks described in the task.
 
 ## Testing Policy
 
-- Keep Test specification in each task without subtasks. No-code
-  tasks: set `Automated tests: N/A` and `Manual tests: N/A`.
+- Keep Test specification in each current or implementation-ready task
+  without subtasks. Initial backlog tasks and subtasks created by
+  [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
+  may omit Test specification until current. No-code tasks being made
+  ready for approval: set `Automated tests: N/A` and
+  `Manual tests: N/A`.
 - Separate test-focused tasks allowed when adding or extending
   coverage as standalone scope.
 - Prefer automated tests and automated checks. `Manual tests` are

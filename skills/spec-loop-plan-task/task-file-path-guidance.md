@@ -37,9 +37,10 @@ has an `in-progress` subtask, state both statuses explicitly and use
 the active subtask plus needed task-level context as the controlling
 increment.
 
-Backlog tasks may keep Research and Design high-level or `To be
-done` until current. Omit Analysis until final clarification
-decisions exist.
+Initial backlog tasks and subtasks created by
+[spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
+may contain only title, Scope, and Motivation until they become
+current; subtasks also keep the normal status line.
 
 In tasks with subtasks, the shared readiness rules apply to the active
 subtask and any task-level context it depends on, not to future
@@ -254,10 +255,15 @@ When a task uses subtasks:
 
 - must start with `## Subtask: <title>` followed by
   `- **Status:** <status>`,
-- must use the same bold-label list-item labels and ordering as the
-  shared main task form, including conditional Scenario, conditional
-  Glossary, optional Constraints, conditional Analysis, and conditional
-  Implementation notes,
+- initial backlog subtasks created by
+  [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
+  may contain only Scope and Motivation after the required status
+  line,
+- every subtask beyond initial work breakdown form must use the same
+  bold-label list-item labels and ordering as the shared main task
+  form, including conditional Scenario, conditional Glossary, optional
+  Constraints, conditional Analysis, and conditional Implementation
+  notes,
 - must not convert those section labels into Markdown headings,
 - must represent a separately tracked work unit within the same
   overall task; for implementation tasks it must include executable

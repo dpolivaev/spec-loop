@@ -22,6 +22,9 @@ Together, they enforce at minimum:
   design, test expectations, and execution status when the task-file
   path is in use, plus `Implementation notes` when meaningful
   implementation-time history must remain visible.
+* Releasable implementation increments by default: each implementation
+  task or subtask must be independently implementable, verifiable,
+  reviewable, and acceptable unless the user explicitly opts out.
 * A canonical fileless chat task as the source of truth on the
   fileless path, allowing an initial task with only the established
   sections, then section-only chat updates and full-task recovery
@@ -93,12 +96,17 @@ If **Design** conflicts with **Constraints**, **Constraints** wins.
 
 ### Briefing as a soft entry point
 
-Each task includes a **Briefing** section that serves as a soft entry
-point:
+Each current or implementation-ready task includes a **Briefing**
+section that serves as a soft entry point. Initial backlog tasks and
+subtasks created by
+[spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/)
+may omit Briefing until they become current.
 
-* for someone unfamiliar with the codebase,
-* for the contributor returning to the task after time has passed,
-* for onboarding new contributors.
+Briefing is for:
+
+* someone unfamiliar with the codebase,
+* the contributor returning to the task after time has passed,
+* onboarding new contributors.
 
 The briefing explains what matters, where to look first, and which
 modules, classes, and stack decisions orient a newcomer quickly.
@@ -193,8 +201,11 @@ This links implementation changes to an explicit, reviewable specification.
 On the task-file path, work is organized by status folders in the
 task directory:
 
-* backlog: planned or deferred work; research and design live here until design
-  is approved.
+* backlog: planned or deferred work; initial backlog tasks and
+  subtasks created by
+  [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/)
+  may contain only title, Scope, and Motivation until they become
+  current.
 * in-progress: active research, design, implementation, or verification;
   subtasks carry explicit status.
 * done: user-verified completion; prefix rules preserve ordering.

@@ -192,6 +192,12 @@ can name the needed behavior when the assistant drifts:
   decisions are recorded there. If not, decisions stay in chat until
   you say where they should be captured. This activates the
   [spec-loop-clarify-task](../skills/spec-loop-clarify-task/) skill.
+- Say `plan this project as tasks`, `turn this idea into a work
+  breakdown`, `break this task into subtasks`, or `revise the work
+  breakdown` when a large idea needs to become tasks or an existing
+  work breakdown needs revision. The assistant should capture that
+  breakdown in the task file using
+  [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/).
 - Say `is this task ready for implementation?`, `prepare this task for
   implementation approval`, or `review this task before I approve
   implementation` when you want task-file readiness checked and
@@ -215,6 +221,8 @@ it before continuing:
 - it ignores the installed workflow rules,
 - it starts implementation before explicit approval,
 - unrelated changes are mixed into one subtask,
+- the work breakdown contains a non-releasable implementation
+  increment and you did not explicitly opt out,
 - implementation changes are made without verification evidence,
 - it misses required supporting updates such as glossary, task status,
   or ignore rules,
@@ -540,9 +548,10 @@ For the initial task creation, do not fully design every future
 subtask. Create only:
 - the overall task,
 - subtasks containing Scope and Motivation each,
-- implementation subtasks that are vertical gameplay slices and can
-  each reach `review` with the tests for that slice,
-- no separate scaffolding, model, logic, or UI subtasks.
+- implementation subtasks that are releasable vertical gameplay
+  slices and can each reach `review` with the tests for that slice,
+- no separate scaffolding, model, logic, or UI subtasks,
+- no non-releasable subtasks unless I explicitly opt out.
 ```
 
 ### Your intent
@@ -560,26 +569,27 @@ subtask. Create only:
   - Overall Scope and Motivation are clear.
   - Each subtask has Scope and Motivation, but future subtasks are not
     fully designed yet.
-  - Implementation subtasks are vertical gameplay slices rather than
-    scaffolding/model/logic/UI buckets.
+  - Implementation subtasks are releasable vertical gameplay slices
+    rather than scaffolding/model/logic/UI buckets.
   - Relevant earlier task-file research is referenced where needed.
   - Task and subtask terminology aligns with `glossary.adoc`.
 
-### ⚠️ Attention point: inspect the subtask split
+### ⚠️ Attention point: inspect the subtask breakdown
 
 - Check the initial subtask breakdown carefully.
 - If the model proposes `scaffolding`, `model`, `logic`, `UI`, or any
-  other layer split, reject it.
-- Correct it immediately: ask for vertical gameplay slices where each
-  implementation subtask delivers reviewable behavior and the tests
-  for that slice.
+  other layer-based breakdown, reject it.
+- Correct it immediately: ask for releasable vertical gameplay slices
+  where each implementation subtask delivers reviewable behavior and
+  the tests for that slice.
 - A good correction prompt is:
 
 ```text
-Reject this split. Re-plan the task into vertical gameplay slices.
-Each implementation subtask must deliver reviewable behavior with the
-needed tests for that slice. Do not create scaffolding/model/logic/UI
-subtasks.
+Reject this breakdown. Re-plan the task into releasable vertical gameplay
+slices. Each implementation subtask must deliver reviewable behavior
+with the needed tests for that slice. Do not create
+scaffolding/model/logic/UI or otherwise non-releasable subtasks unless
+I explicitly opt out.
 ```
 
 ### Subtask-by-subtask workflow
@@ -587,8 +597,8 @@ subtasks.
 - Review the task header and the task breakdown first.
 - If the breakdown needs adjustment, ask the assistant to revise it before
   any implementation starts.
-- Keep the split vertical: each implementation subtask must stay a
-  reviewable gameplay slice with its own tests.
+- Keep the breakdown vertical and releasable: each implementation subtask
+  must stay a reviewable gameplay slice with its own tests.
 - If it looks good, ask the assistant to `fully design only the first subtask`.
 - Review that current subtask detail. If it looks good, ask the assistant to
   `implement only that subtask`.
@@ -818,7 +828,8 @@ Each step follows the Spec Loop workflow model:
 - In large implementation steps, ask the assistant to decompose work into
   smaller implementation subtasks before detailed design and
   implementation approval.
-- Every implementation subtask includes both implementation and testing.
+- Every implementation subtask is a releasable increment and includes
+  both implementation and testing.
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
 - Review-ready implementation moves the current task or subtask to
@@ -839,7 +850,7 @@ Each step follows the Spec Loop workflow model:
 
 Learning outcomes:
 
-- Keep task and subtask scopes small and reviewable.
+- Keep task and subtask scopes small, releasable, and reviewable.
 - Use ADRs for architectural decisions with clear rationale.
 - Verify behavior using concrete evidence, not assumptions.
 

@@ -118,6 +118,8 @@ task-file route.
 
 Use task-file if any of these hold:
 - an active task file already governs the same work item;
+- a file-based work breakdown or multiple tracked work items are
+  needed;
 - subtasks are needed;
 - final clarification or plan state would be unsafe to keep only in
   chat;

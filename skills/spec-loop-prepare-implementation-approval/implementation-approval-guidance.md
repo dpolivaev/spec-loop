@@ -206,7 +206,13 @@ increment:
   Constitution formatting rules, especially in list-item sections that
   contain fenced blocks; and
 - the active task file's current main-task/subtask structure is a good
-  fit for the current increment.
+  fit for the current increment;
+- initial backlog tasks and subtasks created by
+  [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
+  are excluded from current-increment readiness checks until they
+  become current;
+- work breakdown checks use
+  [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md).
 
 ## 6. Diagram choice
 

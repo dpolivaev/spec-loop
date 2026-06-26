@@ -19,6 +19,10 @@ either blocks change or gets ignored.
 Spec Loop avoids both: write the next small spec, review it, then implement it
 with tests. Keep the spec local to the next step. Repeat until done.
 
+When work is too large for one task, Spec Loop breaks it down into
+file-based task-file tasks or subtasks. Each implementation increment
+is releasable by default unless the user explicitly opts out.
+
 Spec Loop is a framework of reusable skills.
 
 ## Getting Started
@@ -127,7 +131,14 @@ npx skills update -g
 
 If `npx` is not available, clone or download this repository and copy
 the core task-workflow skills from [skills/](skills/) into your agent's skills
-directory. Keep that core bundle together.
+directory. Keep that core bundle together:
+
+- [spec-loop-plan-task](skills/spec-loop-plan-task/)
+- [spec-loop-plan-work-breakdown](skills/spec-loop-plan-work-breakdown/)
+- [spec-loop-clarify-task](skills/spec-loop-clarify-task/)
+- [spec-loop-prepare-implementation-approval](skills/spec-loop-prepare-implementation-approval/)
+- [spec-loop-implementation-flow](skills/spec-loop-implementation-flow/)
+- [spec-loop-write-adr](skills/spec-loop-write-adr/)
 
 Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project uses a project glossary.
 

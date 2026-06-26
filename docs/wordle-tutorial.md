@@ -189,6 +189,12 @@ can name the needed behavior when the assistant drifts:
   decisions are recorded there. If not, decisions stay in chat until
   you say where they should be captured. This activates the
   [spec-loop-clarify-task](../skills/spec-loop-clarify-task/) skill.
+- Say `plan this project as tasks`, `turn this idea into a work
+  breakdown`, `break this task into subtasks`, or `revise the work
+  breakdown` when a large idea needs to become tasks or an existing
+  work breakdown needs revision. The assistant should capture that
+  breakdown in the task file using
+  [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/).
 - Say `is this task ready for implementation?`, `prepare this task for
   implementation approval`, or `review this task before I approve
   implementation` when you want task-file readiness checked and
@@ -212,6 +218,8 @@ it before continuing:
 - it ignores the installed workflow rules,
 - it starts implementation before explicit approval,
 - unrelated changes are mixed into one subtask,
+- the work breakdown contains a non-releasable implementation
+  increment and you did not explicitly opt out,
 - implementation changes are made without verification evidence,
 - it misses required supporting updates such as glossary, task status,
   or ignore rules,
@@ -399,9 +407,10 @@ For the initial task creation, do not fully design every future
 subtask. Create only:
 - the overall task,
 - subtasks containing Scope and Motivation each,
-- implementation subtasks that are vertical gameplay slices and can
-  each reach `review` with the tests for that slice,
-- no separate model-only or logic-only subtasks.
+- implementation subtasks that are releasable vertical gameplay
+  slices and can each reach `review` with the tests for that slice,
+- no separate model-only or logic-only subtasks,
+- no non-releasable subtasks unless I explicitly opt out.
 ```
 
 ### Your intent
@@ -420,24 +429,26 @@ subtask. Create only:
   - includes task `Glossary` when shared terms are introduced,
     changed, or redefined,
   - keeps future subtasks lightweight,
-  - uses vertical gameplay slices rather than model/logic buckets,
+  - uses releasable vertical gameplay slices rather than model/logic
+    buckets,
   - uses `glossary.adoc` terms consistently.
 
-### ⚠️ Attention point: inspect the subtask split
+### ⚠️ Attention point: inspect the subtask breakdown
 
 - Check the initial subtask breakdown carefully.
-- If the model proposes a layer split such as `define domain
+- If the model proposes a layer-based breakdown such as `define domain
   objects` and `implement evaluation rules`, reject it.
-- Correct it immediately: ask for vertical gameplay slices where each
-  implementation subtask delivers reviewable behavior and the tests
-  for that slice.
+- Correct it immediately: ask for releasable vertical gameplay slices
+  where each implementation subtask delivers reviewable behavior and
+  the tests for that slice.
 - A good correction prompt is:
 
 ```text
-Reject this split. Re-plan the task into vertical gameplay slices.
-Each implementation subtask must deliver reviewable behavior with the
-needed tests for that slice. Do not create model-only or logic-only
-subtasks.
+Reject this breakdown. Re-plan the task into releasable vertical gameplay
+slices. Each implementation subtask must deliver reviewable behavior
+with the needed tests for that slice. Do not create model-only,
+logic-only, or otherwise non-releasable subtasks unless I explicitly
+opt out.
 ```
 
 ### Subtask-by-subtask workflow
@@ -445,8 +456,8 @@ subtasks.
 - Review the task header and the task breakdown first.
 - If the breakdown needs adjustment, ask the assistant to revise it before
   any implementation starts.
-- Keep the split vertical: each implementation subtask must stay a
-  reviewable gameplay slice with its own tests.
+- Keep the breakdown vertical and releasable: each implementation subtask
+  must stay a reviewable gameplay slice with its own tests.
 - If it looks good, ask the assistant to
   `fully design only the first subtask`.
 - Review that current subtask detail.
@@ -592,7 +603,8 @@ The scope must include:
 - guess submission logic,
 - win and lose termination behavior.
 
-Break the work down into vertical gameplay subtasks in this order:
+Break the work down into releasable vertical gameplay subtasks in this
+order:
 1. start a game and expose immutable in-progress state
 2. submit guesses and handle win/lose termination
 ```
@@ -611,8 +623,8 @@ Break the work down into vertical gameplay subtasks in this order:
 - Task file:
   - keeps future subtasks lightweight,
   - aligns with existing glossary terms,
-  - uses ordered vertical gameplay slices rather than model/logic
-    buckets.
+  - uses ordered releasable vertical gameplay slices rather than
+    model/logic buckets.
 
 ### Subtask-by-subtask workflow
 
@@ -779,8 +791,8 @@ The CLI requirements are:
 - `--cli` to force terminal mode later when a UI also exists,
 - deterministic textual feedback rendering.
 
-Break the implementation work down into vertical behavior slices in
-this order:
+Break the implementation work down into releasable vertical behavior
+slices in this order:
 1. implement a playable CLI flow from a local `--wordlist` path with
    deterministic textual feedback
 2. add URL `--wordlist`, `--attempts`, and `--cli` behavior
@@ -801,7 +813,8 @@ this order:
 - A task file is created automatically with a task header and an
   ordered subtask breakdown, and it is waiting for your review.
 - Task file:
-  - uses an ordered vertical subtask flow for implementation,
+  - uses an ordered releasable vertical subtask flow for
+    implementation,
   - keeps future subtasks lightweight,
   - treats the documentation subtasks as part of the same accepted
     delivery path.
@@ -890,8 +903,8 @@ should start the UI.
 In headless mode or when `--cli` is set, the application should use
 the CLI path.
 
-Break the implementation work down into vertical UI slices in this
-order:
+Break the implementation work down into releasable vertical UI slices
+in this order:
 1. launch the minimal Swing UI when a display is available and `--cli`
    is not set
 2. complete UI input validation and preserve correct CLI/headless
@@ -915,7 +928,7 @@ Swing.
   ordered subtask breakdown, and it is waiting for your review.
 - Task file:
   - keeps future subtasks lightweight,
-  - uses ordered vertical UI slices,
+  - uses ordered releasable vertical UI slices,
   - makes the CLI/UI boundary explicit,
   - uses glossary terms consistently.
 
@@ -973,8 +986,8 @@ Each step follows the Spec Loop workflow model:
 - You approve or reject implementation explicitly.
 - Only after explicit approval should the assistant make executable changes.
 - Tasks should include automated tests for their deliverables.
-- Every implementation subtask includes both implementation and
-  testing.
+- Every implementation subtask is a releasable increment and includes
+  both implementation and testing.
 - When subtasks exist, require separate status updates per subtask.
 - Review-ready implementation moves the current task or subtask to
   `review`; after you accept it, you may ask the assistant to move it
@@ -993,7 +1006,7 @@ Each step follows the Spec Loop workflow model:
 
 Learning outcomes:
 
-- Keep task and subtask scopes small and reviewable.
+- Keep task and subtask scopes small, releasable, and reviewable.
 - Use ADRs for long-lived decisions and tasks for incremental delivery.
 - Use the glossary as the stable shared language across the project.
 - Verify behavior using concrete evidence, not assumptions.
