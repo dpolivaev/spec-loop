@@ -284,9 +284,15 @@ Also update the active project instructions file (for example
 - read `README.md` and follow the "Project Brief" section there for
   project requirements unless I explicitly override it;
 - strictly follow the installed Spec Loop skills;
-- never use the chat-only/fileless planning path in this project; and
+- never use the chat-only/fileless planning path in this project;
 - use the task-file workflow for every implementation change, including
-  code, tests, build/configuration, dependencies, and runtime assets.
+  code, tests, build/configuration, dependencies, and runtime assets;
+- this project is step-driven: do not decompose the whole Project Brief
+  or development direction into a backlog, multi-task work breakdown, or
+  set of future task files;
+- the user will introduce each work item in a later prompt; and
+- for each later prompt, plan only the current work item unless the user
+  explicitly asks to plan a backlog.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -565,6 +571,8 @@ subtask. Create only:
 
 - A task file is created automatically with a task header and an
   ordered subtask breakdown, and it is waiting for your review.
+- The assistant uses `spec-loop-plan-work-breakdown` for this
+  task-level subtask breakdown.
 - Task file:
   - Overall Scope and Motivation are clear.
   - Each subtask has Scope and Motivation, but future subtasks are not
@@ -725,6 +733,8 @@ persistence path above.
 
 - A separate leaderboard backlog task is created automatically and is
   waiting for your review.
+- The assistant uses `spec-loop-plan-work-breakdown` for the
+  task-level ordered subtasks inside that backlog task.
 - Task file:
   - exists with ordered implementation subtasks,
   - keeps future implementation subtasks lightweight,

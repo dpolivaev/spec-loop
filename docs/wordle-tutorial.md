@@ -278,9 +278,15 @@ Also update the active project instructions file (for example
 - read `README.md` and follow the "Project Brief" section there for
   project requirements unless I explicitly override it;
 - strictly follow the installed Spec Loop skills;
-- never use the chat-only/fileless planning path in this project; and
+- never use the chat-only/fileless planning path in this project;
 - use the task-file workflow for every implementation change, including
-  code, tests, build/configuration, dependencies, and runtime assets.
+  code, tests, build/configuration, dependencies, and runtime assets;
+- this project is step-driven: do not decompose the whole Project Brief
+  or development direction into a backlog, multi-task work breakdown, or
+  set of future task files;
+- the user will introduce each work item in a later prompt; and
+- for each later prompt, plan only the current work item unless the user
+  explicitly asks to plan a backlog.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -424,6 +430,8 @@ subtask. Create only:
 
 - A task file is created automatically with a task header and an
   ordered subtask breakdown, and it is waiting for your review.
+- The assistant uses `spec-loop-plan-work-breakdown` for this
+  task-level subtask breakdown.
 - Task file:
   - has clear overall Scope, Motivation, and Scenario,
   - includes task `Glossary` when shared terms are introduced,
@@ -620,6 +628,8 @@ order:
 
 - A task file is created automatically with a task header and an
   ordered subtask breakdown, and it is waiting for your review.
+- The assistant uses `spec-loop-plan-work-breakdown` for this
+  task-level subtask breakdown.
 - Task file:
   - keeps future subtasks lightweight,
   - aligns with existing glossary terms,
@@ -812,6 +822,8 @@ slices in this order:
 
 - A task file is created automatically with a task header and an
   ordered subtask breakdown, and it is waiting for your review.
+- The assistant uses `spec-loop-plan-work-breakdown` for this
+  task-level subtask breakdown.
 - Task file:
   - uses an ordered releasable vertical subtask flow for
     implementation,
@@ -926,6 +938,8 @@ Swing.
 
 - A task file is created automatically with a task header and an
   ordered subtask breakdown, and it is waiting for your review.
+- The assistant uses `spec-loop-plan-work-breakdown` for this
+  task-level subtask breakdown.
 - Task file:
   - keeps future subtasks lightweight,
   - uses ordered releasable vertical UI slices,
