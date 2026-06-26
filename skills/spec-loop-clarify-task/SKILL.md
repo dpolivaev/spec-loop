@@ -3,7 +3,9 @@ name: spec-loop-clarify-task
 description: >-
   Discuss, analyze, compare options, stress-test, and resolve important
   open decisions in chat, a proposed task, plan, design update, or ADR.
-  Use when the user asks to clarify, discuss criteria, compare options,
+  Use for any important Spec Loop clarification with the user, including
+  ADR criteria, alternatives, and decision-boundary clarification. Also
+  use when the user asks to clarify, discuss criteria, compare options,
   or stress-test a design, or when a workflow reaches an important open
   question. First check whether different answers could materially
   change the user's intended conclusion, scope, behavior, policy,
@@ -16,10 +18,16 @@ description: >-
   when no other default grilling skill is available.
 ---
 
-Use this skill to discuss, analyze, compare options, stress-test, and
-resolve important open decisions. A work item is optional. If no task
-file, ADR, or invoking workflow exists, run clarification as a
-chat-only discussion.
+Use this skill for any important clarification with the user:
+discuss, analyze, compare options, stress-test, and resolve important
+open decisions. Do not run important Spec Loop clarification as an
+unstructured side discussion inside another workflow. A work item is
+optional. If no task file, ADR, or invoking workflow exists, run
+clarification as a chat-only discussion.
+
+Use it for ADR criteria, alternatives, and decision-boundary
+clarification whenever different answers could materially change the
+ADR decision or its justification.
 
 An important open decision is any open question, choice, criterion,
 trade-off, credible option, or boundary where different answers could
@@ -35,8 +43,9 @@ This skill is not just for asking questions. Resolve what evidence
 already determines, record final decisions in the governing artifact
 when one exists, and ask the user only when user input is still needed.
 
-Prefer this skill over a generic grill-me variant for Spec Loop task
-creation, task updates, and design updates.
+Prefer this skill over a generic grill-me variant or free-form
+discussion for Spec Loop task creation, task updates, design updates,
+and ADR clarification.
 
 ## Phase and handoff
 

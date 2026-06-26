@@ -739,10 +739,11 @@ or basic option parsing path.
 
 ### You see
 
-- The final ADR is preceded by a criteria discussion in the normal
+- The assistant uses `spec-loop-write-adr` and the final ADR is
+  preceded by a criteria discussion in the normal
   `spec-loop-clarify-task` format.
-- If the assistant starts an unstructured discussion instead, stop it
-  and say:
+- If the assistant starts an unstructured discussion or drafts the ADR
+  before criteria/options are clarified, stop it and say:
   `Use the spec-loop-clarify-task skill for the criteria discussion before writing the ADR.`
 - ADR:
   - compares realistic options,

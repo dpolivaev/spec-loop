@@ -488,10 +488,11 @@ Record one final choice with rationale. In the same ADR:
 
 ### You see
 
-- The ADR is preceded by a decision-criteria discussion in the normal
+- The assistant uses `spec-loop-write-adr` and the ADR is preceded by
+  a decision-criteria discussion in the normal
   `spec-loop-clarify-task` format.
-- If the assistant starts an unstructured discussion instead, stop it
-  and say:
+- If the assistant starts an unstructured discussion or drafts the ADR
+  before criteria/options are clarified, stop it and say:
   `Use the spec-loop-clarify-task skill for the criteria discussion before writing the ADR.`
 - ADR:
   - Compares realistic stack options for the initial game implementation and records the chosen one with rationale.
@@ -750,6 +751,9 @@ commands.
 - ADR: records the chosen persistence approach, storage location
   expectations, reset procedure expectations, and practical verification
   commands before the persistence implementation subtask is fully designed.
+- If the persistence approach, storage location, reset procedure, or
+  verification choices are not already settled, the assistant uses
+  `spec-loop-clarify-task` before writing the ADR as current truth.
 
 ### You send
 

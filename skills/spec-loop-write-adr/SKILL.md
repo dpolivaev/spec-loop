@@ -30,7 +30,8 @@ trade-offs, credible options, or the boundaries of the decision.
 If yes, create only enough ADR structure to hold the topic and
 current evidence safely, then use
 [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing. Do not wait
-for the user to ask for clarification explicitly.
+for the user to ask for clarification explicitly, and do not replace
+this handoff with unstructured criteria discussion or brainstorming.
 
 Re-run this gate whenever later ADR drafting exposes a new important
 open decision.

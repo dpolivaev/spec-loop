@@ -28,8 +28,8 @@ This repository currently ships these skills:
 
 2. **[spec-loop-clarify-task](../skills/spec-loop-clarify-task/)**
    - the clarification skill for underspecified task creation, task
-     updates, and design updates; preferred over generic grill-me
-     variants in Spec Loop workflows;
+     updates, design updates, and ADR decisions; preferred over
+     generic grill-me variants in Spec Loop workflows;
    - defined by
      [skills/spec-loop-clarify-task/SKILL.md](../skills/spec-loop-clarify-task/SKILL.md).
 
@@ -88,7 +88,8 @@ This repository currently ships these skills:
      and phase rules.
    * **[skills/spec-loop-clarify-task/SKILL.md](../skills/spec-loop-clarify-task/SKILL.md)**
      defines how Spec Loop clarifies underspecified task creation,
-     task updates, and design updates before or during planning.
+     task updates, design updates, and ADR decisions during planning
+     or ADR writing.
    * **[skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**
      defines the shared no-subtask task form, section semantics,
      readiness rules, formatting, testing policy, and project-glossary
