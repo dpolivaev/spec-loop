@@ -1,11 +1,13 @@
 ---
 name: spec-loop-plan-work-breakdown
 description: >-
-  Start a Spec Loop file-based work breakdown before drafting a single
-  task file when the user brings a whole project, product, app, game,
-  feature set, initiative, or other outcome likely to need multiple
-  independently acceptable increments, even if phrased as "implement
-  ...". Also use when the user asks to split, order, create, or
+  Create or revise a Spec Loop file-based work breakdown. Use when
+  work should be split before detailed task planning, like a broad
+  project, product, app, game, feature set, initiative, or development
+  direction that should become multiple task-file tasks or backlog
+  items, even if phrased as "implement ..."; or a current task/work
+  item that should remain one task file but needs separately processed
+  subtasks. Also use when the user asks to split, order, create, or
   refine tasks, subtasks, a backlog, or an existing work breakdown.
   Because chat-only planning is not durable project state, work
   breakdown planning is captured in task files. Enforces that each
@@ -24,13 +26,14 @@ complete, use `spec-loop-plan-task` only for classification and route
 selection, then return here before drafting a single task file.
 
 Use it when:
-- a whole project, product, app, game, feature set, initiative, or
-  other outcome likely needs multiple independently acceptable
-  increments;
-- a request should be decomposed before a single task file is drafted;
-- work needs to be planned as tasks or subtasks;
-- an ordered list of future task-file work items is created, ordered,
-  or refined; or
+- work should be split before detailed task planning;
+- a broad project, product, app, game, feature set, initiative, or
+  development direction should become multiple task-file tasks or
+  backlog items;
+- a current task or work item should remain one task file but needs
+  separately processed subtasks;
+- the user asks to split, order, create, or refine tasks, subtasks, a
+  backlog, or an existing work breakdown; or
 - an existing work breakdown needs revision.
 
 If this need appears during chat-only/fileless planning, switch or
