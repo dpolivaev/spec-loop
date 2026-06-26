@@ -194,6 +194,8 @@ Lifecycle and transition rules:
 - LLM moves `in-progress` -> `review` for investigation-only work when
   approved investigation work is complete, `Findings` records the
   final output, and any `Test specification` checks are satisfied.
+- For investigation-only subtasks, the LLM changes the current subtask
+  `Status` from `in-progress` to `review` under the same guard.
 - Later implementation follow-up from `review` or `done` returns to
   PLAN before more implementation work.
 - During that planning and renewed-approval work, a `review` item
