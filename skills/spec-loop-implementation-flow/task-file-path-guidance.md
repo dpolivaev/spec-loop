@@ -74,7 +74,7 @@ For shared route **B. Pause the affected implementation and ask
 For shared route **C. Return to PLAN and seek renewed approval**:
 
 - revise the task file as needed;
-- use [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md) again
+- use [spec-loop-prepare-execution-approval/SKILL.md](../spec-loop-prepare-execution-approval/SKILL.md) again
   before resuming implementation.
 
 For shared route **D. Seek post-implementation User approval of an

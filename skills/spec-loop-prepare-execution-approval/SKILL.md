@@ -1,9 +1,9 @@
 ---
-name: spec-loop-prepare-implementation-approval
+name: spec-loop-prepare-execution-approval
 description: >-
   Mandatory only on the task-file path of `spec-loop-plan-task`. Use
   when an active task file already exists and the next user-facing
-  action would otherwise present implementation work for evaluation,
+  action would otherwise present task-file work for evaluation,
   feedback, review, or execution approval.
 ---
 
@@ -14,22 +14,22 @@ path work kept in chat.
 Before work: read [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md), follow all files it
 requires, and apply the full `spec-loop-plan-task` bundle as shared
 convention guidance. Then read
-[implementation-approval-guidance.md](implementation-approval-guidance.md).
+[execution-approval-guidance.md](execution-approval-guidance.md).
 
 Update the same active task file for user-facing review readiness. Do
 not create a second task artifact or a new pre-execution task status.
 
-Use [implementation-approval-guidance.md](implementation-approval-guidance.md) as the authoritative source
+Use [execution-approval-guidance.md](execution-approval-guidance.md) as the authoritative source
 for readiness checks, diagram-first preparation, duplication removal,
 user-facing review gating, and approval-seeking output.
 
-Follow [implementation-approval-guidance.md](implementation-approval-guidance.md) for the allowed user-facing
+Follow [execution-approval-guidance.md](execution-approval-guidance.md) for the allowed user-facing
 outcomes and response rules.
 
 If readiness checks find directly fixable task defects, update the
 active task in place and re-run the readiness checks before producing
 user-facing output, except for structural decomposition changes
-handled specially by [implementation-approval-guidance.md](implementation-approval-guidance.md).
+handled specially by [execution-approval-guidance.md](execution-approval-guidance.md).
 
 If readiness checks find issues that can be resolved from existing
 evidence, update the active task in place and re-run the readiness
@@ -45,9 +45,13 @@ do not end with a blocker list. Invoke
 [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) in the same turn, then resume this
 skill after clarification before seeking execution approval.
 
-After task-file execution approval for implementation work,
-implementation is governed by
-[spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
+After task-file execution approval:
+- implementation work is governed by
+  [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md);
+- investigation work stays under the `spec-loop-plan-task` task-file
+  path: perform only the approved investigation, record final output in
+  `Findings`, satisfy any `Test specification`, and move the task or
+  subtask to `review`.
 
 If no active task file exists, if the current increment is unclear, or
 if chat-only planning is in use, do not use this skill. Continue task

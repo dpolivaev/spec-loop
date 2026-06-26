@@ -88,7 +88,7 @@ For shared route **C. Return to PLAN and seek renewed approval**:
   full current chat-only task in chat;
 - if the chat-only path must be promoted, reconstruct the task file
   from the current canonical chat-only task state;
-- then use [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md)
+- then use [spec-loop-prepare-execution-approval/SKILL.md](../spec-loop-prepare-execution-approval/SKILL.md)
   and regain normal task-file execution approval before continuing
   implementation work.
 

@@ -46,7 +46,7 @@
   `skills/spec-loop-plan-task/task-file-path-guidance.md`,
   `skills/spec-loop-implementation-flow/SKILL.md`,
   `skills/spec-loop-implementation-flow/implementation-flow-guidance.md`,
-  `skills/spec-loop-prepare-implementation-approval/SKILL.md`,
+  `skills/spec-loop-prepare-execution-approval/SKILL.md`,
   `README.md`, and
   `docs/review-responsibility-and-traceability.md`.
   The current constitution is task-file-only and mixes reusable
@@ -62,15 +62,15 @@
   artifact "Short chat plan" as ShortChatPlan
   artifact "Task file" as TaskFile
   component "Task-file Path Guidance" as TaskFileGuidance
-  component "spec-loop-prepare-implementation-approval" as PrepareApproval
+  component "spec-loop-prepare-execution-approval" as PrepareApproval
   component "spec-loop-implementation-flow" as ImplementationFlow
 
   User --> PlanTask : request planning
   PlanTask --> ShortChatPlan : short planning path
   PlanTask --> TaskFile : task-file path
   TaskFile --> TaskFileGuidance : governed by
-  TaskFile --> PrepareApproval : pre-implementation readiness
-  PrepareApproval --> ImplementationFlow : after task-file approval
+  TaskFile --> PrepareApproval : execution-approval readiness
+  PrepareApproval --> ImplementationFlow : after task-file execution approval
   @enduml
   ```
 
@@ -87,7 +87,7 @@
   - `spec-loop-implementation-flow/SKILL.md` currently says it is
     mandatory only on the task-file path and must not be used when
     short-path planning is in use.
-  - `spec-loop-prepare-implementation-approval/SKILL.md` is also
+  - `spec-loop-prepare-execution-approval/SKILL.md` is also
     task-file-only.
   - `README.md` and
     `docs/review-responsibility-and-traceability.md` currently describe
@@ -103,14 +103,14 @@
   component "Task-file mechanics" as TaskFileMechanics
   artifact "Fileless chat task" as FilelessTask
   artifact "Task file" as TaskFile
-  component "spec-loop-prepare-implementation-approval" as PrepareApproval
+  component "spec-loop-prepare-execution-approval" as PrepareApproval
   component "spec-loop-implementation-flow" as ImplementationFlow
 
   PlanTask --> SharedSemantics : plan against
   PlanTask --> FilelessTask : fileless planning path
   PlanTask --> TaskFile : task-file path
   TaskFile --> TaskFileMechanics : governed by
-  TaskFile --> PrepareApproval : pre-implementation readiness
+  TaskFile --> PrepareApproval : execution-approval readiness
   FilelessTask --> ImplementationFlow : approved implementation
   PrepareApproval --> ImplementationFlow : approved implementation
   @enduml
@@ -125,7 +125,7 @@
 
   User -> PlanTask : request lightweight executable change
   PlanTask -> FilelessTask : emit full task-shaped chat artifact
-  PlanTask -> User : request fileless-path + implementation approval
+  PlanTask -> User : request fileless-path + execution approval
   User -> ImplementationFlow : approve and request implementation
   ImplementationFlow -> FilelessTask : update changed sections only when needed
   ImplementationFlow -> User : report implementation notes and readiness
@@ -169,7 +169,7 @@
     conversation. Do not allow fileless subtasks, fileless diagrams,
     or fileless folder-derived statuses.
   - Require one canonical fileless task artifact before
-    implementation approval. Allow the initial canonical fileless
+    execution approval. Allow the initial canonical fileless
     task to include only the sections already established, while
     requiring title and identifier. During approved fileless
     implementation, later canonical chat updates may re-emit only
@@ -226,7 +226,7 @@
     `Implementation notes` semantics, and the full semantic
     completion checklist. Path companions should own only path-
     specific expression of those rules.
-  - Keep `spec-loop-prepare-implementation-approval` task-file-only.
+  - Keep `spec-loop-prepare-execution-approval` task-file-only.
     Fileless approval stays in chat under `spec-loop-plan-task`.
   - Audit existing constitution content by section so every current
     normative rule is either preserved in the shared semantics source,

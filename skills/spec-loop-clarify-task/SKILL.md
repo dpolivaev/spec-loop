@@ -83,7 +83,7 @@ Workflow-specific returns:
 - clarification during ADR work resumes
   [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md);
 - approval-preparation clarification resumes
-  [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md);
+  [spec-loop-prepare-execution-approval/SKILL.md](../spec-loop-prepare-execution-approval/SKILL.md);
 - implementation-time clarification resumes
   [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 

@@ -6,22 +6,25 @@ Spec Loop follows this workflow:
 - **plan** - the [spec-loop-plan-task](../skills/spec-loop-plan-task/) bundle governs plan-first
   work, including the fileless planning path in chat, the task-file
   path when needed, ADR and documentation routing, Scenario and task
-  Glossary triggers, and the gate before implementation.
+  Glossary triggers, and the gate before execution.
 - **break down work** -
   [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/) governs
   file-based decomposition into task-file tasks or subtasks and
   enforces releasable implementation increments by default.
 - **approve** - you approve either a fileless task in chat or a
   task-file plan; on the task-file path,
-  [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/) prepares the task for
+  [spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/) prepares the task for
   that approval step.
-- **implement** - after execution approval for implementation work on
-  either planning path,
+- **execute implementation** - after execution approval for
+  implementation work on either planning path,
   [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs
   implementation-time work.
-- **review/ready** - [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) also governs
-  the move to `review` on the task-file path and readiness
-  reporting on the fileless path.
+- **execute investigation** - after execution approval for
+  investigation work, the active task records reviewed output in
+  `Findings` and is presented or moved to `review`.
+- **review/ready** - [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs
+  implementation work's move to `review` on the task-file path and
+  readiness reporting on the fileless path.
 
 The planning and approval rules for that workflow live in the
 [spec-loop-plan-task](../skills/spec-loop-plan-task/) bundle and its
@@ -57,16 +60,16 @@ from them when needed.
 
 The model uses these skills while drafting and updating plans, task,
 or review artifacts; you review and approve either a fileless chat
-task or a task-file plan before implementation. Approved
-implementation then continues under [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/).
-On task-file work, it governs implementation-time routing,
-`Implementation notes`, and the move to `review`. On the fileless
-path, it governs canonical chat-task maintenance, recovery re-emission
-or promotion, and readiness reporting. When the code already exists,
-you inspect retrospective review files instead.
+task or a task-file plan before execution. Approved implementation
+then continues under [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/).
+On task-file implementation work, it governs implementation-time
+routing, `Implementation notes`, and the move to `review`. On the
+fileless path, it governs canonical chat-task maintenance, recovery
+re-emission or promotion, and readiness reporting. When the code
+already exists, you inspect retrospective review files instead.
 
-Spec Loop also defines explicit work phases: plan, implementation, and done.
-Any transitions to implementation and to done require explicit user approval.
+Spec Loop also defines explicit work phases: PLAN, EXECUTION, and
+DONE. Transitions to EXECUTION and DONE require explicit user approval.
 
 During planning, active task artifacts may use `Scenario` and task
 `Glossary` sections to ground behavior and extract increment-local

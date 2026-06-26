@@ -209,9 +209,8 @@ When this route is in use:
 - use `tasks/` as the default task directory when project
   instructions do not define one.
 
-Before requesting execution approval for implementation work on the
-task-file path, use
-[spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md).
+Before requesting execution approval for task-file work, use
+[spec-loop-prepare-execution-approval/SKILL.md](../spec-loop-prepare-execution-approval/SKILL.md).
 
 ## ADR routing
 

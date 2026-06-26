@@ -289,8 +289,8 @@ follow the appropriate route from Section 2.
 classification, chat-only path maintenance before execution approval,
 taskless eligibility, and approval gates.
 
-`spec-loop-prepare-implementation-approval` owns task-file readiness
-and execution-approval preparation for implementation work.
+`spec-loop-prepare-execution-approval` owns task-file readiness
+and execution-approval preparation.
 
 After approval, this shared core plus the active path companion govern:
 - implementation-time route handling;

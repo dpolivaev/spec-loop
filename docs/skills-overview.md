@@ -6,7 +6,7 @@ This repository currently ships these skills:
 - The core task-workflow bundle is [spec-loop-plan-task](../skills/spec-loop-plan-task/),
   [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/),
   [spec-loop-clarify-task](../skills/spec-loop-clarify-task/),
-  [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/),
+  [spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/),
   [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/), and
   [spec-loop-write-adr](../skills/spec-loop-write-adr/).
 - [spec-loop-write-glossary](../skills/spec-loop-write-glossary/) is required when a
@@ -43,12 +43,12 @@ This repository currently ships these skills:
    - defined by
      [skills/spec-loop-clarify-task/SKILL.md](../skills/spec-loop-clarify-task/SKILL.md).
 
-4. **[spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/)**
+4. **[spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/)**
    - the approval-preparation skill used only on the task-file path
-     before the agent asks for execution approval for implementation
-     work within the [spec-loop-plan-task](../skills/spec-loop-plan-task/) workflow;
+     before the agent asks for execution approval for implementation or
+     investigation work within the [spec-loop-plan-task](../skills/spec-loop-plan-task/) workflow;
    - defined by
-     [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](../skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md).
+     [skills/spec-loop-prepare-execution-approval/execution-approval-guidance.md](../skills/spec-loop-prepare-execution-approval/execution-approval-guidance.md).
 
 5. **[spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/)**
    - the mandatory implementation-flow skill used after execution
@@ -119,9 +119,9 @@ This repository currently ships these skills:
    * **[skills/spec-loop-plan-task/task-file-path-guidance.md](../skills/spec-loop-plan-task/task-file-path-guidance.md)**
      defines the task-file-specific rules: task files, lifecycle and
      traceability requirements, subtasks, and diagram rules.
-   * **[skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](../skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md)**
+   * **[skills/spec-loop-prepare-execution-approval/execution-approval-guidance.md](../skills/spec-loop-prepare-execution-approval/execution-approval-guidance.md)**
      defines task-file approval-readiness preparation before
-     execution approval for implementation work.
+     execution approval.
    * **[skills/spec-loop-implementation-flow/implementation-flow-guidance.md](../skills/spec-loop-implementation-flow/implementation-flow-guidance.md)**
      defines the shared implementation-flow core: post-approval route
      semantics, canonical-section authority, shared `review` meaning,
@@ -164,8 +164,8 @@ This repository currently ships these skills:
      walks through a complete browser-oriented example with staged
      planning, approvals, implementation, and testing.
    * The two tutorials teach the same Spec Loop workflow: planning
-     first, explicit approval before implementation, small reviewable
-     tasks or subtasks, verification, and user correction when the LLM
+     first, explicit approval before execution, small reviewable tasks
+     or subtasks, verification, and user correction when the LLM
      misses a supporting update. The main difference is the technical
      setting: Wordle is a compact Java path, while the online art game
      is browser-oriented. You can choose either tutorial.
@@ -189,7 +189,7 @@ Recommended quick-check order:
 - [skills/spec-loop-plan-task/scenario-and-glossary-guidance.md](../skills/spec-loop-plan-task/scenario-and-glossary-guidance.md)
 - [skills/spec-loop-plan-task/chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)
 - [skills/spec-loop-plan-task/task-file-path-guidance.md](../skills/spec-loop-plan-task/task-file-path-guidance.md)
-- [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](../skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md)
+- [skills/spec-loop-prepare-execution-approval/execution-approval-guidance.md](../skills/spec-loop-prepare-execution-approval/execution-approval-guidance.md)
 - [skills/spec-loop-implementation-flow/implementation-flow-guidance.md](../skills/spec-loop-implementation-flow/implementation-flow-guidance.md)
 - [skills/spec-loop-implementation-flow/chat-only-path-guidance.md](../skills/spec-loop-implementation-flow/chat-only-path-guidance.md)
 - [skills/spec-loop-implementation-flow/task-file-path-guidance.md](../skills/spec-loop-implementation-flow/task-file-path-guidance.md)

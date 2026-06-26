@@ -200,7 +200,7 @@ can name the needed behavior when the assistant drifts:
   implementation` when you want task-file readiness checked and
   repaired before execution approval. If important open decisions
   remain, clarification runs first. This activates the
-  [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/) skill.
+  [spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/) skill.
 - Say `implement it` only after you approve the plan, when you want the
   approved increment implemented, verified, reflected in the task file,
   and moved to `review`. This activates the

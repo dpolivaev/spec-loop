@@ -86,7 +86,7 @@ work breakdown items unless:
   understandable; or
 - the User explicitly asks for that detail.
 
-Before execution approval for implementation work, complete the
+Before execution approval for a task-file item, complete the
 current-increment sections required by `spec-loop-plan-task`.
 
 ## Blocking unknowns

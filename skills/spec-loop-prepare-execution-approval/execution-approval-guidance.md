@@ -1,9 +1,9 @@
-# Execution-approval guidance for implementation work
+# Execution-approval guidance for task-file work
 
 This file is the authoritative source for task-file review readiness,
-execution-approval-seeking behavior for implementation work, readiness
-checks, diagram-first presentation, duplication removal, and response
-rules.
+execution-approval-seeking behavior, readiness checks, diagram-first
+presentation, duplication removal, and response rules for task-file
+implementation and investigation work.
 
 It reuses the full `spec-loop-plan-task` bundle for shared workflow
 conventions.
@@ -35,15 +35,17 @@ Only these outcomes are allowed.
 
 Polish the task for human design review before showing it to the user.
 
-If the next action is execution approval for implementation work, ask
-for execution approval.
+If the next action is execution approval, ask for execution approval.
 
 Use approval language such as:
 - `The task is ready for your execution approval.`
-- `Please review the task and let me know whether to implement it.`
+- for implementation work:
+  `Please review the task and let me know whether to implement it.`
+- for investigation work:
+  `Please review the task and let me know whether to run the investigation.`
 
 Do not say only `ready for review`, because `review` is overloaded
-between design review and post-implementation review state.
+between design review and post-execution review state.
 
 ### B. Review is blocked
 
@@ -67,8 +69,8 @@ PLAN. They do not freeze the active task.
 
 ## 3. Readiness loop
 
-Before seeking execution approval for implementation work, repair and
-revise the active task in place as needed for the current work item.
+Before seeking execution approval, repair and revise the active task
+in place as needed for the current work item.
 
 If readiness checks fail, use this branch order:
 1. If the failure is directly fixable in the active task, fix it and
@@ -88,13 +90,13 @@ changes must not be applied silently. If approval preparation finds
 that converting a no-subtask task to subtask form or splitting the
 active subtask would materially improve decomposition of the current
 work item by splitting it into parts that are easier to review and
-implement, briefly present the proposed restructuring and ask whether
-to apply it now.
+execute, briefly present the proposed restructuring and ask whether to
+apply it now.
 
 If the User agrees, restructure in place, keep only genuinely shared
 context at task level, move subtask-specific Research, Analysis,
-Design, and Test specification into the relevant subtask, avoid
-parallel task-level and subtask-level restatements of the same
+Design, Test specification, and Findings into the relevant subtask,
+avoid parallel task-level and subtask-level restatements of the same
 material, then use [spec-loop-compact-task-file/SKILL.md](../spec-loop-compact-task-file/SKILL.md) and
 resume this skill.
 
@@ -163,16 +165,24 @@ diagram.
 ## 5. Readiness checks
 
 Before showing the task to the user for evaluation or seeking
-execution approval for implementation work, check at least these items
-for the current increment:
+execution approval, check at least these items for the current
+increment:
 - the task is the correct active artifact and the current increment is
   clear;
+- the work kind is clear: implementation work or investigation work;
 - `Research`, `Scenario` and `Glossary` when required, `Design`, and
   `Test specification` are complete enough for the current increment;
-- when an `Implementation notes` section is present, it describes the
-  current implementation state and is clearly distinguishable from the
-  current target-state plan; approval is blocked if it is stale or if
-  it presents target-only content as already implemented;
+- for implementation work, when an `Implementation notes` section is
+  present, it describes the current implementation state and is clearly
+  distinguishable from the current target-state plan; approval is
+  blocked if it is stale or if it presents target-only content as
+  already implemented;
+- for investigation work, Scope states the investigation boundary and
+  expected output, Constraints forbid shipping product, test, build,
+  config, runtime, or coupled documentation changes, Research records
+  starting evidence and known facts, Design describes the investigation
+  approach, Test specification is `N/A` unless explicit checks are
+  needed, and `Findings` is absent before execution;
 - approval preparation has completed the pre-approval term-reduction,
   term-classification, and glossary-repair pass required by
   [spec-loop-plan-task/scenario-and-glossary-guidance.md](../spec-loop-plan-task/scenario-and-glossary-guidance.md),
@@ -191,8 +201,9 @@ for the current increment:
   when the exact external type or API is part of the reviewed
   contract; approval is blocked if required canonical repairs are
   missing;
-- internal implementation terms are not used in `Scenario`, task
-  `Glossary`, or behavior-level diagrams and prose;
+- for implementation work, internal implementation terms are not used
+  in `Scenario`, task `Glossary`, or behavior-level diagrams and
+  prose;
 - no unresolved essential doubts remain about scope, behavior,
   constraints, naming, or structural boundaries;
 - the approval-preparation rules in section 4 and all applicable
@@ -242,9 +253,13 @@ That means:
   here; and
 - add only the approval-preparation delta.
 
-After execution approval for implementation work, post-approval
-execution and the transition to `review` are handled by
-[spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
+After execution approval, post-approval handling depends on work kind:
+- implementation work uses
+  [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md);
+- investigation work stays under the `spec-loop-plan-task` task-file
+  path: perform only the approved investigation, record final output in
+  `Findings`, satisfy any `Test specification`, and move the task or
+  subtask to `review`.
 
 If new structural decisions emerge during readiness checking, update
 the task in place and keep the conversation in PLAN until the gaps are

@@ -139,6 +139,8 @@ On the task-file path:
   [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs implementation-time
   clarification, the post-implementation `Implementation notes`
   checkpoint, and the move to `review`.
+* After task-file execution approval for investigation work, the active
+  task records reviewed output in `Findings` and moves to `review`.
 
 On the fileless path, after fileless execution approval for
 implementation work,
@@ -170,7 +172,7 @@ after scope changes.
 
 Spec Loop separates agreement on intent from review of implementation.
 Even with simplified statuses, review gates still exist at the
-implementation-approval boundary, at the task-file-path move-to-review
+execution-approval boundary, at the task-file-path move-to-review
 boundary when that path is in use, and at final completion approval.
 
 Reviewers assess correctness against approved intent.

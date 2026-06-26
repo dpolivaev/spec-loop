@@ -12,8 +12,7 @@ trust handling, evidence collection, output structure, section
 meanings, assessment style, tone, translation rules, diagram
 handling, and sharing variants.
 Do not reuse task-file lifecycle folders or statuses, chat-only
-routing, or implementation-approval gates for the reviewed change
-itself.
+routing, or execution-approval gates for the reviewed change itself.
 
 Optional compact example:
 [examples/example-review-settings-loader.md](examples/example-review-settings-loader.md).

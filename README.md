@@ -136,7 +136,7 @@ directory. Keep that core bundle together:
 - [spec-loop-plan-task](skills/spec-loop-plan-task/)
 - [spec-loop-plan-work-breakdown](skills/spec-loop-plan-work-breakdown/)
 - [spec-loop-clarify-task](skills/spec-loop-clarify-task/)
-- [spec-loop-prepare-implementation-approval](skills/spec-loop-prepare-implementation-approval/)
+- [spec-loop-prepare-execution-approval](skills/spec-loop-prepare-execution-approval/)
 - [spec-loop-implementation-flow](skills/spec-loop-implementation-flow/)
 - [spec-loop-write-adr](skills/spec-loop-write-adr/)
 
