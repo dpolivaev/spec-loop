@@ -111,13 +111,8 @@ questions and you want to speed the rest up, tell it:
 I am following the Spec Loop online art game tutorial from my browser.
 Please work in this project according to the Spec Loop workflow defined by the installed skills.
 
-Tutorial-specific goals:
-- use the normal planning workflow for non-trivial work,
-- later tutorial steps will create and maintain `glossary.adoc`,
-- rendering setup help is only needed again if a later step requires
-  it,
-- tell me how you will work here and restate the
-  `PLAN -> IMPLEMENTATION` approval rule in one sentence.
+Tell me how you will work here and restate the
+`PLAN -> IMPLEMENTATION` approval rule in one sentence.
 ```
 
 ### Your intent
@@ -277,11 +272,13 @@ Also create `.gitignore` if you find any harness-specific or IDE-specific
 configuration files in this repository.
 
 Also update the active project instructions file (for example
-`AGENTS.md`) so it explicitly tells the assistant to read `README.md`
-and follow the "Project Brief" section there for project requirements
-unless I explicitly override it. The instructions file must also say
-that this project never uses the fileless planning path: any code change
-requires creation of a task file.
+`AGENTS.md`) so it explicitly tells the assistant to:
+- read `README.md` and follow the "Project Brief" section there for
+  project requirements unless I explicitly override it;
+- strictly follow the installed Spec Loop skills;
+- never use the chat-only/fileless planning path in this project; and
+- use the task-file workflow for every executable change, including
+  code, tests, build/configuration, dependencies, and runtime assets.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -307,8 +304,9 @@ This is documentation-only work, we do not need a task file for it.
 - Project instructions file:
   - Explicitly points the assistant to `README.md` as the
     source of the project brief and requirements.
-  - States that the fileless planning path is never allowed in this
-    project and that any code change requires a task file.
+  - Says the installed Spec Loop skills must be followed strictly.
+  - Disables the chat-only/fileless planning path for this project.
+  - Requires the task-file workflow for every executable change.
 
 ### After completion (commit)
 
