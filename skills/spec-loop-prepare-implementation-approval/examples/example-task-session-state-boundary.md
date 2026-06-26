@@ -1,7 +1,7 @@
 # Example task: Session-state boundary after approval preparation
 
 This compact example shows a task after `spec-loop-prepare-implementation-approval`
-polishes it for implementation approval seeking.
+polishes it for execution approval seeking for implementation work.
 
 It demonstrates:
 - diagram-first structural review;

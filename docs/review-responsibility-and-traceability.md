@@ -10,7 +10,7 @@ no-subtask task form used on both planning paths. When Spec Loop uses
 a task file, the task-file path guidance adds task-file-only mechanics.
 Together, they enforce at minimum:
 
-* Explicit planning before executable work.
+* Explicit planning before implementation work.
 * A fileless planning path in chat only for first-pass, straight-line
   work with lightweight research, a single clear implementation path,
   lightweight verification, no existing task file, and no need for
@@ -128,17 +128,20 @@ chat task.
 On the task-file path:
 
 * The model may edit task files without prior approval.
-* If task files were edited and there is no implementation directive,
-  the model must request user review before changing code, tests, or
+* If task files were edited and there is no execution directive, the
+  model must request user review before changing code, tests, or
   configuration.
-* An explicit directive such as “implement”, “go ahead”, or “proceed”
-  counts as approval and must not trigger another approval request.
-* After task-file implementation approval,
+* An explicit directive such as “implement”, “investigate”, “go ahead”,
+  “proceed”, or “apply” counts as `PLAN -> EXECUTION` approval only
+  when the active task is ready and the directive clearly refers to
+  that task. If readiness or the referent is unclear, ask.
+* After task-file execution approval for implementation work,
   [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs implementation-time
   clarification, the post-implementation `Implementation notes`
   checkpoint, and the move to `review`.
 
-On the fileless path, after fileless implementation approval,
+On the fileless path, after fileless execution approval for
+implementation work,
 [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs implementation-time
 clarification, canonical chat-task updates, full-task recovery
 re-emission when needed, promotion to the task-file path when fileless
@@ -152,12 +155,12 @@ approval before continuing.
 
 ## Phase model
 
-Spec Loop defines work phases: **PLAN**, **IMPLEMENTATION** and **DONE**.
+Spec Loop defines work phases: **PLAN**, **EXECUTION** and **DONE**.
 
 By default, phase transitions are constrained:
 
-* `PLAN -> IMPLEMENTATION` requires explicit approval.
-* `IMPLEMENTATION -> DONE` requires explicit approval.
+* `PLAN -> EXECUTION` requires explicit approval.
+* `EXECUTION -> DONE` requires explicit approval.
 * Any new request, refinement, extension, or follow-up resets work to `PLAN`.
 
 This keeps the model aligned and prevents implementation from continuing by inertia

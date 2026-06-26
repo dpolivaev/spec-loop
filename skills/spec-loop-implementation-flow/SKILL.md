@@ -1,13 +1,14 @@
 ---
 name: spec-loop-implementation-flow
 description: >-
-  Use this skill after implementation approval for an approved
-  chat-only or task-file task. It governs implementation-time
-  routing, canonical task updates, and the final review checkpoint.
+  Use this skill after execution approval for implementation work in
+  an approved chat-only or task-file task. It governs
+  implementation-time routing, canonical task updates, and the final
+  review checkpoint.
 ---
 
-Use this skill after implementation approval for an approved
-chat-only or task-file task.
+Use this skill after execution approval for implementation work in an
+approved chat-only or task-file task.
 
 If no approved active task exists, return to
 [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md).
@@ -26,9 +27,9 @@ If no approved active task exists, return to
   task-file path before continuing.
 - This skill governs only the approved current increment until it
   reaches `review`.
-- If the User introduces additional executable work outside that
+- If the User introduces additional implementation work outside that
   increment, return it to [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md) for route
-  selection and any renewed implementation approval.
+  selection and any renewed execution approval.
 - Before presenting work as ready, perform the `Implementation notes`
   check.
 - If another implementation-related skill conflicts with this skill or

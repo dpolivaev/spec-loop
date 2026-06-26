@@ -1,13 +1,13 @@
 ---
 name: spec-loop-plan-task
 description: >-
-  Choose the route for new work and plan it before implementation.
-  Use this skill to decide whether the work is taskless, chat-only,
-  or task-file, and to create the needed plan for non-trivial
-  executable work.
+  Choose the route for new work and plan it before execution. Use this
+  skill to decide whether the work is taskless, chat-only, or
+  task-file, and to create the needed plan for non-trivial
+  implementation work or investigation work that needs its own task.
 ---
 
-Use this skill for new work before implementation.
+Use this skill for route selection and task planning before execution.
 
 Read this file fully unless it is already loaded in the current
 session context. Apply project instructions such as `AGENTS.md` when
@@ -20,8 +20,16 @@ only if the digest is missing or the user says the rules changed.
 
 - Work starts in PLAN.
 - PLAN may change planning artifacts only.
-- IMPLEMENTATION requires explicit user approval.
-- Non-trivial executable work requires a Spec Loop task.
+- A Spec Loop task is a planned, approval-gated, reviewable unit of
+  work.
+- Non-trivial implementation work requires a task.
+- Investigation work requires a task only when it needs explicit
+  planning, separate tracking, or a reviewable output.
+- Starting EXECUTION requires explicit user approval. A directive such
+  as `implement`, `investigate`, `go ahead`, `proceed`, or `apply`
+  counts as approval only when the active task is ready and the
+  directive clearly refers to that task. If readiness or the referent
+  is unclear, ask.
 - Only the user may override these rules.
 
 If `AGENTS.md` conflicts with these rules, stop and ask the user.
@@ -31,8 +39,12 @@ If the user explicitly asks for a route, planning procedure, or
 sectioned task format, do not simplify it unless the user explicitly
 agrees.
 
-After implementation approval, follow
+After execution approval for implementation work, follow
 [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
+After execution approval for investigation work, perform only the
+approved investigation, record final output in `Findings`, satisfy any
+`Test specification`, and present or move the task/subtask to
+`review` using the active path.
 
 ## Mandatory clarification gate
 
@@ -45,14 +57,19 @@ If yes, do only enough research to frame the open decision clearly
 and use [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing. Do
 not wait for the user to ask for clarification explicitly.
 
+If clarification returns an unresolved blocker that needs ADR work or
+separate investigation work, route that work before continuing the
+blocked task plan.
+
 ## First classification
 
 Classify each work item as one of:
 - standalone documentation;
-- trivial executable work; or
-- non-trivial executable work.
+- trivial implementation work;
+- non-trivial implementation work; or
+- investigation work.
 
-Treat executable work as non-trivial when any of these hold:
+Treat implementation work as non-trivial when any of these hold:
 - it spans multiple files and is not a straightforward mechanical
   edit;
 - it needs research or exploration before editing;
@@ -62,16 +79,25 @@ Treat executable work as non-trivial when any of these hold:
   edit; or
 - more than one plausible implementation path exists.
 
+Investigation work means research, spike, prototype, catalog, proof,
+or similar evidence-gathering whose output is knowledge or a
+reviewable artifact rather than product change. It needs a task only
+when the investigation itself needs explicit planning, separate
+tracking, or a reviewable output. Ordinary planning research stays in
+PLAN inside the current task or chat state. Investigation work must
+not ship product, test, build, config, runtime, or coupled
+documentation changes; plan that scope as implementation work.
+
 Standalone documentation work is taskless by default unless the user
 or project rules require a task.
 
-For executable work:
-- if it looks trivial, ask: `This looks trivial. May I do this without
-  a plan?`
-- if it is non-trivial, ask: `This looks non-trivial. We should use a
-  Spec Loop task. May it be chat-only, or do you want a task file?`
+For route selection:
+- for trivial implementation work, ask: `This looks trivial. May I do this
+  without a plan?`
+- for any work requiring a task, ask: `This needs a Spec Loop task.
+  May it be chat-only, or do you want a task file?`
 
-Before drafting a task or starting implementation, state the route:
+Before drafting a task or starting EXECUTION, state the route:
 - `Planning route: chat-only task`
 - `Planning route: task-file`
 - `Proposed route: taskless, pending your agreement`
@@ -82,10 +108,10 @@ except the route-selection prompts required here.
 ## Phase model
 
 Phases:
-- **PLAN** = research, design/spec, and test specification for
-  executable work.
-- **IMPLEMENTATION** = approved executable changes and their coupled
-  updates.
+- **PLAN** = research, design/spec, test specification, and
+  investigation planning for tasks.
+- **EXECUTION** = approved task work. For implementation work, this
+  means implementation changes and their coupled updates.
 - **DONE** = verified and accepted.
 
 Rules:
@@ -94,11 +120,11 @@ Rules:
 - during PLAN, commands may be used for research or verification only
   if they do not change repository contents outside planning
   artifacts;
-- any change to executable behavior, tests, build or config,
+- any implementation change to behavior, tests, build or config,
   dependencies, packaging, runtime assets, or coupled documentation is
-  IMPLEMENTATION and needs explicit user instruction;
+  EXECUTION and needs explicit user instruction;
 - phases are exclusive unless the user allows combined planning and
-  implementation.
+  execution.
 
 Standalone documentation work is outside this phase model unless the
 user or project instructions say otherwise.
@@ -113,8 +139,8 @@ Choose among:
 - chat-only task; or
 - task-file.
 
-Non-trivial executable work must use either the chat-only route or the
-task-file route.
+Work requiring a Spec Loop task must use either the chat-only route
+or the task-file route.
 
 Use task-file if any of these hold:
 - an active task file already governs the same work item;
@@ -130,7 +156,7 @@ Use task-file if any of these hold:
 
 Otherwise chat-only is allowed.
 
-When later executable follow-up appears after a task or subtask
+When later implementation follow-up appears after a task or subtask
 already in `review` or `done`, or after a chat-only task already
 presented as ready for User review, return to PLAN and re-run route
 selection. Reuse the existing task artifact only when the shared
@@ -139,12 +165,10 @@ the same active work item.
 
 ## Planning content
 
-For executable work, planning must cover:
-- current scope;
-- material clarified decisions;
-- design or implementation direction;
-- acceptance logic; and
-- verification approach.
+For a Spec Loop task, planning uses the same task sections for
+implementation and investigation. It must cover current scope,
+material clarified decisions, relevant research and constraints,
+Design, review expectations, and needed verification.
 
 Use the shared task guidance from
 [common-task-guidance.md](common-task-guidance.md).
@@ -154,11 +178,15 @@ Use the shared task guidance from
 ### Taskless
 
 Taskless by default:
-- standalone non-executable documentation work; and
+- standalone documentation work; and
 - ADR-only work.
 
-For executable work, taskless is allowed only when the work is trivial
+For implementation work, taskless is allowed only when the work is trivial
 and the user explicitly agrees.
+
+Investigation work that does not need explicit planning, separate
+tracking, or a reviewable output is handled inside the current
+clarification or planning flow, not as a separate task.
 
 ### Chat-only
 
@@ -177,22 +205,28 @@ task-file route before continuing.
 When this route is in use:
 - read [task-file-path-guidance.md](task-file-path-guidance.md) fully;
 - use it together with [common-task-guidance.md](common-task-guidance.md);
-- create or update the active task file before executable changes; and
+- create or update the active task file before EXECUTION starts; and
 - use `tasks/` as the default task directory when project
   instructions do not define one.
 
-Before requesting implementation approval on the task-file path, use
+Before requesting execution approval for implementation work on the
+task-file path, use
 [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md).
 
-## Special routing
+## ADR routing
 
 ADR-only work is taskless by default. Use
 [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) for ADR location, naming,
 structure, and update rules.
 
-If ADR work is part of a larger executable change, keep it in that
-task and use [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) during
-IMPLEMENTATION.
+If task planning or accepted investigation findings show that a
+durable architecture or policy decision is needed, route ADR work
+through [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md).
+Do not hide ADR work inside clarification.
+
+If ADR work is part of a larger implementation change, keep it in
+that task and use [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) during
+EXECUTION.
 
 ## Glossary policy
 
@@ -218,15 +252,15 @@ and task-glossary deltas are compared against.
 
 When approved work changes, clarifies, or implements shared domain
 terms, include any required glossary work in the plan. Perform project
-glossary file edits during IMPLEMENTATION. If no project glossary
-exists, create one during IMPLEMENTATION only when the task plan,
+glossary file edits during EXECUTION. If no project glossary
+exists, create one during EXECUTION only when the task plan,
 project instructions, or the User requires project-level glossary
 work.
 
 When a task or subtask needs `Scenario` or `Glossary`, read
 [scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md) and follow it. Task
 `Glossary` sections are planning artifacts; project glossary file
-edits happen only during IMPLEMENTATION.
+edits happen only during EXECUTION.
 
 ## Related skills
 

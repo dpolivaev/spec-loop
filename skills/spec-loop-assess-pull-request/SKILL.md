@@ -31,14 +31,14 @@ Before work:
   clearly fit retrospective review artifacts;
 - apply those shared conventions where they fit retrospective review
   work, but do not apply the chat-only planning path, task-file
-  lifecycle routing, or the normal `PLAN -> IMPLEMENTATION` approval
+  lifecycle routing, or the normal `PLAN -> EXECUTION` approval
   gate to the reviewed change itself; and
 - then read [review-guidance.md](review-guidance.md).
 
 Reconstruct already-implemented work as the retrospective Spec Loop
 review artifact that should have existed, then add AI assessment and
 recommendations. Do not treat the change as waiting at the normal
-`PLAN -> IMPLEMENTATION` gate.
+`PLAN -> EXECUTION` gate.
 
 Use read-only provider commands for evidence when available:
 - `gh` for GitHub

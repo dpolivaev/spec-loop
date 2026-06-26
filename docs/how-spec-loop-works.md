@@ -15,8 +15,9 @@ Spec Loop follows this workflow:
   task-file plan; on the task-file path,
   [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/) prepares the task for
   that approval step.
-- **implement** - after implementation approval on either planning
-  path, [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs
+- **implement** - after execution approval for implementation work on
+  either planning path,
+  [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs
   implementation-time work.
 - **review/ready** - [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) also governs
   the move to `review` on the task-file path and readiness
@@ -127,7 +128,7 @@ the same job or the same lifetime.
   the current increment needs them, they may also include `Scenario`
   and task `Glossary` sections.
 - ADRs capture durable decisions and the reasons behind them.
-- Documentation-only work may stand on its own when no executable
+- Documentation-only work may stand on its own when no implementation
   change is involved and no project rule requires a task file.
 - A project glossary captures stable shared language across tasks,
   design, tests, code symbols, and commits.

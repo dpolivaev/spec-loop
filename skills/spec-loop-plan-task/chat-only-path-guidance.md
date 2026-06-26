@@ -24,7 +24,8 @@ The task-file prose-wrap requirement does not apply to chat-only work
 unless the User asks for wrapped lines. Keep chat-only tasks readable
 and structurally clear.
 
-After implementation approval on the chat-only path, follow
+After execution approval for implementation work on the chat-only
+path, follow
 [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md) and its chat-only path
 companion for implementation-time handling, task revisions,
 `Implementation notes`, and chat-only `review`.
@@ -50,11 +51,10 @@ path for that task.
 - treat that emitted task as the current canonical chat-only task;
 - keep only one active chat-only task in the conversation at a
   time;
-- when the current increment reaches implementation readiness,
-  present the canonical chat-only task to the User as a request to
-  approve both continuing on the chat-only planning path without
-  creating a task file and moving from planning into
-  implementation from that chat-only task.
+- when the current increment reaches execution readiness, present the
+  canonical chat-only task to the User as a request to approve both
+  continuing on the chat-only planning path without creating a task
+  file and moving from PLAN into EXECUTION from that chat-only task.
 
 When proposing the chat-only path to a User who may not already be
 informed, include one brief inline note that chat-only avoids task-file
@@ -121,6 +121,14 @@ fresh full current task in chat with title, identifier, and all
 current sections before continuing. If that still does not restore a
 safe state, promote the work to the task-file path.
 
+### Investigation execution on the chat-only path
+
+After approved investigation work, record the final output in
+`Findings` using `Task changes:` or a full current-task re-emit, then
+present the chat-only task as ready for User review. If the
+investigation result cannot be preserved safely in chat, promote to
+the task-file path before presenting it as ready.
+
 ### Later work relation handling
 
 When new work appears after a chat-only task, first decide whether
@@ -130,7 +138,7 @@ presented as ready for User review.
 If it has already been presented as ready for User review, use the
 shared follow-up rule in
 [common-task-guidance.md](common-task-guidance.md) to decide whether
-later executable follow-up may stay in the current chat-only task,
+later implementation follow-up may stay in the current chat-only task,
 needs task-file promotion for separate tracked history, or is a new
 follow-up task.
 

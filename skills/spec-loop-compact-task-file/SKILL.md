@@ -26,7 +26,8 @@ duplication and shrink the active task file, but it must preserve:
 - decisions;
 - dependencies;
 - constraints;
-- review-relevant facts; and
+- review-relevant facts;
+- findings; and
 - implementation and test expectations.
 
 Keep shared context at task level.
@@ -36,8 +37,8 @@ needs them to understand the current subtask safely.
 
 ## Allowed changes
 
-- Move subtask-specific Research, Design, and Test specification into
-  the relevant subtask.
+- Move subtask-specific Research, Design, Test specification, and
+  Findings into the relevant subtask.
 - Rewrite duplicated section content into a shorter equivalent form.
 - Reorganize section content to remove duplication and make the
   active task file smaller.

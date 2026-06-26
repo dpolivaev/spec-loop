@@ -1,21 +1,13 @@
 ---
 name: spec-loop-clarify-task
 description: >-
-  Discuss, analyze, compare options, stress-test, and resolve important
-  open decisions in chat, a proposed task, plan, design update, or ADR.
-  Use for any important Spec Loop clarification with the user, including
-  ADR criteria, alternatives, and decision-boundary clarification. Also
-  use when the user asks to clarify, discuss criteria, compare options,
-  or stress-test a design, or when a workflow reaches an important open
-  question. First check whether different answers could materially
-  change the user's intended conclusion, scope, behavior, policy,
-  constraints, route, Design, Test specification, or the ADR decision
-  or its justification. Resolve what evidence already determines, ask
-  focused questions only for what remains, and store final results in
-  the governing artifact when one exists. Without a governing artifact,
-  keep results in chat until the user says where to capture them. It
-  may also be used for general grilling when explicitly selected or
-  when no other default grilling skill is available.
+  Engage the User to resolve important open decisions in Spec Loop
+  work, including tasks, plans, design updates, work breakdowns,
+  implementation checkpoints, and ADR drafting. Use when the user asks
+  to clarify, compare options, discuss criteria, or stress-test, or
+  when different answers could materially change scope, behavior,
+  policy, constraints, route, Design, Test specification, or ADR
+  content. Also use for general grilling when explicitly selected.
 ---
 
 Use this skill for any important clarification with the user:
@@ -25,7 +17,7 @@ unstructured side discussion inside another workflow. A work item is
 optional. If no task file, ADR, or invoking workflow exists, run
 clarification as a chat-only discussion.
 
-Use it for ADR criteria, alternatives, and decision-boundary
+Use it during ADR work for criteria, alternatives, and decision-boundary
 clarification whenever different answers could materially change the
 ADR decision or its justification.
 
@@ -45,13 +37,30 @@ when one exists, and ask the user only when user input is still needed.
 
 Prefer this skill over a generic grill-me variant or free-form
 discussion for Spec Loop task creation, task updates, design updates,
-and ADR clarification.
+and clarification during ADR work.
+
+## Resolution scope
+
+This skill resolves decisions by checking existing evidence, engaging
+the User for remaining choices, and recording final answers. It does
+not create ADRs, create tasks, or choose durable work routes.
+
+If evidence and User engagement cannot resolve the decision because
+ADR work, implementation work, or research, spike, prototype, catalog, or
+proof work is needed, state the blocker and return control to the
+invoking workflow. The invoking workflow decides whether to route ADR
+work, create or update a task or subtask, or pause until accepted
+evidence exists.
+
+If no invoking workflow exists, stop with the blocker and ask the User
+which workflow or artifact should own it. Do not continue a workflow
+step that depends on the unresolved result.
 
 ## Phase and handoff
 
 Clarification stays in the invoking workflow phase when one exists:
 - planning clarification stays in PLAN;
-- ADR clarification stays in ADR work;
+- clarification during ADR work stays in ADR work;
 - implementation-time clarification follows
   [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 
@@ -69,7 +78,10 @@ When this skill ends:
 
 Workflow-specific returns:
 - task planning resumes [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md);
-- ADR clarification resumes [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md);
+- work breakdown resumes
+  [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md);
+- clarification during ADR work resumes
+  [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md);
 - approval-preparation clarification resumes
   [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md);
 - implementation-time clarification resumes
@@ -281,7 +293,8 @@ Clarification may have a governing artifact, or it may be chat-only.
 Use these storage rules:
 - Task-governed clarification: store final resolved decisions in the
   task artifact.
-- ADR-governed clarification: store final resolved decisions in the ADR.
+- Clarification during ADR work: store final resolved decisions in the
+  ADR.
 - Chat-only clarification: keep decisions in chat until the user says
   where to capture them. At the end of chat-only clarification, ask
   whether the outcome should be saved and where.

@@ -13,7 +13,8 @@ This file adds only task-file-specific mechanics: task files,
 lifecycle, tracked moves, subtasks, task-file-only testing additions,
 and diagram rules.
 
-After implementation approval on the task-file path, follow
+After execution approval for implementation work on the task-file
+path, follow
 [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md) and its task-file path
 companion for implementation-time handling, task-file updates,
 `Implementation notes`, and the move into `review`.
@@ -26,8 +27,8 @@ current increment.
 When a task file has or may have subtasks, do not infer the active
 increment or subtask status from the folder path. Before identifying
 the active increment, claiming lifecycle status, moving a task or
-subtask status, seeking implementation approval, or presenting
-completion, search the file for subtask heading and status lines:
+subtask status, seeking execution approval, or presenting completion,
+search the file for subtask heading and status lines:
 
 `rg -n '^## Subtask:|^- \*\*Status:\*\*' <task-file>`
 
@@ -71,8 +72,9 @@ Top-level folders: `backlog`, `in-progress`, `review`, `done`.
 
 - Only `backlog` may have subfolders.
 - Backlog subfolder names are organizational only.
-- Backlog numbering optional; if used, readable three-digit prefix
-  local to containing folder.
+- Backlog numbering optional except for task files created by
+  [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md);
+  those use readable three-digit prefixes local to containing folder.
 - `done` uses required three-digit completion-order prefix, one
   global sequence.
 
@@ -93,10 +95,10 @@ to fit target. Remove backlog prefix only when moving out of
 `backlog`. Moving into `done`: assign next global `done` prefix
 independently.
 
-Later executable follow-up from a task or subtask already in
+Later implementation follow-up from a task or subtask already in
 `review` or `done` returns to PLAN and follows the shared follow-up
 rule in [common-task-guidance.md](common-task-guidance.md) before
-more implementation.
+more implementation work.
 
 If that shared rule keeps the same task or subtask from `review`, it
 stays in place by default during that planning and renewed-approval
@@ -161,7 +163,7 @@ work sits.
 Representation:
 - Task state = top-level folder.
 - Tasks in `review` or `done` stay there by default.
-- Later executable follow-up from `review` or `done` returns to PLAN.
+- Later implementation follow-up from `review` or `done` returns to PLAN.
   During that planning and renewed-approval work, a `review` item may
   stay in place without a new subtask. A `done` item is reused only
   when the User chooses that.
@@ -175,8 +177,9 @@ Lifecycle definitions:
   verification.
 - **review** — in the User review cycle. By default, a task or
   subtask stays in `review` once that cycle is reached, including
-  same-task executable follow-up that planning keeps on that task or
-  subtask, unless the User explicitly asks for more formal tracking.
+  same-task implementation follow-up that planning keeps on that task
+  or subtask, unless the User explicitly asks for more formal
+  tracking.
 - **done** — User-verified completion.
 
 Lifecycle and transition rules:
@@ -188,8 +191,11 @@ Lifecycle and transition rules:
 - LLM moves `in-progress` -> `review` when implementation and
   required automated verification are complete under
   `spec-loop-implementation-flow`.
-- Later executable follow-up from `review` or `done` returns to PLAN
-  before more implementation.
+- LLM moves `in-progress` -> `review` for investigation-only work when
+  approved investigation work is complete, `Findings` records the
+  final output, and any `Test specification` checks are satisfied.
+- Later implementation follow-up from `review` or `done` returns to
+  PLAN before more implementation work.
 - During that planning and renewed-approval work, a `review` item
   stays in `review` by default. The LLM must not move a task back to
   `in-progress` or change a subtask from `review` to `in-progress`
@@ -220,12 +226,12 @@ Use the shared no-subtask main-task structure from
 When a task uses subtasks:
 
 - keep subtasks after all global task sections;
-- main-task Research, Analysis, Design, Test specification, and
-  empty Implementation notes may be omitted;
+- main-task Research, Analysis, Design, Test specification, Findings,
+  and empty Implementation notes may be omitted;
 - when a conditional or optional section is omitted, omit it entirely
   and keep the remaining sections in the shared order.
-- For later executable follow-up from `review` or `done`, first apply
-  the shared follow-up rule in
+- For later implementation follow-up from `review` or `done`, first
+  apply the shared follow-up rule in
   [common-task-guidance.md](common-task-guidance.md).
 - Do not create a new subtask by default when that shared rule keeps
   the same task or subtask.
@@ -262,17 +268,16 @@ When a task uses subtasks:
 - every subtask beyond initial work breakdown form must use the same
   bold-label list-item labels and ordering as the shared main task
   form, including conditional Scenario, conditional Glossary, optional
-  Constraints, conditional Analysis, and conditional Implementation
-  notes,
+  Constraints, conditional Analysis, conditional Findings, and
+  conditional Implementation notes,
 - must not convert those section labels into Markdown headings,
 - must represent a separately tracked work unit within the same
-  overall task; for implementation tasks it must include executable
-  work; this is usually a functional increment, but a
-  history-preserving review follow-up may also justify a subtask,
-- for feature implementation, implementation subtasks must be
-  vertical slices: each implementation subtask must cover the
-  cross-layer work needed for one reviewable behavior and its own
-  automated tests,
+  overall task; for implementation work, this is usually a functional
+  increment, but a history-preserving review follow-up may also
+  justify a subtask,
+- for feature implementation, implementation subtasks must be vertical
+  slices: each implementation subtask must cover the cross-layer work
+  needed for one reviewable behavior and its own automated tests,
 - do not split a feature into scaffolding-only or layer-only
   implementation subtasks such as separate `scaffolding`, `model`,
   `logic`, or `UI` subtasks unless the User explicitly requests that
@@ -281,9 +286,13 @@ When a task uses subtasks:
 - is not assumed to be self-sufficient; before working from a
   subtask, read the relevant task-level sections and diagrams needed
   to understand it correctly;
-- must satisfy the testing policy in
+- implementation subtasks must satisfy the testing policy in
   [test-specification-guidance.md](test-specification-guidance.md).
-- No planning-only subtasks unless User explicitly asks.
+- No planning-only subtasks.
+- Ordinary planning research stays in the current task's `Research`.
+- Research, spike, prototype, catalog, or proof subtasks are tasks,
+  not planning placeholders; use the same task structure and
+  [SKILL.md](SKILL.md).
 
 `Implementation notes` placement:
 - without subtasks: task level;
@@ -299,10 +308,11 @@ When a task uses subtasks:
   same content at both task and subtask level; keep shared context at
   task level and local context at subtask level.
 - Future subtasks may keep Research, Design, and Test specification
-  lightweight until current. Analysis may stay omitted or minimal
-  until final clarification decisions exist. Placeholders like `To be
-  done` or `See main task` are allowed for Research, Design, and Test
-  specification.
+  lightweight until current. Findings stays omitted until approved
+  investigation work produces reviewed output. Analysis may stay
+  omitted or minimal until final clarification decisions exist.
+  Placeholders like `To be done` or `See main task` are allowed for
+  Research, Design, and Test specification.
 - Current implementation subtask must have detail needed for review
   and execution.
 - Once a decision is made, remove obsolete or superseded

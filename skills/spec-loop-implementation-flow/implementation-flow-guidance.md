@@ -29,9 +29,10 @@ expressing those shared rules.
 
 Implementation-start checklist:
 - stay inside the approved current increment;
-- return new executable work outside that increment to PLAN;
-- do not make executable edits outside the approved design boundary
-  unless this guidance or the User explicitly authorizes them;
+- return new implementation work outside that increment to PLAN;
+- do not make implementation edits outside the approved design
+  boundary unless this guidance or the User explicitly authorizes
+  them;
 - if `Implementation notes` are later needed, use only the fixed
   subheadings `Interpretations`, `Tradeoffs`, and `Open questions`;
 - do not write `Implementation notes` as a chronological worklog,
@@ -92,7 +93,7 @@ Return to PLAN when the change affects any of the following:
 - dependency decisions not already approved.
 
 When this route applies, return to `spec-loop-plan-task`. Use the path
-companion for the next path-specific steps before more executable work
+companion for the next path-specific steps before more implementation work
 continues.
 
 ### D. Seek post-implementation approval of an implemented deviation
@@ -134,7 +135,7 @@ not be performed before `review`. The path companion defines how that
 state is expressed.
 
 After route E is expressed, this skill is done for that increment.
-Later executable follow-up returns to `spec-loop-plan-task`.
+Later implementation follow-up returns to `spec-loop-plan-task`.
 
 ## 3. Canonical task updates during implementation
 
@@ -285,11 +286,11 @@ follow the appropriate route from Section 2.
 ## 6. Interaction with other task skills
 
 `spec-loop-plan-task` owns workflow routing, trivial/non-trivial
-classification, chat-only path maintenance before implementation
-approval, taskless eligibility, and approval gates.
+classification, chat-only path maintenance before execution approval,
+taskless eligibility, and approval gates.
 
-`spec-loop-prepare-implementation-approval` owns pre-implementation
-Task-file readiness and approval-seeking preparation.
+`spec-loop-prepare-implementation-approval` owns task-file readiness
+and execution-approval preparation for implementation work.
 
 After approval, this shared core plus the active path companion govern:
 - implementation-time route handling;
@@ -300,10 +301,10 @@ After approval, this shared core plus the active path companion govern:
 
 Do not replace the planning or approval-preparation skills. Reuse them
 when implementation uncovers a change that needs renewed planning or
-approval under route C outside the post-implementation approval case
-handled by route D.
+execution approval under route C outside the post-implementation
+approval case handled by route D.
 
-When additional executable work appears outside the approved current
-increment before route E, do not continue in implementation mode by
-inertia. Return it to `spec-loop-plan-task` for route selection
-before more executable work continues.
+When additional implementation work appears outside the approved current
+increment before route E, do not continue in execution by inertia.
+Return it to `spec-loop-plan-task` for route selection before more
+implementation work continues.

@@ -3,8 +3,8 @@ name: spec-loop-prepare-implementation-approval
 description: >-
   Mandatory only on the task-file path of `spec-loop-plan-task`. Use
   when an active task file already exists and the next user-facing
-  action would otherwise present that task for evaluation, feedback,
-  review, or implementation approval.
+  action would otherwise present implementation work for evaluation,
+  feedback, review, or execution approval.
 ---
 
 This skill is mandatory only on the task-file path of the
@@ -17,8 +17,7 @@ convention guidance. Then read
 [implementation-approval-guidance.md](implementation-approval-guidance.md).
 
 Update the same active task file for user-facing review readiness. Do
-not create a second task artifact or a new pre-implementation task
-status.
+not create a second task artifact or a new pre-execution task status.
 
 Use [implementation-approval-guidance.md](implementation-approval-guidance.md) as the authoritative source
 for readiness checks, diagram-first preparation, duplication removal,
@@ -44,9 +43,10 @@ user-preference-sensitive, needed to choose the next path, or could
 materially change scope, constraints, design, or test specification,
 do not end with a blocker list. Invoke
 [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) in the same turn, then resume this
-skill after clarification before seeking implementation approval.
+skill after clarification before seeking execution approval.
 
-After task-file implementation approval, implementation is governed by
+After task-file execution approval for implementation work,
+implementation is governed by
 [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 
 If no active task file exists, if the current increment is unclear, or

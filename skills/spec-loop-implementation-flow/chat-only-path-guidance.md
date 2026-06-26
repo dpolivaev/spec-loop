@@ -18,7 +18,7 @@ Basic facts:
 If the work is no longer simple enough for chat, or confirmed
 clarification decisions kept only in chat would risk loss through
 compaction or context loss, promote it to the task-file path before
-continuing executable work.
+continuing implementation work.
 
 ## 0. Authorized canonical chat updates
 
@@ -89,8 +89,8 @@ For shared route **C. Return to PLAN and seek renewed approval**:
 - if the chat-only path must be promoted, reconstruct the task file
   from the current canonical chat-only task state;
 - then use [spec-loop-prepare-implementation-approval/SKILL.md](../spec-loop-prepare-implementation-approval/SKILL.md)
-  and regain normal task-file implementation approval before
-  continuing executable work.
+  and regain normal task-file execution approval before continuing
+  implementation work.
 
 For shared route **D. Seek post-implementation User approval of an
  implemented deviation**:

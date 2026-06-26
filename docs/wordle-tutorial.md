@@ -109,15 +109,15 @@ I am following the Spec Loop Wordle tutorial from my browser.
 Please work in this project according to the Spec Loop workflow defined by the installed skills.
 
 Tell me how you will work here and restate the
-`PLAN -> IMPLEMENTATION` approval rule in one sentence.
+`PLAN -> EXECUTION` approval rule in one sentence.
 ```
 
 ### Your intent
 
 - Confirm that the assistant is actually following the installed Spec
   Loop workflow in this repository.
-- Make it restate the planning-before-implementation approval boundary
-  before any real work starts.
+- Make it restate the `PLAN -> EXECUTION` approval boundary before
+  any real work starts.
 
 ### You see
 
@@ -128,7 +128,7 @@ intermediate reasoning. Before continuing, confirm these points:
   in this project;
 - the assistant makes clear that non-trivial work will go through the
   normal planning path before implementation;
-- the assistant correctly restates the `PLAN -> IMPLEMENTATION`
+- the assistant correctly restates the `PLAN -> EXECUTION`
   approval rule.
 
 ### You learned (this step)
@@ -142,7 +142,7 @@ intermediate reasoning. Before continuing, confirm these points:
 ## If setup seems wrong
 
 1. Ask the assistant which installed skills are active.
-2. Ask it to restate the `PLAN -> IMPLEMENTATION` approval rule.
+2. Ask it to restate the `PLAN -> EXECUTION` approval rule.
 3. If that still looks wrong, reinstall the skills with:
 
 ```bash
@@ -196,9 +196,9 @@ can name the needed behavior when the assistant drifts:
   breakdown in the task file using
   [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/).
 - Say `is this task ready for implementation?`, `prepare this task for
-  implementation approval`, or `review this task before I approve
+  execution approval`, or `review this task before I approve
   implementation` when you want task-file readiness checked and
-  repaired before implementation approval. If important open decisions
+  repaired before execution approval. If important open decisions
   remain, clarification runs first. This activates the
   [spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/) skill.
 - Say `implement it` only after you approve the plan, when you want the
@@ -214,7 +214,7 @@ it before continuing:
 - it starts changing files or config before showing the plan and
   getting approval,
 - it cannot clearly explain which Spec Loop setup is active or restate
-  the `PLAN -> IMPLEMENTATION` approval rule,
+  the `PLAN -> EXECUTION` approval rule,
 - it ignores the installed workflow rules,
 - it starts implementation before explicit approval,
 - unrelated changes are mixed into one subtask,
@@ -279,7 +279,7 @@ Also update the active project instructions file (for example
   project requirements unless I explicitly override it;
 - strictly follow the installed Spec Loop skills;
 - never use the chat-only/fileless planning path in this project; and
-- use the task-file workflow for every executable change, including
+- use the task-file workflow for every implementation change, including
   code, tests, build/configuration, dependencies, and runtime assets.
 
 This is documentation-only work, we do not need a task file for it.
@@ -308,7 +308,7 @@ This is documentation-only work, we do not need a task file for it.
     source of the project brief and requirements,
   - says the installed Spec Loop skills must be followed strictly,
   - disables the chat-only/fileless planning path for this project,
-  - requires the task-file workflow for every executable change.
+  - requires the task-file workflow for every implementation change.
 
 ### After completion (commit)
 
@@ -979,12 +979,12 @@ Each step follows the Spec Loop workflow model:
 - In chat, you ask the assistant to work on a feature, approved
   documentation change, or long-lived design decision.
 - For implementation work, the assistant should create the needed task
-  automatically before making executable changes.
+  automatically before making implementation changes.
 - For larger tasks, the first planning pass may stop at the task
   header and an ordered subtask breakdown; only the current subtask is
   designed in detail before implementation.
 - You approve or reject implementation explicitly.
-- Only after explicit approval should the assistant make executable changes.
+- Only after explicit approval should the assistant make implementation changes.
 - Tasks should include automated tests for their deliverables.
 - Every implementation subtask is a releasable increment and includes
   both implementation and testing.

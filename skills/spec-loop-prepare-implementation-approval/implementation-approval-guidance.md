@@ -1,8 +1,9 @@
-# Implementation-approval guidance for `spec-loop-prepare-implementation-approval`
+# Execution-approval guidance for implementation work
 
 This file is the authoritative source for task-file review readiness,
-pre-implementation approval-seeking behavior, readiness checks,
-diagram-first presentation, duplication removal, and response rules.
+execution-approval-seeking behavior for implementation work, readiness
+checks, diagram-first presentation, duplication removal, and response
+rules.
 
 It reuses the full `spec-loop-plan-task` bundle for shared workflow
 conventions.
@@ -34,11 +35,11 @@ Only these outcomes are allowed.
 
 Polish the task for human design review before showing it to the user.
 
-If the next action is implementation approval, ask for implementation
-approval.
+If the next action is execution approval for implementation work, ask
+for execution approval.
 
 Use approval language such as:
-- `The task is ready for your implementation approval.`
+- `The task is ready for your execution approval.`
 - `Please review the task and let me know whether to implement it.`
 
 Do not say only `ready for review`, because `review` is overloaded
@@ -46,7 +47,7 @@ between design review and post-implementation review state.
 
 ### B. Review is blocked
 
-Do not show the task as reviewable and do not ask for implementation
+Do not show the task as reviewable and do not ask for execution
 approval.
 
 State clearly that the task is not yet review ready, and list the exact
@@ -66,8 +67,8 @@ PLAN. They do not freeze the active task.
 
 ## 3. Readiness loop
 
-Before seeking implementation approval, repair and revise the active
-task in place as needed for the current work item.
+Before seeking execution approval for implementation work, repair and
+revise the active task in place as needed for the current work item.
 
 If readiness checks fail, use this branch order:
 1. If the failure is directly fixable in the active task, fix it and
@@ -162,8 +163,8 @@ diagram.
 ## 5. Readiness checks
 
 Before showing the task to the user for evaluation or seeking
-implementation approval, check at least these items for the current
-increment:
+execution approval for implementation work, check at least these items
+for the current increment:
 - the task is the correct active artifact and the current increment is
   clear;
 - `Research`, `Scenario` and `Glossary` when required, `Design`, and
@@ -241,8 +242,8 @@ That means:
   here; and
 - add only the approval-preparation delta.
 
-After implementation approval, post-approval execution and the
-transition to `review` are handled by
+After execution approval for implementation work, post-approval
+execution and the transition to `review` are handled by
 [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 
 If new structural decisions emerge during readiness checking, update

@@ -45,14 +45,14 @@ This repository currently ships these skills:
 
 4. **[spec-loop-prepare-implementation-approval](../skills/spec-loop-prepare-implementation-approval/)**
    - the approval-preparation skill used only on the task-file path
-     before the agent asks for implementation approval within the
-     [spec-loop-plan-task](../skills/spec-loop-plan-task/) workflow;
+     before the agent asks for execution approval for implementation
+     work within the [spec-loop-plan-task](../skills/spec-loop-plan-task/) workflow;
    - defined by
      [skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](../skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md).
 
 5. **[spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/)**
-   - the mandatory implementation-flow skill used after
-     implementation approval on either planning path when
+   - the mandatory implementation-flow skill used after execution
+     approval for implementation work on either planning path when
      implementation deviates from the approved task, when uncertainty
      or blocking questions arise, or before handing implemented work
      over for review or ready-state presentation;
@@ -121,7 +121,7 @@ This repository currently ships these skills:
      traceability requirements, subtasks, and diagram rules.
    * **[skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md](../skills/spec-loop-prepare-implementation-approval/implementation-approval-guidance.md)**
      defines task-file approval-readiness preparation before
-     implementation approval.
+     execution approval for implementation work.
    * **[skills/spec-loop-implementation-flow/implementation-flow-guidance.md](../skills/spec-loop-implementation-flow/implementation-flow-guidance.md)**
      defines the shared implementation-flow core: post-approval route
      semantics, canonical-section authority, shared `review` meaning,

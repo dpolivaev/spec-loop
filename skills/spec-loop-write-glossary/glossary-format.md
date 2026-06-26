@@ -29,7 +29,7 @@ Use this guidance when:
   language above individual tasks. It is a project-level supporting
   artifact, not a replacement for task files.
 - Plan required glossary updates during PLAN.
-- Perform planned glossary updates during IMPLEMENTATION.
+- Perform planned glossary updates during EXECUTION.
 - If glossary work would change approved meaning rather than record it,
   return to PLAN first and update the task file before continuing.
 

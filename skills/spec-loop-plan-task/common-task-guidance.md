@@ -1,6 +1,6 @@
 # Common Task Guidance
 
-This file applies to executable task planning on both planning paths of
+This file applies to task planning on both planning paths of
 `spec-loop-plan-task`.
 
 It defines the shared no-subtask main-task form, section meanings,
@@ -19,25 +19,35 @@ and other task-file administration stay in
 ## Current-increment readiness
 
 The active task artifact is the source of truth for the current
-increment. Design-first allows learning during implementation while
-the approved Design stays authoritative. Findings that change the
-intended target lead to updates to the active task artifact and
-renewed approval before implementation continues.
+increment. Design-first allows learning during execution while the
+approved Design stays authoritative. Findings that change the intended
+target lead to updates to the active task artifact and renewed
+approval before execution continues.
 
 - On the chat-only path, that artifact is the current canonical
   chat-only task in chat.
 - On the task-file path, that artifact is the active task file.
 
-Before IMPLEMENTATION, the active task needs: Scope, Motivation,
+Before EXECUTION, implementation work needs: Scope, Motivation,
 Briefing, implementation-ready Design, Test specification, and any
 required Research, Scenario, Glossary, Analysis, or Constraints for
-the current increment — even when the User allows combined phases.
+the current implementation increment — even when the User allows
+combined phases.
 
-Before asking the User to approve a task for IMPLEMENTATION, the LLM
-must self-check that the content for the current implementation
-increment meets all applicable requirements of this file and any
-path-specific companion rules, and is correct, internally consistent,
-and compliant with `AGENTS.md` and applicable glossary rules.
+Before asking the User to approve a task for EXECUTION, the LLM must
+self-check that the content for the current task meets all applicable
+requirements of this file and any path-specific companion rules, and
+is correct, internally consistent, and compliant with `AGENTS.md` and
+applicable glossary rules.
+
+If the task is investigation-only, use the same task sections. Scope
+sets the investigation boundary and expected output. Motivation states
+what the investigation blocks or enables. Constraints state that the
+task must not ship product, test, build, config, runtime, or coupled
+documentation changes. Research records starting evidence and known
+facts. Design describes the investigation approach. Test specification
+is `N/A` unless explicit checks are needed to review the result.
+Findings records the final reviewed output.
 
 At any point while drafting or revising the active task for the
 current increment, if any content would depend on an unresolved
@@ -52,15 +62,15 @@ decision, return to clarification before continuing.
 If asking the User to review a draft instead, say so explicitly and
 list the known gaps, open questions, and unresolved decisions.
 
-## Later executable follow-up from `review` or `done`
+## Later implementation follow-up from `review` or `done`
 
 On the chat-only path, the equivalent starting point is a task
 already presented as ready for User review.
 
 When a task or subtask already in `review` or `done`, or a chat-only
 task already presented as ready for User review, receives a later
-executable change request, return to PLAN before more
-implementation.
+implementation change request, return to PLAN before more
+implementation work.
 
 From `review`, or from a chat-only task already presented as ready
 for User review, keep the same task or subtask by default when the
@@ -93,8 +103,8 @@ creating it.
 
 If the same task or subtask is kept, update the governing artifact in
 PLAN, discard any implementation-created intermediate state from
-canonical planning sections, and seek renewed implementation approval
-before more executable work.
+canonical planning sections, and seek renewed execution approval
+before more implementation work.
 
 ## Task artifact structure and sections
 
@@ -125,6 +135,8 @@ labels below.
     clarification decisions exist for the current increment)
   - `- **Design:**`
   - `- **Test specification:**`
+  - `- **Findings:**` (conditional; investigation-only tasks/subtasks
+    only, after approved investigation work produces reviewed output)
   - `- **Implementation notes:**` (conditional; include it when the
     post-implementation checkpoint finds meaningful notes content)
   When a conditional or optional section is omitted, omit it entirely
@@ -223,7 +235,7 @@ rules, behavior, or subsystem boundaries.
 
 If glossary work is required for the current task:
 - reflect it in the task plan; and
-- during IMPLEMENTATION, follow [SKILL.md](SKILL.md) rules for project glossary
+- during EXECUTION, follow [SKILL.md](SKILL.md) rules for project glossary
   creation or update.
 
 If a project glossary update would change approved meaning rather
@@ -245,7 +257,7 @@ Short orientation for someone unfamiliar with the codebase: relevant
 modules, important classes, framework context, repo conventions, risk
 areas.
 
-Finalize Briefing late in PLAN, shortly before seeking implementation
+Finalize Briefing late in PLAN, shortly before seeking execution
 approval, after Research, Design, and Test specification are coherent.
 Keep target-state plans in Design, not Briefing.
 
@@ -256,16 +268,17 @@ know the research scope, then research the current system and return
 to clarification whenever findings expose material choices about
 intent, scope, constraints, design, acceptance logic, or verification.
 
-Record observations, constraints, verified facts, and findings about
-the original pre-implementation state only. Plans go in **Design**.
-Documents the original pre-implementation system state for the
-governed increment: behavior, implementation, legacy arch, flows, data
-structures, findings, and constraints.
+For implementation work, record observations, constraints, verified
+facts, and findings about the original pre-implementation state only.
+For investigation-only work, record starting evidence and known facts.
+Plans go in **Design**. Approved investigation output goes in
+**Findings**.
 
-Do not record repository states created during the current increment
-in canonical Research. If later clarification, implementation, or
-review reveals new relevant facts about the original
-pre-implementation state, extend Research with those facts only.
+For implementation work, do not record repository states created
+during the current increment in canonical Research. If later
+clarification, implementation, or review reveals new relevant facts
+about the original pre-implementation state, extend Research with
+those facts only.
 
 Do not repeat `Analysis` points here in decision-and-reason form.
 
@@ -300,8 +313,11 @@ Documents target system: architecture, data structures, data flow,
 interactions, implementation boundaries. Draft from validated
 Research and Scenario behavior, using Glossary when present.
 
-Design = implementation contract. Must be reviewable and
-implementation-ready.
+For investigation-only work, Design describes the investigation
+approach instead of a target system change.
+
+For implementation work, Design is the implementation contract. It
+must be reviewable and implementation-ready before execution approval.
 
 Design must follow Constraints and Analysis when they are present. If
 Design conflicts with either, fix Design or return to clarification.
@@ -375,6 +391,9 @@ diagrams and prose.
 Specifies how the current task's requirements and task-relevant
 modified code paths are verified.
 
+For investigation-only work, set Test specification to `N/A` unless
+explicit checks are needed to review the result.
+
 Before drafting or revising `Test specification`, you must read and
 follow [test-specification-guidance.md](test-specification-guidance.md).
 
@@ -385,6 +404,17 @@ Separate automated verification cases from optional human-reader hints:
 - `Manual tests` = optional checks a human reviewer may perform after
   handoff. They do not block `review` and must not be reported as done
   unless actually performed.
+
+### Findings
+
+Conditional output section for investigation-only tasks and subtasks.
+Fill it during EXECUTION when the approved investigation produces its
+reviewed output.
+
+Findings is not a scratchpad, transcript, or worklog. Record only the
+final findings, relevant evidence references, and limits needed for
+review. Follow-up tasks or ADRs copy only the accepted findings they
+depend on into their own `Research`, `Context`, or `Analysis`.
 
 ### Implementation notes
 

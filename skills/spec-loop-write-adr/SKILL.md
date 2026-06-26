@@ -2,8 +2,8 @@
 name: spec-loop-write-adr
 description: >-
   Create, update, or supersede architecture decision records under
-  `architecture-decisions/`. Use when the user asks for ADR work or
-  `spec-loop-plan-task` routes ADR writing.
+  `architecture-decisions/`. Use when the user asks for ADR work or a
+  Spec Loop workflow routes ADR writing.
 ---
 
 Use this skill for ADR writing only.
@@ -13,8 +13,9 @@ apply it.
 
 Read and apply project instructions such as `AGENTS.md` when present.
 
-This skill writes ADRs. It does not decide whether an ADR is
-required. Routing belongs to [spec-loop-plan-task/SKILL.md](../spec-loop-plan-task/SKILL.md).
+This skill writes ADRs. It does not decide by itself whether an ADR
+is required. ADR work starts when the User asks for it or when a Spec
+Loop workflow routes to it.
 
 The ADR being drafted or updated is the governing artifact for this
 skill.
@@ -29,9 +30,10 @@ trade-offs, credible options, or the boundaries of the decision.
 
 If yes, create only enough ADR structure to hold the topic and
 current evidence safely, then use
-[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing. Do not wait
-for the user to ask for clarification explicitly, and do not replace
-this handoff with unstructured criteria discussion or brainstorming.
+[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md)
+to engage the User before continuing. Do not wait for the user to ask
+for clarification explicitly, and do not replace this handoff with
+unstructured criteria discussion or brainstorming.
 
 Re-run this gate whenever later ADR drafting exposes a new important
 open decision.
