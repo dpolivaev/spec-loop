@@ -191,10 +191,11 @@ can name the needed behavior when the assistant drifts:
   [spec-loop-clarify-task](../skills/spec-loop-clarify-task/) skill.
 - Say `plan this project as tasks`, `turn this idea into a work
   breakdown`, `break this task into subtasks`, or `revise the work
-  breakdown` when a large idea needs to become tasks or an existing
-  work breakdown needs revision. The assistant should capture that
-  breakdown in the task file using
-  [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/).
+  breakdown` when a large idea may need subtasks, multiple task files,
+  or revision of an existing work breakdown. The assistant should run
+  planning-form selection first when needed, then use
+  [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/)
+  for the file-based breakdown artifact.
 - Say `is this task ready for implementation?`, `prepare this task for
   execution approval`, or `review this task before I approve
   implementation` when you want task-file readiness checked and
@@ -408,7 +409,7 @@ The scope must include:
   work.
 
 Break the work down into subtasks.
- 
+
 For the initial task creation, do not fully design every future
 subtask. Create only:
 - the overall task,

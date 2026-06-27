@@ -1,40 +1,27 @@
 ---
 name: spec-loop-plan-work-breakdown
 description: >-
-  Create or revise a Spec Loop file-based work breakdown. Use when
-  work should be split before detailed task planning, like a broad
-  project, product, app, game, feature set, initiative, or development
-  direction that should become multiple task-file tasks or backlog
-  items, even if phrased as "implement ..."; or a current task/work
-  item that should remain one task file but needs separately processed
-  subtasks. Also use when the user asks to split, order, create, or
-  refine tasks, subtasks, a backlog, or an existing work breakdown.
-  Because chat-only planning is not durable project state, work
-  breakdown planning is captured in task files. Enforces that each
-  task or subtask is independently acceptable by default and each
-  implementation task or subtask is releasable; non-releasable items
-  require explicit user opt-out.
+  Create or revise file-based Spec Loop work breakdown artifacts for
+  task-file work that uses subtasks or multiple task files / backlog
+  items.
 ---
 
 Use this skill for file-based Spec Loop work breakdown on the
 task-file path. It is a planning companion to `spec-loop-plan-task`;
-it does not replace route selection, clarification, task-file rules,
-or approval gates.
+it does not replace
+[planning-form selection](../spec-loop-plan-task/planning-form-selection-guidance.md),
+clarification, task-file rules, or approval gates.
 
-If an initial request matches this skill before route selection is
-complete, use `spec-loop-plan-task` only for classification and route
-selection, then return here before drafting a single task file.
+Use it after planning-form selection chooses `task file with subtasks`
+or `multiple task files / backlog items`, or when revising an existing
+file-based work breakdown.
 
-Use it when:
-- work should be split before detailed task planning;
-- a broad project, product, app, game, feature set, initiative, or
-  development direction should become multiple task-file tasks or
-  backlog items;
-- a current task or work item should remain one task file but needs
-  separately processed subtasks;
-- the user asks to split, order, create, or refine tasks, subtasks, a
-  backlog, or an existing work breakdown; or
-- an existing work breakdown needs revision.
+If this skill is loaded before planning-form selection is complete, do
+not draft breakdown artifacts. If first classification is incomplete,
+return to [spec-loop-plan-task](../spec-loop-plan-task/SKILL.md).
+Otherwise follow
+[guidance](../spec-loop-plan-task/planning-form-selection-guidance.md)
+first.
 
 If this need appears during chat-only/fileless planning, switch or
 promote to the task-file path before creating the breakdown. Chat-only
@@ -51,7 +38,9 @@ A releasable increment can be implemented, verified, reviewed, and
 accepted independently while leaving the project coherent if no later
 sibling is implemented yet. It includes the tests and any same-slice
 supporting config, migration, documentation, glossary, or operational
-updates needed for that increment to stand alone.
+updates needed for that increment to stand alone. This is a
+vertical-slice validity criterion, not a recommendation to release
+each task or subtask independently.
 
 Do not create non-releasable implementation slices unless the User
 explicitly opts out. If the User opts out, record the opt-out in the
@@ -151,12 +140,6 @@ When drafting a work breakdown:
   merge it with an adjacent item, or ask the User whether to opt out
   explicitly.
 
-Use subtasks only when the work remains one overall task but needs
-separately tracked independently acceptable increments. Implementation
-subtasks must still be releasable unless the User explicitly opts out.
-Use separate tasks when the items have independent purpose,
-acceptance, or release value outside a single task.
-
 ## Final self-check
 
 Before presenting or saving a file-based work breakdown, verify:
@@ -164,7 +147,8 @@ Before presenting or saving a file-based work breakdown, verify:
 - each implementation task or subtask has or will receive its own
   automated tests for that increment;
 - releasing after any completed implementation item in order would
-  leave the project coherent;
+  leave the project coherent, whether or not that item is actually
+  released independently;
 - no item is named only for a layer or preparation activity unless it
   is independently acceptable;
 - any non-releasable implementation item has explicit User opt-out

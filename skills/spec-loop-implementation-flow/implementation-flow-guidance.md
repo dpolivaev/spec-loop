@@ -283,28 +283,21 @@ Before reaching `review`, ensure that:
 If any check fails, do not reach `review`. Complete the missing work or
 follow the appropriate route from Section 2.
 
-## 6. Interaction with other task skills
+## 6. Handoff triggers
 
-`spec-loop-plan-task` owns workflow routing, trivial/non-trivial
-classification, chat-only path maintenance before execution approval,
-taskless eligibility, and approval gates.
+Use these handoffs only when the trigger occurs. Otherwise stay in this
+implementation flow for the approved current increment.
 
-`spec-loop-prepare-execution-approval` owns task-file readiness
-and execution-approval preparation.
-
-After approval, this shared core plus the active path companion govern:
-- implementation-time route handling;
-- authorized canonical updates;
-- `Implementation notes`;
-- the path-specific expression of `review`; and
-- any needed chat-only recovery or promotion.
-
-Do not replace the planning or approval-preparation skills. Reuse them
-when implementation uncovers a change that needs renewed planning or
-execution approval under route C outside the post-implementation
-approval case handled by route D.
-
-When additional implementation work appears outside the approved current
-increment before route E, do not continue in execution by inertia.
-Return it to `spec-loop-plan-task` for route selection before more
-implementation work continues.
+- If there is no approved active task, stop and use
+  [spec-loop-plan-task](../spec-loop-plan-task/SKILL.md).
+- If implementation uncovers a change that needs renewed planning or
+  execution approval under route C, return to
+  [spec-loop-plan-task](../spec-loop-plan-task/SKILL.md). For task-file
+  work, execution can resume only after
+  [approval preparation](../spec-loop-prepare-execution-approval/SKILL.md)
+  prepares renewed approval and the User approves it.
+- If additional implementation work appears outside the approved
+  current increment before route E, do not continue in execution by
+  inertia. Return it to
+  [spec-loop-plan-task](../spec-loop-plan-task/SKILL.md) for
+  planning-form selection.

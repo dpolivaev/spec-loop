@@ -19,9 +19,9 @@ either blocks change or gets ignored.
 Spec Loop avoids both: write the next small spec, review it, then implement it
 with tests. Keep the spec local to the next step. Repeat until done.
 
-When work is too large for one task, Spec Loop breaks it down into
-file-based task-file tasks or subtasks. Each implementation increment
-is releasable by default unless the user explicitly opts out.
+When work is too large for one task, Spec Loop can use subtasks or
+multiple task files / backlog items. Each implementation increment is
+releasable by default unless the user explicitly opts out.
 
 Spec Loop is a framework of reusable skills.
 

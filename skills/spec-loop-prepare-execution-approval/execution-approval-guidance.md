@@ -243,8 +243,9 @@ structural artifact.
 
 ## 7. Interaction with `spec-loop-plan-task`
 
-`spec-loop-plan-task` owns workflow routing and task drafting. This
-skill is its user-facing review and approval-seeking companion.
+`spec-loop-plan-task` owns first classification, planning-form
+selection, and task drafting. This skill is its user-facing review and
+approval-seeking companion.
 
 That means:
 - do not replace `spec-loop-plan-task`;

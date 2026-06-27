@@ -19,6 +19,7 @@ This repository currently ships these skills:
    - the planning and task-administration skill for non-trivial work;
    - defined by
      [skills/spec-loop-plan-task/SKILL.md](../skills/spec-loop-plan-task/SKILL.md),
+     [skills/spec-loop-plan-task/planning-form-selection-guidance.md](../skills/spec-loop-plan-task/planning-form-selection-guidance.md),
      [skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md),
      [skills/spec-loop-plan-task/scenario-and-glossary-guidance.md](../skills/spec-loop-plan-task/scenario-and-glossary-guidance.md)
      when Scenario or task Glossary work is needed,
@@ -28,11 +29,11 @@ This repository currently ships these skills:
      on the task-file path.
 
 2. **[spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/)**
-   - the file-based work breakdown skill; turns large project,
-     feature, or initiative ideas into task-file tasks or subtasks,
-     enforces independently acceptable items and releasable
-     implementation increments by default, and requires explicit user
-     opt-out for non-releasable items;
+   - the file-based work breakdown skill used after planning-form
+     selection chooses `task file with subtasks` or `multiple task
+     files / backlog items`; it enforces independently acceptable
+     items and releasable implementation increments by default, and
+     requires explicit user opt-out for non-releasable items;
    - defined by
      [skills/spec-loop-plan-work-breakdown/SKILL.md](../skills/spec-loop-plan-work-breakdown/SKILL.md).
 
@@ -74,7 +75,7 @@ This repository currently ships these skills:
      files and glossary files.
 
 8. **[spec-loop-write-adr](../skills/spec-loop-write-adr/)**
-   - the ADR-writing skill used when planning routes work to an
+   - the ADR-writing skill used when planning sends work to an
      architecture decision record or when the user asks for ADR work;
    - defined by
      [skills/spec-loop-write-adr/SKILL.md](../skills/spec-loop-write-adr/SKILL.md)
@@ -93,12 +94,17 @@ This repository currently ships these skills:
    briefly.
 
    * **[skills/spec-loop-plan-task/SKILL.md](../skills/spec-loop-plan-task/SKILL.md)**
-     defines planning-path selection, approval and escalation rules,
-     ADR and documentation routing, Scenario/task Glossary triggers,
-     and phase rules.
+     defines first classification, approval and escalation rules, ADR
+     and documentation routing, Scenario/task Glossary triggers, and
+     phase rules.
+   * **[skills/spec-loop-plan-task/planning-form-selection-guidance.md](../skills/spec-loop-plan-task/planning-form-selection-guidance.md)**
+     defines planning-form selection across `taskless`, `chat-only
+     task`, `task file`, `task file with subtasks`, and `multiple task
+     files / backlog items`.
    * **[skills/spec-loop-plan-work-breakdown/SKILL.md](../skills/spec-loop-plan-work-breakdown/SKILL.md)**
-     defines file-based work breakdown into task-file tasks or
-     subtasks and the default releasable-increment rule.
+     defines file-based work breakdown after subtask or multi-task
+     planning forms are selected, including the default
+     releasable-increment rule.
    * **[skills/spec-loop-clarify-task/SKILL.md](../skills/spec-loop-clarify-task/SKILL.md)**
      defines how Spec Loop clarifies underspecified task creation,
      task updates, design updates, and ADR decisions during planning
@@ -183,6 +189,7 @@ This repository currently ships these skills:
 Recommended quick-check order:
 - [README.md](../README.md)
 - [skills/spec-loop-plan-task/SKILL.md](../skills/spec-loop-plan-task/SKILL.md)
+- [skills/spec-loop-plan-task/planning-form-selection-guidance.md](../skills/spec-loop-plan-task/planning-form-selection-guidance.md)
 - [skills/spec-loop-plan-work-breakdown/SKILL.md](../skills/spec-loop-plan-work-breakdown/SKILL.md)
 - [skills/spec-loop-clarify-task/SKILL.md](../skills/spec-loop-clarify-task/SKILL.md)
 - [skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)

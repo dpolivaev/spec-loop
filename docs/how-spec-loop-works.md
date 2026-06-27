@@ -4,13 +4,15 @@ Spec Loop follows this workflow:
 - **clarify** - [spec-loop-clarify-task](../skills/spec-loop-clarify-task/) resolves material unresolved
   questions before or during planning.
 - **plan** - the [spec-loop-plan-task](../skills/spec-loop-plan-task/) bundle governs plan-first
-  work, including the fileless planning path in chat, the task-file
-  path when needed, ADR and documentation routing, Scenario and task
-  Glossary triggers, and the gate before execution.
-- **break down work** -
+  work, including planning-form selection, the fileless planning path
+  in chat, the task-file path when needed, ADR and documentation
+  routing, Scenario and task Glossary triggers, and the gate before
+  execution.
+- **break down work** - after planning-form selection chooses subtasks
+  or multiple task files / backlog items,
   [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/) governs
-  file-based decomposition into task-file tasks or subtasks and
-  enforces releasable implementation increments by default.
+  file-based decomposition and enforces releasable implementation
+  increments by default.
 - **approve** - you approve either a fileless task in chat or a
   task-file plan; on the task-file path,
   [spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/) prepares the task for
@@ -32,8 +34,9 @@ companion files. File-based work breakdown rules live in
 [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/).
 
 The planning bundle starts with
-**[SKILL.md](../skills/spec-loop-plan-task/SKILL.md)** and
-**[common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**.
+**[SKILL.md](../skills/spec-loop-plan-task/SKILL.md)**,
+**[planning-form-selection-guidance.md](../skills/spec-loop-plan-task/planning-form-selection-guidance.md)**,
+and **[common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**.
 When Scenario or task Glossary work is needed, it also uses
 **[scenario-and-glossary-guidance.md](../skills/spec-loop-plan-task/scenario-and-glossary-guidance.md)**,
 plus **[chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)**

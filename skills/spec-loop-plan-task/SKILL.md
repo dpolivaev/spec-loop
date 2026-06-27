@@ -1,13 +1,15 @@
 ---
 name: spec-loop-plan-task
 description: >-
-  Choose the route for new work and plan it before execution. Use this
-  skill to decide whether the work is taskless, chat-only, or
-  task-file, and to create the needed plan for non-trivial
-  implementation work or investigation work that needs its own task.
+  Choose the planning form for new work and plan it before execution.
+  Use this skill to decide whether the work is taskless, chat-only, a
+  task file, a task file with subtasks, or multiple task files /
+  backlog items, and to create the needed plan for non-trivial implementation
+  work or investigation work that needs its own task.
 ---
 
-Use this skill for route selection and task planning before execution.
+Use this skill for planning-form selection and task planning before
+execution.
 
 Read this file fully unless it is already loaded in the current
 session context. Apply project instructions such as `AGENTS.md` when
@@ -35,9 +37,9 @@ only if the digest is missing or the user says the rules changed.
 If `AGENTS.md` conflicts with these rules, stop and ask the user.
 If the assistant stops or pauses, explain why.
 
-If the user explicitly asks for a route, planning procedure, or
-sectioned task format, do not simplify it unless the user explicitly
-agrees.
+If the user explicitly asks for a planning form, planning procedure,
+or sectioned task format, do not simplify it unless the user
+explicitly agrees.
 
 After execution approval for implementation work, follow
 [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
@@ -51,7 +53,7 @@ approved investigation, record final output in `Findings`, satisfy any
 Before drafting or revising a planning artifact as current truth,
 check whether any important open decision remains about scope,
 behavior, policy, conceptual model, conceptual contract boundaries,
-constraints, route, acceptance logic, or verification.
+constraints, planning form, acceptance logic, or verification.
 
 If yes, do only enough research to frame the open decision clearly
 and use [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing. Do
@@ -91,19 +93,10 @@ documentation changes; plan that scope as implementation work.
 Standalone documentation work is taskless by default unless the user
 or project rules require a task.
 
-For route selection:
-- for trivial implementation work, ask: `This looks trivial. May I do this
-  without a plan?`
-- for any work requiring a task, ask: `This needs a Spec Loop task.
-  May it be chat-only, or do you want a task file?`
+## Planning-form selection
 
-Before drafting a task or starting EXECUTION, state the route:
-- `Planning route: chat-only task`
-- `Planning route: task-file`
-- `Proposed route: taskless, pending your agreement`
-
-Do not ask extra permission questions for already requested work,
-except the route-selection prompts required here.
+After first classification, read and follow
+[planning-form-selection-guidance.md](planning-form-selection-guidance.md).
 
 ## Phase model
 
@@ -132,37 +125,6 @@ user or project instructions say otherwise.
 Re-run the mandatory clarification gate whenever later drafting
 exposes a new material branch.
 
-## Route selection
-
-Choose among:
-- taskless handling;
-- chat-only task; or
-- task-file.
-
-Work requiring a Spec Loop task must use either the chat-only route
-or the task-file route.
-
-Use task-file if any of these hold:
-- an active task file already governs the same work item;
-- a file-based work breakdown or multiple tracked work items are
-  needed;
-- subtasks are needed;
-- final clarification or plan state would be unsafe to keep only in
-  chat;
-- research or design is complex enough that a durable artifact is
-  safer;
-- project rules require a task file; or
-- the user prefers a task file.
-
-Otherwise chat-only is allowed.
-
-When later implementation follow-up appears after a task or subtask
-already in `review` or `done`, or after a chat-only task already
-presented as ready for User review, return to PLAN and re-run route
-selection. Reuse the existing task artifact only when the shared
-follow-up rule in [common-task-guidance.md](common-task-guidance.md) still allows it to govern
-the same active work item.
-
 ## Planning content
 
 For a Spec Loop task, planning uses the same task sections for
@@ -173,7 +135,7 @@ Design, review expectations, and needed verification.
 Use the shared task guidance from
 [common-task-guidance.md](common-task-guidance.md).
 
-## Route-specific handling
+## Planning-form-specific handling
 
 ### Taskless
 
@@ -190,19 +152,19 @@ clarification or planning flow, not as a separate task.
 
 ### Chat-only
 
-Use the chat-only route only while canonical task state can safely
-remain in chat.
+Use the chat-only planning form only while canonical task state can
+safely remain in chat.
 
-When this route is in use:
+When this planning form is in use:
 - read [chat-only-path-guidance.md](chat-only-path-guidance.md) fully; and
 - follow it together with [common-task-guidance.md](common-task-guidance.md).
 
 If durable state becomes unsafe to keep only in chat, switch to the
-task-file route before continuing.
+task-file planning form before continuing.
 
 ### Task-file
 
-When this route is in use:
+When this planning form is in use:
 - read [task-file-path-guidance.md](task-file-path-guidance.md) fully;
 - use it together with [common-task-guidance.md](common-task-guidance.md);
 - create or update the active task file before EXECUTION starts; and

@@ -153,11 +153,10 @@ because the earlier implementation created an intermediate state.
 If separate tracking within the same overall task is needed, use the
 task-file path because chat-only work has no subtasks.
 
-If it is a new follow-up task, re-run route selection for that new
-work item. A new chat-only task may start in chat without creating
-any task file only when the earlier chat-only task is no longer
-active and the new task independently still fits the chat-only
-criteria.
+If it is a new follow-up task, re-run planning-form selection for that
+new work item. A new chat-only task may start in chat without creating
+any task file only when the earlier chat-only task is no longer active
+and the new task independently still fits the chat-only criteria.
 
 Do not allow two active chat-only tasks at once. If the new work
 extends the active task or the combined work stops being simple, stay
@@ -232,15 +231,18 @@ Observed shape:
 
 - an earlier task-file task is already in `review` or `done`;
 - the User asks for a follow-up change;
-- the follow-up spans multiple files or needs exploration; and
-- the User wants the next Spec Loop task in chat.
+- the follow-up spans multiple files or needs exploration;
+- the User wants the next Spec Loop task in chat; and
+- chat-only remains credible after normal planning-form selection.
 
 Required assistant behavior:
 
 1. classify the follow-up as non-trivial;
 2. say that a Spec Loop task should be used;
-3. ask whether it may be chat-only or should use a task file;
-4. if the User chooses chat-only, emit the canonical full chat-only
+3. run normal planning-form selection and do not offer chat-only if a
+   task-file planning form, subtasks, or multiple task files are
+   required;
+4. if chat-only remains selected, emit the canonical full chat-only
    task in the shared sectioned format; and
 5. do not shorten the work to an informal plan or taskless handling
    just because the requested change is concrete.
