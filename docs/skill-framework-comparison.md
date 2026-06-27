@@ -31,9 +31,12 @@ specific task that is already chosen.
 - **OpenSpec** and **Superpowers** start earlier from a broader
   **problem, idea, or change** and then move toward
   spec/design/tasks/implementation.
-- **Spec Loop** is strongest once work has already been narrowed to a
-  **task or increment** and you want explicit research, alignment,
-  approval, and governed implementation for that increment.
+- **Spec Loop** is strongest once work has a concrete direction and
+  you want explicit planning-form selection, research, alignment,
+  approval, and governed implementation. It can split larger work into
+  subtasks or multiple task files / backlog items, but it is still
+  less focused on broad problem discovery than OpenSpec or
+  Superpowers.
 - **grill-with-docs** is mainly a **clarification and shared-language**
   component, not a full end-to-end SDLC framework.
 - **agent-skills** spans many stages, but less as one integrated
@@ -45,7 +48,7 @@ specific task that is already chosen.
 |:---|:---:|:---:|:---:|:---:|:---:|
 | Analyze a broad problem area before choosing implementation work | ★★★★★ | ★★★★★ | ★★ | ★★ | ★★★★ |
 | Clarify a specific requested task or increment before implementation | ★★★ | ★★★★ | ★★★★★ | ★★★★★ | ★★★★ |
-| Split a broad initiative or change into smaller deliverable slices/tasks | ★★★★ | ★★★★★ | ★★ | ★ | ★★★★ |
+| Split a broad initiative or change into smaller deliverable slices/tasks | ★★★★ | ★★★★★ | ★★★★ | ★ | ★★★★ |
 
 ## 2. Shared language and durable decision context
 
@@ -150,6 +153,8 @@ This comparison is based on the following materials.
 
 - **Spec Loop:** current repository skills and docs, especially
   [skills/spec-loop-plan-task/](../skills/spec-loop-plan-task/),
+  [planning-form-selection-guidance.md](../skills/spec-loop-plan-task/planning-form-selection-guidance.md),
+  [skills/spec-loop-plan-work-breakdown/](../skills/spec-loop-plan-work-breakdown/),
   [skills/spec-loop-clarify-task/](../skills/spec-loop-clarify-task/),
   [skills/spec-loop-implementation-flow/](../skills/spec-loop-implementation-flow/),
   [docs/review-responsibility-and-traceability.md](review-responsibility-and-traceability.md),
