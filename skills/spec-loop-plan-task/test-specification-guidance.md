@@ -54,6 +54,28 @@ edge cases, and risks described in the task.
 cases. It is not a test execution plan, test log, framework inventory,
 or pass/fail report.
 
+Automated tests must verify each acceptance behavior at the closest
+supported task-relevant boundary practical for the task. Direct service,
+application, handler, or helper tests may supplement coverage, but they
+do not satisfy an acceptance case whose behavior is defined at a
+broader boundary. For rendered UI behavior, the acceptance case is not
+satisfied unless a test, at any test level, exercises the rendered
+control or event path, such as submit, click, change, navigation, or
+keyboard input, unless the task states why that boundary is
+impractical. Do not require a broader end-to-end boundary when the
+approved behavior is internal and no externally observable or
+supported-contract behavior changes.
+
+When behavior crosses UI, representation, rendering, persistence,
+messaging, routing, process, or side-effect boundaries, automated tests
+must assert the contract-relevant conversion, output/state, timing, and
+payload/content as applicable.
+
+For user-reported defects or review fixes, automated tests must include
+a regression case that would have failed against the reported broken
+behavior unless impossible; if impossible, state why and identify the
+closest automated substitute.
+
 For example-based automated tests, use concise behavior/assertion
 bullets. Each bullet must make the tested condition and expected
 observable result clear enough to implement meaningful assertions.

@@ -319,6 +319,14 @@ approach instead of a target system change.
 For implementation work, Design is the implementation contract. It
 must be reviewable and implementation-ready before execution approval.
 
+For externally observable or supported-contract behavior, including UI
+behavior, Design must specify the task-relevant boundary contract:
+accepted input representation, trigger or protocol, observable
+output/state, side-effect payload when relevant, update or consistency
+timing when relevant, and acceptance-relevant absence expectations. Do
+not specify such behavior only through internal services, handlers, or
+helpers.
+
 Design must follow Constraints and Analysis when they are present. If
 Design conflicts with either, fix Design or return to clarification.
 
