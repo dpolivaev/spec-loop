@@ -422,8 +422,34 @@ using them.
   shorten it or use `\n` inside the same statement.
 - In sequence diagrams, each `A -> B : message` line is one
   statement and must stay on one physical line.
-- Class diagrams: one outer `package` with nested inner packages and
-  `set separator none`.
+- Before writing or revising any PlantUML class diagram:
+  - add `set separator none`;
+  - use exactly one top-level `package` block;
+  - put every other `package` block inside that outer package;
+  - for package blocks that represent hierarchical identifiers, such as
+    Java packages, namespaces, or path-like package names, collapse
+    repeated prefixes at every nesting level as a compressed prefix
+    tree: factor out a prefix only when at least two displayed
+    identifiers under the same parent package block share that prefix,
+    apply the same rule recursively to remaining suffixes, keep
+    non-branching suffixes joined with their original separator in child
+    package names, and never repeat a prefix already represented by an
+    ancestor package block; do not infer hierarchy from ordinary
+    descriptive package labels;
+  - declare every connector endpoint inside that package tree before
+    using it in a relationship;
+  - if an endpoint is not in scope for the diagram, omit the connector
+    rather than letting PlantUML create an implicit class; and
+  - treat the task as not approval-ready if any class diagram violates
+    these rules.
+
+  Example: `example.feature.chat.ui`,
+  `example.feature.chat.profile`, and `example.feature.prompt.ui` must
+  be written as `example.feature` with nested `chat` containing `ui`
+  and `profile`, plus `prompt.ui`. If only
+  `example.feature.chat.ui` appears, keep it as one package block; do
+  not split it into single-child package wrappers. Descriptive labels
+  such as `Freeplane AI` remain unchanged.
 - Use escape character `~` for text matching creole markup like `--`.
 
 ### Mermaid-specific rules

@@ -162,6 +162,13 @@ cleanly.
 Approval is blocked if those members are missing from the class
 diagram.
 
+Approval is blocked if any PlantUML class diagram violates the
+class-diagram packaging rules from
+[spec-loop-plan-task/task-file-path-guidance.md](../spec-loop-plan-task/task-file-path-guidance.md),
+including missing `set separator none`, zero or multiple top-level
+package blocks, package blocks outside the single outer package tree,
+or connector endpoints not declared inside that package tree.
+
 ## 5. Readiness checks
 
 Before showing the task to the user for evaluation or seeking
