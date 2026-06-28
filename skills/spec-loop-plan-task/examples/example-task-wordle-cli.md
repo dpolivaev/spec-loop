@@ -12,6 +12,7 @@ It covers:
 - filesystem / project structure
 - component interaction
 - class structure
+- static fields and methods in class diagrams
 - sequence flow
 
 It also demonstrates the Markdown-sensitive case where task sections
@@ -175,12 +176,15 @@ PlantUML writing hints:
   package "wordle.tutorial" {
     package "app" {
       class WordleApplication {
-        + main(args)
+        {static} + main(args)
       }
       class CommandLineOptions {
+        {static} + DEFAULT_WORD_LIST_PATH : String
+        {static} + DEFAULT_ATTEMPTS : int
         + cliMode : boolean
         + wordListPath : String
         + attempts : int
+        {static} + parse(args) : CommandLineOptions
       }
     }
 
@@ -189,7 +193,7 @@ PlantUML writing hints:
         + run()
       }
       class FeedbackRenderer {
-        + render(feedback) : String
+        {static} + render(feedback) : String
       }
     }
 

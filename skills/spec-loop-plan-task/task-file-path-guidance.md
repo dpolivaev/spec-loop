@@ -395,6 +395,9 @@ using them.
 - Put review-relevant operations in interface and class boxes.
 - Put review-relevant fields in DTO, request, response, result,
   value-object, and similar data-type boxes.
+- In PlantUML class diagrams, mark static fields and methods with
+  `{static}` inside the class box. Do not rely on renderer underlining
+  alone, and do not replace `{static}` with prose outside the diagram.
 - Do not restate those members in non-diagram text, lists, or tables
   unless the diagram would become unreadable or the information is not
   naturally owned by a class box.
