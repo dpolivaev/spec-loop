@@ -1,41 +1,49 @@
 # Planning-form selection guidance
 
-Consider five internal candidates:
+Choose from:
 - `taskless`;
 - `chat-only task`;
 - `task file`;
 - `task file with subtasks`; and
 - `multiple task files / backlog items`.
 
-Filter them before prompting:
-- `taskless` only when the Planning-form-specific handling section of
-  [SKILL.md](SKILL.md) allows it; trivial implementation still needs
-  explicit User agreement.
-- Exclude `chat-only task` when task state needs durability, research
-  or design is complex, subtasks or multiple task files are needed,
-  project rules require a task file, or the User prefers a task file.
-- Use `task file` for one durable, coherent increment without tracked
-  slices.
-- Use `task file with subtasks` when the work remains one overall task
-  but needs separately processed vertical slices to reduce context or
-  stage review. Implementation subtasks must still be releasable; this
-  checks vertical-slice validity, not whether each subtask should be
-  released independently.
-- Use `multiple task files / backlog items` when increments have
-  independent purpose, acceptance, or release value outside one task,
-  and that independent value justifies the extra planning and review
-  overhead.
+Start with all forms. Remove a form only when the reason is obvious:
+- `taskless`: keep for standalone documentation and ADR-only work. For
+  implementation, keep only when the work is trivial and the User
+  explicitly agrees. For investigation, keep only when no separate
+  planning, tracking, or reviewable output is needed.
+- `chat-only task`: leave in only when task state can safely stay in
+  chat. Avoid it when task state needs durability, research or design
+  is complex, subtasks or multiple task files are needed, project rules
+  require a task file, or the User prefers a task file.
+- `task file`: one durable work item, no tracked slices.
+- `task file with subtasks`: one task split into releasable vertical
+  slices. Separate release after each subtask must be possible, but is
+  normally not advisable.
+- `multiple task files / backlog items`: separate task and release
+  decisions. Use this when separate releases are advisable, not merely
+  possible.
 
-After filtering:
-- If one candidate remains, state it and the reason. If it is
-  taskless implementation, ask for explicit User agreement.
-- If two or more credible candidates remain, ask the clarification
-  question `What planning form should this work use?` Use only the
-  exact candidate names above as option text, omit excluded forms, and
-  include `Recommended option:` and `Reason:` as required by the
-  clarification question format.
-- Ask whether work may be chat-only only when `chat-only task` is
-  credible and no task-file planning form is recommended.
+For non-trivial implementation, name any slices that can be checked
+separately as part of filtering:
+- Keep `multiple task files / backlog items` when separate releases are
+  advisable.
+- Keep `task file with subtasks` when slices can stand alone but should
+  normally be released together.
+- Keep plain `task file` when no useful releasable slice split is
+  visible, or the User already rejected subtasks.
+- If unsure, leave the form in.
+
+Immediately after filtering:
+- If exactly one form remains, state it and the reason. If it is plain
+  `task file`, include the no-subtask reason. If it is taskless
+  implementation, ask for explicit User agreement.
+- If more than one form remains, ask `What planning form should this
+  work use?` Use only the exact form names above as option text, omit
+  removed forms, and include `Recommended option:` and `Reason:` as
+  required by the clarification question format.
+- Ask whether work may be chat-only only when `chat-only task` remains
+  possible and no task-file planning form is recommended.
 
 After selecting `task file with subtasks` or `multiple task files /
 backlog items`, hand off to

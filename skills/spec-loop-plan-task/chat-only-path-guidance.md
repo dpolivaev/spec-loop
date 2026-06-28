@@ -233,7 +233,7 @@ Observed shape:
 - the User asks for a follow-up change;
 - the follow-up spans multiple files or needs exploration;
 - the User wants the next Spec Loop task in chat; and
-- chat-only remains credible after normal planning-form selection.
+- chat-only remains possible after normal planning-form selection.
 
 Required assistant behavior:
 

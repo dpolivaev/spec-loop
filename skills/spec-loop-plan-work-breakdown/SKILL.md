@@ -42,6 +42,10 @@ updates needed for that increment to stand alone. This is a
 vertical-slice validity criterion, not a recommendation to release
 each task or subtask independently.
 
+Use separate task files/backlog items when separate release decisions
+are advisable. Use subtasks when the slices can safely stand alone but
+separate release decisions are not advisable.
+
 Do not create non-releasable implementation slices unless the User
 explicitly opts out. If the User opts out, record the opt-out in the
 active task artifact near the affected task or subtask.

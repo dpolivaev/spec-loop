@@ -85,13 +85,18 @@ If readiness checks fail, use this branch order:
    applicable direct fixes and evidence-based updates, or when the
    user explicitly asked for status-only feedback.
 
-Unlike ordinary directly fixable defects, structural decomposition
-changes must not be applied silently. If approval preparation finds
-that converting a no-subtask task to subtask form or splitting the
-active subtask would materially improve decomposition of the current
-work item by splitting it into parts that are easier to review and
-execute, briefly present the proposed restructuring and ask whether to
-apply it now.
+Do not silently restructure task files. For a no-subtask
+implementation task, check this before approval: is it clearly safe to
+review, implement, test, and accept this as one piece?
+
+If not, the task is not approval-ready. Do not seek execution
+approval. List the visible slices or the uncertainty. If one rewrite is
+obvious, recommend it. Ask whether to apply it now, unless the User
+already rejected that rewrite for the same work item. Continue without
+asking only when the no-subtask structure is clearly right.
+
+Use the same ask-first rule when splitting the active subtask may make
+the work clearer, safer, or easier to review and test.
 
 If the User agrees, restructure in place, keep only genuinely shared
 context at task level, move subtask-specific Research, Analysis,
@@ -223,9 +228,12 @@ increment:
   terms, relationships, boundaries, actors, or flows;
 - markdown structure is renderer-safe under the Task-file
   Constitution formatting rules, especially in list-item sections that
-  contain fenced blocks; and
+  contain fenced blocks;
 - the active task file's current main-task/subtask structure is a good
   fit for the current increment;
+- for a no-subtask implementation task, approval preparation has
+  verified that one-piece structure is clearly right, or the User
+  already rejected the relevant rewrite for this work item;
 - initial backlog tasks and subtasks created by
   [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
   are excluded from current-increment readiness checks until they

@@ -90,9 +90,6 @@ PLAN inside the current task or chat state. Investigation work must
 not ship product, test, build, config, runtime, or coupled
 documentation changes; plan that scope as implementation work.
 
-Standalone documentation work is taskless by default unless the user
-or project rules require a task.
-
 ## Planning-form selection
 
 After first classification, read and follow
@@ -137,23 +134,7 @@ Use the shared task guidance from
 
 ## Planning-form-specific handling
 
-### Taskless
-
-Taskless by default:
-- standalone documentation work; and
-- ADR-only work.
-
-For implementation work, taskless is allowed only when the work is trivial
-and the user explicitly agrees.
-
-Investigation work that does not need explicit planning, separate
-tracking, or a reviewable output is handled inside the current
-clarification or planning flow, not as a separate task.
-
 ### Chat-only
-
-Use the chat-only planning form only while canonical task state can
-safely remain in chat.
 
 When this planning form is in use:
 - read [chat-only-path-guidance.md](chat-only-path-guidance.md) fully; and
@@ -176,7 +157,7 @@ Before requesting execution approval for task-file work, use
 
 ## ADR routing
 
-ADR-only work is taskless by default. Use
+For ADR-only work, use
 [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) for ADR location, naming,
 structure, and update rules.
 
