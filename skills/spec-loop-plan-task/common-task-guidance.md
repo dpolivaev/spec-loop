@@ -347,6 +347,14 @@ or `Processor` unless they are established domain or framework terms
 that the design explicitly depends on. Undecided name/unit/boundary =
 not ready for implementation.
 
+When requirements name fixed members of a set, Design must state
+whether those members are data identities or distinct behaviors. If
+they share behavior, model them as data identities selected through
+parameters, collections, or lookup structures, not as duplicated
+methods or classes named after each member, unless an external contract
+requires those names. If member-specific methods or classes are used,
+Design must state what behavior or contract differs.
+
 If finding an exact name is hard, treat that as a design defect.
 Change the design until responsibilities and boundaries admit precise
 names, and immediately plan the required refactoring in the active
