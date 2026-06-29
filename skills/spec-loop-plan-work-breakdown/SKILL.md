@@ -28,6 +28,18 @@ promote to the task-file path before creating the breakdown. Chat-only
 content is not durable project state outside the current chat, so
 work breakdown state must live in a task file.
 
+## Scope and motivation gate
+
+Do not draft or revise a work breakdown until the whole work being split
+has clear Scope and Motivation.
+
+If Scope or Motivation is unclear, do only enough research to frame the
+gap, then use
+[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md)
+before drafting breakdown items.
+
+Do not create placeholder implementation items for unclear future work.
+
 ## Releasable-increment rule
 
 Every task or subtask in a work breakdown must be an independently
@@ -94,9 +106,6 @@ Before execution approval for a task-file item, complete the
 current-increment sections required by `spec-loop-plan-task`.
 
 ## Blocking unknowns
-
-Plan only work whose Scope and Motivation are understood enough for
-review.
 
 If a blocking unknown appears during work breakdown, use
 [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md)

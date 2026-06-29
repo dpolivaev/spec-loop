@@ -48,21 +48,6 @@ approved investigation, record final output in `Findings`, satisfy any
 `Test specification`, and present or move the task/subtask to
 `review` using the active path.
 
-## Mandatory clarification gate
-
-Before drafting or revising a planning artifact as current truth,
-check whether any important open decision remains about scope,
-behavior, policy, conceptual model, conceptual contract boundaries,
-constraints, planning form, acceptance logic, or verification.
-
-If yes, do only enough research to frame the open decision clearly
-and use [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md) before continuing. Do
-not wait for the user to ask for clarification explicitly.
-
-If clarification returns an unresolved blocker that needs ADR work or
-separate investigation work, route that work before continuing the
-blocked task plan.
-
 ## First classification
 
 Classify each work item as one of:
@@ -119,8 +104,31 @@ Rules:
 Standalone documentation work is outside this phase model unless the
 user or project instructions say otherwise.
 
-Re-run the mandatory clarification gate whenever later drafting
-exposes a new material branch.
+## Mandatory clarification gate
+
+Before creating or revising task or current-subtask planning content,
+check whether any important open decision remains, using the definition
+in
+[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md).
+
+If an important open decision remains, do only enough research to frame
+it clearly, then use
+[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md)
+before writing content that depends on the answer. Do not wait for the
+user to ask for clarification.
+
+Apply this gate before writing or revising Design or Test specification.
+
+For subtasks, apply this gate only to the current subtask and required
+task-level context. Apply it to future subtasks when they become
+current.
+
+If clarification returns an unresolved blocker that needs ADR work or
+separate investigation work, route that work before continuing the
+blocked task plan.
+
+If drafting later exposes an important open decision, stop and clarify
+before continuing.
 
 ## Planning content
 
