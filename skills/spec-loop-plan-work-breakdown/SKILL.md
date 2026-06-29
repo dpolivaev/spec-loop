@@ -33,6 +33,20 @@ work breakdown state must live in a task file.
 Do not draft or revise a work breakdown until the whole work being split
 has clear Scope and Motivation.
 
+For initial work breakdown and material revisions to an existing work
+breakdown, apply the clarification skill's mandatory decision screening
+to:
+- the whole work's Scope and Motivation;
+- each proposed task/subtask Scope and Motivation; and
+- any Constraint included in a task/subtask or needed to decide item
+  boundaries, ordering, releasability, or coherence.
+
+Do not use work breakdown to discover, clarify, or decide Constraints
+that only affect later Design or Test specification inside an already
+coherent item. If an unknown constraint affects item boundaries,
+ordering, releasability, or coherence, treat it as a breakdown blocker;
+otherwise defer it until the item becomes current.
+
 If Scope or Motivation is unclear, do only enough research to frame the
 gap, then use
 [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md)
@@ -60,7 +74,7 @@ separate release decisions are not advisable.
 
 Do not create non-releasable implementation slices unless the User
 explicitly opts out. If the User opts out, record the opt-out in the
-active task artifact near the affected task or subtask.
+affected item's Scope.
 
 Forbidden by default:
 - scaffolding-only, setup-only, model-only, logic-only, API-only,
@@ -82,10 +96,13 @@ Allowed when they stand alone:
 
 ## Work breakdown detail level
 
-For an initial work breakdown, each task or subtask only needs:
-- title;
-- Scope; and
-- Motivation.
+For an initial task or subtask created from scratch, include only the
+title, required identifier/status metadata, and these planning
+sections:
+- Scope;
+- Motivation; and
+- Constraints, only for already known limits that materially affect the
+  item.
 
 For subtasks, keep the normal `- **Status:**` line because it is
 lifecycle metadata, not planning content.
@@ -94,13 +111,23 @@ For research, spike, prototype, catalog, or proof tasks/subtasks,
 Scope states the investigation boundary and expected output;
 Motivation states what it blocks or enables.
 
-Do not add Briefing, Research, Scenario, Glossary, Constraints,
-Analysis, Design, Test specification, or Implementation notes for
-work breakdown items unless:
-- the item is becoming current;
-- the section is needed to make the work breakdown safe and
-  understandable; or
-- the User explicitly asks for that detail.
+Do not newly draft Briefing, Research, Scenario, Glossary, Analysis,
+Design, or Test specification during work breakdown. Complete those
+planning sections only after the item becomes current under
+`spec-loop-plan-task`.
+
+Do not create Findings or Implementation notes during work breakdown.
+Findings is filled only after approved investigation work produces
+reviewed output. Implementation notes follow
+`spec-loop-implementation-flow`.
+
+Include a Constraints section only for already known limits that
+materially affect the item. Do not create placeholder Constraints.
+
+The exception is restructuring existing planned work, including
+converting a no-subtask task into subtask form. Existing section
+content may be moved to the correct resulting task or subtask, but new
+content for those sections must not be drafted during breakdown.
 
 Before execution approval for a task-file item, complete the
 current-increment sections required by `spec-loop-plan-task`.
@@ -144,8 +171,10 @@ When drafting a work breakdown:
   separate tracking, or a reviewable output;
 - for implementation items, include all cross-layer work needed in
   that same item;
-- keep future subtasks lightweight until they are current, but do not
-  make them vague about the independent increment they deliver;
+- keep future tasks and subtasks created from scratch to title,
+  required identifier/status metadata, Scope, Motivation, and any
+  already known item-relevant Constraints until they are current, but
+  make the independent increment clear;
 - place supporting docs, glossary changes, config, migration, and tests
   in the same item as the behavior they support unless they are
   standalone deliverables; and
@@ -159,9 +188,9 @@ Before presenting or saving a file-based work breakdown, verify:
 - each implementation task or subtask can reach `review` on its own;
 - each implementation task or subtask has or will receive its own
   automated tests for that increment;
-- releasing after any completed implementation item in order would
-  leave the project coherent, whether or not that item is actually
-  released independently;
+- for implementation items without an explicit non-releasable opt-out,
+  after each completed item the resulting software state would be
+  coherent and releasable if no later sibling were implemented;
 - no item is named only for a layer or preparation activity unless it
   is independently acceptable;
 - any non-releasable implementation item has explicit User opt-out
@@ -171,5 +200,10 @@ Before presenting or saving a file-based work breakdown, verify:
 - no downstream implementation item depends on an unresolved unknown;
 - new backlog task files created by this breakdown have readable
   three-digit prefixes local to the containing folder;
-- any current item is detailed enough for its next approval step while
-  future items are only as detailed as needed.
+- each task or subtask created from scratch contains only the title,
+  required identifier/status metadata, Scope, Motivation, and already
+  known item-relevant Constraints when present;
+- fuller section content appears only in unchanged pre-existing current
+  items or because it was moved from an existing task or subtask during
+  restructuring, including conversion from no-subtask task to subtask
+  form.

@@ -7,7 +7,9 @@ description: >-
   to clarify, compare options, discuss criteria, or stress-test, or
   when different answers could materially change scope, behavior,
   policy, constraints, route, Design, Test specification, or ADR
-  content. Also use for general grilling when explicitly selected.
+  content. Provides mandatory decision screening for workflows that
+  require it before dependent Spec Loop content is written or revised.
+  Also use for general grilling when explicitly selected.
 ---
 
 Use this skill for any important clarification with the user:
@@ -28,7 +30,8 @@ policy, conceptual model, conceptual contract boundaries, constraints,
 route, acceptance logic, verification expectations, Design, Test
 specification, or the ADR Decision or its justification.
 
-If the current discussion or work item is clearly free of important
+Outside mandatory decision screening required by an invoking workflow,
+if the current discussion or work item is clearly free of important
 open decisions, do not use this skill.
 
 This skill is not just for asking questions. Resolve what evidence
@@ -87,6 +90,25 @@ Workflow-specific returns:
 - implementation-time clarification resumes
   [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
 
+## Mandatory decision screening
+
+When another workflow says to apply this skill before writing or
+revising content, screen each material decision point that would affect
+that content using the decision tree and allowed screening outcomes
+below. Do not replace this with an intuitive "no questions needed"
+judgment.
+
+A material decision point is any choice the assistant would need to
+make, imply, or write as final content, where a different answer could
+become an important open decision under this skill.
+
+Every material decision point must be classified as exactly one allowed
+screening outcome before dependent final content is written.
+
+Mandatory decision screening means classifying each material decision
+point, not asking about each one. Only the `pending User answer as a
+clarification question` outcome requires a clarification question.
+
 ## Decision tree
 
 ### 1. Check whether clarification is needed
@@ -96,6 +118,11 @@ If no important open decision remains:
 - otherwise, end the chat-only clarification promptly; and
 - do not start clarification batching or durable-state recording for
   this skill.
+
+When this skill is used for mandatory decision screening, return at
+this step only after every material decision point for the screened
+content is classified as resolved from determining evidence or outside
+clarification.
 
 ### 2. Answer simple cases inline
 
@@ -115,6 +142,19 @@ For each important open decision, first check whether the answer is
 already determined by confirmed user choices, current discussion
 context, existing task materials, glossary language, code, docs, or a
 low-risk mechanical consequence of those choices.
+
+Do not ask the User for information that the current codebase, docs, or
+governing artifact already determines. Use those sources first, and ask
+only when they are absent, ambiguous, conflicting, or insufficient for
+the decision.
+
+Defaults, "reasonable defaults", common practice, conventions,
+framework habit, implementation convenience, assistant preference, and
+assistant instinct are not existing determining evidence. Do not use
+them to silently resolve a material decision point.
+
+They may support a surfaced decision or recommended option. User
+confirmation or answer then settles the decision.
 
 Treat conflicts between user wording, glossary language, task
 materials, and code as evidence to surface explicitly.
@@ -196,6 +236,32 @@ Before sending any response containing `Options:`, validate that:
 
 When the user cleanly confirms a presented option, acknowledge it
 briefly, such as `B recorded` or `yes recorded`.
+
+### Decision screening outcomes
+
+Mandatory decision screening may produce only these outcomes for each
+material decision point:
+- resolved from determining evidence, with confirmation when needed;
+- outside clarification because screening shows the choice does not
+  meet the important open decision definition and does not need User
+  check under this skill;
+- pending User check in a surfaced decision batch;
+- pending User answer as a clarification question; or
+- blocked and returned under Resolution scope.
+
+The outside-clarification outcome covers wording or label choices when
+substantive meaning is settled, and Design/Test choices that only
+implement already settled scope, behavior, constraints, route, and
+acceptance expectations.
+
+Outside-clarification choices are not determining evidence and are not
+User-confirmed decisions. Return them to the invoking workflow and
+record them only where that workflow owns them.
+
+Only resolved and outside-clarification outcomes allow dependent final
+content to be written immediately. Pending User-check or User-answer
+outcomes must be resolved before writing dependent final content.
+Blocked outcomes return control to the invoking workflow.
 
 ## Clarification effort question
 

@@ -107,17 +107,12 @@ user or project instructions say otherwise.
 ## Mandatory clarification gate
 
 Before creating or revising task or current-subtask planning content,
-check whether any important open decision remains, using the definition
-in
+apply the clarification skill's mandatory decision screening from
 [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md).
+Use that skill's definition of important open decision.
 
-If an important open decision remains, do only enough research to frame
-it clearly, then use
-[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md)
-before writing content that depends on the answer. Do not wait for the
-user to ask for clarification.
-
-Apply this gate before writing or revising Design or Test specification.
+Apply this gate proactively; do not wait for the User to ask for
+clarification.
 
 For subtasks, apply this gate only to the current subtask and required
 task-level context. Apply it to future subtasks when they become

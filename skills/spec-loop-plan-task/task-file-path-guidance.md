@@ -40,8 +40,9 @@ increment.
 
 Initial backlog tasks and subtasks created by
 [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
-may contain only title, Scope, and Motivation until they become
-current; subtasks also keep the normal status line.
+may contain only title, required identifier/status metadata, Scope,
+Motivation, and already known item-relevant Constraints until they
+become current. Subtasks keep the normal status line.
 
 In tasks with subtasks, the shared readiness rules apply to the active
 subtask and any task-level context it depends on, not to future
@@ -265,8 +266,8 @@ When a task uses subtasks:
   `- **Status:** <status>`,
 - initial backlog subtasks created by
   [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
-  may contain only Scope and Motivation after the required status
-  line,
+  may contain only Scope, Motivation, and already known item-relevant
+  Constraints after the required status line,
 - every subtask beyond initial work breakdown form must use the same
   bold-label list-item labels and ordering as the shared main task
   form, including conditional Scenario, conditional Glossary, optional
