@@ -137,12 +137,12 @@ PlantUML writing hints:
   - No CLI-specific adapter classes exist yet.
 
 - **Analysis:**
-  - CLI mode stays a thin adapter because gameplay logic must remain
+  - CLI mode stays a thin adapter so that gameplay logic remains
     reusable in the existing engine.
   - CLI feedback is rendered in adapter classes because presentation
     belongs in the UI path, not in domain classes.
-  - Only `--cli`, `--wordlist`, and `--attempts` are supported because
-    the example should keep the external CLI contract minimal and
+  - Only `--cli`, `--wordlist`, and `--attempts` are supported so that
+    the example keeps the external CLI contract minimal and
     reviewable.
 - **Design:**
 

@@ -280,14 +280,22 @@ clarification, implementation, or review reveals new relevant facts
 about the original pre-implementation state, extend Research with
 those facts only.
 
-Do not repeat `Analysis` points here in decision-and-reason form.
+Do not repeat `Analysis` points here in decision-and-rationale form.
 
 ### Analysis
 
-Authoritative ledger of final clarification decisions and reasons.
+Authoritative ledger of final clarification decisions and concise
+rationale.
 
-Use one short bullet per final decision:
-`- <decision> because <reason>.`
+Use one short bullet per final decision. Use the connector that matches
+the relation:
+- `because` for a reason, constraint, or accepted fact;
+- `so that` for a purpose or intended effect.
+
+Do not use process history as rationale, such as `because the user
+confirmed`, `because the user asked`, or `because the user chose it`.
+Record the substantive reason or purpose instead. If none is useful,
+record only the decision.
 
 Keep only final decisions here. Move structural, behavioral,
 contract, and verification consequences into the affected canonical

@@ -311,8 +311,8 @@ In task artifacts:
 - keep final resolved decisions in `Analysis`;
 - follow [spec-loop-plan-task/common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md);
 - place `Analysis` immediately after `Research`; and
-- record each final clarification decision as
-  `- <decision> because <reason>.`
+- record final clarification decisions using the `Analysis` bullet
+  rules from that guidance.
 
 In ADRs, do not force all final resolved content into `Analysis`.
 Follow [spec-loop-write-adr/adr-format.md](../spec-loop-write-adr/adr-format.md):

@@ -71,7 +71,7 @@ briefly rather than inflating the section.
 ### Analysis
 
 Record the accepted decision criteria, accepted clarification
-decisions, and brief reasons that support the chosen decision.
+decisions, and brief rationale that supports the chosen decision.
 
 Use a compact bullet list, not a prose paragraph.
 
@@ -80,8 +80,8 @@ Keep only the ADR-relevant subset here.
 When a task artifact exists, draw this section from the ADR-relevant
 subset of its `Analysis` section. Do not copy the whole task ledger.
 
-`Analysis` is the ADR's authoritative decision-and-reason ledger.
-Do not repeat its points elsewhere in decision-and-reason form.
+`Analysis` is the ADR's authoritative decision-and-rationale ledger.
+Do not repeat its points elsewhere in decision-and-rationale form.
 Do not duplicate the full alternatives here.
 Do not put open questions, confidence values, transient notes,
 chain-of-thought, chat history, or step-by-step internal reasoning

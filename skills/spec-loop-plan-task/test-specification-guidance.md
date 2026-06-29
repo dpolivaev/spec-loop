@@ -129,7 +129,7 @@ Do not move automatable verification into `Manual tests`.
 
 ## Relation to other task sections
 
-Do not restate `Analysis` points in decision-and-reason form. Record
+Do not restate `Analysis` points in decision-and-rationale form. Record
 the resulting verification consequences instead.
 
 When task `Glossary` exists, `Test specification` must reuse approved

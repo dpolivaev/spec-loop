@@ -45,15 +45,15 @@ section:
   current-state findings, scope boundaries, and explicit deferrals;
 - `Alternatives` = credible competing options;
 - `Analysis` = the clarified reasoning, accepted criteria,
-  trade-offs, option comparisons, and brief reasons the chosen option
-  won; and
+  trade-offs, option comparisons, and brief rationale for why the
+  chosen option won; and
 - `Decision` = the chosen outcome as a concise TL;DR, including any
   explicit deferrals or major retained boundaries that are part of the
   outcome.
 
-Treat `Analysis` as the ADR's authoritative decision-and-reason
+Treat `Analysis` as the ADR's authoritative decision-and-rationale
 ledger.
-Do not repeat an `Analysis` point elsewhere in decision-and-reason
+Do not repeat an `Analysis` point elsewhere in decision-and-rationale
 form.
 
 When a task artifact exists, use its `Research`, `Analysis`, and
