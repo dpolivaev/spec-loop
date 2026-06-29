@@ -35,14 +35,18 @@ Only these outcomes are allowed.
 
 Polish the task for human design review before showing it to the user.
 
-If the next action is execution approval, ask for execution approval.
+If the next action is the internal execution-approval gate, ask the
+User to approve the planned implementation or investigation.
+`Execution approval` is an internal workflow term; do not use that
+phrase in user-facing approval requests.
 
 Use approval language such as:
-- `The task is ready for your execution approval.`
 - for implementation work:
-  `Please review the task and let me know whether to implement it.`
+  `The task is ready to implement after your approval.`
+  `Please review it and tell me whether to implement it.`
 - for investigation work:
-  `Please review the task and let me know whether to run the investigation.`
+  `The investigation plan is ready to run after your approval.`
+  `Please review it and tell me whether to run the investigation.`
 
 Do not say only `ready for review`, because `review` is overloaded
 between design review and post-execution review state.
