@@ -109,7 +109,8 @@ This file covers only the extra drafting guidance. It does not repeat:
   - if the diagram has nodes outside the main area, group them into
     semantically correct subgraphs;
   - label every Mermaid connection;
-  - keep Mermaid node labels as plain text; and
+  - keep Mermaid node labels as ordinary plain words, with exact code
+    or API names kept in the glossary text; and
   - do not rely on Mermaid click or href links for navigation.
 
 ## Quality checks

@@ -460,6 +460,11 @@ using them.
 
 - Task `Glossary` Mermaid diagrams must follow
   [scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md).
+- Use simple ASCII node IDs. Put display text in labels.
+- Do not put raw code-like syntax in unquoted Mermaid labels, including
+  method calls, brackets, parentheses, pipes, arrows, backticks, or
+  dotted API chains. If an exact technical label is required, use a
+  quoted Mermaid label and avoid `|` in the label text.
 - Class diagrams: use `classDiagram`.
 - Only single-level `namespace` blocks; no nesting.
 - Hierarchical boundaries: flatten namespace names instead of

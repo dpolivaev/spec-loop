@@ -190,7 +190,9 @@ Exclude by default:
   relationships explicit.
 - If a diagram is still too crowded after that restructuring, split
   the content into smaller diagrams.
-- Keep Mermaid node labels as plain text.
+- In glossary diagrams, keep Mermaid node labels as ordinary plain
+  words. Put exact code, API, method, field, or serialized names in the
+  glossary text instead of diagram labels.
 - Label every Mermaid connection.
 - Do not rely on Mermaid click or href links for document navigation;
   use AsciiDoc anchors and cross-references instead.
