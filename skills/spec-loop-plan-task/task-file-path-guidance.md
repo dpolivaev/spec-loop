@@ -95,11 +95,9 @@ appear in multiple backlog folders, once in `review`, and once in
 Move task files between folders to reflect lifecycle state.
 
 Backlog subfolder moves: organizational only. Adjust backlog prefixes
-to fit target. Remove backlog prefix only when moving out of
-`backlog`. Moving into `review`: remove any backlog prefix and assign
-the next `review` prefix. Moving out of `review`: remove the `review`
-prefix before applying the target folder's naming rule. Moving into
-`done`: assign next global `done` prefix independently.
+to fit target. For lifecycle-folder moves, remove any existing
+task-order prefix, then apply the target folder's naming rule.
+Numbering is never preserved across backlog, `review`, and `done`.
 
 Later implementation follow-up from a task or subtask already in
 `review` or `done` returns to PLAN and follows the shared follow-up
