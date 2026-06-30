@@ -43,9 +43,4 @@
   The build stays single-module and uses the Java and application plugins,
   Java 21 toolchain, UTF-8 compilation, and JUnit 5 test execution with
   `useJUnitPlatform()`.
-- **Test specification:**
-  - Automated tests:
-    - Run `./gradlew test` to verify JUnit wiring and test task execution.
-    - Run `./gradlew tasks` to verify wrapper and project configuration load.
-  - Manual tests:
-    - Run `./gradlew run` after adding an entry point and confirm startup.
+- **Test specification:** N/A

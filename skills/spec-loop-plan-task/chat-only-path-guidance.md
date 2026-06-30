@@ -205,10 +205,10 @@ plus the normal test run.
 
 - **Test specification:**
   - **Automated tests:**
-    - Overlong read-only viewer lines are truncated to the available
-      terminal width.
-  - **Manual tests:**
-    - N/A.
+    - `ReadOnlyViewerTest`
+      - `truncatesOverlongLinesToAvailableTerminalWidth`: overlong
+        read-only viewer lines are truncated to the available terminal
+        width.
 ```
 
 Later clarification on the same task:

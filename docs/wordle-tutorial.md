@@ -496,8 +496,9 @@ opt out.
   relationships, methods, and fields for this slice.
 - Reject the subtask if the Test specification leaves checks implicit,
   vague, or missing.
-- The Test specification should list every required automated check
-  and any remaining manual check for this slice.
+- The Test specification should list every required automated test
+  anchor, automated check anchor, and any remaining manual check for
+  this slice.
 - A good correction prompt is:
 
 ```text
@@ -505,7 +506,8 @@ Do not implement this subtask yet. Complete the design first.
 Make the class diagrams fully specified for this slice: include the
 review-relevant classes, relationships, methods, and fields.
 Make the Test specification explicit: list every required automated
-check and any remaining manual check for this slice.
+test anchor, automated check anchor, and any remaining manual check for
+this slice.
 ```
 
 ### You see (during subtask implementation)

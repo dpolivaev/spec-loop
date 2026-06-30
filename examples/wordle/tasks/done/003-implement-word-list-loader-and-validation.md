@@ -40,10 +40,13 @@
   `[0, N-1]`, iterates remaining lines to the target entry, and constructs
   a `Word` from that entry.
 - **Test specification:**
-  - Automated tests:
-    - Calling `randomWord` with the resource path returns a non-null `Word`.
-    - Returned word value is normalized to uppercase.
-    - Repeated calls can return different values for multi-entry lists.
-    - Header count parsing supports selecting the last declared entry.
-  - Manual tests:
-    - N/A
+  - **Automated tests:**
+    - `WordListLoaderTest`
+      - `randomWordReturnsNonNull`: verify calling `randomWord` with
+        the resource path returns a non-null `Word`.
+      - `randomWordIsUppercase`: verify returned word value is
+        normalized to uppercase.
+      - `randomWordReturnsDifferentValues`: verify repeated calls can
+        return different values for multi-entry lists.
+      - `randomWordSelectsOnlyEntry`: verify header count parsing
+        supports selecting the last declared entry.

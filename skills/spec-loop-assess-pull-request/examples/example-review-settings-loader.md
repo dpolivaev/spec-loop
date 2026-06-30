@@ -94,25 +94,17 @@
   ```
 
 - **Test specification:**
-  What should be tested:
-
-  - upgraded-config compatibility and default normalization
-  - invalid-key policy and migration behavior
-  - preview server activation and end-to-end rendering
-
-  Evidence present:
-
-  - parser-focused unit tests, including invalid-key rejection
-
-  Missing or unclear evidence:
-
-  - migration/regression tests for existing configs
-  - application startup proof with preview disabled and end-to-end
-    preview verification
-
-  Sufficiency judgment:
-
-  - The verification story is not yet sufficient for merge confidence.
+  - **Automated tests:**
+    - `SettingsLoaderTest`
+      - `loadsUpgradedConfigWithDefaults`: upgraded-config
+        compatibility and default normalization.
+      - `handlesInvalidKeysAccordingToMigrationPolicy`: invalid-key
+        policy and migration behavior.
+    - `PreviewServerTest`
+      - `startsOnlyWhenPreviewEnabled`: preview server activation
+        respects opt-in / opt-out behavior.
+      - `servesRenderedPreviewRequest`: browser preview requests reach
+        the rendering path end to end.
 
 - **Assessment:**
   - **Intent:**
@@ -123,6 +115,12 @@
   - **Implementation:**
     The branch couples the useful refactor to a breaking validation
     change and a default-enabled runtime expansion.
+  - **Verification:**
+    Parser-focused unit tests, including invalid-key rejection, are
+    present. Migration/regression tests for existing configs,
+    application startup proof with preview disabled, and end-to-end
+    preview verification are missing or unclear, so verification is not
+    sufficient for merge confidence.
   - **Complexity:**
     Most lasting value is in the loader path. Most new burden is in the
     fail-fast validation rollout and preview-server runtime surface.
@@ -164,24 +162,14 @@
   ```
 
 - **Test specification:**
-  What should be tested:
-
-  - known-key parsing and default normalization
-  - compatibility behavior for unknown and legacy keys
-
-  Evidence present:
-
-  - unit tests for parser happy paths and invalid-key rejection
-
-  Missing or weak evidence:
-
-  - regression tests for previously tolerated real-world configs and
-    migration or warning-first behavior
-
-  Sufficiency judgment:
-
-  - The present tests support the refactor itself, but not the
-    compatibility impact of the new policy.
+  - **Automated tests:**
+    - `SettingsLoaderTest`
+      - `loadsKnownKeysWithDefaults`: known-key parsing and default
+        normalization.
+      - `handlesLegacyConfigCompatibility`: compatibility behavior for
+        legacy keys and previously tolerated configs.
+      - `handlesUnknownKeysAccordingToRolloutPolicy`: unknown-key
+        validation follows the approved migration or warning policy.
 
 - **Assessment:**
   - **Intent:**
@@ -192,6 +180,11 @@
     The loader extraction looks coherent. The validation rollout is too
     abrupt because it turns previously tolerated configs into failures
     without migration or warning-first handling.
+  - **Verification:**
+    Parser happy-path and invalid-key rejection tests are present. The
+    tests support the refactor itself, but regression coverage for
+    real-world legacy configs and migration or warning-first behavior is
+    missing or weak.
   - **Complexity:**
     Parsing complexity moves into explicit types, which is justified.
     The fail-fast compatibility policy is accidental complexity in this
@@ -233,25 +226,14 @@
   ```
 
 - **Test specification:**
-  What should be tested:
-
-  - server opt-in / opt-out behavior
-  - startup / shutdown lifecycle
-  - request routing and rendering path
-
-  Evidence present:
-
-  - narrow route-level test coverage
-
-  Missing or weak evidence:
-
-  - startup proof with preview disabled
-  - end-to-end preview request verification
-  - security-boundary checks around exposure and defaults
-
-  Sufficiency judgment:
-
-  - Verification is not yet strong enough for a new runtime surface.
+  - **Automated tests:**
+    - `PreviewServerTest`
+      - `doesNotStartWhenPreviewDisabled`: server opt-out behavior.
+      - `startsAndStopsPreviewServer`: startup and shutdown lifecycle.
+      - `servesRenderedPreviewRequest`: request routing reaches the
+        renderer and returns rendered preview content.
+      - `keepsPreviewExposureLocalAndOptIn`: exposure and default
+        security boundary remain constrained.
 
 - **Assessment:**
   - **Intent:**
@@ -261,6 +243,12 @@
   - **Implementation:**
     Starting the server automatically without explicit opt-in is not a
     safe default.
+  - **Verification:**
+    Narrow route-level coverage is present. Startup proof with preview
+    disabled, end-to-end preview request verification, and
+    security-boundary checks around exposure and defaults are missing or
+    weak, so verification is not strong enough for a new runtime
+    surface.
   - **Complexity:**
     This area adds networking and lifecycle complexity and should be
     deferred to a separate PR unless a clear product need is accepted.

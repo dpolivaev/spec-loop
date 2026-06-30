@@ -40,9 +40,4 @@
 
   Assertion calls are migrated from JUnit assertion utilities to AssertJ
   equivalents while preserving existing test logic and coverage intent.
-- **Test specification:**
-  - Automated tests:
-    - Run `./gradlew test` and confirm all tests pass.
-    - Verify test sources contain no JUnit assertion static imports.
-  - Manual tests:
-    - N/A
+- **Test specification:** N/A

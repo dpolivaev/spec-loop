@@ -9,7 +9,9 @@ It demonstrates:
 - explicit final payload names; and
 - a compact identifier list/table where diagrams alone would be weak.
 
-Use it as a pattern collection, not as a required task size.
+Use it as a pattern collection, not as a required task size. Test
+anchors below are intended verification anchors for the approval-ready
+task, not an inventory of observed tests.
 
 - **Scope:** Normalize an export request payload so the server receives
   one stable structure for selected items and export options.
@@ -97,12 +99,15 @@ Use it as a pattern collection, not as a required task size.
 
 
 - **Test specification:**
-  - Automated tests:
-    - Export request composition emits the normalized request shape.
-    - Multiple selected identifiers keep their order in the emitted
-      request.
-    - `selectionCount` equals the emitted selected-identifier count.
-  - Manual tests:
+  - **Automated tests:**
+    - `ExportRequestCompositionTest`
+      - `emitsNormalizedRequestShape`: verify export request
+        composition emits the normalized request shape.
+      - `keepsSelectedIdentifierOrder`: verify multiple selected
+        identifiers keep their order in the emitted request.
+      - `selectionCountEqualsSelectedIdentifierCount`: verify
+        `selectionCount` equals the emitted selected-identifier count.
+  - **Manual tests:**
     - Export two selected items and inspect the outgoing request.
     - Verify that the server receives only the normalized payload
       shape.

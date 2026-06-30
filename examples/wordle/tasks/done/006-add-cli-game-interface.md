@@ -43,11 +43,7 @@
 
   CLI mode supports configurable attempts and optional external word-list
   source while preserving engine-centric gameplay logic.
-- **Test specification:**
-  - Automated tests:
-    - Covered by subtask test specifications.
-  - Manual tests:
-    - Covered by subtask test specifications.
+- **Test specification:** Covered by subtask test specifications.
 
 ## Subtask: Implement CLI parsing and game loop
 
@@ -93,14 +89,21 @@
   input is read from standard input, and run completion always returns
   process exit code `0` after printing final result text.
 - **Test specification:**
-  - Automated tests:
-    - Option defaults are applied when no CLI args are passed.
-    - `--wordlist` file path source is accepted and loaded.
-    - `--wordlist` URL source is accepted and loaded.
-    - Invalid guesses are reported and do not decrement attempts.
-    - Final `Result:` line reports `WON`, `LOST`, or `INTERRUPTED`.
-  - Manual tests:
-    - Run `./gradlew run` and confirm interactive terminal input works.
+  - **Automated tests:**
+    - `CliOptionsTest`
+      - `defaultsApplyWhenNoArgsProvided`: verify option defaults are
+        applied when no CLI args are passed.
+      - `emptyInputLineIsRejectedAndGameContinues`: verify empty input
+        is reported, does not decrement attempts, and the game can
+        still finish with `Result: WON`.
+      - `invalidGuessIsRejectedAndDoesNotConsumeAttempt`: verify
+        invalid guesses are reported and do not decrement attempts.
+      - `wordlistUrlIsAccepted`: verify `--wordlist` URL source is
+        accepted and loaded.
+      - `inputEndIsReportedAsInterrupted`: verify ended input reports
+        `Result: INTERRUPTED`.
+  - **Manual tests:**
+    - Start the CLI and confirm interactive terminal input works.
 
 ## Subtask: Implement feedback rendering
 
@@ -134,10 +137,12 @@
   Renderer output is deterministic for a given `GameState` so tests can
   assert exact expected strings.
 - **Test specification:**
-  - Automated tests:
-    - Renderer outputs expected status markers for known feedback inputs.
-  - Manual tests:
-    - N/A
+  - **Automated tests:**
+    - `FeedbackRendererTest`
+      - `renderLastFeedbackWithMarkers`: verify renderer outputs
+        expected status markers for known feedback inputs.
+      - `renderEmptyHistoryReturnsEmptyString`: verify empty history
+        renders as an empty string.
 
 ## Subtask: Document CLI build and usage
 
@@ -166,11 +171,7 @@
   ```
 
   README content is the only artifact changed in this subtask.
-- **Test specification:**
-  - Automated tests:
-    - N/A
-  - Manual tests:
-    - N/A
+- **Test specification:** N/A
 
 ## Subtask: Package distribution
 
@@ -206,8 +207,4 @@
   ```
 
   This subtask is documentation-only and does not modify runtime behavior.
-- **Test specification:**
-  - Automated tests:
-    - N/A
-  - Manual tests:
-    - N/A
+- **Test specification:** N/A

@@ -49,11 +49,7 @@
   Engine operations are pure state transitions: `startGame` initializes
   `IN_PROGRESS`, and `submitGuess` returns a new `GameState` with updated
   history, attempts, and terminal status when applicable.
-- **Test specification:**
-  - Automated tests:
-    - Covered by subtask test specifications.
-  - Manual tests:
-    - N/A
+- **Test specification:** Covered by subtask test specifications.
 
 ## Subtask: Define game state model
 
@@ -94,11 +90,10 @@
   `GameState` is immutable and becomes the single payload exchanged between
   gameplay engine and presentation layers.
 - **Test specification:**
-  - Automated tests:
-    - `GameState` stores provided solution, attempts, history, and status.
-    - `GameStatus` contains `IN_PROGRESS`, `WON`, and `LOST`.
-  - Manual tests:
-    - N/A
+  - **Automated tests:**
+    - `GameStateTest`
+      - `gameStateStoresProvidedValues`: verify `GameState` stores
+        provided solution, attempts, history, and status.
 
 ## Subtask: Implement game engine logic
 
@@ -142,11 +137,19 @@
   rule feedback, appends history, updates attempts, and transitions to `WON`
   or `LOST` when conditions are met.
 - **Test specification:**
-  - Automated tests:
-    - Starting a game sets `maxAttempts`, empty history, and `IN_PROGRESS`.
-    - Correct guess sets status to `WON`.
-    - Incorrect guess decrements attempts and appends feedback.
-    - `maxAttempts` incorrect guesses transition to `LOST`.
-    - Post-terminal submissions follow defined behavior consistently.
-  - Manual tests:
-    - N/A
+  - **Automated tests:**
+    - `GameEngineTest`
+      - `startGameInitializesState`: verify starting a game sets
+        `maxAttempts`, empty history, and `IN_PROGRESS`.
+      - `correctGuessWinsWithoutDecrement`: verify a correct guess
+        sets status to `WON`.
+      - `incorrectGuessDecrementsAttempts`: verify an incorrect guess
+        decrements attempts and appends feedback.
+      - `incorrectGuessEndsGameAtZeroAttempts`: verify `maxAttempts`
+        incorrect guesses transition to `LOST`.
+      - `submitGuessAfterWonReturnsSameState`: verify submissions
+        after `WON` return the same state.
+      - `submitGuessAfterLostReturnsSameState`: verify submissions
+        after `LOST` return the same state.
+      - `submitGuessUsesProvidedSolution`: verify submitted guesses are
+        evaluated against the provided solution.

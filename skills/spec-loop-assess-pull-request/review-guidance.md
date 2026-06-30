@@ -287,14 +287,17 @@ unless diff spans them or user explicitly approves.
 - `Design` — implemented target state at head commit. 
 Focus on resulting structure, behavior, interfaces, interactions, changed relationships. 
 Explain how area now works and how new/changed pieces fit together; do not repeat Research pattern hunt.
-- `Test specification` — first reconstruct what should be tested from reviewed behavior, 
-design, risks, integration points. 
-Then compare expected verification scope against changed tests, claimed verification, 
-executed commands, coverage gaps, missing evidence. Not a list of test classes or commands. 
-Explain which behaviors/contracts/regressions/integrations/boundaries/invariants should be covered, 
-what evidence is present, what is missing, whether tests appear sufficient, 
-whether assertions validate intended behavior vs. merely exercise code paths. 
-Apply both globally and per area. Global: distill into concise `Verification` inside `Review outcome`.
+- `Test specification` — reconstruct the verification anchors expected
+from reviewed behavior, design, risks, and integration points. Use the
+shared structure from
+[spec-loop-plan-task/test-specification-guidance.md](../spec-loop-plan-task/test-specification-guidance.md)
+where anchors are known or safely reconstructable. In assessment
+context, anchors are reconstructed verification anchors, not planning
+targets. Do not invent exact test names when naming cannot be safely
+reconstructed. Evidence present, missing or unclear evidence, assertion
+weakness, and sufficiency judgment belong in `Assessment` and the
+global `Verification` outcome, not inside `Test specification`. Apply
+both globally and per area.
 - `Assessment` — AI analytic findings, uncertainties, unresolved
   concerns, recommendations, reviewer attention points, and trade-off
   analysis. Keep the overall verdict only in `Review outcome`. Use

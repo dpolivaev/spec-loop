@@ -8,7 +8,9 @@ It demonstrates:
 - a class diagram plus a sequence diagram; and
 - a compact identifier list instead of a repeated responsibility table.
 
-Use it as a pattern collection, not as a required task size.
+Use it as a pattern collection, not as a required task size. Test
+anchors below are intended verification anchors for the approval-ready
+task, not an inventory of observed tests.
 
 - **Scope:** Add a transient background session path that does not
   enter the persisted live-session registry.
@@ -88,14 +90,19 @@ Use it as a pattern collection, not as a required task size.
 
 
 - **Test specification:**
-  - Automated tests:
-    - Visible session completion persists the session in the
-      visible-session list.
-    - Background run completion does not add the run to the
-      visible-session list.
-    - Background path failure leaves the visible-session list
-      unchanged.
-  - Manual tests:
+  - **Automated tests:**
+    - `SessionVisibilityPersistenceTest`
+      - `visibleCompletionPersistsSessionInVisibleSessionList`: verify
+        visible session completion persists the session in the
+        visible-session list.
+      - `backgroundRunCompletionDoesNotPersistVisibleSession`: verify
+        background run completion does not add the run to the
+        visible-session list.
+    - `BackgroundSessionFailureTest`
+      - `backgroundPathFailureLeavesVisibleSessionsUnchanged`: verify
+        background path failure leaves the visible-session list
+        unchanged.
+  - **Manual tests:**
     - Run one visible session and confirm it appears in the session
       list.
     - Trigger one background export and confirm it stays out of the

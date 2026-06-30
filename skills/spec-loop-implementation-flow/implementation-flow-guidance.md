@@ -50,8 +50,9 @@ point.
 Use this route when implementation stays inside the approved design
 boundary and no blocking ambiguity remains.
 
-Adding tests beyond `Test specification` is allowed as long as those
-tests stay within the approved increment.
+Adding automated tests or automated checks beyond `Test specification`
+is allowed as long as those tests or checks stay within the approved
+increment.
 
 ### B. Pause the affected area and clarify
 
@@ -128,11 +129,11 @@ verification and project-level checks have passed, and it is ready for
 user review.
 
 Reaching `review` means the current implemented state matches the
-approved task and has passed the automated tests that implement the
-`Test specification` plus any required project-level checks at that
-checkpoint. Optional `Manual tests` listed as human-review hints need
-not be performed before `review`. The path companion defines how that
-state is expressed.
+approved task and has passed the automated tests and automated checks
+that implement the `Test specification` plus any required
+project-level checks at that checkpoint. Optional `Manual tests` listed
+as human-review hints need not be performed before `review`. The path
+companion defines how that state is expressed.
 
 After route E is expressed, this skill is done for that increment.
 Later implementation follow-up returns to `spec-loop-plan-task`.
@@ -144,9 +145,11 @@ not silently normalize the task to the code.
 
 Only these sources may override earlier canonical task wording or
 decisions:
-- an explicit user clarification statement; or
+- an explicit user clarification statement;
 - explicit post-implementation user approval of keeping an implemented
-  deviation.
+  deviation; or
+- mechanical alignment of `Test specification` verification anchors to
+  actual landed names under the rule below.
 
 Update only the minimal affected canonical section or sections.
 Do not rewrite canonical task sections for:
@@ -165,6 +168,14 @@ this task is forbidden.
 Patch other changed canonical sections to current truth when explicit
 authority exists, including `Scenario`, `Glossary`, `Constraints`,
 `Design`, and `Test specification` as applicable.
+
+After implementation, updating `Test specification` verification
+anchors to the actual landed names is mechanical alignment, not a
+design deviation, only when the change is naming-only and does not
+change verification boundary, behavior/assertion intent, ownership or
+container, or case split/merge structure. If any of those changes,
+treat it as a Test specification or Design change and use the
+applicable implementation-time route.
 
 When project glossary file work happens during implementation, use it
 only to record approved task `Glossary` meaning. If no explicit
@@ -258,8 +269,9 @@ Before reaching `review`, ensure that:
 - any canonical task-section changes have explicit authority from an
   explicit user clarification or explicit post-implementation user
   approval of keeping an implemented deviation;
-- automated tests that implement `Test specification` and any required
-  project-level checks pass, unless the user waived them;
+- automated tests and automated checks that implement
+  `Test specification` plus any required project-level checks pass,
+  unless the user waived them;
 - any `Manual tests` listed as optional human-review hints are not
   treated as blockers for `review`, and are not claimed as performed
   unless they were actually performed;

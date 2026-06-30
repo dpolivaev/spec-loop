@@ -421,14 +421,6 @@ explicit checks are needed to review the result.
 Before drafting or revising `Test specification`, you must read and
 follow [test-specification-guidance.md](test-specification-guidance.md).
 
-Separate automated verification cases from optional human-reader hints:
-
-- `Automated tests` = task-specific automated verification cases, not
-  execution commands, framework names, or pass/fail status.
-- `Manual tests` = optional checks a human reviewer may perform after
-  handoff. They do not block `review` and must not be reported as done
-  unless actually performed.
-
 ### Findings
 
 Conditional output section for investigation-only tasks and subtasks.

@@ -243,11 +243,6 @@
     - formatting and context-preservation rules.
 
 - **Test specification:**
-  - **Automated tests:**
-    - N/A unless an existing behavior example, snapshot, or regression
-      check already covers planning-path wording or chat task shape.
-    - If such coverage already exists, update only the directly
-      affected assertions.
   - **Manual tests:**
     - Compare the current `task-file-path-guidance.md` against the new
       shared/task-file split and verify that no normative section
@@ -360,9 +355,6 @@
     `task-file-path-guidance.md` for task-file lifecycle, subtask, and
     folder rules.
 - **Test specification:**
-  - **Automated tests:**
-    - N/A unless existing behavior examples or checks already cover
-      implementation-flow documentation structure.
   - **Manual tests:**
     - Verify that the implementation-flow core no longer mixes
       fileless and task-file mechanics in its main sections.

@@ -51,11 +51,7 @@
 
   UI path and CLI path share validation and engine rules so gameplay
   semantics remain consistent across interaction modes.
-- **Test specification:**
-  - Automated tests:
-    - Covered by subtask test specifications.
-  - Manual tests:
-    - Covered by subtask test specifications.
+- **Test specification:** Covered by subtask test specifications.
 
 ## Subtask: Prepare shared input validation
 
@@ -100,14 +96,20 @@
   Parsed options become passive data, while gameplay execution and input
   validation are separated into focused components.
 - **Test specification:**
-  - Automated tests:
-    - Shared validator rejects empty input with user-facing message.
-    - Shared validator rejects invalid-length input with message.
-    - Shared validator accepts valid-length input and normalizes value.
-    - `CliOptions` parsing does not execute gameplay loop.
-    - `CliGameRunner` emits feedback, invalid-input, and status callbacks.
-  - Manual tests:
-    - N/A
+  - **Automated tests:**
+    - `GuessInputHandlerTest`
+      - `rejectsEmptyInput`: verify shared validator rejects empty
+        input with user-facing message.
+      - `rejectsInvalidLength`: verify shared validator rejects
+        invalid-length input with message.
+      - `acceptsValidLength`: verify shared validator accepts
+        valid-length input and normalizes value.
+    - `CliOptionsTest`
+      - `cliOptionIsParsed`: verify `CliOptions` parsing does not
+        execute the gameplay loop.
+    - `CliGameRunnerTest`
+      - `runsLoopAndEmitsCallbacks`: verify `CliGameRunner` emits
+        prompt, feedback, and status callbacks for a valid run.
 
 ## Subtask: Implement Swing UI
 
@@ -159,12 +161,16 @@
   The controller owns widget updates, routes submissions through shared
   validation, and disables input when status reaches a terminal value.
 - **Test specification:**
-  - Automated tests:
-    - Empty input is rejected without attempt decrement.
-    - Invalid-length input is rejected without attempt decrement.
-    - Valid guesses append feedback rows and update attempts.
-    - Terminal statuses disable input and display final result.
-  - Manual tests:
+  - **Automated tests:**
+    - `GameUiControllerTest`
+      - `emptyInputIsRejectedWithoutConsumingAttempt`: verify empty
+        input is rejected without attempt decrement.
+      - `invalidLengthIsRejectedWithoutConsumingAttempt`: verify
+        invalid-length input is rejected without attempt decrement.
+      - `validGuessAppendsFeedbackAndDisablesInputOnWin`: verify a
+        winning valid guess appends a feedback row, displays `WON`, and
+        disables input controls.
+  - **Manual tests:**
     - Run `./gradlew run` in non-headless mode and confirm UI default.
     - Run `./gradlew run --args="--cli ..."` and confirm CLI mode.
     - Run in headless mode and confirm automatic CLI fallback.
@@ -202,8 +208,4 @@
   ```
 
   This subtask changes documentation only and does not alter runtime logic.
-- **Test specification:**
-  - Automated tests:
-    - N/A
-  - Manual tests:
-    - N/A
+- **Test specification:** N/A

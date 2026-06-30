@@ -484,21 +484,15 @@ all no-subtask tasks.
 
 For task-file subtasks:
 
-- Implementation subtasks must include testing. Don't split
-  implementation and testing across separate subtasks for the same
-  functional increment.
+- Implementation subtasks must include their applicable verification
+  in the same subtask. Don't split implementation and verification
+  across separate subtasks for the same functional increment.
 - Separate test-focused tasks allowed when adding or extending
   coverage as standalone scope.
-- Each implementation subtask: include an explicit `Automated tests`
-  sublist of task-specific verification cases.
-- Include a `Manual tests` sublist only for useful optional
-  human-reader checks that cannot be covered adequately by automated
-  tests; otherwise set `Manual tests: N/A`.
-- Manual tests are reviewer hints, not agent review gates. Do not
-  move automatable verification into `Manual tests`; list it under
-  `Automated tests`.
-- Do not list test execution commands, framework names, or pass/fail
-  status in `Test specification`.
-- Run and fix the automated tests that implement the specified cases
-  and any required project-level checks before moving a task or
-  subtask to `review`, unless the User waives them.
+- Each implementation subtask: follow the shared Test specification
+  structure and verification-anchor rules from
+  [test-specification-guidance.md](test-specification-guidance.md).
+- Run and fix the automated tests and automated checks that implement
+  the specified verification anchors plus any required project-level
+  checks before moving a task or subtask to `review`, unless the User
+  waives them.

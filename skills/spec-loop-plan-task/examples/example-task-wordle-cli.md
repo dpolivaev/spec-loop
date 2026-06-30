@@ -243,13 +243,18 @@ PlantUML writing hints:
   - `--attempts`
 
 - **Test specification:**
-  - Automated tests:
-    - Missing optional CLI arguments use default wordlist and attempt
-      values.
-    - Invalid CLI argument values are rejected with user-facing
-      feedback.
-    - CLI feedback rendering matches the engine guess result.
-    - CLI mode delegates valid guess validation and scoring to the
-      existing engine.
-  - Manual tests:
+  - **Automated tests:**
+    - `CliOptionsTest`
+      - `missingOptionalArgumentsUseDefaults`: missing optional CLI
+        arguments use default wordlist and attempt values.
+      - `invalidArgumentValuesAreRejectedWithFeedback`: invalid CLI
+        argument values are rejected with user-facing feedback.
+    - `CliFeedbackRendererTest`
+      - `rendersEngineGuessResultFeedback`: CLI feedback rendering
+        matches the engine guess result.
+    - `CliGameLoopTest`
+      - `validGuessDelegatesValidationAndScoringToEngine`: CLI mode
+        delegates valid guess validation and scoring to the existing
+        engine.
+  - **Manual tests:**
     - Start the CLI and complete one short game from the terminal.

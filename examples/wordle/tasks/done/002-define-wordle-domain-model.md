@@ -42,11 +42,7 @@
   `Word` owns normalization and shape validation, and `WordleRules` owns
   duplicate-aware scoring logic that first marks exact matches and then
   allocates remaining present letters by available counts.
-- **Test specification:**
-  - Automated tests:
-    - Covered by subtask test specifications.
-  - Manual tests:
-    - N/A
+- **Test specification:** Covered by subtask test specifications.
 
 ## Subtask: Define domain objects
 
@@ -85,15 +81,22 @@
   The domain model is immutable and constructor-driven so state changes are
   explicit and controlled by object creation.
 - **Test specification:**
-  - Automated tests:
-    - Creating `Word` from lowercase input normalizes to uppercase.
-    - Creating `Word` with length not equal to five is rejected.
-    - Creating `Word` with non A-Z characters is rejected.
-    - Creating `Word` with valid five-letter alphabetic input succeeds.
-    - `Feedback` preserves entry order.
-    - `LetterFeedback` exposes position, letter, and status correctly.
-  - Manual tests:
-    - N/A
+  - **Automated tests:**
+    - `WordTest`
+      - `wordNormalizesToUppercase`: verify creating `Word` from
+        lowercase input normalizes to uppercase.
+      - `wordRejectsWrongLength`: verify creating `Word` with length
+        not equal to five is rejected.
+      - `wordRejectsNonLetters`: verify creating `Word` with non-A-Z
+        characters is rejected.
+      - `wordAcceptsValidInput`: verify creating `Word` with valid
+        five-letter alphabetic input succeeds.
+    - `FeedbackTest`
+      - `feedbackPreservesEntries`: verify `Feedback` preserves entry
+        order.
+      - `letterFeedbackAccessorsExposeValues`: verify
+        `LetterFeedback` exposes position, letter, and status
+        correctly.
 
 ## Subtask: Implement guess evaluation rules
 
@@ -133,11 +136,15 @@
   The rules class evaluates exact matches first and tracks remaining
   unmatched solution letters before assigning present or absent statuses.
 - **Test specification:**
-  - Automated tests:
-    - Identical solution and guess produce all `CORRECT` statuses.
-    - Completely non-overlapping words produce all `ABSENT` statuses.
-    - Wrong-position overlaps produce correct `PRESENT` statuses.
-    - Duplicate case `LEVEL` vs `LELEE` respects remaining-count logic.
-    - Guess duplicates beyond solution counts are marked `ABSENT`.
-  - Manual tests:
-    - N/A
+  - **Automated tests:**
+    - `WordleRulesTest`
+      - `compareAllCorrect`: verify identical solution and guess
+        produce all `CORRECT` statuses.
+      - `compareAllAbsent`: verify completely non-overlapping words
+        produce all `ABSENT` statuses.
+      - `comparePresentLetters`: verify wrong-position overlaps
+        produce correct `PRESENT` statuses.
+      - `compareDuplicateLetters`: verify duplicate case `LEVEL` vs
+        `LELEE` respects remaining-count logic.
+      - `compareDuplicateLettersWithExtraGuessRepeats`: verify guess
+        duplicates beyond solution counts are marked `ABSENT`.
