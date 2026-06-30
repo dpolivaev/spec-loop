@@ -76,14 +76,17 @@ Top-level folders: `backlog`, `in-progress`, `review`, `done`.
 - Backlog numbering optional except for task files created by
   [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md);
   those use readable three-digit prefixes local to containing folder.
+- `review` uses required three-digit review-order prefix, one sequence
+  local to the `review` folder.
 - `done` uses required three-digit completion-order prefix, one
   global sequence.
 
 Task base names: no ticket IDs, abbreviations; use readable
 descriptive words.
 
-Backlog and done numbering independent. Same number may appear in
-multiple backlog folders, once in `done`.
+Backlog, review, and done numbering are independent. Same number may
+appear in multiple backlog folders, once in `review`, and once in
+`done`.
 
 ### 2. Task administration
 
@@ -93,8 +96,10 @@ Move task files between folders to reflect lifecycle state.
 
 Backlog subfolder moves: organizational only. Adjust backlog prefixes
 to fit target. Remove backlog prefix only when moving out of
-`backlog`. Moving into `done`: assign next global `done` prefix
-independently.
+`backlog`. Moving into `review`: remove any backlog prefix and assign
+the next `review` prefix. Moving out of `review`: remove the `review`
+prefix before applying the target folder's naming rule. Moving into
+`done`: assign next global `done` prefix independently.
 
 Later implementation follow-up from a task or subtask already in
 `review` or `done` returns to PLAN and follows the shared follow-up
@@ -103,10 +108,11 @@ more implementation work.
 
 If that shared rule keeps the same task or subtask from `review`, it
 stays in place by default during that planning and renewed-approval
-work. Do not require a move back to `in-progress` or separate
-tracking solely because the earlier implementation created an
-intermediate state. Briefly mention that the User may instead request
-a new task or subtask, a task move, or a subtask status change.
+work and keeps its `review` prefix. Do not require a move back to
+`in-progress` or separate tracking solely because the earlier
+implementation created an intermediate state. Briefly mention that the
+User may instead request a new task or subtask, a task move, or a
+subtask status change.
 
 Tasks in `done` stay in place. If the User has not already specified
 whether to reuse the same task or subtask or use separate tracking,
@@ -148,8 +154,8 @@ reporting.
 #### Done cleanup
 
 Keep done tasks under `done` with global three-digit prefix
-(independent of backlog prefix). Delete from working tree after
-release tag created.
+(independent of backlog and review prefixes). Delete from working tree
+after release tag created.
 
 ## Task States
 
