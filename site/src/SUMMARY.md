@@ -4,9 +4,9 @@
 - [How Spec Loop Works](docs/how-spec-loop-works.md)
 - [Governance, Review, and Traceability](docs/review-responsibility-and-traceability.md)
 - [Skills Overview](docs/skills-overview.md)
+- [Diagram and Rendering Policy](docs/diagram-and-rendering-policy.md)
 - [AI Workflow Framework Comparison](docs/skill-framework-comparison.md)
 - [Bank Kata AI Workflow Case Study](docs/bank-kata-ai-workflow-case-study.md)
-- [Diagram and Rendering Policy](docs/diagram-and-rendering-policy.md)
 
 # Tutorials
 
