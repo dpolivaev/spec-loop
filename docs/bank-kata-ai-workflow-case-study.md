@@ -9,7 +9,7 @@ The study does not name a universal framework. It records which framework or wor
 | Goal | Framework or workflow | Evidence from the bank-kata solutions | Caveat |
 |---|---|---|---|
 | Compact specification review | [OpenSpec](https://github.com/Fission-AI/OpenSpec) | The OpenSpec solutions, `open-spec` and `open-spec-calisthenics`, had the shortest generated specification files: 5 files / 214 lines and 6 files / 310 lines. The proposal/design/spec split was easy to scan. | OpenSpec documented fewer detailed data, UI, and failure-behavior decisions before implementation. |
-| Design-level control before code | [Spec Loop](https://github.com/dpolivaev/spec-loop) | Spec Loop writes task files with scope, scenarios, analysis, design, and test specifications before implementation. `spec-loop-base-backlog-steered`, `spec-loop-base-backlog-prompted`, and `spec-loop-incremental` each reached 13 full behavior-evidence categories, with design scores of 17/18, 14/18, and 13/18. | It requires the user to review task files at enforced planning checkpoints. |
+| Design-level control before code | [Spec Loop](https://github.com/dpolivaev/spec-loop) | Spec Loop writes task files with scope, scenarios, analysis, design, and test specifications before implementation. `spec-loop-base-backlog-steered`, `spec-loop-base-backlog-prompted`, and `spec-loop-incremental` each reached 13 full behavior-evidence categories, with design scores of 17/18, 14/18, and 13/18. | It asks the user to review task files before implementation. |
 | Detailed implementation steps | [Superpowers](https://github.com/obra/superpowers) | Superpowers generated design documents and implementation plans. The implementation plans contained 7 to 9 tasks, depending on the solution, and the sessions surfaced many product choices. | The generated Superpowers documents were 1988 to 2282 lines. The Superpowers solutions had fewer full behavior-evidence categories than the two Spec Loop backlog solutions. |
 | Few user interruptions | [OpenSpec](https://github.com/Fission-AI/OpenSpec); GSD Small Feature | The OpenSpec solutions, `open-spec` and `open-spec-calisthenics`, had the fewest visible clarification gates and shortest generated specification files. `gsd-small-feature` also used few clarification gates and committed scope, plan, state, and summary files. | The OpenSpec solutions made more unreviewed choices. `gsd-small-feature` had fewer committed automated tests for required behavior and less committed decision analysis than the Spec Loop backlog solutions. |
 | Future auditability of code changes | [Spec Loop](https://github.com/dpolivaev/spec-loop), with [OpenSpec](https://github.com/Fission-AI/OpenSpec) as the closest compact alternative | Spec Loop task files preserved research, analysis, design, glossary/terms, constraints, and test specifications. OpenSpec preserved proposal/design/spec rationale, including decisions and alternatives. | This measures what a future reviewer can reconstruct from Git, not whether the app works today. Files only count when committed. |
@@ -63,7 +63,7 @@ OpenSpec structures work as a change proposal: proposal, design, tasks, and capa
 
 ### [Spec Loop](https://github.com/dpolivaev/spec-loop)
 
-Spec Loop writes task files, subtasks, backlog items, approval gates, design sections, and test specifications. In this study it recorded scope, design, and test specifications before implementation. It required more user review than OpenSpec or GSD Small Feature.
+Spec Loop writes task files, subtasks, backlog items, approval gates, design sections, and test specifications. In this study Spec Loop recorded scope, design, and test specifications before implementation. It required more user review than OpenSpec or GSD Small Feature.
 
 ### [Superpowers](https://github.com/obra/superpowers)
 
@@ -73,26 +73,33 @@ Superpowers uses brainstorming, clarifying questions, design approval, detailed 
 
 GSD has multiple runtime paths. The completed GSD solution included here used the GSD Small Feature workflow through GSD Pi. That workflow was selected after the standard GSD workflow appeared too heavy for this kata. It produced scope, plan, state, and summary files under `.gsd/workflows`. Those files were later committed to the solution repository. This solution is not evidence for the one-shot GSD Pi quick path or for the aborted standard GSD attempt discussed under token/cost observations.
 
+### Prompt and skill routing differences
+
+The frameworks differ in how they direct the model. OpenSpec and GSD use fixed workflow prompts or runtimes. Superpowers uses skills plus procedural instructions. Spec Loop is distributed as cross-referencing skills, without a separate fixed workflow prompt. Its skills reference related skills so planning, clarification, work breakdown, approval, implementation, ADR, and glossary guidance can be loaded when the corresponding trigger is reached.
+
+This gives Spec Loop more flexibility in ordinary communication and makes installation simpler in agents that already support skills. Spec Loop planning guidance gives the model criteria for choosing among taskless work, chat-only tasks, task files, task files with subtasks, and multiple task files / backlog items. The user can state a preferred form, but the workflow does not require the user to choose the form up front. For case-study purposes, a specific form can still be specified in the prompt or selected by later user input. In ordinary use, the model can choose from the criteria.
+
+
 ## Solutions, prompts, and steering
 
 Solution repositories are public in the GitLab subgroup [skill-assessment/bank-kata](https://gitlab.com/skill-assessment/bank-kata). Each repository contains `main` and tag `analysis-2026-06-30` at the listed commit. The `Solution` column links to the repository and uses the repository path name.
 
-Initial prompt and in-session steering are grouped together because both affect attribution. A solution improved by user steering is still a real result, but that improvement cannot be credited to the workflow alone.
+Initial prompt and in-session choices are grouped together because both affect how the row should be read. The table records when a planning form or product decision came from the prompt, the workflow, or later user input.
 
 The standard GSD attempt is not included because it was aborted before completing the kata. The completed `gsdpi-quick` solution is not included because it produced only the result, with no generated documentation, design file, discussion, or steering checkpoint.
 
-| Solution | Workflow / app / model | Commit | Initial prompt condition | Relevant in-session steering | Attribution effect |
+| Solution | Workflow / app / model | Commit | Initial prompt condition | Relevant in-session choices | What this row shows |
 |---|---|---|---|---|---|
-| [open-spec](https://gitlab.com/skill-assessment/bank-kata/open-spec) | OpenSpec / pi / GPT-5.5 xhigh | `81ce8ab5a1b9` | Base bank-kata prompt via OpenSpec proposal flow. This prompt variant included the transfer rollback wording: “Transfer (transactional, rollback on failures).” | No result-changing user steering found beyond normal proceed/apply flow. | Evidence for compact OpenSpec proposal/spec review on the base kata. |
-| [open-spec-calisthenics](https://gitlab.com/skill-assessment/bank-kata/open-spec-calisthenics) | OpenSpec / pi / GPT-5.5 xhigh | `1d71c713d61c` | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all object-calisthenics/domain-language constraints listed above. | No result-changing user steering found beyond applying the generated change. | Evidence for OpenSpec with a constraint-heavy prompt; few design decisions were discussed with the user. |
-| [spec-loop-base-backlog-steered](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-steered) | Spec Loop / pi / GPT-5.5 xhigh | `ae1eb4bb896d` | Base bank-kata prompt. It did not initially require separate backlog tasks, localStorage, or Daily/Savings. | User asked for a “proper multitask backlog,” opted into `glossary.adoc`, and later asked whether transactions and rollback had been considered. | Highest final design score, but the backlog structure and deeper rollback/storage-write-failure handling came partly from user steering. |
-| [spec-loop-base-backlog-prompted](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-prompted) | Spec Loop / pi / GPT-5.5 xhigh | `4b9f8aa9776a` | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, separate backlog tasks, and design of each following task only after the previous task was implemented and committed. | During the final solution session, steering was mostly approvals and moving completed tasks to `done`. | Less user-steered evidence for the backlog prompt than `spec-loop-base-backlog-steered`. |
-| [spec-loop-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-incremental) | Spec Loop / pi / GPT-5.5 xhigh | `4cd947ec1e42` | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and subtask design-after-commit sequencing. | No result-changing corrective steering found. | Evidence for Spec Loop sequential-subtask work without result-changing corrective steering. |
-| [spec-loop-calisthenics](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics) | Spec Loop / pi / GPT-5.5 xhigh | `319a8c9d4c24` | Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above. | User corrected the process: requested task with subtasks, objected that clarification instructions were not followed, and questioned whether the assistant knew the breakdown skill. | Evidence includes user repair of workflow misuse. The final result cannot be attributed to the prompt/framework alone. |
-| [spec-loop-calisthenics-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-incremental) | Spec Loop / pi / GPT-5.5 xhigh | `d8948538ead4` | Expanded calisthenics prompt plus subtask design-after-commit sequencing. | No result-changing corrective steering found beyond normal approvals. | Evidence for Spec Loop calisthenics sequential-subtask work without result-changing corrective steering. |
-| [spec-loop-calisthenics-single-task](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-single-task) | Spec Loop / pi / GPT-5.5 xhigh | `b708bd2c7d97` | Expanded calisthenics prompt without explicit backlog/subtask sequencing. | No result-changing steering retained. | Evidence for the broad single-task calisthenics condition. |
+| [open-spec](https://gitlab.com/skill-assessment/bank-kata/open-spec) | OpenSpec / pi / GPT-5.5 xhigh | `81ce8ab5a1b9` | Base bank-kata prompt via OpenSpec proposal flow. This prompt variant included the transfer rollback wording: “Transfer (transactional, rollback on failures).” | Only normal proceed/apply approvals found. | Evidence for compact OpenSpec proposal/spec review on the base kata. |
+| [open-spec-calisthenics](https://gitlab.com/skill-assessment/bank-kata/open-spec-calisthenics) | OpenSpec / pi / GPT-5.5 xhigh | `1d71c713d61c` | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all object-calisthenics/domain-language constraints listed above. | Only apply approval found. | Evidence for OpenSpec with a constraint-heavy prompt; few design decisions were discussed with the user. |
+| [spec-loop-base-backlog-steered](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-steered) | Spec Loop / pi / GPT-5.5 xhigh | `ae1eb4bb896d` | Base bank-kata prompt. It did not initially specify separate backlog tasks, localStorage, or Daily/Savings. | User asked for a “proper multitask backlog,” opted into `glossary.adoc`, and later asked whether transactions and rollback had been considered. | Highest final design score; observed path includes user-selected backlog and later rollback/storage-write-failure review. |
+| [spec-loop-base-backlog-prompted](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-prompted) | Spec Loop / pi / GPT-5.5 xhigh | `4b9f8aa9776a` | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, separate backlog tasks, and design of each following task only after the previous task was implemented and committed. | During the final solution session, user input was mostly approvals and moving completed tasks to `done`. | Evidence for the backlog form specified in the initial prompt. |
+| [spec-loop-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-incremental) | Spec Loop / pi / GPT-5.5 xhigh | `4cd947ec1e42` | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and subtask design-after-commit sequencing. | No later planning-route change found. | Evidence for Spec Loop sequential-subtask work. |
+| [spec-loop-calisthenics](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics) | Spec Loop / pi / GPT-5.5 xhigh | `319a8c9d4c24` | Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above. | Subtask path selected during the session. | Evidence for Spec Loop with the expanded calisthenics prompt and subtask path. |
+| [spec-loop-calisthenics-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-incremental) | Spec Loop / pi / GPT-5.5 xhigh | `d8948538ead4` | Expanded calisthenics prompt plus subtask design-after-commit sequencing. | Normal approvals found. | Evidence for Spec Loop calisthenics sequential-subtask work. |
+| [spec-loop-calisthenics-single-task](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-single-task) | Spec Loop / pi / GPT-5.5 xhigh | `b708bd2c7d97` | Expanded calisthenics prompt without explicit backlog/subtask sequencing. | No later planning-route change retained. | Evidence for the broad single-task calisthenics condition. |
 | [superpowers](https://gitlab.com/skill-assessment/bank-kata/superpowers) | Superpowers / Codex / GPT-5.5 xhigh | `58bcb54d6478` | Base bank-kata prompt with transactional rollback wording. | User supplied important clarifications: `localStorage`, two internal accounts like Daily/Savings, and plain TypeScript + Vite. | User answers materially changed product scope and stack choices. |
-| [superpowers-5.4](https://gitlab.com/skill-assessment/bank-kata/superpowers-5.4) | Superpowers / Codex / GPT-5.4 high | `5db5d24f5f27` | Base bank-kata prompt with transactional rollback wording. | User supplied browser local storage, two fixed accounts, browser-only display, and later changed direction to include printing. User also answered “ts, vite, browser only,” which the assistant did not clarify before choosing React. | User supplied several decisions, and the assistant did not resolve the stack choice clearly before choosing React. This limits what can be credited to the workflow alone. |
+| [superpowers-5.4](https://gitlab.com/skill-assessment/bank-kata/superpowers-5.4) | Superpowers / Codex / GPT-5.4 high | `5db5d24f5f27` | Base bank-kata prompt with transactional rollback wording. | User supplied browser local storage, two fixed accounts, browser-only display, and later changed direction to include printing. User also answered “ts, vite, browser only,” which the assistant did not clarify before choosing React. | Evidence includes user-provided product choices and an ambiguous stack choice before the assistant selected React. |
 | [superpowers-calisthenics](https://gitlab.com/skill-assessment/bank-kata/superpowers-calisthenics) | Superpowers / Codex / GPT-5.5 xhigh | `65e2dbb20a9d` | Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above. | User said domain tests were enough, later asked not to be bothered with trivial questions, and later challenged date-control design and statement sorting. | User answers shaped test scope and corrected date-control design; final constraint preservation is judged from code/tests. |
 | [gsd-small-feature](https://gitlab.com/skill-assessment/bank-kata/gsd-small-feature) | GSD Small Feature / GSD Pi / GPT-5.5 xhigh | `aef38ffcae7b` | GSD Small Feature workflow started without a description; the assistant asked for one, then the user supplied the expanded TypeScript/Vite, Daily/Savings, rollback, statement, print, filter, and localStorage prompt. | Scope and plan approval gates selected the recommended options. The assistant did not ask separate gray-area questions; it packaged defaults into the scope approval. `.gsd/workflows` files were committed after completion. | Evidence for the GSD Small Feature workflow through GSD Pi, not for the one-shot GSD Pi quick path or standard GSD. The app passed its tests, but it had fewer committed tests for required behavior and less committed decision analysis than the Spec Loop backlog solutions. |
 
@@ -228,34 +235,24 @@ Interpretation: static metrics identified specific risks, but behavior evidence 
 
 ### Decomposition was the clearest positive influence
 
-The clearest positive pattern was explicit vertical decomposition with later design after earlier implementation existed.
+The clearest positive pattern was not splitting by itself. It was vertical decomposition with design and tests for each part, written before that part was implemented.
 
-Current Spec Loop guidance does not say “always split.” It filters among `task file`, `task file with subtasks`, and `multiple task files / backlog items`. It keeps backlog items when separate release decisions are advisable, keeps subtasks when vertical slices can stand alone but should normally be released together, and keeps a plain task file when no releasable split is visible or the user has rejected subtasks. If more than one form remains, it asks the user to choose.
+The observed cases were:
 
-That current rule was added after the first solutions in this study. It should not be retroactively treated as a rule those early solutions failed to follow. Its current relevance is narrower: it explains the later Spec Loop design intent, which is to force explicit consideration of decomposition and avoid default single-task plans for complex work unless a plain task is justified.
-
-Evidence:
-
-- `spec-loop-base-backlog-prompted` required separate backlog tasks from the initial prompt.
-- `spec-loop-incremental` required subtask design after previous committed subtasks.
+- In `spec-loop-base-backlog-prompted`, the initial prompt asked for separate backlog tasks.
+- In `spec-loop-incremental`, the initial prompt asked for each subtask to be designed only after the previous subtask had been implemented and committed.
 - Both had explicit automated-test evidence for 13 of 15 behavior categories, partial evidence for 1 category, and no evidence for 1 category.
-- The steered backlog solution also reached the top tier after the user corrected the planning route to a backlog.
+- `spec-loop-base-backlog-steered` also reached the top tier after the user redirected planning to a backlog.
 
 Conclusion: decomposition helped when task files specified scope, design, and tests for each implementation part. More documentation alone was not enough.
 
-### User intervention changed some results
+### User-specified task decomposition was part of the comparison
 
-`spec-loop-base-backlog-steered` should not be read as evidence of the workflow alone. The user corrected the planning route and challenged rollback handling. Those actions improved the final result.
+Spec Loop supports multiple task-decomposition forms: one large task, one task with subtasks, and multiple task files / backlog items.
 
-This matters because it changes the conclusion from:
+Some Spec Loop solutions used a decomposition form specified by the user or the initial prompt. This was deliberate: the study compared backlog tasks, sequential subtasks, and a broad single task.
 
-> Spec Loop automatically wins.
-
-To:
-
-> Spec Loop gave an experienced user places to correct design before code was written.
-
-That is the narrower conclusion supported by the evidence.
+That does not mean Spec Loop normally requires the user to choose the form. Spec Loop gives the model criteria for selecting the form, and the user can also state a preference.
 
 ### Long plans did not guarantee more tested behavior
 
@@ -276,7 +273,7 @@ Conclusion: domain-language constraints helped only when paired with simplicity/
 This ranking is not a universal tool ranking.
 
 1. Shared rank 1: `spec-loop-base-backlog-steered` and `spec-loop-base-backlog-prompted`.  
-   Higher final design score: `spec-loop-base-backlog-steered`. Less user-steered evidence for the backlog-prompt condition: `spec-loop-base-backlog-prompted`.
+   Higher final design score: `spec-loop-base-backlog-steered`. Backlog form specified in the initial prompt: `spec-loop-base-backlog-prompted`.
 2. `spec-loop-incremental`.
 3. `spec-loop-calisthenics-incremental`.
 4. `spec-loop-calisthenics`.
