@@ -133,6 +133,12 @@ subtask **Research** and **Design** sections. They do not override the
 task context hygiene rules against duplication across task and subtask
 levels.
 
+Include PlantUML displayed-text escape rules for Creole markup in that
+check: when a sequence is intended as displayed diagram text and would
+otherwise match Creole markup, escape it with `~`; for example, use
+`~--` instead of raw `--` for a literal dash pair in diagram text. Do
+not apply displayed-text escaping to PlantUML syntax.
+
 Approval is blocked if those rules are violated.
 
 Preferred review surface:
