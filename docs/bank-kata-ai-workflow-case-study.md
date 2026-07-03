@@ -193,6 +193,8 @@ Code-size and complexity metrics:
 
 Abbreviations: LOC means nonblank physical lines. CC means approximate cyclomatic complexity range across production functions in that bucket. Test buckets omit CC. Production TypeScript excludes tests, config files, and `vite-env.d.ts`. Test TypeScript includes `.test.`/`.spec.` files and files under `test` or `tests` directories. Domain means explicit `src/domain`, `src/bank`, `tests/domain`, `tests/bank`, or root-level banking-domain files such as `money`, `transfer`, `statementFilters`, or `bankState`. Storage and repository files are counted with application+UI because they connect domain behavior to the browser/runtime.
 
+Duplication note: duplication was low in the original metric sweep. Highest duplicated-line percentage was about 2.84% in `superpowers-calisthenics`.
+
 Code/test conclusions:
 
 | Solution | Conclusion |
@@ -212,16 +214,6 @@ Code/test conclusions:
 
 Required-behavior checks counted whether tests or explicitly recorded checks covered these behavior categories: money validation, deposit, withdrawal, insufficient-funds safety, transfer success, rejected-transfer no-change behavior, statement date/amount/balance, type filters, date filters, print behavior, UI/browser flow, restoring data from localStorage, fallback/validation for invalid stored data, storage-write-failure safety, and source-code constraint checks. Storage-write-failure safety means a failed save does not advance visible, in-memory, or persisted state.
 
-### Static metrics
-
-Additional static-risk facts:
-
-- Duplication was low in the original metric sweep. Highest duplicated-line percentage was about 2.84% in `superpowers-calisthenics`.
-- The highest approximate cyclomatic complexity values were 10 in `spec-loop-base-backlog-steered`, `spec-loop-incremental`, and `gsd-small-feature`.
-- Import cycles appeared in three original-sweep solutions: `spec-loop-calisthenics-incremental` had 2, `spec-loop-calisthenics-single-task` had 32, and `superpowers-calisthenics` had 1.
-- `spec-loop-calisthenics` had two very large production files: `src/domain/bank.ts` at 728 nonblank LOC and `src/browser/browserBankDemo.ts` at 712 nonblank LOC.
-
-Interpretation: static metrics identified specific risks, but required-behavior checks and design locality explained the important differences better.
 
 ## Patterns in the higher-ranked results
 
