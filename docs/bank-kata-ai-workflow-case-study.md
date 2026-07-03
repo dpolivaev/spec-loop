@@ -193,7 +193,7 @@ Code-size and complexity metrics:
 
 Abbreviations: LOC means nonblank physical lines. CC means approximate cyclomatic complexity range across production functions in that bucket. Test buckets omit CC. Production TypeScript excludes tests, config files, and `vite-env.d.ts`. Test TypeScript includes `.test.`/`.spec.` files and files under `test` or `tests` directories. Domain means explicit `src/domain`, `src/bank`, `tests/domain`, `tests/bank`, or root-level banking-domain files such as `money`, `transfer`, `statementFilters`, or `bankState`. Storage and repository files are counted with application+UI because they connect domain behavior to the browser/runtime.
 
-Duplication note: duplication was low in the original metric sweep. Highest duplicated-line percentage was about 2.84% in `superpowers-calisthenics`.
+Duplication note: all 12 solutions were measured with jscpd using production files under `src/`, excluding tests and `vite-env.d.ts`. The highest duplicated-line percentage was about 2.84% in `superpowers-calisthenics`.
 
 Code/test conclusions:
 
