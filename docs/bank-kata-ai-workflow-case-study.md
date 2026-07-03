@@ -4,6 +4,8 @@ We compared 12 solutions from 4 skill frameworks on the same browser bank kata, 
 
 The study does not choose one framework for all goals. It records which framework or workflow matched each goal: compact specification review, design control before implementation, detailed implementation steps, or few user interruptions.
 
+The main practical value of the study is the comparison of generated specification, design, task, and plan documents. These documents are where the workflows steer or align the model before code is written. The study summarizes them; reading those documents is the next step for readers who want a fuller impression than the metrics and excerpts can provide. Reading final source code is a deeper audit step.
+
 Terminology used below: **required-behavior checks** means a category-by-category finding for 15 bank-kata behaviors. A category is marked full, partial, or missing based on committed tests and explicitly recorded checks. This is not line, branch, or function coverage.
 
 ## Main result by goal
@@ -124,6 +126,16 @@ UI references in this study are limited to generated UI/display sections, browse
 Here, “specification” means the generated written structure that described, constrained, or guided implementation, including task files, plans, and workflow state files.
 
 The table also records fenced code blocks embedded in generated planning files, because those blocks mix specification with implementation detail. In this study, the OpenSpec and Spec Loop generated files listed below had no fenced source/test code blocks. The Superpowers implementation plans embedded source, test, configuration, UI, CSS, and shell-command fragments. The GSD Small Feature summary embedded shell commands only.
+
+Pre-code specification review differs by workflow:
+
+| Workflow or path | Pre-code specification review in the workflow | What this study observed |
+|---|---|---|
+| Spec Loop | Requires execution approval after task-file planning and before implementation. Task files or subtasks are the review unit. | The most explicit pre-code review structure: scope, analysis, design, and test specification were available before implementation. |
+| Superpowers | Asks for design and implementation-plan approval before execution. | Explicit pre-code approval existed, but plans were long and often embedded code, config, test, UI, CSS, and command fragments. |
+| OpenSpec | Creates proposal, design, specs, and tasks before applying a change. The workflow allows user inspection before implementation. | Compact pre-code review documents, with fewer clarification gates and less detailed failure-behavior discussion. |
+| GSD Small Feature through GSD Pi | Records context and plan before implementation, then state and summary around workflow progress and completion. | Scope, plan, state, and summary were committed, but the pre-code decision analysis was less complete than in the Spec Loop task files or Superpowers design/planning files. |
+| GSD Pi quick | No comparable generated design/specification checkpoint was preserved. | Excluded solution: it produced only the implementation result, without generated documentation, design file, discussion, or steering checkpoint. |
 
 | Solution | Generated specification structure |
 |---|---|
