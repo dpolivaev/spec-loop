@@ -78,24 +78,70 @@ This gives Spec Loop more flexibility in ordinary communication and makes instal
 
 Solution repositories are public in the GitLab subgroup [skill-assessment/bank-kata](https://gitlab.com/skill-assessment/bank-kata). Each repository contains `main` and tag `analysis-2026-06-30` at the evaluated revision. The `Solution` column links to the repository and uses the repository path name.
 
-Initial prompt and in-session choices are grouped together because both affect how the row should be read. The table records when a planning form or product decision came from the prompt, the workflow, or later user input.
+Initial prompt and in-session choices are grouped together because both affect how each solution should be read. Each entry records when a planning form or product decision came from the prompt, the workflow, or later user input.
 
 The standard GSD attempt is not included because it was aborted before completing the kata. The completed `gsdpi-quick` solution is not included because it produced only the result, with no generated documentation, design file, discussion, or steering checkpoint.
 
-| Solution | Workflow / app / model | Initial prompt condition | Relevant in-session choices | What this row shows |
-| --- | --- | --- | --- | --- |
-| [open-spec](https://gitlab.com/skill-assessment/bank-kata/open-spec) | OpenSpec / pi / GPT-5.5 xhigh | Base bank-kata prompt via OpenSpec proposal flow. This prompt variant included the transfer rollback wording: “Transfer (transactional, rollback on failures).” | Only proceed/apply approvals were found. | Evidence for compact OpenSpec proposal/spec review on the base kata. |
-| [open-spec-calisthenics](https://gitlab.com/skill-assessment/bank-kata/open-spec-calisthenics) | OpenSpec / pi / GPT-5.5 xhigh | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all object-calisthenics/domain-language constraints listed above. | Only an apply approval was found. | Evidence for OpenSpec with a constraint-heavy prompt; few design decisions were discussed with the user. |
-| [spec-loop-base-backlog-steered](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-steered) | Spec Loop / pi / GPT-5.5 xhigh | Base bank-kata prompt. It did not initially specify separate backlog tasks, localStorage, or Daily/Savings. | User asked for a “proper multitask backlog,” opted into `glossary.adoc`, and later asked whether transactions and rollback had been considered. | Highest final design score; observed path includes user-selected backlog and later rollback/storage-write-failure review. |
-| [spec-loop-base-backlog-prompted](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-prompted) | Spec Loop / pi / GPT-5.5 xhigh | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, separate backlog tasks, and design of each following task only after the previous task was implemented and committed. | During the final solution session, user input was mostly approvals and moving completed tasks to `done`. | Evidence for the backlog form specified in the initial prompt. |
-| [spec-loop-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-incremental) | Spec Loop / pi / GPT-5.5 xhigh | Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and subtask design-after-commit sequencing. | No later planning-route change found. | Evidence for Spec Loop sequential-subtask work. |
-| [spec-loop-calisthenics](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics) | Spec Loop / pi / GPT-5.5 xhigh | Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above. | Subtask path selected during the session. | Evidence for Spec Loop with the expanded calisthenics prompt and subtask path. |
-| [spec-loop-calisthenics-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-incremental) | Spec Loop / pi / GPT-5.5 xhigh | Expanded calisthenics prompt plus subtask design-after-commit sequencing. | Only approval responses were found. | Evidence for Spec Loop calisthenics sequential-subtask work. |
-| [spec-loop-calisthenics-single-task](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-single-task) | Spec Loop / pi / GPT-5.5 xhigh | Expanded calisthenics prompt without explicit backlog/subtask sequencing. | No later planning-route change appears in the retained session evidence. | Evidence for the broad single-task calisthenics condition. |
-| [superpowers](https://gitlab.com/skill-assessment/bank-kata/superpowers) | Superpowers / Codex / GPT-5.5 xhigh | Base bank-kata prompt with transactional rollback wording. | User supplied important clarifications: `localStorage`, two internal accounts like Daily/Savings, and plain TypeScript + Vite. | User answers set product scope and stack choices. |
-| [superpowers-5.4](https://gitlab.com/skill-assessment/bank-kata/superpowers-5.4) | Superpowers / Codex / GPT-5.4 high | Base bank-kata prompt with transactional rollback wording. | User supplied browser local storage, two fixed accounts, browser-only display, and later changed direction to include printing. User also answered “ts, vite, browser only,” which the assistant did not clarify before choosing React. | Evidence includes user-provided product choices and an ambiguous stack choice before the assistant selected React. |
-| [superpowers-calisthenics](https://gitlab.com/skill-assessment/bank-kata/superpowers-calisthenics) | Superpowers / Codex / GPT-5.5 xhigh | Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above. | User said domain tests were enough, later asked not to be bothered with trivial questions, and later challenged date-control design and statement sorting. | User answers shaped test scope; date-control design changed after user challenge. Final constraint preservation is judged from code/tests. |
-| [gsd-small-feature](https://gitlab.com/skill-assessment/bank-kata/gsd-small-feature) | GSD Small Feature / GSD Pi / GPT-5.5 xhigh | GSD Small Feature workflow started without a description; the assistant asked for one, then the user supplied the expanded TypeScript/Vite, Daily/Savings, rollback, statement, print, filter, and localStorage prompt. | Scope and plan approval gates selected the recommended options. The assistant did not ask separate gray-area questions; it packaged defaults into the scope approval. `.gsd/workflows` files were committed after completion. | Evidence for the GSD Small Feature workflow through GSD Pi, not for the one-shot GSD Pi quick path or standard GSD. The app passed its tests, but it had fewer committed tests for required behavior and less committed decision analysis than the Spec Loop backlog solutions. |
+#### [open-spec](https://gitlab.com/skill-assessment/bank-kata/open-spec) (pi, GPT-5.5 xhigh)
+- Initial prompt condition: Base bank-kata prompt via OpenSpec proposal flow. This prompt variant included the transfer rollback wording: “Transfer (transactional, rollback on failures).”
+- Relevant in-session choices: Only proceed/apply approvals were found.
+- Shows: Evidence for compact OpenSpec proposal/spec review on the base kata.
+
+#### [open-spec-calisthenics](https://gitlab.com/skill-assessment/bank-kata/open-spec-calisthenics) (pi, GPT-5.5 xhigh)
+- Initial prompt condition: Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all object-calisthenics/domain-language constraints listed above.
+- Relevant in-session choices: Only an apply approval was found.
+- Shows: Evidence for OpenSpec with a constraint-heavy prompt; few design decisions were discussed with the user.
+
+#### [spec-loop-base-backlog-steered](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-steered) (pi, GPT-5.5 xhigh)
+- Initial prompt condition: Base bank-kata prompt. It did not initially specify separate backlog tasks, localStorage, or Daily/Savings.
+- Relevant in-session choices: User asked for a “proper multitask backlog,” opted into `glossary.adoc`, and later asked whether transactions and rollback had been considered.
+- Shows: Highest final design score; observed path includes user-selected backlog and later rollback/storage-write-failure review.
+
+#### [spec-loop-base-backlog-prompted](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-prompted) (pi, GPT-5.5 xhigh)
+- Initial prompt condition: Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, separate backlog tasks, and design of each following task only after the previous task was implemented and committed.
+- Relevant in-session choices: During the final solution session, user input was mostly approvals and moving completed tasks to `done`.
+- Shows: Evidence for the backlog form specified in the initial prompt.
+
+#### [spec-loop-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-incremental) (pi, GPT-5.5 xhigh)
+- Initial prompt condition: Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and subtask design-after-commit sequencing.
+- Relevant in-session choices: No later planning-route change found.
+- Shows: Evidence for Spec Loop sequential-subtask work.
+
+#### [spec-loop-calisthenics](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics) (pi, GPT-5.5 xhigh)
+- Initial prompt condition: Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above.
+- Relevant in-session choices: Subtask path selected during the session.
+- Shows: Evidence for Spec Loop with the expanded calisthenics prompt and subtask path.
+
+#### [spec-loop-calisthenics-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-incremental) (pi, GPT-5.5 xhigh)
+- Initial prompt condition: Expanded calisthenics prompt plus subtask design-after-commit sequencing.
+- Relevant in-session choices: Only approval responses were found.
+- Shows: Evidence for Spec Loop calisthenics sequential-subtask work.
+
+#### [spec-loop-calisthenics-single-task](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-single-task) (pi, GPT-5.5 xhigh)
+- Initial prompt condition: Expanded calisthenics prompt without explicit backlog/subtask sequencing.
+- Relevant in-session choices: No later planning-route change appears in the retained session evidence.
+- Shows: Evidence for the broad single-task calisthenics condition.
+
+#### [superpowers](https://gitlab.com/skill-assessment/bank-kata/superpowers) (Codex, GPT-5.5 xhigh)
+- Initial prompt condition: Base bank-kata prompt with transactional rollback wording.
+- Relevant in-session choices: User supplied important clarifications: `localStorage`, two internal accounts like Daily/Savings, and plain TypeScript + Vite.
+- Shows: User answers set product scope and stack choices.
+
+#### [superpowers-5.4](https://gitlab.com/skill-assessment/bank-kata/superpowers-5.4) (Codex, GPT-5.4 high)
+- Initial prompt condition: Base bank-kata prompt with transactional rollback wording.
+- Relevant in-session choices: User supplied browser local storage, two fixed accounts, browser-only display, and later changed direction to include printing. User also answered “ts, vite, browser only,” which the assistant did not clarify before choosing React.
+- Shows: Evidence includes user-provided product choices and an ambiguous stack choice before the assistant selected React.
+
+#### [superpowers-calisthenics](https://gitlab.com/skill-assessment/bank-kata/superpowers-calisthenics) (Codex, GPT-5.5 xhigh)
+- Initial prompt condition: Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above.
+- Relevant in-session choices: User said domain tests were enough, later asked not to be bothered with trivial questions, and later challenged date-control design and statement sorting.
+- Shows: User answers shaped test scope; date-control design changed after user challenge. Final constraint preservation is judged from code/tests.
+
+#### [gsd-small-feature](https://gitlab.com/skill-assessment/bank-kata/gsd-small-feature) (GSD Pi, GPT-5.5 xhigh)
+- Initial prompt condition: GSD Small Feature workflow started without a description; the assistant asked for one, then the user supplied the expanded TypeScript/Vite, Daily/Savings, rollback, statement, print, filter, and localStorage prompt.
+- Relevant in-session choices: Scope and plan approval gates selected the recommended options. The assistant did not ask separate gray-area questions; it packaged defaults into the scope approval. `.gsd/workflows` files were committed after completion.
+- Shows: Evidence for the GSD Small Feature workflow through GSD Pi, not for the one-shot GSD Pi quick path or standard GSD. The app passed its tests, but it had fewer committed tests for required behavior and less committed decision analysis than the Spec Loop backlog solutions.
+
 ### Communication patterns
 
 Question count did not determine whether decisions were checked. The relevant fact was whether important decisions were shown early enough to change the design.
