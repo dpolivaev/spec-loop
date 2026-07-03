@@ -155,7 +155,7 @@ Interpretation: Spec Loop was not unique in documenting rationale, but it preser
 
 All completed comparison projects passed their own tests and build at tag `analysis-2026-06-30`. Required-behavior checks use the 15 behavior categories listed below and are shown as full / partial / missing. Categories that did not apply to the prompt and implemented scope are not counted in those three numbers; this is why `open-spec` sums to 12 instead of 15. The `gsd-small-feature` row was added after the first metric pass over the original 11 solutions and is based on the later manual audit plus fresh `npm test -- --run`, `npm run build`, and `npm run lint` checks.
 
-Design score is a source/test reviewer score, not a static metric and not a UI score. It sums six criteria scored from 0 to 3: naming/domain language, simplicity (KISS), single responsibility (SRP), dependency direction, change locality, and testability. Maximum score is 18. The component scores are shown below because the total alone is not enough evidence.
+Design score is a source/test reviewer score assigned by GPT-5.5 xhigh acting as an expert code reviewer. It is not a static metric and not a UI score. It sums six criteria scored from 0 to 3: naming/domain language, simplicity (KISS), single responsibility (SRP), dependency direction, change locality, and testability. Maximum score is 18. The component scores are shown below because the total alone is not enough evidence.
 
 The score scale was applied independently per criterion:
 
