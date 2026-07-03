@@ -157,20 +157,39 @@ Design score is a source/test review score, not a UI score. It sums six criteria
 
 The four code/test metric columns split TypeScript/TSX files into domain and application+UI buckets. These metrics show where code and tests are concentrated. They do not prove correctness or design quality by themselves; use them with the required-behavior checks, design score, and conclusion table below.
 
-| Solution | Tests | Required checks | Design score | Prod domain files/LOC/CC | Prod application+UI files/LOC/CC | Test domain files/LOC | Test application+UI files/LOC |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| `spec-loop-base-backlog-steered` | 60/60 | 13 / 1 / 1 | 17/18 | 4 / 295 / 1–7 | 9 / 598 / 1–10 | 4 / 271 | 5 / 645 |
-| `spec-loop-base-backlog-prompted` | 58/58 | 13 / 1 / 1 | 14/18 | 6 / 537 / 1–6 | 3 / 529 / 1–5 | 0 / 0 | 8 / 1472 |
-| `spec-loop-incremental` | 30/30 | 13 / 1 / 1 | 13/18 | 1 / 253 / 1–4 | 3 / 431 / 1–10 | 0 / 0 | 1 / 623 |
-| `open-spec-calisthenics` | 12/12 | 13 / 1 / 1 | 15/18 | 16 / 821 / 1–3 | 10 / 602 / 1–6 | 2 / 90 | 2 / 173 |
-| `open-spec` | 19/19 | 11 / 0 / 1 | 12/18 | 6 / 322 / 1–6 | 4 / 454 / 1–5 | 3 / 208 | 2 / 131 |
-| `superpowers` | 17/17 | 11 / 1 / 3 | 12/18 | 5 / 243 / 1–8 | 4 / 453 / 1–9 | 3 / 203 | 2 / 96 |
-| `spec-loop-calisthenics` | 7/7 | 11 / 1 / 3 | 10/18 | 1 / 728 / 1–5 | 2 / 724 / 1–4 | 0 / 0 | 2 / 380 |
-| `spec-loop-calisthenics-single-task` | 17/17 | 11 / 1 / 3 | 10/18 | 36 / 1099 / 1–3 | 6 / 612 / 1–5 | 1 / 161 | 2 / 263 |
-| `spec-loop-calisthenics-incremental` | 16/16 | 10 / 3 / 2 | 11/18 | 27 / 631 / 1–2 | 24 / 934 / 1–4 | 0 / 0 | 1 / 276 |
-| `superpowers-calisthenics` | 13/13 | 8 / 3 / 4 | 11/18 | 17 / 379 / 1–2 | 6 / 387 / 1–5 | 3 / 141 | 2 / 79 |
-| `superpowers-5.4` | 16/16 | 7 / 5 / 3 | 11/18 | 4 / 236 / 1–7 | 11 / 387 / 1–5 | 1 / 107 | 5 / 124 |
-| `gsd-small-feature` | 5/5 | 7 / 2 / 6 | 11/18 | 2 / 327 / 1–10 | 2 / 426 / 1–7 | 1 / 136 | 0 / 0 |
+Result metrics:
+
+| Solution | Tests | Required checks | Design score |
+|---|---:|---:|---:|
+| `spec-loop-base-backlog-steered` | 60/60 | 13 / 1 / 1 | 17/18 |
+| `spec-loop-base-backlog-prompted` | 58/58 | 13 / 1 / 1 | 14/18 |
+| `spec-loop-incremental` | 30/30 | 13 / 1 / 1 | 13/18 |
+| `open-spec-calisthenics` | 12/12 | 13 / 1 / 1 | 15/18 |
+| `open-spec` | 19/19 | 11 / 0 / 1 | 12/18 |
+| `superpowers` | 17/17 | 11 / 1 / 3 | 12/18 |
+| `spec-loop-calisthenics` | 7/7 | 11 / 1 / 3 | 10/18 |
+| `spec-loop-calisthenics-single-task` | 17/17 | 11 / 1 / 3 | 10/18 |
+| `spec-loop-calisthenics-incremental` | 16/16 | 10 / 3 / 2 | 11/18 |
+| `superpowers-calisthenics` | 13/13 | 8 / 3 / 4 | 11/18 |
+| `superpowers-5.4` | 16/16 | 7 / 5 / 3 | 11/18 |
+| `gsd-small-feature` | 5/5 | 7 / 2 / 6 | 11/18 |
+
+Code-size and complexity metrics:
+
+| Solution | Prod domain files/LOC/CC | Prod app+UI files/LOC/CC | Test domain files/LOC | Test app+UI files/LOC |
+|---|---:|---:|---:|---:|
+| `spec-loop-base-backlog-steered` | 4 / 295 / 1–7 | 9 / 598 / 1–10 | 4 / 271 | 5 / 645 |
+| `spec-loop-base-backlog-prompted` | 6 / 537 / 1–6 | 3 / 529 / 1–5 | 0 / 0 | 8 / 1472 |
+| `spec-loop-incremental` | 1 / 253 / 1–4 | 3 / 431 / 1–10 | 0 / 0 | 1 / 623 |
+| `open-spec-calisthenics` | 16 / 821 / 1–3 | 10 / 602 / 1–6 | 2 / 90 | 2 / 173 |
+| `open-spec` | 6 / 322 / 1–6 | 4 / 454 / 1–5 | 3 / 208 | 2 / 131 |
+| `superpowers` | 5 / 243 / 1–8 | 4 / 453 / 1–9 | 3 / 203 | 2 / 96 |
+| `spec-loop-calisthenics` | 1 / 728 / 1–5 | 2 / 724 / 1–4 | 0 / 0 | 2 / 380 |
+| `spec-loop-calisthenics-single-task` | 36 / 1099 / 1–3 | 6 / 612 / 1–5 | 1 / 161 | 2 / 263 |
+| `spec-loop-calisthenics-incremental` | 27 / 631 / 1–2 | 24 / 934 / 1–4 | 0 / 0 | 1 / 276 |
+| `superpowers-calisthenics` | 17 / 379 / 1–2 | 6 / 387 / 1–5 | 3 / 141 | 2 / 79 |
+| `superpowers-5.4` | 4 / 236 / 1–7 | 11 / 387 / 1–5 | 1 / 107 | 5 / 124 |
+| `gsd-small-feature` | 2 / 327 / 1–10 | 2 / 426 / 1–7 | 1 / 136 | 0 / 0 |
 
 Abbreviations: LOC means nonblank physical lines. CC means approximate cyclomatic complexity range across production functions in that bucket. Test buckets omit CC. Production TypeScript excludes tests, config files, and `vite-env.d.ts`. Test TypeScript includes `.test.`/`.spec.` files and files under `test` or `tests` directories. Domain means explicit `src/domain`, `src/bank`, `tests/domain`, `tests/bank`, or root-level banking-domain files such as `money`, `transfer`, `statementFilters`, or `bankState`. Storage and repository files are counted with application+UI because they connect domain behavior to the browser/runtime.
 
