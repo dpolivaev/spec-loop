@@ -157,6 +157,8 @@ All completed comparison projects passed their own tests and build at tag `analy
 
 Design score is a source/test reviewer score assigned by GPT-5.5 xhigh acting as an expert code reviewer. It is not a static metric and not a UI score. It sums six criteria scored from 0 to 3: naming/domain language, simplicity (KISS), single responsibility (SRP), dependency direction, change locality, and testability. Maximum score is 18. The component scores are shown below because the total alone is not enough evidence.
 
+The implementation prompts did not disclose this exact scoring rubric to the code-writing models. The design-score rubric was applied retrospectively. The scores therefore measure final source/test design quality against the study rubric, not compliance with an announced acceptance criterion.
+
 The score scale was applied independently per criterion:
 
 - Naming/domain language:
