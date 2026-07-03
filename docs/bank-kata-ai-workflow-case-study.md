@@ -11,12 +11,14 @@ Terminology used below: **required-behavior checks** means a category-by-categor
 | Goal | Framework or workflow | Evidence from the bank-kata solutions | Caveat |
 |---|---|---|---|
 | Compact specification review | [OpenSpec](https://github.com/Fission-AI/OpenSpec) | The OpenSpec solutions, `open-spec` and `open-spec-calisthenics`, had the shortest generated specification files: 5 files / 214 lines and 6 files / 310 lines. The proposal/design/spec split was easy to scan. | OpenSpec documented fewer detailed data, UI, and failure-behavior decisions before implementation. |
-| Design-level control before code | [Spec Loop](https://github.com/dpolivaev/spec-loop) | Spec Loop writes task files with scope, scenarios, analysis, design, and test specifications before implementation. `spec-loop-base-backlog-steered`, `spec-loop-base-backlog-prompted`, and `spec-loop-incremental` each had 13 of 15 behavior categories fully checked, with design scores of 17/18, 14/18, and 13/18. | It asks for more specification and design review before implementation. |
+| Design-level control before code | [Spec Loop](https://github.com/dpolivaev/spec-loop) | Spec Loop writes task files with scope, scenarios, analysis, design, and test specifications before implementation. `spec-loop-base-backlog-steered`, `spec-loop-base-backlog-prompted`, and `spec-loop-incremental` each had 13 of 15 behavior categories fully checked. | It asks for more specification and design review before implementation. |
 | Detailed implementation steps | [Superpowers](https://github.com/obra/superpowers) | Superpowers generated design documents and implementation plans. The implementation plans contained 7 to 9 tasks, depending on the solution, and the sessions showed many product choices. | The generated Superpowers documents were 1988 to 2282 lines. The Superpowers solutions had fewer fully checked behavior categories than the two Spec Loop backlog solutions. |
 | Few user interruptions | [OpenSpec](https://github.com/Fission-AI/OpenSpec); GSD Small Feature | The OpenSpec solutions, `open-spec` and `open-spec-calisthenics`, had the fewest visible clarification gates and shortest generated specification files. `gsd-small-feature` also used few clarification gates and committed scope, plan, state, and summary files. | The OpenSpec solutions made more unreviewed choices. `gsd-small-feature` had fewer committed automated tests for required behavior and less committed decision analysis than the Spec Loop backlog solutions. |
 | What future reviewers can reconstruct from Git | [Spec Loop](https://github.com/dpolivaev/spec-loop), with [OpenSpec](https://github.com/Fission-AI/OpenSpec) as the closest compact alternative | Spec Loop task files preserved research, analysis, design, glossary/terms, constraints, and test specifications. OpenSpec preserved proposal/design/spec rationale, including decisions and alternatives. | This measures what a future reviewer can reconstruct from Git, not whether the app works today. Files only count when committed. |
 
 In this case study, Spec Loop gave the clearest user-reviewed design before code and the most complete Git record of implementation reasoning. OpenSpec produced the shortest specification files and needed few visible clarification gates. Superpowers produced the longest implementation plans and asked many product questions. GSD Small Feature in GSD Pi produced a shorter scope/plan/state/summary file set and a working app. Object-calisthenics/domain-language constraints are discussed separately because their effect on final source structure is a different question from workflow choice.
+
+See [Ranking by study criteria and limits](#ranking-by-study-criteria-and-limits) for the full ordering and rank-specific evidence.
 
 ## Kata attribution and scope
 
@@ -151,9 +153,44 @@ Interpretation: Spec Loop was not unique in documenting rationale, but it preser
 
 ## Code, tests, and static metrics
 
-All completed comparison projects passed their own tests and build at tag `analysis-2026-06-30`. Required-behavior checks are shown as full / partial / missing across 15 behavior categories. The `gsd-small-feature` row was added after the original metric sweep and is based on the later manual audit plus fresh `npm test -- --run`, `npm run build`, and `npm run lint` checks.
+All completed comparison projects passed their own tests and build at tag `analysis-2026-06-30`. Required-behavior checks use the 15 behavior categories listed below and are shown as full / partial / missing. Categories that did not apply to the prompt and implemented scope are not counted in those three numbers; this is why `open-spec` sums to 12 instead of 15. The `gsd-small-feature` row was added after the first metric pass over the original 11 solutions and is based on the later manual audit plus fresh `npm test -- --run`, `npm run build`, and `npm run lint` checks.
 
-Design score is a source/test review score, not a UI score. It sums six criteria scored from 0 to 3: naming/domain language, simplicity (KISS), single responsibility (SRP), dependency direction, change locality, and testability. Maximum score is 18.
+Design score is a source/test reviewer score, not a static metric and not a UI score. It sums six criteria scored from 0 to 3: naming/domain language, simplicity (KISS), single responsibility (SRP), dependency direction, change locality, and testability. Maximum score is 18. The component scores are shown below because the total alone is not enough evidence.
+
+The score scale was applied independently per criterion:
+
+- Naming/domain language:
+  - 0: public names obscure or misrepresent bank concepts.
+  - 1: many generic names, abbreviations, or inconsistent account/transaction terms make the domain hard to infer.
+  - 2: banking terms are mostly consistent, with some generic records/functions or primitive values leaking into public APIs.
+  - 3: banking concepts are named consistently; public APIs read as deposits, withdrawals, transfers, statements, and filters.
+- KISS:
+  - 0: control flow or abstraction is hard to follow for the kata size.
+  - 1: avoidable indirection, many tiny objects for simple rules, or giant mixed files make simple changes tedious.
+  - 2: structure is mostly direct, with one or a few large files, templates, state handlers, or abstractions heavier than needed.
+  - 3: implementation is direct for the kata size, with no avoidable abstraction, giant mixed flow, or needless object split.
+- SRP:
+  - 0: domain rules, UI, storage, formatting, or printing are mixed so broadly that unrelated changes cross the same files.
+  - 1: several responsibilities share central files or classes.
+  - 2: main responsibilities are separated, but one orchestration, UI, or domain file still combines several tasks.
+  - 3: domain rules, application orchestration, storage, UI/rendering, formatting, and printing are separated.
+- Dependency direction:
+  - 0: domain code depends on browser, storage, UI, or framework APIs.
+  - 1: side effects and domain rules are coupled, or browser/storage details leak into core behavior.
+  - 2: dependency direction mostly holds, with some domain/application boundary leakage or hard-coded runtime assumptions.
+  - 3: domain code is independent of browser APIs, and side effects are isolated behind adapters or injected functions.
+- Change locality:
+  - 0: likely changes require scattered edits because of cycles, duplicated rules, or hard-coded concepts in many files.
+  - 1: ordinary changes touch unrelated layers/files, repeated account/type assumptions, cycles, or large aggregate files.
+  - 2: most changes are localized, but common changes still touch a central file or several fixed-account mappings.
+  - 3: likely changes touch few expected files; boundaries make the change location clear.
+- Testability:
+  - 0: essential behavior can only be checked through manual/browser setup or brittle DOM paths; side effects are not controllable.
+  - 1: some core behavior is tested, but many rules require UI/integration setup; time, storage, or printing is hard to substitute.
+  - 2: core behavior is directly tested; boundary/side-effect tests are thinner or some runtime details are hard to substitute.
+  - 3: core and boundary behavior can be tested directly; side effects such as time, storage, and printing are injectable or mockable.
+
+No component in the final table scored 0.
 
 The four code/test metric columns split TypeScript/TSX files into domain and application+UI buckets. These metrics show where code and tests are concentrated. They do not prove correctness or design quality by themselves; use them with the required-behavior checks, design score, and conclusion table below.
 
@@ -173,6 +210,23 @@ Result metrics:
 | `superpowers-calisthenics` | 13/13 | 8 / 3 / 4 | 11/18 |
 | `superpowers-5.4` | 16/16 | 7 / 5 / 3 | 11/18 |
 | `gsd-small-feature` | 5/5 | 7 / 2 / 6 | 11/18 |
+
+Design-score breakdown:
+
+| Solution | Naming | KISS | SRP | Dependency direction | Change locality | Testability | Total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `spec-loop-base-backlog-steered` | 3 | 2 | 3 | 3 | 3 | 3 | 17/18 |
+| `spec-loop-base-backlog-prompted` | 2 | 2 | 2 | 3 | 2 | 3 | 14/18 |
+| `spec-loop-incremental` | 2 | 2 | 2 | 2 | 2 | 3 | 13/18 |
+| `open-spec-calisthenics` | 3 | 2 | 3 | 3 | 2 | 2 | 15/18 |
+| `open-spec` | 2 | 2 | 2 | 2 | 2 | 2 | 12/18 |
+| `superpowers` | 2 | 2 | 2 | 2 | 2 | 2 | 12/18 |
+| `spec-loop-calisthenics` | 3 | 1 | 1 | 2 | 1 | 2 | 10/18 |
+| `spec-loop-calisthenics-single-task` | 3 | 1 | 2 | 1 | 1 | 2 | 10/18 |
+| `spec-loop-calisthenics-incremental` | 3 | 1 | 2 | 2 | 1 | 2 | 11/18 |
+| `superpowers-calisthenics` | 2 | 2 | 2 | 2 | 1 | 2 | 11/18 |
+| `superpowers-5.4` | 2 | 2 | 2 | 2 | 1 | 2 | 11/18 |
+| `gsd-small-feature` | 2 | 2 | 2 | 2 | 1 | 2 | 11/18 |
 
 Code-size and complexity metrics:
 
@@ -248,24 +302,31 @@ Conclusion: domain-language constraints helped only when paired with simplicity/
 
 ## Ranking by study criteria and limits
 
-The list ranks the 12 bank-kata solutions under the study criteria. It does not say that one framework is always better than another. Because first place is shared, the numbered list has 11 ranks.
+The list ranks the 12 bank-kata solutions under the study criteria. It does not say that one framework is always better than another. Because first place is shared, the table has 11 ranks.
 
-1. `spec-loop-base-backlog-steered` and `spec-loop-base-backlog-prompted` share first place.  
-   Both had 13 fully checked behavior categories, 1 partially checked category, and 1 missing category. `spec-loop-base-backlog-steered` had the higher final design score. `spec-loop-base-backlog-prompted` had the backlog form specified in the initial prompt.
-2. `spec-loop-incremental`.
-3. `spec-loop-calisthenics-incremental`.
-4. `spec-loop-calisthenics`.
-5. `spec-loop-calisthenics-single-task`.
-6. `superpowers`.
-7. `open-spec`.
-8. `open-spec-calisthenics`.
-9. `superpowers-calisthenics`.
-10. `superpowers-5.4`.
-11. `gsd-small-feature`.
+The ranking is not a formula that sums the result-metrics table. The table is one input. The ordering was applied this way:
+
+1. Group solutions by required-behavior checks, with the missing or partial category considered, not only the count.
+2. Give more weight to safety categories such as money validation, transfer rollback, persistence validation, storage-write-failure safety, and print/UI evidence than to static shape signals.
+3. Use source/test design score to break or adjust close comparisons, but do not let it override missing safety evidence.
+4. Use generated specification files and session communication to check whether important decisions were visible before or during coding.
+5. Treat static metrics, token use, and compactness as supporting facts, not ranking drivers.
+
+| Rank | Solution | Evidence affecting rank |
+|---:|---|---|
+| 1 | `spec-loop-base-backlog-steered` and `spec-loop-base-backlog-prompted` | Both had 13 / 1 / 1 required-behavior checks. Their missing category was source-code constraint checks, which were not part of their non-calisthenics prompt condition. Both preserved detailed task-level design and test specifications before implementation. `spec-loop-base-backlog-steered` had the higher source/test design score and deeper localStorage validation. `spec-loop-base-backlog-prompted` was cleaner evidence for the backlog form because the backlog was specified in the initial prompt, but it had less deposit/withdrawal save-failure handling evidence. |
+| 2 | `spec-loop-incremental` | Also had 13 / 1 / 1 required-behavior checks with source-code constraint checks missing outside its prompt condition. It had broad rendered-app tests for deposits, withdrawals, invalid input, transfers, persistence restore, malformed storage, filters, and printing. It ranked below the first tier because its design record was one task file with subtasks rather than separate backlog task files, and its source layering was coarser. |
+| 3 | `spec-loop-calisthenics-incremental` | Ranked above the other calisthenics Spec Loop solutions because it had fewer missing behavior categories, visible subtask-by-subtask decisions, transfer persistence-failure rollback evidence, and committed checkpoints after each slice. It ranked below the non-calisthenics Spec Loop rows because money validation and print evidence were partial, storage validation was less complete, and source/test design score was lower. |
+| 4 | `spec-loop-calisthenics` | Had broad domain and browser-flow evidence, clear domain vocabulary, and a committed task file with design and test specifications. It ranked below `spec-loop-calisthenics-incremental` because print evidence was partial, bad-storage fallback and save-failure safety were missing, and the final source had two very large production files. |
+| 5 | `spec-loop-calisthenics-single-task` | Had source-constraint tests and exact-date/filter/print/storage evidence, but it used one broad task. It ranked below the other Spec Loop calisthenics solutions because money validation, bad-storage fallback, and save-failure safety were missing or less complete, browser-flow evidence was partial, and dependency cycles reduced the source/test design score. |
+| 6 | `superpowers` | Had visible accepted product decisions and a 12/18 source/test design score. It ranked below the Spec Loop rows because UI/browser-flow tests, print assertions, and save-failure behavior were less complete. It ranked above `open-spec` because more product choices were visibly asked, answered, and accepted. |
+| 7 | `open-spec` | Had concise generated specification files, robust core money/rollback tests, and 11 / 0 / 1 checks inside its base scope. It ranked below `superpowers` because important persistence/filter/date/UI choices were less visibly resolved with the user. Persistence categories were outside the base prompt and implemented scope rather than counted as failures. |
+| 8 | `open-spec-calisthenics` | Had 13 / 1 / 1 required-behavior checks and a 15/18 source/test design score, so the result table alone would rank it higher. It ranks here because its partial category was money validation, its missing category was storage-write-failure safety, and fewer detailed implementation/test decisions were user-visible before coding than in the Spec Loop task files. |
+| 9 | `superpowers-calisthenics` | Had complete feature intent and visible correction behavior, but only 8 full required-behavior checks. Money validation, persistence fallback, UI flow, print behavior, and source-constraint preservation were less complete than in the higher-ranked solutions. |
+| 10 | `superpowers-5.4` | Had readable React structure, but only 7 full required-behavior checks. Successful withdrawal evidence, money precision validation, filtered-print evidence, persistence validation depth, and save-failure safety had less test evidence than in the higher-ranked solutions. |
+| 11 | `gsd-small-feature` | Passed its committed tests and build, but had only 5 committed tests and 7 full required-behavior checks. Browser smoke checks existed in the session, but print, storage fallback, storage-write failure, and UI regression checks were not committed as executable tests. The committed GSD files preserved less decision analysis than the higher-ranked generated specification files. |
 
 The study criteria give more weight to required-behavior checks, implementation safety, written or discussed decisions before code, and source/test design score than to compact files or conversation volume alone.
-
-If only source design were considered, `open-spec-calisthenics` would rank higher because its domain language and boundaries scored high. That does not change the study ranking because required-behavior checks and storage-write-failure tests also count.
 
 ### Limits
 
