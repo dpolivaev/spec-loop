@@ -1,441 +1,295 @@
-# Bank Kata AI Workflow Case Study
+# Comparing AI-Assisted Software Workflows on the Bank Kata
 
-We compared 12 solutions from 4 skill frameworks on the same browser bank kata, based on Sandro Mancuso's [Bank Kata](https://github.com/sandromancuso/Bank-kata). This is an observational comparison: the solutions shared the same core exercise, but prompt details, adapters, and interaction patterns differed, so those differences are treated as context when interpreting results.
+## An exploratory artifact study of OpenSpec, Spec Loop, Superpowers, and GSD
 
-The study does not choose one framework for all goals. It records which framework or workflow matched each goal: compact specification review, design control before implementation, detailed implementation steps, or few user interruptions.
+### Abstract
 
-The main practical value of the study is the comparison of generated specification, design, task, and plan documents. These documents are where the workflows steer or align the model before code is written. The study summarizes them; reading those documents is the next step for readers who want a fuller impression than the metrics and excerpts can provide. Reading final source code is a deeper audit step.
+AI coding workflows differ in when they ask questions, what they write before code, how they divide work, and what remains reviewable in Git. This exploratory mixed-method study compares 12 completed implementations of the same browser Bank Kata across OpenSpec, Spec Loop, Superpowers, and GSD Small Feature. The evidence comprises generated planning artifacts, visible user–assistant messages, tagged source and tests, fresh test/build runs, 14 common behavior-evidence categories, a conditional source-constraint category, static code metrics, reviewer-assigned source/test design scores, and recorded token use.
 
-Terminology used below: **required-behavior checks** means a category-by-category finding for 15 bank-kata behaviors. A category is marked full, partial, or missing based on committed tests and explicitly recorded checks. This is not line, branch, or function coverage.
+The strongest results came from two Spec Loop backlog conditions: both had 13 full and 1 partial behavior checks among 14 applicable categories, and they preserved task-specific design and test specifications before implementation. A Spec Loop incremental-subtask condition produced the same behavior-check totals with a less granular Git record. OpenSpec produced much more compact specification sets and, after a matched non-calisthenics rerun, strong implementation evidence with few user interruptions. Superpowers surfaced many product choices but generated the longest plans. GSD Small Feature produced a working app and a compact workflow record, but fewer committed tests and less committed decision analysis. Domain-language/object-calisthenics constraints improved vocabulary and boundary visibility in some runs but did not produce a consistent net quality improvement.
 
-## Main result by goal
+These observations do not establish that one workflow is generally superior. The sample contains one artifact per condition, prompt and interaction differences, post-hoc scoring, and an author who maintains one of the compared workflows. The results support narrower claims about the artifacts and sessions studied.
 
-| Goal | Framework or workflow | Evidence from the bank-kata solutions | Caveat |
-|---|---|---|---|
-| Compact specification review | [OpenSpec](https://github.com/Fission-AI/OpenSpec) | The OpenSpec solutions, `open-spec` and `open-spec-calisthenics`, had the shortest generated specification files: 5 files / 214 lines and 6 files / 310 lines. The proposal/design/spec split was easy to scan. | OpenSpec documented fewer detailed data, UI, and failure-behavior decisions before implementation. |
-| Design-level control before code | [Spec Loop](https://github.com/dpolivaev/spec-loop) | Spec Loop writes task files with scope, scenarios, analysis, design, and test specifications before implementation. `spec-loop-base-backlog-steered`, `spec-loop-base-backlog-prompted`, and `spec-loop-incremental` each had 13 of 15 behavior categories fully checked. | It asks for more specification and design review before implementation. |
-| Detailed implementation steps | [Superpowers](https://github.com/obra/superpowers) | Superpowers generated design documents and implementation plans. The implementation plans contained 7 to 9 tasks, depending on the solution, and the sessions showed many product choices. | The generated Superpowers documents were 1988 to 2282 lines. The Superpowers solutions had fewer fully checked behavior categories than the two Spec Loop backlog solutions. |
-| Few user interruptions | [OpenSpec](https://github.com/Fission-AI/OpenSpec); GSD Small Feature | The OpenSpec solutions, `open-spec` and `open-spec-calisthenics`, had the fewest visible clarification gates and shortest generated specification files. `gsd-small-feature` also used few clarification gates and committed scope, plan, state, and summary files. | The OpenSpec solutions made more unreviewed choices. `gsd-small-feature` had fewer committed automated tests for required behavior and less committed decision analysis than the Spec Loop backlog solutions. |
-| What future reviewers can reconstruct from Git | [Spec Loop](https://github.com/dpolivaev/spec-loop), with [OpenSpec](https://github.com/Fission-AI/OpenSpec) as the closest compact alternative | Spec Loop task files preserved research, analysis, design, glossary/terms, constraints, and test specifications. OpenSpec preserved proposal/design/spec rationale, including decisions and alternatives. | This measures what a future reviewer can reconstruct from Git, not whether the app works today. Files only count when committed. |
+**Keywords:** AI-assisted software development, specification-driven development, software design, code review, Bank Kata, object calisthenics
 
-In this case study, Spec Loop gave the clearest user-reviewed design before code and the most complete Git record of implementation reasoning. OpenSpec produced the shortest specification files and needed few visible clarification gates. Superpowers produced the longest implementation plans and asked many product questions. GSD Small Feature in GSD Pi produced a shorter scope/plan/state/summary file set and a working app. Object-calisthenics/domain-language constraints are discussed separately because their effect on final source structure is a different question from workflow choice.
+The [technical appendix](bank-kata-ai-workflow-case-study-appendix.md) contains the full condition matrix, behavior matrix, scoring anchors, per-solution evidence, metrics, token accounting, and protocol deviations.
 
-See [Ranking by study criteria and limits](#ranking-by-study-criteria-and-limits) for the full ordering and rank-specific evidence.
+## 1. Introduction
 
-## Kata attribution and scope
+Agentic coding workflows do more than generate code. They structure the conversation, decide when implementation may start, create different review artifacts, and direct attention toward different engineering risks. Comparing only the final source therefore misses part of their effect; comparing only their documentation misses whether the resulting software preserved the documented intent.
 
-The kata requirements are not original to this study. They come from the Bank Account / Bank Kata used in software-craftsmanship practice, commonly attributed to Sandro Mancuso / Codurance. The user prompts reused that kata wording, especially:
+This study examines both sides using a small, recognizable task: a browser implementation of the [Bank Kata](https://github.com/sandromancuso/Bank-kata). Twelve completed solutions were produced with four workflow families and several prompt or decomposition conditions. The study is exploratory rather than a controlled benchmark: the runs were not replicated, prompts were not identical, and user interaction varied. Its purpose is to identify observable patterns, expose trade-offs, and define claims that the collected evidence can support.
 
-> Think of your personal bank account experience. Requirements: Deposit and Withdrawal; Transfer; Account statement (date, amount, balance); Statement printing; Statement filters (just deposits, withdrawal, date).
+The research questions are:
 
-The object-calisthenics constraints used in the calisthenics solutions are also not original to this study. They come from Jeff Bay's Object Calisthenics exercise in *The ThoughtWorks Anthology*. The domain-language boundary rule was added alongside those rules for this bank-kata comparison.
+1. **RQ1 — Pre-code reviewability:** What artifacts did each workflow make available for review before implementation, and what did Git preserve afterward?
+2. **RQ2 — Decision visibility:** Which material product and design decisions were visible to the user rather than silently selected by the assistant?
+3. **RQ3 — Resulting evidence and design:** How much required-behavior evidence did the tagged tests or recorded checks provide, and how did the resulting source/tests score against an explicit six-part design rubric?
+4. **RQ4 — Decomposition and calisthenics:** What patterns were associated with backlog/incremental decomposition and with domain-language/object-calisthenics constraints?
+5. **RQ5 — Interaction and cost trade-offs:** What relationships appeared among document size, interaction shape, token consumption, and resulting evidence?
 
-This study compares AI workflow outputs on those existing exercises. It does not claim authorship of the kata requirements or the object-calisthenics rule set.
+The contribution is an evidence-linked comparison of workflow outputs, not a general causal claim about the frameworks.
 
-Common functional requirements across the bank-kata prompts:
+## 2. Background
 
-- deposit and withdrawal;
-- transfer / rollback behavior when the prompt included it explicitly;
-- account statement with date, amount, and balance;
+### 2.1 Bank Kata scope
+
+The Bank Kata is a software-craftsmanship exercise associated with Sandro Mancuso and Codurance. The original kata emphasizes deposits, withdrawals, and statement printing and also presents [Object Calisthenics](https://github.com/sandromancuso/Bank-kata#object-calisthenics) as a design constraint set.
+
+The common browser-app scope in this study comprised:
+
+- deposits and withdrawals;
+- transfers with rejected-operation or rollback safety;
+- account statements containing date, amount, and running balance;
 - statement printing;
-- statement filters for deposits, withdrawals, and date.
+- filters for deposits, withdrawals, and date;
+- browser `localStorage` persistence; and
+- a user-visible browser flow.
 
-Additional requirements in expanded prompts:
+The matched conditions used TypeScript/Vite and fixed Daily and Savings accounts. Five calisthenics conditions additionally required bank-domain language, a domain boundary, and the listed object-calisthenics source constraints. Source-constraint verification is therefore applicable only to those five conditions.
 
-- TypeScript and Vite;
-- browser local storage;
-- fixed Daily and Savings accounts;
-- rollback on failed Daily/Savings transfer;
-- object-calisthenics and domain-language constraints.
+### 2.2 Compared workflows
 
-Object-calisthenics/domain-language constraints used in all calisthenics prompts:
+- [OpenSpec](https://github.com/Fission-AI/OpenSpec) organizes a change into proposal, design, capability specifications, and implementation tasks before an apply step.
+- [Spec Loop](https://github.com/dpolivaev/spec-loop) supports task files, subtasks, or multiple backlog tasks with scope, analysis, design, test specification, and execution approval.
+- [Superpowers](https://github.com/obra/superpowers) uses brainstorming, design approval, a detailed implementation plan, and test-driven execution skills.
+- [GSD](https://opengsd.net) provides several execution paths. The completed GSD solution studied here used the Small Feature path through GSD Pi.
 
-1. Domain code must use only bank-domain concepts and names. UI, browser, storage, framework, rendering, and technical orchestration concepts must stay out of the domain model.
-2. One level of indentation per method.
-3. Do not use the `else` keyword.
-4. Wrap all primitives and strings.
-5. Use first-class collections.
-6. Use one dot per line.
-7. Do not abbreviate.
-8. Keep all entities small: 50 lines.
-9. No classes with more than two instance variables.
-10. No getters, setters, or properties.
+These descriptions explain workflow mechanics; they are not treated as outcome evidence.
 
-## Workflows and compared solutions
+## 3. Method
 
-### Workflow mechanics
+### 3.1 Study design and corpus
 
-- [OpenSpec](https://github.com/Fission-AI/OpenSpec) structures work as a change proposal: proposal, design, tasks, and capability specs.
-- [Spec Loop](https://github.com/dpolivaev/spec-loop) writes task files, subtasks, backlog items, approval gates, design sections, and test specifications.
-- [Superpowers](https://github.com/obra/superpowers) uses brainstorming, clarifying questions, design approval, detailed implementation plans, TDD-style execution, and verification.
-- [GSD](https://opengsd.net) has multiple runtime paths. The completed GSD solution included here used the GSD Small Feature workflow through GSD Pi.
+The unit of analysis is one completed, tagged solution repository plus its retained generation session. The primary corpus contains 12 solutions: two OpenSpec, six Spec Loop, three Superpowers, and one GSD Small Feature implementation. All primary solutions include persistence. The non-calisthenics OpenSpec control was regenerated on 15 July 2026 after an audit found that the original base-prompt run had silently excluded persistence. The original run remains public as an excluded pilot; Section 6 and the appendix discuss this post-hoc correction.
 
-The frameworks differ in how they direct the model. OpenSpec and GSD use fixed workflow prompts or runtimes. Superpowers uses skills plus procedural instructions. Spec Loop is distributed as cross-referencing skills, without a separate fixed workflow prompt. Its skills reference related skills so planning, clarification, work breakdown, approval, implementation, ADR, and glossary guidance can be loaded when the corresponding trigger is reached.
+Most runs used GPT-5.5 with `xhigh` reasoning. `superpowers-5.4` used GPT-5.4 with `high` reasoning. The matched OpenSpec rerun also used GPT-5.5 `xhigh`; its retained session records that configuration.
 
-This gives Spec Loop more flexibility in ordinary communication and makes installation simpler in agents that already support skills. Spec Loop planning guidance gives the model criteria for choosing among taskless work, chat-only tasks, task files, task files with subtasks, and multiple task files / backlog items. The user can state a preferred form, but the workflow does not require the user to choose the form up front. For case-study purposes, a specific form can still be specified in the prompt or selected by later user input. In ordinary use, the model can choose from the criteria.
+Each primary repository exposes the evaluated state through the shared tag `analysis-2026-06-30`. The tag is a cross-repository snapshot label, not a claim that every run occurred on that date. Exact repository links and commit identifiers are in the appendix.
 
-### Solution conditions and in-session choices
+### 3.2 Evidence sources
 
-Solution repositories are public in the GitLab subgroup [skill-assessment/bank-kata](https://gitlab.com/skill-assessment/bank-kata). Each repository contains `main` and tag `analysis-2026-06-30` at the evaluated revision. The `Solution` column links to the repository and uses the repository path name.
+The analysis used:
 
-Initial prompt and in-session choices are grouped together because both affect how each solution should be read. Each entry records when a planning form or product decision came from the prompt, the workflow, or later user input.
+1. generated proposal, design, specification, task, plan, state, and summary files committed with each solution;
+2. tagged production source and automated tests;
+3. fresh project test and build runs;
+4. static metrics from the same local analysis scripts;
+5. user-visible assistant messages and user responses extracted from retained session JSONL files; and
+6. session usage records for integrated token and cost accounting.
 
-The standard GSD attempt is not included because it was aborted before completing the kata. The completed `gsdpi-quick` solution is not included because it produced only the result, with no generated documentation, design file, discussion, or steering checkpoint.
+Tool calls and hidden reasoning were excluded from decision-visibility analysis. Raw session files are not published; this limits independent reproduction of the interaction findings. The solution artifacts and evaluated revisions are public.
 
-#### [open-spec](https://gitlab.com/skill-assessment/bank-kata/open-spec) (pi, GPT-5.5 xhigh)
-- Initial prompt condition: Base bank-kata prompt via OpenSpec proposal flow. This prompt variant included the transfer rollback wording: “Transfer (transactional, rollback on failures).”
-- Relevant in-session choices: Only proceed/apply approvals were found.
-- Shows: Evidence for compact OpenSpec proposal/spec review on the base kata.
+### 3.3 Behavior-evidence classification
 
-#### [open-spec-calisthenics](https://gitlab.com/skill-assessment/bank-kata/open-spec-calisthenics) (pi, GPT-5.5 xhigh)
-- Initial prompt condition: Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all object-calisthenics/domain-language constraints listed above.
-- Relevant in-session choices: Only an apply approval was found.
-- Shows: Evidence for OpenSpec with a constraint-heavy prompt; few design decisions were discussed with the user.
+Fourteen categories apply to every primary solution: money validation; deposit; withdrawal; insufficient-funds safety; transfer success; rejected-transfer no-change behavior; statement date/amount/balance; type filters; date filters; print behavior; UI/browser flow; persistence restore; invalid-storage fallback/validation; and storage-write-failure safety. A fifteenth category, automated source-constraint checks, applies only to calisthenics conditions.
 
-#### [spec-loop-base-backlog-steered](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-steered) (pi, GPT-5.5 xhigh)
-- Initial prompt condition: Base bank-kata prompt. It did not initially specify separate backlog tasks, localStorage, or Daily/Savings.
-- Relevant in-session choices: User asked for a “proper multitask backlog,” opted into `glossary.adoc`, and later asked whether transactions and rollback had been considered.
-- Shows: Highest final design score; observed path includes user-selected backlog and later rollback/storage-write-failure review.
+Each applicable category was classified as:
 
-#### [spec-loop-base-backlog-prompted](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-prompted) (pi, GPT-5.5 xhigh)
-- Initial prompt condition: Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, separate backlog tasks, and design of each following task only after the previous task was implemented and committed.
-- Relevant in-session choices: During the final solution session, user input was mostly approvals and moving completed tasks to `done`.
-- Shows: Evidence for the backlog form specified in the initial prompt.
+- **full:** direct automated evidence, or a sufficiently specific retained verification record, covers the expected behavior;
+- **partial:** only part of the behavior or a weaker proxy is checked; or
+- **missing:** no adequate evidence was found.
 
-#### [spec-loop-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-incremental) (pi, GPT-5.5 xhigh)
-- Initial prompt condition: Expanded prompt: TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and subtask design-after-commit sequencing.
-- Relevant in-session choices: No later planning-route change found.
-- Shows: Evidence for Spec Loop sequential-subtask work.
+`N/A` is not counted as missing. The classification measures evidence, not proof of correctness.
 
-#### [spec-loop-calisthenics](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics) (pi, GPT-5.5 xhigh)
-- Initial prompt condition: Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above.
-- Relevant in-session choices: Subtask path selected during the session.
-- Shows: Evidence for Spec Loop with the expanded calisthenics prompt and subtask path.
+### 3.4 Source/test design score
 
-#### [spec-loop-calisthenics-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-incremental) (pi, GPT-5.5 xhigh)
-- Initial prompt condition: Expanded calisthenics prompt plus subtask design-after-commit sequencing.
-- Relevant in-session choices: Only approval responses were found.
-- Shows: Evidence for Spec Loop calisthenics sequential-subtask work.
+The reviewer assigned 0–3 points independently for:
 
-#### [spec-loop-calisthenics-single-task](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-single-task) (pi, GPT-5.5 xhigh)
-- Initial prompt condition: Expanded calisthenics prompt without explicit backlog/subtask sequencing.
-- Relevant in-session choices: No later planning-route change appears in the retained session evidence.
-- Shows: Evidence for the broad single-task calisthenics condition.
+1. naming and domain language;
+2. simplicity (KISS);
+3. single responsibility (SRP);
+4. dependency direction;
+5. change locality; and
+6. testability.
 
-#### [superpowers](https://gitlab.com/skill-assessment/bank-kata/superpowers) (Codex, GPT-5.5 xhigh)
-- Initial prompt condition: Base bank-kata prompt with transactional rollback wording.
-- Relevant in-session choices: User supplied important clarifications: `localStorage`, two internal accounts like Daily/Savings, and plain TypeScript + Vite.
-- Shows: User answers set product scope and stack choices.
+The maximum score is 18. The rubric was formalized after initial solution review rather than preregistered, and the implementation agents did not receive it. The matched OpenSpec rerun was scored later using the same anchors. The component table is reported so readers need not trust the total alone; full anchors and evidence appear in the appendix.
 
-#### [superpowers-5.4](https://gitlab.com/skill-assessment/bank-kata/superpowers-5.4) (Codex, GPT-5.4 high)
-- Initial prompt condition: Base bank-kata prompt with transactional rollback wording.
-- Relevant in-session choices: User supplied browser local storage, two fixed accounts, browser-only display, and later changed direction to include printing. User also answered “ts, vite, browser only,” which the assistant did not clarify before choosing React.
-- Shows: Evidence includes user-provided product choices and an ambiguous stack choice before the assistant selected React.
+### 3.5 Synthesis and ranking
 
-#### [superpowers-calisthenics](https://gitlab.com/skill-assessment/bank-kata/superpowers-calisthenics) (Codex, GPT-5.5 xhigh)
-- Initial prompt condition: Expanded calisthenics prompt with TypeScript/Vite, Daily/Savings, transfer rollback, browser local storage, and all constraints listed above.
-- Relevant in-session choices: User said domain tests were enough, later asked not to be bothered with trivial questions, and later challenged date-control design and statement sorting.
-- Shows: User answers shaped test scope; date-control design changed after user challenge. Final constraint preservation is judged from code/tests.
+Observations by research question are primary. A secondary overall ranking was produced using an explicit qualitative procedure:
 
-#### [gsd-small-feature](https://gitlab.com/skill-assessment/bank-kata/gsd-small-feature) (GSD Pi, GPT-5.5 xhigh)
-- Initial prompt condition: GSD Small Feature workflow started without a description; the assistant asked for one, then the user supplied the expanded TypeScript/Vite, Daily/Savings, rollback, statement, print, filter, and localStorage prompt.
-- Relevant in-session choices: Scope and plan approval gates selected the recommended options. The assistant did not ask separate gray-area questions; it packaged defaults into the scope approval. `.gsd/workflows` files were committed after completion.
-- Shows: Evidence for the GSD Small Feature workflow through GSD Pi, not for the one-shot GSD Pi quick path or standard GSD. The app passed its tests, but it had fewer committed tests for required behavior and less committed decision analysis than the Spec Loop backlog solutions.
+1. compare applicable behavior categories, with greater weight on money, rollback, persistence, print, and browser-flow safety;
+2. use the six-component design score for close results, without letting it conceal missing safety evidence;
+3. consider whether important decisions and verification expectations were reviewable before or during coding; and
+4. treat document size, static metrics, test count, and token use as supporting rather than decisive evidence.
 
-### Communication patterns
+The ranking is intentionally not a sum of unrelated columns.
 
-Question count did not determine whether decisions were checked. The relevant fact was whether important decisions were shown early enough to change the design.
+## 4. Results
 
-- OpenSpec and GSD Small Feature used fewer clarification points. OpenSpec left fewer recorded reasons for data, UI, and failure-behavior decisions. GSD Small Feature showed decisions for approval, but did not ask gray-area questions separately.
-- Spec Loop recorded decisions at task or subtask boundaries. In `spec-loop-base-backlog-steered`, user review changed rollback and storage-write-failure handling.
-- Superpowers asked many product/design questions. Source and tests were still needed to check whether those answers reached the final code. In `superpowers-5.4`, the ambiguous `ts, vite, browser only` answer was not resolved before React was selected.
+### 4.1 RQ1 — Pre-code reviewability and Git reconstruction
 
-## How conclusions were derived
-
-The study used this chain of evidence:
-
-1. **Prompt condition** — what the solution was asked to do.
-2. **Generated specification files** — what the workflow wrote before or during implementation.
-3. **Committed files** — what a later reviewer can reconstruct from Git without the chat log.
-4. **Session communication** — which important choices were shown to the user and accepted before coding.
-5. **Source code structure** — whether the final implementation preserved clean boundaries and localized change.
-6. **Tests** — which required behaviors and failure modes were actually asserted.
-7. **Static metrics** — supporting diagnostics for file size, complexity, duplication, dependency cycles, and risky patterns.
-
-Conclusions require agreement between several evidence types. Example: a plan without tests is not enough; many tests without written design are also not enough.
-
-UI references in this study are limited to generated UI/display sections, browser-flow checks, print/filter/storage behavior, and separation of UI code from domain/application code. The study does not compare visual design, usability, or accessibility.
-
-## Generated specification files and Git reconstruction
-
-Here, “specification” means the generated written structure that described, constrained, or guided implementation, including task files, plans, and workflow state files.
-
-The table also records fenced code blocks embedded in generated planning files, because those blocks mix specification with implementation detail. In this study, the OpenSpec and Spec Loop generated files listed below had no fenced source/test code blocks. The Superpowers implementation plans embedded source, test, configuration, UI, CSS, and shell-command fragments. The GSD Small Feature summary embedded shell commands only.
-
-Pre-code specification review differs by workflow:
-
-| Workflow or path | Pre-code specification review in the workflow | What this study observed |
+| Workflow | Generated artifact shape | Observed review trade-off |
 |---|---|---|
-| Spec Loop | Requires execution approval after task-file planning and before implementation. Task files or subtasks are the review unit. | The most explicit pre-code review structure: scope, analysis, design, and test specification were available before implementation. |
-| Superpowers | Asks for design and implementation-plan approval before execution. | Explicit pre-code approval existed, but plans were long and often embedded code, config, test, UI, CSS, and command fragments. |
-| OpenSpec | Creates proposal, design, specs, and tasks before applying a change. The workflow allows user inspection before implementation. | Compact pre-code review documents, with fewer clarification gates and less detailed failure-behavior discussion. |
-| GSD Small Feature through GSD Pi | Records context and plan before implementation, then state and summary around workflow progress and completion. | Scope, plan, state, and summary were committed, but the pre-code decision analysis was less complete than in the Spec Loop task files or Superpowers design/planning files. |
-| GSD Pi quick | No comparable generated design/specification checkpoint was preserved. | Excluded solution: it produced only the implementation result, without generated documentation, design file, discussion, or steering checkpoint. |
+| OpenSpec | 310–311 lines across proposal, design, capability specs, and tasks | Compact complete change sets; the assistant asked no product or design questions. |
+| Spec Loop | 466–1598 lines in one task, subtasks, or separate backlog task files | Most explicit task-level analysis, design, and test expectations; greater review volume. |
+| Superpowers | 1988–2282 lines across design documents and implementation plans | Detailed execution instructions, but 32–90 fenced code/config/command blocks made plans long and implementation-like. |
+| GSD Small Feature | 278 lines across context, plan, state, and summary | Compact workflow record, but part of the record was post-implementation and contained less committed decision analysis. |
 
-| Solution | Generated specification structure |
-|---|---|
-| [open-spec](https://gitlab.com/skill-assessment/bank-kata/open-spec) | - Proposal (28 lines): why, changes, capabilities, and impact.<br>- Design (55 lines): context, goals/non-goals, decisions, and risks/trade-offs.<br>- Specs (2 files / 91 lines): bank-account transaction and account-statement requirements with scenarios.<br>- Tasks (40 lines): 6-step implementation checklist. |
-| [open-spec-calisthenics](https://gitlab.com/skill-assessment/bank-kata/open-spec-calisthenics) | - Proposal (31 lines): why, changes, capabilities, and impact.<br>- Design (74 lines): context, goals/non-goals, decisions, and risks/trade-offs for TypeScript, boundaries, rollback, persistence, and printing.<br>- Specs (3 files / 152 lines): account operations, account statements, and browser persistence requirements with scenarios.<br>- Tasks (53 lines): 7-step implementation checklist. |
-| [spec-loop-base-backlog-steered](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-steered) | - Task files (4 files / 1491 lines): deposit/withdrawal/statement, account transfers, statement filters, and statement printing.<br>- Each task file uses task-style sections: scope, motivation, scenario, glossary, constraints, briefing, research, analysis, design, and test specification. |
-| [spec-loop-base-backlog-prompted](https://gitlab.com/skill-assessment/bank-kata/spec-loop-base-backlog-prompted) | - Task files (5 files / 1598 lines): app shell, deposits/withdrawals/statement ledger, transfers with rollback, statement filters, and statement printing.<br>- Each task file uses task-style sections: scope, motivation, scenario, glossary, constraints, briefing, research, analysis, design, and test specification. |
-| [spec-loop-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-incremental) | - Task file (929 lines): top-level scope, motivation, scenario, glossary, constraints, briefing, and analysis.<br>- Nested subtasks (4, inside the same task file): deposits/withdrawals/statements/persistence, transfers with rollback, statement filters, and statement printing.<br>- Each subtask uses task-style sections: scope, motivation, scenario, briefing, research, analysis, design, and test specification. |
-| [spec-loop-calisthenics](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics) | - Task file (625 lines): top-level scope, motivation, scenario, glossary, constraints, briefing, research, analysis, and design.<br>- Nested subtasks (3, inside the same task file): persisted deposits/withdrawals/statements, transfers with rollback, and filtered/printable statements.<br>- Each subtask uses task-style sections: scope, motivation, scenario, briefing, research, design, and test specification. |
-| [spec-loop-calisthenics-incremental](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-incremental) | - Task file (1067 lines): top-level scope, motivation, scenario, glossary, constraints, and briefing.<br>- Nested subtasks (3, inside the same task file): deposits/withdrawals with persisted statements, transfers with rollback, and statement filters/printing.<br>- Subtask sections include scope, motivation, scenario, constraints, briefing, research, design, and test specification; the two later subtasks also include analysis. |
-| [spec-loop-calisthenics-single-task](https://gitlab.com/skill-assessment/bank-kata/spec-loop-calisthenics-single-task) | - Task file (466 lines): one broad task with no nested subtask sections.<br>- The file uses task-style sections: scope, motivation, scenario, glossary, constraints, briefing, research, analysis, design, and test specification. |
-| [superpowers](https://gitlab.com/skill-assessment/bank-kata/superpowers) | - Design document (148 lines): overview, goals/non-goals, architecture, domain model, banking operations, statement filtering, persistence, UI, validation/errors, testing, and boundaries.<br>- Implementation plan (1840 lines): file structure and 8 tasks from scaffold through browser verification.<br>- Embedded fenced code blocks (32): `.gitignore`, JSON config/package files, HTML, CSS, TypeScript source, Vitest tests, and shell/git commands. |
-| [superpowers-5.4](https://gitlab.com/skill-assessment/bank-kata/superpowers-5.4) | - Design document (320 lines): overview, goals/non-goals, architecture, data model, transaction behavior, UI, filtering, validation, failure handling, testing, module boundaries, and acceptance criteria.<br>- Implementation plan (1741 lines): file structure and 9 tasks from Vite/React/Vitest bootstrap through verification and cleanup.<br>- Embedded fenced code blocks (48): JSON config/package files, Vite/TypeScript config, HTML, CSS, TypeScript/TSX source, React Testing Library/Vitest tests, and shell/git commands. |
-| [superpowers-calisthenics](https://gitlab.com/skill-assessment/bank-kata/superpowers-calisthenics) | - Design document (120 lines): goal, scope, constraints, architecture, domain model, application flow, statements, persistence, UI, error handling, testing, and settled decisions.<br>- Implementation plan (2162 lines): file structure, domain rules, and 7 tasks from scaffold through final verification.<br>- Embedded fenced code blocks (90): package/config files, HTML, CSS, TypeScript source, Vitest tests, object-calisthenics validation commands, and shell/git commands. |
-| [gsd-small-feature](https://gitlab.com/skill-assessment/bank-kata/gsd-small-feature) | - Context (52 lines): feature description, decisions made or proposed, scope boundaries, and gray areas.<br>- Plan (120 lines): 4 implementation tasks and final workflow verification.<br>- State (33 lines): workflow template, branch, phases, timestamps, and output directory.<br>- Summary (73 lines): built behavior, changed files, commits, usage instructions, and test/use notes.<br>- Embedded fenced code blocks (2): shell commands for install, dev server, tests, build, and lint; no source/test code blocks. |
+Spec Loop was not unique in preserving rationale. OpenSpec designs recorded decisions, alternatives, and risks in a much smaller space. The distinctive Spec Loop result was the placement of research, final decisions, design, and behavior-specific test expectations inside the task or current subtask that governed execution. The two backlog solutions preserved separate review units for deposits/withdrawals, transfer, filtering, and printing.
 
-### What Git preserves
+Superpowers preserved the most detailed implementation order, including expected test code, configuration, CSS, and shell commands. This made implementation intent reconstructable but reduced the distinction between specification and generated implementation draft.
 
-A separate question is what future reviewers can reconstruct from Git after the chat log is gone. This is not the same as checking whether the app works.
+### 4.2 RQ2 — Decision visibility
 
-- Spec Loop task files preserved research, analysis, design, glossary/terms, constraints, and test specifications. Across the completed Spec Loop solutions in this study, `Analysis` sections contained between 6 and 28 bullet items per solution with explicit `because` or `so that` reasoning.
-- OpenSpec proposal/design/spec files preserved goals, decisions, rationale, alternatives considered, and risks/trade-offs in a compact form.
-- Superpowers specs/plans preserved implementation order and expected tests, including many expected-failure notes. Decision analysis was less consistently separated from the long plan.
-- GSD Small Feature in GSD Pi preserved scope, key decisions made or proposed, plan, state, and summary in committed `.gsd/workflows` files. Gray areas remained unresolved in the committed files, and some verification details rely on the session log.
+The sessions showed four different interaction patterns:
 
-Interpretation: Spec Loop was not unique in documenting rationale, but it preserved implementation reasoning inside task files alongside research, glossary/terms, constraints, design, and test specifications. OpenSpec was the closest compact alternative for decision rationale.
+- **OpenSpec:** both primary runs proceeded with proposal/apply approvals and asked no product or design questions. The matched control had five user messages: proposal, apply, manual-check confirmation, commit, and staging approval. Important choices were visible in generated artifacts, but not negotiated in chat.
+- **Spec Loop:** decisions appeared in batches at task or subtask boundaries. In `spec-loop-base-backlog-steered`, the assistant proposed `localStorage`; the user redirected planning to a multi-task backlog and later challenged transfer and persistence-failure handling. The final task files record the resulting decisions.
+- **Superpowers:** the assistant asked many product and architecture questions. The user explicitly chose persistence, accounts, filter behavior, layout, and other details. Those accepted decisions were strong session evidence, although later source/test inspection was still necessary to see what survived implementation.
+- **GSD Small Feature:** scope and plan approvals exposed bundled defaults, but gray-area choices were not asked one at a time and some remained listed as proposed in committed context.
 
-## Code, tests, and static metrics
+Question count alone did not determine reviewability. OpenSpec exposed choices through compact files; Superpowers exposed many through conversation; Spec Loop connected decisions to execution-governing task sections. The study found no evidence that long questioning alone guaranteed stronger final behavior checks.
 
-All completed comparison projects passed their own tests and build at tag `analysis-2026-06-30`. Required-behavior checks use the 15 behavior categories listed below and are shown as full / partial / missing. Categories that did not apply to the prompt and implemented scope are not counted in those three numbers; this is why `open-spec` sums to 12 instead of 15. The `gsd-small-feature` row was added after the first metric pass over the original 11 solutions and is based on the later manual audit plus fresh `npm test -- --run`, `npm run build`, and `npm run lint` checks.
+### 4.3 RQ3 — Behavior evidence and resulting design
 
-Design score is a source/test reviewer score assigned by GPT-5.5 xhigh acting as an expert code reviewer. It is not a static metric and not a UI score. It sums six criteria scored from 0 to 3: naming/domain language, simplicity (KISS), single responsibility (SRP), dependency direction, change locality, and testability. Maximum score is 18. The component scores are shown below because the total alone is not enough evidence.
+All 12 primary repositories passed their project tests and build at the evaluated revision. Test count is reported only as context. Both tables below are sorted by descending design score; ties retain corpus order.
 
-The implementation prompts did not disclose this exact scoring rubric to the code-writing models. The design-score rubric was applied retrospectively. The scores therefore measure final source/test design quality against the study rubric, not compliance with an announced acceptance criterion.
+| Solution | Tests | Full | Partial | Missing | Applicable | Design score |
+|---|---:|---:|---:|---:|---:|---:|
+| `spec-loop-base-backlog-steered` | 60/60 | 13 | 1 | 0 | 14 | 17/18 |
+| `open-spec-calisthenics` | 12/12 | 13 | 1 | 1 | 15 | 15/18 |
+| `open-spec` | 19/19 | 12 | 1 | 1 | 14 | 14/18 |
+| `spec-loop-base-backlog-prompted` | 58/58 | 13 | 1 | 0 | 14 | 14/18 |
+| `spec-loop-incremental` | 30/30 | 13 | 1 | 0 | 14 | 13/18 |
+| `superpowers` | 17/17 | 11 | 1 | 2 | 14 | 12/18 |
+| `spec-loop-calisthenics-incremental` | 16/16 | 10 | 3 | 2 | 15 | 11/18 |
+| `superpowers-5.4` | 16/16 | 7 | 5 | 2 | 14 | 11/18 |
+| `superpowers-calisthenics` | 13/13 | 8 | 3 | 4 | 15 | 11/18 |
+| `gsd-small-feature` | 5/5 | 7 | 2 | 5 | 14 | 11/18 |
+| `spec-loop-calisthenics` | 7/7 | 11 | 1 | 3 | 15 | 10/18 |
+| `spec-loop-calisthenics-single-task` | 17/17 | 11 | 1 | 3 | 15 | 10/18 |
 
-The score scale was applied independently per criterion:
+The design-score components were:
 
-- Naming/domain language:
-  - 0: public names obscure or misrepresent bank concepts.
-  - 1: many generic names, abbreviations, or inconsistent account/transaction terms make the domain hard to infer.
-  - 2: banking terms are mostly consistent, with some generic records/functions or primitive values leaking into public APIs.
-  - 3: banking concepts are named consistently; public APIs read as deposits, withdrawals, transfers, statements, and filters.
-- KISS:
-  - 0: control flow or abstraction is hard to follow for the kata size.
-  - 1: avoidable indirection, many tiny objects for simple rules, or giant mixed files make simple changes tedious.
-  - 2: structure is mostly direct, with one or a few large files, templates, state handlers, or abstractions heavier than needed.
-  - 3: implementation is direct for the kata size, with no avoidable abstraction, giant mixed flow, or needless object split.
-- SRP:
-  - 0: domain rules, UI, storage, formatting, or printing are mixed so broadly that unrelated changes cross the same files.
-  - 1: several responsibilities share central files or classes.
-  - 2: main responsibilities are separated, but one orchestration, UI, or domain file still combines several tasks.
-  - 3: domain rules, application orchestration, storage, UI/rendering, formatting, and printing are separated.
-- Dependency direction:
-  - 0: domain code depends on browser, storage, UI, or framework APIs.
-  - 1: side effects and domain rules are coupled, or browser/storage details leak into core behavior.
-  - 2: dependency direction mostly holds, with some domain/application boundary leakage or hard-coded runtime assumptions.
-  - 3: domain code is independent of browser APIs, and side effects are isolated behind adapters or injected functions.
-- Change locality:
-  - 0: likely changes require scattered edits because of cycles, duplicated rules, or hard-coded concepts in many files.
-  - 1: ordinary changes touch unrelated layers/files, repeated account/type assumptions, cycles, or large aggregate files.
-  - 2: most changes are localized, but common changes still touch a central file or several fixed-account mappings.
-  - 3: likely changes touch few expected files; boundaries make the change location clear.
-- Testability:
-  - 0: essential behavior can only be checked through manual/browser setup or brittle DOM paths; side effects are not controllable.
-  - 1: some core behavior is tested, but many rules require UI/integration setup; time, storage, or printing is hard to substitute.
-  - 2: core behavior is directly tested; boundary/side-effect tests are thinner or some runtime details are hard to substitute.
-  - 3: core and boundary behavior can be tested directly; side effects such as time, storage, and printing are injectable or mockable.
-
-No component in the final table scored 0.
-
-The four code/test metric columns split TypeScript/TSX files into domain and application+UI buckets. These metrics show where code and tests are concentrated. They do not prove correctness or design quality by themselves; use them with the required-behavior checks, design score, and conclusion table below.
-
-Result metrics:
-
-| Solution | Tests | Required checks | Design score |
-|---|---:|---:|---:|
-| `spec-loop-base-backlog-steered` | 60/60 | 13 / 1 / 1 | 17/18 |
-| `spec-loop-base-backlog-prompted` | 58/58 | 13 / 1 / 1 | 14/18 |
-| `spec-loop-incremental` | 30/30 | 13 / 1 / 1 | 13/18 |
-| `open-spec-calisthenics` | 12/12 | 13 / 1 / 1 | 15/18 |
-| `open-spec` | 19/19 | 11 / 0 / 1 | 12/18 |
-| `superpowers` | 17/17 | 11 / 1 / 3 | 12/18 |
-| `spec-loop-calisthenics` | 7/7 | 11 / 1 / 3 | 10/18 |
-| `spec-loop-calisthenics-single-task` | 17/17 | 11 / 1 / 3 | 10/18 |
-| `spec-loop-calisthenics-incremental` | 16/16 | 10 / 3 / 2 | 11/18 |
-| `superpowers-calisthenics` | 13/13 | 8 / 3 / 4 | 11/18 |
-| `superpowers-5.4` | 16/16 | 7 / 5 / 3 | 11/18 |
-| `gsd-small-feature` | 5/5 | 7 / 2 / 6 | 11/18 |
-
-Design-score breakdown:
-
-| Solution | Naming | KISS | SRP | Dependency direction | Change locality | Testability | Total |
+| Solution | Naming | KISS | SRP | Dependencies | Locality | Testability | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| `spec-loop-base-backlog-steered` | 3 | 2 | 3 | 3 | 3 | 3 | 17/18 |
-| `spec-loop-base-backlog-prompted` | 2 | 2 | 2 | 3 | 2 | 3 | 14/18 |
-| `spec-loop-incremental` | 2 | 2 | 2 | 2 | 2 | 3 | 13/18 |
-| `open-spec-calisthenics` | 3 | 2 | 3 | 3 | 2 | 2 | 15/18 |
-| `open-spec` | 2 | 2 | 2 | 2 | 2 | 2 | 12/18 |
-| `superpowers` | 2 | 2 | 2 | 2 | 2 | 2 | 12/18 |
-| `spec-loop-calisthenics` | 3 | 1 | 1 | 2 | 1 | 2 | 10/18 |
-| `spec-loop-calisthenics-single-task` | 3 | 1 | 2 | 1 | 1 | 2 | 10/18 |
-| `spec-loop-calisthenics-incremental` | 3 | 1 | 2 | 2 | 1 | 2 | 11/18 |
-| `superpowers-calisthenics` | 2 | 2 | 2 | 2 | 1 | 2 | 11/18 |
-| `superpowers-5.4` | 2 | 2 | 2 | 2 | 1 | 2 | 11/18 |
-| `gsd-small-feature` | 2 | 2 | 2 | 2 | 1 | 2 | 11/18 |
+| `spec-loop-base-backlog-steered` | 3 | 2 | 3 | 3 | 3 | 3 | 17 |
+| `open-spec-calisthenics` | 3 | 2 | 3 | 3 | 2 | 2 | 15 |
+| `open-spec` | 2 | 2 | 2 | 3 | 2 | 3 | 14 |
+| `spec-loop-base-backlog-prompted` | 2 | 2 | 2 | 3 | 2 | 3 | 14 |
+| `spec-loop-incremental` | 2 | 2 | 2 | 2 | 2 | 3 | 13 |
+| `superpowers` | 2 | 2 | 2 | 2 | 2 | 2 | 12 |
+| `spec-loop-calisthenics-incremental` | 3 | 1 | 2 | 2 | 1 | 2 | 11 |
+| `superpowers-5.4` | 2 | 2 | 2 | 2 | 1 | 2 | 11 |
+| `superpowers-calisthenics` | 2 | 2 | 2 | 2 | 1 | 2 | 11 |
+| `gsd-small-feature` | 2 | 2 | 2 | 2 | 1 | 2 | 11 |
+| `spec-loop-calisthenics` | 3 | 1 | 1 | 2 | 1 | 2 | 10 |
+| `spec-loop-calisthenics-single-task` | 3 | 1 | 2 | 1 | 1 | 2 | 10 |
 
-Code-size and complexity metrics:
+The two backlog Spec Loop runs and `spec-loop-incremental` had no missing applicable category; their partial category was storage-write-failure safety. The matched OpenSpec control had full money, browser-flow, persistence-restore, and bad-storage evidence, partial print evidence, and missing storage-write-failure safety. Its application controller updates in-memory state before saving, so a failed write can leave an advanced state that becomes visible after a later render.
 
-| Solution | Prod domain files/LOC/CC | Prod app+UI files/LOC/CC | Test domain files/LOC | Test app+UI files/LOC |
-|---|---:|---:|---:|---:|
-| `spec-loop-base-backlog-steered` | 4 / 295 / 1–7 | 9 / 598 / 1–10 | 4 / 271 | 5 / 645 |
-| `spec-loop-base-backlog-prompted` | 6 / 537 / 1–6 | 3 / 529 / 1–5 | 0 / 0 | 8 / 1472 |
-| `spec-loop-incremental` | 1 / 253 / 1–4 | 3 / 431 / 1–10 | 0 / 0 | 1 / 623 |
-| `open-spec-calisthenics` | 16 / 821 / 1–3 | 10 / 602 / 1–6 | 2 / 90 | 2 / 173 |
-| `open-spec` | 6 / 322 / 1–6 | 4 / 454 / 1–5 | 3 / 208 | 2 / 131 |
-| `superpowers` | 5 / 243 / 1–8 | 4 / 453 / 1–9 | 3 / 203 | 2 / 96 |
-| `spec-loop-calisthenics` | 1 / 728 / 1–5 | 2 / 724 / 1–4 | 0 / 0 | 2 / 380 |
-| `spec-loop-calisthenics-single-task` | 36 / 1099 / 1–3 | 6 / 612 / 1–5 | 1 / 161 | 2 / 263 |
-| `spec-loop-calisthenics-incremental` | 27 / 631 / 1–2 | 24 / 934 / 1–4 | 0 / 0 | 1 / 276 |
-| `superpowers-calisthenics` | 17 / 379 / 1–2 | 6 / 387 / 1–5 | 3 / 141 | 2 / 79 |
-| `superpowers-5.4` | 4 / 236 / 1–7 | 11 / 387 / 1–5 | 1 / 107 | 5 / 124 |
-| `gsd-small-feature` | 2 / 327 / 1–10 | 2 / 426 / 1–7 | 1 / 136 | 0 / 0 |
+The strongest source/test design score, 17/18, belonged to `spec-loop-base-backlog-steered`. Its ports separated domain transitions, application commit ordering, storage, time, identifiers, printing, and UI. The result also reflects user intervention: the user requested backlog decomposition and challenged persistence-failure semantics. It is therefore not clean evidence for workflow defaults alone.
 
-Abbreviations: LOC means nonblank physical lines. CC means approximate cyclomatic complexity range across production functions in that bucket. Test buckets omit CC. Production TypeScript excludes tests, config files, and `vite-env.d.ts`. Test TypeScript includes `.test.`/`.spec.` files and files under `test` or `tests` directories. Domain means explicit `src/domain`, `src/bank`, `tests/domain`, `tests/bank`, or root-level banking-domain files such as `money`, `transfer`, `statementFilters`, or `bankState`. Storage and repository files are counted with application+UI because they connect domain behavior to the browser/runtime.
+### 4.4 RQ4 — Decomposition and calisthenics
 
-Duplication note: all 12 solutions were measured with jscpd using production files under `src/`, excluding tests and `vite-env.d.ts`. The highest duplicated-line percentage was about 2.84% in `superpowers-calisthenics`.
+#### Decomposition
 
-Code/test conclusions:
+The clearest repeated pattern was vertical decomposition combined with a design and test specification for the current slice:
 
-| Solution | Conclusion |
-|---|---|
-| `spec-loop-base-backlog-steered` | Highest design score in this comparison. Tests covered broad behavior, localStorage validation, and rollback depth. User review contributed to rollback/storage-write-failure coverage. |
-| `spec-loop-base-backlog-prompted` | 58 passing tests and 13 fully checked behavior categories. Restored localStorage validation and storage-write-failure handling during deposit/withdrawal were less complete than in `spec-loop-base-backlog-steered`. |
-| `spec-loop-incremental` | 30 passing tests and 13 fully checked behavior categories. Planning was kept in one task file rather than separate backlog files. |
-| `open-spec-calisthenics` | Second-highest design score. No automated test simulated localStorage failing while saving state. |
-| `open-spec` | Base-scope implementation with 19 passing tests and 11 fully checked behavior categories. Few design decisions were visible in session. |
-| `superpowers` | Accepted product decisions were visible in session. Tests did not cover UI flow, localStorage validation, print assertions, or storage-write failure as fully as the solutions with the most fully checked behavior categories. |
-| `spec-loop-calisthenics` | Domain vocabulary was clear. Very large files reduced the simplicity and change-locality scores. |
-| `spec-loop-calisthenics-single-task` | Automated tests checked source-code constraints; broad single-task design and dependency cycles remained problems. |
-| `spec-loop-calisthenics-incremental` | 16 passing tests. Storage and print evidence was partial or missing in some behavior categories. |
-| `superpowers-calisthenics` | Session included a date-control design change after user challenge. Final tests/code preserved fewer requested constraints and required behaviors than the solutions with the most fully checked behavior categories. |
-| `superpowers-5.4` | 16 passing tests, but only 7 fully checked behavior categories. |
-| `gsd-small-feature` | 5 passing tests covering deposits, withdrawal rejection, successful transfer, simulated rollback, and statement filters. Browser smoke checks in the session covered UI flow, print invocation, localStorage reload, and clean diagnostics, but those checks were not committed as executable tests. Committed tests did not cover print, storage fallback, storage-write failure, or UI regression. |
+- the two backlog conditions and the non-calisthenics incremental condition each achieved 13 full and 1 partial check with no missing applicable category;
+- the broad single-task calisthenics condition had more dependency cycles and weaker browser evidence than the incremental/backlog leaders; and
+- documentation volume alone did not explain the result: some longer plans produced fewer full checks.
 
-Required-behavior checks counted whether tests or explicitly recorded checks covered these behavior categories: money validation, deposit, withdrawal, insufficient-funds safety, transfer success, rejected-transfer no-change behavior, statement date/amount/balance, type filters, date filters, print behavior, UI/browser flow, restoring data from localStorage, fallback/validation for invalid stored data, storage-write-failure safety, and source-code constraint checks. Storage-write-failure safety means a failed save does not advance visible, in-memory, or persisted state.
+This is an association within a small, non-random sample. The first backlog result was user-steered; the second used an initial prompt that required backlog sequencing; and the Spec Loop skills had changed between some runs.
 
+#### Domain-language/object-calisthenics constraints
 
-## Patterns in the higher-ranked results
+The matched framework comparisons were mixed:
 
-### Task decomposition was the clearest pattern
+- **OpenSpec:** on the 14 common categories, both runs were 12 full / 1 partial / 1 missing. The calisthenics run added full source-constraint evidence and scored one design point higher, but money validation was partial; the non-calisthenics run had full money validation but only partial print evidence.
+- **Spec Loop:** the closest incremental comparison favored the non-calisthenics condition on behavior evidence and simplicity. Calisthenics conditions improved domain vocabulary but sometimes produced very large files, many small objects, or import cycles.
+- **Superpowers:** the non-calisthenics solution had more full common-behavior evidence and a slightly higher design score. The calisthenics intent was only partly preserved in final production source.
 
-Some Spec Loop solutions used a decomposition form specified by the user or the initial prompt. This was deliberate: the study compared backlog tasks, sequential subtasks, and a broad single task.
+The revised evidence does **not** support the earlier formulation that calisthenics lowered quality within every framework. It supports a narrower conclusion: the constraint set reliably increased attention to vocabulary and boundaries, but its net effect depended on whether simplicity, change locality, and behavioral safety were preserved.
 
-The clearest pattern was not decomposition by itself. It was vertical decomposition with design and tests for each part, written before that part was implemented.
+### 4.5 RQ5 — Interaction, document size, and token use
 
-The observed cases were:
+Recorded integrated token totals varied widely:
 
-- In `spec-loop-base-backlog-prompted`, the initial prompt asked for separate backlog tasks.
-- In `spec-loop-incremental`, the initial prompt asked for each subtask to be designed only after the previous subtask had been implemented and committed.
-- Both had 13 of 15 behavior categories fully checked, 1 category partially checked, and 1 category missing.
-- `spec-loop-base-backlog-steered` also shared first place after the user redirected planning to a backlog.
+- OpenSpec: 4.18M for the matched control and 4.51M for the calisthenics run;
+- Spec Loop: 7.74M–36.09M across six conditions;
+- Superpowers: 16.65M–22.26M across three conditions; and
+- GSD Small Feature: 6.58M.
 
-Conclusion: in these solutions, decomposition helped when task files specified scope, design, and tests for each implementation part. More documentation alone was not enough.
+The totals are dominated by cached input: long sessions repeatedly re-read an expanding context. They measure interaction and context-processing volume, not mostly new prompt text. Cross-harness cost figures also depend on recorded usage semantics and model prices, so they are supporting evidence rather than a quality-normalized efficiency measure.
 
-### Long plans did not guarantee more tested behavior
+Within comparable conditions, more checkpoints generally meant more repeated context. The incremental Spec Loop calisthenics run used more tokens than the up-front/single-task Spec Loop calisthenics runs. However, the extra checkpoints also allowed later design decisions to use evidence from earlier implemented slices. The data therefore show a review/cost trade-off, not that either up-front or incremental work is universally more efficient.
 
-Superpowers produced detailed plans and asked many product questions. The final solutions still had fewer fully checked behavior categories than the Spec Loop backlog solutions. GSD Small Feature in GSD Pi produced a shorter plan and a working app, but it also had fewer committed tests and less committed rationale.
+## 5. Secondary overall ranking
 
-Conclusion: implementation plans help before execution, but they do not prove that the final code preserved the plan. For later review, the final source/tests and committed, updated task/workflow state mattered more.
+The ranking applies only the synthesis procedure in Section 3.5. Shared ranks indicate that the evidence did not justify a forced ordering.
 
-### Object-calisthenics constraints had mixed value
-
-The constraint set improved vocabulary and boundary awareness in some generated files. It did not reliably improve maintainability.
-
-Observed costs included large files, more indirection, import cycles, and incomplete preservation of constraints in final production code.
-
-Conclusion: domain-language constraints helped only when paired with simplicity/change-locality checks and enforceable tests.
-
-## Ranking by study criteria and limits
-
-The list ranks the 12 bank-kata solutions under the study criteria. It does not say that one framework is always better than another. Because first place is shared, the table has 11 ranks.
-
-The ranking is not a formula that sums the result-metrics table. The table is one input. The ordering was applied this way:
-
-1. Group solutions by required-behavior checks, with the missing or partial category considered, not only the count.
-2. Give more weight to safety categories such as money validation, transfer rollback, persistence validation, storage-write-failure safety, and print/UI evidence than to static shape signals.
-3. Use source/test design score to break or adjust close comparisons, but do not let it override missing safety evidence.
-4. Use generated specification files and session communication to check whether important decisions were visible before or during coding.
-5. Treat static metrics, token use, and compactness as supporting facts, not ranking drivers.
-
-| Rank | Solution | Evidence affecting rank |
+| Rank | Solution | Main reason |
 |---:|---|---|
-| 1 | `spec-loop-base-backlog-steered` and `spec-loop-base-backlog-prompted` | Both had 13 / 1 / 1 required-behavior checks. Their missing category was source-code constraint checks, which were not part of their non-calisthenics prompt condition. Both preserved detailed task-level design and test specifications before implementation. `spec-loop-base-backlog-steered` had the higher source/test design score and deeper localStorage validation. `spec-loop-base-backlog-prompted` was cleaner evidence for the backlog form because the backlog was specified in the initial prompt, but it had less deposit/withdrawal save-failure handling evidence. |
-| 2 | `spec-loop-incremental` | Also had 13 / 1 / 1 required-behavior checks with source-code constraint checks missing outside its prompt condition. It had broad rendered-app tests for deposits, withdrawals, invalid input, transfers, persistence restore, malformed storage, filters, and printing. It ranked below the first tier because its design record was one task file with subtasks rather than separate backlog task files, and its source layering was coarser. |
-| 3 | `spec-loop-calisthenics-incremental` | Ranked above the other calisthenics Spec Loop solutions because it had fewer missing behavior categories, visible subtask-by-subtask decisions, transfer persistence-failure rollback evidence, and committed checkpoints after each slice. It ranked below the non-calisthenics Spec Loop rows because money validation and print evidence were partial, storage validation was less complete, and source/test design score was lower. |
-| 4 | `spec-loop-calisthenics` | Had broad domain and browser-flow evidence, clear domain vocabulary, and a committed task file with design and test specifications. It ranked below `spec-loop-calisthenics-incremental` because print evidence was partial, bad-storage fallback and save-failure safety were missing, and the final source had two very large production files. |
-| 5 | `spec-loop-calisthenics-single-task` | Had source-constraint tests and exact-date/filter/print/storage evidence, but it used one broad task. It ranked below the other Spec Loop calisthenics solutions because money validation, bad-storage fallback, and save-failure safety were missing or less complete, browser-flow evidence was partial, and dependency cycles reduced the source/test design score. |
-| 6 | `superpowers` | Had visible accepted product decisions and a 12/18 source/test design score. It ranked below the Spec Loop rows because UI/browser-flow tests, print assertions, and save-failure behavior were less complete. It ranked above `open-spec` because more product choices were visibly asked, answered, and accepted. |
-| 7 | `open-spec` | Had concise generated specification files, robust core money/rollback tests, and 11 / 0 / 1 checks inside its base scope. It ranked below `superpowers` because important persistence/filter/date/UI choices were less visibly resolved with the user. Persistence categories were outside the base prompt and implemented scope rather than counted as failures. |
-| 8 | `open-spec-calisthenics` | Had 13 / 1 / 1 required-behavior checks and a 15/18 source/test design score, so the result table alone would rank it higher. It ranks here because its partial category was money validation, its missing category was storage-write-failure safety, and fewer detailed implementation/test decisions were user-visible before coding than in the Spec Loop task files. |
-| 9 | `superpowers-calisthenics` | Had complete feature intent and visible correction behavior, but only 8 full required-behavior checks. Money validation, persistence fallback, UI flow, print behavior, and source-constraint preservation were less complete than in the higher-ranked solutions. |
-| 10 | `superpowers-5.4` | Had readable React structure, but only 7 full required-behavior checks. Successful withdrawal evidence, money precision validation, filtered-print evidence, persistence validation depth, and save-failure safety had less test evidence than in the higher-ranked solutions. |
-| 11 | `gsd-small-feature` | Passed its committed tests and build, but had only 5 committed tests and 7 full required-behavior checks. Browser smoke checks existed in the session, but print, storage fallback, storage-write failure, and UI regression checks were not committed as executable tests. The committed GSD files preserved less decision analysis than the higher-ranked generated specification files. |
+| 1 | `spec-loop-base-backlog-steered`; `spec-loop-base-backlog-prompted` | 13 full, 1 partial, no missing applicable checks; detailed task-level design/test records. The steered run has the strongest design score, while the prompted run is cleaner evidence for the backlog condition. |
+| 2 | `spec-loop-incremental` | Same behavior totals as rank 1 with a compact one-task/subtask record, but coarser source layering and less granular Git review units. |
+| 3 | `open-spec`; `open-spec-calisthenics` | Strong common behavior evidence and compact specification sets. The base run has stronger money evidence; the calisthenics run has stronger vocabulary, boundaries, print, and source-constraint evidence. |
+| 4 | `superpowers` | Strong accepted decision trace and acceptable source design, but missing print and storage-write-failure evidence and only partial UI coverage. |
+| 5 | `spec-loop-calisthenics-incremental` | Fewer missing categories than the other Spec Loop calisthenics runs and partial save-failure evidence, but weaker money/print evidence and over-decomposition. |
+| 6 | `spec-loop-calisthenics` | Broad core behavior and clear vocabulary, but missing storage validation, save-failure, and source-constraint evidence; two very large production files. |
+| 7 | `spec-loop-calisthenics-single-task` | Full source-constraint evidence and broad core behavior, but missing money, storage-validation, and save-failure evidence plus many import cycles. |
+| 8 | `superpowers-calisthenics` | Complete feature intent and visible correction behavior, but weaker money, print, UI, persistence, and constraint evidence. |
+| 9 | `superpowers-5.4` | Readable React structure, but weaker money, withdrawal, print, and save-failure evidence. |
+| 10 | `gsd-small-feature` | Working app and compact workflow record, but only five committed tests and less committed evidence for withdrawal, persistence robustness, printing, and UI regression. |
 
-The study criteria give more weight to required-behavior checks, implementation safety, written or discussed decisions before code, and source/test design score than to compact files or conversation volume alone.
+Small changes to the weighting of money safety, design language, or reviewability can change adjacent positions. The rank is a summary of the stated criteria, not an interval-scale measurement.
 
-### Limits
+## 6. Limitations
 
-Do not conclude that one framework is universally superior.
+### Measurement limitations
 
-Supported conclusions are narrower:
+Behavior categories measure evidence in tests or retained checks, not complete correctness. Test count is not a quality measure. The six design scores are reviewer judgments, even with explicit anchors. UI visual quality, accessibility, real banking semantics, and long-term maintainability were not evaluated.
 
-- OpenSpec produced the shortest generated specification files and used few visible clarification gates.
-- Spec Loop wrote the most explicit task files for design and test specifications before implementation.
-- Superpowers asked the most product/design questions and wrote the longest implementation plans.
-- Explicit task decomposition was associated with higher-ranked Spec Loop results.
-- Object-calisthenics constraints were not sufficient to improve final source structure.
-- Static metrics identified risks but did not decide the ranking.
+### Comparability limitations
 
-## Up-front design and token use
+Conditions differed in prompts, user intervention, workflow versions, harnesses, and one model setting. There was one run per condition, so stochastic model variation cannot be separated from workflow effects. Several Spec Loop runs used explicit decomposition prompts, and one was materially steered by the user.
 
-Workflows without sequential design gates concentrated design before implementation. OpenSpec created proposal/design/spec files before applying the change. Superpowers created a design document and implementation plan before execution. Spec Loop single-task or whole-task solutions designed the broad task before implementation.
+The matched OpenSpec control was generated after the original results had been inspected. It corrects a real scope mismatch—persistence had been silently excluded—but introduces a post-hoc replacement risk and a later execution date. The original pilot is preserved publicly, the replacement prompt is reported verbatim, and the replacement is used only as the primary matched control.
 
-Token data supports a narrower cost observation, not a universal cross-framework law. For the original eleven solutions, the table uses integrated totals from `comparison.md`. For `gsd-small-feature`, it uses usage counters from the GSD Pi session. The totals are dominated by cached input: previously seen context re-read by the model. There was no session compaction, so longer incremental sessions repeatedly read a growing context, mostly from cache. Treat the totals as interaction and cached-context-read volume, not as mostly fresh input.
+### Researcher and evaluator bias
 
-| Solution(s) and condition | Token totals / source | Supported interpretation |
-|---|---:|---|
-| `open-spec`, `open-spec-calisthenics` — OpenSpec single-change plans | 2.18M and 4.51M from `comparison.md` | Lowest token totals among the original eleven solutions; concise up-front files. |
-| `spec-loop-calisthenics`, `spec-loop-calisthenics-single-task` — up-front/single-task Spec Loop calisthenics | 7.74M and 10.39M from `comparison.md` | Lower token total than the matched calisthenics incremental solution. |
-| `spec-loop-calisthenics-incremental` — incremental Spec Loop calisthenics | 18.29M from `comparison.md` | More expensive, with subtask-by-subtask decisions. |
-| `spec-loop-base-backlog-steered`, `spec-loop-incremental`, `spec-loop-base-backlog-prompted` — non-calisthenics Spec Loop backlog/incremental work | 19.69M, 20.22M, and 36.09M from `comparison.md` | More review boundaries; token volume depended heavily on implementation loops and repeated cached-context reads, not only planning form. |
-| `superpowers`, `superpowers-5.4`, `superpowers-calisthenics` — Superpowers single up-front plans | 16.65M, 18.19M, and 22.26M from `comparison.md` | Single up-front plans were detailed, but did not always use fewer tokens than Spec Loop incremental solutions. |
-| `gsd-small-feature` — GSD Small Feature in GSD Pi | 6.58M total tokens and about $5.69 from the `.gsd` session log | No evidence of subagents: the repo-specific session directory contained one JSONL file and no subagent/delegation tool calls. Lower recorded cost than the aborted standard GSD attempt, with scope and plan gates, but fewer committed tests and less committed analysis. |
+The author created and maintains Spec Loop, designed the conditions, approved many assistant decisions, and challenged some interpretations. The artifact/design audit was performed by an AI reviewer without using Spec Loop instructions, but the criteria were refined during the evaluation sessions and were not preregistered. The author’s involvement and the reviewer’s single-model judgments can favor familiar concepts or post-hoc explanations.
 
-The supported conclusion is narrower: single-task or up-front design reduced repeated design/context reads inside comparable conditions, especially within the Spec Loop calisthenics solutions. It also gave less attention to each implementation part. Incremental design consumed more repeated context because it had more design/implementation checkpoints, but it made decisions later, when previous implementation evidence existed.
+### Generalizability limitations
 
-### Aborted [GSD](https://opengsd.net) attempt
+The task is a small TypeScript browser kata. Results may not transfer to legacy systems, teams, other languages, regulated software, or longer projects. The workflows also evolve; these artifacts represent the recorded versions and sessions, not permanent framework characteristics.
 
-A standard GSD attempt was started after the original eleven completed solutions and before the GSD Small Feature solution in GSD Pi was added, using Codex with GPT-5.5 xhigh. It is not included in the completed-solution comparison or ranking because it was cancelled for budget/process reasons before completing the kata. The user selected GSD's standard granularity, interactive mode, sequential execution, committed planning docs, research, plan check, verifier, adaptive models, drift guard, and vertical MVP. Those choices were reasonable for evaluating GSD: standard was the middle granularity option, not a fine-grained stress setting. Under that configuration, GSD decomposed the small kata into six phases: account walking skeleton, deposit, withdrawal, transfer/rollback, persistence, and statement filters/printing. By cancellation, it had completed a tested account/deposit slice and had started Phase 3 planning, but withdrawals, transfers, rollback, local storage, filters, and printing had not started in the source code. Available parent-plus-subagent counters were roughly 76M tokens by cancellation, mostly cached input. A narrow source/test check found that the completed deposit part passed 25 tests and typecheck. The observed issue was not the completed part's source or tests. The standard GSD path appeared to constrain the model more than it helped it: reasonable local engineering judgments were repeatedly routed through required files and gates such as discussion, UI spec, research, pattern mapping, planning, plan checking, UAT, verification, state transitions, and recovery of framework metadata. Although GSD has separate fast and quick modes, the standard path did not visibly adapt by collapsing the kata into a shorter route after the task size and budget pressure were clear. At cancellation, it had spent high token volume before most required behavior was implemented.
+### Reproducibility
 
-## Reproduction notes
+Tagged repositories, prompts, commit identifiers, scoring anchors, and derived matrices are reported. Raw private session JSONL files are not published, so independent readers cannot fully reproduce token accounting or decision-message extraction. The shared tag name resembles a date but is intentionally a stable cross-repository snapshot label.
 
-Use the solution repositories in the GitLab subgroup [skill-assessment/bank-kata](https://gitlab.com/skill-assessment/bank-kata). Each completed comparison repository contains `main` and the analysis tag. The `gsd-small-feature` repository also has its GSD workflow files committed under `.gsd/workflows`.
+## 7. Discussion
 
-Use tag:
+The study suggests that workflow value is multi-dimensional:
 
-```text
-analysis-2026-06-30
-```
+- OpenSpec offered the best compactness-to-evidence trade-off in the matched pair, but it did not actively negotiate product choices.
+- Spec Loop’s strongest advantage was not document volume; it was execution-governing design and test expectations attached to backlog items or current subtasks.
+- Superpowers made alternatives visible through conversation, but its very long implementation plans did not guarantee more complete final evidence.
+- GSD Small Feature completed the kata with a compact operational record, while the excluded standard GSD attempt showed that a heavier path could be disproportionate for this task.
 
-Standard verification commands in each solution repository:
+For practitioners, the choice depends on the desired review surface. A developer wanting a concise change proposal may prefer OpenSpec. A developer wanting explicit task-level design alignment and a Git record of decisions may prefer Spec Loop. A developer wanting extended interactive design exploration may prefer Superpowers. This study provides no basis for selecting one workflow without considering those preferences.
 
-```sh
-npm test
-npm run build
-```
+The most actionable cross-workflow finding is that specifications and plans should be checked against final source/tests. Reviewable intent helped, but behavior-specific evidence and safe state/persistence boundaries still determined many rank differences.
 
-The behavior and design conclusions require reading source, tests, generated specification files, and relevant session communication. Commands alone do not produce these conclusions.
+## 8. Conclusion
+
+Across these 12 Bank Kata implementations, the best-supported pattern was vertical decomposition with reviewable design and test expectations for the current unit of work. The two Spec Loop backlog solutions produced the strongest combined evidence under the study criteria, while OpenSpec produced much more compact specification sets and a strong matched pair. Superpowers provided the richest product discussion but the longest plans. GSD Small Feature produced a working compact result with thinner committed verification.
+
+Domain-language/object-calisthenics constraints improved vocabulary and boundary attention, but the matched evidence was mixed and did not show a consistent overall quality gain or loss. The study therefore supports an artifact-level conclusion, not a universal framework ranking: workflow structure changed what was visible, reviewable, and tested, and those effects were most useful when final implementation evidence remained part of the evaluation.
+
+## Data availability and disclosure
+
+The evaluated repositories are linked in the [technical appendix](bank-kata-ai-workflow-case-study-appendix.md). Use tag `analysis-2026-06-30`; the appendix also gives exact commit identifiers. The original excluded OpenSpec pilot is preserved at commit `81ce8ab5a1b92c82a81fc05b13c48e9171f59bee` on branch `pilot/base-prompt`.
+
+The author is the creator and maintainer of Spec Loop. No claim in this paper should be read as an independent product endorsement.
+
+## References
+
+1. Sandro Mancuso. [Bank Kata](https://github.com/sandromancuso/Bank-kata).
+2. Fission AI. [OpenSpec](https://github.com/Fission-AI/OpenSpec).
+3. Dimitry Polivaev. [Spec Loop](https://github.com/dpolivaev/spec-loop).
+4. Jesse Vincent. [Superpowers](https://github.com/obra/superpowers).
+5. GSD. [Get Shit Done](https://opengsd.net).
+6. Per Runeson and Martin Höst. [Guidelines for conducting and reporting case study research in software engineering](https://doi.org/10.1007/s10664-008-9102-8). *Empirical Software Engineering* 14, 131–164 (2009).

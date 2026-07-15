@@ -6,7 +6,8 @@
 - [Skills Overview](docs/skills-overview.md)
 - [Diagram and Rendering Policy](docs/diagram-and-rendering-policy.md)
 - [AI Workflow Framework Comparison](docs/skill-framework-comparison.md)
-- [Bank Kata AI Workflow Case Study](docs/bank-kata-ai-workflow-case-study.md)
+- [Bank Kata AI Workflow Study](docs/bank-kata-ai-workflow-case-study.md)
+  - [Technical Appendix](docs/bank-kata-ai-workflow-case-study-appendix.md)
 
 # Tutorials
 
