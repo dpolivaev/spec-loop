@@ -79,7 +79,7 @@ Top-level folders: `backlog`, `in-progress`, `review`, `done`.
 - `review` uses required three-digit review-order prefix, one sequence
   local to the `review` folder.
 - `done` uses required three-digit completion-order prefix, one
-  global sequence.
+  global sequence independent of backlog and `review` prefixes.
 
 Task base names: no ticket IDs, abbreviations; use readable
 descriptive words.
@@ -152,7 +152,9 @@ reporting.
 #### Done cleanup
 
 Keep done tasks under `done` with global three-digit prefix
-(independent of backlog and review prefixes). Delete from working tree
+(independent of backlog and review prefixes). When moving a task file
+into `done`, rename it to the next `done` prefix. Never keep the old
+backlog, `in-progress`, or `review` prefix. Delete from working tree
 after release tag created.
 
 ## Task States
