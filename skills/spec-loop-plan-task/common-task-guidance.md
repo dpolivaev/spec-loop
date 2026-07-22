@@ -384,9 +384,9 @@ names, serialized field names, config keys, action keys, menu
 placeholder names, and shared session/state flags.
 
 Local variables, private methods, private fields contained within one
-class, and other purely internal implementation details are excluded
-from this inventory unless the User explicitly requests lower-level
-review.
+class, and other purely internal implementation details are not part
+of this inventory. Add private methods and private fields to Design
+only when the User explicitly requests lower-level review.
 
 Test-only elements go in **Test specification**, not Design, unless
 task changes test infrastructure.

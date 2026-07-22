@@ -402,6 +402,10 @@ using them.
 - Put review-relevant operations in interface and class boxes.
 - Put review-relevant fields in DTO, request, response, result,
   value-object, and similar data-type boxes.
+- When the User explicitly requests lower-level design, relevant private
+  members may also appear in class boxes; mark their actual
+  visibility, and do not treat them as part of the supported
+  interface merely because they appear in the diagram.
 - In PlantUML class diagrams, mark static fields and methods with
   `{static}` inside the class box. Do not rely on renderer underlining
   alone, and do not replace `{static}` with prose outside the diagram.
