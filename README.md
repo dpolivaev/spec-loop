@@ -43,7 +43,7 @@ npx skills add dpolivaev/spec-loop -s '*'
 
 Variations:
 - `-s '*'` installs all shipped skills.
-- Remove `-s '*'` to select skills interactively instead of installing the full bundle. That lets you skip the optional [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) and [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) skills, and skip [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project will not use a project glossary.
+- Remove `-s '*'` to select skills interactively instead of installing the full bundle. That lets you skip the optional [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/), [spec-loop-walk-through](skills/spec-loop-walk-through/), and [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) skills, and skip [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project will not use a project glossary.
 - Add `-g` for a global install.
 - Use `-g --all` for a global, non-interactive install for all supported agents.
 
@@ -143,6 +143,9 @@ directory. Keep that core bundle together:
 Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project uses a project glossary.
 
 Install [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) only if you want rendering setup or troubleshooting help.
+
+Install [spec-loop-walk-through](skills/spec-loop-walk-through/) only if you need a file-wise review
+walk-through for an existing diff without a verdict-oriented assessment.
 
 Install [spec-loop-assess-pull-request](skills/spec-loop-assess-pull-request/) only if you need retrospective
 review of trusted repositories.

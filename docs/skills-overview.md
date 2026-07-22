@@ -11,7 +11,8 @@ This repository currently ships these skills:
   [spec-loop-write-adr](../skills/spec-loop-write-adr/).
 - [spec-loop-write-glossary](../skills/spec-loop-write-glossary/) is required when a
   project uses a project glossary in the Spec Loop AsciiDoc format.
-- [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) and
+- [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/),
+  [spec-loop-walk-through](../skills/spec-loop-walk-through/), and
   [spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) are
   optional.
 
@@ -82,7 +83,16 @@ This repository currently ships these skills:
      and
      [skills/spec-loop-write-adr/adr-format.md](../skills/spec-loop-write-adr/adr-format.md).
 
-9. **[spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/)**
+9. **[spec-loop-walk-through](../skills/spec-loop-walk-through/)**
+   - the optional file-wise review walk-through skill for existing
+     diffs when the user wants review order, file ownership, and inline
+     findings without a verdict-oriented assessment;
+   - defined by
+     [skills/spec-loop-walk-through/SKILL.md](../skills/spec-loop-walk-through/SKILL.md)
+     and
+     [skills/spec-loop-walk-through/walk-through-guidance.md](../skills/spec-loop-walk-through/walk-through-guidance.md).
+
+10. **[spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/)**
    - the optional retrospective review skill for existing pull requests,
      branch diffs, or commit ranges from trusted repositories;
    - defined by

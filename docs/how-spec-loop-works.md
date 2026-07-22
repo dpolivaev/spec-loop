@@ -56,6 +56,11 @@ and
 **[jetbrains-setup.md](../skills/spec-loop-setup-doc-rendering/jetbrains-setup.md)**
 for manual editor-specific setup references.
 
+The [spec-loop-walk-through](../skills/spec-loop-walk-through/) skill is optional. It prepares file-wise review
+walk-through documents for existing diffs from local or trusted
+sources, with review-block ownership, reading order, and inline
+findings, without turning the result into a merge verdict.
+
 The [spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) skill is optional. It reconstructs
 retrospective review files from trusted pull requests, merge requests,
 or commit ranges and can generate GitHub-friendly Mermaid variants
@@ -69,7 +74,8 @@ On task-file implementation work, it governs implementation-time
 routing, `Implementation notes`, and the move to `review`. On the
 fileless path, it governs canonical chat-task maintenance, recovery
 re-emission or promotion, and readiness reporting. When the code
-already exists, you inspect retrospective review files instead.
+already exists, you inspect a retrospective walk-through or assessment
+instead.
 
 Spec Loop also defines explicit work phases: PLAN, EXECUTION, and
 DONE. Transitions to EXECUTION and DONE require explicit user approval.
