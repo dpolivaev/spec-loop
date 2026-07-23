@@ -78,9 +78,9 @@ Use this sequence by default:
    - which historical intent, context, or final code behavior it
      appears to support;
    - what contract, runtime path, or rule it affects;
-   - relevant tests or missing tests; and
-   - findings, open evidence questions, or reviewer attention points
-     where they arise.
+   - relevant tests and what they prove; and
+   - findings, including missing or insufficient verification, open
+     evidence questions, or reviewer attention points where they arise.
 10. Keep a findings list as part of the walk-through, not as a separate
     afterthought.
 11. End each review block with durable notes such as open risks,
@@ -200,13 +200,11 @@ or
 
 **Primary reason:** <why this file belongs here>
 
-#### <changed element or local topic>
-
 <analysis prose>
 
 **Intent:** <judgment when needed>
 **Implementation review:** <judgment when needed>
-**Verification:** <evidence or missing evidence when needed>
+**Verification:** <how the change is tested and what that evidence proves; if coverage is insufficient, say why>
 **Complexity:** <burden judgment when needed>
 
 ### Review Block 1 Notes
@@ -240,12 +238,16 @@ criteria for a whole repository or project slice. Otherwise use
 `**Review-block criteria:**`.
 In those block-level criteria sections, use bullet points.
 Do not add block-status lines.
-Use `####` headings for real changed elements or local topics, not for
-every analysis sentence.
-Inside file sections, keep most analysis in prose and use inline bold
-labels such as `Intent`, `Implementation review`, `Verification`, and
-`Complexity` when they help. Use neither extra headings nor the
-block-level bullet-list form for those labels.
+Inside file sections, keep analysis in prose.
+Do not add fourth-level headings under file sections.
+Do not write local-topic headings such as `#### Deleted behavior` or
+`#### Purchase JSON compile validation`.
+When you need to distinguish changed elements or local topics, name
+those elements in prose or with inline code labels.
+Use neither extra heading levels nor the block-level bullet-list form
+inside file sections.
+Use inline bold labels such as `Intent`, `Implementation review`,
+`Verification`, and `Complexity` when they help.
 Use `### Review Block <number> Notes` only when that block has durable
 end notes worth keeping.
 In `## Verification Notes`, use one labeled subsection per repository,
@@ -256,10 +258,11 @@ The `Review Findings` section should make unresolved findings easy to
 scan.
 Keep the detailed explanation in the owning file section where the
 finding was discovered.
-When a file section or local topic contributes to a listed finding,
+When analysis in a file section contributes to a listed finding,
 reference that finding by ID at the relevant point.
 Do not write `No issue found`, `No issues found`, or similar clearance
-statements in file sections, topic sections, or review-block notes.
+statements in file sections, analysis paragraphs, or review-block
+notes.
 If no finding applies, stop after the analysis instead of writing a
 clearance line.
 
@@ -311,8 +314,20 @@ Use the language or test framework's normal separator in that path.
 If the outermost test class or suite name duplicates the file name,
 omit that duplicate and keep the rest of the path.
 For Java, use `.` between path segments, not `#`.
-Even when tests live in a separate block, cite relevant test evidence
-inline in production-file sections.
+For each changed production file, include a `Verification:` paragraph
+in that file section.
+Use it to show how the changed behavior, contract, data shape, or
+removed surface is tested or otherwise checked, and briefly state what
+that evidence proves.
+Do not add extra sufficiency commentary when the coverage is adequate.
+If the change is missing tests or the existing tests are not sufficient
+for the changed behavior, record a finding.
+Cite those tests or other evidence there even if the test files are
+reviewed in another block.
+If no distinct file-specific verification exists, say that plainly in
+`Verification:` and treat the gap as a finding when the resulting
+coverage is insufficient.
+Keep the detailed test-file analysis in the test-file section.
 
 ## Findings
 
