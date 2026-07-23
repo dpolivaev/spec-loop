@@ -7,6 +7,7 @@ It covers:
 - file ownership by review block;
 - reading order;
 - human checkpoints;
+- attention routing;
 - walk-through structure;
 - inline findings; and
 - review discipline.
@@ -61,32 +62,51 @@ Use this sequence by default:
 3. Propose the review blocks as the canonical file grouping, their
    order, and the exact file assignment where every changed file
    belongs to exactly one block.
-4. Inside each block, order files top-down: from the controlling entry
+4. Do a survey pass over the changed files and diff before writing
+   detailed review text.
+5. From that survey, identify the provisional highest-attention areas.
+   Focus on behavior, contract, compatibility, orchestration,
+   persistence, parsers or rewriters, deletions, and weak or missing
+   verification.
+6. For each provisional highest-attention area, note:
+   - the central risk;
+   - the old/new behavior comparison that must be checked;
+   - the strongest relevant evidence found so far; and
+   - the most likely blind spot.
+7. Inside each block, order files top-down: from the controlling entry
    point or public surface through the collaborators, data types,
    helpers, deletions, and tests that explain it.
-5. Create the file ownership table and all review-block and file-level
+8. Create the file ownership table and all review-block and file-level
    headings before writing detailed review text.
-6. For a large or mixed change, present the proposed block order and
-   file assignment for human review before writing detailed review
-   content.
-7. Review each assigned file exactly once.
-8. Inside each file, review in source order unless another local order
-   explains the changed elements and their relationships better.
-9. At the smallest useful level, record:
-   - what changed;
-   - why it appears to exist;
-   - which historical intent, context, or final code behavior it
-     appears to support;
-   - what contract, runtime path, or rule it affects;
-   - relevant tests and what they prove; and
-   - findings, including missing or insufficient verification, open
-     evidence questions, or reviewer attention points where they arise.
-10. Keep a findings list as part of the walk-through, not as a separate
-    afterthought.
-11. End each review block with durable notes such as open risks,
+9. For a large, mixed, or provisionally high-risk change, present the
+   proposed block order, file assignment, and provisional
+   highest-attention areas for human review before detailed review
+   continues.
+10. Review each assigned file exactly once.
+11. Inside each file, review in source order unless another local
+    order explains the changed elements and their relationships better.
+12. At the smallest useful level, record:
+    - what changed;
+    - why it appears to exist;
+    - which historical intent, context, or final code behavior it
+      appears to support;
+    - what contract, runtime path, or rule it affects;
+    - relevant tests and what they prove; and
+    - findings, including missing or insufficient verification, open
+      evidence questions, or reviewer attention points where they
+      arise.
+13. Keep a findings list as part of the walk-through, not as a
+    separate afterthought.
+14. After the detailed walk-through, do a short confirmation pass over
+    the highest-attention areas. Update that routing if deeper reading
+    changes the real risk center. Check that each highest-attention
+    area received explicit old/new comparison and either concrete
+    verification evidence or a finding or open question when evidence
+    is weak or missing.
+15. End each review block with durable notes such as open risks,
     unresolved evidence, reviewer attention points, and useful next
     review focus.
-12. End the document with final verification notes or other final
+16. End the document with final verification notes or other final
     notes only when they help the reviewer.
 
 Apply the shared review criteria where they help.
@@ -98,18 +118,55 @@ is also active or the user explicitly asks for one.
 For large or mixed changes, prefer an iterative block-wise workflow over
 generating the full walk-through in one pass.
 
-The first checkpoint should propose all review blocks, their order, and
-one owning block for every changed file.
+The first checkpoint should propose all review blocks, their order, one
+owning block for every changed file, and when needed the provisional
+highest-attention areas.
 The human may then accept the proposal, ask to change the order, move
 files, split or merge blocks, or discuss the trade-off before detailed
 review continues.
 
-Use each checkpoint to validate file ownership, review depth, review
-block boundaries, and whether the current findings are useful.
+Use each checkpoint to validate file ownership, attention routing,
+review depth, review block boundaries, and whether the current findings
+are useful.
 
 Checkpoints are conversation steps, not sections in the review file.
 Update the walk-through file only with the durable outcome of that
 discussion when it affects the document.
+
+## Attention routing
+
+Attention routing happens after the initial file inventory and diff
+skim, not before any reading.
+
+It is a workflow step, not a required section in the review file.
+
+Use it to make review priority explicit before detailed file-by-file
+writing begins.
+
+Attention areas do not override review block ownership. They guide
+depth and scrutiny; every changed file still belongs to exactly one
+review block.
+
+For large, mixed, redesign, migration, orchestration, or
+compatibility-heavy changes, identify the provisional
+highest-attention areas early and surface them at the first human
+checkpoint when a checkpoint is used.
+
+For each highest-attention area, name:
+- the central risk;
+- the old/new behavior comparison that must be checked;
+- the strongest relevant evidence found so far; and
+- the most likely blind spot.
+
+Use that routing to decide depth.
+High-attention areas need deeper comparison and explicit links to the
+tests or other evidence that support the behavior claim.
+Lower-risk mechanical areas may stay brief unless deeper reading shows
+a real risk.
+
+If the closing confirmation pass shows that a highest-attention area
+still lacks enough evidence or behavior comparison, record a finding or
+an open question.
 
 ## Walk-through file shape
 
