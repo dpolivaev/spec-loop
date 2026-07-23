@@ -56,15 +56,9 @@ and
 **[jetbrains-setup.md](../skills/spec-loop-setup-doc-rendering/jetbrains-setup.md)**
 for manual editor-specific setup references.
 
-The [spec-loop-walk-through](../skills/spec-loop-walk-through/) skill is optional. It prepares file-wise review
-walk-through documents for existing diffs from local or trusted
-sources, with review-block ownership, reading order, and inline
-findings, without turning the result into a merge verdict.
-
-The [spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) skill is optional. It reconstructs
-retrospective review files from trusted pull requests, merge requests,
-or commit ranges and can generate GitHub-friendly Mermaid variants
-from them when needed.
+The [spec-loop-review-change](../skills/spec-loop-review-change/) skill is optional. It reviews existing
+changes from local or trusted sources. It can produce a high-level
+assessment, a file-wise walk-through, or both.
 
 The model uses these skills while drafting and updating plans, task,
 or review artifacts; you review and approve either a fileless chat

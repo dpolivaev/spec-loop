@@ -11,9 +11,8 @@ This repository currently ships these skills:
   [spec-loop-write-adr](../skills/spec-loop-write-adr/).
 - [spec-loop-write-glossary](../skills/spec-loop-write-glossary/) is required when a
   project uses a project glossary in the Spec Loop AsciiDoc format.
-- [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/),
-  [spec-loop-walk-through](../skills/spec-loop-walk-through/), and
-  [spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/) are
+- [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) and
+  [spec-loop-review-change](../skills/spec-loop-review-change/) are
   optional.
 
 1. **[spec-loop-plan-task](../skills/spec-loop-plan-task/)**
@@ -83,20 +82,18 @@ This repository currently ships these skills:
      and
      [skills/spec-loop-write-adr/adr-format.md](../skills/spec-loop-write-adr/adr-format.md).
 
-9. **[spec-loop-walk-through](../skills/spec-loop-walk-through/)**
-   - the optional file-wise review walk-through skill for existing
-     diffs when the user wants review order, file ownership, and inline
-     findings without a verdict-oriented assessment;
+9. **[spec-loop-review-change](../skills/spec-loop-review-change/)**
+   - the optional existing-change review skill for pull requests,
+     merge requests, branch diffs, commit ranges, local branch changes,
+     or agent-written code the user wants reviewed; it supports both
+     high-level assessment and file-wise walk-through modes;
    - defined by
-     [skills/spec-loop-walk-through/SKILL.md](../skills/spec-loop-walk-through/SKILL.md)
+     [skills/spec-loop-review-change/SKILL.md](../skills/spec-loop-review-change/SKILL.md),
+     [skills/spec-loop-review-change/review-core-guidance.md](../skills/spec-loop-review-change/review-core-guidance.md),
+     [skills/spec-loop-review-change/assessment-guidance.md](../skills/spec-loop-review-change/assessment-guidance.md),
+     [skills/spec-loop-review-change/walk-through-guidance.md](../skills/spec-loop-review-change/walk-through-guidance.md),
      and
-     [skills/spec-loop-walk-through/walk-through-guidance.md](../skills/spec-loop-walk-through/walk-through-guidance.md).
-
-10. **[spec-loop-assess-pull-request](../skills/spec-loop-assess-pull-request/)**
-   - the optional retrospective review skill for existing pull requests,
-     branch diffs, or commit ranges from trusted repositories;
-   - defined by
-     [skills/spec-loop-assess-pull-request/review-guidance.md](../skills/spec-loop-assess-pull-request/review-guidance.md).
+     [skills/spec-loop-review-change/github-gitlab-evidence-guidance.md](../skills/spec-loop-review-change/github-gitlab-evidence-guidance.md).
 
 ## Documentation
 
