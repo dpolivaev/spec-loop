@@ -125,50 +125,143 @@ Use explicit rename arrows and compact review-block labels.
 Avoid long full paths inside table cells.
 
 Link both columns in the file ownership table.
-File labels should link to the corresponding file-level headings, and
-review-block labels should link to the corresponding review-block
-headings.
-Use stable explicit anchors when Markdown's generated section links
-would be unclear, too long, or fragile.
+File labels should link to explicit file anchors, and review-block
+labels should link to explicit review-block anchors.
+Use explicit anchors for every review block and every file section.
 
-Use this structure unless the change needs something more specific:
+Use the approved walk-through style. The outer structure is fixed, and
+inner analysis should follow the same heading-versus-prose pattern:
 
 ```markdown
-# Branch Review Walk-Through
+# <subject> Branch Walk-Through
 
-## Scope
+<introductory orientation prose>
 
-## Intent Summary
+## Scope Summary
+
+### <repository or other scope partition>
+
+Base: <exact comparison base>
+
+Changed files: <count>. See `File Ownership Table`.
+
+<optional scope-exclusion or range note>
+
+## Review Findings
+
+### Finding <scope-prefix>-<number>: <summary>
+
+**Priority:** <priority>
+
+**Affected surface:**
+- <surface>
+
+**Evidence:**
+- <observed evidence>
+
+**Why it matters:**
+<impact>
+
+**Review note:** <current-state note>
 
 ## File Ownership Table
+
+<short table guidance prose>
 
 | File | Review block |
 | --- | --- |
 | [<minimal file label>](#file-<stable-id>) | [<Owning Theme>](#review-block-<stable-id>) |
 
-## Review Findings
+<a id="review-block-<stable-id>"></a>
 
 ## Review Block 1: <Owning Theme>
 
+Repository: `<repository>`
+
+**Review purpose:** <why this block exists and why it appears here>
+
+**Project-level review criteria:**
+- Intent: <block-level judgment>
+- Implementation: <block-level judgment>
+- Verification: <block-level judgment>
+- Complexity: <block-level judgment>
+
+or
+
+**Review-block criteria:**
+- Intent: <block-level judgment>
+- Implementation: <block-level judgment>
+- Verification: <block-level judgment>
+- Complexity: <block-level judgment>
+
 <a id="file-<stable-id>"></a>
 
-### <minimal file label>
+### `<minimal file label>`
 
 **Primary reason:** <why this file belongs here>
 
-#### <Type, function, test, or other changed element>
+#### <changed element or local topic>
 
-#### <Nested element when useful>
+<analysis prose>
 
-**Review finding:** <inline finding when present>
+**Intent:** <judgment when needed>
+**Implementation review:** <judgment when needed>
+**Verification:** <evidence or missing evidence when needed>
+**Complexity:** <burden judgment when needed>
+
+### Review Block 1 Notes
 
 ## Verification Notes
+
+<scope label>:
+
+- Working directory: `<path>`
+- Command: `<command>`
+- Log: `<log-path>`
+- Result: `<result>`
 ```
 
-The `Review Findings` section should provide a compact list for quick
-triage.
+Start with short orientation prose before `## Scope Summary` when it
+helps the reviewer.
+Keep the exact top-level section order shown above.
+Place `## Review Findings` before `## File Ownership Table`.
+In each `### <repository or other scope partition>` under `## Scope
+Summary`, state the exact comparison base used and the reviewed changed-file count.
+Add explicit exclusion or range notes there when they matter, for
+example when inherited changes are intentionally excluded or when the
+walk-through file itself is outside the reviewed diff.
+Use finding IDs in the form `<scope-prefix>-<number>`.
+Use `Repository: ...` when repository context helps, especially in
+multi-repository reviews. Omit it when the block already has clear
+single-repository context.
+Every review block and every file section must have an explicit anchor.
+Use `**Project-level review criteria:**` when a block establishes
+criteria for a whole repository or project slice. Otherwise use
+`**Review-block criteria:**`.
+In those block-level criteria sections, use bullet points.
+Do not add block-status lines.
+Use `####` headings for real changed elements or local topics, not for
+every analysis sentence.
+Inside file sections, keep most analysis in prose and use inline bold
+labels such as `Intent`, `Implementation review`, `Verification`, and
+`Complexity` when they help. Use neither extra headings nor the
+block-level bullet-list form for those labels.
+Use `### Review Block <number> Notes` only when that block has durable
+end notes worth keeping.
+In `## Verification Notes`, use one labeled subsection per repository,
+module, or other verified scope and list `Working directory`,
+`Command`, `Log`, and `Result` in that order.
+
+The `Review Findings` section should make unresolved findings easy to
+scan.
 Keep the detailed explanation in the owning file section where the
 finding was discovered.
+When a file section or local topic contributes to a listed finding,
+reference that finding by ID at the relevant point.
+Do not write `No issue found`, `No issues found`, or similar clearance
+statements in file sections, topic sections, or review-block notes.
+If no finding applies, stop after the analysis instead of writing a
+clearance line.
 
 In `Verification Notes` and any inline verification reference,
 identify each cited test precisely enough that the reviewer can find it
@@ -224,20 +317,23 @@ inline in production-file sections.
 ## Findings
 
 Integrate findings into the walk-through where the evidence appears.
+List unresolved findings in `## Review Findings` using the approved
+shape:
 
-For each finding, include:
+- `### Finding <id>: <summary>`
+- `**Priority:**`
+- `**Affected surface:**`
+- `**Evidence:**`
+- `**Why it matters:**`
+- `**Review note:**` for the current-state disposition or constraint
 
-- severity or review priority;
-- affected file and element;
-- observed evidence from the diff;
-- expected behavior source: final code shape, existing contract, or
-  historical context;
-- why it matters; and
-- the smallest useful follow-up question or fix direction.
-
+Keep the detailed explanation and code reading in the owning file
+section.
+In those detailed sections, cite finding IDs where relevant instead of
+restating the full finding, and do not add no-issue statements.
 Prefer concrete findings over broad suspicion.
-If the evidence is not yet enough to call something a defect, mark it as
-an open question and state what would confirm or disconfirm it.
+If the evidence is not yet enough to call something a defect, state it
+as an open question and say what would confirm or disconfirm it.
 
 When a finding is fixed during the walk-through process and the fix is
 validated, delete that finding from the walk-through document.
