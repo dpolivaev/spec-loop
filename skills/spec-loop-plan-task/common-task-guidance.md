@@ -366,8 +366,13 @@ Design must state what behavior or contract differs.
 If finding an exact name is hard, treat that as a design defect.
 Change the design until responsibilities and boundaries admit precise
 names, and immediately plan the required refactoring in the active
-artifact. Resolving precise domain language and exact structural names
-is the highest priority during design work.
+artifact. On the task-file path, if that refactoring is a standalone
+refactoring under
+[planning-form-selection-guidance.md](planning-form-selection-guidance.md),
+re-run planning-form selection and then work breakdown. If the change
+remains one overall task, put the refactoring in its own subtask.
+Resolving precise domain language and exact structural names is the
+highest priority during design work.
 
 When production structure changes, Design must make the structural
 inventory explicit for every planned new or changed top-level

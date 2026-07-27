@@ -7,6 +7,14 @@ Choose from:
 - `task file with subtasks`; and
 - `multiple task files / backlog items`.
 
+A User request like `add task` or `add subtask` does not decide the
+planning form or whether breakdown is needed. Evaluate the work
+itself.
+
+A standalone refactoring is a refactoring increment scoped to make no
+intended externally observable behavior change, and still acceptable if
+merged even if the later feature item is never implemented.
+
 Start with all forms. Remove a form only when the reason is obvious:
 - `taskless`: keep for standalone documentation and ADR-only work. For
   implementation, keep only when the work is trivial and the User
@@ -25,13 +33,20 @@ Start with all forms. Remove a form only when the reason is obvious:
   possible.
 
 For non-trivial implementation, name any slices that can be checked
-separately as part of filtering:
+separately as part of filtering. If the same overall change contains
+standalone refactoring plus later behavior change, treat them as
+separate candidate slices:
 - Keep `multiple task files / backlog items` when separate releases are
-  advisable.
+  advisable, including standalone refactoring only when that split also
+  needs separate release decisions.
 - Keep `task file with subtasks` when slices can stand alone but should
-  normally be released together.
+  normally be released together, including standalone refactoring plus
+  later behavior change within one overall task.
 - Keep plain `task file` when no useful releasable slice split is
   visible, or the User already rejected subtasks.
+- If it is unclear whether a refactoring is standalone, do not remove
+  `task file with subtasks` or `multiple task files / backlog items`
+  on that basis alone. Clarify instead.
 - If unsure, leave the form in.
 
 Immediately after filtering:
@@ -49,6 +64,12 @@ After selecting `task file with subtasks` or `multiple task files /
 backlog items`, hand off to
 [spec-loop-plan-work-breakdown](../spec-loop-plan-work-breakdown/SKILL.md)
 before drafting or updating the durable artifact.
+
+If later planning or design reveals a new independently acceptable
+split, re-run planning-form selection before updating the durable
+artifact. For example, do this when a requested single task or subtask
+turns out to contain standalone refactoring plus later behavior
+change.
 
 When later implementation follow-up appears after a task or subtask
 already in `review` or `done`, or after a chat-only task already

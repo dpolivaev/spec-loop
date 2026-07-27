@@ -2,8 +2,9 @@
 name: spec-loop-plan-work-breakdown
 description: >-
   Create or revise file-based Spec Loop work breakdown artifacts for
-  task-file work that uses subtasks or multiple task files / backlog
-  items.
+  task-file work, including splitting a requested single item into
+  subtasks or multiple task files / backlog items when planning or
+  design shows that split is needed.
 ---
 
 Use this skill for file-based Spec Loop work breakdown on the
@@ -13,13 +14,18 @@ it does not replace
 clarification, task-file rules, or approval gates.
 
 Use it after planning-form selection chooses `task file with subtasks`
-or `multiple task files / backlog items`, or when revising an existing
-file-based work breakdown.
+or `multiple task files / backlog items`.
+Also use it when revising an existing file-based work breakdown, or
+when later planning or design shows that a requested single task or
+subtask should be split.
+A User request phrased as `task` or `subtask` does not decide by
+itself whether breakdown is needed.
 
 If this skill is loaded before planning-form selection is complete, do
 not draft breakdown artifacts. If first classification is incomplete,
-return to [spec-loop-plan-task](../spec-loop-plan-task/SKILL.md).
-Otherwise follow
+or if later planning or design may change the viable forms, return to
+[spec-loop-plan-task](../spec-loop-plan-task/SKILL.md). Otherwise
+follow
 [guidance](../spec-loop-plan-task/planning-form-selection-guidance.md)
 first.
 
@@ -85,10 +91,9 @@ Forbidden by default:
 - splitting implementation and tests for the same behavior into
   separate subtasks.
 
-A standalone refactoring is a refactoring increment explicitly scoped to
-have no intended externally observable behavior change, and whose
-result would still be acceptable if merged even if the later feature
-item were never implemented.
+A standalone refactoring is a refactoring increment scoped to make no
+intended externally observable behavior change, and still acceptable if
+merged even if the later feature item is never implemented.
 
 Allowed when they stand alone:
 - infrastructure or setup work that leaves a coherent build or runtime
@@ -177,8 +182,12 @@ When drafting a work breakdown:
   separate tracking, or a reviewable output;
 - for implementation items, include all cross-layer work needed in
   that same item;
-- split standalone refactoring into its own task or subtask;
-- keep refactoring inside the feature item otherwise;
+- if the refactoring is standalone and the change remains one overall
+  task, put it in its own subtask;
+- if the refactoring is standalone and separate release decisions are
+  advisable, use a separate task file or backlog item;
+- if the refactoring is not standalone, keep it inside the feature
+  item;
 - keep future tasks and subtasks created from scratch to title,
   required identifier/status metadata, Scope, Motivation, and any
   already known item-relevant Constraints until they are current, but
@@ -212,6 +221,8 @@ Before presenting or saving a file-based work breakdown, verify:
   required identifier/status metadata, Scope, Motivation, and already
   known item-relevant Constraints when present;
 - each refactoring-only task or subtask is a standalone refactoring;
+- separate task files or backlog items are used for standalone
+  refactoring only when separate release decisions are advisable;
 - fuller section content appears only in unchanged pre-existing current
   items or because it was moved from an existing task or subtask during
   restructuring, including conversion from no-subtask task to subtask

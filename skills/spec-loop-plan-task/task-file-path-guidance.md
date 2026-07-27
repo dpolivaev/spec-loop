@@ -257,6 +257,14 @@ When a task uses subtasks:
 - If a task without subtasks needs its first separately tracked
   follow-up within the same overall task, convert it to subtask form
   by default.
+- If planning or design reveals standalone refactoring under
+  [planning-form-selection-guidance.md](planning-form-selection-guidance.md)
+  plus later behavior change, re-run planning-form selection and then
+  [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md).
+- If the change remains one overall task, use subtask form for that
+  split.
+- Use separate task files/backlog items for that split only when
+  separate release decisions are advisable.
 - During that conversion, keep only shared context at task level and
   move subtask-specific Research, Analysis, Design, and Test
   specification into the relevant subtask.
