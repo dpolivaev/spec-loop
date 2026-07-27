@@ -85,11 +85,17 @@ Forbidden by default:
 - splitting implementation and tests for the same behavior into
   separate subtasks.
 
+A standalone refactoring is a refactoring increment explicitly scoped to
+have no intended externally observable behavior change, and whose
+result would still be acceptable if merged even if the later feature
+item were never implemented.
+
 Allowed when they stand alone:
 - infrastructure or setup work that leaves a coherent build or runtime
   capability;
 - documentation, test-hardening, migration, or cleanup work whose
-  standalone artifact is the accepted deliverable; and
+  standalone artifact is the accepted deliverable;
+- standalone refactoring; and
 - a layer-focused change that is itself a complete reviewable behavior
   or operational capability, not merely a dependency for a later
   sibling.
@@ -171,6 +177,8 @@ When drafting a work breakdown:
   separate tracking, or a reviewable output;
 - for implementation items, include all cross-layer work needed in
   that same item;
+- split standalone refactoring into its own task or subtask;
+- keep refactoring inside the feature item otherwise;
 - keep future tasks and subtasks created from scratch to title,
   required identifier/status metadata, Scope, Motivation, and any
   already known item-relevant Constraints until they are current, but
@@ -203,6 +211,7 @@ Before presenting or saving a file-based work breakdown, verify:
 - each task or subtask created from scratch contains only the title,
   required identifier/status metadata, Scope, Motivation, and already
   known item-relevant Constraints when present;
+- each refactoring-only task or subtask is a standalone refactoring;
 - fuller section content appears only in unchanged pre-existing current
   items or because it was moved from an existing task or subtask during
   restructuring, including conversion from no-subtask task to subtask
