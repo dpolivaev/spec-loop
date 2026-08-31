@@ -107,7 +107,9 @@ are unambiguous.
 
 Names are part of the design for current or implementation-ready work.
 If exact verification containers or case anchors cannot be named for
-the current work, the task is not fully designed yet.
+the current task, the task is not fully designed yet. If the task
+uses subtasks, apply this test to the current subtask plus needed
+task-level context.
 
 A listed verification anchor may be newly added, modified, or
 intentionally reused unchanged. Do not mark that status unless the

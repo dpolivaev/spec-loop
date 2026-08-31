@@ -5,8 +5,9 @@ This file applies only on the task-file path of
 
 Read [common-task-guidance.md](common-task-guidance.md) first.
 That file defines the shared no-subtask main-task form, section
-semantics, current work readiness rules, context-preservation
-rules, formatting conventions, and the required use of detailed Test
+semantics, readiness rules for the current task, including subtask
+handling when subtasks exist, context-preservation rules,
+formatting conventions, and the required use of detailed Test
 specification guidance for both planning paths.
 
 This file adds only task-file-specific mechanics: task files,
@@ -22,27 +23,29 @@ companion for implementation-time handling, task-file updates,
 ## Task-file path readiness
 
 On the task-file path, the task file is the source of truth for the
-current work.
+current task. If the task uses subtasks, it is also the source of
+truth for the current subtask plus the task-level context it depends
+on.
 
 When a task file has or may have subtasks, do not infer the active
-subtask or current work from the folder path. Before identifying the
-active subtask, claiming lifecycle status, moving a task or subtask
-status, seeking execution approval, or presenting completion, search
-the file for subtask heading and status lines:
+subtask from the folder path. Before identifying the current subtask,
+claiming lifecycle status, moving a task or subtask status, seeking
+execution approval, or presenting completion, search the file for
+subtask heading and status lines:
 
 `rg -n '^## Subtask:|^- \*\*Status:\*\*' <task-file>`
 
 Use the folder path as task-level status only. Use subtask
 `- **Status:**` lines as subtask-level status. If a task in `review`
-has an `in-progress` subtask, state both statuses explicitly and use
-the active subtask plus needed task-level context as the controlling
-work.
+has an `in-progress` subtask, state both statuses explicitly and base
+readiness, approval, and completion claims on the active subtask plus
+needed task-level context.
 
 Initial backlog tasks and subtasks created by
 [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
 may contain only title, required identifier/status metadata, Scope,
-Motivation, and already known item-relevant Constraints until they
-become current. Subtasks keep the normal status line.
+Motivation, and already known relevant Constraints until they become
+current. Subtasks keep the normal status line.
 
 In tasks with subtasks, the shared readiness rules apply to the active
 subtask and any task-level context it depends on, not to future
@@ -268,11 +271,11 @@ When a task uses subtasks:
 - During that conversion, keep only shared context at task level and
   move subtask-specific Research, Analysis, Design, and Test
   specification into the relevant subtask.
-- If the original no-subtask task already describes a concrete
-  standalone outcome, promote that outcome into its own subtask.
+- If the original no-subtask task already describes one concrete
+  reviewable result, promote that result into its own subtask.
 - Do not create a synthetic "original task" subtask when the former
   top-level content was only broad shared context and not a distinct
-  standalone outcome.
+  reviewable result.
 
 ### Every Subtask
 
@@ -280,7 +283,7 @@ When a task uses subtasks:
   `- **Status:** <status>`,
 - initial backlog subtasks created by
   [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
-  may contain only Scope, Motivation, and already known item-relevant
+  may contain only Scope, Motivation, and already known relevant
   Constraints after the required status line,
 - every subtask beyond initial work breakdown form must use the same
   bold-label list-item labels and ordering as the shared main task
@@ -290,8 +293,9 @@ When a task uses subtasks:
 - must not convert those section labels into Markdown headings,
 - must represent a separately tracked work unit within the same
   overall task; for implementation work, this is usually one
-  standalone change, but a history-preserving review follow-up may
-  also justify a subtask,
+  reviewable result, often one vertical slice or standalone
+  refactoring, but a history-preserving review follow-up may also
+  justify a subtask,
 - for feature implementation, choose implementation subtasks as
   releasable vertical slices: each one must cover the cross-layer work
   needed for one reviewable behavior and its own automated tests,

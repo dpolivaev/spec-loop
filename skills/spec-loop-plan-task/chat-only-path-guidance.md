@@ -5,9 +5,9 @@ This file applies only on the chat-only planning path of
 
 Read [common-task-guidance.md](common-task-guidance.md) first.
 That file defines the shared no-subtask main-task form, section
-semantics, current work readiness rules, context-preservation
-rules, formatting conventions, and the required use of detailed Test
-specification guidance for both planning paths.
+semantics, readiness rules for the current task,
+context-preservation rules, formatting conventions, and the required
+use of detailed Test specification guidance for both planning paths.
 
 This file covers only chat-only path mechanics: the chat task,
 `Task changes:`, reconstruction, later-work handling, and promotion
@@ -51,7 +51,7 @@ path for that task.
 - treat that emitted task as the current canonical chat-only task;
 - keep only one active chat-only task in the conversation at a
   time;
-- when the current work reaches execution readiness, present the
+- when the current task reaches execution readiness, present the
   canonical chat-only task to the User as a request to approve both
   continuing on the chat-only planning path without creating a task
   file and moving from PLAN into EXECUTION from that chat-only task.

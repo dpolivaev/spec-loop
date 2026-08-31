@@ -80,16 +80,17 @@ documentation changes; plan that scope as implementation work.
 After first classification, read and follow
 [planning-form-selection-guidance.md](planning-form-selection-guidance.md).
 
-## Current-item-first planning for file-based multi-item work
+## Current-first detailed planning for file-based multi-item work
 
 When planning-form selection chooses `task file with subtasks` or
 `multiple task files / backlog items`, first do only the whole-work
 clarification needed for Scope, Motivation, and a sound rough
 breakdown. Then use
 [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
-to identify the current item and lightweight later items. Do full
-clarification and detailed planning only for the current item and any
-required shared context.
+to identify the current task, or the current subtask when subtasks
+are in use, and lightweight later tasks or subtasks. Do full
+clarification and detailed planning only for that current task, or
+for that current subtask plus any required shared context.
 
 ## Phase model
 
@@ -127,11 +128,13 @@ clarification.
 
 For file-based multi-item work, apply this gate twice:
 - before rough breakdown, only for whole-work Scope, Motivation,
-  planning-form selection, and item boundaries, ordering,
+  planning-form selection, and task or subtask boundaries, ordering,
   releasability, or coherence;
-- after the current item is identified, fully for that item and any
-  required shared context before drafting implementation-ready Design
-  or Test specification.
+- after the current task is identified — or, for subtask-based work,
+  after the current subtask is identified — apply the gate fully to
+  that current task, or to that current subtask plus any required
+  shared context, before drafting implementation-ready Design or Test
+  specification.
 
 For subtasks, apply this gate only to the current subtask and required
 task-level context. Apply it to future subtasks when they become
@@ -175,7 +178,9 @@ When this planning form is in use:
   instructions do not define one.
 
 For `task file with subtasks` or `multiple task files / backlog items`,
-apply the current-item-first planning rule above.
+apply the rule above: fully plan only the current task, or the
+current subtask plus required shared context when subtasks are in
+use.
 
 Before requesting execution approval for task-file work, use
 [spec-loop-prepare-execution-approval/SKILL.md](../spec-loop-prepare-execution-approval/SKILL.md).

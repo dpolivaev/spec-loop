@@ -27,22 +27,24 @@ Start with all forms. Remove a form only when the reason is obvious:
 - `task file`: one durable work item, not split into tracked
   subtasks.
 - `task file with subtasks`: one task split into separately tracked
-  subtasks. For implementation work, these should usually be
-  releasable vertical slices. Separate release after each subtask
-  must be possible, but is normally not advisable.
+  subtasks. For implementation work, these should usually each be one
+  releasable vertical slice. Separate release after each subtask must
+  be possible, but is normally not advisable.
 - `multiple task files / backlog items`: separate task and release
   decisions. Use this when separate releases are advisable, not merely
   possible.
 
-For non-trivial implementation, name any parts of the work that can be
-reviewed separately as part of filtering. If the same overall change
-contains standalone refactoring plus later behavior change, treat them
-as separate candidate parts:
+For non-trivial implementation, name any split points that would
+produce separately reviewable tasks or subtasks as part of filtering.
+For feature work, those tasks or subtasks should usually each be one
+releasable vertical slice. If the same overall change contains
+standalone refactoring plus later behavior change, treat that as a
+candidate split:
 - Keep `multiple task files / backlog items` when separate releases are
   advisable, including standalone refactoring only when that split also
   needs separate release decisions.
-- Keep `task file with subtasks` when those parts can stand alone but
-  should normally be released together, including standalone
+- Keep `task file with subtasks` when the resulting subtasks can stand
+  alone but should normally be released together, including standalone
   refactoring plus later behavior change within one overall task.
 - Keep plain `task file` when no useful releasable split is visible,
   or the User already rejected subtasks.

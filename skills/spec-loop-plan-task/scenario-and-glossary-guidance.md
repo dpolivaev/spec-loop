@@ -1,8 +1,8 @@
 # Scenario and Glossary Guidance
 
 This file applies only after [common-task-guidance.md](common-task-guidance.md) has already
-established that the current task or subtask needs `Scenario` or
-`Glossary`.
+established that the current task needs `Scenario` or `Glossary`, or
+that the current subtask does when the task uses subtasks.
 
 This file covers only the extra drafting guidance. It does not repeat:
 - when these sections are required;
@@ -67,8 +67,9 @@ This file covers only the extra drafting guidance. It does not repeat:
   rather than by adding a separate classification table, unless the
   User asks for one:
   - shared domain term = ensure `Scenario` uses the term; when the
-    current work introduces or changes it relative to the shared
-    source, include it in task `Glossary`;
+    current task introduces or changes it relative to the shared
+    source, include it in task `Glossary`; if the task uses subtasks,
+    apply this to the current subtask plus needed task-level context;
   - exact external technical term = include it in task `Glossary` only
     when the exact external type or API is part of the reviewed
     contract;

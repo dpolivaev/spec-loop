@@ -4,10 +4,11 @@ This file applies to task planning on both planning paths of
 `spec-loop-plan-task`.
 
 It defines the shared no-subtask main-task form, section meanings,
-current work readiness rules, context-preservation rules,
-formatting conventions, and the required use of detailed Test
-specification guidance for both planning paths, with any
-task-file-only formatting rules called out explicitly:
+readiness rules for the current task, including subtask handling when
+subtasks exist, context-preservation rules, formatting conventions,
+and the required use of detailed Test specification guidance for both
+planning paths, with any task-file-only formatting rules called out
+explicitly:
 
 - the chat-only planning path kept in chat; and
 - the task-file path.
@@ -16,13 +17,15 @@ Task-file-only lifecycle, folders, tracked moves, subtasks, diagrams,
 and other task-file administration stay in
 [task-file-path-guidance.md](task-file-path-guidance.md).
 
-## Current work readiness
+## Readiness for the current task
 
-The active task artifact is the source of truth for the current work.
-Design-first allows learning during execution while the approved
-Design stays authoritative. Findings that change the intended target
-lead to updates to the active task artifact and renewed approval
-before execution continues.
+The active task artifact is the source of truth for the current task.
+If the task uses subtasks, these readiness rules apply to the current
+subtask plus the task-level context it depends on. Design-first allows
+learning during execution while the approved Design stays
+authoritative. Findings that change the intended target lead to
+updates to the active task artifact and renewed approval before
+execution continues.
 
 - On the chat-only path, that artifact is the current canonical
   chat-only task in chat.
@@ -31,14 +34,17 @@ before execution continues.
 Before EXECUTION, implementation work needs: Scope, Motivation,
 Briefing, implementation-ready Design, Test specification, and any
 required Research, Scenario, Glossary, Analysis, or Constraints for
-the current implementation work — even when the User allows combined
-phases.
+the current task. If the task uses subtasks, apply those requirements
+to the current subtask plus needed task-level context — even when the
+User allows combined phases.
 
-Before asking the User to approve a task for EXECUTION, the LLM must
-self-check that the content for the current task meets all applicable
-requirements of this file and any path-specific companion rules, and
-is correct, internally consistent, and compliant with `AGENTS.md` and
-applicable glossary rules.
+Before asking the User to approve EXECUTION, the LLM must self-check
+that the current task meets all applicable requirements of this file
+and any path-specific companion rules. If the task uses subtasks,
+apply that self-check to the current subtask plus needed task-level
+context. In either case, the result must be correct, internally
+consistent, and compliant with `AGENTS.md` and applicable glossary
+rules.
 
 If the task is investigation-only, use the same task sections. Scope
 sets the investigation boundary and expected output. Motivation states
@@ -49,9 +55,9 @@ facts. Design describes the investigation approach. Test specification
 is `N/A` unless explicit checks are needed to review the result.
 Findings records the final reviewed output.
 
-At any point while drafting or revising the active task for the
-current work, if any content would depend on an unresolved material
-branch about scope, behavior, policy, conceptual model,
+At any point while drafting or revising the active task artifact, if
+any content would depend on an unresolved material branch about scope,
+behavior, policy, conceptual model,
 conceptual contract boundaries, constraints, migration, acceptance
 logic, or verification expectations, it must return to clarification
 instead of guessing.
@@ -132,7 +138,9 @@ labels below.
   - `- **Briefing:**`
   - `- **Research:**`
   - `- **Analysis:**` (conditional; include it when final
-    clarification decisions exist for the current work)
+    clarification decisions exist for the current task; if the task
+    uses subtasks, apply this to the current subtask plus needed
+    task-level context)
   - `- **Design:**`
   - `- **Test specification:**`
   - `- **Findings:**` (conditional; investigation-only tasks/subtasks
@@ -158,8 +166,10 @@ relevant modules, conventions, or risks.
 
 ### Scope
 
-Defines the current work's boundaries: what is included, what is
-excluded, and which user-visible or system behavior is in scope.
+Defines the boundaries of the current task: what is included, what is
+excluded, and which user-visible or system behavior is in scope. If
+the task uses subtasks, apply this to the current subtask plus needed
+task-level context.
 
 ### Motivation
 
@@ -194,10 +204,12 @@ artifact.
 
 ### Glossary
 
-Use task `Glossary` when the current work introduces or changes
-review-relevant shared domain terms, or exact external technical terms
-whose precise type or API is part of the reviewed contract, relative to
-the current shared domain-language source.
+Use task `Glossary` when the current task introduces or changes
+review-relevant shared domain terms, or exact external technical
+terms whose precise type or API is part of the reviewed contract,
+relative to the current shared domain-language source. If the task
+uses subtasks, apply this to the current subtask plus needed
+task-level context.
 
 Before approval seeking, if the term-reduction and classification
 pass finds such a qualifying term delta and task `Glossary` is
@@ -275,7 +287,8 @@ Plans go in **Design**. Approved investigation output goes in
 **Findings**.
 
 For implementation work, do not record repository states created
-during the current work in canonical Research. If later
+while implementing the current task in canonical Research. If the
+task uses subtasks, apply this to the current subtask. If later
 clarification, implementation, or review reveals new relevant facts
 about the original pre-implementation state, extend Research with
 those facts only.
@@ -339,7 +352,8 @@ Design must follow Constraints and Analysis when they are present. If
 Design conflicts with either, fix Design or return to clarification.
 
 Design must describe only the current intended end state. Do not
-describe repository states created during the current work, including
+describe repository states created while implementing the current
+task, or the current subtask when subtasks are in use, including
 staged refactor states or
 transformations such as `S1 -> S2`. If such an intermediate state
 must be preserved, use a new task or subtask where that state can
