@@ -18,8 +18,6 @@ or `multiple task files / backlog items`.
 Also use it when revising an existing file-based work breakdown, or
 when later planning or design shows that a requested single task or
 subtask should be split.
-A User request phrased as `task` or `subtask` does not decide by
-itself whether breakdown is needed.
 
 If this skill is loaded before planning-form selection is complete, do
 not draft breakdown artifacts. If first classification is incomplete,
@@ -34,6 +32,9 @@ promote to the task-file path before creating the breakdown. Chat-only
 content is not durable project state outside the current chat, so
 work breakdown state must live in a task file.
 
+In the sections below, `(sub)task` means a task or subtask in the work
+breakdown.
+
 ## Scope and motivation gate
 
 Do not draft or revise a work breakdown until the whole work being split
@@ -43,59 +44,63 @@ For initial work breakdown and material revisions to an existing work
 breakdown, apply the clarification skill's mandatory decision screening
 to:
 - the whole work's Scope and Motivation;
-- each proposed task/subtask Scope and Motivation; and
-- any Constraint included in a task/subtask or needed to decide item
-  boundaries, ordering, releasability, or coherence.
+- each proposed (sub)task Scope and Motivation; and
+- any Constraint included in a (sub)task or needed to decide
+  (sub)task boundaries, ordering, releasability, or coherence.
 
 Do not use work breakdown to discover, clarify, or decide Constraints
 that only affect later Design or Test specification inside an already
-coherent item. If an unknown constraint affects item boundaries,
-ordering, releasability, or coherence, treat it as a breakdown blocker;
-otherwise defer it until the item becomes current.
+coherent (sub)task. If an unknown constraint affects (sub)task
+boundaries, ordering, releasability, or coherence, treat it as a
+breakdown blocker; otherwise defer it until that (sub)task
+becomes current.
 
 If Scope or Motivation is unclear, do only enough research to frame the
 gap, then use
 [spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md)
 before drafting breakdown items.
 
-Do not create placeholder implementation items for unclear future work.
+Do not create placeholder implementation (sub)tasks for
+unclear future work.
 
-For work breakdown, clarify only enough to make item boundaries,
-ordering, and coherence sound. Defer detailed rule, API, design, and
-test clarification until the item is current.
+For work breakdown, clarify only enough to make (sub)task
+boundaries, ordering, and coherence sound. Defer detailed rule, API,
+design, and test clarification until the (sub)task is current.
 
-## Standalone-item rule
+## Standalone (sub)task rule
 
-Every task or subtask in a work breakdown must stand on its own by
-default. For implementation work, that means the item must be
-releasable.
+Every (sub)task in a work breakdown must stand on its own by
+default. For implementation work, that means the (sub)task must
+be releasable.
 
-A releasable implementation item can be implemented, verified,
-reviewed, and accepted on its own while leaving the project coherent
-if no later sibling is implemented. It must include its tests and any
-supporting config, migration, documentation, glossary, or operational
-updates needed to stand on its own. This is a validity criterion, not
-a recommendation to release each task or subtask independently.
+A releasable implementation (sub)task can be implemented,
+verified, reviewed, and accepted on its own while leaving the project
+coherent if no later sibling is implemented. It must include its tests
+and any supporting config, migration, documentation, glossary, or
+operational updates needed to stand on its own. This is a validity
+criterion, not a recommendation to release each (sub)task
+independently.
 
-For feature implementation, choose item boundaries by slicing the
-overall work into releasable vertical slices when a coherent split
-exists.
+For feature implementation, choose (sub)task boundaries by
+slicing the overall work into releasable vertical slices when a
+coherent split exists.
 
 Use separate task files/backlog items when separate release decisions
-are advisable. Use subtasks when the resulting items can safely stand
-alone but separate release decisions are not advisable.
+are advisable. Use subtasks when the resulting subtasks can safely
+stand alone but separate release decisions are not advisable.
 
-Do not create non-releasable implementation items unless the User
-explicitly opts out. If the User opts out, record the opt-out in the
-affected item's Scope.
+Do not create non-releasable implementation (sub)tasks unless
+the User explicitly opts out. If the User opts out, record the opt-out
+in the affected (sub)task's Scope.
 
 Forbidden by default:
 - scaffolding-only, setup-only, model-only, logic-only, API-only,
   persistence-only, UI-only, test-only, or docs-only implementation
-  items that do not stand alone;
-- a preparation-heavy implementation item with no observable
-  accepted-result difference or other immediately demonstrable
-  coherent capability when a smaller behavior-first slice is viable;
+  (sub)tasks that do not stand alone;
+- a preparation-heavy implementation (sub)task with no
+  observable accepted-result difference or other immediately
+  demonstrable coherent capability when a smaller behavior-first
+  vertical slice is viable;
 - a "foundation" subtask that only enables later behavior but has no
   independently reviewable result; and
 - splitting implementation and tests for the same behavior into
@@ -117,45 +122,45 @@ Allowed when they stand alone:
 
 ## Fast-payoff preference
 
-Prefer the earliest coherent implementation item that shows visible
-executable behavior or another immediately demonstrable coherent
-capability. For feature work, that usually means the first releasable
-vertical slice.
+Prefer the earliest coherent implementation (sub)task that shows
+visible executable behavior or another immediately demonstrable
+coherent capability. For feature work, that usually means the first
+releasable vertical slice.
 
 Defer setup, generation, storage, orchestration, and generalization
-until they affect that item's accepted result, unless they are
-required for coherence or independent acceptability.
+until they affect the accepted result of that (sub)task, unless
+they are required for coherence or independent acceptability.
 
 If the same behavior can be reviewed first with deterministic setup,
-prefer that slice. If a candidate item still carries substantial
-plumbing or generalization with too little visible result, or internal
-choices it cannot yet expose, split it again unless that would break
-independent acceptability.
+prefer that slice. If a candidate (sub)task still carries
+substantial plumbing or generalization with too little visible result,
+or internal choices it cannot yet expose, split it again unless that
+would break independent acceptability.
 
 Do not pull speculative flexibility or future-proofing into an earlier
-item when a narrower one can already stand alone.
+(sub)task when a narrower one can already stand alone.
 
 ## Work breakdown detail level
 
-For an initial task or subtask created from scratch, include only the
+For an initial (sub)task created from scratch, include only the
 title, required identifier/status metadata, and these planning
 sections:
 - Scope;
 - Motivation; and
 - Constraints, only for already known limits that materially affect the
-  item.
+  (sub)task.
 
 For subtasks, keep the normal `- **Status:**` line because it is
 lifecycle metadata, not planning content.
 
-For research, spike, prototype, catalog, or proof tasks/subtasks,
+For research, spike, prototype, catalog, or proof (sub)tasks,
 Scope states the investigation boundary and expected output;
 Motivation states what it blocks or enables.
 
 Do not newly draft Briefing, Research, Scenario, Glossary, Analysis,
 Design, or Test specification during work breakdown. Complete those
-planning sections only after the item becomes current under
-`spec-loop-plan-task`.
+planning sections only after the (sub)task becomes current
+under `spec-loop-plan-task`.
 
 Do not create Findings or Implementation notes during work breakdown.
 Findings is filled only after approved investigation work produces
@@ -163,15 +168,18 @@ reviewed output. Implementation notes follow
 `spec-loop-implementation-flow`.
 
 Include a Constraints section only for already known limits that
-materially affect the item. Do not create placeholder Constraints.
+materially affect the (sub)task. Do not create placeholder
+Constraints.
 
 The exception is restructuring existing planned work, including
 converting a no-subtask task into subtask form. Existing section
-content may be moved to the correct resulting task or subtask, but new
+content may be moved to the correct resulting (sub)task, but new
 content for those sections must not be drafted during breakdown.
 
-Before execution approval for a task-file item, complete the
-sections required for the current work by `spec-loop-plan-task`.
+Before execution approval on the task-file path, complete the
+sections required for the current task under `spec-loop-plan-task`.
+If the task uses subtasks, apply this to the current subtask plus
+needed task-level context.
 
 ## Blocking unknowns
 
@@ -181,17 +189,17 @@ when existing evidence or User engagement can resolve it.
 
 If the blocker still needs a durable decision, route ADR work. If it
 needs new evidence, create a research, spike, prototype, catalog, or
-proof task/subtask only when that investigation requires explicit
+proof (sub)task only when that investigation requires explicit
 planning, separate tracking, or a reviewable output.
 
 If accepted investigation findings show that a durable architecture or
 policy decision is needed, route ADR work before planning dependent
-implementation items.
+implementation (sub)tasks.
 
-Do not create downstream implementation items or placeholders that
-depend on the unknown result. If blocking work is needed, pause work
-breakdown. After that work is accepted, continue the work breakdown
-from the new evidence or decision.
+Do not create downstream implementation (sub)tasks or
+placeholders that depend on the unknown result. If blocking work is
+needed, pause work breakdown. After that work is accepted, continue
+the work breakdown from the new evidence or decision.
 
 If converting a no-subtask task to subtask form, adding a new subtask
 after earlier subtasks already contain full section content, or making
@@ -202,62 +210,68 @@ and then resume this skill.
 ## Work breakdown construction
 
 When drafting a work breakdown:
-- name each item by its delivered outcome, not by a technical layer;
+- name each (sub)task by its delivered outcome, not by a
+  technical layer;
 - when creating backlog task files, number them with readable
   three-digit prefixes local to the containing folder;
-- prefer the smallest sequence where each item remains independently
-  acceptable, each implementation item remains releasable, and earlier
-  items follow the Fast-payoff preference above;
-- create research, spike, prototype, catalog, or proof tasks/subtasks
+- prefer the smallest sequence where each (sub)task remains
+  independently acceptable, each implementation (sub)task
+  remains releasable, and earlier (sub)tasks follow the
+  Fast-payoff preference above;
+- create research, spike, prototype, catalog, or proof (sub)tasks
   only when the investigation itself requires explicit planning,
   separate tracking, or a reviewable output;
-- for implementation items, include all cross-layer work needed in
-  that same item;
+- for implementation (sub)tasks, include all cross-layer work
+  needed in that same (sub)task;
 - if the refactoring is standalone and the change remains one overall
   task, put it in its own subtask;
 - if the refactoring is standalone and separate release decisions are
   advisable, use a separate task file or backlog item;
 - if the refactoring is not standalone, keep it inside the feature
-  item;
-- keep future tasks and subtasks created from scratch to title,
+  (sub)task;
+- keep future (sub)tasks created from scratch to title,
   required identifier/status metadata, Scope, Motivation, and any
-  already known item-relevant Constraints until they are current, but
-  make the standalone result clear;
-- place supporting docs, glossary changes, config, migration, and tests
-  in the same item as the behavior they support unless they are
-  standalone deliverables; and
-- if a candidate implementation item is not releasable, reshape it,
-  merge it with an adjacent item, or ask the User whether to opt out
-  explicitly.
+  already known relevant Constraints until they are current, but make
+  the standalone result clear;
+- place supporting docs, glossary changes, config, migration, and
+  tests in the same (sub)task as the behavior they support
+  unless they are standalone deliverables; and
+- if a candidate implementation (sub)task is not releasable,
+  reshape it, merge it with an adjacent (sub)task, or ask the
+  User whether to opt out explicitly.
 
 ## Final self-check
 
 Before presenting or saving a file-based work breakdown, verify:
-- each implementation task or subtask can reach `review` on its own;
-- each implementation task or subtask has or will receive its own
-  automated tests for that item;
-- for implementation items without an explicit non-releasable opt-out,
-  after each completed item the resulting software state would be
-  coherent and releasable if no later sibling were implemented;
-- earlier implementation items, especially the first, satisfy the
-  Fast-payoff preference above and do not pull setup, generation,
-  storage, orchestration, or generalization forward without need;
-- no item is named only for a layer or preparation activity unless it
-  is independently acceptable;
-- any non-releasable implementation item has explicit User opt-out
-  recorded;
-- each research, spike, prototype, catalog, or proof task/subtask
+- each implementation (sub)task can reach `review` on its own;
+- each implementation (sub)task has or will receive its own
+  automated tests;
+- for implementation (sub)tasks without an explicit
+  non-releasable opt-out, after each completed (sub)task the
+  resulting software state would be coherent and releasable if no
+  later sibling were implemented;
+- earlier implementation (sub)tasks, especially the first,
+  satisfy the Fast-payoff preference above and do not pull setup,
+  generation, storage, orchestration, or generalization forward
+  without need;
+- no (sub)task is named only for a layer or preparation
+  activity unless it is independently acceptable;
+- any non-releasable implementation (sub)task has explicit User
+  opt-out recorded;
+- each research, spike, prototype, catalog, or proof (sub)task
   shows why separate tracking is needed;
-- no downstream implementation item depends on an unresolved unknown;
+- no downstream implementation (sub)task depends on an
+  unresolved unknown;
 - new backlog task files created by this breakdown have readable
   three-digit prefixes local to the containing folder;
-- each task or subtask created from scratch contains only the title,
+- each (sub)task created from scratch contains only the title,
   required identifier/status metadata, Scope, Motivation, and already
-  known item-relevant Constraints when present;
-- each refactoring-only task or subtask is a standalone refactoring;
+  known relevant Constraints when present;
+- each refactoring-only (sub)task is a standalone refactoring;
 - separate task files or backlog items are used for standalone
   refactoring only when separate release decisions are advisable;
-- fuller section content appears only in unchanged pre-existing current
-  items or because it was moved from an existing task or subtask during
+- fuller section content appears only in an unchanged pre-existing
+  current task, in an unchanged pre-existing current subtask, or
+  because it was moved from an existing (sub)task during
   restructuring, including conversion from no-subtask task to subtask
   form.
