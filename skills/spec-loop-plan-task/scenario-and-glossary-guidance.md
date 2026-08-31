@@ -23,7 +23,7 @@ This file covers only the extra drafting guidance. It does not repeat:
 ## Scenario drafting
 
 - Write behavior, boundaries, and outcomes.
-- Keep it concise and implementation-free.
+- Keep it succinct and implementation-free.
 - Make terms understandable through usage in the scenario.
 - Do not describe review workflow, document workflow, or code
   structure there.

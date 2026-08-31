@@ -456,7 +456,7 @@ Artifact volume remains separate and unranked: OpenSpec has small structured art
 | Solution or group | Visible decision evidence | Limitation |
 |---|---|---|
 | `open-spec` | Five user messages: propose, apply, manual-check confirmation, commit, staging approval. Generated design exposed choices. | No product/design clarification; choices were assistant-selected. |
-| `open-spec-calisthenics` | Apply approval and concise workflow progress. | No product/design questions; choices were assistant-selected. |
+| `open-spec-calisthenics` | Approval gates and short workflow progress updates. | No product/design questions; choices were assistant-selected. |
 | `spec-loop-base-backlog-steered` | Assistant proposed stack, persistence, accounts, statement, and printing decisions; user redirected backlog form and later challenged rollback. | Several advantages are user-steered rather than workflow-default evidence. |
 | Other Spec Loop | The assistant requested user choice or approval for material task/subtask decisions before requesting execution approval. | Clarification used individual questions or bounded decision batches, so raw question counts are not comparable measures of steering quality. |
 | `superpowers` conditions | Many one-at-a-time product/design questions and explicit user answers. | Long discussion/plan did not guarantee preservation in final code/tests. |

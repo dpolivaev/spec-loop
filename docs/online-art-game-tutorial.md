@@ -271,7 +271,7 @@ Include the project brief verbatim in the README under a "Project Brief"
 section. The README must preserve the AIC attribution requirements from
 the brief and clearly describe the two parts (museum overview page +
 Progressive Timeline game), the core rules, and the leaderboard sorting.
-Keep the README concise and practical.
+Keep the README succinct and practical.
 
 Also create `glossary.adoc` from the approved project brief. It should
 define the canonical project terms needed for this tutorial and keep

@@ -253,7 +253,7 @@
     - During a follow-up clarification on that same fileless task,
       verify that the assistant uses an explicit update marker and
       updates only the changed sections in chat.
-    - Verify that the inline fileless example stays concise and
+    - Verify that the inline fileless example stays succinct and
       clearly shows why its task fits the fileless path.
     - Verify that when new work appears after a fileless task, the
       assistant infers from the User's message whether it is a subtask
@@ -377,6 +377,6 @@
       companions so `review`, canonical-section authority, and
       `Implementation notes` stay governed once while fileless and
       task-file mechanics stay separate.
-    - Moved the concise fileless example into `spec-loop-plan-task`
-      guidance instead of keeping a separate example file so fit,
-      concision, and update shape are visible at the point of use.
+    - Moved the fileless example into `spec-loop-plan-task`
+      guidance instead of keeping a separate example file so its fit,
+      brevity, and update shape are visible at the point of use.

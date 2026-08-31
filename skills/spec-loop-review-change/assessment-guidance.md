@@ -118,7 +118,7 @@ Allowed values:
 - `request changes`
 - `do not merge`
 
-When `Review outcome` is present, include concise supporting bullets:
+When `Review outcome` is present, include brief supporting bullets:
 
 - `Intent`
 - `Implementation`

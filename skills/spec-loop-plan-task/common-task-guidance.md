@@ -179,7 +179,7 @@ observed defects, project goals, or clearly marked inference.
 ### Scenario
 
 `Scenario` explains what happens and grounds domain language before
-implementation. Keep it concise, implementation-free, and
+implementation. Keep it succinct, implementation-free, and
 behavior-first.
 
 Use `Scenario` when behavior, flow, boundaries, or user-visible
@@ -297,7 +297,7 @@ Do not repeat `Analysis` points here in decision-and-rationale form.
 
 ### Analysis
 
-Authoritative ledger of final clarification decisions and concise
+Authoritative ledger of final clarification decisions and succinct
 rationale.
 
 Use one short bullet per final decision. Use the connector that matches

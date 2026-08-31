@@ -47,7 +47,7 @@ section:
 - `Analysis` = the clarified reasoning, accepted criteria,
   trade-offs, option comparisons, and brief rationale for why the
   chosen option won; and
-- `Decision` = the chosen outcome as a concise TL;DR, including any
+- `Decision` = the chosen outcome as a TL;DR, including any
   explicit deferrals or major retained boundaries that are part of the
   outcome.
 

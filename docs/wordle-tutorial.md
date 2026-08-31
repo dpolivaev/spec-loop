@@ -264,7 +264,7 @@ Technical direction:
 Please write `README.md` for this repository based on the project brief.
 Include the project brief verbatim in the README under a "Project Brief"
 section. The README must clearly describe the game rules, the later CLI
-and UI paths, and the word-list expectations. Keep the README concise
+and UI paths, and the word-list expectations. Keep the README succinct
 and practical.
 
 Also create `glossary.adoc` from the approved project brief. It should

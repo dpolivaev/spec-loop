@@ -146,7 +146,7 @@ Preferred review surface:
 - compact supporting inventories only where diagrams are weak.
 
 Canonical ownership by information kind:
-- non-diagrammable design decisions and approvals -> concise decision
+- non-diagrammable design decisions and approvals -> compact decision
   lists;
 - diagrammable content in **Research** and **Design** -> diagrams;
 - exact external identifiers or other precise inventories the diagram
