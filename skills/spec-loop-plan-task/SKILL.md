@@ -80,6 +80,17 @@ documentation changes; plan that scope as implementation work.
 After first classification, read and follow
 [planning-form-selection-guidance.md](planning-form-selection-guidance.md).
 
+## Current-item-first planning for file-based multi-item work
+
+When planning-form selection chooses `task file with subtasks` or
+`multiple task files / backlog items`, first do only the whole-work
+clarification needed for Scope, Motivation, and a sound rough
+breakdown. Then use
+[spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
+to identify the current item and lightweight later items. Do full
+clarification and detailed planning only for the current item and any
+required shared context.
+
 ## Phase model
 
 Phases:
@@ -113,6 +124,14 @@ Use that skill's definition of important open decision.
 
 Apply this gate proactively; do not wait for the User to ask for
 clarification.
+
+For file-based multi-item work, apply this gate twice:
+- before rough breakdown, only for whole-work Scope, Motivation,
+  planning-form selection, and item boundaries, ordering,
+  releasability, or coherence;
+- after the current item is identified, fully for that item and any
+  required shared context before drafting implementation-ready Design
+  or Test specification.
 
 For subtasks, apply this gate only to the current subtask and required
 task-level context. Apply it to future subtasks when they become
@@ -154,6 +173,9 @@ When this planning form is in use:
 - create or update the active task file before EXECUTION starts; and
 - use `tasks/` as the default task directory when project
   instructions do not define one.
+
+For `task file with subtasks` or `multiple task files / backlog items`,
+apply the current-item-first planning rule above.
 
 Before requesting execution approval for task-file work, use
 [spec-loop-prepare-execution-approval/SKILL.md](../spec-loop-prepare-execution-approval/SKILL.md).

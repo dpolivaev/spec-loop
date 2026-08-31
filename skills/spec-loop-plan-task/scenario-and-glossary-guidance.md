@@ -67,7 +67,7 @@ This file covers only the extra drafting guidance. It does not repeat:
   rather than by adding a separate classification table, unless the
   User asks for one:
   - shared domain term = ensure `Scenario` uses the term; when the
-    current increment introduces or changes it relative to the shared
+    current work introduces or changes it relative to the shared
     source, include it in task `Glossary`;
   - exact external technical term = include it in task `Glossary` only
     when the exact external type or API is part of the reviewed

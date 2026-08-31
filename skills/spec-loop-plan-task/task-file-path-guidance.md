@@ -5,7 +5,7 @@ This file applies only on the task-file path of
 
 Read [common-task-guidance.md](common-task-guidance.md) first.
 That file defines the shared no-subtask main-task form, section
-semantics, current-increment readiness rules, context-preservation
+semantics, current work readiness rules, context-preservation
 rules, formatting conventions, and the required use of detailed Test
 specification guidance for both planning paths.
 
@@ -22,13 +22,13 @@ companion for implementation-time handling, task-file updates,
 ## Task-file path readiness
 
 On the task-file path, the task file is the source of truth for the
-current increment.
+current work.
 
 When a task file has or may have subtasks, do not infer the active
-increment or subtask status from the folder path. Before identifying
-the active increment, claiming lifecycle status, moving a task or
-subtask status, seeking execution approval, or presenting completion,
-search the file for subtask heading and status lines:
+subtask or current work from the folder path. Before identifying the
+active subtask, claiming lifecycle status, moving a task or subtask
+status, seeking execution approval, or presenting completion, search
+the file for subtask heading and status lines:
 
 `rg -n '^## Subtask:|^- \*\*Status:\*\*' <task-file>`
 
@@ -36,7 +36,7 @@ Use the folder path as task-level status only. Use subtask
 `- **Status:**` lines as subtask-level status. If a task in `review`
 has an `in-progress` subtask, state both statuses explicitly and use
 the active subtask plus needed task-level context as the controlling
-increment.
+work.
 
 Initial backlog tasks and subtasks created by
 [spec-loop-plan-work-breakdown/SKILL.md](../spec-loop-plan-work-breakdown/SKILL.md)
@@ -269,10 +269,10 @@ When a task uses subtasks:
   move subtask-specific Research, Analysis, Design, and Test
   specification into the relevant subtask.
 - If the original no-subtask task already describes a concrete
-  functional increment, promote that increment into its own subtask.
+  standalone outcome, promote that outcome into its own subtask.
 - Do not create a synthetic "original task" subtask when the former
   top-level content was only broad shared context and not a distinct
-  functional increment.
+  standalone outcome.
 
 ### Every Subtask
 
@@ -289,11 +289,11 @@ When a task uses subtasks:
   conditional Implementation notes,
 - must not convert those section labels into Markdown headings,
 - must represent a separately tracked work unit within the same
-  overall task; for implementation work, this is usually a functional
-  increment, but a history-preserving review follow-up may also
-  justify a subtask,
-- for feature implementation, implementation subtasks must be vertical
-  slices: each implementation subtask must cover the cross-layer work
+  overall task; for implementation work, this is usually one
+  standalone change, but a history-preserving review follow-up may
+  also justify a subtask,
+- for feature implementation, choose implementation subtasks as
+  releasable vertical slices: each one must cover the cross-layer work
   needed for one reviewable behavior and its own automated tests,
 - do not split a feature into scaffolding-only or layer-only
   implementation subtasks such as separate `scaffolding`, `model`,
@@ -498,7 +498,7 @@ For task-file subtasks:
 
 - Implementation subtasks must include their applicable verification
   in the same subtask. Don't split implementation and verification
-  across separate subtasks for the same functional increment.
+  across separate subtasks for the same implementation change.
 - Separate test-focused tasks allowed when adding or extending
   coverage as standalone scope.
 - Each implementation subtask: follow the shared Test specification

@@ -60,40 +60,50 @@ before drafting breakdown items.
 
 Do not create placeholder implementation items for unclear future work.
 
-## Releasable-increment rule
+For work breakdown, clarify only enough to make item boundaries,
+ordering, and coherence sound. Defer detailed rule, API, design, and
+test clarification until the item is current.
 
-Every task or subtask in a work breakdown must be an independently
-acceptable increment by default. For implementation work, that means a
-releasable increment.
+## Standalone-item rule
 
-A releasable increment can be implemented, verified, reviewed, and
-accepted independently while leaving the project coherent if no later
-sibling is implemented yet. It includes the tests and any same-slice
+Every task or subtask in a work breakdown must stand on its own by
+default. For implementation work, that means the item must be
+releasable.
+
+A releasable implementation item can be implemented, verified,
+reviewed, and accepted on its own while leaving the project coherent
+if no later sibling is implemented. It must include its tests and any
 supporting config, migration, documentation, glossary, or operational
-updates needed for that increment to stand alone. This is a
-vertical-slice validity criterion, not a recommendation to release
-each task or subtask independently.
+updates needed to stand on its own. This is a validity criterion, not
+a recommendation to release each task or subtask independently.
+
+For feature implementation, choose item boundaries by slicing the
+overall work into releasable vertical slices when a coherent split
+exists.
 
 Use separate task files/backlog items when separate release decisions
-are advisable. Use subtasks when the slices can safely stand alone but
-separate release decisions are not advisable.
+are advisable. Use subtasks when the resulting items can safely stand
+alone but separate release decisions are not advisable.
 
-Do not create non-releasable implementation slices unless the User
+Do not create non-releasable implementation items unless the User
 explicitly opts out. If the User opts out, record the opt-out in the
 affected item's Scope.
 
 Forbidden by default:
 - scaffolding-only, setup-only, model-only, logic-only, API-only,
   persistence-only, UI-only, test-only, or docs-only implementation
-  slices that do not stand alone;
+  items that do not stand alone;
+- a preparation-heavy implementation item with no observable
+  accepted-result difference or other immediately demonstrable
+  coherent capability when a smaller behavior-first slice is viable;
 - a "foundation" subtask that only enables later behavior but has no
   independently reviewable result; and
 - splitting implementation and tests for the same behavior into
   separate subtasks.
 
-A standalone refactoring is a refactoring increment scoped to make no
-intended externally observable behavior change, and still acceptable if
-merged even if the later feature item is never implemented.
+A standalone refactoring makes no intended externally observable
+behavior change and is still acceptable if merged even if the later
+feature item is never implemented.
 
 Allowed when they stand alone:
 - infrastructure or setup work that leaves a coherent build or runtime
@@ -104,6 +114,26 @@ Allowed when they stand alone:
 - a layer-focused change that is itself a complete reviewable behavior
   or operational capability, not merely a dependency for a later
   sibling.
+
+## Fast-payoff preference
+
+Prefer the earliest coherent implementation item that shows visible
+executable behavior or another immediately demonstrable coherent
+capability. For feature work, that usually means the first releasable
+vertical slice.
+
+Defer setup, generation, storage, orchestration, and generalization
+until they affect that item's accepted result, unless they are
+required for coherence or independent acceptability.
+
+If the same behavior can be reviewed first with deterministic setup,
+prefer that slice. If a candidate item still carries substantial
+plumbing or generalization with too little visible result, or internal
+choices it cannot yet expose, split it again unless that would break
+independent acceptability.
+
+Do not pull speculative flexibility or future-proofing into an earlier
+item when a narrower one can already stand alone.
 
 ## Work breakdown detail level
 
@@ -141,7 +171,7 @@ content may be moved to the correct resulting task or subtask, but new
 content for those sections must not be drafted during breakdown.
 
 Before execution approval for a task-file item, complete the
-current-increment sections required by `spec-loop-plan-task`.
+sections required for the current work by `spec-loop-plan-task`.
 
 ## Blocking unknowns
 
@@ -176,7 +206,8 @@ When drafting a work breakdown:
 - when creating backlog task files, number them with readable
   three-digit prefixes local to the containing folder;
 - prefer the smallest sequence where each item remains independently
-  acceptable and each implementation item remains releasable;
+  acceptable, each implementation item remains releasable, and earlier
+  items follow the Fast-payoff preference above;
 - create research, spike, prototype, catalog, or proof tasks/subtasks
   only when the investigation itself requires explicit planning,
   separate tracking, or a reviewable output;
@@ -191,7 +222,7 @@ When drafting a work breakdown:
 - keep future tasks and subtasks created from scratch to title,
   required identifier/status metadata, Scope, Motivation, and any
   already known item-relevant Constraints until they are current, but
-  make the independent increment clear;
+  make the standalone result clear;
 - place supporting docs, glossary changes, config, migration, and tests
   in the same item as the behavior they support unless they are
   standalone deliverables; and
@@ -204,10 +235,13 @@ When drafting a work breakdown:
 Before presenting or saving a file-based work breakdown, verify:
 - each implementation task or subtask can reach `review` on its own;
 - each implementation task or subtask has or will receive its own
-  automated tests for that increment;
+  automated tests for that item;
 - for implementation items without an explicit non-releasable opt-out,
   after each completed item the resulting software state would be
   coherent and releasable if no later sibling were implemented;
+- earlier implementation items, especially the first, satisfy the
+  Fast-payoff preference above and do not pull setup, generation,
+  storage, orchestration, or generalization forward without need;
 - no item is named only for a layer or preparation activity unless it
   is independently acceptable;
 - any non-releasable implementation item has explicit User opt-out

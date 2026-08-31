@@ -4,7 +4,7 @@ This file applies to task planning on both planning paths of
 `spec-loop-plan-task`.
 
 It defines the shared no-subtask main-task form, section meanings,
-current-increment readiness rules, context-preservation rules,
+current work readiness rules, context-preservation rules,
 formatting conventions, and the required use of detailed Test
 specification guidance for both planning paths, with any
 task-file-only formatting rules called out explicitly:
@@ -16,13 +16,13 @@ Task-file-only lifecycle, folders, tracked moves, subtasks, diagrams,
 and other task-file administration stay in
 [task-file-path-guidance.md](task-file-path-guidance.md).
 
-## Current-increment readiness
+## Current work readiness
 
-The active task artifact is the source of truth for the current
-increment. Design-first allows learning during execution while the
-approved Design stays authoritative. Findings that change the intended
-target lead to updates to the active task artifact and renewed
-approval before execution continues.
+The active task artifact is the source of truth for the current work.
+Design-first allows learning during execution while the approved
+Design stays authoritative. Findings that change the intended target
+lead to updates to the active task artifact and renewed approval
+before execution continues.
 
 - On the chat-only path, that artifact is the current canonical
   chat-only task in chat.
@@ -31,8 +31,8 @@ approval before execution continues.
 Before EXECUTION, implementation work needs: Scope, Motivation,
 Briefing, implementation-ready Design, Test specification, and any
 required Research, Scenario, Glossary, Analysis, or Constraints for
-the current implementation increment — even when the User allows
-combined phases.
+the current implementation work — even when the User allows combined
+phases.
 
 Before asking the User to approve a task for EXECUTION, the LLM must
 self-check that the content for the current task meets all applicable
@@ -50,8 +50,8 @@ is `N/A` unless explicit checks are needed to review the result.
 Findings records the final reviewed output.
 
 At any point while drafting or revising the active task for the
-current increment, if any content would depend on an unresolved
-material branch about scope, behavior, policy, conceptual model,
+current work, if any content would depend on an unresolved material
+branch about scope, behavior, policy, conceptual model,
 conceptual contract boundaries, constraints, migration, acceptance
 logic, or verification expectations, it must return to clarification
 instead of guessing.
@@ -132,7 +132,7 @@ labels below.
   - `- **Briefing:**`
   - `- **Research:**`
   - `- **Analysis:**` (conditional; include it when final
-    clarification decisions exist for the current increment)
+    clarification decisions exist for the current work)
   - `- **Design:**`
   - `- **Test specification:**`
   - `- **Findings:**` (conditional; investigation-only tasks/subtasks
@@ -158,7 +158,7 @@ relevant modules, conventions, or risks.
 
 ### Scope
 
-Defines the current increment's boundaries: what is included, what is
+Defines the current work's boundaries: what is included, what is
 excluded, and which user-visible or system behavior is in scope.
 
 ### Motivation
@@ -194,7 +194,7 @@ artifact.
 
 ### Glossary
 
-Use task `Glossary` when the current increment introduces or changes
+Use task `Glossary` when the current work introduces or changes
 review-relevant shared domain terms, or exact external technical terms
 whose precise type or API is part of the reviewed contract, relative to
 the current shared domain-language source.
@@ -275,7 +275,7 @@ Plans go in **Design**. Approved investigation output goes in
 **Findings**.
 
 For implementation work, do not record repository states created
-during the current increment in canonical Research. If later
+during the current work in canonical Research. If later
 clarification, implementation, or review reveals new relevant facts
 about the original pre-implementation state, extend Research with
 those facts only.
@@ -338,9 +338,9 @@ helpers.
 Design must follow Constraints and Analysis when they are present. If
 Design conflicts with either, fix Design or return to clarification.
 
-Design must describe only the current intended end state for the
-governed increment. Do not describe repository states created during
-the current increment, including staged refactor states or
+Design must describe only the current intended end state. Do not
+describe repository states created during the current work, including
+staged refactor states or
 transformations such as `S1 -> S2`. If such an intermediate state
 must be preserved, use a new task or subtask where that state can
 appear as **Research**. Implementation detours that do not belong in

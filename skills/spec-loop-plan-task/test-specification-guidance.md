@@ -107,7 +107,7 @@ are unambiguous.
 
 Names are part of the design for current or implementation-ready work.
 If exact verification containers or case anchors cannot be named for
-the current increment, the task is not fully designed yet.
+the current work, the task is not fully designed yet.
 
 A listed verification anchor may be newly added, modified, or
 intentionally reused unchanged. Do not mark that status unless the
