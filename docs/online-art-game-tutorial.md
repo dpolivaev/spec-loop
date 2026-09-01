@@ -206,8 +206,9 @@ can name the needed behavior when the assistant drifts:
   remain, clarification runs first. This activates the
   [spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/) skill.
 - Say `implement it` only after you approve the plan, when you want the
-  approved increment implemented, verified, reflected in the task file,
-  and moved to `review`. This activates the
+  approved task — or the approved current subtask when subtasks are in
+  use — implemented, verified, reflected in the task file, and moved
+  to `review`. This activates the
   [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) skill.
 
 ## Possible misalignment
@@ -223,7 +224,7 @@ it before continuing:
 - it starts implementation before explicit approval,
 - unrelated changes are mixed into one subtask,
 - the work breakdown contains a non-releasable implementation
-  increment and you did not explicitly opt out,
+  subtask and you did not explicitly opt out,
 - implementation changes are made without verification evidence,
 - it misses required supporting updates such as glossary, task status,
   or ignore rules,
@@ -292,8 +293,8 @@ Also update the active project instructions file (for example
   or development direction into a backlog, multi-task work breakdown, or
   set of future task files;
 - the user will introduce each work item in a later prompt; and
-- for each later prompt, plan only the current work item unless the user
-  explicitly asks to plan a backlog.
+- for each later prompt, plan only the requested work item unless the
+  user explicitly asks to plan a backlog.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -556,7 +557,8 @@ subtask. Create only:
 - the overall task,
 - subtasks containing Scope and Motivation each,
 - implementation subtasks that are releasable vertical gameplay
-  slices and can each reach `review` with the tests for that slice,
+  slices and can each reach `review` with the tests needed for that
+  subtask,
 - no separate scaffolding, model, logic, or UI subtasks,
 - no non-releasable subtasks unless I explicitly opt out.
 ```
@@ -590,13 +592,13 @@ subtask. Create only:
   other layer-based breakdown, reject it.
 - Correct it immediately: ask for releasable vertical gameplay slices
   where each implementation subtask delivers reviewable behavior and
-  the tests for that slice.
+  the tests needed for that subtask.
 - A good correction prompt is:
 
 ```text
 Reject this breakdown. Re-plan the task into releasable vertical gameplay
 slices. Each implementation subtask must deliver reviewable behavior
-with the needed tests for that slice. Do not create
+with the tests needed for that subtask. Do not create
 scaffolding/model/logic/UI or otherwise non-releasable subtasks unless
 I explicitly opt out.
 ```
@@ -622,8 +624,8 @@ I explicitly opt out.
 - Only the current subtask is fully designed, and implementation
   still waits for explicit approval.
 - Task file: the current subtask includes fully specified class
-  diagrams for the slice; future subtasks remain lightweight.
-- Test specification: every required check for the slice is listed
+  diagrams for that subtask; future subtasks remain lightweight.
+- Test specification: every required check for that subtask is listed
   explicitly.
 - The current subtask Design and Constraints, when present,
   use glossary terms from `glossary.adoc` consistently and make any
@@ -633,21 +635,21 @@ I explicitly opt out.
 
 - Reject the subtask if the class diagrams are partial or vague.
 - The diagrams should already show the review-relevant classes,
-  relationships, methods, and fields for this slice.
+  relationships, methods, and fields for this subtask.
 - Reject the subtask if the Test specification leaves checks implicit,
   vague, or missing.
 - The Test specification should list every required automated test
   anchor, automated check anchor, and any remaining manual check for
-  this slice.
+  this subtask.
 - A good correction prompt is:
 
 ```text
 Do not implement this subtask yet. Complete the design first.
-Make the class diagrams fully specified for this slice: include the
+Make the class diagrams fully specified for this subtask: include the
 review-relevant classes, relationships, methods, and fields.
 Make the Test specification explicit: list every required automated
 test anchor, automated check anchor, and any remaining manual check for
-this slice.
+this subtask.
 ```
 
 ### You see (during subtask implementation)
@@ -841,8 +843,8 @@ Each step follows the Spec Loop workflow model:
 - In large implementation steps, ask the assistant to decompose work into
   smaller implementation subtasks before detailed design and execution
   approval.
-- Every implementation subtask is a releasable increment and includes
-  both implementation and testing.
+- Every implementation subtask is releasable and includes both
+  implementation and testing.
 - When subtasks exist, require separate status updates per subtask
   (each subtask is tracked independently).
 - Review-ready implementation moves the current task or subtask to

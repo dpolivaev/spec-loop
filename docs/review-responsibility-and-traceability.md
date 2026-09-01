@@ -22,9 +22,9 @@ Together, they enforce at minimum:
   design, test expectations, and execution status when the task-file
   path is in use, plus `Implementation notes` when meaningful
   implementation-time history must remain visible.
-* Releasable implementation increments by default: each implementation
-  task or subtask must be independently implementable, verifiable,
-  reviewable, and acceptable unless the user explicitly opts out.
+* Implementation tasks and subtasks are releasable by default: each
+  one must be independently implementable, verifiable, reviewable,
+  and acceptable unless the user explicitly opts out.
 * A canonical fileless chat task as the source of truth on the
   fileless path, allowing an initial task with only the established
   sections, then section-only chat updates and full-task recovery
@@ -67,14 +67,19 @@ that approved plan.
 ## Task files as present truth
 
 A task file is not a general historical narrative. It is the
-stabilized description of what must be true now to implement the next
-increment correctly.
+stabilized description of what must be true now to implement the
+active task correctly, or the current subtask plus needed task-level
+context when subtasks are used.
 
 Practically:
 
 * Research records observations and verified facts only.
-* Constraints record binding limits for the increment when needed.
-* Design records the approved target design intent for the increment.
+* Constraints record binding limits for the active task, or for the
+  current subtask plus needed task-level context when subtasks are
+  used.
+* Design records the approved target design intent for the active
+  task, or for the current subtask plus needed task-level context
+  when subtasks are used.
 * Test specification defines the verification that must exist for completion.
 * Implementation notes, when present, keep only the bounded
   implementation-time decision trail that later review needs.
@@ -224,7 +229,7 @@ explicitly instructed to commit.
 
 Completion is not inferred from working code.
 
-An increment is considered done only when:
+A task or subtask is considered done only when:
 
 * the approved design is fully implemented,
 * the test specification is implemented and passing,

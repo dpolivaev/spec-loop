@@ -221,7 +221,9 @@ The audit changed 17 of 72 component judgments across nine artifacts relative to
 
 #### Decomposition
 
-The clearest repeated pattern was vertical decomposition combined with a design and test specification for the current slice:
+The clearest repeated pattern was vertical decomposition combined with
+a design and test specification for the current task, or for the
+current subtask when subtasks were used:
 
 - the two backlog conditions and the non-calisthenics incremental condition each achieved 13 full and 1 partial check with no missing applicable category;
 - the broad single-task calisthenics condition had more dependency cycles and weaker browser evidence than the incremental/backlog leaders; and
@@ -262,7 +264,7 @@ The six Spec Loop conditions separate into two checkpoint structures:
 
 The totals are dominated by cached input: long sessions repeatedly re-read an expanding context. They measure interaction and context-processing volume, not mostly new prompt text. Cross-harness cost figures also depend on recorded usage semantics and model prices, so they are supporting evidence rather than a quality-normalized efficiency measure.
 
-Within these Spec Loop conditions, the two up-front single-task runs recorded the lowest totals. Every incremental-subtask or backlog run recorded a higher total, from 18.29M to 36.09M. This pattern is consistent with more checkpoints repeatedly processing an expanding context. The groups also differ in prompts, constraints, and user steering, so the comparison is descriptive rather than causal. Extra checkpoints allowed later design decisions to use evidence from earlier implemented slices; the data therefore show a review/cost trade-off, not that one planning form is universally more efficient.
+Within these Spec Loop conditions, the two up-front single-task runs recorded the lowest totals. Every incremental-subtask or backlog run recorded a higher total, from 18.29M to 36.09M. This pattern is consistent with more checkpoints repeatedly processing an expanding context. The groups also differ in prompts, constraints, and user steering, so the comparison is descriptive rather than causal. Extra checkpoints allowed later design decisions to use evidence from earlier completed subtasks or backlog tasks; the data therefore show a review/cost trade-off, not that one planning form is universally more efficient.
 
 ## 5. Secondary overall synthesis and ranking
 

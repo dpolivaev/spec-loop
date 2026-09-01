@@ -203,8 +203,9 @@ can name the needed behavior when the assistant drifts:
   remain, clarification runs first. This activates the
   [spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/) skill.
 - Say `implement it` only after you approve the plan, when you want the
-  approved increment implemented, verified, reflected in the task file,
-  and moved to `review`. This activates the
+  approved task — or the approved current subtask when subtasks are in
+  use — implemented, verified, reflected in the task file, and moved
+  to `review`. This activates the
   [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) skill.
 
 ## Possible misalignment
@@ -220,7 +221,7 @@ it before continuing:
 - it starts implementation before explicit approval,
 - unrelated changes are mixed into one subtask,
 - the work breakdown contains a non-releasable implementation
-  increment and you did not explicitly opt out,
+  subtask and you did not explicitly opt out,
 - implementation changes are made without verification evidence,
 - it misses required supporting updates such as glossary, task status,
   or ignore rules,
@@ -286,8 +287,8 @@ Also update the active project instructions file (for example
   or development direction into a backlog, multi-task work breakdown, or
   set of future task files;
 - the user will introduce each work item in a later prompt; and
-- for each later prompt, plan only the current work item unless the user
-  explicitly asks to plan a backlog.
+- for each later prompt, plan only the requested work item unless the
+  user explicitly asks to plan a backlog.
 
 This is documentation-only work, we do not need a task file for it.
 ```
@@ -415,7 +416,8 @@ subtask. Create only:
 - the overall task,
 - subtasks containing Scope and Motivation each,
 - implementation subtasks that are releasable vertical gameplay
-  slices and can each reach `review` with the tests for that slice,
+  slices and can each reach `review` with the tests needed for that
+  subtask,
 - no separate model-only or logic-only subtasks,
 - no non-releasable subtasks unless I explicitly opt out.
 ```
@@ -449,13 +451,13 @@ subtask. Create only:
   objects` and `implement evaluation rules`, reject it.
 - Correct it immediately: ask for releasable vertical gameplay slices
   where each implementation subtask delivers reviewable behavior and
-  the tests for that slice.
+  the tests needed for that subtask.
 - A good correction prompt is:
 
 ```text
 Reject this breakdown. Re-plan the task into releasable vertical gameplay
 slices. Each implementation subtask must deliver reviewable behavior
-with the needed tests for that slice. Do not create model-only,
+with the tests needed for that subtask. Do not create model-only,
 logic-only, or otherwise non-releasable subtasks unless I explicitly
 opt out.
 ```
@@ -483,9 +485,9 @@ opt out.
   still waits for explicit approval.
 - Task file:
   - the current subtask includes fully specified class diagrams for
-    the slice,
+    that subtask,
   - the current subtask Test specification lists every required check
-    explicitly,
+    for that subtask explicitly,
   - future subtasks remain lightweight,
   - the current subtask uses glossary terms consistently.
 
@@ -493,21 +495,21 @@ opt out.
 
 - Reject the subtask if class diagrams are partial or vague.
 - The diagrams should already show the review-relevant classes,
-  relationships, methods, and fields for this slice.
+  relationships, methods, and fields for this subtask.
 - Reject the subtask if the Test specification leaves checks implicit,
   vague, or missing.
 - The Test specification should list every required automated test
   anchor, automated check anchor, and any remaining manual check for
-  this slice.
+  this subtask.
 - A good correction prompt is:
 
 ```text
 Do not implement this subtask yet. Complete the design first.
-Make the class diagrams fully specified for this slice: include the
+Make the class diagrams fully specified for this subtask: include the
 review-relevant classes, relationships, methods, and fields.
 Make the Test specification explicit: list every required automated
 test anchor, automated check anchor, and any remaining manual check for
-this slice.
+this subtask.
 ```
 
 ### You see (during subtask implementation)
@@ -652,9 +654,9 @@ order:
 
 ### You see (during subtask implementation)
 
-- Game-start behavior lands first as a reviewable increment.
+- Game-start behavior lands first as a reviewable subtask.
 - Guess submission, history updates, and win/lose behavior land in the
-  next reviewable increment.
+  next reviewable subtask.
 - Each implemented current subtask moves to `review` when local
   verification is complete.
 - When the last remaining unfinished subtask reaches `review` and no
@@ -817,9 +819,9 @@ slices in this order:
 
 - Make the CLI feature follow the approved ADR instead of
   rediscovering parsing choices inside the task.
-- Keep the implementation slices behavior-oriented instead of
+- Keep the implementation subtasks behavior-oriented instead of
   splitting parsing from visible CLI behavior.
-- Keep runtime behavior and docs in ordered increments.
+- Keep runtime behavior and docs in ordered subtasks.
 
 ### You see (plan)
 
@@ -854,7 +856,7 @@ slices in this order:
 - A playable CLI flow from a local `--wordlist` path with
   deterministic feedback lands first.
 - URL `--wordlist`, `--attempts`, and `--cli` behavior land in the
-  next accepted increment.
+  next accepted subtask.
 - README usage and distribution packaging docs are delivered as later
   accepted subtasks.
 - Verification evidence includes exact manual and automated
@@ -871,7 +873,7 @@ slices in this order:
 ### You learned (this step)
 
 - Even when one feature spans runtime behavior and documentation,
-  keep the implementation increments behavior-oriented and separately
+  keep the implementation subtasks behavior-oriented and separately
   accepted.
 
 ## Step 10: UI Clarification and Minimal Swing UI
@@ -968,7 +970,7 @@ Swing.
   remains, the overall task moves to `review` too.
 - Minimal Swing UI launch behavior lands first.
 - UI input validation and correct CLI/headless fallback behavior land
-  in the next accepted increment.
+  in the next accepted subtask.
 - README UI usage updates land as the final subtask.
 - Verification evidence includes exact commands for UI launch, CLI
   override, and headless fallback behavior.
@@ -986,7 +988,7 @@ Swing.
 - Leaving the UI approach open can force the missing framework decision
   into a clarification round before task design.
 - Once the UI direction is chosen, keep the interface work in
-  reviewable vertical increments rather than shared-preparation
+  reviewable vertical-slice subtasks rather than shared-preparation
   subtasks.
 
 ## You learned
@@ -1003,8 +1005,8 @@ Each step follows the Spec Loop workflow model:
 - You approve or reject implementation explicitly.
 - Only after explicit approval should the assistant make implementation changes.
 - Tasks should include automated tests for their deliverables.
-- Every implementation subtask is a releasable increment and includes
-  both implementation and testing.
+- Every implementation subtask is releasable and includes both
+  implementation and testing.
 - When subtasks exist, require separate status updates per subtask.
 - Review-ready implementation moves the current task or subtask to
   `review`; after you accept it, you may ask the assistant to move it

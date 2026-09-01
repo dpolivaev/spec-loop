@@ -21,7 +21,7 @@
 
 - [OpenSpec](https://github.com/Fission-AI/OpenSpec) — repo-local change/spec system with proposal, specs, design, tasks, verify, and archive flow.
 - [Superpowers](https://github.com/obra/superpowers) — full coding-agent methodology with design gates, task planning, TDD, subagents, worktrees, and closeout workflows.
-- [Spec Loop](https://github.com/dpolivaev/spec-loop) — governed task/increment workflow with explicit research, context-building, approval, and implementation control.
+- [Spec Loop](https://github.com/dpolivaev/spec-loop) — governed task/subtask workflow with explicit research, context-building, approval, and implementation control.
 - [grill-with-docs](https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs) — clarification skill with strong domain-language pressure, contradiction surfacing, and optional inline glossary/ADR capture.
 - [agent-skills](https://github.com/addyosmani/agent-skills) — broad engineering workflow library with strong anti-rationalization and verification patterns.
 
@@ -47,8 +47,8 @@ specific task that is already chosen.
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | Analyze a broad problem area before choosing implementation work | ★★★★★ | ★★★★★ | ★★ | ★★ | ★★★★ |
-| Clarify a specific requested task or increment before implementation | ★★★ | ★★★★ | ★★★★★ | ★★★★★ | ★★★★ |
-| Split a broad initiative or change into smaller deliverable slices/tasks | ★★★★ | ★★★★★ | ★★★★ | ★ | ★★★★ |
+| Clarify a specific requested task or change before implementation | ★★★ | ★★★★ | ★★★★★ | ★★★★★ | ★★★★ |
+| Split a broad initiative or change into smaller deliverable tasks or parts | ★★★★ | ★★★★★ | ★★★★ | ★ | ★★★★ |
 
 ## 2. Shared language and durable decision context
 
@@ -68,19 +68,19 @@ specific task that is already chosen.
 | Make current and target structure/behavior explicit with reviewable diagrams | ★ | ★ | ★★★★★ | ★ | ★ |
 | Maintain brownfield deltas between current and proposed behavior | ★★★★★ | - | ★ | - | - |
 
-## 4. Make the next increment implementation-ready
+## 4. Make the next implementation step ready
 
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
 |:---|:---:|:---:|:---:|:---:|:---:|
-| Make one implementation increment ready by explicitly capturing research, constraints, design, and test expectations | ★★★ | ★★★★ | ★★★★★ | ★★★ | ★★★ |
+| Make one implementation step ready by explicitly capturing research, constraints, design, and test expectations | ★★★ | ★★★★ | ★★★★★ | ★★★ | ★★★ |
 | Break approved work into actionable implementation tasks/checklists | ★★★★★ | ★★★★★ | ★★★★ | ★ | ★★★★ |
-| Support lightweight planning for one simple increment without opening a full formal artifact workflow | ★★ | ★ | ★★★★★ | ★★ | ★ |
+| Support lightweight planning for one simple implementation step without opening a full formal artifact workflow | ★★ | ★ | ★★★★★ | ★★ | ★ |
 
 ## 5. Govern implementation while coding
 
 | Action / purpose | OpenSpec | Superpowers | Spec Loop | grill-with-docs | agent-skills |
 |:---|:---:|:---:|:---:|:---:|:---:|
-| Keep implementation constrained to the approved increment/task/change during coding | ★★★★ | ★★★★★ | ★★★★★ | - | ★★★ |
+| Keep implementation constrained to the approved task or change during coding | ★★★★ | ★★★★★ | ★★★★★ | - | ★★★ |
 | Use explicit guardrails against rationalization and unjustified confidence during execution | ★ | ★★★★★ | ★★★ | ★ | ★★★★★ |
 | Treat test-first development as a required implementation method | ★ | ★★★★★ | ★★ | - | ★ |
 | Require root-cause analysis before fixes when debugging | - | ★★★★★ | - | - | - |
@@ -111,15 +111,15 @@ materials, not measurements or benchmark results.
 - **Before coding** = the cost of clarification, specification,
   design, planning artifacts, and approvals before implementation
   starts.
-- **Coding and testing** = the cost once the increment is already
-  chosen: coding mechanics, testing method, review loops, and
+- **Coding and testing** = the cost once the next task or change is
+  already chosen: coding mechanics, testing method, review loops, and
   implementation-time clarification.
 - **Maintaining authoritative written artifacts as the system grows**
   = the cost of keeping specs, glossary files, ADRs, or similar
   written artifacts believable as the codebase and behavior evolve.
-- **Repeated research and re-alignment per increment** = the cost of
-  re-checking current truth and rebuilding enough local context for
-  each new increment.
+- **Repeated research and re-alignment per implementation step** = the
+  cost of re-checking current truth and rebuilding enough local
+  context for each new task or change.
 
 ### Analysis
 
@@ -128,19 +128,19 @@ materials, not measurements or benchmark results.
 | Before coding | High | Very high | Medium | Low | High |
 | Coding and testing | High | Very high | Medium | High | High |
 | Maintaining authoritative written artifacts as the system grows | High | Medium | Low | Medium | Medium |
-| Repeated research and re-alignment per increment | Medium | Medium | Medium | High | Medium |
+| Repeated research and re-alignment per implementation step | Medium | Medium | Medium | High | Medium |
 
 - **Spec Loop:** low artifact-maintenance cost because it keeps the
   authoritative written state relatively narrow, but medium repeated
   re-alignment cost because it re-checks current system truth through
-  codebase research for each increment.
+  codebase research for each task or change.
 - **OpenSpec:** higher artifact-maintenance cost because it asks a
   larger enduring spec set to stay believable as the system grows.
 - **Superpowers:** very high upfront and execution-phase cost because
   it wants design, planning, TDD, and strong execution controls before
   and during coding.
 - **grill-with-docs:** low upfront cost mainly because it covers the
-  clarification/shared-language slice, not the whole end-to-end
+  clarification/shared-language portion, not the whole end-to-end
   workflow, but repeated re-alignment cost is higher because it does
   not carry the later implementation workflow itself.
 - **agent-skills:** scored here as a representative spec -> plan ->

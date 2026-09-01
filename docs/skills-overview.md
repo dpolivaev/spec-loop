@@ -31,9 +31,10 @@ This repository currently ships these skills:
 2. **[spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/)**
    - the file-based work breakdown skill used after planning-form
      selection chooses `task file with subtasks` or `multiple task
-     files / backlog items`; it enforces independently acceptable
-     items and releasable implementation increments by default, and
-     requires explicit user opt-out for non-releasable items;
+     files / backlog items`; it enforces standalone tasks and
+     subtasks, with implementation tasks and subtasks releasable by
+     default, and requires explicit user opt-out for non-releasable
+     implementation work;
    - defined by
      [skills/spec-loop-plan-work-breakdown/SKILL.md](../skills/spec-loop-plan-work-breakdown/SKILL.md).
 
@@ -110,8 +111,9 @@ This repository currently ships these skills:
      files / backlog items`.
    * **[skills/spec-loop-plan-work-breakdown/SKILL.md](../skills/spec-loop-plan-work-breakdown/SKILL.md)**
      defines file-based work breakdown after subtask or multi-task
-     planning forms are selected, including the default
-     releasable-increment rule.
+     planning forms are selected, including the default rule that
+     implementation tasks and subtasks must be releasable unless the
+     user explicitly opts out.
    * **[skills/spec-loop-clarify-task/SKILL.md](../skills/spec-loop-clarify-task/SKILL.md)**
      defines how Spec Loop clarifies underspecified task creation,
      task updates, design updates, and ADR decisions during planning

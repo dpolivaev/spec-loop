@@ -43,7 +43,7 @@ The primary remote now points `main` and `analysis-2026-06-30` to replacement co
 
 ### A.3 Other excluded attempts
 
-- **Standard GSD attempt:** cancelled after completing an account/deposit slice and beginning later planning. Withdrawals, transfer/rollback, persistence, filters, and printing were incomplete. Available parent-plus-subagent usage was roughly 76M tokens, mostly cached input. It is discussed only as process evidence, not ranked.
+- **Standard GSD attempt:** cancelled after completing an account/deposit step and beginning later planning. Withdrawals, transfer/rollback, persistence, filters, and printing were incomplete. Available parent-plus-subagent usage was roughly 76M tokens, mostly cached input. It is discussed only as process evidence, not ranked.
 - **GSD Pi quick result (`gsdpi-quick`):** completed code existed, but no comparable generated design, discussion, or steering checkpoint was retained. It is excluded because the study evaluates workflow review artifacts as well as code.
 - **Earlier abandoned or superseded Spec Loop sessions:** not treated as completed solution units. Where an aborted session affected interpretation, it is described as a threat rather than counted as another solution.
 

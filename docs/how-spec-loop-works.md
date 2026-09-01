@@ -11,8 +11,8 @@ Spec Loop follows this workflow:
 - **break down work** - after planning-form selection chooses subtasks
   or multiple task files / backlog items,
   [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/) governs
-  file-based decomposition and enforces releasable implementation
-  increments by default.
+  file-based decomposition and requires implementation tasks and
+  subtasks to be releasable by default.
 - **approve** - you approve either a fileless task in chat or a
   task-file plan; on the task-file path,
   [spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/) prepares the task for
@@ -75,9 +75,9 @@ Spec Loop also defines explicit work phases: PLAN, EXECUTION, and
 DONE. Transitions to EXECUTION and DONE require explicit user approval.
 
 During planning, active task artifacts may use `Scenario` and task
-`Glossary` sections to ground behavior and extract increment-local
-terms. On the task-file path this means task files. On the chat-only
-path this means the canonical chat-only task kept in chat.
+`Glossary` sections to ground behavior and extract task-local terms.
+On the task-file path this means task files. On the chat-only path
+this means the canonical chat-only task kept in chat.
 
 When a project maintains a glossary described by the shared task
 semantics
@@ -96,20 +96,23 @@ behavior, design contracts, and verification aligned.
 
 Spec Loop is designed to work with existing codebases at scale.
 Before detailed design or implementation, the model captures relevant
-knowledge in Research for the current increment: existing behavior,
-constraints, APIs, interfaces, and established code practices.
+knowledge in Research for the current task, or for the current
+subtask plus needed task-level context when subtasks are in use:
+existing behavior, constraints, APIs, interfaces, and established code
+practices.
 
 It follows the classic research–plan–implement approach, broken down
-into small, incremental sub-tasks.
+into small, reviewable tasks and subtasks.
 
-The research is explicitly scoped to the next increment. It captures only
-what is required to implement that increment correctly, and is intentionally
-partial. The result is a bounded, reviewable understanding whose size
-remains manageable.
+The research is explicitly scoped to the current task, or to the
+current subtask plus needed task-level context when subtasks are in
+use. It captures only what is required to implement that scope
+correctly, and is intentionally partial. The result is a bounded,
+reviewable understanding whose size remains manageable.
 
 For large codebases, task `Glossary` sections and the project glossary
 are especially useful because they keep domain terms stable across
-many increments, files, and subsystems.
+many tasks, subtasks, files, and subsystems.
 
 Because the scope can be kept reasonably small and the research is
 written down, you can verify that the model examined the right parts of
@@ -129,10 +132,11 @@ the same job or the same lifetime.
   alignment becomes unsafe, they are re-emitted or promoted to task
   files.
 - Task files are short-lived working artifacts for the next concrete
-  slice of work when the task-file path is in use. They exist to drive
-  research, review, implementation, and testing of that slice. When
-  the current increment needs them, they may also include `Scenario`
-  and task `Glossary` sections.
+  task on the task-file path, or for the current subtask plus needed
+  task-level context when a task uses subtasks. They exist to drive
+  research, review, implementation, and testing for that scope. When
+  needed, they may also include `Scenario` and task `Glossary`
+  sections.
 - ADRs capture durable decisions and the reasons behind them.
 - Documentation-only work may stand on its own when no implementation
   change is involved and no project rule requires a task file.

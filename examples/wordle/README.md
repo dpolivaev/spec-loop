@@ -3,13 +3,13 @@
 This directory contains a worked example used to demonstrate Spec Loop
 end-to-end. The **primary documentation of the example is its commit history**,
 which shows how specifications, design, implementation, and tests evolve
-incrementally.
+step by step.
 
 ## Purpose
 
 The goal of this example is to demonstrate:
 
-* incremental specification (design per step),
+* step-local specification (design per step),
 * explicit research and design,
 * test-driven completion,
 * disciplined use of the model under explicit review boundaries.
@@ -34,7 +34,7 @@ specification and testing.
 
 ## Why Wordle is a suitable demonstration task
 
-Wordle is small enough to build in clear, reviewable increments, but rich enough
+Wordle is small enough to build in clear, reviewable steps, but rich enough
 to require explicit rules, research into edge cases, and verification through
 tests. This makes it a good fit for demonstrating step-local specifications
 and approval gates.
