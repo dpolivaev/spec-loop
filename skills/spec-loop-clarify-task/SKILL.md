@@ -196,13 +196,17 @@ materials, choose one outcome:
   choice can be made.
 
 A surfaced decision batch must contain at most 6 proposed decisions.
-For each proposed decision, use:
+Number decisions consecutively inside the batch, starting at 1 and not
+exceeding 6. For each proposed decision, use:
 
-Decision: <brief answer> (<N>%)
+Decision 1: <brief answer> (<N>%)
 Reason: <brief reason>
 
-Keep both lines brief. The `Decision:` line must contain the proposed
-answer.
+Decision 2: <brief answer> (<N>%)
+Reason: <brief reason>
+
+Keep both lines brief. Each `Decision <N>:` line must contain the
+proposed answer.
 
 After a decision batch, ask the user to confirm, question, or disagree,
 then wait.
@@ -215,6 +219,7 @@ Options:
 - A. <brief option summary>
 - B. <brief option summary>
 - C. <brief option summary>
+
 Reason: <brief reason>
 
 For clarification questions:
@@ -223,6 +228,7 @@ For clarification questions:
 - option summaries and explanations belong only in `Options:` and
   `Reason:`;
 - option lines use `- <LETTER>. <summary>`;
+- leave an empty line between the last option line and `Reason:`;
 - do not put confidence values on individual option lines;
 - for yes/no choices, use option summaries such as `A. yes` and
   `B. no`.
@@ -231,7 +237,8 @@ Before sending any response containing `Options:`, validate that:
 - the `Recommended option:` line has the exact shape
   `Recommended option: <LETTER> (<N>%)`;
 - the recommended letter exists in the option list;
-- option lines have the exact shape `- <LETTER>. <summary>`; and
+- option lines have the exact shape `- <LETTER>. <summary>`;
+- there is an empty line between the last option line and `Reason:`; and
 - no option line contains a confidence value.
 
 When the user cleanly confirms a presented option, acknowledge it
@@ -302,6 +309,7 @@ Options:
 - B. Normal effort: propose clear choices; ask when uncertain or preference-sensitive.
 - C. High effort: ask when uncertain or when the decision is among the most important; use batches for straightforward choices.
 - D. Exhaustive: ask about every important unsettled decision; record settled decisions directly.
+
 Reason: <brief reason for the recommended option>
 You can change this later by saying "ask fewer questions", "ask more questions", or "ask about every important decision".
 
@@ -348,9 +356,9 @@ needed context, evidence, explanation, or status before it. After a
 decision batch, only the short confirm/question/disagree prompt may
 follow.
 
-Use `Decision:` batches only for agent-proposed decisions that need
-user check or agreement. Do not use them for choices already made by
-the user or settled by existing materials.
+Use numbered `Decision <N>:` entries only for agent-proposed
+decisions that need user check or agreement. Do not use them for
+choices already made by the user or settled by existing materials.
 
 ## Where to store the result
 
