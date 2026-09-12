@@ -135,6 +135,8 @@ PlantUML writing hints:
   - The repository already separates application wiring from domain
     logic.
   - No CLI-specific adapter classes exist yet.
+  - The living-project-document list is in `README.md`; no listed
+    document is affected, and no project glossary exists.
 
 - **Analysis:**
   - CLI mode stays a thin adapter so that gameplay logic remains
@@ -241,6 +243,8 @@ PlantUML writing hints:
   - `--cli`
   - `--wordlist`
   - `--attempts`
+
+  - **Living project documents:** None affected
 
 - **Test specification:**
   - **Automated tests:**

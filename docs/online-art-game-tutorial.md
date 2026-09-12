@@ -226,8 +226,8 @@ it before continuing:
 - the work breakdown contains a non-releasable implementation
   subtask and you did not explicitly opt out,
 - implementation changes are made without verification evidence,
-- it misses required supporting updates such as glossary, task status,
-  or ignore rules,
+- it omits a required living-project-document action from planning or
+  review, or misses a required task status update or ignore rule,
 - the assistant's final response does not match the actual changed
   files,
 - a task or subtask is moved to `done` without explicit user
@@ -272,7 +272,9 @@ Include the project brief verbatim in the README under a "Project Brief"
 section. The README must preserve the AIC attribution requirements from
 the brief and clearly describe the two parts (museum overview page +
 Progressive Timeline game), the core rules, and the leaderboard sorting.
-Keep the README succinct and practical.
+Keep the README succinct and practical. Include a "Living Project
+Documents" section that lists `glossary.adoc` and the active project
+instructions file; the README itself is implicit.
 
 Also create `glossary.adoc` from the approved project brief. It should
 define the canonical project terms needed for this tutorial and keep
@@ -311,6 +313,8 @@ This is documentation-only work, we do not need a task file for it.
 - `README.md`:
   - Exists and captures the project brief requirements.
   - Includes the project brief text under "Project Brief".
+  - Lists `glossary.adoc` and the active project instructions file as
+    living project documents.
 - `glossary.adoc`:
   - Exists and defines the canonical project terms from the brief.
   - Uses wording consistent with the brief so later tasks can reuse it.
@@ -492,6 +496,10 @@ Record one final choice with rationale. In the same ADR:
 - explain why the chosen stack and design style are a good fit for
   clean, reviewable design
 - mark persistence as out of scope and deferred to the leaderboard work
+
+Update the "Living Project Documents" section in `README.md` to include
+`architecture-decisions/` as the collection for project-wide
+architecture decision records.
 ```
 
 ### Your intent
@@ -510,6 +518,8 @@ Record one final choice with rationale. In the same ADR:
 - If the assistant starts an unstructured discussion or drafts the ADR
   before criteria/options are clarified, stop it and say:
   `Use the spec-loop-clarify-task skill for the criteria discussion before writing the ADR.`
+- `README.md` lists `architecture-decisions/` as the collection for
+  project-wide architecture decision records.
 - ADR:
   - Compares realistic stack options for the initial game implementation and records the chosen one with rationale.
   - Records the required core design style, not only the implementation stack.
@@ -527,8 +537,10 @@ Record one final choice with rationale. In the same ADR:
 
 ### After completion (commit)
 
-- After you accept the ADR as done: ask the assistant to `commit the ADR`.
-  This step is ADR-only and does not involve moving anything to `done`.
+- After you accept the ADR as done: ask the assistant to
+  `commit the ADR and README changes`.
+  This standalone documentation step does not involve moving anything
+  to `done`.
 
 ### You learned (this step)
 
@@ -840,6 +852,8 @@ Each step follows the Spec Loop workflow model:
 - Only after explicit approval should the assistant make implementation changes
   (code/tests/config/runtime assets).
 - Tasks should include automated tests for their deliverables.
+- A task plans actions for affected living project documents with the
+  implementation and includes the completed actions in review.
 - In large implementation steps, ask the assistant to decompose work into
   smaller implementation subtasks before detailed design and execution
   approval.
@@ -876,8 +890,9 @@ How to think while running this tutorial:
   and (after you accept it) you can ask the assistant to commit it as part
   of a step when appropriate (for example: `.gitignore`,
   documentation typo fixes).
-- Chat is for coordination and approvals; task files and ADRs are
-  the long-lived specification files.
+- Chat is for coordination and approvals; task files govern their
+  current increments, while the README, glossary, and current ADRs
+  preserve current project truth.
 - Trust the installed skills to choose the workflow, and correct the
   assistant explicitly if it skips planning, over-designs future work, or
   misses a required file update.

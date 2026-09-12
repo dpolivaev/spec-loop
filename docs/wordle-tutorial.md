@@ -223,8 +223,8 @@ it before continuing:
 - the work breakdown contains a non-releasable implementation
   subtask and you did not explicitly opt out,
 - implementation changes are made without verification evidence,
-- it misses required supporting updates such as glossary, task status,
-  or ignore rules,
+- it omits a required living-project-document action from planning or
+  review, or misses a required task status update or ignore rule,
 - the assistant's final response does not match the actual changed
   files,
 - a task or subtask is moved to `done` without explicit user
@@ -266,7 +266,9 @@ Please write `README.md` for this repository based on the project brief.
 Include the project brief verbatim in the README under a "Project Brief"
 section. The README must clearly describe the game rules, the later CLI
 and UI paths, and the word-list expectations. Keep the README succinct
-and practical.
+and practical. Include a "Living Project Documents" section that lists
+`glossary.adoc` and the active project instructions file; the README
+itself is implicit.
 
 Also create `glossary.adoc` from the approved project brief. It should
 define the canonical project terms needed for this tutorial and keep
@@ -304,7 +306,9 @@ This is documentation-only work, we do not need a task file for it.
 
 - `README.md`:
   - exists and captures the project brief requirements,
-  - includes the project brief text under `Project Brief`.
+  - includes the project brief text under `Project Brief`,
+  - lists `glossary.adoc` and the active project instructions file as
+    living project documents.
 - `glossary.adoc`:
   - exists and defines the canonical project terms from the brief,
   - uses wording consistent with the brief so later tasks can reuse it.
@@ -584,8 +588,9 @@ Then ask the assistant to `implement it`.
 - Tests prove header parsing, normalization, and selection behavior.
 - The task file is in `review`.
 - If the loader work stabilizes a shared term such as `Word List` and
-  the glossary was not updated, ask the assistant to add that missing glossary
-  update before accepting the step.
+  the task did not plan and complete the required glossary action, do
+  not accept the step. Ask the assistant to return to PLAN and correct
+  the omission.
 
 ### After acceptance (move to done / commit)
 
@@ -754,6 +759,10 @@ The ADR should explain why the chosen approach is a good fit for a
 small project now and for modest CLI growth later.
 Also record the practical verification command for checking the CLI help
 or basic option parsing path.
+
+Update the "Living Project Documents" section in `README.md` to include
+`architecture-decisions/` as the collection for project-wide
+architecture decision records.
 ```
 
 ### Your intent
@@ -772,6 +781,8 @@ or basic option parsing path.
 - If the assistant starts an unstructured discussion or drafts the ADR
   before criteria/options are clarified, stop it and say:
   `Use the spec-loop-clarify-task skill for the criteria discussion before writing the ADR.`
+- `README.md` lists `architecture-decisions/` as the collection for
+  project-wide architecture decision records.
 - ADR:
   - compares realistic options,
   - records the chosen parsing approach with rationale,
@@ -782,7 +793,7 @@ or basic option parsing path.
 ### After completion (commit)
 
 - After you accept the ADR as done:
-  ask the assistant to `commit the ADR change`.
+  ask the assistant to `commit the ADR and README changes`.
 
 ### You learned (this step)
 
@@ -1005,6 +1016,8 @@ Each step follows the Spec Loop workflow model:
 - You approve or reject implementation explicitly.
 - Only after explicit approval should the assistant make implementation changes.
 - Tasks should include automated tests for their deliverables.
+- A task plans actions for affected living project documents with the
+  implementation and includes the completed actions in review.
 - Every implementation subtask is releasable and includes both
   implementation and testing.
 - When subtasks exist, require separate status updates per subtask.
@@ -1033,8 +1046,9 @@ Learning outcomes:
 How to think while running this tutorial:
 
 - Keep the process meaningful, not bureaucratic.
-- Chat is for coordination and approvals; task files and the glossary
-  are the long-lived specification files.
+- Chat is for coordination and approvals; task files govern their
+  current increments, while the README, glossary, and current ADRs
+  preserve current project truth.
 - Trust the installed skills to choose the workflow, and correct the
   assistant explicitly if it skips planning, over-designs future work, or
   misses a required file update.

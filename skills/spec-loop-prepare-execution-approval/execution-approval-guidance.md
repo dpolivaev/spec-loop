@@ -194,6 +194,18 @@ increment:
 - the work kind is clear: implementation work or investigation work;
 - `Research`, `Scenario` and `Glossary` when required, `Design`, and
   `Test specification` are complete enough for the current increment;
+- for implementation work:
+  - Research records the living-project-document list, if one exists,
+    the relevant entries or collections checked, and any existing
+    project glossary;
+  - any question required by the project-list rules is resolved;
+  - Design lists each required action under `Living project documents`
+    with its path or paths, role, action, and required facts or
+    contract; and
+  - `None affected` is allowed only when Research explicitly confirms
+    that no existing project glossary or other relevant listed living
+    project document is affected. Block approval if the Design item or
+    a required action is missing;
 - for implementation work, when an `Implementation notes` section is
   present, it describes the current implementation state and is clearly
   distinguishable from the current target-state plan; approval is
@@ -214,6 +226,11 @@ increment:
   one;
 - approval is blocked if coined terms remain where existing canonical
   terms or ordinary prose would preserve review-relevant precision;
+- approval is blocked when a proposed glossary term is semantically
+  identical to an existing abstraction unless the task reuses its
+  current name or Design includes a refactoring proposal naming the
+  current abstraction, target term, and intended rename or
+  restructuring;
 - approval is blocked if any new review-relevant term introduced in
   `Design`, diagrams, or `Test specification` remains unclassified or
   ambiguously classified;

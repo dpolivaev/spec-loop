@@ -226,35 +226,34 @@ Task `Glossary` is delta-only relative to the current shared
 domain-language source. Do not redefine unchanged terms from that
 source.
 
+Test semantic identity, not spelling, before adding a term. If an
+existing abstraction represents the same concept, either use its
+current name or include an explicit refactoring proposal in Design.
+The proposal must name the current abstraction, the target term, and
+the intended rename or restructuring. Do not add competing glossary
+language while leaving the same abstraction unchanged.
+
 For glossary sources, extension points, and candidate-term selection
 rules, follow
 [scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md).
 
 #### Project glossary policy
 
-Follow [SKILL.md](SKILL.md) for glossary-file recognition and
-glossary-format routing.
+Follow [SKILL.md](SKILL.md) for the living-project-document list,
+project glossary handling, and glossary-format routing.
 
-Current shared domain-language source:
-- if a project glossary exists, use it;
-- otherwise use `Research` plus the existing codebase until a project
-  glossary is created.
+An existing project glossary is shared task language above individual
+tasks and code. Without one, use `Research` plus the existing codebase.
+Do not add helper names, implementation details, framework terms, or
+terms not needed to explain project rules, behavior, or subsystem
+boundaries.
 
-Once a project glossary exists, use it as shared task language above
-individual tasks and code. Do not add helper names, implementation
-details, framework terms, or terms not needed to explain project
-rules, behavior, or subsystem boundaries.
+If this task creates, updates, or supersedes the project glossary:
+- list that action under `Living project documents` in Design; and
+- complete it during EXECUTION.
 
-If glossary work is required for the current task:
-- reflect it in the task plan; and
-- during EXECUTION, follow [SKILL.md](SKILL.md) rules for project glossary
-  creation or update.
-
-If a project glossary update would change approved meaning rather
-than record it, return to PLAN first.
-
-If the task plan is missing required glossary work, return to PLAN,
-update the task, get approval, and continue.
+If a project glossary action would change approved meaning rather than
+record it, return to PLAN first.
 
 ### Constraints
 
@@ -339,6 +338,54 @@ approach instead of a target system change.
 
 For implementation work, Design is the implementation contract. It
 must be reviewable and implementation-ready before execution approval.
+
+#### Living project documents
+
+Follow [SKILL.md](SKILL.md) for the project list, the glossary
+exception, and what counts as a living project document.
+
+For an implementation task without subtasks, or for the current
+implementation subtask:
+- Research records the living-project-document list, if one exists,
+  the relevant entries or collections checked, and any existing project
+  glossary; and
+- Design uses one of the exact nested forms below.
+
+When no living project document is affected:
+
+```md
+- **Design:**
+  - **Living project documents:** None affected
+```
+
+When document actions are required:
+
+```md
+- **Design:**
+  - **Living project documents:**
+    - `<path or paths>` — `<role>`; `<action>`:
+      `<facts or contract the document must reflect>`.
+```
+
+`<action>` is `update`, `create`, or `supersede`.
+
+Use `None affected` only when Research explicitly confirms that no
+existing project glossary or other relevant listed living project
+document is affected.
+Creating or maintaining the project list is itself a document action
+when required. Complete all listed actions in the approved increment
+and include them in review.
+
+Follow each document's format and lifecycle rules. Use
+[spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) for ADRs and
+[spec-loop-write-glossary/SKILL.md](../spec-loop-write-glossary/SKILL.md) for
+Spec Loop AsciiDoc project glossaries.
+
+On the task-file path, place `Living project documents` after Design
+diagrams and related text.
+
+If required living-project-document work is missing from the plan,
+return to PLAN, update the task, get approval, and continue.
 
 For externally observable or supported-contract behavior, including UI
 behavior, Design must specify the task-relevant boundary contract:

@@ -5,8 +5,8 @@ tasks and the code. Its purpose is to keep Scenario, Design, tests,
 code symbols, and commit text aligned on the same terms across the
 project.
 
-This file defines how to create and update a project glossary in
-AsciiDoc.
+This file defines how to create, update, or supersede a project
+glossary in AsciiDoc.
 
 This document is plain repository guidance and does not depend on any
 specific tool.
@@ -15,10 +15,12 @@ specific tool.
 
 Use this guidance when:
 
-- a project glossary already exists and must be updated,
-- the user asks to create a glossary,
-- a task changes, clarifies, or implements shared domain terms within
-  approved scope.
+- creating an AsciiDoc project glossary;
+- updating an AsciiDoc project glossary;
+- superseding an AsciiDoc project glossary with an AsciiDoc successor;
+  or
+- recording shared domain terms changed, clarified, or implemented by
+  a task.
 
 ## Relationship to Spec Loop
 
@@ -28,16 +30,25 @@ Use this guidance when:
 - If `glossary.adoc` exists, it defines the project's shared domain
   language above individual tasks. It is a project-level supporting
   artifact, not a replacement for task files.
-- Plan required glossary updates during PLAN.
-- Perform planned glossary updates during EXECUTION.
-- If glossary work would change approved meaning rather than record it,
-  return to PLAN first and update the task file before continuing.
+- For task-based work, plan required glossary actions during PLAN and
+  perform them during EXECUTION.
+- If task-based glossary work would change approved meaning rather than
+  record it, return to PLAN first and update the active task.
 
 ## File Naming
 
 - Use `glossary.adoc` as the glossary file name.
 - Keep the glossary near the relevant project root unless the user asks
   for a different location.
+
+## Supersession
+
+Supersession requires an approved replacement, not just a second file.
+The successor becomes canonical. The predecessor may remain as
+historical material under project lifecycle rules.
+
+Use this guidance when the successor is AsciiDoc. For a non-AsciiDoc
+successor, follow its project format instead.
 
 ## Reference Structures
 
@@ -128,6 +139,18 @@ Use this shape:
   meaning.
 
 ## Term Selection Rules
+
+Determine identity by meaning, not spelling. Before adding a term,
+check whether an existing abstraction represents the same concept. If
+it does, either use that abstraction's current name or require an
+approved refactoring proposal that names:
+
+- the current abstraction;
+- the target term; and
+- the intended rename or restructuring.
+
+Do not add competing glossary language while leaving the same
+abstraction unchanged.
 
 Include by default:
 

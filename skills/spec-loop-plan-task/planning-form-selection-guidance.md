@@ -16,9 +16,9 @@ behavior change and is still acceptable if merged even if the later
 feature item is never implemented.
 
 Start with all forms. Remove a form only when the reason is obvious:
-- `taskless`: keep for standalone documentation and ADR-only work. For
-  implementation, keep only when the work is trivial and the User
-  explicitly agrees. For investigation, keep only when no separate
+- `taskless`: keep for standalone documentation, including ADR-only
+  work. For implementation, keep only when the work is trivial and the
+  User explicitly agrees. For investigation, keep only when no separate
   planning, tracking, or reviewable output is needed.
 - `chat-only task`: leave in only when task state can safely stay in
   chat. Avoid it when task state needs durability, research or design

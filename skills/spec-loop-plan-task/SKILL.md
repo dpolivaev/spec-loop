@@ -200,39 +200,76 @@ If ADR work is part of a larger implementation change, keep it in
 that task and use [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) during
 EXECUTION.
 
-## Glossary policy
+## Living project documents
 
-Default glossary policy:
-- glossary use is opted in;
-- project or session instructions may opt out;
-- when the project uses the Spec Loop AsciiDoc glossary format, use
-  [spec-loop-write-glossary/SKILL.md](../spec-loop-write-glossary/SKILL.md);
-- otherwise follow the project's glossary format.
+Living project documents hold current project truth: specifications,
+API contracts, architecture and operations documents, project
+glossaries, and current ADRs. Historical, archived, and incidental
+documents do not count.
+
+Spec Loop does not require a project to have living project documents.
+If none exist, do not create documents or a `Living Project Documents`
+list solely to satisfy this policy.
+
+### Project list
+
+Projects with multiple living project documents should keep one list
+named `Living Project Documents` as their entry point:
+- use an existing list in a loaded project instruction file; otherwise
+  use the root `README.md`;
+- let entries identify individual documents or collections by path,
+  role, and scope;
+- treat the file containing the list as implicit; and
+- if more than one list exists, ask which one should be used.
+
+Use the list as the starting point for relevant Research. If current
+work names or depends on an unlisted living document, ask how to handle
+it. If a project has multiple living documents but no list, ask the
+User before creating the default list in the root `README.md`.
+
+A project glossary is a living project document. Search for
+`glossary.adoc` and `glossary.md` even when no list exists. If an
+existing glossary is omitted from a list that covers other living
+documents, ask how to handle it. If the glossary is the only living
+document, use it and update it when affected without requiring a list.
+
+A living-project-document action does not by itself require a task.
+Include required actions in the same increment as the implementation.
+For task-based work, record the check in Research and list the actions
+in Design. For `taskless` implementation or standalone documentation
+work, complete the actions together and list each action and resulting
+file or files in the final response, or state `None affected`. See
+[common-task-guidance.md](common-task-guidance.md) for task content.
+
+## Glossary policy
 
 Recognize `glossary.adoc` and `glossary.md` as project glossary files.
 If both exist, ask which one is canonical before updating either.
 
-Once a project glossary exists, treat it as the shared domain-language
-source above individual tasks and code. If no explicit project
-glossary exists, use `Research` plus the existing codebase as the
-source of current domain language until a project glossary is created.
+For a Spec Loop AsciiDoc glossary, use
+[spec-loop-write-glossary/SKILL.md](../spec-loop-write-glossary/SKILL.md).
+For other glossary formats, follow the project's format.
 
-The presence or absence of a project glossary does not by itself
-determine whether a task or subtask needs task `Glossary`. It
-determines only which shared domain-language source task vocabulary
-and task-glossary deltas are compared against.
+An existing project glossary is the shared domain-language source above
+individual tasks and code. Without one, use `Research` plus the existing
+codebase until a project glossary is created.
+
+The presence or absence of a project glossary does not determine
+whether a task or subtask needs task `Glossary`. It determines only
+which shared source task vocabulary and task-glossary deltas are
+compared against.
 
 When approved work changes, clarifies, or implements shared domain
-terms, include any required glossary work in the plan. Perform project
-glossary file edits during EXECUTION. If no project glossary
-exists, create one during EXECUTION only when the task plan,
-project instructions, or the User requires project-level glossary
-work.
+terms, include a task Glossary when needed. If an existing project
+glossary is affected, plan its update in the same increment. Treat
+project glossary creation, update, or supersession as
+living-project-document work. Create or supersede a project glossary
+only when approved by the User, project instructions, or the task plan.
 
 When a task or subtask needs `Scenario` or `Glossary`, read
 [scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md) and follow it. Task
-`Glossary` sections are planning artifacts; project glossary file
-edits happen only during EXECUTION.
+`Glossary` sections are planning artifacts; project glossary actions
+happen only during EXECUTION.
 
 ## Related skills
 

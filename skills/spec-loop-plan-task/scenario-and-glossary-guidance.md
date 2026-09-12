@@ -7,7 +7,7 @@ that the current subtask does when the task uses subtasks.
 This file covers only the extra drafting guidance. It does not repeat:
 - when these sections are required;
 - task section order; or
-- project glossary update timing.
+- project glossary action timing.
 
 ## Working method
 
@@ -29,8 +29,8 @@ This file covers only the extra drafting guidance. It does not repeat:
   structure there.
 - Reuse unchanged current domain terms instead of inventing local
   synonyms.
-- If no explicit project glossary exists, use `Research` plus the
-  existing codebase as the source of current domain terms.
+- If no project glossary exists, use `Research` plus the existing
+  codebase as the source of current domain terms.
 
 ## Glossary drafting
 
@@ -40,6 +40,9 @@ This file covers only the extra drafting guidance. It does not repeat:
   - the project glossary, when one exists; otherwise
   - `Research` plus the existing codebase.
 - Do not redefine unchanged terms from that source.
+- Apply the semantic-identity and explicit-refactoring-proposal rule
+  from [common-task-guidance.md](common-task-guidance.md) before keeping
+  a new term. A spelling difference does not establish a new concept.
 - Reuse existing canonical terms from the shared domain-language
   source whenever they fit. If none fits, use ordinary prose unless
   the design introduces a new review-relevant design element that
@@ -121,6 +124,8 @@ Consistent reuse of approved terms across the shared glossary source,
 behavior, design contracts, and verification aligned.
 
 - `Scenario` and `Glossary` use one vocabulary, not parallel synonyms.
+- No glossary term competes with an existing abstraction name without
+  the required explicit refactoring proposal.
 - `Glossary` terms are grounded in the reviewed behavior or contract.
 - `Design` and `Test specification` reuse approved terms.
 - `Design` does not redefine `Glossary` terms.

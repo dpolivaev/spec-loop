@@ -5,7 +5,7 @@ Spec Loop follows this workflow:
   questions before or during planning.
 - **plan** - the [spec-loop-plan-task](../skills/spec-loop-plan-task/) bundle governs plan-first
   work, including planning-form selection, the fileless planning path
-  in chat, the task-file path when needed, ADR and documentation
+  in chat, the task-file path when needed, ADR and other documentation
   routing, Scenario and task Glossary triggers, and the gate before
   execution.
 - **break down work** - after planning-form selection chooses subtasks
@@ -20,7 +20,8 @@ Spec Loop follows this workflow:
 - **execute implementation** - after execution approval for
   implementation work on either planning path,
   [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs
-  implementation-time work.
+  code, tests, and approved actions for affected living project
+  documents.
 - **execute investigation** - after execution approval for
   investigation work, the active task records reviewed output in
   `Findings` and is presented or moved to `review`.
@@ -81,18 +82,21 @@ this means the canonical chat-only task kept in chat.
 
 When a project maintains a glossary described by the shared task
 semantics
-[project glossary section](../skills/spec-loop-plan-task/common-task-guidance.md#project-glossary),
+[project glossary section](../skills/spec-loop-plan-task/common-task-guidance.md#project-glossary-policy),
 that project glossary defines the shared domain language above
 individual tasks and the code. It keeps design documents, tests, code
 symbols, and commit text aligned on the same terms across the whole
 project.
 
-If no explicit project glossary exists yet, current domain language
-comes from `Research` plus the existing codebase until one is created.
+If no project glossary exists yet, current domain language comes from
+`Research` plus the existing codebase until one is created.
 
 Consistent reuse of approved terms across the shared glossary source,
 `Scenario`, `Design`, and `Test specification` keeps meaning,
-behavior, design contracts, and verification aligned.
+behavior, design contracts, and verification aligned. When a proposed
+term means the same thing as an existing abstraction, Spec Loop reuses
+the current name or requires an explicit proposal to rename or
+restructure that abstraction.
 
 Spec Loop is designed to work with existing codebases at scale.
 Before detailed design or implementation, the model captures relevant
@@ -137,23 +141,37 @@ the same job or the same lifetime.
   research, review, implementation, and testing for that scope. When
   needed, they may also include `Scenario` and task `Glossary`
   sections.
-- ADRs capture durable decisions and the reasons behind them.
+- Living project documents capture current truth that should remain
+  useful after the task is accepted. They include specifications, API
+  contracts, architecture and operations documents, current ADRs, and
+  project glossaries. ADRs preserve durable decisions and their
+  reasons. A project glossary preserves shared language across tasks,
+  design, tests, code symbols, and commits.
 - Documentation-only work may stand on its own when no implementation
   change is involved and no project rule requires a task file.
-- A project glossary captures stable shared language across tasks,
-  design, tests, code symbols, and commits.
 - Review files reconstruct and assess already-implemented work from
   trusted pull requests, merge requests, or commit ranges. When needed,
   they may also produce GitHub-friendly Mermaid variants for sharing
   the review.
-- Living project documents capture current truth that should remain
-  useful after the task is accepted, such as technical shape,
-  operations, or other stable project knowledge.
+
+Spec Loop does not require a project to have living project documents.
+When none are otherwise needed, the project does not need to create
+documents or a list for workflow compliance.
+
+Projects with multiple living project documents keep one list named
+`Living Project Documents` in an existing project instruction file or, by
+default, the root README. The file containing the list is implicit. The
+list may identify individual documents or collections such as an arc42
+document set. If an existing project glossary is omitted while other
+living documents are listed, the model asks how to handle it. When a
+project glossary is the only living document, it remains in use without
+requiring a list. Planned document actions update, create, or supersede;
+ADR actions follow the ADR lifecycle.
 
 Historical task files do not need to be kept mutually consistent
 across time. The active task artifact, however, should stay aligned
-with the glossary, living project documents, and implemented code for
-its scope.
+with applicable living project documents and implemented code for its
+scope.
 
 If a project maintains a technical design document, its purpose is to
 describe the current technical shape, stable boundaries, and important

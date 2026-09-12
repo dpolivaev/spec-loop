@@ -62,6 +62,9 @@ task, not an inventory of observed tests.
 
   - The current client sends two similar request variants, which
     forces the server to branch on partially duplicated payloads.
+  - The living-project-document list in `README.md` includes
+    `docs/export-api.md` as the current Export API payload contract. No
+    project glossary exists.
 
 - **Design:**
 
@@ -97,6 +100,9 @@ task, not an inventory of observed tests.
   | `format` | request field | target export format |
   | `/api/export` | endpoint | normalized export request target |
 
+  - **Living project documents:**
+    - `docs/export-api.md` — Export API contract; `update`: normalized
+      payload fields and removal of the legacy request shape.
 
 - **Test specification:**
   - **Automated tests:**

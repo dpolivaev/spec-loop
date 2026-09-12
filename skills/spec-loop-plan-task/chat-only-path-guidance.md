@@ -197,11 +197,15 @@ plus the normal test run.
   Relevant files: the read-only viewer render path and its tests.
 
 - **Research:**
-  The viewer can return lines wider than the terminal width.
+  The viewer can return lines wider than the terminal width. The
+  living-project-document list is in `README.md`; no listed document
+  is affected, and no project glossary exists.
 
 - **Design:**
   Truncate rendered lines to the available width before display and
   add one regression test.
+
+  - **Living project documents:** None affected
 
 - **Test specification:**
   - **Automated tests:**
@@ -223,6 +227,8 @@ Task changes:
 - **Design:**
   Truncate only the rendered line width. Do not change content before
   color formatting. Add one regression test.
+
+  - **Living project documents:** None affected
 ```
 
 ## Example: non-trivial follow-up after a reviewed task-file task

@@ -37,6 +37,8 @@ task, not an inventory of observed tests.
   - The current design stores all work through the visible session
     registry, so even one-off background execution would be persisted
     and listed unless a second boundary is introduced.
+  - The living-project-document list is in `README.md`; no listed
+    document is affected, and no project glossary exists.
 
 - **Design:**
 
@@ -88,6 +90,7 @@ task, not an inventory of observed tests.
   - `visibleSessions.json`
   - `backgroundExportEnabled`
 
+  - **Living project documents:** None affected
 
 - **Test specification:**
   - **Automated tests:**

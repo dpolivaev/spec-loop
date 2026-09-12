@@ -29,9 +29,12 @@ Together, they enforce at minimum:
   fileless path, allowing an initial task with only the established
   sections, then section-only chat updates and full-task recovery
   re-emission when reconstruction confidence drops.
-* ADRs and documentation may stand as their own planning artifacts
+* ADRs and other documentation may stand as their own planning artifacts
   when they are the requested work and no task-file rule overrides
   that.
+* One living-project-document list in project instructions or the root
+  README when the project has multiple living documents, with entries
+  for individual documents or collections.
 * A default approval gate before any code, test, or configuration
   changes, with either fileless-task approval on the fileless path or
   task-file approval on the task-file path.
@@ -41,9 +44,12 @@ Together, they enforce at minimum:
   fileless path it governs canonical chat-task maintenance,
   implementation-time clarification, recovery or promotion, and
   readiness reporting.
-* Implementation completeness: design, constraints when present, and
-  test specification implemented unless tests are explicitly waived,
-  plus any required implementation-note traceability captured.
+* Implementation completeness: the approved design is implemented,
+  applicable constraints are met, required living-project-document
+  actions are complete, and the test specification is implemented
+  unless tests are waived.
+* Review includes each completed living-project-document action, its
+  resulting files, and required implementation-note traceability.
 * Traceability discipline: identifiers in commit messages, and
   status/folder consistency where task files are in use.
 
@@ -234,6 +240,8 @@ A task or subtask is considered done only when:
 * the approved design is fully implemented,
 * the test specification is implemented and passing,
 * any deviations are documented in the active task artifact,
+* required living-project-document actions are complete and included in
+  review,
 * the user explicitly approves the transition to **done**.
 
 This applies equally to human-written and model-written code.

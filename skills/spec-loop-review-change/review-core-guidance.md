@@ -184,8 +184,9 @@ Use these criteria where they help:
 
 - `Intent`: what the changed code appears to be trying to accomplish,
   based on the final diff and existing contracts;
-- `Implementation`: whether the changed code realizes that behavior
-  coherently, completely, and safely, including wiring and integration;
+- `Implementation`: whether the change realizes that behavior
+  coherently, completely, and safely, including wiring, integration,
+  and required actions for affected living project documents;
 - `Verification`: whether tests, examples, schema output, generated
   output, or other evidence cover the changed behavior strongly enough;
   and

@@ -19,11 +19,36 @@ either blocks change or gets ignored.
 Spec Loop avoids both: write the next small spec, review it, then implement it
 with tests. Keep the spec local to the next step. Repeat until done.
 
+Living project documents record current specifications, contracts,
+architecture, operations, shared language, and decisions. Spec Loop plans
+changes to affected documents with the code, completes them in the same
+increment, and includes them in review. Spec Loop does not require a project
+to create living documents when none are otherwise needed.
+
+Projects with multiple living documents keep one list in an existing
+project instruction file or, by default, the root README. The list may point
+to individual documents or collections such as an arc42 document set. An
+existing project glossary remains active when it is the only living document.
+
 When work is too large for one task, Spec Loop can use subtasks or
 multiple task files / backlog items. Implementation tasks and subtasks
 should be releasable unless the user explicitly opts out.
 
 Spec Loop is a framework of reusable skills.
+
+## Living Project Documents
+
+This section is this project's authoritative living-project-document list.
+`README.md` is implicit because it contains the list.
+
+- [`AGENTS.md`](AGENTS.md) — project instructions; repository-wide agent
+  rules.
+- [`skills/`](skills/) — normative skill collection; Spec Loop workflow,
+  format, and lifecycle behavior.
+- [`docs/`](docs/) — user-facing documentation collection; explanations,
+  governance, comparisons, studies, and tutorials.
+- [`site/`](site/) — documentation publication collection; site navigation
+  and build behavior.
 
 ## Getting Started
 

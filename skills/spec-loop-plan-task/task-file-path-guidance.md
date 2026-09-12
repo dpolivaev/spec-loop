@@ -396,6 +396,8 @@ using them.
 - If any non-diagram points in **Research** or **Design** are not tied
   to a specific diagram or diagram group, place them at the end of
   that section, after the last diagram-related block.
+- Place `Living project documents` after all **Design** diagrams and
+  related text.
 - Omit diagrams only when the task is confined to a single method or
   a trivially local change with no meaningful flow or interaction.
 - No test classes, fixtures, or test-only helpers in diagrams.

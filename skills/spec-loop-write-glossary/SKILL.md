@@ -1,23 +1,27 @@
 ---
 name: spec-loop-write-glossary
 description: >-
-  Create or update a project glossary in the Spec Loop AsciiDoc glossary
-  format. Use when the user, project instructions, or `spec-loop-plan-task`
-  already requires project glossary work. This skill is mandatory for
-  AsciiDoc project glossaries unless the user explicitly opts out for
-  the current project or session.
+  Create, update, or supersede a project glossary in the Spec Loop
+  AsciiDoc glossary format. Use when the user, project instructions, or
+  `spec-loop-plan-task` already requires project glossary work. This
+  skill is mandatory for AsciiDoc project glossaries unless the user
+  explicitly opts out for the current project or session.
 ---
 
-Use for creating or updating a project glossary in the Spec Loop
-AsciiDoc format.
+Use for creating, updating, or superseding a project glossary in the
+Spec Loop AsciiDoc format.
 
 This skill is mandatory for AsciiDoc project glossaries unless the
 user explicitly opts out for the current project or session.
 
-Before doing that work, read [glossary-format.md](glossary-format.md)
-and apply it.
+Before doing that work:
+- read [glossary-format.md](glossary-format.md) and apply it; and
+- apply project instructions such as `AGENTS.md`.
 
-Read and apply project instructions such as `AGENTS.md` when present.
+Before adding a term, test semantic identity against existing
+abstractions. Reuse the current abstraction name or require the
+explicit, approved refactoring proposal described in
+[glossary-format.md](glossary-format.md).
 
 This skill defines the project glossary format. It does not decide
 whether project glossary work is required.

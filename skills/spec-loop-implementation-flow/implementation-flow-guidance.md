@@ -33,6 +33,8 @@ Implementation-start checklist:
 - do not make implementation edits outside the approved design
   boundary unless this guidance or the User explicitly authorizes
   them;
+- complete every `Living project documents` action in the current
+  increment;
 - if `Implementation notes` are later needed, use only the fixed
   subheadings `Interpretations`, `Tradeoffs`, and `Open questions`;
 - do not write `Implementation notes` as a chronological worklog,
@@ -80,10 +82,12 @@ approved contract or needs redesign.
 Return to PLAN when the change affects any of the following:
 - approved scope;
 - business behavior or scenario contract;
+- `Living project documents` omits a required action, or an approved
+  document action or its required content must change;
 - approved `Glossary` meaning, shared domain terms, or glossary usage
   constraints;
-- when no explicit project glossary exists, current domain language
-  derived from `Research` and the existing codebase;
+- when no project glossary exists, current domain language derived
+  from `Research` and the existing codebase;
 - constraints or non-goals;
 - new or renamed planned top-level production types;
 - new or renamed planned structural elements with externally relevant
@@ -177,11 +181,16 @@ container, or case split/merge structure. If any of those changes,
 treat it as a Test specification or Design change and use the
 applicable implementation-time route.
 
-When project glossary file work happens during implementation, use it
-only to record approved task `Glossary` meaning. If no explicit
-project glossary exists and the approved task does not require
-creating one, keep glossary meaning in the task artifact rather than
-inventing a project glossary edit.
+Complete each `Living project documents` action in Design. Follow the
+document's format and lifecycle rules. For ADRs, use
+[spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md). For project glossary
+actions, preserve existing shared meaning and apply only approved task
+`Glossary` changes.
+
+Complete planned changes to the project's living-project-document list.
+
+If a required action is absent from Design, or an action would change
+approved task meaning, use route C before continuing.
 
 Record the authorized change as the path companion requires.
 
@@ -278,10 +287,14 @@ Before reaching `review`, ensure that:
 - if `Scenario` or `Glossary` is present, implementation and
   verification still match their approved behavior and domain-language
   contract;
+- every `Living project documents` action, including project-list and
+  project glossary work, is complete and its document matches the
+  approved task;
 - if task `Glossary` is present, `Design`, `Test specification`, and
   any project glossary file changes still match its approved terms;
-- required glossary work is complete, including any planned project
-  glossary creation or update;
+- when presenting work for User review, list each completed
+  living-project-document action and its resulting file or files, or
+  state `None affected`;
 - the mandatory `Implementation notes` check has been performed;
 - when relevant `Implementation notes` content exists,
   `Implementation notes` is recorded;

@@ -66,8 +66,8 @@ This repository currently ships these skills:
      [skills/spec-loop-implementation-flow/task-file-path-guidance.md](../skills/spec-loop-implementation-flow/task-file-path-guidance.md).
 
 6. **[spec-loop-write-glossary](../skills/spec-loop-write-glossary/)**
-   - the Spec Loop AsciiDoc project-glossary-format skill, required
-     when the project uses that glossary format;
+   - the skill for creating, updating, or superseding a Spec Loop
+     AsciiDoc project glossary;
    - defined by
      [skills/spec-loop-write-glossary/glossary-format.md](../skills/spec-loop-write-glossary/glossary-format.md).
 
@@ -86,8 +86,9 @@ This repository currently ships these skills:
 9. **[spec-loop-review-change](../skills/spec-loop-review-change/)**
    - the optional existing-change review skill for pull requests,
      merge requests, branch diffs, commit ranges, local branch changes,
-     or agent-written code the user wants reviewed; it supports both
-     high-level assessment and file-wise walk-through modes;
+     or agent-written code the user wants reviewed; high-level
+     assessments check required living-project-document actions, and
+     file-wise walk-through mode explains the changed files;
    - defined by
      [skills/spec-loop-review-change/SKILL.md](../skills/spec-loop-review-change/SKILL.md),
      [skills/spec-loop-review-change/review-core-guidance.md](../skills/spec-loop-review-change/review-core-guidance.md),
@@ -120,12 +121,13 @@ This repository currently ships these skills:
      or ADR writing.
    * **[skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**
      defines the shared no-subtask task form, section semantics,
-     readiness rules, formatting, testing policy, and project-glossary
-     policy used on both planning paths.
+     readiness rules, formatting, testing policy, and task rules for
+     the project list and for project glossaries and other living
+     project documents.
    * **[skills/spec-loop-plan-task/scenario-and-glossary-guidance.md](../skills/spec-loop-plan-task/scenario-and-glossary-guidance.md)**
-     defines how task `Scenario` and task `Glossary` are drafted,
-     how existing domain terms are reused, and how task visual
-     glossaries should be written.
+     defines how task `Scenario` and task `Glossary` are drafted, how
+     terms are checked for semantic identity with existing
+     abstractions, and how task visual glossaries should be written.
    * **[skills/spec-loop-plan-task/chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)**
      defines the chat-only-path planning mechanics: initial canonical
      chat-task expression, section-only updates, recovery
@@ -187,9 +189,10 @@ This repository currently ships these skills:
 
 6. Project glossary conventions.
 
-   * See the common task guidance project glossary section above for
-     the project-glossary policy and the fallback to `Research` plus
-     the existing codebase when no project glossary exists yet.
+   * See the planning skill's project-list and project-glossary
+     sections, plus the common task guidance, for glossary planning and
+     the fallback to `Research` plus the existing codebase when no
+     project glossary exists.
    * **[skills/spec-loop-write-glossary/glossary-format.md](../skills/spec-loop-write-glossary/glossary-format.md)**
      is the shared project-glossary-format guidance file.
    * Companion glossary examples live under
