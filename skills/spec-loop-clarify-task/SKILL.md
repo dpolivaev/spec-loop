@@ -183,6 +183,8 @@ reduces ambiguity. Do not add confidence or model reasoning. Use:
 
 Recorded: <choice>.
 
+After recording a decision, continue immediately.
+
 Do not put settled decisions in a decision batch.
 
 ### 5. Propose decisions or ask questions for unsettled decisions
@@ -241,8 +243,7 @@ Before sending any response containing `Options:`, validate that:
 - there is an empty line between the last option line and `Reason:`; and
 - no option line contains a confidence value.
 
-When the user cleanly confirms a presented option, acknowledge it
-briefly, such as `B recorded` or `yes recorded`.
+When the user cleanly confirms a presented option, record it.
 
 ### Decision screening outcomes
 
