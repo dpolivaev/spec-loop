@@ -346,14 +346,14 @@
      id="line16"
      style="fill:none;stroke:#000000;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round" />
   <text
-     x="39.681641"
+     x="32.279297"
      y="511.02072"
      class="sans sec-b"
      id="text67"
      style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Tasks</text>
   <g
      id="g10"
-     transform="translate(0,-179.89723)">
+     transform="translate(0,-193.22117)">
     <text
        x="34.656704"
        y="622.62048"
@@ -684,34 +684,36 @@
      id="path15"
      d="m 630.97861,536.86701 a 20.606606,14.912676 0 0 1 21.71262,9.55136 20.606606,14.912676 0 0 1 -7.60706,17.54489" />
   <text
-     x="42.594357"
-     y="643.87701"
+     x="226.68411"
+     y="572.41223"
      class="sans sec-b"
      id="text3"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Project Glossary</text>
-  <text
-     x="260.86487"
-     y="588.11493"
-     class="sans sec-b"
-     id="text4"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">ADR</text>
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000"><tspan
+       id="tspan18"
+       x="226.68411"
+       y="572.41223">readme,</tspan><tspan
+       x="226.68411"
+       y="602.41223"
+       id="tspan22">glossary,</tspan><tspan
+       x="226.68411"
+       y="632.41223"
+       id="tspan19">ADR,</tspan><tspan
+       x="226.68411"
+       y="662.41223"
+       id="tspan21">ARC42...</tspan></text>
   <path
      style="fill:none;stroke:#000000;stroke-width:3.77951;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
-     d="m 85.799822,544.23391 v 48.99324"
+     d="m 63.091797,544.23391 v 48.99324"
      id="path20" />
-  <path
-     style="fill:none;stroke:#000000;stroke-width:3.77952;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
-     d="m 120.97443,536.0677 109.7118,38.22438"
-     id="path21" />
   <text
-     x="226.12213"
-     y="511.18546"
+     x="31.927734"
+     y="635.94604"
      class="sans sec-b"
      id="text25"
      style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Subtasks</text>
   <path
      style="fill:none;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
-     d="m 194.73779,502.63597 h -42.7408"
+     d="M 195.2248,502.63598 H 134.55224"
      id="path26" />
   <text
      x="39.060547"
@@ -737,4 +739,20 @@
      class="sans sec-b"
      id="text10"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:-1px;fill:#000000">Reasons</text>
+  <text
+     x="271.4888"
+     y="508.21506"
+     class="sans sec-b"
+     id="text15"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:'Arial, Helvetica, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:-1px;text-anchor:middle;fill:#000000"><tspan
+       id="tspan15"
+       x="271.4888"
+       y="508.21506">Living</tspan><tspan
+       id="tspan16"
+       x="270.9888"
+       y="538.21509">documentation:</tspan></text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:3.77951;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;marker-start:url(#ConcaveTriangle_Fnone_S-000000_reversed);marker-end:url(#ConcaveTriangle_Fnone_S-000000);paint-order:markers stroke fill"
+     d="m 197.23532,558.71725 -70.85043,43.04057"
+     id="path22" />
 </svg>
