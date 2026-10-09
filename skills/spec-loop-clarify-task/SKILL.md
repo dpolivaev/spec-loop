@@ -383,11 +383,11 @@ exists. Do not store open questions, confidence values, or transient
 notes.
 
 In task artifacts:
-- keep final resolved decisions in `Analysis`;
-- follow [spec-loop-plan-task/common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md);
-- place `Analysis` immediately after `Research`; and
-- record final clarification decisions using the `Analysis` bullet
-  rules from that guidance.
+- put final decisions in `Analysis` for task files or `Scope` for
+  chat-only tasks;
+- follow [spec-loop-plan-task/common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md)
+  for section order and the rules for each kind of information; and
+- use its `Analysis` bullet rules for final decisions in either form.
 
 In ADRs, do not force all final resolved content into `Analysis`.
 Follow [spec-loop-write-adr/adr-format.md](../spec-loop-write-adr/adr-format.md):

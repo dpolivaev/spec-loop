@@ -4,21 +4,20 @@ This file applies only on the chat-only planning path of
 `spec-loop-plan-task`.
 
 Read [common-task-guidance.md](common-task-guidance.md) first.
-That file defines the shared no-subtask main-task form, section
-semantics, readiness rules for the current task,
-context-preservation rules, formatting conventions, and the required
-use of detailed Test specification guidance for both planning paths.
+It defines the full format for task files without subtasks, section
+meanings, requirements before work can start, how to keep task context,
+formatting rules, and Test specification requirements for both forms.
 
 This file covers only chat-only path mechanics: the chat task,
 `Task changes:`, reconstruction, later-work handling, and promotion
 to the task-file path.
 
-User-facing term: `chat-only`. This is still a full structured Spec
-Loop task kept in chat, not taskless work.
-
-If the User asks for the sectioned task format, emit the full task in
-chat. Do not replace a requested chat-only task with an informal
-short plan.
+`chat-only` means a planned task kept in chat, not taskless work. It
+still needs a plan and explicit execution approval. Use the three-section
+format below; the full format belongs to task files. If the User asks
+for the full format in chat, ask whether to use the three-section
+chat-only format or a task file. Do not choose for the User or silently
+create a file.
 
 The task-file prose-wrap requirement does not apply to chat-only work
 unless the User asks for wrapped lines. Keep chat-only tasks readable
@@ -40,42 +39,52 @@ through compaction or context loss, promote the work to the task-file
 path before continuing. After that, do not return to the chat-only
 path for that task.
 
+### Compact chat-only format
+
+Keep the shared title and identifier. Use exactly these three sections,
+in this order:
+- `Scope`: what is included and excluded, constraints, relevant facts,
+  and final decisions with their reasons when useful;
+- `Design`: enough detail to implement the agreed change, or the approach
+  for an investigation;
+- `Test specification`: the required verification anchors, or `N/A`
+  only when the shared testing rules allow it.
+
+All other required planning information goes in Scope. Follow the shared
+rules for each kind of information. Do not add task sections or copy the
+full template into subsections inside Scope. Approval and verification
+rules still apply, as do the rules for switching to a task file.
+
 ### Canonical chat-only task
 
-- emit an initial canonical chat-only task in chat using the shared
-  no-subtask main-task form and no diagrams;
+- emit an initial canonical task in the compact format with no subtasks
+  or diagrams;
 - always include the title line and exactly one identifier;
-- include any established sections in the exact shared order; on
-  this initial emission, omitted sections mean not yet
-  established;
+- include all required content; otherwise the task is not execution-ready;
 - treat that emitted task as the current canonical chat-only task;
-- keep only one active chat-only task in the conversation at a
-  time;
-- when the current task reaches execution readiness, present the
-  canonical chat-only task to the User as a request to approve both
-  continuing on the chat-only planning path without creating a task
-  file and moving from PLAN into EXECUTION from that chat-only task.
+- keep only one active chat-only task at a time;
+- ask permission to use chat-only under the form-selection rules; do not
+  ask again if the User has already given that permission;
+- when the task is ready, ask for explicit PLAN-to-EXECUTION approval.
+  Permission to keep the task in chat does not approve execution.
 
-When proposing the chat-only path to a User who may not already be
-informed, include one brief inline note that chat-only avoids task-file
-overhead for simple work but carries higher chat-alignment risk and
-may require a full task re-emission or promotion if confidence drops.
-Do not repeat that note when the User is already informed unless the
-risk basis materially changes.
+When first offering chat-only, briefly explain that it avoids a task
+file for simple work, but its current state can be harder to keep clear.
+If that happens, repeat the complete task or move it to a file. Do not
+repeat this warning unless the User is uninformed or the risk changes
+in a way that matters.
 
 ### Chat-only task revisions
 
-The first chat-only task for a work item is a full task.
-
-Later revisions normally use `Task changes:` instead of reprinting the
-full task.
+The initial emission is a complete task in the compact format. Later
+revisions normally use `Task changes:` instead of reprinting it.
 
 Use this marker:
 
 `Task changes:`
 
-List only changed sections, in the normal shared task section order.
-Omitted sections mean unchanged.
+List only changed sections from Scope, Design, and Test specification,
+in that order. Omitted sections mean unchanged.
 
 Inside each changed section, either:
 
@@ -103,31 +112,32 @@ Rules:
 Quote the old and new text so the current chat-only task can be
 reconstructed without guessing.
 
-The most recent full chat-only task plus later `Task changes:`
+The most recent complete chat-only task plus later `Task changes:`
 blocks is the current task state.
 
-Reprint the full current chat-only task only when:
+Reprint the complete current chat-only task only when:
 
 - the User asks for it;
 - reconstruction is no longer safe;
-- promotion to a task file needs a full current version; or
+- promotion to a task file needs a complete current version; or
 - the change cannot be expressed clearly as a change list.
 
 ### Reconstruction and recovery
 
-If the current chat-only task cannot be reconstructed safely from the
-most recent full task plus later `Task changes:` blocks, re-emit a
-fresh full current task in chat with title, identifier, and all
-current sections before continuing. If that still does not restore a
-safe state, promote the work to the task-file path.
+If the latest complete task plus later `Task changes:` blocks no longer
+make the current task clear, repeat the complete task with its title,
+identifier, and three sections before continuing. If it is still unsafe
+to keep the task in chat, move it to a task file. Follow all task-file
+rules, including the full format and required checks. Repeating the
+three-section chat task does not meet those task-file requirements.
 
 ### Investigation execution on the chat-only path
 
-After approved investigation work, record the final output in
-`Findings` using `Task changes:` or a full current-task re-emit, then
-present the chat-only task as ready for User review. If the
-investigation result cannot be preserved safely in chat, promote to
-the task-file path before presenting it as ready.
+After approved investigation work, record the final output in Scope.
+Keep it distinct from the starting evidence. Use `Task changes:` or
+repeat the complete task, then present it as ready for User review.
+If the result cannot safely stay in chat, move the task to a file before
+presenting it as ready.
 
 ### Later work relation handling
 
@@ -183,23 +193,13 @@ plus the normal test run.
 - **Task Identifier:** 2026-05-24-viewer-truncation
 
 - **Scope:**
-  Prevent the read-only viewer from failing on overlong rendered
-  lines.
-
-- **Motivation:**
-  The current viewer can fail on long lines. The fix is local and has
-  one clear implementation path.
-
-- **Constraints:**
-  Keep existing viewer behavior unchanged apart from safe truncation.
-
-- **Briefing:**
-  Relevant files: the read-only viewer render path and its tests.
-
-- **Research:**
-  The viewer can return lines wider than the terminal width. The
-  living-project-document list is in `README.md`; no listed document
-  is affected, and no project glossary exists.
+  Prevent the read-only viewer from failing on overlong rendered lines.
+  The fix is local and has one clear implementation path.
+  - Constraints: keep existing behavior apart from safe truncation.
+  - Current facts: the render path can return lines wider than the
+    terminal; relevant files are that path and its tests. The
+    living-project-document list is in `README.md`; no listed document
+    is affected, and no project glossary exists.
 
 - **Design:**
   Truncate rendered lines to the available width before display and
@@ -220,9 +220,9 @@ Later clarification on the same task:
 ```md
 Task changes:
 
-- **Constraints:**
+- **Scope:**
   - Added:
-    - `Preserve existing color rendering while truncating width.`
+    - `Constraints: preserve existing color rendering while truncating width.`
 
 - **Design:**
   Truncate only the rendered line width. Do not change content before
@@ -248,7 +248,7 @@ Required assistant behavior:
 3. run normal planning-form selection and do not offer chat-only if a
    task-file planning form, subtasks, or multiple task files are
    required;
-4. if chat-only remains selected, emit the canonical full chat-only
-   task in the shared sectioned format; and
+4. if the User approves chat-only, emit the canonical task in the
+   compact format; and
 5. do not shorten the work to an informal plan or taskless handling
    just because the requested change is concrete.

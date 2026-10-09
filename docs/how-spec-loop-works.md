@@ -24,7 +24,8 @@ Spec Loop follows this workflow:
   documents.
 - **execute investigation** - after execution approval for
   investigation work, the active task records reviewed output in
-  `Findings` and is presented or moved to `review`.
+  `Findings` for task-file work or `Scope` for chat-only work, then is
+  presented or moved to `review`.
 - **review/ready** - [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs
   implementation work's move to `review` on the task-file path and
   readiness reporting on the fileless path.
@@ -33,6 +34,20 @@ The planning and approval rules for that workflow live in the
 [spec-loop-plan-task](../skills/spec-loop-plan-task/) bundle and its
 companion files. File-based work breakdown rules live in
 [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/).
+
+A task file is the default. If a lighter form meets the rules, the model
+explains why and asks your permission to use it. The rules for scope,
+complexity, a lasting task record, and splitting work stay the same.
+When the lighter form no longer meets them, the model changes form
+and follows the new form's rules. Permission to use a form is not
+permission to start execution.
+
+Chat-only tasks have exactly Scope, Design, and Test specification.
+Motivation, constraints, orientation, research, final decisions, and any
+required behavior or glossary content go in Scope. Keep clear which
+statements are facts, limits, term meanings, or final decisions. Follow
+the same rules for each kind of information. Add no other task sections.
+Only task files use the full format.
 
 The planning bundle starts with
 **[SKILL.md](../skills/spec-loop-plan-task/SKILL.md)**,
@@ -67,18 +82,19 @@ task or a task-file plan before execution. Approved implementation
 then continues under [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/).
 On task-file implementation work, it governs implementation-time
 routing, `Implementation notes`, and the move to `review`. On the
-fileless path, it governs canonical chat-task maintenance, recovery
-re-emission or promotion, and readiness reporting. When the code
-already exists, you inspect a retrospective walk-through or assessment
-instead.
+chat-only path, it keeps the current task up to date, repeats it when
+needed, moves it to a file when chat-only no longer fits, and reports
+when work is ready for review. Useful implementation notes go in the
+review message, outside the three-section task. File-only preparation
+steps apply only when the work uses a task file. When the code already
+exists, you inspect a walk-through or assessment of that change instead.
 
 Spec Loop also defines explicit work phases: PLAN, EXECUTION, and
 DONE. Transitions to EXECUTION and DONE require explicit user approval.
 
-During planning, active task artifacts may use `Scenario` and task
-`Glossary` sections to ground behavior and extract task-local terms.
-On the task-file path this means task files. On the chat-only path
-this means the canonical chat-only task kept in chat.
+During planning, task files use required `Scenario` and task `Glossary`
+sections to ground behavior and record task-local terms. Chat-only tasks
+keep that content in Scope.
 
 When a project maintains a glossary described by the shared task
 semantics
@@ -100,10 +116,10 @@ restructure that abstraction.
 
 Spec Loop is designed to work with existing codebases at scale.
 Before detailed design or implementation, the model captures relevant
-knowledge in Research for the current task, or for the current
-subtask plus needed task-level context when subtasks are in use:
-existing behavior, constraints, APIs, interfaces, and established code
-practices.
+knowledge in Research (or Scope for chat-only work) for the
+current task, or for the current subtask plus needed task-level context
+when subtasks are in use: existing behavior, constraints, APIs,
+interfaces, and established code practices.
 
 It follows the classic research–plan–implement approach, broken down
 into small, reviewable tasks and subtasks.
@@ -130,11 +146,11 @@ incremental change safer.
 Spec Loop uses more than one document type on purpose. They do not have
 the same job or the same lifetime.
 
-- Fileless chat tasks are short-lived canonical chat artifacts for
-  simple work on the fileless path. They exist to drive research,
-  implementation, and verification without task-file overhead. If
-  alignment becomes unsafe, they are re-emitted or promoted to task
-  files.
+- Chat-only tasks keep the current plan for simple work in chat rather
+  than a file. They still require research, design, implementation, and
+  verification. If the current plan becomes unclear, repeat the complete
+  task. If chat-only no longer meets the rules, move the task to a file
+  and follow all task-file requirements.
 - Task files are short-lived working artifacts for the next concrete
   task on the task-file path, or for the current subtask plus needed
   task-level context when a task uses subtasks. They exist to drive

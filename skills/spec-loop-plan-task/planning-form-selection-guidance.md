@@ -54,15 +54,33 @@ candidate split:
 - If unsure, leave the form in.
 
 Immediately after filtering:
-- If exactly one form remains, state it and the reason. If it is plain
-  `task file`, include the no-subtask reason. If it is taskless
-  implementation, ask for explicit User agreement.
-- If more than one form remains, ask `What planning form should this
-  work use?` Use only the exact form names above as option text, omit
-  removed forms, and include `Recommended option:` and `Reason:` as
-  required by the clarification question format.
-- Ask whether work may be chat-only only when `chat-only task` remains
-  possible and no task-file planning form is recommended.
+1. If the User has already chosen a form for this work and it still meets
+   the rules, use it. That counts as permission; do not ask again or
+   choose a different form. If the User is now requesting a form that
+   does not meet the rules, explain why and ask before choosing another.
+2. Otherwise, a task file is the default. If `taskless` or `chat-only
+   task` meets the rules above, recommend the lighter allowed form and
+   ask permission to use it. Prefer `taskless` before `chat-only task`.
+   Explain why it fits and wait for the answer. Use it only if the User
+   agrees; if the User declines, use a file-based form.
+3. For file-based work, use the split and release rules above to choose
+   between `task file`, `task file with subtasks`, and `multiple task
+   files / backlog items`. If those rules do not settle the choice, ask
+   `What planning form should this work use?` and wait for the answer.
+   List only allowed forms, using their exact names above. Follow the
+   clarification skill's question format, with a recommendation and
+   reason.
+
+State the chosen form and why it fits. For plain `task file`, explain
+why it has no subtasks. Do not relax any rule to use a lighter form.
+
+Permission to use a form is not permission to start EXECUTION. A task
+must be ready, and the User must explicitly approve execution. Taskless
+implementation still needs explicit User agreement to implement.
+
+If the current form no longer meets the rules, stop and choose another
+form before continuing. Apply all rules for the new form, including its
+planning and approval requirements.
 
 After selecting `task file with subtasks` or `multiple task files /
 backlog items`, hand off to

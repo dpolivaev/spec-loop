@@ -34,6 +34,14 @@ When work is too large for one task, Spec Loop can use subtasks or
 multiple task files / backlog items. Implementation tasks and subtasks
 should be releasable unless the user explicitly opts out.
 
+A task file is the default. If a lighter form meets the rules, the agent
+explains why and asks your permission to use it. When that form is no
+longer enough, the agent changes form and follows the new form's rules.
+Chat-only tasks have exactly three sections: Scope (including constraints
+and relevant context), Design, and Test specification. Only task files
+use the full format. Agreeing to a form does not approve execution; the
+agent must still ask before starting the work.
+
 Spec Loop is a framework of reusable skills.
 
 ## Living Project Documents

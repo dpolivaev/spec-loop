@@ -3,12 +3,9 @@
 This file applies to task planning on both planning paths of
 `spec-loop-plan-task`.
 
-It defines the shared no-subtask main-task form, section meanings,
-readiness rules for the current task, including subtask handling when
-subtasks exist, context-preservation rules, formatting conventions,
-and the required use of detailed Test specification guidance for both
-planning paths, with any task-file-only formatting rules called out
-explicitly:
+It defines the full format for task files without subtasks, what each
+section means, the checks required before work starts, how to keep task
+context, formatting rules, and Test specification requirements for:
 
 - the chat-only planning path kept in chat; and
 - the task-file path.
@@ -31,12 +28,18 @@ execution continues.
   chat-only task in chat.
 - On the task-file path, that artifact is the active task file.
 
-Before EXECUTION, implementation work needs: Scope, Motivation,
-Briefing, implementation-ready Design, Test specification, and any
-required Research, Scenario, Glossary, Analysis, or Constraints for
-the current task. If the task uses subtasks, apply those requirements
-to the current subtask plus needed task-level context — even when the
-User allows combined phases.
+Before EXECUTION, implementation work needs:
+- task file: Scope, Motivation, Briefing, Design ready for implementation,
+  Test specification, and any required Research, Scenario, Glossary,
+  Analysis, or Constraints;
+- chat-only task: exactly Scope (including constraints, relevant context,
+  and final decisions), Design ready for implementation, and Test
+  specification.
+
+Both forms must include all required information. For work with subtasks,
+the current subtask and the task-level context it needs must meet the
+full task-file requirements, even if the User allows planning and
+execution together.
 
 Before asking the User to approve EXECUTION, the LLM must self-check
 that the current task meets all applicable requirements of this file
@@ -46,14 +49,16 @@ context. In either case, the result must be correct, internally
 consistent, and compliant with `AGENTS.md` and applicable glossary
 rules.
 
-If the task is investigation-only, use the same task sections. Scope
-sets the investigation boundary and expected output. Motivation states
-what the investigation blocks or enables. Constraints state that the
-task must not ship product, test, build, config, runtime, or coupled
-documentation changes. Research records starting evidence and known
-facts. Design describes the investigation approach. Test specification
-is `N/A` unless explicit checks are needed to review the result.
-Findings records the final reviewed output.
+For investigation-only work, use the chosen form's format. Scope states
+what will be investigated and what output is expected. Record what the
+investigation blocks or makes possible, its starting evidence and known
+facts, and the limit against shipping product, test, build, config, or
+runtime changes, or the documentation updates that go with those changes.
+Use their separate sections in a task file, or Scope in a chat-only task.
+Design states the approach. Test specification
+is `N/A` unless specific review checks are needed. Record the final
+reviewed output in Findings for a task file or Scope for a chat-only
+task, keeping it distinct from the starting evidence.
 
 At any point while drafting or revising the active task artifact, if
 any content would depend on an unresolved material branch about scope,
@@ -114,7 +119,18 @@ before more implementation work.
 
 ## Task artifact structure and sections
 
-Each task without subtasks uses this exact order and layout.
+For tasks without subtasks, task files use the full form below.
+Chat-only tasks use only the compact form in
+[chat-only-path-guidance.md](chat-only-path-guidance.md), keeping the
+same title, identifier, section labels, and section order.
+
+Chat-only tasks have exactly Scope, Design, and Test specification.
+Motivation, Constraints, Briefing, Research, Analysis, and any required
+Scenario or Glossary content are folded into Scope. Keep clear which
+statements are facts, constraints, behavior, term meanings, or final
+decisions. Each kind of information still follows its own rules. Do not
+add task sections or copy the full template into subsections inside Scope.
+
 Do not add extra metadata fields or custom readiness markers unless
 the User explicitly requests them. Use the exact bold-label section
 labels below.
@@ -126,7 +142,7 @@ labels below.
     `YYYY-MM-DD-<slug>` where `<slug>` is 1-2 keywords from the
     task title or intended filename.
   - Value present = **Primary Identifier** for commit messages.
-- Main task sections as bold-label list items in this order:
+- Full-form main task sections as bold-label list items in this order:
   - `- **Scope:**`
   - `- **Motivation:**`
   - `- **Scenario:**` (conditional; use when behavior, flow,
@@ -190,6 +206,9 @@ only. If neither behavior nor shared vocabulary changes, omit both
 `Scenario` and `Glossary`. Prefer `Scenario` over `Glossary` when
 only one section is needed. Do not use `Glossary` without `Scenario`
 by default.
+
+On the chat-only path, record required Scenario and Glossary content in
+Scope. The separate-section rules below apply only to task files.
 
 Across the whole task artifact, use domain-related words for planned
 behavior and structure. When referring to planned or changed
@@ -282,8 +301,8 @@ intent, scope, constraints, design, acceptance logic, or verification.
 For implementation work, record observations, constraints, verified
 facts, and findings about the original pre-implementation state only.
 For investigation-only work, record starting evidence and known facts.
-Plans go in **Design**. Approved investigation output goes in
-**Findings**.
+Plans go in **Design**. Approved investigation output goes in **Findings**
+for task files and **Scope** for chat-only tasks.
 
 For implementation work, do not record repository states created
 while implementing the current task in canonical Research. If the
@@ -498,9 +517,9 @@ follow [test-specification-guidance.md](test-specification-guidance.md).
 
 ### Findings
 
-Conditional output section for investigation-only tasks and subtasks.
-Fill it during EXECUTION when the approved investigation produces its
-reviewed output.
+The final output of an investigation task or subtask. Record it during
+EXECUTION, after the approved investigation produces reviewed output:
+in Findings for task files or Scope for chat-only tasks.
 
 Findings is not a scratchpad, transcript, or worklog. Record only the
 final findings, relevant evidence references, and limits needed for
@@ -509,14 +528,13 @@ depend on into their own `Research`, `Context`, or `Analysis`.
 
 ### Implementation notes
 
-Conditional execution-phase notes. This section is filled only at the
-post-implementation checkpoint under the
-`spec-loop-implementation-flow` skill. It is not part of the
-canonical planning truth. If present, it describes the current
-implementation state, not the target state in canonical sections. Its
-content may still be relevant context for follow-up tasks and, on the
-task-file path, subtasks. Detailed behavior is governed by that skill
-and is not repeated here.
+Record these notes only after implementation, under
+`spec-loop-implementation-flow`, and only when there is useful content.
+Put them in the task file's Implementation notes section or in the
+chat-only review message outside the task. They describe what was
+implemented, not the plan or its target state. They can help later tasks
+or subtasks understand the implementation. That skill defines the
+remaining rules; they are not repeated here.
 
 ### Iterative discovery
 
@@ -541,6 +559,8 @@ review. No implementation during this loop.
 
 ## Formatting
 
+- Use plain language in tasks, documentation, and User messages. Explain
+  necessary technical terms. Keep required labels and names exact.
 - Task-file artifacts must wrap prose to roughly 72-80 characters and
   avoid horizontal scrolling. Chat-only work in chat does not need a
   fixed wrap width unless the User asks for it, but it must remain

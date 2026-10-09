@@ -19,7 +19,10 @@ This repository currently ships these skills:
   optional.
 
 1. **[spec-loop-plan-task](../skills/spec-loop-plan-task/)**
-   - the planning and task-administration skill for non-trivial work;
+   - plans non-trivial work and manages its tasks. A task file is the
+     default; a lighter form needs to meet the rules and have the user's
+     permission. Chat-only tasks have exactly Scope, Design, and Test
+     specification;
    - defined by
      [skills/spec-loop-plan-task/SKILL.md](../skills/spec-loop-plan-task/SKILL.md),
      [skills/spec-loop-plan-task/planning-form-selection-guidance.md](../skills/spec-loop-plan-task/planning-form-selection-guidance.md),
@@ -119,9 +122,11 @@ This repository currently ships these skills:
      and documentation routing, Scenario/task Glossary triggers, and
      phase rules.
    * **[skills/spec-loop-plan-task/planning-form-selection-guidance.md](../skills/spec-loop-plan-task/planning-form-selection-guidance.md)**
-     defines planning-form selection across `taskless`, `chat-only
-     task`, `task file`, `task file with subtasks`, and `multiple task
-     files / backlog items`.
+     defines selection across `taskless`, `chat-only task`, `task file`,
+     `task file with subtasks`, and `multiple task files / backlog items`;
+     uses a task file by default and asks permission before using a
+     lighter form. When the form no longer fits, change it and apply the
+     new form's rules. Permission to use a form does not approve execution.
    * **[skills/spec-loop-plan-work-breakdown/SKILL.md](../skills/spec-loop-plan-work-breakdown/SKILL.md)**
      defines file-based work breakdown after subtask or multi-task
      planning forms are selected, including the default rule that
@@ -132,7 +137,7 @@ This repository currently ships these skills:
      task updates, design updates, and ADR decisions during planning
      or ADR writing.
    * **[skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**
-     defines the shared no-subtask task form, section semantics,
+     defines the full no-subtask task form, shared section semantics,
      readiness rules, formatting, testing policy, and task rules for
      the project list and for project glossaries and other living
      project documents.
@@ -145,10 +150,10 @@ This repository currently ships these skills:
      terms are checked for semantic identity with existing
      abstractions, and how task visual glossaries should be written.
    * **[skills/spec-loop-plan-task/chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)**
-     defines the chat-only-path planning mechanics: initial canonical
-     chat-task expression, section-only updates, recovery
-     re-emission, later-work relation handling, and promotion to the
-     task-file path.
+     defines exactly three chat-only sections (Scope including context
+     and constraints, Design, Test specification), how to write and update
+     the current task, repeat it when needed, handle later work, and move
+     to a task file when chat-only no longer fits.
    * **[skills/spec-loop-plan-task/task-file-path-guidance.md](../skills/spec-loop-plan-task/task-file-path-guidance.md)**
      defines the task-file-specific rules: task files, lifecycle and
      traceability requirements, subtasks, and diagram rules.
@@ -160,9 +165,10 @@ This repository currently ships these skills:
      semantics, canonical-section authority, shared `review` meaning,
      `Implementation notes`, and the semantic completion checklist.
    * **[skills/spec-loop-implementation-flow/chat-only-path-guidance.md](../skills/spec-loop-implementation-flow/chat-only-path-guidance.md)**
-     defines the chat-only-path implementation-time mechanics:
-     canonical chat updates, recovery re-emission, promotion, and
-     chat-only expression of `review`.
+     defines how to update a chat-only task during implementation,
+     repeat it when needed, move it to a file, and present work for review.
+     Useful notes stay outside the three-section task. File-only
+     preparation steps apply only when the work uses a task file.
    * **[skills/spec-loop-implementation-flow/task-file-path-guidance.md](../skills/spec-loop-implementation-flow/task-file-path-guidance.md)**
      defines the task-file-path implementation-time delta:
      authorized task-file edits, task-file `Implementation notes`

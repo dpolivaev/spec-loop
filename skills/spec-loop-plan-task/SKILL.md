@@ -43,10 +43,11 @@ explicitly agrees.
 
 After execution approval for implementation work, follow
 [spec-loop-implementation-flow/SKILL.md](../spec-loop-implementation-flow/SKILL.md).
-After execution approval for investigation work, perform only the
-approved investigation, record final output in `Findings`, satisfy any
-`Test specification`, and present or move the task/subtask to
-`review` using the active path.
+After execution approval for investigation work, do only the approved
+investigation. Record the final output in `Findings` for task files or
+`Scope` for chat-only tasks. Complete any required `Test specification`
+checks, then present or move the task/subtask to `review` under the
+chosen form's rules.
 
 ## First classification
 
@@ -76,6 +77,9 @@ not ship product, test, build, config, runtime, or coupled
 documentation changes; plan that scope as implementation work.
 
 ## Planning-form selection
+
+A task file is the default. A lighter form must meet the rules and
+have the User's permission.
 
 After first classification, read and follow
 [planning-form-selection-guidance.md](planning-form-selection-guidance.md).
@@ -149,10 +153,9 @@ before continuing.
 
 ## Planning content
 
-For a Spec Loop task, planning uses the same task sections for
-implementation and investigation. It must cover current scope,
-material clarified decisions, relevant research and constraints,
-Design, review expectations, and needed verification.
+Use the task format for the chosen form. Cover scope, final decisions,
+research, constraints, Design, review expectations, and verification.
+This applies to implementation and investigation tasks.
 
 Use the shared task guidance from
 [common-task-guidance.md](common-task-guidance.md).
@@ -235,10 +238,11 @@ document, use it and update it when affected without requiring a list.
 
 A living-project-document action does not by itself require a task.
 Include required actions in the same increment as the implementation.
-For task-based work, record the check in Research and list the actions
-in Design. For `taskless` implementation or standalone documentation
-work, complete the actions together and list each action and resulting
-file or files in the final response, or state `None affected`. See
+For task-based work, record the check in Research (or Scope for
+chat-only work) and list the actions in Design. For `taskless`
+implementation or standalone documentation work, complete the actions
+together and list each action and resulting file or files in the final
+response, or state `None affected`. See
 [common-task-guidance.md](common-task-guidance.md) for task content.
 
 ## Glossary policy
@@ -260,16 +264,17 @@ which shared source task vocabulary and task-glossary deltas are
 compared against.
 
 When approved work changes, clarifies, or implements shared domain
-terms, include a task Glossary when needed. If an existing project
-glossary is affected, plan its update in the same increment. Treat
-project glossary creation, update, or supersession as
-living-project-document work. Create or supersede a project glossary
-only when approved by the User, project instructions, or the task plan.
+terms, record required task Glossary content in its own task-file
+section or in chat-only Scope. If an existing project glossary is
+affected, plan its update in the same increment. Creating, updating, or
+superseding a project glossary is living-project-document work. Create
+or supersede one only when approved by the User, project instructions,
+or the task plan.
 
 When a task or subtask needs `Scenario` or `Glossary`, read
 [scenario-and-glossary-guidance.md](scenario-and-glossary-guidance.md) and follow it. Task
-`Glossary` sections are planning artifacts; project glossary actions
-happen only during EXECUTION.
+Glossary content is a planning artifact; project glossary actions happen
+only during EXECUTION.
 
 ## Related skills
 

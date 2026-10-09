@@ -147,8 +147,9 @@ Later implementation follow-up returns to `spec-loop-plan-task`.
 
 ## 3. Canonical task updates during implementation
 
-Change canonical task sections only when explicit authority exists. Do
-not silently normalize the task to the code.
+Change the task only when explicitly allowed. Do not change it just to
+make it match the code. These rules apply to information inside chat-only
+Scope as well as separate task-file sections.
 
 Only these sources may override earlier canonical task wording or
 decisions:
@@ -217,7 +218,10 @@ commit, or otherwise implying implementation closure, perform the
 mandatory `Implementation notes` check.
 
 If relevant `Interpretations`, `Tradeoffs`, or `Open questions` exist,
-record them. If none exist, omit the section.
+put them in the task file's Implementation notes section, or in the
+chat-only review message outside the three-section task. If there are
+none, omit them. Do not put implementation history into chat-only Scope,
+Design, or Test specification.
 
 Use these fixed subheadings when notes are present:
 - `Interpretations`

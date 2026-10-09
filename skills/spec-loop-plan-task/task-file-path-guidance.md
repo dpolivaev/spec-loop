@@ -4,11 +4,10 @@ This file applies only on the task-file path of
 `spec-loop-plan-task`.
 
 Read [common-task-guidance.md](common-task-guidance.md) first.
-That file defines the shared no-subtask main-task form, section
-semantics, readiness rules for the current task, including subtask
-handling when subtasks exist, context-preservation rules,
-formatting conventions, and the required use of detailed Test
-specification guidance for both planning paths.
+It defines the full format for task files without subtasks, what each
+section means, checks required before work starts (including checks for
+the current subtask), how to keep task context, formatting rules, and
+Test specification requirements for both forms.
 
 This file adds only task-file-specific mechanics: task files,
 lifecycle, tracked moves, subtasks, task-file-only testing additions,
@@ -232,7 +231,7 @@ Lifecycle and transition rules:
 
 ## Task Structure on the task-file path
 
-Use the shared no-subtask main-task structure from
+For a task without subtasks, use the full format in
 [common-task-guidance.md](common-task-guidance.md).
 
 When a task uses subtasks:

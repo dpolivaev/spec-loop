@@ -5,9 +5,10 @@ This document defines the governance, review, and traceability rules around Spec
 ## What the workflow rules, common task guidance, and task-file path guidance enforce
 
 The workflow rules are the normative contract between the human
-developer and the model. `common-task-guidance.md` defines the shared
-no-subtask task form used on both planning paths. When Spec Loop uses
-a task file, the task-file path guidance adds task-file-only mechanics.
+developer and the model. `common-task-guidance.md` defines the full
+task-file format and what each section means. Chat-only tasks follow the
+same content rules in three sections. The task-file guide adds rules
+that apply only to task files.
 Together, they enforce at minimum:
 
 * Explicit planning before implementation work.
@@ -15,9 +16,11 @@ Together, they enforce at minimum:
   work with lightweight research, a single clear implementation path,
   lightweight verification, no existing task file, and no need for
   subtasks or diagrams.
-* One shared main-task structure and section semantics across both
-  planning paths, with task-file-only additions for subtasks,
-  lifecycle, and diagrams.
+* Exactly three chat-only task sections: Scope (including constraints
+  and relevant context), Design, and Test specification. Other planning
+  content goes in Scope and keeps its existing meaning and rules.
+  For tasks, only task files use the full format, subtasks, status
+  folders, and diagrams.
 * Task files as the source of truth for scope, constraints, research,
   design, test expectations, and execution status when the task-file
   path is in use, plus `Implementation notes` when meaningful
@@ -25,10 +28,9 @@ Together, they enforce at minimum:
 * Implementation tasks and subtasks are releasable by default: each
   one must be independently implementable, verifiable, reviewable,
   and acceptable unless the user explicitly opts out.
-* A canonical fileless chat task as the source of truth on the
-  fileless path, allowing an initial task with only the established
-  sections, then section-only chat updates and full-task recovery
-  re-emission when reconstruction confidence drops.
+* The current chat-only task as the source of truth, with relevant
+  context and final decisions in Scope. Update only changed sections.
+  Repeat the complete three-section task if its current state is unclear.
 * ADRs and other documentation may stand as their own planning artifacts
   when they are the requested work and no task-file rule overrides
   that.
@@ -38,12 +40,14 @@ Together, they enforce at minimum:
 * A default approval gate before any code, test, or configuration
   changes, with either fileless-task approval on the fileless path or
   task-file approval on the task-file path.
-* A separate post-approval implementation skill on both planning
-  paths. On the task-file path it governs implementation-time
-  clarification, task maintenance, and the move to `review`. On the
-  fileless path it governs canonical chat-task maintenance,
-  implementation-time clarification, recovery or promotion, and
-  readiness reporting.
+* After approval, a separate implementation skill handles task-file and
+  chat-only work. For task files, it handles clarification, task updates,
+  and the move to `review`. For chat-only tasks, it handles clarification,
+  updates to the current task, repeating it when unclear, moving it to a
+  file when needed, and reporting when work is ready. Useful
+  Implementation notes go in the review message, outside the
+  three-section task. File-only preparation steps apply only when the
+  work uses a task file.
 * Implementation completeness: the approved design is implemented,
   applicable constraints are met, required living-project-document
   actions are complete, and the test specification is implemented
@@ -107,8 +111,9 @@ If **Design** conflicts with **Constraints**, **Constraints** wins.
 
 ### Briefing as a soft entry point
 
-Each current or implementation-ready task includes a **Briefing**
-section that serves as a soft entry point. Initial backlog tasks and
+Each current task file, or task file ready for implementation, includes a
+**Briefing** section to help the reader get started. Chat-only tasks keep
+that information in Scope. Initial backlog tasks and
 subtasks created by
 [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/)
 may omit Briefing until they become current.
@@ -132,9 +137,15 @@ Spec Loop has two planning approval surfaces:
 * Fileless planning-path approval in chat.
 * Task-file approval on the task-file path.
 
-On the fileless planning path, the model must ask the user to approve
-both skipping task-file creation and implementing from the fileless
-chat task.
+A task file is the default. Before using a lighter form, the model must
+check that it meets the rules and ask the user's permission. If the user
+has already chosen an allowed form, do not ask again. When the current
+form stops meeting the rules, change form and follow the new form's
+requirements. This does not approve execution.
+
+For a chat-only task, the model must get explicit execution approval
+once the task is ready. The three-section format does not remove that
+requirement.
 
 On the task-file path:
 
@@ -156,7 +167,7 @@ On the task-file path:
 On the fileless path, after fileless execution approval for
 implementation work,
 [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/) governs implementation-time
-clarification, canonical chat-task updates, full-task recovery
+clarification, canonical chat-task updates, complete-task recovery
 re-emission when needed, promotion to the task-file path when fileless
 simplicity no longer holds, and readiness reporting.
 

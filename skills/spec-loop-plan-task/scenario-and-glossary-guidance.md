@@ -4,6 +4,11 @@ This file applies only after [common-task-guidance.md](common-task-guidance.md) 
 established that the current task needs `Scenario` or `Glossary`, or
 that the current subtask does when the task uses subtasks.
 
+For chat-only tasks, put Scenario, Glossary, and Research content in
+Scope. Follow the content rules below without adding task sections or
+subsections. Rules for separate sections and their order apply only to
+task files.
+
 This file covers only the extra drafting guidance. It does not repeat:
 - when these sections are required;
 - task section order; or
