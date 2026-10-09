@@ -339,6 +339,15 @@ approach instead of a target system change.
 For implementation work, Design is the implementation contract. It
 must be reviewable and implementation-ready before execution approval.
 
+Before proposing APIs, components, dependencies, or configuration,
+check existing capabilities. Use relevant callers, writers, readers,
+invariants, and supported contracts to establish the need. A code path
+or a constructible fixture alone does not establish a requirement.
+Record consequential findings in Research and the missing capability
+or responsibility in Design. Do not invent future requirements or
+remove required compatibility. Explain review-relevant choices, not
+every local implementation detail.
+
 #### Living project documents
 
 Follow [SKILL.md](SKILL.md) for the project list, the glossary

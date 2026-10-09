@@ -52,6 +52,9 @@ point.
 Use this route when implementation stays inside the approved design
 boundary and no blocking ambiguity remains.
 
+Before writing or changing automated tests, read and follow
+[spec-loop-write-readable-tests](../spec-loop-write-readable-tests/SKILL.md).
+
 Adding automated tests or automated checks beyond `Test specification`
 is allowed as long as those tests or checks stay within the approved
 increment.
@@ -257,8 +260,24 @@ recording that clarification in `Implementation notes`.
 
 ## 5. Completion checkpoint
 
-Compare the implementation with the approved task and its verification
-expectations.
+Read the actual changes, including added or changed tests and relevant
+unchanged callers or configuration. Apply the project's rules and any
+selected design or test skills. Compare the result with the approved
+task and its verification expectations; passing tests and matching the
+plan do not replace this self-review.
+
+Check the task-relevant purpose of added APIs, components,
+configuration, dependencies, and tests. When a premise changes, check
+affected code, tests, and target documentation for leftovers. Use the
+routes below for findings; this check does not authorize redesign or
+rewriting historical Research.
+
+Keep coverage inspection separate from successful execution. Report
+what passed, failed, was blocked, or was waived, and attribute results
+reported by the User. Distinguish assertion or fixture defects from
+environment initialization failures. Tests that never ran remain
+unverified; a blocker is not a pass or a waiver. Keep execution results
+out of `Test specification` and `Implementation notes`.
 
 For each finding:
 - if it is an implementation-side interpretation, trade-off, or open

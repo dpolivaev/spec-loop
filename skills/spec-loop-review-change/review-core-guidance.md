@@ -198,6 +198,21 @@ Apply them proportionally.
 Do not force every section to use all four when one adds no value.
 Do not invent offsetting pros and cons the evidence does not support.
 
+When reviewing added or changed automated tests, read and follow
+[spec-loop-write-readable-tests](../spec-loop-write-readable-tests/SKILL.md).
+
+Inspect changed tests as code: fixtures, mock outcomes, assertions,
+and the behavior they actually prove. Compare coverage with relevant
+existing tests before calling an addition necessary or redundant.
+For added APIs, components, configuration, or dependencies, check the
+supported requirement or responsibility and existing capabilities.
+A constructible fixture alone does not establish a supported state.
+
+Keep coverage inspection separate from execution results. Attribute
+reported results, distinguish test defects from initialization
+blockers, and identify checks that did not run. Neither test presence
+nor a passing mocked interaction proves behavior beyond its boundary.
+
 ## Multi-repository order
 
 When a change spans multiple repositories, review them in dependency

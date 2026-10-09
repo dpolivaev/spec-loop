@@ -12,6 +12,11 @@ workflow and does not change route, phase, or approval rules.
 `Test specification` specifies how the current task's requirements and
 task-relevant modified code paths are verified.
 
+Before designing automated tests or choosing their names, read and
+follow [spec-loop-write-readable-tests](../spec-loop-write-readable-tests/SKILL.md).
+This file retains ownership of coverage requirements and verification
+anchor structure.
+
 Aim for broad task-relevant coverage: cover the described requirements,
 changed behavior, affected contracts, important edge cases, regressions,
 and modified decision branches with meaningful assertions for each
@@ -117,6 +122,12 @@ distinction affects scope. If an existing unchanged test is listed, it
 is listed because the task intentionally relies on it for verification,
 not merely because it exists or seems related.
 
+Before choosing new anchors, inspect relevant existing tests: their
+assertions, fixtures, and verification boundaries. Add or extend tests
+for task-relevant coverage gaps; unchanged production code may still
+need new verification for a new caller. Test presence alone does not
+establish coverage.
+
 Existing tests belong in `Research` when their current presence affects
 design, placement, naming, ownership, coverage gaps, or reuse
 constraints.
@@ -129,9 +140,8 @@ Examples:
 
 - **Automated tests:**
   - `OptimizationTaskModificationTest`
-    - `checksIfItModifiesReferenceTask`: scoped fields affect
-      `OptimizationTaskModification.modifiesReferenceOptimizationTask(...)`
-      consistently with existing scoped modification fields.
+    - `changedScopedFieldsModifyReferenceTask`: changing scoped fields
+      marks the reference optimization task as modified.
   - `catalog-offers-json-modification.spec.ts`
     - `Catalog offers JSON > serialization > orders JSON`: catalog-offer
       JSON serialization orders properties and collection elements.

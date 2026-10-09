@@ -194,6 +194,9 @@ increment:
 - the work kind is clear: implementation work or investigation work;
 - `Research`, `Scenario` and `Glossary` when required, `Design`, and
   `Test specification` are complete enough for the current increment;
+- implementation additions have a researched need under the Design
+  rules in [common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md);
+  complete diagrams and exact names alone do not establish that need;
 - for implementation work:
   - Research records the living-project-document list, if one exists,
     the relevant entries or collections checked, and any existing
