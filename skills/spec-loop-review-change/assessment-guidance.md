@@ -234,7 +234,7 @@ Do not split one file across multiple review areas.
 - `Test specification` — the tests or checks this change should
   satisfy, reconstructed from behavior, design, risks, and integration
   points. Use
-  [spec-loop-plan-task/test-specification-guidance.md](../spec-loop-plan-task/test-specification-guidance.md)
+  [spec-loop-write-readable-tests/SKILL.md](../spec-loop-write-readable-tests/SKILL.md)
   when the needed checks are known or can be reconstructed safely. Keep evidence
   sufficiency judgments in `Assessment`, not inside `Test
   specification`.

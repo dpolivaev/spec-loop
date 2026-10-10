@@ -64,10 +64,10 @@ This section is this project's authoritative living-project-document list.
 
 Recommended path:
 
-Install the core task-workflow skills together. For automated test work,
-also install [spec-loop-write-readable-tests](skills/spec-loop-write-readable-tests/).
-Spec Loop uses it for test planning, implementation, and review; it is
-also usable independently.
+Install the core task-workflow skills together, including
+[spec-loop-write-readable-tests](skills/spec-loop-write-readable-tests/).
+It provides independently usable test design and writing guidance,
+plus Spec Loop rules for task verification entries and readiness.
 
 Ensure Node.js is available so `npx` works.
 
@@ -175,10 +175,9 @@ directory. Keep that core bundle together:
 - [spec-loop-prepare-execution-approval](skills/spec-loop-prepare-execution-approval/)
 - [spec-loop-implementation-flow](skills/spec-loop-implementation-flow/)
 - [spec-loop-write-adr](skills/spec-loop-write-adr/)
+- [spec-loop-write-readable-tests](skills/spec-loop-write-readable-tests/)
 
-Install [spec-loop-write-readable-tests](skills/spec-loop-write-readable-tests/)
-when work includes designing, naming, writing, changing, or reviewing
-automated tests. It works with or without the task-workflow bundle.
+The testing skill can also be used without the task-workflow bundle.
 
 Install [spec-loop-write-glossary](skills/spec-loop-write-glossary/) when your project uses a project glossary.
 

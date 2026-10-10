@@ -306,8 +306,8 @@ When a task uses subtasks:
 - is not assumed to be self-sufficient; before working from a
   subtask, read the relevant task-level sections and diagrams needed
   to understand it correctly;
-- implementation subtasks must satisfy the testing policy in
-  [test-specification-guidance.md](test-specification-guidance.md).
+- implementation subtasks must satisfy the testing policy from
+  [spec-loop-write-readable-tests/SKILL.md](../spec-loop-write-readable-tests/SKILL.md).
 - No planning-only subtasks.
 - Ordinary planning research stays in the current task's `Research`.
 - Research, spike, prototype, catalog, or proof subtasks are tasks,
@@ -496,19 +496,17 @@ using them.
 ## Testing Policy on tasks with subtasks
 
 Use the shared Testing Policy from
-[test-specification-guidance.md](test-specification-guidance.md) for
-all no-subtask tasks.
+[spec-loop-write-readable-tests/SKILL.md](../spec-loop-write-readable-tests/SKILL.md)
+for all no-subtask tasks.
 
 For task-file subtasks:
 
 - Implementation subtasks must include their applicable verification
   in the same subtask. Don't split implementation and verification
   across separate subtasks for the same implementation change.
-- Separate test-focused tasks allowed when adding or extending
-  coverage as standalone scope.
 - Each implementation subtask: follow the shared Test specification
   structure and verification-anchor rules from
-  [test-specification-guidance.md](test-specification-guidance.md).
+  [spec-loop-write-readable-tests/SKILL.md](../spec-loop-write-readable-tests/SKILL.md).
 - Run and fix the automated tests and automated checks that implement
   the specified verification anchors plus any required project-level
   checks before moving a task or subtask to `review`, unless the User

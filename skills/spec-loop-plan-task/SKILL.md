@@ -57,6 +57,9 @@ Classify each work item as one of:
 - non-trivial implementation work; or
 - investigation work.
 
+Separate test-focused tasks are allowed when adding or extending
+coverage as standalone scope.
+
 Treat implementation work as non-trivial when any of these hold:
 - it spans multiple files and is not a straightforward mechanical
   edit;
@@ -159,6 +162,10 @@ This applies to implementation and investigation tasks.
 
 Use the shared task guidance from
 [common-task-guidance.md](common-task-guidance.md).
+
+Before drafting or revising `Test specification`, follow
+[spec-loop-write-readable-tests/SKILL.md](../spec-loop-write-readable-tests/SKILL.md)
+for testing guidance.
 
 ## Planning-form-specific handling
 

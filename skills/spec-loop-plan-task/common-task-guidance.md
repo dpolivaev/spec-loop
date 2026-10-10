@@ -513,7 +513,7 @@ For investigation-only work, set Test specification to `N/A` unless
 explicit checks are needed to review the result.
 
 Before drafting or revising `Test specification`, you must read and
-follow [test-specification-guidance.md](test-specification-guidance.md).
+follow [spec-loop-write-readable-tests/SKILL.md](../spec-loop-write-readable-tests/SKILL.md).
 
 ### Findings
 

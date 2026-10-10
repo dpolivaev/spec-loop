@@ -7,11 +7,11 @@ This repository currently ships these skills:
   [spec-loop-plan-work-breakdown](../skills/spec-loop-plan-work-breakdown/),
   [spec-loop-clarify-task](../skills/spec-loop-clarify-task/),
   [spec-loop-prepare-execution-approval](../skills/spec-loop-prepare-execution-approval/),
-  [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/), and
-  [spec-loop-write-adr](../skills/spec-loop-write-adr/).
-- [spec-loop-write-readable-tests](../skills/spec-loop-write-readable-tests/)
-  is required for automated test design, naming, implementation, and
-  review. It is also usable without Spec Loop.
+  [spec-loop-implementation-flow](../skills/spec-loop-implementation-flow/),
+  [spec-loop-write-adr](../skills/spec-loop-write-adr/), and
+  [spec-loop-write-readable-tests](../skills/spec-loop-write-readable-tests/).
+- The testing skill's test design and writing guidance also works
+  without Spec Loop.
 - [spec-loop-write-glossary](../skills/spec-loop-write-glossary/) is required when a
   project uses a project glossary in the Spec Loop AsciiDoc format.
 - [spec-loop-setup-doc-rendering](../skills/spec-loop-setup-doc-rendering/) and
@@ -104,13 +104,19 @@ This repository currently ships these skills:
      [skills/spec-loop-review-change/github-gitlab-evidence-guidance.md](../skills/spec-loop-review-change/github-gitlab-evidence-guidance.md).
 
 10. **[spec-loop-write-readable-tests](../skills/spec-loop-write-readable-tests/)**
-    - the independently usable companion for behavioral test names,
-      visible setup/action/result, explicit mock outcomes, appropriate
-      helpers and parameterization, and preservation of assertions;
-    - used by test-specification planning, implementation, and existing
-      change review when automated tests are in scope;
+    - the testing skill for coverage, case selection, case purposes and
+      behavioral names, visible setup/action/result, explicit mock
+      outcomes, appropriate helpers and parameterization, and
+      preservation of assertions;
+    - also defines Spec Loop task verification entries and readiness
+      requirements. Only that part depends on Spec Loop;
     - defined by
-      [skills/spec-loop-write-readable-tests/SKILL.md](../skills/spec-loop-write-readable-tests/SKILL.md).
+      [skills/spec-loop-write-readable-tests/SKILL.md](../skills/spec-loop-write-readable-tests/SKILL.md),
+      which directly links
+      [test-design-and-writing.md](../skills/spec-loop-write-readable-tests/test-design-and-writing.md)
+      for test design, naming, and writing, and
+      [spec-loop-task-verification.md](../skills/spec-loop-write-readable-tests/spec-loop-task-verification.md)
+      for Spec Loop task-recording and readiness rules.
 
 ## Documentation
 
@@ -138,13 +144,13 @@ This repository currently ships these skills:
      or ADR writing.
    * **[skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)**
      defines the full no-subtask task form, shared section semantics,
-     readiness rules, formatting, testing policy, and task rules for
+     readiness rules, formatting, and task rules for
      the project list and for project glossaries and other living
      project documents.
    * **[skills/spec-loop-write-readable-tests/SKILL.md](../skills/spec-loop-write-readable-tests/SKILL.md)**
-     defines test-readability rules used during test planning,
-     implementation, and review. Spec Loop retains ownership of
-     task-specific coverage, verification anchors, and approvals.
+     selects test design and writing guidance and Spec Loop
+     task-recording and readiness rules. The invoking workflows still
+     control scope, phases, approvals, and completion.
    * **[skills/spec-loop-plan-task/scenario-and-glossary-guidance.md](../skills/spec-loop-plan-task/scenario-and-glossary-guidance.md)**
      defines how task `Scenario` and task `Glossary` are drafted, how
      terms are checked for semantic identity with existing
@@ -228,7 +234,7 @@ Recommended quick-check order:
 - [skills/spec-loop-clarify-task/SKILL.md](../skills/spec-loop-clarify-task/SKILL.md)
 - [skills/spec-loop-plan-task/common-task-guidance.md](../skills/spec-loop-plan-task/common-task-guidance.md)
 - [skills/spec-loop-write-readable-tests/SKILL.md](../skills/spec-loop-write-readable-tests/SKILL.md)
-  when automated tests are in scope
+  for Test specification work or automated tests
 - [skills/spec-loop-plan-task/scenario-and-glossary-guidance.md](../skills/spec-loop-plan-task/scenario-and-glossary-guidance.md)
 - [skills/spec-loop-plan-task/chat-only-path-guidance.md](../skills/spec-loop-plan-task/chat-only-path-guidance.md)
 - [skills/spec-loop-plan-task/task-file-path-guidance.md](../skills/spec-loop-plan-task/task-file-path-guidance.md)
