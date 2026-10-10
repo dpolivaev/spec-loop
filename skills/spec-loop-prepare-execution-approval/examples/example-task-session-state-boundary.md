@@ -5,12 +5,13 @@ polishes it for execution approval seeking for implementation work.
 
 It demonstrates:
 - diagram-first structural review;
-- a class diagram plus a sequence diagram; and
+- PlantUML and Mermaid alternatives for one class diagram;
+- a sequence diagram; and
 - a compact identifier list instead of a repeated responsibility table.
 
-Use it as a pattern collection, not as a required task size. Test
-anchors below are intended verification anchors for the approval-ready
-task, not an inventory of observed tests.
+Use it as a pattern collection, not as a required task size. The
+starting-state facts below are illustrative, not observations of a real
+repository. Test anchors show planned verification for that context.
 
 - **Scope:** Add a transient background session path that does not
   enter the persisted live-session registry.
@@ -37,6 +38,15 @@ task, not an inventory of observed tests.
   - The current design stores all work through the visible session
     registry, so even one-off background execution would be persisted
     and listed unless a second boundary is introduced.
+  - The visible-session path uses
+    `SessionController.startVisibleSession()`,
+    `LiveSessionManager.createSession()`, and `SessionStore.save(session)`.
+    Neither `BackgroundRunner` nor
+    `SessionController.triggerBackgroundExport()` exists yet.
+  - `SessionVisibilityPersistenceTest` already contains
+    `visibleCompletionPersistsSessionInVisibleSessionList`. The
+    background-completion case and `BackgroundSessionFailureTest` do
+    not exist yet.
   - The living-project-document list is in `README.md`; no listed
     document is affected, and no project glossary exists.
 
@@ -47,18 +57,18 @@ task, not an inventory of observed tests.
   set separator none
 
   package "example" {
-    class SessionController {
-      + startVisibleSession()
-      + triggerBackgroundExport()
+    class "<plain>**±**</plain> SessionController" as SessionController {
+      + <plain>**=**</plain> startVisibleSession()
+      + <plain>**+**</plain> triggerBackgroundExport()
     }
-    class LiveSessionManager {
-      + createSession()
+    class "<plain>**=**</plain> LiveSessionManager" as LiveSessionManager {
+      + <plain>**=**</plain> createSession()
     }
-    class BackgroundRunner {
-      + runOnce()
+    class "<plain>**+**</plain> BackgroundRunner" as BackgroundRunner {
+      + <plain>**+**</plain> runOnce()
     }
-    class SessionStore {
-      + save(session)
+    class "<plain>**=**</plain> SessionStore" as SessionStore {
+      + <plain>**=**</plain> save(session)
     }
   }
 
@@ -67,6 +77,33 @@ task, not an inventory of observed tests.
   LiveSessionManager --> SessionStore : persist visible session
   @enduml
   ```
+
+  ```mermaid
+  classDiagram
+      namespace example {
+          class SessionController["± SessionController"] {
+              = startVisibleSession()
+              + triggerBackgroundExport()
+          }
+          class LiveSessionManager["= LiveSessionManager"] {
+              = createSession()
+          }
+          class BackgroundRunner["+ BackgroundRunner"] {
+              + runOnce()
+          }
+          class SessionStore["= SessionStore"] {
+              = save(session)
+          }
+      }
+      SessionController --> LiveSessionManager : visible session
+      SessionController --> BackgroundRunner : transient run
+      LiveSessionManager --> SessionStore : persist visible session
+  ```
+
+  These class diagrams are renderer alternatives for this example, not
+  duplicate inventories to keep in an actual task. Keep only the selected
+  renderer's class diagram; PlantUML remains the default. Mermaid uses
+  plain indicators without HTML or Markdown wrappers.
 
   ```plantuml
   @startuml
@@ -94,16 +131,16 @@ task, not an inventory of observed tests.
 
 - **Test specification:**
   - **Automated tests:**
-    - `SessionVisibilityPersistenceTest`
-      - `visibleCompletionPersistsSessionInVisibleSessionList`: verify
-        visible session completion persists the session in the
+    - **±** `SessionVisibilityPersistenceTest`
+      - **=** `visibleCompletionPersistsSessionInVisibleSessionList`:
+        verify visible session completion persists the session in the
         visible-session list.
-      - `backgroundRunCompletionDoesNotPersistVisibleSession`: verify
-        background run completion does not add the run to the
+      - **+** `backgroundRunCompletionDoesNotPersistVisibleSession`:
+        verify background run completion does not add the run to the
         visible-session list.
-    - `BackgroundSessionFailureTest`
-      - `backgroundPathFailureLeavesVisibleSessionsUnchanged`: verify
-        background path failure leaves the visible-session list
+    - **+** `BackgroundSessionFailureTest`
+      - **+** `backgroundPathFailureLeavesVisibleSessionsUnchanged`:
+        verify background path failure leaves the visible-session list
         unchanged.
   - **Manual tests:**
     - Run one visible session and confirm it appears in the session

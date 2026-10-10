@@ -23,6 +23,11 @@ This repository currently ships these skills:
      default; a lighter form needs to meet the rules and have the user's
      permission. Chat-only tasks have exactly Scope, Design, and Test
      specification;
+   - task-file Design class diagrams prefix each displayed type and
+     member with **+** (add), **=** (reuse unchanged), or **±** (modify).
+     PlantUML wraps each bold marker in `<plain>`; Mermaid uses plain
+     literal indicators without HTML or Markdown wrappers. These show
+     planned changes, not implementation progress;
    - defined by
      [skills/spec-loop-plan-task/SKILL.md](../skills/spec-loop-plan-task/SKILL.md),
      [skills/spec-loop-plan-task/planning-form-selection-guidance.md](../skills/spec-loop-plan-task/planning-form-selection-guidance.md),
@@ -110,6 +115,11 @@ This repository currently ships these skills:
       preservation of assertions;
     - also defines Spec Loop task verification entries and readiness
       requirements. Only that part depends on Spec Loop;
+    - Spec Loop `Automated tests` entries prefix every file or other
+      verification container and case anchor with **+**, **=**, or **±**
+      for planned additions, unchanged reuse, or modifications.
+      Containers and cases are classified independently; the markers
+      are not executable names or test results;
     - defined by
       [skills/spec-loop-write-readable-tests/SKILL.md](../skills/spec-loop-write-readable-tests/SKILL.md),
       which directly links

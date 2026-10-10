@@ -185,7 +185,8 @@ before continuing.
 
 Good fit because the change is local, there is one clear
 implementation path, and verification is one targeted regression test
-plus the normal test run.
+plus the normal test run. The task below uses an illustrative starting
+context, not observations of a real viewer repository.
 
 ```md
 # Task: Fix read-only viewer line truncation
@@ -197,9 +198,12 @@ plus the normal test run.
   The fix is local and has one clear implementation path.
   - Constraints: keep existing behavior apart from safe truncation.
   - Current facts: the render path can return lines wider than the
-    terminal; relevant files are that path and its tests. The
-    living-project-document list is in `README.md`; no listed document
-    is affected, and no project glossary exists.
+    terminal; relevant files are that path and its tests.
+    `ReadOnlyViewerTest` already contains
+    `preservesLinesThatFitWithinTerminalWidth`; the truncation case
+    does not exist yet. The living-project-document list is in
+    `README.md`; no listed document is affected, and no project glossary
+    exists.
 
 - **Design:**
   Truncate rendered lines to the available width before display and
@@ -209,10 +213,12 @@ plus the normal test run.
 
 - **Test specification:**
   - **Automated tests:**
-    - `ReadOnlyViewerTest`
-      - `truncatesOverlongLinesToAvailableTerminalWidth`: overlong
+    - **±** `ReadOnlyViewerTest`
+      - **+** `truncatesOverlongLinesToAvailableTerminalWidth`: overlong
         read-only viewer lines are truncated to the available terminal
         width.
+      - **=** `preservesLinesThatFitWithinTerminalWidth`: lines that
+        already fit remain unchanged.
 ```
 
 Later clarification on the same task:

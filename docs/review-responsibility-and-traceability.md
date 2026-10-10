@@ -208,6 +208,19 @@ component, sequence), with strict formatting rules.
 Design remains reviewable as a first-class artifact and is not encoded only in
 implementation.
 
+## Reading planned-change markers
+
+Automated test entries and task-file Design class diagrams use **+** for
+additions, **=** for unchanged reuse, and **±** for modifications. These
+show planned changes from the task's starting state, not progress or test
+results.
+
+Files and types are classified separately from their cases and members.
+For example, an existing test file gaining a case is **±**, its new case
+is **+**, and unchanged cases remain **=**.
+
+For diagram formatting, see [Diagram and Rendering Policy](diagram-and-rendering-policy.md).
+
 ## Traceability mechanics
 
 Spec Loop makes intent recoverable after the fact:

@@ -56,12 +56,17 @@ Each automated test entry identifies:
 - the verification case anchor plus the behavior, assertion, property,
   or contract the task relies on.
 
-Preferred shape:
+Preferred shape, using illustrative file paths as containers:
 
 - **Automated tests:**
-  - `VerificationContainer`
-    - `verification case anchor`: expected behavior, assertion,
-      property, or contract.
+  - **+** `tests/new-feature.test.ts`
+    - **+** `newTestCase`: required behavior.
+  - **±** `tests/existing-feature.test.ts`
+    - **+** `additionalTestCase`: additional required behavior.
+    - **=** `unchangedTestCase`: existing verification reused unchanged.
+    - **±** `modifiedTestCase`: verification to adapt or extend.
+  - **=** `tests/unchanged-feature.test.ts`
+    - **=** `reusedTestCase`: existing verification reused unchanged.
 
 For current or implementation-ready work, the task must identify exact
 verification containers and case anchors. If those references are not
@@ -69,27 +74,50 @@ yet known, the task is not fully designed. For tasks with subtasks,
 apply this readiness check to the current subtask plus needed
 task-level context.
 
-A listed verification anchor may be newly added, modified, or
-intentionally reused unchanged. Do not mark that status unless the
-distinction affects scope. If an existing unchanged test is listed, it
-is listed because the task intentionally relies on it for verification,
-not merely because it exists or seems related.
+Prefix every verification container (test-file path, test class, or
+other framework-natural container) and case anchor with one bold literal
+text symbol, immediately before its code-formatted identity and outside
+its backticks:
+
+- **+** — add the element.
+- **=** — reuse the existing element unchanged.
+- **±** — modify the existing element.
+
+Classify containers and cases independently against the task's starting
+state. An existing file or other container that gains or modifies cases
+is **±**, not **+**; its new cases are **+** and unchanged cases remain
+**=**. Establish that starting state from Research or relevant context;
+merely listing an element does not establish that it already exists.
+
+These annotations are not part of paths or executable test names and do
+not indicate implementation progress or test results. Preserve the
+container/case hierarchy and behavior descriptions. Do not add legends
+or worded status labels to the task's `Test specification`. This rule
+applies only to Spec Loop `Automated tests` entries, not standalone test
+code, `Automated checks`, or `Manual tests`.
+
+If an existing unchanged test is listed, it is listed because the task
+intentionally relies on it for verification, not merely because it
+exists or seems related.
 
 Existing tests belong in `Research` when their current presence affects
 design, placement, naming, ownership, coverage gaps, or reuse
 constraints.
 
-Examples:
+Illustrative starting context: `OptimizationTaskModificationTest` and its
+listed case exist and need modification; the JSON spec file and its
+case are new; the feature file and its case are reused unchanged.
 
 - **Automated tests:**
-  - `OptimizationTaskModificationTest`
-    - `changedScopedFieldsModifyReferenceTask`: changing scoped fields
-      marks the reference optimization task as modified.
-  - `catalog-offers-json-modification.spec.ts`
-    - `Catalog offers JSON > serialization > orders JSON`: catalog-offer
-      JSON serialization orders properties and collection elements.
-  - `catalog-offer-modification.feature`
-    - `ONLY_MODIFIED omits catalog offers`: `ONLY_MODIFIED` omits
+  - **±** `OptimizationTaskModificationTest`
+    - **±** `changedScopedFieldsModifyReferenceTask`: changing scoped
+      fields marks the reference optimization task as modified.
+  - **+** `catalog-offers-json-modification.spec.ts`
+    - **+** `Catalog offers JSON > serialization > orders JSON`:
+      catalog-offer JSON serialization orders properties and collection
+      elements.
+  - **=** `catalog-offer-modification.feature`
+    - **=** `ONLY_MODIFIED omits catalog offers`: `ONLY_MODIFIED` omits
       catalog offers from the reference modification.
 
 For property-based, stateful, model-based, generated, parameterized,

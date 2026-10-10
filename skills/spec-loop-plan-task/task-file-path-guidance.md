@@ -434,6 +434,67 @@ using them.
   interaction, meaningful dependency labels, and at most one
   connector per class pair.
 
+### Planned changes in Design class diagrams
+
+In task-file **Design** class diagrams, prefix every displayed type and
+member with one literal text symbol for its planned change relative to
+the task's starting state. Use the renderer-specific formatting below:
+
+- **+** — add the element.
+- **=** — reuse the existing element unchanged.
+- **±** — modify the existing element.
+
+Include classes, interfaces, enums, type aliases, module boxes used to
+show functions, and every displayed method, constructor, field,
+constant, and enum member. Classify types and members independently: an
+existing type that gains or modifies members is **±**, its new members
+are **+**, and its unchanged members remain **=**. Newly added
+declarations are not modified declarations; existing framework types
+reused unchanged are **=**, not **+**. Establish the starting state from
+Research, not merely from an element's presence in Design.
+
+Markers are display annotations, not parts of canonical names or source
+identifiers, and do not indicate implementation progress or test
+results. Decorate display labels and retain stable aliases for connector
+endpoints. Preserve signatures, packages, and relationships.
+
+Keep this notation only in **Design** class diagrams, not Research,
+component, sequence, or glossary diagrams. Do not add notes, legends, or
+worded status labels inside task diagrams.
+
+For PlantUML:
+
+- Wrap every marker, including type-label and non-static member markers,
+  in `<plain>` while keeping the symbol bold: `<plain>**+**</plain>`,
+  `<plain>**=**</plain>`, or `<plain>**±**</plain>`.
+- Wrap only the marker, not the declaration. Keep `{static}` and actual
+  visibility modifiers in their syntactic positions before the marker,
+  for example `{static} + <plain>**+**</plain> create(): AddedType`.
+- At the start of a member, bare `+` means public visibility and `~`
+  means package visibility; `~+` is not a literal-plus escape there.
+  Bare `**+**` is bold, but `{static}` also underlines it, which can
+  make it look like **±**. `<plain>` keeps the marker un-underlined
+  while preserving the static member's underline. Do not remove
+  `{static}` to avoid underlining the marker.
+
+For Mermaid:
+
+- Use plain literal `+`, `=`, and `±` indicators without HTML or Markdown
+  wrappers. Do not use `<b>`, `<plain>`, or `**...**` around them;
+  HTML tags can appear literally in member rows.
+- Prefix quoted type display labels, keeping simple ASCII class IDs
+  unchanged, for example `class AddedType["+ AddedType"]`.
+- Prefix each member with its indicator, for example `+ boolean addedMember`,
+  `= read() string`, or `± number modifiedMember`. Member indicators do
+  not need to be bold; class headings follow the renderer's styling.
+- Keep Mermaid's `$` suffix for static fields and methods, for example
+  `+ String DEFAULT_PATH$` or `+ create() AddedType$`. Static underlining
+  may extend through the indicator; unlike PlantUML, this notation does
+  not isolate it from the underline. Do not remove `$` to avoid this.
+- A leading `+` also has Mermaid public-visibility syntax. In this
+  notation it marks a planned addition; do not infer source visibility
+  from the planned-change indicator.
+
 ### PlantUML-specific rules
 
 - Prefer separate diagrams over `allowmixing`; keep file or folder

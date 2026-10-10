@@ -4,14 +4,15 @@ This compact example task shows valid embedded Mermaid and PlantUML
 for common task-diagram needs. It is primarily a collection of valid
 diagram patterns in a realistic task context, not a required minimum
 task size and not a signal that every first planning pass should be
-this detailed.
+this detailed. Its starting context is illustrative, not an inventory
+of the current Wordle example application.
 
 It covers:
 
 - task `Glossary` with Mermaid visual glossary
 - filesystem / project structure
 - component interaction
-- class structure
+- class structure with PlantUML and Mermaid alternatives
 - static fields and methods in class diagrams
 - sequence flow
 
@@ -134,7 +135,13 @@ PlantUML writing hints:
   Research notes:
   - The repository already separates application wiring from domain
     logic.
-  - No CLI-specific adapter classes exist yet.
+  - No CLI option-parsing or adapter classes, or CLI test classes,
+    exist yet.
+  - `WordleApplication` and its `main(args)` entry point already exist.
+    `Game`, `GameEngine`, `Feedback`, and `Word`, including the shown
+    gameplay methods, already exist.
+  - `GameEngineTest` already covers repeated-letter scoring through
+    `scoresRepeatedLettersWithoutExceedingAnswerOccurrences`.
   - The living-project-document list is in `README.md`; no listed
     document is affected, and no project glossary exists.
 
@@ -177,37 +184,37 @@ PlantUML writing hints:
 
   package "wordle.tutorial" {
     package "app" {
-      class WordleApplication {
-        {static} + main(args)
+      class "<plain>**±**</plain> WordleApplication" as WordleApplication {
+        {static} + <plain>**±**</plain> main(args)
       }
-      class CommandLineOptions {
-        {static} + DEFAULT_WORD_LIST_PATH : String
-        {static} + DEFAULT_ATTEMPTS : int
-        + cliMode : boolean
-        + wordListPath : String
-        + attempts : int
-        {static} + parse(args) : CommandLineOptions
+      class "<plain>**+**</plain> CommandLineOptions" as CommandLineOptions {
+        {static} + <plain>**+**</plain> DEFAULT_WORD_LIST_PATH : String
+        {static} + <plain>**+**</plain> DEFAULT_ATTEMPTS : int
+        + <plain>**+**</plain> cliMode : boolean
+        + <plain>**+**</plain> wordListPath : String
+        + <plain>**+**</plain> attempts : int
+        {static} + <plain>**+**</plain> parse(args) : CommandLineOptions
       }
     }
 
     package "cli" {
-      class CliGameLoop {
-        + run()
+      class "<plain>**+**</plain> CliGameLoop" as CliGameLoop {
+        + <plain>**+**</plain> run()
       }
-      class FeedbackRenderer {
-        {static} + render(feedback) : String
+      class "<plain>**+**</plain> FeedbackRenderer" as FeedbackRenderer {
+        {static} + <plain>**+**</plain> render(feedback) : String
       }
     }
 
     package "domain" {
-      class Game {
-        + applyGuess(guess)
+      class "<plain>**=**</plain> Game" as Game {
+        + <plain>**=**</plain> applyGuess(guess)
       }
-      class GameEngine {
-        + submitGuess(guess) : Feedback
+      class "<plain>**=**</plain> GameEngine" as GameEngine {
+        + <plain>**=**</plain> submitGuess(guess) : Feedback
       }
-      class Feedback
-      class Word
+      class "<plain>**=**</plain> Feedback" as Feedback
+      class "<plain>**=**</plain> Word" as Word
     }
   }
 
@@ -220,6 +227,55 @@ PlantUML writing hints:
   Game --> Feedback : records
   @enduml
   ```
+
+  ```mermaid
+  classDiagram
+      namespace wordle_tutorial_app {
+          class WordleApplication["± WordleApplication"] {
+              ± main(args)$
+          }
+          class CommandLineOptions["+ CommandLineOptions"] {
+              + String DEFAULT_WORD_LIST_PATH$
+              + int DEFAULT_ATTEMPTS$
+              + boolean cliMode
+              + String wordListPath
+              + int attempts
+              + parse(args) CommandLineOptions$
+          }
+      }
+      namespace wordle_tutorial_cli {
+          class CliGameLoop["+ CliGameLoop"] {
+              + run()
+          }
+          class FeedbackRenderer["+ FeedbackRenderer"] {
+              + render(feedback) String$
+          }
+      }
+      namespace wordle_tutorial_domain {
+          class Game["= Game"] {
+              = applyGuess(guess)
+          }
+          class GameEngine["= GameEngine"] {
+              = submitGuess(guess) Feedback
+          }
+          class Feedback["= Feedback"]
+          class Word["= Word"]
+      }
+      WordleApplication --> CommandLineOptions : parses CLI options
+      WordleApplication --> CliGameLoop : starts
+      CliGameLoop --> GameEngine : uses
+      CliGameLoop --> FeedbackRenderer : uses
+      GameEngine --> Game : creates / updates
+      GameEngine --> Word : validates
+      Game --> Feedback : records
+  ```
+
+  The class diagrams above are renderer alternatives for this example.
+  In an actual task, keep only the selected renderer's class diagram;
+  PlantUML remains the default. Mermaid namespace labels flatten
+  `wordle.tutorial.app`, `wordle.tutorial.cli`, and
+  `wordle.tutorial.domain` with underscores. The `$` suffix preserves
+  static fields and methods; indicators have no HTML or Markdown wrappers.
 
   ```plantuml
   @startuml
@@ -248,17 +304,21 @@ PlantUML writing hints:
 
 - **Test specification:**
   - **Automated tests:**
-    - `CliOptionsTest`
-      - `missingOptionalArgumentsUseDefaults`: missing optional CLI
+    - **+** `CliOptionsTest`
+      - **+** `missingOptionalArgumentsUseDefaults`: missing optional CLI
         arguments use default wordlist and attempt values.
-      - `invalidArgumentValuesAreRejectedWithFeedback`: invalid CLI
+      - **+** `invalidArgumentValuesAreRejectedWithFeedback`: invalid CLI
         argument values are rejected with user-facing feedback.
-    - `CliFeedbackRendererTest`
-      - `rendersEngineGuessResultFeedback`: CLI feedback rendering
+    - **+** `CliFeedbackRendererTest`
+      - **+** `rendersEngineGuessResultFeedback`: CLI feedback rendering
         matches the engine guess result.
-    - `CliGameLoopTest`
-      - `validGuessDelegatesValidationAndScoringToEngine`: CLI mode
+    - **+** `CliGameLoopTest`
+      - **+** `validGuessDelegatesValidationAndScoringToEngine`: CLI mode
         delegates valid guess validation and scoring to the existing
         engine.
+    - **=** `GameEngineTest`
+      - **=** `scoresRepeatedLettersWithoutExceedingAnswerOccurrences`:
+        repeated-letter feedback never counts more matches than the
+        answer's occurrences of that letter.
   - **Manual tests:**
     - Start the CLI and complete one short game from the terminal.

@@ -9,9 +9,9 @@ It demonstrates:
 - explicit final payload names; and
 - a compact identifier list/table where diagrams alone would be weak.
 
-Use it as a pattern collection, not as a required task size. Test
-anchors below are intended verification anchors for the approval-ready
-task, not an inventory of observed tests.
+Use it as a pattern collection, not as a required task size. The
+starting-state facts below are illustrative, not observations of a real
+repository. Test anchors show planned verification for that context.
 
 - **Scope:** Normalize an export request payload so the server receives
   one stable structure for selected items and export options.
@@ -62,6 +62,11 @@ task, not an inventory of observed tests.
 
   - The current client sends two similar request variants, which
     forces the server to branch on partially duplicated payloads.
+  - `ExportRequestCompositionTest` already contains
+    `keepsSelectedIdentifierOrder`, which checks ordering independently
+    of request shape, and `selectionCountEqualsSelectedIdentifierCount`,
+    which currently checks both legacy request variants.
+    `emitsNormalizedRequestShape` does not exist yet.
   - The living-project-document list in `README.md` includes
     `docs/export-api.md` as the current Export API payload contract. No
     project glossary exists.
@@ -106,13 +111,14 @@ task, not an inventory of observed tests.
 
 - **Test specification:**
   - **Automated tests:**
-    - `ExportRequestCompositionTest`
-      - `emitsNormalizedRequestShape`: verify export request
+    - **±** `ExportRequestCompositionTest`
+      - **+** `emitsNormalizedRequestShape`: verify export request
         composition emits the normalized request shape.
-      - `keepsSelectedIdentifierOrder`: verify multiple selected
+      - **=** `keepsSelectedIdentifierOrder`: verify multiple selected
         identifiers keep their order in the emitted request.
-      - `selectionCountEqualsSelectedIdentifierCount`: verify
-        `selectionCount` equals the emitted selected-identifier count.
+      - **±** `selectionCountEqualsSelectedIdentifierCount`: verify
+        `selectionCount` equals the emitted selected-identifier count
+        in the normalized request.
   - **Manual tests:**
     - Export two selected items and inspect the outgoing request.
     - Verify that the server receives only the normalized payload

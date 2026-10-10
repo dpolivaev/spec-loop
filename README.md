@@ -93,6 +93,17 @@ include Mermaid visual glossaries. Spec Loop project glossaries may
 include Mermaid diagrams. Prepare your editor for reviewing rendered
 task files and glossary files before continuing.
 
+Automated test entries and task-file Design class diagrams show planned
+changes from the task's starting state: **+** means add, **=** means reuse
+unchanged, and **±** means modify. Containers/types and cases/members are
+classified independently. These text markers are annotations, not
+identifiers, implementation progress, or test results. Automated test
+entries use bold markers. PlantUML wraps only each bold marker in
+`<plain>` to prevent static-member underlining from changing its
+appearance. Mermaid class diagrams use plain `+`, `=`, and `±` without
+HTML or Markdown wrappers; see the
+[diagram policy](docs/diagram-and-rendering-policy.md).
+
 Ask the agent to use the [spec-loop-setup-doc-rendering](skills/spec-loop-setup-doc-rendering/) skill to
 prepare your editor preview setup.
 
