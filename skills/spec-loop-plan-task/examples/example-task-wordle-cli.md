@@ -28,7 +28,8 @@ PlantUML writing hints:
 - Follow the PlantUML-specific rules in
   [task-file-path-guidance.md](../task-file-path-guidance.md).
 - This example keeps line-oriented PlantUML statements on one physical
-  line.
+  line. The 72-character `CliGameLoop.run` signature uses literal `\n`
+  for rendered line breaks; shorter signatures stay on one rendered line.
 - If rendering fails, fix the diagram before treating the task as ready
   for review.
 
@@ -199,7 +200,7 @@ PlantUML writing hints:
 
     package "cli" {
       class "<plain>**+**</plain> CliGameLoop" as CliGameLoop {
-        + <plain>**+**</plain> run()
+        + <plain>**+**</plain> run(\nstandardInput : BufferedReader,\nstandardOutput : PrintStream\n)\n: void
       }
       class "<plain>**+**</plain> FeedbackRenderer" as FeedbackRenderer {
         {static} + <plain>**+**</plain> render(feedback) : String
@@ -245,7 +246,7 @@ PlantUML writing hints:
       }
       namespace wordle_tutorial_cli {
           class CliGameLoop["+ CliGameLoop"] {
-              + run()
+              + run(BufferedReader standardInput, PrintStream standardOutput) void
           }
           class FeedbackRenderer["+ FeedbackRenderer"] {
               + render(feedback) String$

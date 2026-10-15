@@ -501,15 +501,28 @@ For Mermaid:
   tree, component, class, and sequence diagrams separate unless one
   mixed diagram is genuinely required.
 - Do not apply normal prose line wrapping inside PlantUML fences.
-- Keep each line-oriented PlantUML statement on one physical line.
+- Keep each line-oriented PlantUML statement, including member
+  declarations, on one physical source line.
 - Use multiple physical lines only for syntax that is explicitly
   block-based, such as `package { ... }` and `class { ... }`.
 - `note ... end note` and `legend ... endlegend` are not allowed in
   task diagrams.
 - If inline text on a line-oriented statement becomes too long,
-  shorten it or use `\n` inside the same statement.
+  shorten it or use `\n` inside the same statement, except for method
+  and constructor signatures, which follow the class-diagram rules below.
 - In sequence diagrams, each `A -> B : message` line is one
   statement and must stay on one physical line.
+- In class diagrams:
+  - keep method and constructor signatures on one rendered line when
+    they are at most 60 characters, counting the name, parameters,
+    and return type, but excluding visibility and change-marker markup;
+  - for longer signatures, insert literal `\n` after `(`, between
+    parameters, and before `)`. Put any return type on its own rendered
+    line;
+  - preserve names, types, visibility, `{static}`, and change markers; and
+  - check rendered diagrams when rendering is available. If a diagram
+    remains too wide for readable review, split it into focused diagrams;
+    do not shorten signatures or shrink text to fit.
 - Before writing or revising any PlantUML class diagram:
   - add `set separator none`;
   - use exactly one top-level `package` block;
