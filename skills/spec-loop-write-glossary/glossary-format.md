@@ -191,6 +191,10 @@ Exclude by default:
 ## Diagram Rules
 
 - Mermaid diagrams live inside the same `.adoc` file as the glossary.
+- Declare Mermaid diagram blocks with `[mermaid]` followed by `----`
+  delimiters. Do not use `[source,mermaid]`: it declares a source-code
+  listing rather than a diagram block. Rendering requires Mermaid support
+  in the AsciiDoc preview or diagram processor.
 - Every glossary area must include a focused Mermaid diagram.
 - If an overview section exists, it must include an overview Mermaid
   diagram.
