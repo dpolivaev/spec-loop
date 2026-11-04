@@ -212,36 +212,24 @@ EXECUTION.
 
 ## Living project documents
 
-Living project documents hold current project truth: specifications,
-API contracts, architecture and operations documents, project
-glossaries, and current ADRs. Historical, archived, and incidental
-documents do not count.
+The project decides which living documents it needs. README can list them
+with links and a short purpose. Choose documents for what their human or
+agent readers need. Spec Loop specifically covers README, glossary, and ADRs.
 
-Spec Loop does not require a project to have living project documents.
-If none exist, do not create documents or a `Living Project Documents`
-list solely to satisfy this policy.
+Read relevant documents alongside code and tests. Keep each explanation in
+one place and link to it elsewhere. Task-specific detail stays in the task;
+explanations needed later belong in living documents. Link to task files only
+if they will remain available. Update affected documents during implementation
+in the same increment. Keep required status updates brief.
 
-### Project list
+Avoid redundant documents and explanations unless explicitly required by the
+project. Use the [clarification skill](../spec-loop-clarify-task/SKILL.md) when a
+document's purpose, audience, or needed content is unclear, or to agree how
+existing redundancy will be removed.
 
-Projects with multiple living project documents should keep one list
-named `Living Project Documents` as their entry point:
-- use an existing list in a loaded project instruction file; otherwise
-  use the root `README.md`;
-- let entries identify individual documents or collections by path,
-  role, and scope;
-- treat the file containing the list as implicit; and
-- if more than one list exists, ask which one should be used.
-
-Use the list as the starting point for relevant Research. If current
-work names or depends on an unlisted living document, ask how to handle
-it. If a project has multiple living documents but no list, ask the
-User before creating the default list in the root `README.md`.
-
-A project glossary is a living project document. Search for
-`glossary.adoc` and `glossary.md` even when no list exists. If an
-existing glossary is omitted from a list that covers other living
-documents, ask how to handle it. If the glossary is the only living
-document, use it and update it when affected without requiring a list.
+Use an existing `glossary.adoc` or `glossary.md` for shared language, even
+without a document list. Combining or removing documents follows
+[common-task-guidance.md](common-task-guidance.md#living-project-documents).
 
 A living-project-document action does not by itself require a task.
 Include required actions in the same increment as the implementation.

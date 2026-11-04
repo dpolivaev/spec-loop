@@ -25,10 +25,9 @@ changes to affected documents with the code, completes them in the same
 increment, and includes them in review. Spec Loop does not require a project
 to create living documents when none are otherwise needed.
 
-Projects with multiple living documents keep one list in an existing
-project instruction file or, by default, the root README. The list may point
-to individual documents or collections such as an arc42 document set. An
-existing project glossary remains active when it is the only living document.
+The project decides which living documents it needs. README can list them
+with links and a short purpose. Use an existing glossary for shared language,
+whether or not the project keeps a document list.
 
 When work is too large for one task, Spec Loop can use subtasks or
 multiple task files / backlog items. Implementation tasks and subtasks

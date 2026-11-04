@@ -185,13 +185,13 @@ container, or case split/merge structure. If any of those changes,
 treat it as a Test specification or Design change and use the
 applicable implementation-time route.
 
-Complete each `Living project documents` action in Design. Follow the
-document's format and lifecycle rules. For ADRs, use
+Complete each `Living project documents` action in Design, following
+[common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md#living-project-documents) and the project's document choices. For ADRs, use
 [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md). For project glossary
 actions, preserve existing shared meaning and apply only approved task
 `Glossary` changes.
 
-Complete planned changes to the project's living-project-document list.
+Complete planned changes to the document list if the project uses one.
 
 If a required action is absent from Design, or an action would change
 approved task meaning, use route C before continuing.
@@ -266,9 +266,9 @@ recording that clarification in `Implementation notes`.
 
 Read the actual changes, including added or changed tests and relevant
 unchanged callers or configuration. Apply the project's rules and any
-selected design or test skills. Compare the result with the approved
-task and its verification expectations; passing tests and matching the
-plan do not replace this self-review.
+selected design or test skills. Compare the result with the approved task,
+the User's explicit decisions, relevant project documents, and verification
+expectations; passing tests do not replace this review.
 
 Check the task-relevant purpose of added APIs, components,
 configuration, dependencies, and tests. When a premise changes, check
@@ -310,9 +310,10 @@ Before reaching `review`, ensure that:
 - if `Scenario` or `Glossary` is present, implementation and
   verification still match their approved behavior and domain-language
   contract;
-- every `Living project documents` action, including project-list and
-  project glossary work, is complete and its document matches the
-  approved task;
+- planned document actions and preservation/link checks are complete and
+  follow the approved task and project requirements;
+- task sections follow
+  [Keep each explanation in one place](../spec-loop-plan-task/common-task-guidance.md#keep-each-explanation-in-one-place);
 - if task `Glossary` is present, `Design`, `Test specification`, and
   any project glossary file changes still match its approved terms;
 - when presenting work for User review, list each completed

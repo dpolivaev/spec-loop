@@ -119,6 +119,10 @@ Then re-run readiness checks and continue approval preparation. If the
 User declines, continue approval preparation on the current
 structure.
 
+Check that the task records the User's decisions correctly and agrees with
+relevant project documents. Apply
+[Keep each explanation in one place](../spec-loop-plan-task/common-task-guidance.md#keep-each-explanation-in-one-place).
+
 ## 4. Research and Design review-preparation rules
 
 Make the Research and Design sections reviewer-friendly without losing
@@ -198,17 +202,12 @@ increment:
   rules in [common-task-guidance.md](../spec-loop-plan-task/common-task-guidance.md);
   complete diagrams and exact names alone do not establish that need;
 - for implementation work:
-  - Research records the living-project-document list, if one exists,
-    the relevant entries or collections checked, and any existing
-    project glossary;
-  - any question required by the project-list rules is resolved;
-  - Design lists each required action under `Living project documents`
-    with its path or paths, role, action, and required facts or
-    contract; and
-  - `None affected` is allowed only when Research explicitly confirms
-    that no existing project glossary or other relevant listed living
-    project document is affected. Block approval if the Design item or
-    a required action is missing;
+  - Research identifies relevant documents/sections, any project glossary,
+    and the document list if the project uses one;
+  - Design lists affected documents, readers/purpose, and specific changes,
+    or `Living project documents: None affected` supported by Research;
+  - document actions meet the [document rules](../spec-loop-plan-task/common-task-guidance.md#living-project-documents);
+    resolve missing actions and unclear document needs before approval;
 - for implementation work, when an `Implementation notes` section is
   present, it describes the current implementation state and is clearly
   distinguishable from the current target-state plan; approval is

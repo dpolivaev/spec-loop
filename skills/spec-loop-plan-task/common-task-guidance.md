@@ -166,6 +166,13 @@ labels below.
   When a conditional or optional section is omitted, omit it entirely
   and keep the remaining sections in the order listed above.
 
+### Keep each explanation in one place
+
+Use each task section for its purpose; link to unchanged rules instead of
+copying them. Record each decision and reason once, then show its consequences
+in diagrams and tests. Keep required detail and sections; code/test links do
+not replace Design or Test specification.
+
 The `###` headings below are guidance-document headings only. In task
 artifacts, these sections must be bold-label list items such as
 `- **Design:**`, not Markdown headings. This keeps task files with
@@ -258,8 +265,7 @@ rules, follow
 
 #### Project glossary policy
 
-Follow [SKILL.md](SKILL.md) for the living-project-document list,
-project glossary handling, and glossary-format routing.
+Follow [SKILL.md](SKILL.md) for project document choices and glossary rules.
 
 An existing project glossary is shared task language above individual
 tasks and code. Without one, use `Research` plus the existing codebase.
@@ -369,14 +375,13 @@ every local implementation detail.
 
 #### Living project documents
 
-Follow [SKILL.md](SKILL.md) for the project list, the glossary
-exception, and what counts as a living project document.
+Follow [SKILL.md](SKILL.md#living-project-documents) and the project's
+choice of documents.
 
 For an implementation task without subtasks, or for the current
 implementation subtask:
-- Research records the living-project-document list, if one exists,
-  the relevant entries or collections checked, and any existing project
-  glossary; and
+- Research identifies relevant documents/sections read, any project glossary,
+  and the document list if the project uses one; and
 - Design uses one of the exact nested forms below.
 
 When no living project document is affected:
@@ -391,18 +396,21 @@ When document actions are required:
 ```md
 - **Design:**
   - **Living project documents:**
-    - `<path or paths>` — `<role>`; `<action>`:
-      `<facts or contract the document must reflect>`.
+    - `<path or paths>` — `<readers and purpose>`; `<action>`:
+      `<what explanation or instruction needs to change and how>`.
 ```
 
-`<action>` is `update`, `create`, or `supersede`.
+`<action>` is `update`, `create`, `supersede`, `consolidate` (combine), or
+`remove`. Plan changes for readers' needs. Use `None affected` when Research
+confirms that no living document needs changes. Complete planned actions in
+the same increment.
 
-Use `None affected` only when Research explicitly confirms that no
-existing project glossary or other relevant listed living project
-document is affected.
-Creating or maintaining the project list is itself a document action
-when required. Complete all listed actions in the approved increment
-and include them in review.
+Combining or removing named documents needs explicit User approval. Record
+where needed explanations will remain; preserve meaning and required history,
+including requirements and reasons not fully explained by code/tests. Discard
+only what evidence or the User confirms is unnecessary. Follow document rules.
+Verify preservation and update links and any document list before removal;
+include these checks in Test specification. Ask if anything remains unclear.
 
 Follow each document's format and lifecycle rules. Use
 [spec-loop-write-adr/SKILL.md](../spec-loop-write-adr/SKILL.md) for ADRs and

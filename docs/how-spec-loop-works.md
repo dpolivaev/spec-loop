@@ -174,15 +174,15 @@ Spec Loop does not require a project to have living project documents.
 When none are otherwise needed, the project does not need to create
 documents or a list for workflow compliance.
 
-Projects with multiple living project documents keep one list named
-`Living Project Documents` in an existing project instruction file or, by
-default, the root README. The file containing the list is implicit. The
-list may identify individual documents or collections such as an arc42
-document set. If an existing project glossary is omitted while other
-living documents are listed, the model asks how to handle it. When a
-project glossary is the only living document, it remains in use without
-requiring a list. Planned document actions update, create, or supersede;
-ADR actions follow the ADR lifecycle.
+The project decides which living documents it needs. README can list them
+with links and a short purpose. Use an existing glossary for shared language,
+whether or not the project keeps a document list.
+
+Task-specific detail stays in the task. Explanations needed later belong in
+living documents. Link to task files only if they will remain available.
+Combining or removing documents requires explicit approval, preservation of
+needed explanations and required history, and checked links. Follow the
+[document rules](../skills/spec-loop-plan-task/common-task-guidance.md#living-project-documents), including ADR lifecycle rules.
 
 Historical task files do not need to be kept mutually consistent
 across time. The active task artifact, however, should stay aligned
