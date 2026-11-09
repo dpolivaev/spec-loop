@@ -16,7 +16,10 @@ planning or executing new work.
 If trust, the exact change to review, or the comparison range is
 unclear, stop and ask before fetching GitHub, GitLab, or Git data.
 
-Read [review-core-guidance.md](./review-core-guidance.md) first.
+Read and follow the shared guidance for both modes:
+
+- [review-core-guidance.md](./review-core-guidance.md); and
+- [security-evaluation-guidance.md](./security-evaluation-guidance.md).
 
 Then choose the review mode and evidence source together, and load only
 the needed guidance files. Load both mode files only when the user

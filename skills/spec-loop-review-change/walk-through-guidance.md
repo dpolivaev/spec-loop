@@ -9,11 +9,14 @@ It covers:
 - human checkpoints;
 - attention routing;
 - walk-through structure;
-- inline findings; and
+- inline findings;
+- security evaluation; and
 - review discipline.
 
 Shared trust, naming, and writing-style rules stay in
 [review-core-guidance.md](./review-core-guidance.md).
+Security evaluation rules stay in
+[security-evaluation-guidance.md](./security-evaluation-guidance.md).
 
 ## Review unit
 
@@ -66,8 +69,8 @@ Use this sequence by default:
    detailed review text.
 5. From that survey, identify the provisional highest-attention areas.
    Focus on behavior, contract, compatibility, orchestration,
-   persistence, parsers or rewriters, deletions, and weak or missing
-   verification.
+   persistence, parsers or rewriters, deletions, security-sensitive
+   paths, and weak or missing verification.
 6. For each provisional highest-attention area, note:
    - the central risk;
    - the old/new behavior comparison that must be checked;
@@ -82,7 +85,8 @@ Use this sequence by default:
    proposed block order, file assignment, and provisional
    highest-attention areas for human review before detailed review
    continues.
-10. Review each assigned file exactly once.
+10. Review each assigned file exactly once, applying the shared
+    security evaluation during the same inspection.
 11. Inside each file, review in source order unless another local
     order explains the changed elements and their relationships better.
 12. At the smallest useful level, record:
@@ -91,6 +95,8 @@ Use this sequence by default:
     - which historical intent, context, or final code behavior it
       appears to support;
     - what contract, runtime path, or rule it affects;
+    - relevant security inputs, protections, consequential operations,
+      and reachable failure or bypass conditions;
     - relevant tests and what they prove; and
     - findings, including missing or insufficient verification, open
       evidence questions, or reviewer attention points where they
@@ -102,7 +108,8 @@ Use this sequence by default:
     changes the real risk center. Check that each highest-attention
     area received explicit old/new comparison and either concrete
     verification evidence or a finding or open question when evidence
-    is weak or missing.
+    is weak or missing. Include security-sensitive paths in this check;
+    unresolved security concerns must not disappear from the summary.
 15. End each review block with durable notes such as open risks,
     unresolved evidence, reviewer attention points, and useful next
     review focus.
@@ -221,6 +228,14 @@ Changed files: <count>. See `File Ownership Table`.
 
 **Review note:** <current-state note>
 
+## Security evaluation
+
+**Inspected surface:** <security-sensitive paths and protections inspected>
+
+**Findings and unresolved concerns:** <finding IDs and bounded conclusions>
+
+**Verification and limits:** <checks performed, results, and unassessed paths>
+
 ## File Ownership Table
 
 <short table guidance prose>
@@ -238,7 +253,7 @@ Repository: `<repository>`
 **Review purpose:** <why this block exists and why it appears here>
 
 **Project-level review criteria:**
-- Intent: <block-level judgment>
+- Intent: <purpose of the reviewed change in this block>
 - Implementation: <block-level judgment>
 - Verification: <block-level judgment>
 - Complexity: <block-level judgment>
@@ -246,7 +261,7 @@ Repository: `<repository>`
 or
 
 **Review-block criteria:**
-- Intent: <block-level judgment>
+- Intent: <purpose of the reviewed change in this block>
 - Implementation: <block-level judgment>
 - Verification: <block-level judgment>
 - Complexity: <block-level judgment>
@@ -259,8 +274,9 @@ or
 
 <analysis prose>
 
-**Intent:** <judgment when needed>
+**Intent:** <purpose of the changed code when needed>
 **Implementation review:** <judgment when needed>
+**Security evaluation:** <file-level security evidence and finding IDs when relevant>
 **Verification:** <how the change is tested and what that evidence proves; if coverage is insufficient, say why>
 **Complexity:** <burden judgment when needed>
 
@@ -279,7 +295,11 @@ or
 Start with short orientation prose before `## Scope Summary` when it
 helps the reviewer.
 Keep the exact top-level section order shown above.
-Place `## Review Findings` before `## File Ownership Table`.
+Place `## Security evaluation` after `## Review Findings` and before
+`## File Ownership Table`. Its required content is defined in
+[security-evaluation-guidance.md](./security-evaluation-guidance.md).
+When assessment mode is also active, reference the assessment's overall
+security evaluation instead of repeating it here.
 In each `### <repository or other scope partition>` under `## Scope
 Summary`, state the exact comparison base used and the reviewed changed-file count.
 Add explicit exclusion or range notes there when they matter, for
@@ -294,6 +314,10 @@ Use `**Project-level review criteria:**` when a block establishes
 criteria for a whole repository or project slice. Otherwise use
 `**Review-block criteria:**`.
 In those block-level criteria sections, use bullet points.
+Keep `Intent` descriptive, following the shared criteria. It describes
+what the reviewed change is intended to achieve. `Review purpose`
+instead explains why this review block exists and appears at this point
+in the reading order. Do not put the reviewer's judgment under `Intent`.
 Do not add block-status lines.
 Inside file sections, keep analysis in prose.
 Do not add fourth-level headings under file sections.
@@ -304,7 +328,10 @@ those elements in prose or with inline code labels.
 Use neither extra heading levels nor the block-level bullet-list form
 inside file sections.
 Use inline bold labels such as `Intent`, `Implementation review`,
-`Verification`, and `Complexity` when they help.
+`Security evaluation`, `Verification`, and `Complexity` when they help.
+For security-relevant files, explain input or trigger control, relevant
+protections, consequential operations, and findings in that file's
+analysis. Keep overall security conclusions in `## Security evaluation`.
 Use `### Review Block <number> Notes` only when that block has durable
 end notes worth keeping.
 In `## Verification Notes`, use one labeled subsection per repository,
@@ -321,7 +348,10 @@ Do not write `No issue found`, `No issues found`, or similar clearance
 statements in file sections, analysis paragraphs, or review-block
 notes.
 If no finding applies, stop after the analysis instead of writing a
-clearance line.
+clearance line. A bounded no-security-issue conclusion is allowed only
+in the overall `Security evaluation` under the conditions in
+[security-evaluation-guidance.md](./security-evaluation-guidance.md),
+not as per-file clearance.
 
 In `Verification Notes` and any inline verification reference,
 identify each cited test precisely enough that the reviewer can find it

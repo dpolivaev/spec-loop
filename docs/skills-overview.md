@@ -100,9 +100,13 @@ This repository currently ships these skills:
      or agent-written code the user wants reviewed; high-level
      assessments check required living-project-document actions, and
      file-wise walk-through mode explains the changed files;
+   - both modes require security evaluation during inspection
+     and an explicit `Security evaluation` section covering inspected
+     surfaces, findings and unresolved concerns, and verification limits;
    - defined by
      [skills/spec-loop-review-change/SKILL.md](../skills/spec-loop-review-change/SKILL.md),
      [skills/spec-loop-review-change/review-core-guidance.md](../skills/spec-loop-review-change/review-core-guidance.md),
+     [skills/spec-loop-review-change/security-evaluation-guidance.md](../skills/spec-loop-review-change/security-evaluation-guidance.md),
      [skills/spec-loop-review-change/assessment-guidance.md](../skills/spec-loop-review-change/assessment-guidance.md),
      [skills/spec-loop-review-change/walk-through-guidance.md](../skills/spec-loop-review-change/walk-through-guidance.md),
      and

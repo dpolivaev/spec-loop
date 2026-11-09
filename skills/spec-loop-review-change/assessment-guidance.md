@@ -9,11 +9,14 @@ It covers:
 - verdict handling;
 - review areas;
 - section meanings;
+- security evaluation and examples;
 - diagrams for this mode; and
 - GitHub-ready or GitLab-ready copies.
 
 Shared trust, naming, and writing-style rules stay in
 [review-core-guidance.md](./review-core-guidance.md).
+Security evaluation rules stay in
+[security-evaluation-guidance.md](./security-evaluation-guidance.md).
 
 Before drafting this kind of review:
 
@@ -99,6 +102,7 @@ Use this structure unless the user explicitly requests another one:
   - `- **Research:**`
   - `- **Design:**`
   - `- **Test specification:**`
+  - `- **Security evaluation:**`
   - `- **Assessment:**`
 
 `Assessment` must be the last main section of the main review portion.
@@ -118,7 +122,7 @@ Allowed values:
 - `request changes`
 - `do not merge`
 
-When `Review outcome` is present, include brief supporting bullets:
+When `Review outcome` is present, include brief bullets:
 
 - `Intent`
 - `Implementation`
@@ -133,6 +137,12 @@ When `Review outcome` is present, include brief supporting bullets:
 - whether major parts should be kept, simplified, split, deferred, or
   dropped
 - when recommending split: the suggested first follow-up slice
+
+`Intent` states the purpose of the reviewed change. It is not a
+judgment supporting the verdict. Explain judgments about whether the
+change should exist, and recommendations to keep, simplify, split,
+defer, or drop it, in `Assessment`. The outcome may summarize those
+recommendations separately, but not under `Intent`.
 
 Keep those four bullet types separate.
 Do not mix `Intent`, `Implementation`, `Verification`, and `Complexity`
@@ -150,11 +160,9 @@ reflect that current state.
 
 ### Axis discipline
 
-Use the shared axis names with these stricter meanings in assessment
-mode:
+Use the shared descriptive definition of `Intent` unchanged. Use these
+assessment-specific meanings for the other criteria:
 
-- `Intent` — whether the change or review area should exist at all,
-  and in roughly this form;
 - `Implementation` — whether the chosen change is realized correctly,
   coherently, completely, and safely, including wiring and
   integration;
@@ -202,6 +210,9 @@ Recommended status values:
 Each review area uses the same section ordering as the main review,
 ends with its own `Assessment`, and should make clear what the area
 adds, changes, or removes and why.
+`Security evaluation` is mandatory globally. In review areas, include it
+only for distinct area-specific coverage or concerns; reference existing
+findings rather than repeating their explanation.
 Do not split one file across multiple review areas.
 
 ## Section meanings
@@ -238,9 +249,54 @@ Do not split one file across multiple review areas.
   when the needed checks are known or can be reconstructed safely. Keep evidence
   sufficiency judgments in `Assessment`, not inside `Test
   specification`.
+- `Security evaluation` — the mandatory inspected surface, findings
+  and unresolved concerns, and verification limits defined in
+  [security-evaluation-guidance.md](./security-evaluation-guidance.md).
+  Reference findings in their owning review areas or the
+  global `Assessment`; do not duplicate their detailed explanation.
 - `Assessment` — analytic findings, uncertainties, unresolved
-  concerns, recommendations, reviewer attention points, and trade-off
-  analysis.
+  concerns, judgments, recommendations, reviewer attention points, and
+  trade-off analysis. Put judgments about whether the change or an area
+  should exist in its current form here, including recommendations to
+  keep, simplify, split, defer, or drop it. Include the effect of security
+  findings on implementation and verification judgments.
+
+## Security evaluation examples
+
+These are illustrative section fragments, not evidence about an actual
+repository. Both use the shared security evaluation fields. A referenced
+finding is explained once in its owning `Assessment` or walk-through
+file section.
+
+An unresolved parser concern:
+
+```markdown
+- **Security evaluation:**
+  - **Inspected surface:** Clipboard HTML enters `TableReader.read`;
+    cell spans reach `reserveRows` before the dimension limit is checked.
+  - **Findings and unresolved concerns:** Finding PARSER-1 records
+    attacker-controlled allocation as a potential resource-exhaustion
+    vulnerability. No evidence of a concealed access or execution path
+    was identified in the inspected parser path.
+  - **Verification and limits:** Source tracing established the
+    allocation order. No allocation-stress experiment was performed;
+    application-level failure and effective input limits remain
+    unverified. PARSER-1 remains unresolved.
+```
+
+A bounded conclusion for a documentation-only change:
+
+```markdown
+- **Security evaluation:**
+  - **Inspected surface:** The diff changes prose and diagram labels
+    only. Checked for changed commands, links, executable examples,
+    configuration, and build or runtime files; none are changed.
+  - **Findings and unresolved concerns:** No security issue identified
+    within the inspected scope.
+  - **Verification and limits:** Inspected the complete diff. No runtime
+    checks were performed because executable behavior is unchanged;
+    unchanged application code was not audited.
+```
 
 ## If this file also includes a walk-through
 
@@ -249,7 +305,8 @@ When one file contains both the assessment and the walk-through:
 - keep the assessment complete enough to stand alone as the high-level
   review;
 - keep detailed file-wise explanation only in the walk-through portion;
-  and
+- keep the overall `Security evaluation` in the assessment portion and
+  reference it from the walk-through's `Security evaluation`; and
 - let the high-level `Assessment` section summarize the main
   conclusions and point to the detailed walk-through when useful.
 

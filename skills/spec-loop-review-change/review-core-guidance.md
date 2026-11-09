@@ -182,8 +182,9 @@ after it. Do not explain the same finding twice.
 
 Use these criteria where they help:
 
-- `Intent`: what the changed code appears to be trying to accomplish,
-  based on the final diff and existing contracts;
+- `Intent`: what the reviewed change appears intended to achieve,
+  based on the final diff and existing contracts. This is the change's
+  purpose, not the review's purpose;
 - `Implementation`: whether the change realizes that behavior
   coherently, completely, and safely, including wiring, integration,
   and required actions for affected living project documents;
@@ -193,6 +194,13 @@ Use these criteria where they help:
 - `Complexity`: what lasting structural, operational, or maintenance
   burden the change introduces, and whether that burden is justified by
   clear present benefit.
+
+Keep `Intent` descriptive in both modes. Do not use it to judge whether
+the change should exist or to recommend keeping, simplifying, splitting,
+deferring, or dropping it. In assessment mode, explain those judgments
+and recommendations in `Assessment`, separate from `Intent`. In
+walk-through mode, keep those local judgments and recommendations in
+the existing file analysis or review-block notes, separate from `Intent`.
 
 Apply them proportionally.
 Do not force every section to use all four when one adds no value.
@@ -250,3 +258,32 @@ State strong negative findings clearly, but prefer measured phrasing
 such as `not ready to merge`, `not yet complete`, `not yet supported by
 evidence`, `accepted but not fixed`, or `does not currently
 demonstrate` when that is still fully accurate.
+
+Write for a reader who understands software but does not know this part
+of the codebase. Explain behavior in simple language without removing
+conditions, evidence, or technical detail needed to understand it.
+
+For each finding:
+
+- Start with what goes wrong, not an internal mechanism or technical
+  category. For example, prefer “Copying a table includes text excluded
+  by the filter” over “Filtered-copy disclosure.”
+- Explain what the user or system does, what should happen, what actually
+  happens, and why the difference matters.
+- State the conditions that trigger the problem, including any required
+  user action. Use a short example when it makes those conditions clearer.
+- Explain the code responsible after explaining the behavior. Keep exact
+  code names and source references, but do not use them as substitutes for
+  an explanation.
+- State what the evidence establishes, whether it comes from reading code
+  or executing a check, and what remains unverified.
+
+Use technical terms when needed for precision, and explain them on first
+use. Do not replace established domain terms with approximate alternatives.
+
+Apply the same language to summaries, recommendations, design explanations,
+and verification limits. Simple language must not weaken a finding or
+make an uncertain consequence sound established.
+
+These are content requirements, not a mandatory set of labels or a fixed
+paragraph template.
