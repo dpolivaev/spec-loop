@@ -57,9 +57,11 @@ recording rules.
 
 Keep the task file aligned with the current final clarification
 state, including the `Analysis` section and every affected canonical
-section. Sync at a clean checkpoint before that state would be hard
-to reconstruct safely from chat alone, and always before
-clarification returns control to another workflow.
+section. Record each confirmed decision soon after the User confirms
+it, in the same turn, as
+[spec-loop-clarify-task/SKILL.md](../spec-loop-clarify-task/SKILL.md#where-to-store-the-result)
+requires, and always sync before clarification returns control to
+another workflow.
 
 These sync edits preserve state. Do not ask the User to review them
 separately during clarification. If unresolved questions remain after

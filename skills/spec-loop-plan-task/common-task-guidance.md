@@ -551,6 +551,14 @@ Analysis (if used), Design, and Test specification until coherent.
 Record intermediate alternatives only when they aid reasoning or
 review. No implementation during this loop.
 
+Design and Test specification are drafted by the agent. On the
+task-file path, write them into the task file while drafting them, in
+small updates; do not collect their content to write it at the end.
+Saved parts may be revised later as understanding improves; the first
+draft need not be final. Saving does not return control to the User;
+continue drafting. A partly drafted Design or Test specification is a
+draft and is not ready for approval.
+
 ## Context Preservation
 
 - Re-read relevant task sections before implementation or when

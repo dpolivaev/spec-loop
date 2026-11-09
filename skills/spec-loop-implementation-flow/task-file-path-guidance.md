@@ -63,8 +63,8 @@ For shared route **B. Pause the affected implementation and ask
  targeted User questions**:
 
 - during route-B clarification, update only the minimal affected
-  canonical sections in the active task file at clean checkpoints
-  needed to preserve final clarification state;
+  canonical sections in the active task file soon after the User
+  confirms each clarification, in the same turn;
 - do not ask the User to review those sync edits separately during
   clarification; and
 - if unresolved questions remain after a sync and the clarification

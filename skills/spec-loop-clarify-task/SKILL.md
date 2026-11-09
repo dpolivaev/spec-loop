@@ -414,6 +414,11 @@ chat-only storage becomes unsafe, and always sync the final resolved
 state before returning control. This rule does not convert standalone
 chat-only discussion into task-controlled work.
 
+When a governing artifact exists, record each decision in it soon
+after the User confirms it, in the same turn. Do not collect confirmed
+decisions in chat to record them later. Recording does not return
+control to the User; continue the work.
+
 ## Exit
 
 Before handing work back to the invoking workflow, confirm that:
