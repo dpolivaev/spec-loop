@@ -14,6 +14,7 @@ It covers:
 - component interaction
 - class structure with PlantUML and Mermaid alternatives
 - static fields and methods in class diagrams
+- removed fields and methods alongside modified elements
 - sequence flow
 
 It also demonstrates the Markdown-sensitive case where task sections
@@ -35,7 +36,9 @@ PlantUML writing hints:
 
 - **Scope:** Add a CLI adapter for Wordle that starts a game, reads
   guesses from standard input, renders CLI feedback, and keeps
-  gameplay rules in the existing engine and domain classes.
+  gameplay rules in the existing engine and domain classes. Replace
+  the entry point's fixed-attempt startup method and constant with
+  option-based CLI startup.
 - **Motivation:** This example demonstrates current task structure and
   diagram patterns that render reliably in Markdown task files.
 - **Scenario:** A player starts the application in CLI mode, enters
@@ -138,7 +141,10 @@ PlantUML writing hints:
     logic.
   - No CLI option-parsing or adapter classes, or CLI test classes,
     exist yet.
-  - `WordleApplication` and its `main(args)` entry point already exist.
+  - `WordleApplication`, its `main(args)` entry point, its static
+    `startDefaultGame()` method, and its static `FIXED_ATTEMPTS: int`
+    constant already exist in the illustrative starting state.
+    `startDefaultGame()` starts with that fixed attempt count.
     `Game`, `GameEngine`, `Feedback`, and `Word`, including the shown
     gameplay methods, already exist.
   - `GameEngineTest` already covers repeated-letter scoring through
@@ -187,6 +193,8 @@ PlantUML writing hints:
     package "app" {
       class "<plain>**±**</plain> WordleApplication" as WordleApplication {
         {static} + <plain>**±**</plain> main(args)
+        {static} + <plain>**-**</plain> startDefaultGame()
+        {static} - <plain>**-**</plain> FIXED_ATTEMPTS : int
       }
       class "<plain>**+**</plain> CommandLineOptions" as CommandLineOptions {
         {static} + <plain>**+**</plain> DEFAULT_WORD_LIST_PATH : String
@@ -234,6 +242,8 @@ PlantUML writing hints:
       namespace wordle_tutorial_app {
           class WordleApplication["± WordleApplication"] {
               ± main(args)$
+              - startDefaultGame()$
+              - int FIXED_ATTEMPTS$
           }
           class CommandLineOptions["+ CommandLineOptions"] {
               + String DEFAULT_WORD_LIST_PATH$
@@ -277,6 +287,9 @@ PlantUML writing hints:
   `wordle.tutorial.app`, `wordle.tutorial.cli`, and
   `wordle.tutorial.domain` with underscores. The `$` suffix preserves
   static fields and methods; indicators have no HTML or Markdown wrappers.
+  The **-** members show removal of `startDefaultGame()` and
+  `FIXED_ATTEMPTS`; `main(args)` remains **±**, not **-**, because the
+  same entry point is modified rather than removed.
 
   ```plantuml
   @startuml

@@ -434,22 +434,24 @@ helpers.
 Design must follow Constraints and Analysis when they are present. If
 Design conflicts with either, fix Design or return to clarification.
 
-Design must describe only the current intended end state. Do not
-describe repository states created while implementing the current
-task, or the current subtask when subtasks are in use, including
-staged refactor states or
-transformations such as `S1 -> S2`. If such an intermediate state
-must be preserved, use a new task or subtask where that state can
-appear as **Research**. Implementation detours that do not belong in
+Design must describe the current intended end state. Explicitly marked
+removed elements document planned removals from the task's starting
+state; they are not retained target elements or intermediate states.
+Do not describe repository states created while implementing the current
+task, or the current subtask when subtasks are in use, including staged
+refactor states or transformations such as `S1 -> S2`. If such an
+intermediate state must be preserved, use a new task or subtask where
+that state can appear as **Research**. Implementation detours that do not belong in
 canonical sections may go in **Implementation notes** when relevant.
 
-Use only final intended names for design-owned terms, units, config
-keys, tool/API names, request/response fields, enum values, etc.
-Prefer domain-related words and exact intended class names. No
-placeholders, temp names, candidate names, example names, or generic
-stand-ins such as `Controller`, `Collaborator`, `Helper`, `Manager`,
-or `Processor` unless they are established domain or framework terms
-that the design explicitly depends on. Undecided name/unit/boundary =
+Use only final intended names for target design-owned terms, units,
+config keys, tool/API names, request/response fields, enum values, etc.
+Explicitly marked removed elements retain their exact starting-state
+names and declarations. Prefer domain-related words and exact intended
+class names. No placeholders, temp names, candidate names, example names,
+or generic stand-ins such as `Controller`, `Collaborator`, `Helper`,
+`Manager`, or `Processor` unless they are established domain or framework
+terms that the design explicitly depends on. Undecided name/unit/boundary =
 not ready for implementation.
 
 When requirements name fixed members of a set, Design must state
@@ -472,11 +474,13 @@ Resolving precise domain language and exact structural names is the
 highest priority during design work.
 
 When production structure changes, Design must make the structural
-inventory explicit for every planned new or changed top-level
-production class, interface, enum, and every new or changed
-externally meaningful identifier in scope. In class diagrams, put
-review-relevant methods and fields of displayed types in the diagram
-itself. On the task-file path, follow
+inventory explicit for every planned new, changed, or removed top-level
+production class, interface, enum, and every new, changed, or removed
+externally meaningful identifier in scope. Outside class diagrams, prefix
+removed identifiers with **-**. In class diagrams, put review-relevant
+methods, fields, and database columns in the diagram itself, including
+removals under the [planned-change rules](task-file-path-guidance.md#planned-changes-in-design-class-diagrams).
+On the task-file path, follow
 [task-file-path-guidance.md](task-file-path-guidance.md) for the
 rules that govern diagrams, allowed non-diagram text, and local
 ordering between a diagram and its related text in **Research** and

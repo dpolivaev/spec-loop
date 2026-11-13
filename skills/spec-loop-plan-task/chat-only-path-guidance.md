@@ -200,9 +200,11 @@ context, not observations of a real viewer repository.
   - Current facts: the render path can return lines wider than the
     terminal; relevant files are that path and its tests.
     `ReadOnlyViewerTest` already contains
-    `preservesLinesThatFitWithinTerminalWidth`; the truncation case
-    does not exist yet. The living-project-document list is in
-    `README.md`; no listed document is affected, and no project glossary
+    `preservesLinesThatFitWithinTerminalWidth` and
+    `overlongLinesRaiseRenderingError`; the latter verifies the failure
+    behavior being replaced. The truncation case does not exist yet.
+    The living-project-document list is in `README.md`; no listed
+    document is affected, and no project glossary
     exists.
 
 - **Design:**
@@ -219,6 +221,9 @@ context, not observations of a real viewer repository.
         width.
       - **=** `preservesLinesThatFitWithinTerminalWidth`: lines that
         already fit remain unchanged.
+      - **-** `overlongLinesRaiseRenderingError`: remove the failure
+        expectation; `truncatesOverlongLinesToAvailableTerminalWidth`
+        verifies the replacement behavior.
 ```
 
 Later clarification on the same task:

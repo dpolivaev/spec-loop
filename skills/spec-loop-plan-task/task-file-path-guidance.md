@@ -411,7 +411,8 @@ using them.
 - In **Research**, show the current classes, interfaces, enums,
   relationships, and review-relevant members needed for review.
 - In **Design**, show the target classes, interfaces, enums,
-  relationships, and review-relevant members needed for review.
+  relationships, and review-relevant members needed for review; annotate
+  removals under [Planned changes in Design class diagrams](#planned-changes-in-design-class-diagrams).
 - Treat the class diagram as the primary structural inventory for those
   types, relationships, and review-relevant members.
 - Put review-relevant operations in interface and class boxes.
@@ -445,15 +446,26 @@ the task's starting state. Use the renderer-specific formatting below:
 - **+** — add the element.
 - **=** — reuse the existing element unchanged.
 - **±** — modify the existing element.
+- **-** — remove the existing element.
 
 Include classes, interfaces, enums, type aliases, module boxes used to
-show functions, and every displayed method, constructor, field,
-constant, and enum member. Classify types and members independently: an
-existing type that gains or modifies members is **±**, its new members
-are **+**, and its unchanged members remain **=**. Newly added
-declarations are not modified declarations; existing framework types
-reused unchanged are **=**, not **+**. Establish the starting state from
-Research, not merely from an element's presence in Design.
+show functions, database tables and columns, and every displayed method,
+constructor, field, constant, and enum member. Classify types and members
+independently: an existing type that gains, modifies, or loses members is
+**±**, its new members are **+**, its unchanged members remain **=**, and
+its removed members are **-**. A removed type is **-**, and every displayed
+member of that removed type is also **-**. Newly added declarations are
+not modified declarations; existing framework types reused unchanged are
+**=**, not **+**. Establish the starting state from Research, not merely
+from an element's presence in Design.
+
+Keep review-relevant removed elements visible in Design with **-**; do
+not require reviewers to infer removal from absence. Use their exact
+starting-state names, signatures, field types, and column definitions.
+They are removal annotations, not retained target APIs or schema columns.
+Do not attach target relationships to removed types. A changed signature
+or field type of the same element remains **±**; replacement by a distinct
+element shows the old element as **-** and the new element as **+**.
 
 Markers are display annotations, not parts of canonical names or source
 identifiers, and do not indicate implementation progress or test
@@ -468,7 +480,7 @@ For PlantUML:
 
 - Wrap every marker, including type-label and non-static member markers,
   in `<plain>` while keeping the symbol bold: `<plain>**+**</plain>`,
-  `<plain>**=**</plain>`, or `<plain>**±**</plain>`.
+  `<plain>**=**</plain>`, `<plain>**±**</plain>`, or `<plain>**-**</plain>`.
 - Wrap only the marker, not the declaration. Keep `{static}` and actual
   visibility modifiers in their syntactic positions before the marker,
   for example `{static} + <plain>**+**</plain> create(): AddedType`.
@@ -481,21 +493,22 @@ For PlantUML:
 
 For Mermaid:
 
-- Use plain literal `+`, `=`, and `±` indicators without HTML or Markdown
+- Use plain literal `+`, `=`, `±`, and `-` indicators without HTML or Markdown
   wrappers. Do not use `<b>`, `<plain>`, or `**...**` around them;
   HTML tags can appear literally in member rows.
 - Prefix quoted type display labels, keeping simple ASCII class IDs
   unchanged, for example `class AddedType["+ AddedType"]`.
 - Prefix each member with its indicator, for example `+ boolean addedMember`,
-  `= read() string`, or `± number modifiedMember`. Member indicators do
-  not need to be bold; class headings follow the renderer's styling.
+  `= read() string`, `± number modifiedMember`, or `- string removedMember`.
+  Member indicators do not need to be bold; class headings follow the
+  renderer's styling.
 - Keep Mermaid's `$` suffix for static fields and methods, for example
   `+ String DEFAULT_PATH$` or `+ create() AddedType$`. Static underlining
   may extend through the indicator; unlike PlantUML, this notation does
   not isolate it from the underline. Do not remove `$` to avoid this.
-- A leading `+` also has Mermaid public-visibility syntax. In this
-  notation it marks a planned addition; do not infer source visibility
-  from the planned-change indicator.
+- Leading `+` and `-` also have Mermaid visibility syntax. In this
+  notation they mark planned additions and removals; do not infer source
+  visibility from either planned-change indicator.
 
 ### PlantUML-specific rules
 
@@ -583,7 +596,5 @@ For task-file subtasks:
 - Each implementation subtask: follow the shared Test specification
   structure and verification-anchor rules from
   [spec-loop-write-readable-tests/SKILL.md](../spec-loop-write-readable-tests/SKILL.md).
-- Run and fix the automated tests and automated checks that implement
-  the specified verification anchors plus any required project-level
-  checks before moving a task or subtask to `review`, unless the User
-  waives them.
+- Apply the shared [execution and review-readiness requirements](../spec-loop-write-readable-tests/spec-loop-task-verification.md#task-requirements)
+  to each implementation subtask before moving it or its task to `review`.

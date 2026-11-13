@@ -6,7 +6,8 @@ an external payload contract.
 It demonstrates:
 - a task `Glossary` with a focused Mermaid visual glossary;
 - a small component diagram;
-- explicit final payload names; and
+- explicit final payload names and removed request fields;
+- **-** annotations for removed fields and database columns; and
 - a compact identifier list/table where diagrams alone would be weak.
 
 Use it as a pattern collection, not as a required task size. The
@@ -14,7 +15,9 @@ starting-state facts below are illustrative, not observations of a real
 repository. Test anchors show planned verification for that context.
 
 - **Scope:** Normalize an export request payload so the server receives
-  one stable structure for selected items and export options.
+  one stable structure for selected items and export options. Remove the
+  legacy `selectedItems` request field and duplicate `selected_items_json`
+  database column; keep `selected_item_ids_json`.
 - **Motivation:** Remove parallel request shapes and make the Export API
   contract explicit before implementation.
 - **Scenario:** A user selects several items, triggers export, and the
@@ -62,11 +65,20 @@ repository. Test anchors show planned verification for that context.
 
   - The current client sends two similar request variants, which
     forces the server to branch on partially duplicated payloads.
+    Both request variants contain `selectionCount`, `includeMetadata`,
+    and `format`. One carries `selectedItems: list[str]`, the other
+    `selectedItemIds: list[str]`. The existing `export_request` table
+    has both `selected_items_json: TEXT NOT NULL` and
+    `selected_item_ids_json: TEXT NOT NULL` columns; both currently store
+    the same ordered identifiers. This task removes the first column
+    without changing saved identifier values.
   - `ExportRequestCompositionTest` already contains
     `keepsSelectedIdentifierOrder`, which checks ordering independently
     of request shape, and `selectionCountEqualsSelectedIdentifierCount`,
     which currently checks both legacy request variants.
-    `emitsNormalizedRequestShape` does not exist yet.
+    `acceptsLegacySelectedItemsField` verifies the old field being removed.
+    `emitsNormalizedRequestShape`, `rejectsLegacySelectedItemsField`, and
+    `ExportRequestStorageTest` do not exist yet.
   - The living-project-document list in `README.md` includes
     `docs/export-api.md` as the current Export API payload contract. No
     project glossary exists.
@@ -84,6 +96,32 @@ repository. Test anchors show planned verification for that context.
   @enduml
   ```
 
+  ```plantuml
+  @startuml
+  set separator none
+  package "export" {
+    class "<plain>**±**</plain> export request payload" as Payload {
+      + <plain>**=**</plain> selectedItemIds : list[str]
+      + <plain>**=**</plain> selectionCount : int
+      + <plain>**=**</plain> includeMetadata : bool
+      + <plain>**=**</plain> format : str
+      + <plain>**-**</plain> selectedItems : list[str]
+    }
+    class "<plain>**±**</plain> export_request" as Storage <<table>> {
+      <plain>**=**</plain> selected_item_ids_json : TEXT NOT NULL
+      <plain>**-**</plain> selected_items_json : TEXT NOT NULL
+    }
+    Payload --> Storage : persists ordered identifiers
+  }
+  @enduml
+  ```
+
+  Remove `selected_items_json` after verifying it equals the retained
+  `selected_item_ids_json` for every saved row; conflicting values block
+  migration rather than discarding data. The **-** field and column show
+  starting-state declarations, not members of the normalized request or
+  resulting table.
+
   Export request payload:
 
   ```json
@@ -95,15 +133,8 @@ repository. Test anchors show planned verification for that context.
   }
   ```
 
-  Serialized contract inventory:
-
-  | Identifier | Kind | Purpose |
-  | --- | --- | --- |
-  | `selectedItemIds` | request field | ordered selected identifiers |
-  | `selectionCount` | request field | explicit count for validation |
-  | `includeMetadata` | request field | metadata export toggle |
-  | `format` | request field | target export format |
-  | `/api/export` | endpoint | normalized export request target |
+  Externally meaningful identifier outside the class diagram:
+  - `/api/export` — normalized export request endpoint.
 
   - **Living project documents:**
     - `docs/export-api.md` — Export API contract; `update`: normalized
@@ -119,6 +150,16 @@ repository. Test anchors show planned verification for that context.
       - **±** `selectionCountEqualsSelectedIdentifierCount`: verify
         `selectionCount` equals the emitted selected-identifier count
         in the normalized request.
+      - **-** `acceptsLegacySelectedItemsField`: remove acceptance of
+        the legacy request field; `rejectsLegacySelectedItemsField`
+        verifies its absence in the accepted contract.
+      - **+** `rejectsLegacySelectedItemsField`: the Export API rejects
+        the removed request field, including requests with both fields.
+    - **+** `ExportRequestStorageTest`
+      - **+** `columnRemovalPreservesOrderedIdentifiers`: migration removes
+        the duplicate column only after exact equality verification;
+        retained identifiers remain unchanged and conflicting rows
+        prevent migration without writes.
   - **Manual tests:**
     - Export two selected items and inspect the outgoing request.
     - Verify that the server receives only the normalized payload

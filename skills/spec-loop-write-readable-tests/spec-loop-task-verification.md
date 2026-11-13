@@ -23,10 +23,12 @@ It does not change workflow routes, phases, or approvals.
 - Each implementation task without subtasks: include explicit
   task-specific verification content using the structure below.
 - Run and fix the automated tests and automated checks that implement
-  the specified verification anchors plus any required project-level
+  retained or added verification anchors plus any required project-level
   checks before moving a task-file task to `review`, before presenting
   chat-only work as ready, or before otherwise implying implementation
-  closure, unless the User waives them.
+  closure, unless the User waives them. For anchors marked **-**, verify
+  removal and required replacement coverage instead of executing the
+  removed tests.
 
 ## Structure
 
@@ -65,6 +67,11 @@ Preferred shape, using illustrative file paths as containers:
     - **+** `additionalTestCase`: additional required behavior.
     - **=** `unchangedTestCase`: existing verification reused unchanged.
     - **±** `modifiedTestCase`: verification to adapt or extend.
+    - **-** `obsoleteTestCase`: obsolete expectation removed; replacement
+      verification is `additionalTestCase`.
+  - **-** `tests/removed-feature.test.ts`
+    - **-** `removedFeatureTestCase`: removed feature's verification is
+      removed with that feature.
   - **=** `tests/unchanged-feature.test.ts`
     - **=** `reusedTestCase`: existing verification reused unchanged.
 
@@ -82,12 +89,22 @@ its backticks:
 - **+** — add the element.
 - **=** — reuse the existing element unchanged.
 - **±** — modify the existing element.
+- **-** — remove the existing element.
 
 Classify containers and cases independently against the task's starting
-state. An existing file or other container that gains or modifies cases
-is **±**, not **+**; its new cases are **+** and unchanged cases remain
-**=**. Establish that starting state from Research or relevant context;
-merely listing an element does not establish that it already exists.
+state. An existing file or other container that gains, modifies, or loses
+cases is **±**, not **+**; its new cases are **+**, unchanged cases remain
+**=**, and removed cases are **-**. A removed container and its listed
+cases are **-**. Establish that starting state from Research or relevant
+context; merely listing an element does not establish that it already
+exists.
+
+Keep removed containers and cases explicit with their exact starting-state
+identities. State which removed requirement makes the verification obsolete
+or identify replacement verification that preserves the required coverage.
+Removed anchors are deletion expectations; apply the execution and
+review-readiness checks under [Task requirements](#task-requirements).
+Do not remove still-required coverage merely to make a test suite pass.
 
 These annotations are not part of paths or executable test names and do
 not indicate implementation progress or test results. Preserve the
@@ -105,13 +122,17 @@ design, placement, naming, ownership, coverage gaps, or reuse
 constraints.
 
 Illustrative starting context: `OptimizationTaskModificationTest` and its
-listed case exist and need modification; the JSON spec file and its
-case are new; the feature file and its case are reused unchanged.
+listed cases exist: one needs modification and one is removed with the
+obsolete optimization behavior. The JSON spec file and its case are new;
+the feature file and its case are reused unchanged.
 
 - **Automated tests:**
   - **±** `OptimizationTaskModificationTest`
     - **±** `changedScopedFieldsModifyReferenceTask`: changing scoped
       fields marks the reference optimization task as modified.
+    - **-** `everyEditMarksReferenceTaskModified`: remove the expectation
+      that edits outside the scoped fields modify the reference task;
+      `changedScopedFieldsModifyReferenceTask` covers the scoped behavior.
   - **+** `catalog-offers-json-modification.spec.ts`
     - **+** `Catalog offers JSON > serialization > orders JSON`:
       catalog-offer JSON serialization orders properties and collection

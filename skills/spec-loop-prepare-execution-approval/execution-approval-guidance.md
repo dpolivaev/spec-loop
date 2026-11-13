@@ -166,7 +166,7 @@ The Design section prepared for approval must contain no placeholders.
 Do not leave role stand-ins, candidate names, temporary labels,
 abstract aliases, or generic structural placeholders in Design
 non-diagram text, diagrams, tables, or lists. If an exact intended
-name is not yet known, approval-seeking is blocked.
+target name is not yet known, approval-seeking is blocked.
 
 Keep both a diagram and a table only when each adds distinct value. If
 a table only restates the diagram, remove it or reduce it to the exact
@@ -178,8 +178,9 @@ lists, or tables. Text blocks such as `X contract:` or `Y fields:` are
 duplication unless they add information the diagram cannot carry
 cleanly.
 
-Approval is blocked if those members are missing from the class
-diagram.
+Approval is blocked if those members are missing from the class diagram
+or removal annotations violate the task-file path's
+[planned-change rules](../spec-loop-plan-task/task-file-path-guidance.md#planned-changes-in-design-class-diagrams).
 
 Approval is blocked if any PlantUML class diagram violates the
 class-diagram packaging rules from

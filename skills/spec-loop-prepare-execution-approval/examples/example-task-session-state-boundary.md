@@ -6,6 +6,7 @@ polishes it for execution approval seeking for implementation work.
 It demonstrates:
 - diagram-first structural review;
 - PlantUML and Mermaid alternatives for one class diagram;
+- removed fields and methods alongside additions and modifications;
 - a sequence diagram; and
 - a compact identifier list instead of a repeated responsibility table.
 
@@ -14,7 +15,8 @@ starting-state facts below are illustrative, not observations of a real
 repository. Test anchors show planned verification for that context.
 
 - **Scope:** Add a transient background session path that does not
-  enter the persisted live-session registry.
+  enter the persisted live-session registry; remove the persisted
+  background-export entry point and its stored session ID.
 - **Motivation:** Keep the visible session model simple while allowing
   one-off background execution.
 - **Scenario:** A user starts one visible session and also triggers a
@@ -41,10 +43,15 @@ repository. Test anchors show planned verification for that context.
   - The visible-session path uses
     `SessionController.startVisibleSession()`,
     `LiveSessionManager.createSession()`, and `SessionStore.save(session)`.
+    `SessionController.triggerPersistedBackgroundExport()` currently uses
+    that same visible-session path and keeps `backgroundSessionId: String`.
+    That method and field exist in the illustrative starting state.
     Neither `BackgroundRunner` nor
     `SessionController.triggerBackgroundExport()` exists yet.
   - `SessionVisibilityPersistenceTest` already contains
-    `visibleCompletionPersistsSessionInVisibleSessionList`. The
+    `visibleCompletionPersistsSessionInVisibleSessionList` and
+    `backgroundExportPersistsSessionInVisibleSessionList`. The latter
+    verifies the persisted background path being removed. The
     background-completion case and `BackgroundSessionFailureTest` do
     not exist yet.
   - The living-project-document list is in `README.md`; no listed
@@ -60,6 +67,8 @@ repository. Test anchors show planned verification for that context.
     class "<plain>**±**</plain> SessionController" as SessionController {
       + <plain>**=**</plain> startVisibleSession()
       + <plain>**+**</plain> triggerBackgroundExport()
+      + <plain>**-**</plain> triggerPersistedBackgroundExport()
+      - <plain>**-**</plain> backgroundSessionId : String
     }
     class "<plain>**=**</plain> LiveSessionManager" as LiveSessionManager {
       + <plain>**=**</plain> createSession()
@@ -84,6 +93,8 @@ repository. Test anchors show planned verification for that context.
           class SessionController["± SessionController"] {
               = startVisibleSession()
               + triggerBackgroundExport()
+              - triggerPersistedBackgroundExport()
+              - String backgroundSessionId
           }
           class LiveSessionManager["= LiveSessionManager"] {
               = createSession()
@@ -103,7 +114,9 @@ repository. Test anchors show planned verification for that context.
   These class diagrams are renderer alternatives for this example, not
   duplicate inventories to keep in an actual task. Keep only the selected
   renderer's class diagram; PlantUML remains the default. Mermaid uses
-  plain indicators without HTML or Markdown wrappers.
+  plain indicators without HTML or Markdown wrappers. The **-** members
+  show the existing method and field being removed; `SessionController`
+  remains **±** because the type remains with changed members.
 
   ```plantuml
   @startuml
@@ -138,6 +151,10 @@ repository. Test anchors show planned verification for that context.
       - **+** `backgroundRunCompletionDoesNotPersistVisibleSession`:
         verify background run completion does not add the run to the
         visible-session list.
+      - **-** `backgroundExportPersistsSessionInVisibleSessionList`:
+        remove the persisted-background expectation;
+        `backgroundRunCompletionDoesNotPersistVisibleSession` verifies
+        the replacement behavior.
     - **+** `BackgroundSessionFailureTest`
       - **+** `backgroundPathFailureLeavesVisibleSessionsUnchanged`:
         verify background path failure leaves the visible-session list

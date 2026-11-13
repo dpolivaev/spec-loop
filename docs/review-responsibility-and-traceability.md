@@ -211,15 +211,15 @@ implementation.
 ## Reading planned-change markers
 
 Automated test entries and task-file Design class diagrams use **+** for
-additions, **=** for unchanged reuse, and **±** for modifications. These
-show planned changes from the task's starting state, not progress or test
-results.
+additions, **=** for unchanged reuse, **±** for modifications, and **-**
+for removals from the task's starting state, not progress or test results.
 
-Files and types are classified separately from their cases and members.
-For example, an existing test file gaining a case is **±**, its new case
-is **+**, and unchanged cases remain **=**.
-
-For diagram formatting, see [Diagram and Rendering Policy](diagram-and-rendering-policy.md).
+Review **-** entries as planned removals, not retained target elements.
+For removed test anchors, check removal and required replacement coverage,
+not execution of the removed tests. See the
+[diagram policy](diagram-and-rendering-policy.md) and
+[test verification rules](../skills/spec-loop-write-readable-tests/spec-loop-task-verification.md#automated-tests)
+for classification, exact starting-state identities, and formatting.
 
 ## Traceability mechanics
 
