@@ -73,6 +73,59 @@ decision, return to clarification before continuing.
 If asking the User to review a draft instead, say so explicitly and
 list the known gaps, open questions, and unresolved decisions.
 
+## Planning completion process
+
+Use this process when completing or revising an established task plan,
+including approval preparation and resuming after context compaction.
+For new work, first establish the current work item and approach under
+this file and the applicable planning and clarification rules.
+
+1. **Resume from established state.**
+   Read the current task, required shared context, and applicable
+   guidance. Retain confirmed decisions and completed research. Do not
+   repeat completed work unless relevant evidence or requirements have
+   changed.
+2. **Identify the remaining work.**
+   Keep a finite working checklist of missing required content,
+   unresolved questions, and required checks for the current increment.
+   Do not create a task section, status, or separate artifact for it.
+   Preserve enough working state across compaction to resume rather
+   than restart.
+3. **Complete missing content.**
+   Add the Design and Test specification detail needed for implementation
+   and review, not detail merely because it could be specified. Write
+   task-file content into the active task while drafting, as required.
+4. **Investigate concrete gaps only.**
+   Each investigation must answer a specific question needed to complete
+   the current increment. Use existing evidence first. Once answered,
+   update the affected content and return to the remaining work. Use
+   the clarification skill for important open decisions as required.
+5. **Perform the required readiness checks.**
+   Check the plan against confirmed requirements and applicable guidance.
+   Use mechanical checks for mechanical rules where practical. Render
+   and inspect diagrams as required. Identify actual failures rather
+   than starting another unrestricted planning pass.
+6. **Repair actual failures.**
+   Make the smallest complete correction and recheck affected content
+   and dependencies. Repeat broader checks when the change affects
+   them or governing instructions require them. A local formatting
+   defect does not reopen settled Design.
+7. **Produce the outcome.**
+   When required content and checks are complete, present the plan and
+   request approval through the applicable workflow. If blocked, invoke
+   required clarification or report the exact non-question blocker.
+   Do not keep expanding the plan instead of producing that outcome.
+
+Each step should reduce the remaining work. Add work or reopen settled
+content only for an unmet requirement, a concrete defect or
+contradiction, relevant new evidence, or an explicit User change.
+An imagined alternative or an opportunity for more detail is not
+sufficient.
+
+This process controls repetition; it does not waive required content,
+verification, clarification, or approval. It does not authorize
+implementation.
+
 ## Later implementation follow-up from `review` or `done`
 
 On the chat-only path, the equivalent starting point is a task
@@ -552,6 +605,9 @@ remaining rules; they are not repeated here.
 
 Iterate across Research, Scenario (if used), Glossary (if used),
 Analysis (if used), Design, and Test specification until coherent.
+For established plans, complete remaining work under the
+[Planning completion process](#planning-completion-process) rather than
+restarting planning.
 Record intermediate alternatives only when they aid reasoning or
 review. No implementation during this loop.
 

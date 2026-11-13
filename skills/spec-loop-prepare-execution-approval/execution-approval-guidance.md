@@ -73,14 +73,17 @@ PLAN. They do not freeze the active task.
 
 ## 3. Readiness loop
 
-Before seeking execution approval, repair and revise the active task
-in place as needed for the current work item.
+Before seeking execution approval, follow the
+[Planning completion process](../spec-loop-plan-task/common-task-guidance.md#planning-completion-process)
+and repair the active task in place for the current work item.
+Recheck affected content and dependencies after each correction;
+repeat broader checks when affected or required by governing instructions.
 
 If readiness checks fail, use this branch order:
 1. If the failure is directly fixable in the active task, fix it and
-   re-run the readiness checks.
+   recheck under that process.
 2. If the failure can be resolved from existing evidence, update the
-   active task and re-run the readiness checks.
+   active task and recheck under that process.
 3. If compaction is needed, use
    [spec-loop-compact-task-file/SKILL.md](../spec-loop-compact-task-file/SKILL.md), then resume this skill.
 4. If any important open decision remains, use outcome C
