@@ -459,9 +459,10 @@ not modified declarations; existing framework types reused unchanged are
 **=**, not **+**. Establish the starting state from Research, not merely
 from an element's presence in Design.
 
-Keep review-relevant removed elements visible in Design with **-**; do
-not require reviewers to infer removal from absence. Use their exact
-starting-state names, signatures, field types, and column definitions.
+Keep review-relevant removed elements visible in Design class diagrams
+with **-**; do not require reviewers to infer removal from absence. Use
+their exact starting-state names, signatures, field types, and column
+definitions.
 They are removal annotations, not retained target APIs or schema columns.
 Do not attach target relationships to removed types. A changed signature
 or field type of the same element remains **±**; replacement by a distinct
@@ -472,9 +473,9 @@ identifiers, and do not indicate implementation progress or test
 results. Decorate display labels and retain stable aliases for connector
 endpoints. Preserve signatures, packages, and relationships.
 
-Keep this notation only in **Design** class diagrams, not Research,
-component, sequence, or glossary diagrams. Do not add notes, legends, or
-worded status labels inside task diagrams.
+In diagrams, use this notation only in **Design** class diagrams, not
+Research, component, sequence, or glossary diagrams. Do not add notes,
+legends, or worded status labels inside task diagrams.
 
 For PlantUML:
 

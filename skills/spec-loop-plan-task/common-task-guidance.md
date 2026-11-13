@@ -529,10 +529,9 @@ highest priority during design work.
 When production structure changes, Design must make the structural
 inventory explicit for every planned new, changed, or removed top-level
 production class, interface, enum, and every new, changed, or removed
-externally meaningful identifier in scope. Outside class diagrams, prefix
-removed identifiers with **-**. In class diagrams, put review-relevant
-methods, fields, and database columns in the diagram itself, including
-removals under the [planned-change rules](task-file-path-guidance.md#planned-changes-in-design-class-diagrams).
+externally meaningful identifier in scope. In class diagrams, put
+review-relevant methods, fields, and database columns in the diagram
+itself.
 On the task-file path, follow
 [task-file-path-guidance.md](task-file-path-guidance.md) for the
 rules that govern diagrams, allowed non-diagram text, and local
