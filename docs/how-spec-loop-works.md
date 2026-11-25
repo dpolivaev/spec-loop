@@ -179,7 +179,8 @@ with links and a short purpose. Use an existing glossary for shared language,
 whether or not the project keeps a document list.
 
 Task-specific detail stays in the task. Explanations needed later belong in
-living documents. Link to task files only if they will remain available.
+living documents. Refer to tasks by their title as plain text, as required
+by the [task-file guidance](../skills/spec-loop-plan-task/task-file-path-guidance.md#1-task-files).
 Combining or removing documents requires explicit approval, preservation of
 needed explanations and required history, and checked links. Follow the
 [document rules](../skills/spec-loop-plan-task/common-task-guidance.md#living-project-documents), including ADR lifecycle rules.

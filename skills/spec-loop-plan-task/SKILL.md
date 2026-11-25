@@ -218,9 +218,10 @@ agent readers need. Spec Loop specifically covers README, glossary, and ADRs.
 
 Read relevant documents alongside code and tests. Keep each explanation in
 one place and link to it elsewhere. Task-specific detail stays in the task;
-explanations needed later belong in living documents. Link to task files only
-if they will remain available. Update affected documents during implementation
-in the same increment. Keep required status updates brief.
+explanations needed later belong in living documents. Refer to tasks by their
+title as plain text, as required by the [task-file guidance](task-file-path-guidance.md#1-task-files).
+Update affected documents during implementation in the same increment. Keep
+required status updates brief.
 
 Avoid redundant documents and explanations unless explicitly required by the
 project. Use the [clarification skill](../spec-loop-clarify-task/SKILL.md) when a

@@ -88,6 +88,10 @@ Top-level folders: `backlog`, `in-progress`, `review`, `done`.
 Task base names: no ticket IDs, abbreviations; use readable
 descriptive words.
 
+Refer to tasks by their title as plain text. Do not use task filenames,
+paths, or links to task files as references: filenames and paths change
+when tasks move between lifecycle folders.
+
 Backlog, review, and done numbering are independent. Same number may
 appear in multiple backlog folders, once in `review`, and once in
 `done`.
